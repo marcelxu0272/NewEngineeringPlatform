@@ -105,8 +105,8 @@ const DataDashboard = () => {
     { month: '6月', newContracts: 2390, completedContracts: 2200, invoicedAmount: 2000, receivedPayments: 1900, wip: 1500, accountsReceivable: 2500 },
     { month: '7月', newContracts: 3490, completedContracts: 3200, invoicedAmount: 3000, receivedPayments: 2800, wip: 1600, accountsReceivable: 2600 },
     { month: '8月', newContracts: 3190, completedContracts: 2900, invoicedAmount: 2700, receivedPayments: 2500, wip: 1700, accountsReceivable: 2700 },
-    { month: '9月', newContracts: 2490, completedContracts: 2300, invoicedAmount: 2100, receivedPayments: 2000, wip: 1800, accountsReceivable: 2800 },
-    { month: '10月', newContracts: 2790, completedContracts: 2600, invoicedAmount: 2400, receivedPayments: 2200, wip: 1900, accountsReceivable: 2900 },
+    { month: '9月', newContracts: 2490, completedContracts: 2300, invoicedAmount: 2100, receivedPayments: 2000, wip: 8200, accountsReceivable: 12500 },
+    { month: '10月', newContracts: 2790, completedContracts: 2600, invoicedAmount: 2400, receivedPayments: 2200, wip: 8500, accountsReceivable: 12000 },
     { month: '11月', newContracts: 0, completedContracts: 0, invoicedAmount: 0, receivedPayments: 0, wip: 0, accountsReceivable: 0 },
     { month: '12月', newContracts: 0, completedContracts: 0, invoicedAmount: 0, receivedPayments: 0, wip: 0, accountsReceivable: 0 }
   ];
@@ -152,25 +152,17 @@ const DataDashboard = () => {
   };
 
   const getMetricInfo = (metricId: string) => {
-    type MetricItem = {
-      month: string;
-      newContracts: number;
-      completedContracts: number;
-      invoicedAmount: number;
-      receivedPayments: number;
-      wip: number;
-      accountsReceivable: number;
-    };
-
-    const totalAmount = data.reduce((sum, item) => {
-      const value = item[metricId as keyof typeof item];
-      return sum + (typeof value === 'number' ? value : 0);
-    }, 0);
-    const currentMonthAmount = data.length > 0 ? Number(data[data.length - 1][metricId as keyof typeof data[0]]) || 0 : 0;
-    const previousMonthAmount = data.length > 1 ? Number(data[data.length - 2][metricId as keyof typeof data[0]]) || 0 : 0;
-    const monthlyChange = currentMonthAmount - previousMonthAmount;
+    // 找到最后一个非0值的月份数据
+    const lastNonZeroMonth = [...data].reverse().find(item => item[metricId as keyof typeof item] !== 0);
+    const currentMonthAmount = lastNonZeroMonth ? Number(lastNonZeroMonth[metricId as keyof typeof lastNonZeroMonth]) : 0;
     
-    // 对于WIP和应收账款，我们只关心当前金额和月度变化
+    // 找到倒数第二个非0值的月份数据
+    const secondLastNonZeroMonth = [...data].reverse().filter(item => item[metricId as keyof typeof item] !== 0)[1];
+    const previousMonthAmount = secondLastNonZeroMonth ? Number(secondLastNonZeroMonth[metricId as keyof typeof secondLastNonZeroMonth]) : 0;
+    
+    const monthlyChange = currentMonthAmount - previousMonthAmount;
+
+    // 对于WIP和应收账款的特殊处理
     if (metricId === 'wip' || metricId === 'accountsReceivable') {
       return {
         totalAmount: formatNumber(currentMonthAmount),
@@ -182,10 +174,10 @@ const DataDashboard = () => {
     }
 
     const yearlyTarget = 30000; // 假设的年度目标
-    const completionRate = ((totalAmount / yearlyTarget) * 100).toFixed(2);
+    const completionRate = ((currentMonthAmount / yearlyTarget) * 100).toFixed(2);
 
     return {
-      totalAmount: formatNumber(totalAmount),
+      totalAmount: formatNumber(currentMonthAmount),
       currentMonthAmount: formatNumber(currentMonthAmount),
       monthlyChange: formatNumber(monthlyChange),
       yearlyTarget: formatNumber(yearlyTarget),
@@ -222,20 +214,20 @@ const DataDashboard = () => {
   // 修改 renderChangeWithTriangle 函数,为 WIP 和应收账款添加特殊处理
   const renderChangeWithTriangle = (change: string, isWipOrAR: boolean = false) => {
     const numericChange = parseFloat(change.replace(/,/g, ''));
-    const textSize = isWipOrAR ? "text-l" : "text-base"; // 为 WIP 和应收账款使用更小的字号
+    const textSize = isWipOrAR ? "text-2xl" : "text-base"; 
     
     if (numericChange > 0) {
       return (
         <div className="flex items-center">
-          <ArrowUpIcon className="w-3 h-3 text-red-500 mr-0.5" />
-          <span className={`${textSize} font-bold`}>{change}</span>
+          <ArrowUpIcon className="w-6 h-6 text-red-500 mr-0.5" />
+          <span className={`${textSize} font-bold text-red-500`}>{change}</span>
         </div>
       );
     } else if (numericChange < 0) {
       return (
         <div className="flex items-center">
-          <ArrowDownIcon className="w-3 h-3 text-green-500 mr-0.5" />
-          <span className={`${textSize} font-bold`}>{change.replace('-', '')}</span>
+          <ArrowDownIcon className="w-6 h-6 text-green-500 mr-0.5" />
+          <span className={`${textSize} font-bold text-green-500`}>{change.replace('-', '')}</span>
         </div>
       );
     } else {
@@ -306,7 +298,7 @@ const DataDashboard = () => {
   // 更新renderProjectCostChart函数
   const renderProjectCostChart = () => (
     <Card className="p-4 mb-4">
-      <h3 className="text-lg font-semibold mb-2">项目成本月分布</h3>
+      <h3 className="text-lg font-semibold mb-2">项目成本月度分布</h3>
       <ResponsiveContainer width="100%" height={600}>
         <BarChart data={projectCostData}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -623,7 +615,7 @@ const DataDashboard = () => {
                         <div className="flex items-center ">
                           <Progress 
                             value={parseFloat(metricInfo.completionRate)} 
-                            className="flex-grow h-3 bg-[#007069]/20 rounded-full [&>div]:bg-[#007069] [&>div]:rounded-full"
+                            className="flex-grow h-4 bg-[#007069]/20 rounded-full [&>div]:bg-[#007069] [&>div]:rounded-full"
                           />
                           <span className="text-lg text-[#007069] ml-8">{metricInfo.completionRate}%</span>
                         </div>
@@ -638,14 +630,14 @@ const DataDashboard = () => {
                         const percentage = Math.min(100, (target.current / target.target) * 100).toFixed(1);
                         return (
                           <div key={idx} className="mb-2 last:mb-0">
-                            <div className="text-gray-500 flex text-sm mb-1">
+                            <div className="text-gray-500 flex text-sm ">
                               <span>{target.type}</span>
                               <span className="ml-4 text-gray-500">
                                 {formatNumber(target.current)} / {formatNumber(target.target)}
                               </span>
                             </div>
                             <div className="flex items-center gap-2">
-                              <div className="flex-1 h-3 bg-[#007069]/20 rounded-full overflow-hidden">
+                              <div className="flex-1 h-4 bg-[#007069]/20 rounded-full overflow-hidden">
                                 <div 
                                   className="h-full bg-[#007069] rounded-full transition-all duration-500"
                                   style={{ width: `${percentage}%` }}

@@ -280,15 +280,15 @@ export default function Component() {
                       </div>
 
                       {/* 子目标区域 */}
-                      {showSubTargets && (
+                      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${showSubTargets ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'}`}>
                         <div className="mt-4 pt-4 border-t border-[#007069]/20">
                           {card.subTargets.map((target, idx) => {
                             const percentage = Math.min(100, (target.current / target.target) * 100).toFixed(1);
                             return (
                               <div key={idx} className="mb-2 last:mb-0">
-                                <div className="flex text-sm text-[#007069] mb-1">
-                                  <span>{target.type}</span>
-                                  <span className="ml-4 text-gray-500">
+                                <div className="flex text-sm mb-1">
+                                  <span className="text-gray-500">{target.type}</span>
+                                  <span className="ml-4 text-[#007069]">
                                     {target.current.toLocaleString()} / {target.target.toLocaleString()}
                                   </span>
                                 </div>
@@ -305,7 +305,7 @@ export default function Component() {
                             );
                           })}
                         </div>
-                      )}
+                      </div>
                     </CardContent>
                   </Card>
                 ))}
@@ -393,20 +393,20 @@ export default function Component() {
                   </div>
                   
                   {/* 三个子项成本 */}
-                  <div className="grid grid-cols-3 gap-2">
-                    <div className="bg-[#007069]/5 p-2 rounded-lg">
+                  <div className="flex gap-2">
+                    <div className="bg-[#007069]/5 p-2 rounded-lg" style={{ flex: '2.74' }}>
                       <p className="text-lg font-bold text-[#007069]">936.52</p>
-                      <p className="text-sm text-[#007069] mt-1">报价成本</p>
+                      <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">报价成本</p>
                     </div>
-                    <div className="bg-[#007069]/5 p-2 rounded-lg">
+                    <div className="bg-[#007069]/5 p-2 rounded-lg" style={{ flex: '79.58' }}>
                       <p className="text-lg font-bold text-[#007069]">27,167.37</p>
-                      <p className="text-sm text-[#007069] mt-1">项目成本</p>
+                      <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">项目成本</p>
                     </div>
-                    <div className="bg-[#007069]/5 p-2 rounded-lg">
+                    <div className="bg-[#007069]/5 p-2 rounded-lg" style={{ flex: '17.67' }}>
                       <div>
                         <p className="text-lg font-bold text-[#007069]">6,032.32</p>
                         <div className="flex items-center gap-2 mt-1">
-                          <p className="text-sm text-[#007069]">部门成本</p>
+                          <p className="text-sm text-[#007069] whitespace-nowrap">部门成本</p>
                           <AntTooltip title="查看详情">
                             <Link 
                               href={`/dashboard/department-cost-detail`}
@@ -431,7 +431,7 @@ export default function Component() {
                   <div className="flex items-center">
                     <CalendarOutlined className="w-4 h-4 mr-4" />
                     <Link href="/dashboard/eletable" className="cursor-pointer">
-                      <h3 className="font-medium text-sm text-[#ff4444]"><strong className="text-[#007069]">项目追踪表：</strong>每月月初更新，点击在线查！</h3>
+                      <h3 className="font-medium text-sm text-[#ff7711]"><strong className="text-[#007069]">项目追踪表：</strong>每月月初更新，点击在线查！</h3>
                     </Link>
                   </div>
                 </CardContent>
@@ -445,14 +445,26 @@ export default function Component() {
                     <div>
                       <h3 className="font-medium text-sm text-gray-700 mb-2">负荷率</h3>
                       <div className="space-y-2">
-                        <div className="bg-[#007069]/10 p-2 rounded-lg">
-                          <div className="flex items-center justify-between">
+                        <div className="relative p-2 rounded-lg overflow-hidden bg-[#007069]/10">
+                          {/* 背景条 */}
+                          <div 
+                            className="absolute inset-0 bg-[#007069]/10"
+                            style={{ width: `${Math.min(87, 100)}%` }}
+                          />
+                          {/* 内容 */}
+                          <div className="relative z-10 flex items-center justify-between">
                             <span className="text-sm text-[#007069]">全年</span>
                             <span className="text-lg font-bold text-[#007069]">87%</span>
                           </div>
                         </div>
-                        <div className="bg-[#007069]/10 p-2 rounded-lg">
-                          <div className="flex items-center justify-between">
+                        <div className="relative p-2 rounded-lg overflow-hidden bg-[#007069]/10">
+                          {/* 背景条 */}
+                          <div 
+                            className="absolute inset-0 bg-[#007069]/10"
+                            style={{ width: `${Math.min(96, 100)}%` }}
+                          />
+                          {/* 内容 */}
+                          <div className="relative z-10 flex items-center justify-between">
                             <span className="text-sm text-[#007069]">当月</span>
                             <span className="text-lg font-bold text-[#007069]">96%</span>
                           </div>
