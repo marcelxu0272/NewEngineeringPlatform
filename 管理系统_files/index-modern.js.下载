@@ -1,0 +1,184 @@
+﻿
+function getActionDaysHtml(date) {
+
+    if (date == null) {
+        return '';
+    }
+
+
+    let html = '<li class="history-date" data-date="' + date.actiondate +'">'
+    + '<div class="history-date-title">'
+    + '<label>' +  date.actiondate  +'</label>'
+    + '<label>' + date.datename+ '</label>'
+    + '</div>'
+    + '<div class="history-line"></div>'
+    + '<ul class="day-action-list">';
+    for (let jj = 0; jj < date.actions.length; jj++) {
+        let event = date.actions[jj];
+
+        html += '<li class="day-action-content" data-url="' + event.url +'">'
+            + '<span>' + event.actiontime + '</span>'
+            + '<span>' + event.content + '</span>'
+            + '</li>';
+    }
+    html += '</ul>'
+            + '<div class="history-date-clear"></div>'
+            + '</li>';
+
+    return html;
+}
+
+
+function setLeftMenuVisiblity(visiblity, isFirstLoad) {
+    let status = "close";
+    if (visiblity) {
+        status = "open";
+    }
+
+    editUserPreference('left-menu', status, function onsuccess() {
+        if (visiblity) {
+            $("#left-menu").show().attr("left-menu-show", "show");
+
+            $(".left-panel").removeClass("left-panel-expand");
+
+            $("#content").width(window.innerWidth - 160).css("left", "10px");
+        } else {
+            $("#left-menu").hide().attr("left-menu-show", "hidden");
+
+            $(".left-panel").addClass("left-panel-expand");
+
+            if (isFirstLoad === true) {
+                ;
+            } else {
+                $("#content").width(window.innerWidth).css("left", "0");
+            }
+        }
+        $("#content").show(0, function () { $(window).resize(); });
+        $(".easyui-tabs").each(function () {
+
+            $(this).tabs("resize");
+        });
+
+        $(".datagrid-f").each(function () {
+
+            console.log(".datagrid-f:%o:%o", $(this).datagrid("options"));
+
+            $(this).datagrid("resize");
+        });
+    });
+}
+
+function setFootMarkVisiblity(visiblity, isFirstLoad) {
+
+    let status = "close";
+    if (visiblity) {
+        status = "open";
+    }
+
+    editUserPreference('right-panel', status, function onsuccess() {
+
+        if (visiblity) {
+            $(".foot-mark").show();
+
+        } else {
+
+            $(".foot-mark").hide();
+
+        }
+
+    });
+}
+
+// 左侧菜单，非当前项的折叠
+function collpaseMenu(menus, level, expandMenuStack) {
+
+    for (let i = 0; i < menus.length; i++) {
+        let item = menus[i];
+        let node = $("#leftmenu").tree('find', item.id);
+
+        if (level > expandMenuStack.length) {
+            $("#leftmenu").tree('collapse', node.target);
+        }
+        else if (item.id != expandMenuStack[level - 1].id) {
+            $("#leftmenu").tree('collapse', node.target);
+
+        } else if (item.id == expandMenuStack[level - 1].id && level == expandMenuStack.length) {
+            continue;
+        }
+
+
+        let children = node.children;
+        if (children!==null && children.length > 0) {
+            collpaseMenu(children, level + 1, expandMenuStack);
+        }
+    }
+}
+
+function breadcrumbInit() {
+    // 面包屑的处理放在初始化db之前处理
+    $('<div class="left-panel"></div>').prependTo($("#breadcrumb"));
+    $("body").on("click", "#breadcrumb > div.left-panel", function () {
+
+        getUserPreference('left-menu', function onsuccess(value) {
+
+            setLeftMenuVisiblity((value !== "open"));
+        });
+    });
+    $('<div class="right-panel"></div>').appendTo($("#breadcrumb"));
+    $("body").on("click", "#breadcrumb > div.right-panel", function () {
+
+        setFootMarkVisiblity(true);
+    });
+
+    $(".foot-mark-icon").on('click', function () {
+
+        setFootMarkVisiblity(false);
+    });
+}
+
+$(function () {
+
+    // 面包屑的处理放在初始化db之前处理
+    breadcrumbInit();
+
+    // 先初始化本地DB，再初始化左侧菜单
+    openDB(function onOpenDBSuccess() {
+        getActions(function onGetRecord(one) {
+
+            let $html = $(getActionDaysHtml(one));
+
+            $html.appendTo($(".foot-mark-list"));
+
+
+            //点击浏览历史
+            $(".day-action-content", $html).on('click', function () {
+
+                let $this = $(this);
+                let url = $this.attr('data-url');
+                let menuname = $("span:eq(1)", $this).html();
+
+                addAction(new Date(), menuname, url, function () {
+                    //db更新后再做跳转
+                    window.location.href = url;
+                });
+
+                return false;
+            });
+        });
+
+        editUserPreference('left-menu', 'open');
+
+        getUserPreference('left-menu', function onsuccess(value) {
+
+            setLeftMenuVisiblity((value === "open"), true);
+        });
+
+        getUserPreference('right-panel', function onsuccess(value) {
+
+            setFootMarkVisiblity((value === "open"), true);
+        });
+    });
+
+    // 左侧菜单初始化
+    //initLeftMenuTree();
+});

@@ -1,0 +1,590 @@
+﻿//编辑对话框
+var dlg = new MyAppDialog(900, 600);
+
+//列定义
+var cols = [[
+    { field: "Id", title: 'Id', width: 10, hidden: true },
+    { field: "CheckId", title: 'CheckId', width: 10, hidden: true },
+    { field: "ck", title: 'ck', width: 10, checkbox: true },
+    {
+        field: "op", title: '操作', width: 200, align: 'center', formatter: function (value, rec) {
+            var op = [];
+            op.push("<div class='btn-group'>");
+            //完工检查状态: 未检查
+            if (rec.FinishInspectStatus == 0) {
+                if (!canEdit || !((isPM) || ((curUser == rec.DesignDirectorId) && rec.ProjectManager == "" && rec.ResultId != 1) || (isCM && rec.ResultId != 1) || (isKZ && rec.ResultId == 1 || (isKZ && rec.ResultId == 0)))) {
+                    op.push("<a href='#none' onclick='View(this)' class='btn btn-mini btn-default' data-id='" + rec.Id + "'>查看</a>");
+                } else if (isKZ && rec.ResultId == 0) {
+
+                } else if ((curUser == rec.DesignDirectorId) && rec.ProjectManager == "" && rec.ResultId != 1) {
+                    op.push("<a href='#none' onclick='ChooseProjectManager(this)' class='btn btn-mini btn-default' data-id='" + rec.Id + "'>选择项目经理</a>");
+                }
+                else {
+                    op.push("<a href='#none' onclick='Edit(this)' class='btn btn-mini btn-default' data-id='" + rec.Id + "'>修改</a>");
+                }
+                if (rec.ResultId == 1 && isAdmin) {//控制部,已审核项目才能变更
+                    //变更项目经理
+                    op.push("<a href='#none' onclick='ChangeProjectManager(this)' class='btn btn-mini btn-default' data-id='" + rec.Id + "'>变更项目经理</a>");
+                }
+            }
+            //2020-03-27 del 任务书和责任书流程代替了审批
+            //del-start
+            //if (canEdit && isPM && !rec.isSubmitCheck && rec.ResultId == 0) {
+            //    op.push("<a href='#none' onclick='submitCheckResult(this)' class='btn btn-mini btn-default' data-category='" + rec.ContractAmountType + "' data-targetCost='" + rec.TargetCost + "' data-id='" + rec.Id + "'>提交执行审核</a>");
+            //}
+            //if (canEdit && rec.ResultId == 0 && rec.CheckId != 0) {
+            //    if (rec.CheckAudit != 0) {
+            //        op.push("<a href='#none' onclick='CheckProject(this)' class='btn btn-mini btn-default' data-checkid='" + rec.CheckId + "'data-id='" + rec.Id + "'>审核</a>");
+            //    } else if (isKZ) {
+            //        op.push("<a href='#none' onclick='CheckProject(this)' class='btn btn-mini btn-default' data-checkid='" + rec.CheckId + "'data-id='" + rec.Id + "'>审核</a>");
+            //    }
+            //}
+            //del-end
+            if (canEdit && isKZ && rec.canDocCheck) {
+                op.push("<a href='#none' onclick='CheckProjectDoc(this)' class='btn btn-mini btn-default' data-id='" + rec.Id + "'>文档审核</a>");
+            }
+
+            //2018-11-05 add 项目关闭功能
+            if (canClose/* && rec.ResultId == 1*//*通过*/) {
+                var textStr = "";
+                var clickStr = "";
+                //FinishInspectStatus: 未检查 = 0, 检查中 = 1, 检查完成 = 2, 已关闭 = 3
+                //FinishInspectResult: 通过 = 1, 未通过 = 2
+                if (rec.FinishInspectStatus == 0) {
+                    op.push("<a href='#none' onclick='CloseProjectInspect(this)' class='btn btn-mini btn-default' data-id='" + rec.Id + "'>完工检查</a>");
+                }
+                if (rec.FinishInspectResult == 1 || rec.FinishInspectStatus == 2 || (rec.FinishInspectStatus == 3 && rec.FinishInspectResult == 1)) {
+                    op.push("<a href='#none' onclick='CloseProjectViewResult(this)' class='btn btn-mini btn-default' data-id='" + rec.Id + "'>查看完工结果</a>");
+                }
+            }
+            if (rec.CanCheckGuideCost) {
+                op.push("<a href='#none' onclick='CheckProjectCost(this)' class='btn btn-mini btn-default' data-id='" + rec.Id + "' data-category='" + 1 + "'>指导成本审核</a>");
+            } else if (rec.CanCheckAllocationCost) {
+                op.push("<a href='#none' onclick='CheckProjectCost(this)' class='btn btn-mini btn-default' data-id='" + rec.Id + "' data-category='" + 2 + "'>分配成本审核</a>");
+            }
+            if (canEditDocumentStatus) {
+                op.push("<a href='#none' onclick='EditDocumentStatus(this)' class='btn btn-mini btn-default' data-id='" + rec.Id + "'>文档状态维护</a>");
+            }
+            op.push("</div>");
+            return op.join("");
+        }
+    },
+    { field: "ProjectName", title: '项目名称', sortable: true, width: 100, align: 'center' },
+    { field: "ProjectNo", title: '项目编号', sortable: true, width: 100, align: 'center' },
+    { field: "CRBNo", title: 'CRB编号', sortable: false, width: 100, align: 'center' },
+    { field: "Percentage", title: '已审百分比', sortable: false, width: 100, align: 'center' },
+    { field: "CustomerName", title: '当前单位', sortable: true, width: 100, align: 'center' },
+    { field: "OldCustomerName", title: '曾经单位', sortable: false, width: 100, align: 'center' },
+    { field: "DesignDirector", title: '负责人', sortable: true, width: 70, align: 'center' },
+    { field: "ProjectManager", title: '项目经理', sortable: true, width: 70, align: 'center' },
+    {
+        field: "ContractAmount", title: '修正后合同额', sortable: false, width: 100, align: 'center', formatter: function (value, rec) {
+            if (!value) {
+                return "-";
+            }
+            if (canEdit && isKZ && rec.needCheck) {
+                return "<div>" + value.toFixed("N2") + "元" + "<a href='#none' class='btn btn-mini btn-default' data-id='" + rec.Id + "' onclick='CheckContractAmount(this)'>审核修正值</a></div>";
+            } else {
+                return value.toFixed("N2") + "元";
+            }
+        }
+    },
+    //{
+    //    field: "ManageCostRatio", title: '项目管理成本比率', sortable: true, width: 100, align: 'center', formatter: function (value, rec) {
+
+    //        if (canEdit && isKZ && rec.needCostCheck) {
+    //            return "<div>" + value + "<a href='#none' class='btn btn-mini btn-default' data-id='" + rec.Id + "' onclick='CheckManageRatio(this)'>审核调整值</a></div>";
+    //        } else {
+    //            return value;
+    //        }
+    //    }
+    //},
+    //{
+    //    field: "SubcontractOutput", title: '项目分包申报产值', sortable: true, width: 100, align: 'center', formatter: function (value, rec) {
+
+    //        if (canEdit && isKZ && rec.CanSubcontractOutputCheck) {
+    //            return "<div>" + value + "元" + "<a href='#none' class='btn btn-mini btn-default' data-id='" + rec.Id + "' onclick='CheckSubcontractOutput(this)'>审核</a></div>";
+    //        } else {
+    //            return value + "元";
+    //        }
+    //    }
+    //},
+    //{
+    //    field: "PlanHours", title: '调整后计划工时', sortable: true, width: 100, align: 'center', formatter: function (value, rec) {
+
+    //        if (canEdit && isKZ && rec.needPlanHoursCheck) {
+    //            return "<div>" + value + "H" + "<a href='#none' class='btn btn-mini btn-default' data-id='" + rec.Id + "' onclick='CheckPlanHours(this)'>审核</a></div>";
+    //        } else {
+    //            return value + "H";
+    //        }
+    //    }
+    //},
+    //{
+    //    field: "EndDate", title: '调整后结束日期', sortable: true, width: 100, align: 'center', formatter: function (value, rec) {
+
+    //        if (canEdit && isKZ && rec.needEndDateCheck) {
+    //            return "<div>" + value + "<a href='#none' class='btn btn-mini btn-default' data-id='" + rec.Id + "' onclick='CheckEndDate(this)'>审核</a></div>";
+    //        } else {
+    //            return value;
+    //        }
+    //    }
+    //},
+    { field: "BusinessType", title: '业务类型', sortable: true, width: 130, align: 'center' },
+    //{ field: "Result", title: '状态', sortable: true, width: 70, align: 'center' }
+    { field: "FlowStatus", title: '状态', sortable: true, width: 150, align: 'center' },
+    { field: "FinishInspectStatusText", title: '项目关闭状态', sortable: false, width: 150, align: 'center' }
+    
+]];
+
+$(document).ready(function () {
+    //删除
+    $("#btndel").click(function (evt) { evt.preventDefault(); del(); });
+    //添加
+    $("#btnadd").click(function (evt) {
+        window.location.href = "/Task/Project/Tab/0" + "?" + Math.random();
+    });
+    //查询
+    $("#btnquery").click(function (evt) {
+        evt.preventDefault();
+        var params = $("#datagrid").datagrid('options').queryParams;
+        params.s = $("#searchkey").val();
+        params.status = $("#History").val();
+        params.ischange = !!$("#IsHasChange").val() ? $("#IsHasChange").val() : 0;
+        params.issubchange = !!$("#IsHasSubChange").val() ? $("#IsHasSubChange").val() : 0;//$("#IsHasSubChange").val();
+        params.iscostchange = !!$("#ManageCostIsHasChange").val() ? $("#ManageCostIsHasChange").val() : 0;//$("#ManageCostIsHasChange").val();
+        params.isdoccheck = !!$("#ProfessionDocHasCheck").val() ? $("#ProfessionDocHasCheck").val() : 0;//$("#ProfessionDocHasCheck").val();
+        params.isplancheck = !!$("#IsHasPlanCheck").val() ? $("#IsHasPlanCheck").val() : 0;//$("#ProfessionDocHasCheck").val();
+        params.issuboutputcheck = !!$("#IsHasSubOutputCheck").val() ? $("#IsHasSubOutputCheck").val() : 0;//$("#ProfessionDocHasCheck").val();
+        params.isenddatecheck = !!$("#IsHasEndDateCheck").val() ? $("#IsHasEndDateCheck").val() : 0;
+        params.isguidecostcheck = !!$("#IsHasGuideCostCheck").val() ? $("#IsHasGuideCostCheck").val() : 0;
+        params.isallocationcostcheck = !!$("#IsHasAllocationCostCheck").val() ? $("#IsHasAllocationCostCheck").val() : 0;
+        params.directly = !$("#Directly").val() ? 0 : $("#Directly").val();
+        params.businesscategory = !$("#BusinessCategory").val() ? 0 : $("#BusinessCategory").val();
+        params.businesstype = !$("#BusinessType").val() ? 0 : $("#BusinessType").val();
+        params.ampm = !$("#AMPM").val() ? 0 : $("#AMPM").val();
+        params.canassign = $("#CanAssign").val() == '' ? -1 : $("#CanAssign").val();
+        params.contract = $("#Contract").val() == '' ? -1 : $("#Contract").val();
+        params.workorder = $("#WorkOrder").val() == '' ? -1 : $("#WorkOrder").val();
+        params.flowstatusnow = $("#FlowStatusNow").val() == '' ? -1 : $("#FlowStatusNow").val();
+        params.finishstatus = $("#FinishStatus").val() == '' ? -1 : $("#FinishStatus").val();
+        params.flowstatushistory = $("#FlowStatusHistory").val() == '' ? -1 : $("#FlowStatusHistory").val();
+        params.percentagetype = $("#PercentageType").val() == '' ? 1 : $("#PercentageType").val();
+        params.percentage = $("#Percentage").val();
+        $("#datagrid").datagrid("load");
+    });
+
+    $("#searchkey").keydown(function (event) {
+        if (event.keyCode == $.ui.keyCode.ENTER) {
+            event.preventDefault();
+            $("#btnquery").click();
+            return false;
+        }
+    });
+
+    //搜索条件
+    $("#History,#IsHasChange,#ManageCostIsHasChange,#ProfessionDocHasCheck,#IsHasSubChange,#Directly,#BusinessCategory,#AMPM,#IsHasPlanCheck,#IsHasSubOutputCheck,#IsHasEndDateCheck,#IsHasGuideCostCheck,#IsHasAllocationCostCheck").change(function (evt) {
+        evt.preventDefault();
+        $("#btnquery").click();
+    });
+
+    LoadDatagrid();
+
+    if (!canEdit) {
+        $("#datagrid").datagrid('hideColumn', 'op');
+        // $("#datagrid").datagrid('showColumn', 'locked');
+    }
+
+    $("#btnadd").hide();
+    $("#btndel").hide();
+    //客户经理, 且有新增权限时显示新增按钮
+    if (isCM && canAdd) {
+        $("#btnadd").show();
+        $("#btndel").show();
+    }
+    //有编辑权限时显示删除按钮
+    if (canEdit) {
+        $("#btndel").show();
+    }
+    //控制部, 由于这个业务部门显示的数据太多无法做新增功能, 隐藏新增
+    if (isKZ && canEdit) {
+        $("#btnadd").hide();
+        $("#btndel").show();
+    }
+
+    //新增部门代码
+    $("#btnadddeptcode").click(function (evt) {
+        dlg.setSize(600, 620);
+        dlg.setURL("新增部门代码", "/Task/Project/AddDeptCode?t=" + Math.random());
+        dlg.show();
+    });
+
+});
+
+//项目合同额审核
+function CheckContractAmount(obj) {
+    dlg.setSize(750, 600);
+    dlg.setURL("项目合同额调整详情", "/Task/Project/ContractAmountChangeCheck/" + $(obj).attr("data-id") + "?t=" + Math.random());
+    dlg.show();
+}
+//项目分包合同额审核
+function SubCheckContractAmount(obj) {
+    dlg.setSize(750, 600);
+    dlg.setURL("项目分包合同额调整详情", "/Task/Project/SubContractAmountChangeCheck/" + $(obj).attr("data-id") + "?t=" + Math.random());
+    dlg.show();
+}
+//项目成本比率
+function CheckManageRatio(obj) {
+    dlg.setSize(750, 600);
+    dlg.setURL("项目管理成本比率调整详情", "/Task/Project/ManageCostRatioChangeCheck/" + $(obj).attr("data-id") + "?t=" + Math.random());
+    dlg.show();
+}
+//项目分包产值
+function CheckSubcontractOutput(obj) {
+    dlg.setSize(750, 600);
+    dlg.setURL("项目分包申报产值详情", "/Task/Project/SubcontractOutputCheck/" + $(obj).attr("data-id") + "?t=" + Math.random());
+    dlg.show();
+}
+//项目预计工时
+function CheckPlanHours(obj) {
+    dlg.setSize(750, 600);
+    dlg.setURL("项目计划工时详情", "/Task/Project/PlanHoursChangeCheck/" + $(obj).attr("data-id") + "?t=" + Math.random());
+    dlg.show();
+}
+//项目结束日期
+function CheckEndDate(obj) {
+    dlg.setSize(750, 600);
+    dlg.setURL("项目结束日期详情", "/Task/Project/EndDateChangeCheck/" + $(obj).attr("data-id") + "?t=" + Math.random());
+    dlg.show();
+}
+
+//关闭对话框
+function closeDialog(reload) {
+    dlg.close();
+
+    if (reload)
+        $("#datagrid").datagrid("reload");
+}
+//查看
+function View(obj) {
+    window.location.href = "/Task/Project/Tab/" + $(obj).attr("data-id") + "?" + Math.random();
+}
+//任务评价
+function ViewEvaluation(obj) {
+    dlg.setSize(900, 550);
+    dlg.setURL("查看任务评价信息", "/Task/Project/ViewEvaluation/" + $(obj).attr("data-id") + "?" + Math.random());
+    dlg.show();
+}
+//编辑
+function Edit(obj) {
+    window.location.href = "/Task/Project/Tab/" + $(obj).attr("data-id") + "?" + Math.random();
+
+}
+//选择项目经理
+function ChooseProjectManager(obj) {
+    window.location.href = "/Task/Project/Tab/" + $(obj).attr("data-id") + "?" + Math.random();
+}
+//变更项目经理
+function ChangeProjectManager(obj) {
+    dlg.setSize(800, 660);
+    dlg.setURL("变更项目经理", "/Task/Project/Choose/" + $(obj).attr("data-id") + "?ischange=1&t=" + Math.random());
+    dlg.show();
+}
+//提交执行审核
+function submitCheckResult(obj) {
+
+    if ($(obj).attr("data-category") == '0') {
+        $.messager.alert("消息提示", "提交执行审核前必须确定项目合同额类型", "error");
+        return;
+    }
+
+    if ($(obj).attr("data-targetCost") == '0' || $(obj).attr("data-targetCost") == 'null' || $(obj).attr("data-targetCost") == '') {
+        //$.messager.alert("消息提示", "提交执行审核前必须确定项目工时控制成本", "error");
+        $.messager.alert("消息提示", "提交执行审核前必须确定项目分配成本", "error");
+        return;
+    }
+
+    var html = "";
+
+    html = '<div class="submit-confirm-form">'
+        + $(".v2-submit-box-child").clone().html()
+        + '</div>';
+    $.messager.confirm('选择分公司审批人', html, function (c) {
+        if (c) {
+            var grade1Approver = $(".submit-confirm-form #Grade1ApproverChild").val();
+            //确认
+            if (grade1Approver == "") {
+                $.messager.alert("提示", "请选择审批人", "error");
+                return false;
+            }
+            $.messager.confirm(sysname, "提交之后，内容不可修改，请知悉？", function (r) {
+                if (r) {
+                    $.ajax({
+                        type: "post",
+                        url: "/Task/Project/SubmitCheckSave",
+                        data: {
+                            id: $(obj).attr("data-id"),
+                            grade1ApprovorUserid: grade1Approver,
+                        },
+                        success: function (e) {
+                            if (e.Ret == "0") {
+                                $("#datagrid").datagrid("reload");
+                            } else {
+                                $.messager.alert(sysname, e.Msg, "error");
+                            }
+                        }
+                    });
+                    $("#Grade1ApproverChild").removeAttr("disabled");
+                }
+            });
+        }
+
+    });
+}
+//审核
+function CheckProject(obj) {
+    window.location.href = "/Task/Project/Tab?id=" + $(obj).attr("data-id") + "&checkId=" + $(obj).attr("data-checkid") + "&" + Math.random();
+
+}
+//2018-11-06 add 完工检查
+function CloseProjectInspect(obj) {
+    $.messager.confirm(sysname, "确认要进行完工检查吗？", function (r) {
+        if (r) {
+            $(obj).attr("disabled", true);
+            //if ($(obj).prev().text() == "查看结果") {
+            //    $(obj).prev().attr("disabled", true);
+            //}
+            $.ajax({
+                type: "post",
+                url: "/Task/Project/CloseProjectInspect",
+                data: { id: $(obj).attr("data-id") },
+                success: function (e) {
+                    if (e.Ret == "0") {
+                        //$("#datagrid").datagrid("reload");
+                        $(obj).text("检查中");
+                    } else {
+                        $.messager.alert(sysname, e.Msg, "error");
+                    }
+                }
+            });
+        }
+    });
+}
+//2018-11-06 add 查看完工检查结果
+function CloseProjectViewResult(obj) {
+    dlg.setSize(900, 600);
+    dlg.setURL("完工检查结果", "/Task/Project/CloseProjectViewResult?id=" + $(obj).attr("data-id"));
+    dlg.show();
+}
+//审核文档
+function CheckProjectDoc(obj) {
+    dlg.setSize(850, 800);
+    dlg.setURL("审核项目文档", "/Task/Project/CheckProjectDoc?id=" + $(obj).attr("data-id"));
+    dlg.show();
+}
+//文档状态维护
+function EditDocumentStatus(obj) {
+    dlg.setSize(500, 300);
+    dlg.setURL("文档状态维护", "/Task/Project/EditDocumentStatus?id=" + $(obj).attr("data-id"));
+    dlg.show();
+}
+//指导成本/分配成本 审核
+function CheckProjectCost(obj) {
+    var category = $(obj).attr("data-category");
+    var title = "项目指导成本审核";
+    if (category == 2) {
+        title = "项目分配成本审核";
+        dlg.setSize(600, 400);
+    } else {
+        dlg.setSize(600, 800);
+    }
+    dlg.setURL(title, "/Task/Project/EditProjectCost?id=" + $(obj).attr("data-id") + "&category=" + category + "&isCheck=" + true);
+    dlg.show();
+}
+//加载列表数据
+function LoadDatagrid() {
+    var $dg = $("#datagrid");
+    $dg.datagrid({
+        title: '项目列表',
+        url: '/Task/Project/ProjectListJson',
+        fit: true,
+        fitColumns: true,
+        striped: true,
+        nowrap: true,
+        idField: 'Id',
+        pagination: true,
+        pageNumber:
+            //返回过来时读取之前的所在页号
+            localStorage_getItem("back") ? localStorage_getItem("pageNumber") : 1,
+        pageSize: 20,
+        pageList: [10, 20, 30, 45, 60, 75],
+        rownumbers: true,
+        singleSelect: false,
+        queryParams:
+            //返回过来时读取之前的查询条件
+            localStorage_getItem("back") ?
+                localStorage_getItem("params")
+                :
+                {
+                    s: "",
+                    status: $("#History").val() * 1,//未审核
+                    ischange: 0,
+                    issubchange: 0,
+                    iscostchange: 0,
+                    isdoccheck: 0,
+                    isplancheck: 0,
+                    issuboutputcheck: 0,
+                    directly: 0,
+                    businesscategory: 0,
+                    businesstype: 0,
+                    ampm: 0,
+                    canassign: -1,
+                    contract: -1,
+                    workorder: 1,
+                    flowstatusnow: -1,
+                    finishstatus: -1,
+                    flowstatushistory: -1,
+                    percentagetype: 1,
+                    percentage: "",
+                },
+        sortName: 'Id',
+        sortOrder: 'desc',
+        columns: cols,
+        onLoadSuccess: function () {
+            //多选时，加载完成后清除所有选中项（不然可能会有残留选中项）
+            $dg.datagrid("clearSelections");
+            //保存列表当前所在页号与查询条件
+            localStorage_setItem("back", false);//清除返回标记
+            localStorage_setItem("pageNumber", $dg.datagrid("getPager").data("pagination").options.pageNumber);
+            var params = $dg.datagrid('options').queryParams;
+            var queryParams = {
+                searchkey: params.s,
+                History: params.status,
+                IsHasChange: params.ischange,
+                IsHasSubChange: params.issubchange,
+                ManageCostIsHasChange: params.iscostchange,
+                ProfessionDocHasCheck: params.isdoccheck,
+                IsHasPlanCheck: params.isplancheck,
+                IsHasSubOutputCheck: params.issuboutputcheck,
+                IsHasEndDateCheck: params.isenddatecheck,
+                IsHasGuideCostCheck: params.isguidecostcheck,
+                IsHasGuideCostCheck: params.isallocationcostcheck,
+                Directly: params.directly,
+                BusinessCategory: params.businesscategory,
+                BusinessType: params.businesstype,
+                AMPM: params.ampm,
+                CanAssign: params.canassign,
+                Contract: params.contract,
+                WorkOrder: params.workorder,
+                FlowStatusNow: params.flowstatusnow,
+                FinishStatus: params.finishstatus,
+                FlowStatusHistory: params.flowstatushistory,
+                PercentageType: params.percentagetype,
+                Percentage: params.percentage,
+            }
+            localStorage_setItem("params", params);
+            localStorage_setItem("queryParams", queryParams);
+        },
+        onDblClickRow: function (rowIndex, row) {
+            if (!canEdit || !((isPM) || ((curUser == row.DesignDirectorId) && row.ProjectManager == "" && row.ResultId != 1) || (isCM && row.ResultId != 1) || (isKZ && row.ResultId == 1 || (isKZ && row.ResultId == 0)))) {
+                window.location.href = "/Task/Project/Tab/" + row.Id + "?" + Math.random();
+            } /*else if (isKZ && row.ResultId == 0) {
+
+            }*/ else if ((curUser == row.DesignDirectorId) && row.ProjectManager == "" && row.ResultId != 1) {
+                window.location.href = "/Task/Project/Tab/" + row.Id + "?" + Math.random();
+            }
+            //2020-03-23 add 有权限审批项目指导/分配成本的可以进入项目详情
+            else if (row.CanCheckGuideCost || row.CanCheckAllocationCost) {
+                window.location.href = "/Task/Project/Tab/" + row.Id + "?" + Math.random();
+            }
+            else {
+                window.location.href = "/Task/Project/Tab/" + row.Id + "?" + Math.random();
+            }
+        },
+        onSelect: function (rowIndex, row) {
+
+        },
+        onUnselect: function (rowIndex, row) {
+
+        }
+    });
+}
+//删除
+function del() {
+    var row = $("#datagrid").datagrid('getSelections');
+
+    if (row.length == 0) {
+        $.messager.alert(sysname, "请选择要删除的记录！");
+        return;
+    }
+
+    $.messager.confirm(sysname, "确认要删除选中的记录吗？", function (r) {
+        if (r) {
+            var ids = "";
+            for (var i = 0; i < row.length; i++) {
+                ids += row[i].Id + ",";
+            }
+
+            $.ajax({
+                type: "post",
+                url: "/Task/Project/Delete",
+                data: { ids: ids },
+                success: function (e) {
+                    if (e.Ret == "0") {
+                        $("#datagrid").datagrid("reload");
+                    } else {
+                        $.messager.alert(sysname, e.Msg, "error");
+                    }
+                }
+            });
+        }
+    })
+}
+
+//2020-05-19 add 批量完工检查（特殊）
+function BatchCloseProjectInspect() {
+    $.messager.confirm(sysname, "确认要进行批量完工检查吗？", function (r) {
+        if (r) {
+
+            var ids = [];
+            var rows = $("#datagrid").datagrid('getRows');
+            console.log(rows);
+            if (rows.length > 0) {
+                for (var i = 0; i < rows.length; i++) {
+                    // 未检查 = 0, 检查中 = 1, 检查完成 = 2, 已关闭 = 3
+                    if (rows[i].ResultId == 1 && (rows[i].FinishInspectStatus == 0 || rows[i].FinishInspectStatus == 3)) {
+                        ids.push(rows[i].Id);
+                    }
+                }
+            }
+            console.log(ids);
+            if (ids && ids.length > 0) {
+                console.log("**************开始批量执行**************")
+                
+                for (var i = 0; i < ids.length; i++) {
+                    //console.log("**************执行ID:" + ids[i] + "**************");
+                    $.ajax({
+                        type: "post",
+                        url: "/Task/Project/CloseProjectInspectSpecial",
+                        data: { id: ids[i] },
+                        success: function (e) {
+                            if (e.Ret == "0") {
+                                console.log("**************执行ID:" + ids[i] + "**************");
+                            } else {
+                                $.messager.alert(sysname, e.Msg, "error");
+                            }
+                        }
+                    });
+                }
+            }
+            else {
+                console.log("**************无符合批量执行的数据**************")
+            }
+        }
+    });
+}
+
+
+
+
+
+

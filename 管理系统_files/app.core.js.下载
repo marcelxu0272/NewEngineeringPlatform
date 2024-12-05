@@ -1,0 +1,1209 @@
+﻿function showError(xhr) {
+    throw new Error(xhr.responseText);
+    //var errordlg = new MyAppDialog(700, 500, { modal: true });
+    //var msg = $("<div/>");
+    //msg.css("margin", "20px");
+    //$(xhr.responseText).appendTo(msg);
+    //errordlg.setContent("出错了", msg);
+    //errordlg.show();
+}
+
+var sysname = "管理系统";
+var pwddlg = new MyAppDialog(460, 320, { modal: true });
+var querydlg = new MyAppDialog(1000, 650);
+
+function showChangepwd() {
+    pwddlg.setURL("修改密码", "/Manage/User/ChangePassword" + "?Username=" + $("#Username").val() + "&t=" + Date.parse(new Date()));
+    pwddlg.show();
+}
+function closeChangepwd() {
+    pwddlg.close();
+}
+
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);//从?之后开始匹配如getQuery(courseid)返回一个数组["courseid=8","","8","&",index:0,input:"courseid=8"]
+    if (r != null) return unescape(r[2]); return null;
+}
+
+function handlerKeydown(target) {
+    if (target == null) {
+        $("input").bind("keydown", function (event) {
+            if (event.keyCode == 13) {
+                if ($(this).closest(".dialog").length > 0) {
+                    event.preventDefault();
+                    return false;
+                }
+            }
+        });
+    } else {
+        $(target).find("input").bind("keydown", function (event) {
+            if (event.keyCode == 13) {
+                if ($(this).closest(".dialog").length > 0) {
+                    event.preventDefault();
+                    return false;
+                }
+            }
+        });
+    }
+}
+
+$(document).ready(function () {
+    handlerKeydown(null);
+
+    $("ul.radio").each(function () {
+        var radio = $(this);
+
+        radio.find("input[type='radio']").click(function (evt) {
+            evt.preventDefault();
+            $(radio).find("input[type='hidden']").val($(this).val());
+            $(radio).find("li.checked").removeClass("checked");
+            $(this).parent("li").addClass("checked");
+        });
+    });
+
+    $("[data-form=radio]").radio();
+    $("[data-form=checkbox]").checkbox();
+    $("[data-form=datepicker]").datepicker({ clearBtn: true });
+    $("[data-form=monthpicker]").datepicker({ clearBtn: true, startView: 1, minViewMode: 1, format: 'yyyy-mm', autoclose: true });
+    //$("[data-form=colorpicker]").colorpicker();
+    $("[data-form=wycombo]").wycombo();
+    $("[data-form=wyupload]").wyupload();
+    //2019-01-07
+    $("[data-form=wyformatdecimal]").wyformatdecimal();
+
+    //退出系统
+    $("#exitsystem").click(function () {
+        $.messager.confirm(sysname, "确认要退出系统吗？", function (r) {
+            if (r) {
+                location.href = "/Member/Logout";
+            }
+        });
+    });
+    //语言
+    $(".languagename").click(function () {
+        setLanguage($(this).attr("data-lang"));
+    });
+
+    //列表查询框自动去除两边空格
+    $("#searchkey").blur(function () {
+        $(this).val($(this).val().trim());
+    }).keydown(function (event) {
+        if (event.keyCode == 13) {
+            $(this).val($(this).val().trim());
+            event.preventDefault();
+            return false;
+        }
+    });
+});
+
+function MyAppDialog(width, height, options) {
+    this.setting = {
+        width: width,
+        height: (height > (window.innerHeight - 30) ? window.innerHeight - 30 : height),
+        //top: "10%",
+        closed: true,
+        maximizable: false,
+        resizable: true,
+        modal: true,
+        draggable: true,
+        onClose: function () {
+            $(this).dialog("destroy");
+        }
+    };
+
+    $.extend(this.setting, options);
+}
+
+MyAppDialog.prototype.setSize = function (width, height) {
+    this.setting.width = width;
+    this.setting.height = (height > (window.innerHeight - 30) ? window.innerHeight - 30 : height);
+}
+
+MyAppDialog.prototype.setTop = function (top) {
+    //this.setting.top = top;
+}
+
+MyAppDialog.prototype.setTitle = function (title) {
+    this.setting.title = title;
+    if (this.dlg) {
+        this.dlg.dialog("setTitle", title);
+    }
+}
+
+MyAppDialog.prototype.setURL = function (title, url) {
+    this.setting.title = title;
+    this.setting.content = "<iframe id='iframe' frameborder='0' scrolling='auto' class='easyui-layout layout' data-options='fit:true' src='" + url + "'></iframe>";
+}
+
+MyAppDialog.prototype.setAjaxURL = function (title, url) {
+    this.setting.title = title;
+    this.setting.href = url;
+}
+
+MyAppDialog.prototype.setContent = function (title, content) {
+    this.setting.title = title;
+    this.setting.content = content;
+}
+
+MyAppDialog.prototype.show = function () {
+    //if (this.setting.top == undefined) {
+    if (this.setting.height) {
+        if ($(window).height() < this.setting.height) {
+            this.setting.top = 0;
+        } else {
+            this.setting.top = undefined;//($(window).height() - this.setting.height) * 0.5;
+        }
+    }
+    //}
+
+    this.dlg = $("<div />").dialog(this.setting).dialog("open");
+}
+
+MyAppDialog.prototype.close = function () {
+    this.setting.top = undefined;
+    if (this.dlg)
+        this.dlg.dialog("close");
+}
+
+String.prototype.format = function (args) {
+    var result = this;
+    if (arguments.length > 0) {
+        if (arguments.length == 1 && typeof (args) == "object") {
+            for (var key in args) {
+                if (args[key] != undefined) {
+                    var reg = new RegExp("({" + key + "})", "g");
+                    result = result.replace(reg, args[key]);
+                }
+            }
+        }
+        else {
+            for (var i = 0; i < arguments.length; i++) {
+                if (arguments[i] != undefined) {
+                    //var reg = new RegExp("({[" + i + "]})", "g");//这个在索引大于9时会有问题，谢谢何以笙箫的指出
+                    var reg = new RegExp("({)" + i + "(})", "g");
+                    result = result.replace(reg, arguments[i]);
+                }
+            }
+        }
+    }
+    return result;
+}
+String.prototype.trim = function () {
+    return this.replace(/(^\s*)|(\s*$)/g, "");
+}
+String.prototype.ltrim = function () {
+    return this.replace(/(^\s*)/g, "");
+}
+String.prototype.rtrim = function () {
+    return this.replace(/(\s*$)/g, "");
+}
+String.prototype.toDate = function (format) {
+    format = format || 'yyyy-MM-dd';
+    return new Date(parseInt(this.substr(6, 13))).format(format);
+}
+Date.prototype.format = function (format) {
+    var o = {
+        "M+": this.getMonth() + 1, //month
+        "d+": this.getDate(),    //day
+        "h+": this.getHours(),   //hour
+        "m+": this.getMinutes(), //minute
+        "s+": this.getSeconds(), //second
+        "q+": Math.floor((this.getMonth() + 3) / 3),  //quarter
+        "S": this.getMilliseconds() //millisecond
+    };
+    if (/(y+)/.test(format)) {
+        format = format.replace(RegExp.$1,
+			(this.getFullYear() + "").substr(4 - RegExp.$1.length));
+    }
+    for (var k in o) {
+        if (new RegExp("(" + k + ")").test(format))
+            format = format.replace(RegExp.$1,
+				RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+    }
+    return format;
+}
+/* 得到日期年月日等加数字后的日期 */
+Date.prototype.dateAdd = function (interval, number) {
+    var d = this;
+    var k = { 'y': 'FullYear', 'q': 'Month', 'm': 'Month', 'w': 'Date', 'd': 'Date', 'h': 'Hours', 'n': 'Minutes', 's': 'Seconds', 'ms': 'MilliSeconds' };
+    var n = { 'q': 3, 'w': 7 };
+    eval('d.set' + k[interval] + '(d.get' + k[interval] + '()+' + ((n[interval] || 1) * number) + ')');
+    return d;
+}
+
+/*easyui tree扩展*/
+$(function () {
+    //此处是扩展tree的两个方法. 
+    $.extend($.fn.tree.methods, {
+        //注：getChildren是获取所有子节点（包括子节点的子节点）
+        //获取下一级的子节点
+        getLeafChildren: function (jq, params) {
+            var nodes = [];
+            $(params).next().children().children("div.tree-node").each(function () {
+                nodes.push($(jq[0]).tree('getNode', this));
+            });
+            return nodes;
+        },
+        //扩展getChecked方法,使其能实心节点也一起返回 
+        getCheckedExt: function (jq) {
+            var checked = $(jq).tree("getChecked");
+            var checkbox2 = $(jq).find("span.tree-checkbox2").parent();
+            $.each(checkbox2, function () {
+                var node = $(jq[0]).tree('getNode', this);
+                checked.push(node);
+            });
+            return checked;
+        },
+        //扩展一个能返回实心节点的方法 
+        getSolidExt: function (jq) {
+            var checked = [];
+            var checkbox2 = $(jq).find("span.tree-checkbox2").parent();
+            $.each(checkbox2, function () {
+                var node = $(jq[0]).tree('getNode', this);
+                checked.push(node);
+            });
+            return checked;
+        },
+        /**
+         * 激活复选框  
+         * @param {Object} jq  
+         * @param {Object} target  
+         */
+        enableCheck: function (jq, target) {
+            return jq.each(function () {
+                var realTarget;
+                if (typeof target == "string" || typeof target == "number") {
+                    realTarget = $(this).tree("find", target).target;
+                } else {
+                    realTarget = target;
+                }
+                var ckSpan = $(realTarget).find(">span.tree-checkbox");
+                if (ckSpan.hasClass('tree-checkbox-disabled0')) {
+                    ckSpan.removeClass('tree-checkbox-disabled0');
+                } else if (ckSpan.hasClass('tree-checkbox-disabled1')) {
+                    ckSpan.removeClass('tree-checkbox-disabled1');
+                } else if (ckSpan.hasClass('tree-checkbox-disabled2')) {
+                    ckSpan.removeClass('tree-checkbox-disabled2');
+                }
+            });
+        },
+        /**
+         * 禁用复选框  
+         * @param {Object} jq  
+         * @param {Object} target  
+         */
+        disableCheck: function (jq, target) {
+            return jq.each(function () {
+                var realTarget;
+                var that = this;
+                var state = $.data(this, 'tree');
+                var opts = state.options;
+                if (typeof target == "string" || typeof target == "number") {
+                    realTarget = $(this).tree("find", target).target;
+                } else {
+                    realTarget = target;
+                }
+                var ckSpan = $(realTarget).find(">span.tree-checkbox");
+                ckSpan.removeClass("tree-checkbox-disabled0").removeClass("tree-checkbox-disabled1").removeClass("tree-checkbox-disabled2");
+                if (ckSpan.hasClass('tree-checkbox0')) {
+                    ckSpan.addClass('tree-checkbox-disabled0');
+                } else if (ckSpan.hasClass('tree-checkbox1')) {
+                    ckSpan.addClass('tree-checkbox-disabled1');
+                } else {
+                    ckSpan.addClass('tree-checkbox-disabled2')
+                }
+                if (!state.resetClick) {
+                    $(this).unbind('click').bind('click', function (e) {
+                        var tt = $(e.target);
+                        var node = tt.closest('div.tree-node');
+                        if (!node.length) { return; }
+                        if (tt.hasClass('tree-hit')) {
+                            $(this).tree("toggle", node[0]);
+                            return false;
+                        } else if (tt.hasClass('tree-checkbox')) {
+                            if (tt.hasClass('tree-checkbox-disabled0') || tt.hasClass('tree-checkbox-disabled1') || tt.hasClass('tree-checkbox-disabled2')) {
+                                $(this).tree("select", node[0]);
+                            } else {
+                                if (tt.hasClass('tree-checkbox1')) {
+                                    $(this).tree('uncheck', node[0]);
+                                } else {
+                                    $(this).tree('check', node[0]);
+                                }
+                                return false;
+                            }
+                        } else {
+                            $(this).tree("select", node[0]);
+                            opts.onClick.call(this, $(this).tree("getNode", node[0]));
+                        }
+                        e.stopPropagation();
+                    });
+                }
+
+            });
+        }
+    });
+});
+
+/*eayui扩展，layout折叠后显示数据源*/
+(function ($) {
+    var buttonDir = { north: 'down', south: 'up', east: 'left', west: 'right' };
+    $.extend($.fn.layout.paneldefaults, {
+        onBeforeCollapse: function () {
+            /**/
+            var popts = $(this).panel('options');
+            var dir = popts.region;
+            var btnDir = buttonDir[dir];
+            if (!btnDir) return false;
+
+            setTimeout(function () {
+                var pDiv = $('.layout-button-' + btnDir).closest('.layout-expand').css({
+                    textAlign: 'center', lineHeight: '18px', fontWeight: 'bold'
+                });
+
+                if (popts.title) {
+                    var vTitle = popts.title;
+                    if (dir == "east" || dir == "west") {
+                        var vTitle = popts.title.split('').join('<br/>');
+                        pDiv.find('.panel-body').html(vTitle);
+                    } else {
+                        $('.layout-button-' + btnDir).closest('.layout-expand').find('.panel-title')
+                        .css({ textAlign: 'left' })
+                        .html(vTitle)
+                    }
+
+                }
+            }, 100);
+
+        }
+    });
+})(jQuery);
+
+//禁止右键、复制功能
+(function ($) {
+    $.fn.ctrlCmd = function (key) {
+
+        var allowDefault = true;
+
+        if (!$.isArray(key)) {
+            key = [key];
+        }
+
+        return this.keydown(function (e) {
+            for (var i = 0, l = key.length; i < l; i++) {
+                if (e.keyCode === key[i].toUpperCase().charCodeAt(0) && e.metaKey) {
+                    allowDefault = false;
+                }
+            };
+            return allowDefault;
+        });
+    };
+
+
+    $.fn.disableSelection = function () {
+
+        this.ctrlCmd(['a', 'c']);
+
+        return this.attr('unselectable', 'on')
+                   .css({
+                       '-moz-user-select': '-moz-none',
+                       '-moz-user-select': 'none',
+                       '-o-user-select': 'none',
+                       '-khtml-user-select': 'none',
+                       '-webkit-user-select': 'none',
+                       '-ms-user-select': 'none',
+                       'user-select': 'none'
+                   })
+                   .bind('selectstart', false);
+    };
+
+})(jQuery);
+
+var APP = {
+    _msg: {}, //alert message
+    _set: {
+        loginUrl: "", //session timeout
+        loginTitle: "", //if loginTitle open a login dialog
+        debug: true
+    },
+    msg: function (key, args) {
+        var _format = function (str, args) {
+            args = args || [];
+            var result = str || "";
+            for (var i = 0; i < args.length; i++) {
+                result = result.replace(new RegExp("\\{" + i + "\\}", "g"), args[i]);
+            }
+            return result;
+        }
+        return _format(this._msg[key], args);
+    },
+    debug: function (msg) {
+        if (this._set.debug) {
+            if (typeof (console) != "undefined") console.log(msg);
+            else alert(msg);
+        }
+    }
+};
+
+// 获取长度为len的随机字符串  
+function getRandomString(len) {
+    len = len || 32;
+    var $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'; // 默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1  
+    var maxPos = $chars.length;
+    var pwd = '';
+    for (i = 0; i < len; i++) {
+        pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+    return pwd;
+}
+
+function setCookie(name, value) {
+    var Days = 30;
+    var exp = new Date();
+    exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+    document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+}
+//读取COOKIES
+function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg)) return unescape(arr[2]);
+    else return null;
+}
+//删除COOKIES
+function delCookie(name) {
+    var exp = new Date();
+    exp.setTime(exp.getTime() - 1);
+    var cval = getCookie(name);
+    if (cval != null) document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+}
+
+function beforeFrameHtmlUnload() {
+    var a = beforeFrameHtmlUnload._oFuncs, b;
+    for (var c in a) {
+        b = (typeof a[c] == "function") && a[c]();
+        if (b) {
+            return b;
+        }
+    }
+}
+beforeFrameHtmlUnload.add = function (b, a) {
+    beforeFrameHtmlUnload._oFuncs[b] = a;
+};
+beforeFrameHtmlUnload._oFuncs = {};
+beforeFrameHtmlUnload.remove = function (a) {
+    delete beforeFrameHtmlUnload._oFuncs[a];
+};
+
+function ajaxProfessionCombo($target, professionid, taskid, isLabel) {
+    $target.empty();
+    if (!isNaN(professionid)) {
+        $.ajax({
+            type: "post",
+            async: false,
+            url: "/Task/TaskManage/GetCustomField",
+            data: { professionid: professionid, taskid: taskid, isedit: isLabel ? 1 : 0 },
+            success: function (e) {
+                var html = "";
+
+                for (var j = 0; j < e.length; j++) {
+                    var peritem = "";
+                    var str = "";
+                    var require = "";
+                    if (isLabel) {
+                        str = "<label/>" + e[j].Value + "</label>";
+
+                    } else {
+                        var name = "customfield" + j;
+                        str = "<input name='" + name + "'type='text'value='" + e[j].Value + "'data-id='" + e[j].Id + "'data-name='" + e[j].Name + "'/></td>";
+                        require = "<span style='color:red'>*</span>";
+                    }
+                    var item = "<td class='td-label'>" + require + "" + e[j].Name + "</td><td class='td-content'>" + str + "";
+                    if ((j + 1) % 2 == 0) {
+                        html += item + "</tr>";
+                    } else {
+                        html += "<tr>" + item;
+                    }
+
+
+                }
+                if (e.length % 2 != 0) {
+                    html += "</tr>";
+                }
+
+                $target.html(html);
+
+                //验证规则
+                $target.find("input").each(function () {
+                    $(this).rules("add", {
+                        required: true
+                    })
+                });
+
+
+            },
+            error: function (xhr) {
+                showError(xhr);
+            }
+        });
+    }
+}
+
+function smalltoBIGNew(currencyDigits) {
+    // Constants: 
+    var MAXIMUM_NUMBER = 99999999999.99;
+    // Predefine the radix characters and currency symbols for output: 
+    var CN_ZERO = "零";
+    var CN_ONE = "壹";
+    var CN_TWO = "贰";
+    var CN_THREE = "叁";
+    var CN_FOUR = "肆";
+    var CN_FIVE = "伍";
+    var CN_SIX = "陆";
+    var CN_SEVEN = "柒";
+    var CN_EIGHT = "捌";
+    var CN_NINE = "玖";
+    var CN_TEN = "拾";
+    var CN_HUNDRED = "佰";
+    var CN_THOUSAND = "仟";
+    var CN_TEN_THOUSAND = "万";
+    var CN_HUNDRED_MILLION = "亿";
+    var CN_SYMBOL = "";
+    var CN_DOLLAR = "元";
+    var CN_TEN_CENT = "角";
+    var CN_CENT = "分";
+    var CN_INTEGER = "整";
+
+    // Variables: 
+    var integral;    // Represent integral part of digit number. 
+    var decimal;    // Represent decimal part of digit number. 
+    var outputCharacters;    // The output result. 
+    var parts;
+    var digits, radices, bigRadices, decimals;
+    var zeroCount;
+    var i, p, d, ds;
+    var quotient, modulus;
+
+    // Validate input string: 
+    currencyDigits = currencyDigits.toString();
+    if (currencyDigits == "") {
+        alert("不能为空 请输入数字金额!如：123.23");
+        return "";
+    }
+    if (currencyDigits.match(/[^,.\d]/) != null) {
+        alert("输入字符串中的字符无效!");
+        return "";
+    }
+    if ((currencyDigits).match(/^((\d{1,3}(,\d{3})*(.((\d{3},)*\d{1,3}))?)|(\d+(.\d+)?))$/) == null) {
+        alert("请输入正确的数字金额!");
+        return "";
+    }
+
+    // Normalize the format of input digits: 
+    currencyDigits = currencyDigits.replace(/,/g, "");    // Remove comma delimiters. 
+    currencyDigits = currencyDigits.replace(/^0+/, "");    // Trim zeros at the beginning. 
+    // Assert the number is not greater than the maximum number. 
+    if (Number(currencyDigits) > MAXIMUM_NUMBER) {
+        alert("Too large a number to convert!");
+        return "";
+    }
+
+    // Process the coversion from currency digits to characters: 
+    // Separate integral and decimal parts before processing coversion: 
+    parts = currencyDigits.split(".");
+    if (parts.length > 1) {
+        integral = parts[0];
+        decimal = parts[1];
+        // Cut down redundant decimal digits that are after the second. 
+        decimal = decimal.substr(0, 2);
+    }
+    else {
+        integral = parts[0];
+        decimal = "";
+    }
+    // Prepare the characters corresponding to the digits: 
+    digits = new Array(CN_ZERO, CN_ONE, CN_TWO, CN_THREE, CN_FOUR, CN_FIVE, CN_SIX, CN_SEVEN, CN_EIGHT, CN_NINE);
+    radices = new Array("", CN_TEN, CN_HUNDRED, CN_THOUSAND);
+    bigRadices = new Array("", CN_TEN_THOUSAND, CN_HUNDRED_MILLION);
+    decimals = new Array(CN_TEN_CENT, CN_CENT);
+    // Start processing: 
+    outputCharacters = "";
+    // Process integral part if it is larger than 0: 
+    if (Number(integral) > 0) {
+        zeroCount = 0;
+        for (i = 0; i < integral.length; i++) {
+            p = integral.length - i - 1;
+            d = integral.substr(i, 1);
+            quotient = p / 4;
+            modulus = p % 4;
+            if (d == "0") {
+                zeroCount++;
+            }
+            else {
+                if (zeroCount > 0) {
+                    outputCharacters += digits[0];
+                }
+                zeroCount = 0;
+                outputCharacters += digits[Number(d)] + radices[modulus];
+            }
+            if (modulus == 0 && zeroCount < 4) {
+                outputCharacters += bigRadices[quotient];
+            }
+        }
+        outputCharacters += CN_DOLLAR;
+    }
+    // Process decimal part if there is: 
+    if (decimal != "") {
+        for (i = 0; i < decimal.length; i++) {
+            d = decimal.substr(i, 1);
+            ds = decimal.substr(-1, 1);
+            if (d == 0) {
+                if (ds == 0) {
+                    outputCharacters += "";
+                }
+                else {
+                    outputCharacters += digits[Number(d)];
+                }
+            }
+            else {
+
+                outputCharacters += digits[Number(d)] + decimals[i];
+
+            }
+        }
+    }
+    // Confirm and return the final output string: 
+    if (outputCharacters == "") {
+        outputCharacters = CN_ZERO + CN_DOLLAR;
+    }
+    if (decimal == "") {
+        outputCharacters += CN_INTEGER;
+    }
+    outputCharacters = CN_SYMBOL + outputCharacters;
+    return outputCharacters;
+}
+
+function smalltoBIG(n) {
+    var fraction = ['角', '分'];
+    var digit = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
+    var unit = [['元', '万', '亿'], ['', '拾', '佰', '仟']];
+    var head = n < 0 ? '欠' : '';
+    n = Math.abs(n);
+
+    var s = '';
+
+    for (var i = 0; i < fraction.length; i++) {
+        s += (digit[Math.floor(n * 10 * Math.pow(10, i)) % 10] + fraction[i]).replace(/零./, '');
+    }
+    s = s || '整';
+    n = Math.floor(n);
+
+    for (var i = 0; i < unit[0].length && n > 0; i++) {
+        var p = '';
+        for (var j = 0; j < unit[1].length && n > 0; j++) {
+            p = digit[n % 10] + unit[1][j] + p;
+            n = Math.floor(n / 10);
+        }
+        s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
+    }
+    return head + s.replace(/(零.)*零元/, '元').replace(/(零.)+/g, '零').replace(/^整$/, '零元整');
+}
+
+Number.prototype.formatMoney = function (places, symbol, thousand, decimal) {
+    places = !isNaN(places = Math.abs(places)) ? places : 2;
+    symbol = symbol !== undefined ? symbol : "$";
+    thousand = thousand || ",";
+    decimal = decimal || ".";
+    var number = this,
+        negative = number < 0 ? "-" : "",
+        i = parseInt(number = Math.abs(+number || 0).toFixed(places), 10) + "",
+        j = (j = i.length) > 3 ? j % 3 : 0;
+    return symbol + negative + (j ? i.substr(0, j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : "");
+};
+
+
+function ajaxProfessionCombo_New($target, professionid, taskid, isLabel) {
+    $target.empty();
+    if (!isNaN(professionid)) {
+        $.ajax({
+            type: "post",
+            async: false,
+            url: "/Task/TaskManage/GetCustomField",
+            data: { professionid: professionid, taskid: taskid, isedit: isLabel ? 1 : 0 },
+            success: function (e) {
+                var html = "<tr>";
+
+                for (var j = 0; j < e.length; j++) {
+                    var peritem = "";
+                    var str = "";
+                    var require = "";
+                    if (isLabel) {
+                        str = "<label/>" + e[j].Value + "</label>";
+
+                    } else {
+                        var name = "customfield" + j;
+                        str = "<input name='" + name + "'type='text'value='" + e[j].Value + "'data-id='" + e[j].Id + "'data-name='" + e[j].Name + "'/></td>";
+                        require = "<span style='color:red'>*</span>";
+                    }
+                    var _colspan = (j + 1) % 3 == 0 ? "3" : "2";
+                    var item = "<td colspan='1'>" + require + "" + e[j].Name + "</td><td colspan=" + _colspan + ">" + str + "";
+                    if ((j + 1) % 3 == 0) {
+                        html += item + "</tr>";
+                    } else {
+                        html += item;
+                    }
+
+
+                }
+                if (e.length % 3 != 0) {
+                    html += "</tr>";
+                }
+
+                $target.html(html);
+
+                //验证规则
+                $target.find("input").each(function () {
+                    $(this).rules("add", {
+                        required: true
+                    })
+                });
+
+
+            },
+            error: function (xhr) {
+                showError(xhr);
+            }
+        });
+    }
+}
+//loading扩展
+(function ($) {
+    $.extend({
+        loading: function () {
+            $("<div class=\"datagrid-mask\"></div>").css({ display: "block", width: "100%", height: $(document.body).height() }).appendTo("body");
+            $("<div class=\"datagrid-mask-msg\"></div>").html("正在提交数据，请稍候。。。").appendTo("body").css({ display: "block", left: ($(window).outerWidth(true) - 190) / 2, top: ($(window).scrollTop() + 350), height: "40px" });
+        },
+        removeload: function (isParentWindow) {
+            var t = $;
+            if (typeof isParentWindow != "undefined")
+                t = top.$;
+            t(".datagrid-mask,.datagrid-mask-msg").remove();
+        }
+    });
+})(jQuery);
+
+//保存原始toFixed方法
+Number.prototype.baseToFixed = Number.prototype.toFixed;
+//重写toFixed方法, 用Math.round方法去实现四舍五入
+//精确数值只要小数位数小于等于6位的都是准确的, 精确到6位单但实际大于6位的会做精度弥补
+Number.prototype.toFixed = function (_d) {
+    if (isNaN(this)) {
+        return this;
+    }
+    if (Math.abs(this) == Infinity) {
+        return this;
+    }
+    var point = null;
+    var d = null;
+    var foramt = 'F';
+    //用于补小数位的0
+    var array = ['', '0', '00', '000', '0000', '00000', '000000', '0000000', '00000000', '000000000'];
+    if (typeof (_d) == typeof ('') && _d.charAt(0) == 'N') {
+        foramt = 'N';
+        d = _d.toString().substr(1) * 1;
+    } else {
+        //防止传入的参数是字符串数值
+        d = !_d ? 0 : _d * 1;
+    }
+    //记录正负
+    var sign = (this < 0 ? '-' : '');
+    //小于0的数转换成正数计算, js负数用Math.round取整时会有四舍五入问题, 例如Math.round(-0.5)结果是0, 而0.5则是1
+    var num = (this < 0 ? Math.abs(this) : this).toString();
+    //获取小数部分
+    var decimalStr = (num.indexOf('.') != -1 ? num.substr(num.indexOf('.') + 1) : '');
+    //判断实际需要截取的小数后面是否是小数精度损失需要进位的小数位数
+    var dd = d + 1;
+    //如果是精度损失且需要进位的情况则用这个 + 1后的小数位数先计算一遍, 然后在取实际的值
+    if (decimalStr.length > 6
+        && decimalStr.substr(dd, 3) == '999'
+        && decimalStr.substr(dd, decimalStr.length - (dd + 1)).replace(/9/g, '') === ''
+    ) {
+        point = Math.pow(10, dd);
+        num = (Math.round(num * point) / point).toString();
+    }
+
+    if (d == 0) {
+        let val = sign + Math.round(num * 1).toString();
+        if (foramt == 'N') {
+            var rx2 = /(\d{1,3})(?=(\d{3})+(?:[$|.]))/g;
+            val = (val + '.').replace(rx2, '$&,').split('.')[0];
+        }
+        return val;
+    }
+    point = Math.pow(10, d);
+    num = (Math.round(num * point) / point).toString();
+    if (num.indexOf('.') == -1) {
+        num = sign + num + '.' + array[d];
+    } else {
+        num = sign + num + array[d - num.split('.')[1].length];
+    }
+
+    //千分符
+    if (foramt == 'N') {
+        var rx2 = /(\d{1,3})(?=(\d{3})+(?:[$|.]))/g;
+        return num.replace(rx2, '$&,');
+    }
+    return num;
+};
+//string类型的数值能直接使用toFixed
+String.prototype.toFixed = function (d) {
+    var val = this.toString();
+    if (isNaN(val)) {
+        return val;
+    }
+    if (val == '' || val == '-' || val.indexOf(',') != -1) return val;
+    if (val.split('.').length > 2) {
+        val = val.split('.').slice(0, 2).join('.');
+    }
+    var num = val * 1;
+    return num.toFixed(d);
+};
+    
+//文件预览(图片/pdf/office)
+(function ($) {
+    $.extend({
+        preview: function (path) {
+            var imgArray = ['png', 'jpg', 'jpeg', 'gif', 'bmp'];
+            var officeArray = ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'];
+            var pdfArray = ['pdf'];
+
+            var pathArray = path.split('.');
+
+            if (pathArray.length == 1) {
+                alert("未知文件");
+                return;
+            }
+            if (pathArray.length > 1) {
+                var fileExt = pathArray[pathArray.length - 1].toLowerCase();
+                //图片预览
+                if (imgArray.findIndex(function (p) { return p == fileExt }) != -1) {
+
+                    var dlg = new MyAppDialog(900, 600);
+                    dlg.setSize(window.innerWidth * 0.9, window.innerHeight);
+                    var divWidth = window.innerWidth * 0.9 - 60;
+                    var divHeight = window.innerHeight - 80;
+
+                    dlg.setContent("预览", "<div style='display:flex;justify-content:center;align-items:center;width:" + divWidth + "px;height:" + divHeight + "px;margin:0 auto;'><div onclick='var deg = $(this).next().attr(\"data-transform\");$(this).next().attr(\"data-transform\",deg*1+90);$(this).next().css(\"transform\",\"rotate(\" + (deg*1+90) + \"deg)\");' style='position: absolute;background: url(/content/images/preview/rotate.png) no-repeat;background-size: contain;width: 40px;height: 40px;top: 30px;right: 4px;z-index:99;' title=\"旋转\"></div><canvas id='mycanvas-preview' data-transform='0' width='1000' height='600'></canvas></div>");
+                    dlg.show();
+
+                    var mycanvas = document.getElementById('mycanvas-preview')
+                    var ctx = mycanvas.getContext('2d')
+                    // 内存中先加载，然后当内存加载完毕时，再把内存中的数据填充到我们的 dom元素中，这样能够快速的去
+                    // 反应，比如网易的图片
+                    var img = new Image();
+                    img.onload = function () {
+                        // 将图片画到canvas上面上去！
+                        var w = img.width;//
+                        var h = img.height;//
+
+                        if (w / divWidth > h / divHeight) {
+                            h = h / (w / divWidth);
+                            w = divWidth;
+                        } else {
+                            w = w / (h / divHeight);
+                            h = divHeight;
+                        }
+                        mycanvas.width = divWidth;
+                        mycanvas.height = divHeight;
+                        ctx.drawImage(img, (divWidth - w) / 2, (divHeight - h) / 2, w, h);
+                    }
+                    img.src = path;
+
+                    return;
+                    //$.ajax({
+                    //    url: '/Public/ImgToBase64String',
+                    //    type: 'post',
+                    //    data: { filePath: path, isThumb: false },
+                    //    success: function (e) {
+                    //        if (e.Ret == 0) {
+                    //            var dlg = new MyAppDialog(900, 600);
+                    //            //dlg.setSize(513, 540);
+                    //            dlg.setSize(window.innerWidth * 0.9 - 60, window.innerHeight - 80);
+                    //            var divWidth = window.innerWidth * 0.9 - 60;
+                    //            var divHeight = window.innerHeight - 80;
+                    //            dlg.setContent("预览", "<div style='display:flex;justify-content:center;align-items:center;width:" + divHeight + "px;height:" + divHeight + "px;'><div onclick='var deg = $(this).next().attr(\"data-transform\");$(this).next().attr(\"data-transform\",deg*1+90);$(this).next().css(\"transform\",\"rotate(\" + (deg*1+90) + \"deg)\");' style='position: absolute;background: url(/content/images/preview/rotate.png) no-repeat;background-size: contain;width: 40px;height: 40px;top: 30px;right: 4px;z-index:99;' title=\"旋转\"></div><img id='yulan' style='max-width:" + divWidth + "px' data-transform='0' src='data:image/png;base64," + e.Content + "' /></div>");
+                    //            dlg.show();
+                    //        }
+                    //    }
+                    //});
+                }
+                //office预览
+                else if (officeArray.findIndex(function (p) { return p == fileExt }) != -1) {
+                    var url = '/Doc/PreviewOffice?filePath=' + path;
+                    var width = window.screen.width;
+                    var height = window.screen.height;
+                    try {
+                        POBrowser.openWindowModeless(url, 'width=' + width + 'px;height=' + height + 'px;fullscreen:true;');
+                    } catch (e) {
+                        alert("未加载office预览插件");
+                        return;
+                    }
+                }
+                //pdf预览
+                else if (pdfArray.findIndex(function (p) { return p == fileExt }) != -1) {
+                    var dlg = new MyAppDialog((window.innerWidth - 50) > 700 ? 700 : (window.innerWidth - 50), 600);
+                    //dlg.setSize(700, 600);
+                    dlg.setURL("预览", path);
+                    dlg.show();
+                } else {
+                    alert("该文件无法预览");
+                    return;
+                }
+            }
+        }
+    });
+})(jQuery);
+
+(function ($) {
+    $.extend({
+        previewOpen: function (path) {
+            var imgArray = ['png', 'jpg', 'jpeg', 'gif', 'bmp'];
+            var officeArray = ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'];
+            var pdfArray = ['pdf'];
+
+            var pathArray = path.split('.');
+
+            if (pathArray.length == 1) {
+                alert("未知文件");
+                return;
+            }
+            if (pathArray.length > 1) {
+                var fileExt = pathArray[pathArray.length - 1].toLowerCase();
+                //图片预览
+                if (imgArray.findIndex(function (p) { return p == fileExt }) != -1) {
+                    $.ajax({
+                        url: '/Public/ImgToBase64String',
+                        type: 'post',
+                        data: { filePath: path, isThumb: false },
+                        success: function (e) {
+                            if (e.Ret == 0) {
+                                var dlg = new MyAppDialog(window.innerWidth * 0.9, window.innerHeight);
+                                dlg.setSize(window.innerWidth * 0.9, window.innerHeight);
+                                dlg.setContent("预览", "<div style='display:flex;justify-content:center;align-items:center;overflow:hidden;width:100%;height:100%;'><div onclick='var deg = $(this).next().attr(\"data-transform\");$(this).next().attr(\"data-transform\",deg*1+90);$(this).next().css(\"transform\",\"rotate(\" + (deg*1+90) + \"deg)\");' style='position: absolute;background: url(/content/images/preview/rotate.png) no-repeat;background-size: contain;width: 40px;height: 40px;top: 30px;right: 4px;z-index:99;' title=\"旋转\"></div><img data-transform='0' width='100%' src='data:image/png;base64," + e.Content + "' /></div>");
+                                dlg.show();
+                            }
+                        }
+                    });
+                }
+                //office预览
+                else if (officeArray.findIndex(function (p) { return p == fileExt }) != -1) {
+                    var url = '/Doc/PreviewOffice?filePath=' + path;
+                    var width = window.screen.width;
+                    var height = window.screen.height;
+                    try {
+                        POBrowser.openWindowModeless(url, 'width=' + width + 'px;height=' + height + 'px;fullscreen:true;');
+                    } catch (e) {
+                        alert("未加载office预览插件");
+                        return;
+                    }
+                }
+                //pdf预览
+                else if (pdfArray.findIndex(function (p) { return p == fileExt }) != -1) {
+                    var dlg = new MyAppDialog((window.innerWidth - 50) > 700 ? 700 : (window.innerWidth - 50), 600);
+                    //dlg.setSize(700, 600);
+                    dlg.setSize(window.innerWidth * 0.9, window.innerHeight);
+                    dlg.setURL("预览", path);
+                    dlg.show();
+                } else {
+                    alert("该文件无法预览");
+                    return;
+                }
+            }
+        },
+        //(https://gitee.com/kekingcn/file-online-preview/wikis/Home)
+        kkFileView: function (obj, dataType) {
+            var _this = $(obj).parent();
+            //var id = $(_this).attr("data-id");
+            //var filename = $(_this).attr("data-name");
+            //var arr = filename.split(".");
+            //var filetype = arr[arr.length - 1];
+            var json = {
+                id: $(_this).attr("data-id") || $(obj).attr("data-id"),
+                filename: $(_this).attr("data-name") || $(obj).attr("data-name"),
+                dataType: dataType,
+            };
+            $.kkFileViewByJson(json);
+        },
+        kkFileViewByJson: function (json) {
+            var arr = json.filename.split(".");
+            var filetype = arr[arr.length - 1];
+
+            $.ajax({
+                type: "post",
+                url: "/Api/File/CreatePreviewKey",
+                data: {
+                    dataType: json.dataType, dataId: json.id
+                },
+                success: function (e) {
+                    if (e.Ret == "0") {
+                        ////kkFileView-2.2.0 Code
+                        //var url = window.location.origin + "/onlinePreviewSrv/onlinePreview?url=" + ((window.location.origin + "/Api/GetFile/" + e.Msg + "%3ffullfilename=" + e.Msg + "." + filetype));
+                        //if (window.location.origin.indexOf("http://localhost") != -1) {
+                        //    url = "http://localhost:8012/onlinePreviewSrv/onlinePreview?url=" + ((window.location.origin + "/Api/GetFile/" + e.Msg + "%3ffullfilename=" + e.Msg + "." + filetype));
+                        //}
+                        //kkFileView-4.0.0 Code
+                        var url = window.location.origin + "/onlinePreviewSrv/onlinePreview?url=" + encodeURIComponent(base64encode(window.location.origin + "/Api/GetFile/" + e.Msg + "?fullfilename=" + e.Msg + "." + filetype));
+                        if (window.location.origin.indexOf("http://localhost") != -1) {
+                            url = "http://localhost:8012/onlinePreviewSrv/onlinePreview?url=" + encodeURIComponent(base64encode(window.location.origin + "/Api/GetFile/" + e.Msg + "?fullfilename=" + e.Msg + "." + filetype));
+                        }
+                        //弹出预览窗口
+                        if (parent && parent.previewNewDialog) {
+                            //子弹窗使用父窗口弹出比自身更大的预览窗口
+                            parent.previewNewDialog(window.innerWidth * 0.9, window.innerHeight, url);
+                        } else {
+                            //直接弹出小于自身大小的子窗口预览
+                            var dlg_review = new MyAppDialog(900, 600);
+                            dlg_review.setSize(window.innerWidth * 0.9, window.innerHeight);
+                            dlg_review.setURL("预览", url);
+                            dlg_review.show();
+                        }
+                    } else {
+                        $.messager.alert("操作失败", "获取预览Key失败", "error");
+                    }
+                },
+                error: function (xhr) {
+                    showError(xhr);
+                }
+            });
+        },
+        //和老平台一起的DCT版本调用的是老平台的js, 添加对DCT预览的功能支持
+        kkFileViewDCTByJson: function (json) {
+            var arr = json.filename.split(".");
+            var filetype = arr[arr.length - 1];
+
+            $.ajax({
+                type: "post",
+                url: "/DCT/File/CreatePreviewKey",
+                data: {
+                    dataType: json.dataType, dataId: json.id
+                },
+                success: function (e) {
+                    if (e.resultStatus.code == "0") {
+                        var keyValue = e.resultStatus.message;
+                        ////kkFileView-2.2.0 Code
+                        //var url = window.location.origin + "/onlinePreviewSrv/onlinePreview?url=" + ((window.location.origin + "/Api/GetFile/" + e.Msg + "%3ffullfilename=" + e.Msg + "." + filetype));
+                        //if (window.location.origin.indexOf("http://localhost") != -1) {
+                        //    url = "http://localhost:8012/onlinePreviewSrv/onlinePreview?url=" + ((window.location.origin + "/Api/GetFile/" + e.Msg + "%3ffullfilename=" + e.Msg + "." + filetype));
+                        //}
+                        //kkFileView-4.0.0 Code
+                        var url = window.location.origin + "/onlinePreviewSrv/onlinePreview?url=" + encodeURIComponent(base64encode(window.location.origin + "/DCT/GetFile/" + keyValue + "?fullfilename=" + keyValue + "." + filetype));
+                        if (window.location.origin.indexOf("http://localhost") != -1) {
+                            url = "http://localhost:8012/onlinePreviewSrv/onlinePreview?url=" + encodeURIComponent(base64encode(window.location.origin + "/DCT/GetFile/" + keyValue + "?fullfilename=" + keyValue + "." + filetype));
+                        }
+                        //弹出预览窗口
+                        if (parent && parent.previewNewDialog) {
+                            //子弹窗使用父窗口弹出比自身更大的预览窗口
+                            parent.previewNewDialog(window.innerWidth * 0.9, window.innerHeight, url);
+                        } else {
+                            //直接弹出小于自身大小的子窗口预览
+                            var dlg_review = new MyAppDialog(900, 600);
+                            dlg_review.setSize(window.innerWidth * 0.9, window.innerHeight);
+                            dlg_review.setURL("预览", url);
+                            dlg_review.show();
+                        }
+                    } else {
+                        $.messager.alert("操作失败", "获取预览Key失败", "error");
+                    }
+                },
+                error: function (xhr) {
+                    showError(xhr);
+                }
+            });
+        },
+        kkFileViewByPathAndName: function kkFileViewByPathAndName(path, name) {
+            var arr = path.split(".");
+            var filetype = arr[arr.length - 1];
+            //kkFileView-4.0.0 Code
+            var url = window.location.origin + "/onlinePreviewSrv/onlinePreview?url=" + encodeURIComponent(base64encode(window.location.origin + path + "?fullfilename=" + name + "." + filetype));
+            if (window.location.origin.indexOf("http://localhost") != -1) {
+                url = "http://localhost:8012/onlinePreviewSrv/onlinePreview?url=" + encodeURIComponent(base64encode(window.location.origin + path + "?fullfilename=" + name + "." + filetype));
+            }
+            //弹出预览窗口
+            if (parent && parent.previewNewDialog) {
+                //子弹窗使用父窗口弹出比自身更大的预览窗口
+                parent.previewNewDialog(window.innerWidth * 0.9, window.innerHeight, url);
+            } else {
+                //直接弹出小于自身大小的子窗口预览
+                var dlg_review = new MyAppDialog(900, 600);
+                dlg_review.setSize(window.innerWidth * 0.9, window.innerHeight);
+                dlg_review.setURL("预览", url);
+                dlg_review.show();
+            }
+
+        },
+
+    });
+})(jQuery);
+
+//清除列表返回的信息
+var localStorage_clear = function () {
+    localStorage.removeItem("back");
+    localStorage.removeItem("pageNumber");
+    localStorage.removeItem("params");
+    localStorage.removeItem("queryParams");
+};
+
+///
+(function ($) {
+    if (typeof ($.app_core_ajaxLastError) == typeof([])) { return; }
+    $.app_core_ajaxLastError = [];
+    //将原ajax放到_ajax中
+    _ajax = $.ajax;
+    $.ajax = function (cfg) {
+        $.app_core_ajaxLastErrorUrl = "";
+        //将原ajax中的success方法保存为_success
+        cfg._success = cfg.success;
+        cfg.cache = false;
+        //重写ajax的success方法
+        cfg.success = function (res) {
+            if (!!res && res.Ret == "1") {
+                $.app_core_ajaxLastErrorUrl = cfg.url;
+                $.app_core_ajaxLastError[cfg.url.replace(/\//g, '_')] = res.Msg;
+            }
+            //返回的数据重新放入原先ajax
+            if (cfg._success != null) {
+                cfg._success(res);
+                return;
+            }
+        }
+        //之前有错误时, 获取对应接口的错误, 加入到header中
+        if ($.app_core_ajaxLastError && $.app_core_ajaxLastError.length > 0) {
+            
+            cfg.headers = {
+                AjaxLastErrorMsg: encodeURI($.app_core_ajaxLastError[cfg.url.replace(/\//g, '_')]),
+                AjaxLastErrorUrl: encodeURI(cfg.url)
+            }
+            //清除已提交的错误
+            delete $.app_core_ajaxLastError[cfg.url.replace(/\//g, '_')]
+            delete $.app_core_ajaxLastErrorUrl
+        }
+        return _ajax(cfg);
+    }
+})($);
+
+function getDctToken() {
+    let token = "";
+    $.ajax({
+        url: '/Api/DCT/GetToken',
+        data: {},
+        async: false,
+        type: 'post',
+        success: function (token) {
+            token
+        },
+        error: function (e) {
+            console.log("获取token失败");
+        }
+    });
+
+    return token;
+}

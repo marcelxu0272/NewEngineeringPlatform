@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人员卡片展示</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f0f4f8;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    .search-filter-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .search-filter-container input,
+    .search-filter-container select {
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .search-filter-container input {
+      width: 250px;
+    }
+    .search-filter-container select {
+      width: 180px;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      width: 280px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      position: relative;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    .card-header {
+      border-bottom: 1px solid #e0e0e0;
+      margin-bottom: 12px;
+      padding-bottom: 10px;
+      position: relative;
+      padding-top: 20px;
+    }
+    .card-header h2 {
+      margin: 0 0 5px 0;
+      color: #2c3e50;
+      font-size: 20px;
+    }
+    .email {
+      font-size: 12px;
+      color: #3498db;
+      font-weight: normal;
+      display: block;
+      margin-top: 2px;
+    }
+    .major {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      color: white;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .major.化工工艺 { background-color: #3498db; }
+    .major.项目管理 { background-color: #e74c3c; }
+    .major.自动化控制 { background-color: #2ecc71; }
+    .major.机械工程 { background-color: #f39c12; }
+    .major.电气工程 { background-color: #9b59b6; }
+    .major.土木工程 { background-color: #1abc9c; }
+    .major.其他 { background-color: #34495e; }
+    .department {
+      font-size: 12px;
+      color: #7f8c8d;
+      margin-top: 2px;
+    }
+    .info-item {
+      margin-bottom: 10px;
+    }
+    .info-item-title {
+      font-weight: 600;
+      color: #2c3e50;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      font-size: 14px;
+    }
+    .info-item-title i {
+      margin-right: 6px;
+      font-size: 16px;
+      color: #3498db;
+    }
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+    .tag {
+      background-color: #e1f0ff;
+      color: #3498db;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .card {
+        width: 100%;
+        max-width: 320px;
+      }
+      .search-filter-container {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-filter-container input,
+      .search-filter-container select {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="search-filter-container">
+    <input type="text" id="search" placeholder="搜索...">
+    <select id="department-filter">
+      <option value="">所有部门</option>
+      <option value="工程设计部">工程设计部</option>
+      <option value="项目管理部">项目管理部</option>
+      <option value="技术研发部">技术研发部</option>
+      <option value="质量控制部">质量控制部</option>
+      <option value="采购部">采购部</option>
+    </select>
+    <select id="major-filter">
+      <option value="">所有专业</option>
+      <option value="化工工艺">化工工艺</option>
+      <option value="项目管理">项目管理</option>
+      <option value="自动化控制">自动化控制</option>
+      <option value="机械工程">机械工程</option>
+      <option value="电气工程">电气工程</option>
+      <option value="土木工程">土木工程</option>
+      <option value="其他">其他</option>
+    </select>
+  </div>
+  <div class="container" id="card-container">
+    <!-- 卡片将通过 JavaScript 动态生成 -->
+  </div>
+
+  <script>
+    const personnelData = [
+      {
+        name: "张三",
+        email: "san.zhang@woodplc.com",
+        department: "工程设计部",
+        major: "化工工艺",
+        projects: ["空分", "乙醛"],
+        industries: ["石油", "煤化工"],
+        regions: ["上海", "山西"],
+        skills: ["设计管理", "项目管理"],
+        qualifications: ["一建", "注册结构师"]
+      },
+      {
+        name: "李四",
+        email: "si.li@woodplc.com",
+        department: "项目管理部",
+        major: "项目管理",
+        projects: ["炼油", "化肥"],
+        industries: ["石化", "农业"],
+        regions: ["北京", "河北"],
+        skills: ["项目规划", "风险管理"],
+        qualifications: ["PMP", "高级工程师"]
+      },
+      {
+        name: "王五",
+        email: "wu.wang@woodplc.com",
+        department: "技术研发部",
+        major: "自动化控制",
+        projects: ["智能工厂", "物联网"],
+        industries: ["制造业", "新能源"],
+        regions: ["深圳", "广东"],
+        skills: ["系统集成", "AI应用"],
+        qualifications: ["软件工程师", "CCNA"]
+      },
+      {
+        name: "赵六",
+        email: "liu.zhao@woodplc.com",
+        department: "工程设计部",
+        major: "机械工程",
+        projects: ["压力容器", "管道设计"],
+        industries: ["石化", "天然气"],
+        regions: ["天津", "辽宁"],
+        skills: ["3D建模", "强度计算"],
+        qualifications: ["注册机械工程师", "压力容器设计资格"]
+      },
+      {
+        name: "钱七",
+        email: "qi.qian@woodplc.com",
+        department: "质量控制部",
+        major: "电气工程",
+        projects: ["电气系统", "仪表控制"],
+        industries: ["电力", "石化"],
+        regions: ["重庆", "四川"],
+        skills: ["质量审核", "电气设计"],
+        qualifications: ["注册电气工程师", "ISO 9001审核员"]
+      },
+      {
+        name: "孙八",
+        email: "ba.sun@woodplc.com",
+        department: "项目管理部",
+        major: "土木工程",
+        projects: ["厂房建设", "基础设施"],
+        industries: ["建筑", "市政"],
+        regions: ["武汉", "湖北"],
+        skills: ["工程造价", "施工管理"],
+        qualifications: ["注册造价工程师", "一级建造师"]
+      },
+      {
+        name: "周九",
+        email: "jiu.zhou@woodplc.com",
+        department: "技术研发部",
+        major: "化工工艺",
+        projects: ["新材料研发", "工艺优化"],
+        industries: ["新材料", "精细化工"],
+        regions: ["苏州", "江苏"],
+        skills: ["实验设计", "数据分析"],
+        qualifications: ["高级工程师", "六西格玛黑带"]
+      },
+      {
+        name: "吴十",
+        email: "shi.wu@woodplc.com",
+        department: "采购部",
+        major: "其他",
+        projects: ["设备采购", "供应链管理"],
+        industries: ["多行业"],
+        regions: ["广州", "广东"],
+        skills: ["谈判", "成本控制"],
+        qualifications: ["注册采购师", "供应链管理师"]
+      },
+      {
+        name: "郑十一",
+        email: "shiyi.zheng@woodplc.com",
+        department: "工程设计部",
+        major: "自动化控制",
+        projects: ["DCS系统", "安全仪表系统"],
+        industries: ["化工", "制药"],
+        regions: ["南京", "江苏"],
+        skills: ["PLC编程", "SCADA系统设计"],
+        qualifications: ["自动化工程师", "功能安全工程师"]
+      },
+      {
+        name: "王十二",
+        email: "shier.wang@woodplc.com",
+        department: "项目管理部",
+        major: "项目管理",
+        projects: ["海外工程", "EPC总承包"],
+        industries: ["石油天然气", "海外工程"],
+        regions: ["青岛", "山东"],
+        skills: ["国际项目管理", "合同管理"],
+        qualifications: ["PMP", "FIDIC认证"]
+      }
+    ];
+
+    function createCard(person) {
+      return `
+        <div class="card">
+          <div class="card-header">
+            <div class="major ${person.major}">${person.major}</div>
+            <h2>${person.name}</h2>
+            <span class="email">${person.email}</span>
+            <div class="department">${person.department}</div>
+          </div>
+          <div class="info-item">
+            <div class="info-item-title"><i>📁</i>项目</div>
+            <div class="tag-container">
+              ${person.projects.map(project => `<span class="tag">${project}</span>`).join('')}
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-item-title"><i>🏭</i>行业</div>
+            <div class="tag-container">
+              ${person.industries.map(industry => `<span class="tag">${industry}</span>`).join('')}
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-item-title"><i>📍</i>区域</div>
+            <div class="tag-container">
+              ${person.regions.map(region => `<span class="tag">${region}</span>`).join('')}
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-item-title"><i>🛠️</i>技能</div>
+            <div class="tag-container">
+              ${person.skills.map(skill => `<span class="tag">${skill}</span>`).join('')}
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-item-title"><i>🏅</i>资质</div>
+            <div class="tag-container">
+              ${person.qualifications.map(qualification => `<span class="tag">${qualification}</span>`).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCards(data) {
+      const container = document.getElementById('card-container');
+      container.innerHTML = data.map(createCard).join('');
+    }
+
+    function filterCards() {
+      const searchTerm = document.getElementById('search').value.toLowerCase();
+      const departmentFilter = document.getElementById('department-filter').value;
+      const majorFilter = document.getElementById('major-filter').value;
+
+      const filteredData = personnelData.filter(person => {
+        const matchesSearch = Object.values(person).some(value => 
+          Array.isArray(value) 
+            ? value.some(item => item.toLowerCase().includes(searchTerm))
+            : value.toLowerCase().includes(searchTerm)
+        );
+        const matchesDepartment = !departmentFilter || person.department === departmentFilter;
+        const matchesMajor = !majorFilter || person.major === majorFilter;
+
+        return matchesSearch && matchesDepartment && matchesMajor;
+      });
+
+      renderCards(filteredData);
+    }
+
+    // 初始渲染
+    renderCards(personnelData);
+
+    // 添加事件监听器
+    document.getElementById('search').addEventListener('input', filterCards);
+    document.getElementById('department-filter').addEventListener('change', filterCards);
+    document.getElementById('major-filter').addEventListener('change', filterCards);
+  </script>
+</body>
+</html>

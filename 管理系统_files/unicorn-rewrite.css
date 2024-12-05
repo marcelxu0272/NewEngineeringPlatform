@@ -1,0 +1,575 @@
+﻿html {
+    ov1erflow: hidden;
+}
+
+body[data-color=grey] {
+    background: #f2f2f2;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    #content {
+        margin-left: 43px;
+        margin-top: 0px;
+    }
+}
+
+#wrapper {
+    position: relative;
+}
+
+/*#breadcrumb{
+    border-top-left-radius: 4px;
+    border-top:0;
+}
+#breadcrumb a{
+    font-size:12px;
+}*/
+
+
+#content {
+    border-bottom-left-radius: 0;
+    width: calc(100vw);
+}
+
+#left-menu[left-menu-show='show'] + #content {
+    width: calc(100vw - 160px) !important;
+}
+
+#left-menu[left-menu-show='hidden'] + #content {
+    width: calc(100vw) !important;
+}
+
+#user-nav {
+    right: 20px;
+}
+
+    #user-nav > ul > li > a {
+        padding: 9px 10px;
+    }
+
+        #user-nav > ul > li > a > i {
+            margin-top: 2px;
+        }
+
+    #user-nav > ul > li > a {
+        font-size: 12px;
+    }
+
+#sidebar > ul > li > a > i {
+    font-size: 16px;
+    width: 12px;
+    text-align: center;
+}
+
+#sidebar > ul > li > a {
+    padding: 6px 0 7px 10px;
+    font-size: 13px;
+    font-family: 'Microsoft YaHei';
+}
+
+#sidebar > ul ul li a {
+    padding: 5px 0 5px 35px;
+    display: block;
+    position: relative;
+    font-family: 'Microsoft YaHei';
+}
+
+#sidebar > ul ul li.active a:before, #sidebar > ul ul li.active a:after {
+    font-family: 'FontAwesome';
+    content: "\f101";
+    display: block;
+    position: absolute;
+    top: 5px;
+    left: 15px;
+}
+
+/*body[data-color="grey"] #sidebar > ul ul li a {
+  color: #000;
+  background-color: #ccc;
+}
+body[data-color="grey"] #sidebar > ul ul li.active a {
+  color: #000;
+  background-color: #ccc;
+}
+body[data-color="grey"] #sidebar > ul ul li a {
+  color: rgba(255, 255, 255, 0.35);
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}*/
+
+/*重写按钮尺寸*/
+.btn {
+    font-size: 9pt;
+}
+
+.btn, .btn-normal {
+    font-size: 12px;
+    padding: 4px 14px;
+}
+
+.btn-mini, .btn-xs {
+    font-size: 12px;
+    padding: 1px 5px;
+}
+
+.btn-sm, .btn-small {
+    font-size: 12px;
+    padding: 3px 10px;
+}
+
+.btn-default {
+    background-color: #f1f1f1;
+}
+
+.datagrid-cell a.btn-mini {
+    line-height: 1.41;
+}
+
+.widget-box {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.widget-title, .modal-header, .table th, div.dataTables_wrapper .ui-widget-header, .ui-dialog .ui-dialog-titlebar {
+    height: 30px;
+}
+
+.widget-box .widget-title span.icon {
+    padding: 7px 10px 5px 11px;
+}
+
+.widget-box .widget-title h5 {
+    padding: 8px;
+}
+
+body[data-color="grey"] #sidebar > ul ul li a:hover, body[data-color="grey"] #sidebar > ul ul li.active a {
+    color: rgba(255, 255, 255, 1);
+    background-color: #0a6166;
+}
+
+.input-icon.on-right .form-control {
+    padding-left: 6px;
+}
+
+.input-icon.icon-sm .fa {
+    top: 8px;
+    /*font-size:16px;*/
+}
+
+.form-control {
+    font-size: inherit;
+    padding: 4px 6px;
+}
+/*.table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td{
+    vertical-align:middle;
+}*/
+.input-icon {
+    position: relative;
+    display: inline-block;
+}
+
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 3px;
+}
+
+/*=================================================================*/
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+    /*font-family: 'Microsoft YaHei';*/
+    font-size: 9pt;
+    padding: 4px 6px;
+    height: 26px;
+    webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+    input[type="text"].input-large {
+        padding: 3px 6px;
+        webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        width: 260px;
+        background: #ffffff;
+    }
+
+select, input[type="file"] {
+    height: 26px;
+    line-height: 26px;
+}
+
+
+.grid-control {
+    margin-top: 0px;
+}
+
+.form-control {
+    width: 100%;
+    height: auto;
+    line-height: 1.428571429;
+    /*webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;*/
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+    -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+select.form-control {
+    height: 26px;
+    padding: 4px 6px;
+    margin: 0;
+    width: auto;
+    font-size: 9pt;
+}
+
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+    border: 1px solid #cccccc;
+    /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0);
+  -webkit-transition: border linear 0.2s, box-shadow linear 0.2s;
+     -moz-transition: border linear 0.2s, box-shadow linear 0.2s;
+       -o-transition: border linear 0.2s, box-shadow linear 0.2s;
+          transition: border linear 0.2s, box-shadow linear 0.2s;*/
+}
+
+    textarea:focus,
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    input[type="datetime"]:focus,
+    input[type="datetime-local"]:focus,
+    input[type="date"]:focus,
+    input[type="month"]:focus,
+    input[type="time"]:focus,
+    input[type="week"]:focus,
+    input[type="number"]:focus,
+    input[type="email"]:focus,
+    input[type="url"]:focus,
+    input[type="search"]:focus,
+    input[type="tel"]:focus,
+    input[type="color"]:focus,
+    .uneditable-input:focus {
+        border-color: #3061C6;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), 0 0 8px rgba(82, 168, 236, 0);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), 0 0 8px rgba(82, 168, 236, 0);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0), 0 0 8px rgba(82, 168, 236, 0);
+        /*border-color: rgba(82, 168, 236, 1);
+  outline: 0;
+  outline: thin dotted \9;*/
+        /* IE6-9 */
+        /*-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(82, 168, 236, 0.6);*/
+    }
+
+.input-append .add-on:last-child, .input-append .btn:last-child, .input-append .btn-group:last-child > .dropdown-toggle {
+    webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.input-append .add-on, .input-prepend .add-on {
+    display: inline-block;
+    width: auto;
+    height: 18px;
+    min-width: 16px;
+    padding: 3px 5px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    text-align: center;
+    text-shadow: 0 1px 0 #ffffff;
+    background-color: #eeeeee;
+    border: 1px solid #ccc;
+}
+
+.input-append .add-on, .input-append .btn, .input-append .btn-group {
+    margin-left: -2px;
+}
+
+label, input, button, select, textarea {
+    font-size: 9pt;
+    font-weight: normal;
+    line-height: 20px;
+}
+
+.input-append.input-icon-prepend .add-on input, .input-prepend.input-icon-append .add-on input {
+    margin-top: -6px;
+    padding: 2px;
+    padding-left: 25px;
+}
+
+.input-append.input-icon-prepend .btn, .input-prepend.input-icon-append .btn {
+    height: auto;
+}
+
+.input-group input, .input-group select {
+    -webkit-border-radius: 4px 0 0 4px;
+    -moz-border-radius: 4px 0 0 4px;
+    border-radius: 4px 0 0 4px;
+}
+
+.input-group-sm > .input-group-addon {
+    height: 24px;
+    -webkit-border-radius: 0 4px 4px 0;
+    -moz-border-radius: 0 4px 4px 0;
+    border-radius: 0 4px 4px 0;
+    padding: 2px 7px;
+}
+
+.input-group-sm > .input-group-btn > .btn {
+    border-radius: 4px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.content > .content-body {
+    padding: 10px 30px 10px 30px;
+    /*padding:0 10px 0 0;*/
+}
+
+.nav-tabs > li {
+    margin-right: 5px;
+}
+
+.nav > li > a {
+    padding: 7px 15px;
+}
+
+#switcher #switcher-inner h3 {
+    background-color: #12aab3;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 -20px;
+    padding: 10px 10px 10px 20px;
+}
+
+#header h1 {
+    height: 60px;
+    left: 30px;
+    line-height: 600px;
+    overflow: hidden;
+    position: relative;
+    top: 10px;
+    width: 191px;
+}
+
+.gallery-masonry .item .actions-inner {
+    width: 64px;
+    height: 27px;
+    background-color: #12aab3;
+    border-radius: 5px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    filter: alpha(opacity=0);
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+    margin-top: -13px;
+    margin-left: -32px;
+    -webkit-transition: transform 0.3s ease-in-out 0.2s, opacity 0.3s ease-in-out 0.2s;
+    transition: transform 0.3s ease-in-out 0.2s, opacity 0.3s ease-in-out 0.2s;
+}
+
+.dataTables_paginate .ui-button:hover,
+.pagination.alternate li a:hover {
+    color: #12aab3;
+    text-shadow: 0 1px 0 #ffffff;
+    cursor: pointer;
+}
+
+#tooltip {
+    position: absolute;
+    display: none;
+    border: none;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 10px;
+    background-color: #12aab3;
+    color: #ffffff;
+    z-index: 25;
+}
+
+.label-inverse[href]:hover,
+.badge-inverse[href]:hover,
+.label-inverse[href]:focus,
+.badge-inverse[href]:focus {
+    background-color: #15c5cf;
+}
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #00706a;
+    border-color: #00706a;
+}
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active,
+    .btn-primary.active,
+    .open .dropdown-toggle.btn-primary {
+        color: #ffffff;
+        background-color: #00706a;
+        border-color: #00706a;
+    }
+
+.pm_option > button {
+    background-color: #00706a !important;
+    border-color: #00706a;
+}
+
+    .pm_option > button:focus {
+        background-color: #00706a !important;
+        border-color: #00706a;
+    }
+
+    .pm_option > button.el-button--danger {
+        background-color: #f56c6c !important;
+        border-color: #f56c6c !important;
+    }
+
+        .pm_option > button.el-button--danger:focus {
+            background-color: #f56c6c !important;
+            border-color: #f56c6c;
+        }
+
+.grey-switcher {
+    background-color: #13b3ba;
+}
+
+body[data-color="grey"] #wrapper {
+    background-color: #15c5cf;
+}
+
+body[data-color="grey"] #header {
+    box-shadow: inset 0 0 0 1px #11a3ab;
+    background-color: #13b3ba;
+    background-image: -webkit-linear-gradient(top, #13b3ba 0%, #119ea6 100%);
+    background-image: linear-gradient(to bottom, #13b3ba 0%, #119ea6 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff13b3ba', endColorstr='#ff119ea6', GradientType=0);
+    border-bottom: 1px solid #14c0c9;
+}
+
+body[data-color="grey"] #user-nav > ul {
+    border-left: 1px solid #11a6ad;
+}
+
+    body[data-color="grey"] #user-nav > ul > li {
+        border-right: 1px solid #11a6ad;
+    }
+
+body[data-color="grey"] #sidebar > ul {
+    border-top: 1px solid #14bcc4;
+    border-bottom: 1px solid #14c0c9;
+}
+
+    body[data-color="grey"] #sidebar > ul > li {
+        border-top: 1px solid #14c0c9;
+        border-bottom: 1px solid #14bcc4;
+        background-color: #15c5cf;
+    }
+
+        body[data-color="grey"] #sidebar > ul > li:hover {
+            background-color: #14c0c9;
+        }
+
+        body[data-color="grey"] #sidebar > ul > li.open.submenu {
+            background-color: #14c0c9;
+        }
+
+        body[data-color="grey"] #sidebar > ul > li.active {
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3) inset;
+            background-color: transparent;
+            background-image: -webkit-linear-gradient(top, #14bcc4 0%, #15c5cf 100%);
+            background-image: linear-gradient(to bottom, #14bcc4 0%, #15c5cf 100%);
+            background-repeat: repeat-x;
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff14bcc4', endColorstr='#ff15c5cf', GradientType=0);
+        }
+
+            body[data-color="grey"] #sidebar > ul > li.active.open.subenu > a {
+                border-bottom: 1px solid #15c5cf;
+            }
+
+    body[data-color="grey"] #sidebar > ul ul {
+        background-color: #12aab3;
+    }
+
+        body[data-color="grey"] #sidebar > ul ul li a {
+            color: rgba(255, 255, 255, 1);
+            border-top: 1px solid #12afb8;
+            border-bottom: 1px solid #11a3ab;
+        }
+
+            body[data-color="grey"] #sidebar > ul ul li a:hover,
+            body[data-color="grey"] #sidebar > ul ul li.active a {
+                color: rgba(255, 255, 255, 1);
+                background-color: #0a6166;
+                font-size: 14px;
+            }
+
+        body[data-color="grey"] #sidebar > ul ul:before,
+        body[data-color="grey"] #sidebar > ul ul:after {
+            border-right: 6px solid #12aab3;
+        }
+
+body[data-color="grey"].flat #sidebar > ul > li.active {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-image: none;
+    background-color: #14c0c9;
+}
+
+body[data-color="grey"] #sidebar > ul > li.submenu > a {
+    color: #ffffff;
+    border-bottom: none;
+}
+
+body[data-color="grey"] #sidebar > ul ul li a {
+    color: rgba(255, 255, 255, 1);
+    border-top: 1px solid #12afb8;
+    border-bottom: 1px solid #11a3ab;
+    font-size: 14px;
+}
+
+#user-nav > ul > li > a,
+#user-nav > ul > li > a > i {
+    color: rgba(255, 255, 255, 1);
+}
+
+body[data-color="grey"] #sidebar > ul ul li a,
+body[data-color="grey"] #sidebar > ul ul li a:hover,
+body[data-color="grey"] #sidebar > ul ul li.active a {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 12.5px;
+}
+
+#btnhistory.btn-small {
+    float: left;
+    margin-left: 20px;
+}
