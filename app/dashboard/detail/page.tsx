@@ -31,15 +31,26 @@ const formatNumber = (num: number | undefined | null, decimals: number = 0): str
 
 // 添加新的模拟数据
 const top20ProjectsData = [
-  { id: 'P001', name: '上海某炼油厂扩建项目', client: '上海建设集团', manager: '三', responsible: '李四', management: '金山中心', businessType: '工程总承包', amount: 5000 },
-  { id: 'P002', name: '北京某石化储备库项目', client: '北京开发有限公司', manager: '王五', responsible: '赵六', management: '沈阳中心', businessType: '设计咨询', amount: 4500 },
-  { id: 'P003', name: '广州某化工园区建设项目', client: '广州地产公司', manager: '孙七', responsible: '周八', management: '金山中心', businessType: '工程总承包', amount: 4000 },
-  { id: 'P004', name: '深圳某石油码头改造项目', client: '深圳商业集团', manager: '吴九', responsible: '郑十', management: '沈阳中心', businessType: '设计咨询', amount: 3500 },
-  { id: 'P005', name: '成都某石化研发中心项目', client: '成都建设集团', manager: '陈十一', responsible: '张十二', management: '金山中心', businessType: '工程总承包', amount: 3000 },
-  { id: 'P006', name: '重庆某油气管道工程项目', client: '重庆工业公司', manager: '李十三', responsible: '王十四', management: '沈阳中心', businessType: '设计咨询', amount: 2500 },
-  { id: 'P007', name: '杭州某化工厂环保改造项目', client: '杭州地产公司', manager: '赵十五', responsible: '孙十六', management: '金山中心', businessType: '工程总承包', amount: 2000 },
-  { id: 'P008', name: '南京某石油储备基地项目', client: '南京商业集团', manager: '周七', responsible: '吴十八', management: '沈阳中心', businessType: '设计咨询', amount: 1500 },
-  { id: 'P009', name: '武汉某石化实验室建设项目', client: '武汉建设集团', manager: '陈十九', responsible: '李二十', management: '金山中心', businessType: '工程总承包', amount: 1000 },
+  { id: 'P001', name: '上海某炼油厂扩建项目', client: '阿朗新科高性能弹性体（常州）有限公司', manager: '三', responsible: '李四', management: '金山中心', businessType: '工程总承包', amount: 5000 },
+  { id: 'P002', name: '北京某石化储备库项目', client: '中国化学工程第十一建设有限公司', manager: '王五', responsible: '赵六', management: '沈阳中心', businessType: '设计咨询', amount: 4500 },
+  { id: 'P003', name: '广州某化工园区建设项目', client: '宁夏英力特化工股份有限公司', manager: '孙七', responsible: '周八', management: '金山中心', businessType: '工程总承包', amount: 4000 },
+  { id: 'P004', name: '深圳某石油码头改造项目', client: '宁夏英力特化工股份有限公司', manager: '吴九', responsible: '郑十', management: '沈阳中心', businessType: '设计咨询', amount: 3500 },
+  { id: 'P005', name: '成都某石化研发中心项目', client: '和元智造（上海）基因技术有限公司', manager: '陈十一', responsible: '张十二', management: '金山中心', businessType: '工程总承包', amount: 3000 },
+  { id: 'P006', name: '重庆某油气管道工程项目', client: '中国化学工程第十建设有限公司', manager: '李十三', responsible: '王十四', management: '沈阳中心', businessType: '设计咨询', amount: 2500 },
+  { id: 'P007', name: '杭州某化工厂环保改造项目', client: '中国化学工程第九建设有限公司', manager: '赵十五', responsible: '孙十六', management: '金山中心', businessType: '工程总承包', amount: 2000 },
+  { id: 'P008', name: '南京某石油储备基地项目', client: '中国化学工程第十一建设有限公司', manager: '周七', responsible: '吴十八', management: '沈阳中心', businessType: '设计咨询', amount: 1500 },
+  { id: 'P009', name: '武汉某石化实验室建设项目', client: '中国化学工程第十一建设有限公司', manager: '陈十九', responsible: '李二十', management: '金山中心', businessType: '工程总承包', amount: 1000 },
+  { id: 'P010', name: '上海某化工园区建设项目', client: '中国化学工程第一建设有限公司', manager: '张二十一', responsible: '李二十二', management: '金山中心', businessType: '工程总承包', amount: 900 },
+  { id: 'P011', name: '北京某石化研发中心项目', client: '中国化学工程第一建设有限公司', manager: '王二十三', responsible: '赵二十四', management: '沈阳中心', businessType: '设计咨询', amount: 800 },
+  { id: 'P012', name: '广州某石油码头改造项目', client: '巴斯夫一体化基地（北京）有限公司', manager: '孙二十五', responsible: '周二十六', management: '金山中心', businessType: '工程总承包', amount: 700 },
+  { id: 'P013', name: '深圳某石化储备库项目', client: '巴斯夫一体化基地（上海）有限公司', manager: '吴二十-seven', responsible: '郑二十-eight', management: '沈阳中心', businessType: '设计咨询', amount: 600 },
+  { id: 'P014', name: '成都某石化实验室建设项目', client: '宁夏英力特化工股份有限公司', manager: '陈二十-nine', responsible: '张三十', management: '金山中心', businessType: '工程总承包', amount: 500 },
+  { id: 'P015', name: '重庆某石化园区建设项目', client: '阿朗新科高性能弹性体（常州）有限公司', manager: '李三十一', responsible: '王三十-two', management: '沈阳中心', businessType: '设计咨询', amount: 400 },
+  { id: 'P016', name: '杭州某石化研发中心项目', client: '阿朗新科高性能弹性体（常州）有限公司', manager: '赵三十-three', responsible: '孙三十-four', management: '金山中心', businessType: '工程总承包', amount: 300 },
+  { id: 'P017', name: '南京某石化储备库项目', client: '巴斯夫一体化基地（广东）有限公司', manager: '周三十-five', responsible: '吴三十-six', management: '沈阳中心', businessType: '设计咨询', amount: 200 },
+  { id: 'P018', name: '武汉某石化码头改造项目', client: '阿朗新科高性能弹性体（常州）有限公司', manager: '陈三十-seven', responsible: '李三十-eight', management: '金山中心', businessType: '工程总承包', amount: 100 },
+  { id: 'P019', name: '苏州某石化园区建设项目', client: '阿朗新科高性能弹性体（常州）有限公司', manager: '张三十-nine', responsible: '赵四十', management: '沈阳中心', businessType: '设计咨询', amount: 90 },
+  { id: 'P020', name: '天津某石化研发中心项目', client: '阿朗新科高性能弹性体（常州）有限公司', manager: '孙四十-one', responsible: '周四十-two', management: '金山中心', businessType: '工程总承包', amount: 80 },
   // ... 添加更多项目数据，总共20条
 ];
 
@@ -261,7 +272,9 @@ const DataDashboard = () => {
 
   const renderTop20ProjectsTable = () => (
     <Card className="p-4 mt-4">
-      <h2 className="text-xl font-semibold mb-4">TOP20 项目</h2>
+      <h2 className="text-xl font-semibold mb-4">
+        {selectedMetric === 'newContracts' ? '年度新签合同额明细' : 'TOP20 项目'}
+      </h2>
       <div className="overflow-x-auto">
         <table className="min-w-full divide-y divide-gray-200">
           <thead>
@@ -416,6 +429,110 @@ const DataDashboard = () => {
       return '管理成本';
     }
     return '';
+  };
+
+  // 添加分页状态
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
+  // 修改 renderClientRankingTable 函数
+  const renderClientRankingTable = () => {
+    // 计算客户统计信息(保持不变)
+    const clientStats = top20ProjectsData.reduce((acc, project) => {
+      if (!acc[project.client]) {
+        acc[project.client] = {
+          amount: 0,
+          projectCount: 0
+        };
+      }
+      acc[project.client].amount += project.amount;
+      acc[project.client].projectCount += 1;
+      return acc;
+    }, {} as Record<string, { amount: number; projectCount: number }>);
+
+    // 转换为数组并排序(保持不变)
+    const sortedClients = Object.entries(clientStats)
+      .map(([client, stats]) => ({
+        client,
+        ...stats
+      }))
+      .sort((a, b) => b.amount - a.amount);
+
+    // 计算最大合同额(保持不变)
+    const maxAmount = Math.max(...sortedClients.map(item => item.amount));
+    
+    // 计算分页数据
+    const totalPages = Math.ceil(sortedClients.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentPageData = sortedClients.slice(startIndex, endIndex);
+
+    return (
+      <Card className="p-4 mt-4">
+        <h2 className="text-xl font-semibold mb-4">客户合同额排行榜</h2>
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            {/* 表头保持不变 */}
+            <thead>
+              <tr>
+                <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-16">排名</th>
+                <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">客户名称</th>
+                <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-32">项目/工作单数量</th>
+                <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider w-240">合同额（万元）</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {currentPageData.map((item, index) => (
+                <tr key={item.client}>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm">{startIndex + index + 1}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm">{item.client}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-center">{item.projectCount}</td>
+                  <td className="px-4 py-2">
+                    <div className="flex items-center">
+                      <span className="w-12 text-sm">{formatNumber(item.amount)}</span>
+                      <div className="flex-1 h-4">
+                        <Progress 
+                          value={Math.max(10, (item.amount / maxAmount) * 100)}
+                          className="h-4 rounded-sm bg-white [&>div]:bg-[#007069] [&>div]:rounded-sm"
+                        />
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        
+        {/* 添加分页控制 */}
+        <div className="flex items-center justify-between mt-4 px-4">
+          <div className="text-sm text-gray-500">
+            共 {sortedClients.length} 条记录
+          </div>
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+            >
+              上一页
+            </Button>
+            <span className="text-sm">
+              第 {currentPage} / {totalPages} 页
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+            >
+              下一页
+            </Button>
+          </div>
+        </div>
+      </Card>
+    );
   };
 
   return (
@@ -591,7 +708,7 @@ const DataDashboard = () => {
                 <Card className="p-4 bg-gradient-to-r to-indigo-50">
                   <div className="grid grid-cols-3 ">
                     <div className="bg-white p-4 rounded-lg">
-                      <p className="text-sm text-gray-500 mb-1">{metrics.find(m => m.id === selectedMetric)?.hasYearlyTarget ? '累计金额（万元）' : '当前金额（万元）'}</p>
+                      <p className="text-sm text-gray-500 mb-1">{metrics.find(m => m.id === selectedMetric)?.hasYearlyTarget ? '累计额（万元）' : '当前金额（万元）'}</p>
                       <p className="text-4xl font-bold text-[#007069]">{metricInfo.totalAmount}</p>
                     </div>
                     <div className="bg-white p-4 rounded-lg">
@@ -703,10 +820,20 @@ const DataDashboard = () => {
                   </div>
                 )}
 
-                {(selectedMetric === 'wip' || selectedMetric === 'accountsReceivable') && (
+                {(selectedMetric === 'wip' || 
+                  selectedMetric === 'accountsReceivable' ||
+                  selectedMetric === 'completedContracts' ||
+                  selectedMetric === 'invoicedAmount' ||
+                  selectedMetric === 'receivedPayments') && (
                   <>
-                    {/* 新增的TOP20项目表格 */}
                     {renderTop20ProjectsTable()}
+                  </>
+                )}
+
+                {selectedMetric === 'newContracts' && (
+                  <>
+                    {renderTop20ProjectsTable()}
+                    {renderClientRankingTable()}
                   </>
                 )}
               </>
@@ -740,7 +867,7 @@ const DataDashboard = () => {
   );
 };
 
-// 生成随机颜色的辅助函数
+// 生成随机颜色辅助函数
 const getRandomColor = () => {
   return '#' + Math.floor(Math.random()*16777215).toString(16);
 };

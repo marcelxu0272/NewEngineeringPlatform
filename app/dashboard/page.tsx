@@ -396,11 +396,11 @@ export default function Component() {
                   <div className="flex gap-2">
                     <div className="bg-[#007069]/5 p-2 rounded-lg" style={{ flex: '2.74' }}>
                       <p className="text-lg font-bold text-[#007069]">936.52</p>
-                      <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">报价成本</p>
+                      <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">未签项目成本</p>
                     </div>
                     <div className="bg-[#007069]/5 p-2 rounded-lg" style={{ flex: '79.58' }}>
                       <p className="text-lg font-bold text-[#007069]">27,167.37</p>
-                      <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">项目成本</p>
+                      <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">已签项目成本</p>
                     </div>
                     <div className="bg-[#007069]/5 p-2 rounded-lg" style={{ flex: '17.67' }}>
                       <div>
@@ -431,7 +431,7 @@ export default function Component() {
                   <div className="flex items-center">
                     <CalendarOutlined className="w-4 h-4 mr-4" />
                     <Link href="/dashboard/eletable" className="cursor-pointer">
-                      <h3 className="font-medium text-sm text-[#ff7711]"><strong className="text-[#007069]">项目追踪表：</strong>每月月初更新，点击在线查！</h3>
+                      <h3 className="font-medium text-sm text-[#ff7711]"><strong className="text-[#007069]">项目执行跟踪详细数据：</strong>每月月初更新，点击在线查！</h3>
                     </Link>
                   </div>
                 </CardContent>
