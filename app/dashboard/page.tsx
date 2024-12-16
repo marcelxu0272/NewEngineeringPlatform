@@ -39,7 +39,7 @@ const columns = [
         <div className="absolute inset-0"></div>
         {/* 对角线 */}
         <div className="absolute inset-0" style={{
-          background: 'linear-gradient(to bottom left, transparent calc(50% - 1px), #007069, transparent calc(50% + 1px))'
+          background: 'linear-gradient(to bottom left, transparent calc(50% - 1px), #00706933, transparent calc(50% + 1px))'
         }}></div>
         {/* 右上角文字 */}
         <div className="absolute right-1 top-1 text-xs">SO</div>
@@ -427,11 +427,13 @@ export default function Component() {
             <div className="space-y-4">
               {/* 上部卡片 - 新增概览内容 */}
               <Card className="border-0 shadow-md h-[calc(25%-0.5rem)]">
-                <CardContent className="p-4">
+                <CardContent className="p-4 border-0 border-[#007069] bg-[#007069]/85 rounded-lg">
                   <div className="flex items-center">
-                    <CalendarOutlined className="w-4 h-4 mr-4" />
+                    <CalendarOutlined className="w-4 h-4 mr-4 text-white" />
                     <Link href="/dashboard/eletable" className="cursor-pointer">
-                      <h3 className="font-medium text-sm text-[#ff7711]"><strong className="text-[#007069]">项目执行跟踪详细数据：</strong>每月月初更新，点击在线查！</h3>
+                      <h3 className="font-medium text-sm text-orange-300">
+                        <strong className="text-white">项目执行跟踪详细数据</strong> - 每月月初更新，点击在线查！
+                      </h3>
                     </Link>
                   </div>
                 </CardContent>

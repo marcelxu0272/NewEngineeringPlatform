@@ -1279,6 +1279,6 @@ const PersonCard: React.FC<{ person: PersonCard; checkedSkills: string[]; onClic
       </div>
     </div>
   );
-};
+};  
 
 export default EngineeringSystemSkills;

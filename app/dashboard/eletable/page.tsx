@@ -232,8 +232,8 @@ const departmentOptions = [
 ]
 
 const businessTypeOptions = [
-  { label: '软件开发', value: 'ruanjiankaifa' },
-  { label: '系统集成', value: 'xitongjicheng' },
+  { label: '软件开发', value: '软件开发' },
+  { label: '系统集成', value: '系统集成' },
 ]
 
 // 添加列宽度配置
@@ -608,18 +608,8 @@ export default function ProjectTable() {
         return false
       }
       
-      // 开始时间范围筛选
-      if (values.dateRange && values.dateRange[0] && values.dateRange[1]) {
-        const startDate = new Date(item.startDate)
-        const rangeStart = new Date(values.dateRange[0])
-        const rangeEnd = new Date(values.dateRange[1])
-        if (startDate < rangeStart || startDate > rangeEnd) {
-          return false
-        }
-      }
-      
-      // 业务类别筛选
-      if (values.businessType && item.businessType !== values.businessType) {
+      // 业务类别筛选 - 修改为数组包含判断
+      if (values.businessType?.length && !values.businessType.includes(item.businessType)) {
         return false
       }
       
@@ -1174,7 +1164,7 @@ export default function ProjectTable() {
         <div className="ml-16 pb-4 space-y-4 bg-[#f8faff] w-[calc(100%-4rem)] min-h-screen">
           {/* 固定顶部白条 */}
           <div className="fixed top-0 left-16 right-0 h-20 bg-white shadow-sm z-20">
-            <h2 className="pt-6 pl-6 text-2xl">运营看板 - 项目追踪表</h2>
+            <h2 className="pt-6 pl-6 text-2xl">运营看板 - 项目执行跟踪详细数据</h2>
           </div>
 
           {/* 原有内容,添加上边距 */}
@@ -1198,6 +1188,14 @@ export default function ProjectTable() {
                     onClick={() => console.log('导入功能')}
                   >
                     导入
+                  </Button>
+
+                  <Button 
+                    type="primary"
+                    className="bg-[#007069] text-white"
+                    onClick={() => console.log('导入功能')}
+                  >
+                    导出
                   </Button>
 
                   <Button 
@@ -1289,35 +1287,27 @@ export default function ProjectTable() {
                     />
                   </Form.Item>
 
-                  <Form.Item name="dateRange" label="开始时间范围" className="mb-0">
-                    <DatePicker.RangePicker 
-                      className="w-full"
-                      placeholder={['最早开始日期', '最晚开始日期']}
-                      allowClear
-                    />
-                  </Form.Item>
-
                   <Form.Item name="businessType" label="业务类别">
                     <Select
+                      mode="multiple"
                       showSearch
-                      placeholder="请选择业务类别"
+                      placeholder="请选择业务类别(可多选)"
                       options={businessTypeOptions}
                       allowClear
                       filterOption={pinyinMatch}
+                      maxTagCount={2}
                     />
                   </Form.Item>
 
-                  <Form.Item label=" ">
-                    <div className="flex justify-end">
-                      <Button 
-                        type="primary" 
-                        htmlType="submit" 
-                        className="mr-2 w-32 hover:bg-[#005c56] transition-colors"
-                      >
-                        查询
-                      </Button>   
-                      <Button onClick={onReset}>重置</Button>
-                    </div>
+                  <Form.Item className="col-span-2 flex justify-end mb-0 mt-8">
+                    <Button 
+                      type="primary" 
+                      htmlType="submit" 
+                      className="mr-2 w-32 hover:bg-[#005c56] transition-colors"
+                    >
+                      查询
+                    </Button>   
+                    <Button onClick={onReset}>重置</Button>
                   </Form.Item>
                 </Form>
               </div>
