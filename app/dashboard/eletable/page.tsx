@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
-import { Table, Tooltip, Modal } from 'antd'
+import { Table, Tooltip, Modal, message, Upload } from 'antd'
 import { 
   DashboardOutlined, 
   BarChartOutlined, 
@@ -10,7 +10,9 @@ import {
   RightOutlined, 
   EyeOutlined,
   EyeInvisibleOutlined,
-  ArrowLeftOutlined
+  ArrowLeftOutlined,
+  UpOutlined,
+  InboxOutlined
 } from '@ant-design/icons'
 import { Form, Input, Select, DatePicker, Button } from 'antd'
 import Link from 'next/link'
@@ -208,7 +210,7 @@ const summaryData = {
   },
   payment: {
     current: formatNumber(projectData.reduce((sum, item) => sum + parseFloat(item.payment.current.replace(/,/g, '')), 0)),
-    yearly: formatNumber(projectData.reduce((sum, item) => sum + parseFloat(item.payment.yearly.replace(/,/g, '')), 0)),
+    yearly: formatNumber(projectData.reduce((sum, item) => sum + parseFloat(item.payment.yearly.replace(/,/g, '')), 0)), 
     total: formatNumber(projectData.reduce((sum, item) => sum + parseFloat(item.payment.total.replace(/,/g, '')), 0)),
     months: calculateMonthlySum('payment')
   },
@@ -401,6 +403,26 @@ export default function ProjectTable() {
   // 添加统计弹窗控制状态
   const [showStatistics, setShowStatistics] = useState(false)
 
+  // 添加展开/收起状态
+  const [isFilterExpanded, setIsFilterExpanded] = useState(true)
+
+  // 添加导入Modal状态
+  const [importModalVisible, setImportModalVisible] = useState(false)
+
+  // 添加导入处理函数
+  const handleImport = (file: RcFile) => {
+    // TODO: 处理Excel文件导入
+    message.success('导入成功')
+    setImportModalVisible(false)
+    return false // 阻止自动上传
+  }
+
+  // 添加导出处理函数  
+  const handleExport = () => {
+    // TODO: 导出数据到Excel
+    message.success('导出成功')
+  }
+
   // 添加统计表格列定义
   const statisticsColumns = [
     {
@@ -428,7 +450,7 @@ export default function ProjectTable() {
     {
       title: '本年度新增合同额',
       dataIndex: 'newContract',
-      align: 'right' as const,
+      align: 'right',
       width: 120,
       onHeaderCell: () => ({
         style: { 
@@ -443,7 +465,7 @@ export default function ProjectTable() {
     {
       title: '截止报告期存量合同额',
       dataIndex: 'remainingContract', 
-      align: 'right' as const,
+      align: 'right',
       width: 150,
       onHeaderCell: () => ({
         style: { 
@@ -458,7 +480,7 @@ export default function ProjectTable() {
     {
       title: 'WIP(催开票)',
       dataIndex: 'wip',
-      align: 'right' as const,
+      align: 'right',
       width: 120,
       onHeaderCell: () => ({
         style: { 
@@ -473,7 +495,7 @@ export default function ProjectTable() {
     {
       title: '应收账款(催回款)',
       dataIndex: 'receivable',
-      align: 'right' as const,
+      align: 'right',
       width: 120,
       onHeaderCell: () => ({
         style: { 
@@ -488,7 +510,7 @@ export default function ProjectTable() {
     {
       title: '报告当期完成合同额',
       dataIndex: 'currentCompleted',
-      align: 'right' as const,
+      align: 'right',
       width: 150,
       onHeaderCell: () => ({
         style: { 
@@ -503,7 +525,7 @@ export default function ProjectTable() {
     {
       title: '本年度累计完成合同额',
       dataIndex: 'yearlyCompleted',
-      align: 'right' as const,
+      align: 'right',
       width: 150,
       onHeaderCell: () => ({
         style: { 
@@ -518,7 +540,7 @@ export default function ProjectTable() {
     {
       title: '本年度累计完成开票',
       dataIndex: 'yearlyInvoice',
-      align: 'right' as const,
+      align: 'right',
       width: 150,
       onHeaderCell: () => ({
         style: { 
@@ -533,7 +555,7 @@ export default function ProjectTable() {
     {
       title: '本年度累计完成回款',
       dataIndex: 'yearlyPayment',
-      align: 'right' as const,
+      align: 'right',
       width: 150,
       onHeaderCell: () => ({
         style: { 
@@ -567,7 +589,7 @@ export default function ProjectTable() {
 
   const getHeaders = (section: 'contract' | 'invoice' | 'payment') => {
     const baseHeaders = {
-      contract: ["报告当期完成合同额", "本年度完成合同额", "项目结算完成合同额"],
+      contract: ["报告当期完��合同额", "本年度完成合同额", "项目结算完成合同额"],
       invoice: ["报告当期开票额", "本年度累计开票金额", "项目结算开票金额"],
       payment: ["报告当期回款额", "本年度累计回款金额", "项目结算回款金额"]
     }
@@ -746,7 +768,7 @@ export default function ProjectTable() {
             ...getCommonCellProps(COLUMN_WIDTHS.manager)
           },
           {
-            title: '部门归属',
+            title: '板块归属',
             dataIndex: 'department',
             width: COLUMN_WIDTHS.department,
             fixed: 'left',
@@ -1185,7 +1207,7 @@ export default function ProjectTable() {
                   <Button 
                     type="primary"
                     className="bg-[#007069] text-white"
-                    onClick={() => console.log('导入功能')}
+                    onClick={() => setImportModalVisible(true)}
                   >
                     导入
                   </Button>
@@ -1193,7 +1215,7 @@ export default function ProjectTable() {
                   <Button 
                     type="primary"
                     className="bg-[#007069] text-white"
-                    onClick={() => console.log('导入功能')}
+                    onClick={handleExport}
                   >
                     导出
                   </Button>
@@ -1208,7 +1230,7 @@ export default function ProjectTable() {
                 </div>
               </div>
 
-              {/* 添加统计弹窗 */}
+              {/* 修改统计弹窗 */}
               <Modal
                 title="追踪表数据统计"
                 open={showStatistics}
@@ -1238,77 +1260,83 @@ export default function ProjectTable() {
               </Modal>
 
               {/* 筛选区域 */}
-              <div className="border rounded-lg p-4 mb-12 bg-white">
+              <div className="border rounded-lg p-2 mb-6 bg-white">
                 <Form
                   form={form}
                   onFinish={onFinish}
                   layout="vertical"
-                  size="large"
-                  className="grid grid-cols-1 md:grid-cols-4 gap-4 p-4 pb-0"
+                  size="middle"
                 >
-                  <Form.Item name="projectId" label="项目编号" className="mb-0">
-                    <Input 
-                      placeholder="请输入项目编号" 
-                      allowClear 
-                    />
-                  </Form.Item>
-                  
-                  <Form.Item name="projectName" label="项目名称" className="mb-0">
-                    <Input 
-                      placeholder="请输入项目名称" 
-                      allowClear 
-                    />
-                  </Form.Item>
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-2 px-2">
+                    {/* 第一行基础筛选项 */}
+                    <Form.Item name="projectId" label="项目编号" className="mb-1">
+                      <Input placeholder="请输入项目编号" allowClear />
+                    </Form.Item>
+                    
+                    <Form.Item name="projectName" label="项目名称" className="mb-1">
+                      <Input placeholder="请输入项目名称" allowClear />
+                    </Form.Item>
 
-                  <Form.Item name="manager" label="项目经理" className="mb-0">
-                    <Select
-                      showSearch
-                      placeholder="请选择项目经理"
-                      options={managerOptions}
-                      allowClear
-                      filterOption={pinyinMatch}
-                    />
-                  </Form.Item>
+                    <Form.Item name="manager" label="项目经理" className="mb-1">
+                      <Select
+                        showSearch
+                        placeholder="请选择项目经理"
+                        options={managerOptions}
+                        allowClear
+                        filterOption={pinyinMatch}
+                      />
+                    </Form.Item>
 
-                  <Form.Item name="department" label="部门归属" className="mb-0">
-                    <Select
-                      showSearch
-                      placeholder="请选择部门"
-                      options={departmentOptions}
-                      allowClear
-                      filterOption={pinyinMatch}
-                    />
-                  </Form.Item>
+                    {/* 按钮组 */}
+                    <div className="flex items-end justify-end gap-2 pb-[2px]"> {/* 添加 pb-[2px] 以对齐表单项底部 */}
+                      <Button
+                        onClick={() => setIsFilterExpanded(!isFilterExpanded)}
+                        className="flex items-center"
+                      >
+                        {isFilterExpanded ? "收起" : "展开"}
+                        {isFilterExpanded ? <UpOutlined className="ml-1" /> : <DownOutlined className="ml-1" />}
+                      </Button>
+                      <Button 
+                        type="primary" 
+                        htmlType="submit" 
+                        className="w-20 hover:bg-[#005c56] transition-colors"
+                      >
+                        查询
+                      </Button>   
+                      <Button onClick={onReset}>重置</Button>
+                    </div>
 
-                  <Form.Item name="customer" label="客户名称" className="mb-0">
-                    <Input 
-                      placeholder="请输入客户名称" 
-                      allowClear 
-                    />
-                  </Form.Item>
+                    {/* 高级筛选项 */}
+                    <div className={`grid grid-cols-1 md:grid-cols-4 col-span-4 gap-2 transition-all duration-300 overflow-hidden ${
+                      isFilterExpanded ? 'max-h-72 opacity-100' : 'max-h-0 opacity-0'
+                    }`}>
+                      <Form.Item name="department" label="板块归属" className="mb-1">
+                        <Select
+                          showSearch
+                          placeholder="请选择部门"
+                          options={departmentOptions}
+                          allowClear
+                          filterOption={pinyinMatch}
+                        />
+                      </Form.Item>
 
-                  <Form.Item name="businessType" label="业务类别">
-                    <Select
-                      mode="multiple"
-                      showSearch
-                      placeholder="请选择业务类别(可多选)"
-                      options={businessTypeOptions}
-                      allowClear
-                      filterOption={pinyinMatch}
-                      maxTagCount={2}
-                    />
-                  </Form.Item>
+                      <Form.Item name="customer" label="客户名称" className="mb-1">
+                        <Input placeholder="请输入客户名称" allowClear />
+                      </Form.Item>
 
-                  <Form.Item className="col-span-2 flex justify-end mb-0 mt-8">
-                    <Button 
-                      type="primary" 
-                      htmlType="submit" 
-                      className="mr-2 w-32 hover:bg-[#005c56] transition-colors"
-                    >
-                      查询
-                    </Button>   
-                    <Button onClick={onReset}>重置</Button>
-                  </Form.Item>
+                      <Form.Item name="businessType" label="业务类别" className="mb-1">
+                        <Select
+                          mode="multiple"
+                          showSearch
+                          placeholder="请选择业务类别(可多选)"
+                          options={businessTypeOptions}
+                          allowClear
+                          filterOption={pinyinMatch}
+                          maxTagCount={2}
+                        />
+                      </Form.Item>
+                    </div>
+                  </div>
                 </Form>
               </div>
 
@@ -1378,6 +1406,28 @@ export default function ProjectTable() {
           </div>
         </div>
       </div>
+
+      {/* 添加导入Modal */}
+      <Modal
+        title="导入数据"
+        open={importModalVisible}
+        onCancel={() => setImportModalVisible(false)}
+        footer={null}
+      >
+        <Upload.Dragger
+          accept=".xlsx,.xls"
+          beforeUpload={handleImport}
+          showUploadList={false}
+        >
+          <p className="ant-upload-drag-icon">
+            <InboxOutlined />
+          </p>
+          <p className="ant-upload-text">点击或拖拽文件到此区域上传</p>
+          <p className="ant-upload-hint">
+            支持.xlsx或.xls格式的Excel文件
+          </p>
+        </Upload.Dragger>
+      </Modal>
     </ConfigProvider>
   )
 }

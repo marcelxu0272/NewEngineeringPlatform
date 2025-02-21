@@ -393,16 +393,16 @@ export default function Component() {
                   </div>
                   
                   {/* 三个子项成本 */}
-                  <div className="flex gap-2">
-                    <div className="bg-[#007069]/5 p-2 rounded-lg" style={{ flex: '2.74' }}>
+                  <div className="flex gap-2 w-full">
+                    {/* <div className="flex-1 bg-[#007069]/5 p-2 rounded-lg">
                       <p className="text-lg font-bold text-[#007069]">936.52</p>
                       <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">未签项目成本</p>
-                    </div>
-                    <div className="bg-[#007069]/5 p-2 rounded-lg" style={{ flex: '79.58' }}>
+                    </div> */}
+                    <div className="flex-1 bg-[#007069]/5 p-2 rounded-lg">
                       <p className="text-lg font-bold text-[#007069]">27,167.37</p>
                       <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">已签项目成本</p>
                     </div>
-                    <div className="bg-[#007069]/5 p-2 rounded-lg" style={{ flex: '17.67' }}>
+                    <div className="flex-1 bg-[#007069]/5 p-2 rounded-lg">
                       <div>
                         <p className="text-lg font-bold text-[#007069]">6,032.32</p>
                         <div className="flex items-center gap-2 mt-1">
@@ -544,7 +544,7 @@ export default function Component() {
           <div className="px-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
             <Card className="border-0 shadow-md lg:col-span-2">
               <CardContent className="p-4">
-                <h3 className="font-medium text-sm text-gray-700 mb-2">Workshare 金额</h3>
+                <h3 className="font-medium text-sm text-gray-700 mb-2">Workshare 金额（万元）</h3>
                 <Table 
                   columns={columns as ColumnType<any>[]} 
                   dataSource={data} 
@@ -583,7 +583,17 @@ export default function Component() {
             <div className="space-y-4">
               <Card className="border-0 shadow-md h-[calc(50%-0.5rem)]">
                 <CardContent className="p-4">
-                  <h3 className="font-medium text-sm text-gray-700 mb-4">工程软件设计项目覆盖率</h3>
+                  <div className="flex items-center gap-2 mb-4">
+                    <h3 className="font-medium text-sm text-gray-700">工程软件设计项目覆盖率</h3>
+                    <AntTooltip title="查看详情">
+                      <Link 
+                        href="/dashboard/software-coverage"
+                        className="w-5 h-5 rounded-full bg-[#007069]/10 flex items-center justify-center hover:bg-[#007069]/20 transition-colors"
+                      >
+                        <RightOutlined className="text-xs text-[#007069]" />
+                      </Link>
+                    </AntTooltip>
+                  </div>
                   <div className="grid grid-cols-3 gap-2">
                     <div className="bg-[#007069]/10 p-3 rounded-lg">
                       <div className="text-lg font-bold text-[#007069]">39.69%</div>
@@ -603,7 +613,17 @@ export default function Component() {
 
               <Card className="border-0 shadow-md h-[calc(50%-0.5rem)]">
                 <CardContent className="p-4">
-                  <h3 className="font-medium text-sm text-gray-700 mb-4">工程师工程软件参与小时数</h3>
+                  <div className="flex items-center gap-2 mb-4">
+                    <h3 className="font-medium text-sm text-gray-700">工程师工程软件参与小时数</h3>
+                    <AntTooltip title="查看详情">
+                      <Link 
+                        href="/dashboard/software-hours"
+                        className="w-5 h-5 rounded-full bg-[#007069]/10 flex items-center justify-center hover:bg-[#007069]/20 transition-colors"
+                      >
+                        <RightOutlined className="text-xs text-[#007069]" />
+                      </Link>
+                    </AntTooltip>
+                  </div>
                   <div className="grid grid-cols-3 gap-2">
                     <div className="bg-[#007069]/10 p-3 rounded-lg">
                       <div className="text-lg font-bold text-[#007069]">16,432</div>
