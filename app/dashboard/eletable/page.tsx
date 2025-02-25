@@ -410,7 +410,7 @@ export default function ProjectTable() {
   const [importModalVisible, setImportModalVisible] = useState(false)
 
   // 添加导入处理函数
-  const handleImport = (file: RcFile) => {
+  const handleImport = (file: File) => {
     // TODO: 处理Excel文件导入
     message.success('导入成功')
     setImportModalVisible(false)

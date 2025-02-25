@@ -13,7 +13,8 @@ import {
   ArrowDownOutlined,
   FolderOutlined,
   DollarOutlined,
-  ArrowLeftOutlined
+  ArrowLeftOutlined,
+  SearchOutlined  // 添加这一行
 } from '@ant-design/icons';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Highcharts from 'highcharts';
@@ -31,36 +32,259 @@ const formatNumber = (num: number | undefined | null, decimals: number = 0): str
 
 // 添加新的模拟数据
 const top20ProjectsData = [
-  { id: 'P001', name: '上海某炼油厂扩建项目', client: '阿朗新科高性能弹性体（常州）有限公司', manager: '三', responsible: '李四', management: '金山中心', businessType: '工程总承包', amount: 5000 },
-  { id: 'P002', name: '北京某石化储备库项目', client: '中国化学工程第十一建设有限公司', manager: '王五', responsible: '赵六', management: '沈阳中心', businessType: '设计咨询', amount: 4500 },
-  { id: 'P003', name: '广州某化工园区建设项目', client: '宁夏英力特化工股份有限公司', manager: '孙七', responsible: '周八', management: '金山中心', businessType: '工程总承包', amount: 4000 },
-  { id: 'P004', name: '深圳某石油码头改造项目', client: '宁夏英力特化工股份有限公司', manager: '吴九', responsible: '郑十', management: '沈阳中心', businessType: '设计咨询', amount: 3500 },
-  { id: 'P005', name: '成都某石化研发中心项目', client: '和元智造（上海）基因技术有限公司', manager: '陈十一', responsible: '张十二', management: '金山中心', businessType: '工程总承包', amount: 3000 },
-  { id: 'P006', name: '重庆某油气管道工程项目', client: '中国化学工程第十建设有限公司', manager: '李十三', responsible: '王十四', management: '沈阳中心', businessType: '设计咨询', amount: 2500 },
-  { id: 'P007', name: '杭州某化工厂环保改造项目', client: '中国化学工程第九建设有限公司', manager: '赵十五', responsible: '孙十六', management: '金山中心', businessType: '工程总承包', amount: 2000 },
-  { id: 'P008', name: '南京某石油储备基地项目', client: '中国化学工程第十一建设有限公司', manager: '周七', responsible: '吴十八', management: '沈阳中心', businessType: '设计咨询', amount: 1500 },
-  { id: 'P009', name: '武汉某石化实验室建设项目', client: '中国化学工程第十一建设有限公司', manager: '陈十九', responsible: '李二十', management: '金山中心', businessType: '工程总承包', amount: 1000 },
-  { id: 'P010', name: '上海某化工园区建设项目', client: '中国化学工程第一建设有限公司', manager: '张二十一', responsible: '李二十二', management: '金山中心', businessType: '工程总承包', amount: 900 },
-  { id: 'P011', name: '北京某石化研发中心项目', client: '中国化学工程第一建设有限公司', manager: '王二十三', responsible: '赵二十四', management: '沈阳中心', businessType: '设计咨询', amount: 800 },
-  { id: 'P012', name: '广州某石油码头改造项目', client: '巴斯夫一体化基地（北京）有限公司', manager: '孙二十五', responsible: '周二十六', management: '金山中心', businessType: '工程总承包', amount: 700 },
-  { id: 'P013', name: '深圳某石化储备库项目', client: '巴斯夫一体化基地（上海）有限公司', manager: '吴二十-seven', responsible: '郑二十-eight', management: '沈阳中心', businessType: '设计咨询', amount: 600 },
-  { id: 'P014', name: '成都某石化实验室建设项目', client: '宁夏英力特化工股份有限公司', manager: '陈二十-nine', responsible: '张三十', management: '金山中心', businessType: '工程总承包', amount: 500 },
-  { id: 'P015', name: '重庆某石化园区建设项目', client: '阿朗新科高性能弹性体（常州）有限公司', manager: '李三十一', responsible: '王三十-two', management: '沈阳中心', businessType: '设计咨询', amount: 400 },
-  { id: 'P016', name: '杭州某石化研发中心项目', client: '阿朗新科高性能弹性体（常州）有限公司', manager: '赵三十-three', responsible: '孙三十-four', management: '金山中心', businessType: '工程总承包', amount: 300 },
-  { id: 'P017', name: '南京某石化储备库项目', client: '巴斯夫一体化基地（广东）有限公司', manager: '周三十-five', responsible: '吴三十-six', management: '沈阳中心', businessType: '设计咨询', amount: 200 },
-  { id: 'P018', name: '武汉某石化码头改造项目', client: '阿朗新科高性能弹性体（常州）有限公司', manager: '陈三十-seven', responsible: '李三十-eight', management: '金山中心', businessType: '工程总承包', amount: 100 },
-  { id: 'P019', name: '苏州某石化园区建设项目', client: '阿朗新科高性能弹性体（常州）有限公司', manager: '张三十-nine', responsible: '赵四十', management: '沈阳中心', businessType: '设计咨询', amount: 90 },
-  { id: 'P020', name: '天津某石化研发中心项目', client: '阿朗新科高性能弹性体（常州）有限公司', manager: '孙四十-one', responsible: '周四十-two', management: '金山中心', businessType: '工程总承包', amount: 80 },
-  // ... 添加更多项目数据，总共20条
+  { 
+    id: 'P001', 
+    name: '上海某炼油厂扩建项目', 
+    client: '阿朗新科高性能弹性体（常州）有限公司',
+    manager: '三',
+    responsible: '李四',
+    management: '金山中心',
+    businessType: '工程总承包',
+    date: '2025-01-15',
+    type: '新签',
+    amount: 5000 * 10000
+  },
+  { 
+    id: 'P002', 
+    name: '北京某石化储备库项目', 
+    client: '中国化学工程第十一建设有限公司', 
+    manager: '王五', 
+    responsible: '赵六', 
+    management: '沈阳中心', 
+    businessType: '设计咨询', 
+    date: '2025-01-20',
+    type: '新签',
+    amount: 4500 * 10000
+  },
+  { 
+    id: 'P003', 
+    name: '广州某化工园区建设项目', 
+    client: '宁夏英力特化工股份有限公司', 
+    manager: '孙七', 
+    responsible: '周八', 
+    management: '金山中心', 
+    businessType: '工程总承包', 
+    date: '2025-02-01',
+    type: '变更',
+    amount: 4000 * 10000
+  },
+  { 
+    id: 'P004', 
+    name: '深圳某石油码头改造项目', 
+    client: '宁夏英力特化工股份有限公司', 
+    manager: '吴九', 
+    responsible: '郑十', 
+    management: '沈阳中心', 
+    businessType: '设计咨询', 
+    date: '2025-02-05',
+    type: '新签',
+    amount: 3500 * 10000
+  },
+  { 
+    id: 'P005', 
+    name: '成都某石化研发中心项目', 
+    client: '和元智造（上海）基因技术有限公司', 
+    manager: '陈十一', 
+    responsible: '张十二', 
+    management: '金山中心', 
+    businessType: '工程总承包', 
+    date: '2025-02-10',
+    type: '变更',
+    amount: 3000 * 10000
+  },
+  { 
+    id: 'P006', 
+    name: '重庆某油气管道工程项目', 
+    client: '中国化学工程第十建设有限公司', 
+    manager: '李十三', 
+    responsible: '王十四', 
+    management: '沈阳中心', 
+    businessType: '设计咨询', 
+    date: '2025-02-15',
+    type: '新签',
+    amount: 2500 * 10000
+  },
+  { 
+    id: 'P007', 
+    name: '杭州某化工厂环保改造项目', 
+    client: '中国化学工程第九建设有限公司', 
+    manager: '赵十五', 
+    responsible: '孙十六', 
+    management: '金山中心', 
+    businessType: '工程总承包', 
+    date: '2025-02-20',
+    type: '变更',
+    amount: 2000 * 10000
+  },
+  { 
+    id: 'P008', 
+    name: '南京某石油储备基地项目', 
+    client: '中国化学工程第十一建设有限公司', 
+    manager: '周七', 
+    responsible: '吴十八', 
+    management: '沈阳中心', 
+    businessType: '设计咨询', 
+    date: '2025-03-01',
+    type: '新签',
+    amount: 1500 * 10000
+  },
+  { 
+    id: 'P009', 
+    name: '武汉某石化实验室建设项目', 
+    client: '中国化学工程第十一建设有限公司', 
+    manager: '陈十九', 
+    responsible: '李二十', 
+    management: '金山中心', 
+    businessType: '工程总承包', 
+    date: '2025-03-05',
+    type: '变更',
+    amount: 1000 * 10000
+  },
+  { 
+    id: 'P010', 
+    name: '上海某化工园区建设项目', 
+    client: '中国化学工程第一建设有限公司', 
+    manager: '张二十一', 
+    responsible: '李二十二', 
+    management: '金山中心', 
+    businessType: '工程总承包', 
+    date: '2025-03-10',
+    type: '新签',
+    amount: 900 * 10000
+  },
+  { 
+    id: 'P011', 
+    name: '北京某石化研发中心项目', 
+    client: '中国化学工程第一建设有限公司', 
+    manager: '王二十三', 
+    responsible: '赵二十四', 
+    management: '沈阳中心', 
+    businessType: '设计咨询', 
+    date: '2025-03-15',
+    type: '变更',
+    amount: 800 * 10000
+  },
+  { 
+    id: 'P012', 
+    name: '广州某石油码头改造项目', 
+    client: '巴斯夫一体化基地（北京）有限公司', 
+    manager: '孙二十五', 
+    responsible: '周二十六', 
+    management: '金山中心', 
+    businessType: '工程总承包', 
+    date: '2025-03-20',
+    type: '新签',
+    amount: 700 * 10000
+  },
+  { 
+    id: 'P013', 
+    name: '深圳某石化储备库项目', 
+    client: '巴斯夫一体化基地（上海）有限公司', 
+    manager: '吴二十-seven', 
+    responsible: '郑二十-eight', 
+    management: '沈阳中心', 
+    businessType: '设计咨询', 
+    date: '2025-03-25',
+    type: '变更',
+    amount: 600 * 10000
+  },
+  { 
+    id: 'P014', 
+    name: '成都某石化实验室建设项目', 
+    client: '宁夏英力特化工股份有限公司', 
+    manager: '陈二十-nine', 
+    responsible: '张三十', 
+    management: '金山中心', 
+    businessType: '工程总承包', 
+    date: '2025-04-01',
+    type: '新签',
+    amount: 500 * 10000
+  },
+  { 
+    id: 'P015', 
+    name: '重庆某石化园区建设项目', 
+    client: '阿朗新科高性能弹性体（常州）有限公司', 
+    manager: '李三十一', 
+    responsible: '王三十-two', 
+    management: '沈阳中心', 
+    businessType: '设计咨询', 
+    date: '2025-04-05',
+    type: '变更',
+    amount: 400 * 10000
+  },
+  { 
+    id: 'P016', 
+    name: '杭州某石化研发中心项目', 
+    client: '阿朗新科高性能弹性体（常州）有限公司', 
+    manager: '赵三十-three', 
+    responsible: '孙三十-four', 
+    management: '金山中心', 
+    businessType: '工程总承包', 
+    date: '2025-04-10',
+    type: '新签',
+    amount: 300 * 10000
+  },
+  { 
+    id: 'P017', 
+    name: '南京某石化储备库项目', 
+    client: '巴斯夫一体化基地（广东）有限公司', 
+    manager: '周三十-five', 
+    responsible: '吴三十-six', 
+    management: '沈阳中心', 
+    businessType: '设计咨询', 
+    date: '2025-04-15',
+    type: '变更',
+    amount: 200 * 10000
+  },
+  { 
+    id: 'P018', 
+    name: '武汉某石化码头改造项目', 
+    client: '阿朗新科高性能弹性体（常州）有限公司', 
+    manager: '陈三十-seven', 
+    responsible: '李三十-eight', 
+    management: '金山中心', 
+    businessType: '工程总承包', 
+    date: '2025-04-20',
+    type: '新签',
+    amount: 100 * 10000
+  },
+  { 
+    id: 'P019', 
+    name: '苏州某石化园区建设项目', 
+    client: '阿朗新科高性能弹性体（常州）有限公司', 
+    manager: '张三十-nine', 
+    responsible: '赵四十', 
+    management: '沈阳中心', 
+    businessType: '设计咨询', 
+    date: '2025-04-25',
+    type: '变更',
+    amount: 90 * 10000
+  },
+  { 
+    id: 'P020', 
+    name: '天津某石化研发中心项目', 
+    client: '阿朗新科高性能弹性体（常州）有限公司', 
+    manager: '孙四十-one', 
+    responsible: '周四十-two', 
+    management: '金山中心', 
+    businessType: '工程总承包', 
+    date: '2025-04-30',
+    type: '新签',
+    amount: 80 * 10000
+  }
 ];
 
 const DataDashboard = () => {
   const [selectedMetric, setSelectedMetric] = useState('newContracts');
   const [selectedMenu, setSelectedMenu] = useState('dashboard');
   const [selectedCenter, setSelectedCenter] = useState('all');
-  const [selectedYear, setSelectedYear] = useState('2023');
+  const [selectedYear, setSelectedYear] = useState('2025');
   const [selectedSubmenu, setSelectedSubmenu] = useState('operationalMetrics');
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [selectedManagement, setSelectedManagement] = useState('all');
+  const [selectedCostManagement, setSelectedCostManagement] = useState('all');
+  const [selectedProjectType, setSelectedProjectType] = useState('all');
 
   const metrics = [
     { 
@@ -270,83 +494,338 @@ const DataDashboard = () => {
     </Card>
   );
 
-  const renderTop20ProjectsTable = () => (
-    <Card className="p-4 mt-4">
-      <h2 className="text-xl font-semibold mb-4">
-        {selectedMetric === 'newContracts' ? '年度新签合同额明细' : 'TOP20 项目'}
-      </h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead>
-            <tr>
-              <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">项目编号</th>
-              <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">项目名称</th>
-              <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">甲方名称</th>
-              <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">项目经理</th>
-              <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">负责人</th>
-              <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">管理归属</th>
-              <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">业务类型</th>
-              <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">金额（万元）</th>
-            </tr>
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {top20ProjectsData.map((project) => (
-              <tr key={project.id}>
-                <td className="px-4 py-2 whitespace-nowrap">{project.id}</td>
-                <td className="px-4 py-2 whitespace-nowrap">{project.name}</td>
-                <td className="px-4 py-2 whitespace-nowrap">{project.client}</td>
-                <td className="px-4 py-2 whitespace-nowrap">{project.manager}</td>
-                <td className="px-4 py-2 whitespace-nowrap">{project.responsible}</td>
-                <td className="px-4 py-2 whitespace-nowrap">{project.management}</td>
-                <td className="px-4 py-2 whitespace-nowrap">{project.businessType}</td>
-                <td className="px-4 py-2 whitespace-nowrap">{formatNumber(project.amount)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    </Card>
-  );
+  const renderTop20ProjectsTable = () => {
+    // 判断是否需要显示筛选和搜索
+    const showFilters = ['newContracts', 'completedContracts', 'invoicedAmount', 'receivedPayments'].includes(selectedMetric);
 
-  // 更新renderProjectCostChart函数
-  const renderProjectCostChart = () => (
-    <Card className="p-4 mb-4">
-      <h3 className="text-lg font-semibold mb-2">项目成本月度分布</h3>
-      <ResponsiveContainer width="100%" height={600}>
-        <BarChart data={projectCostData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="month" />
-          <YAxis tickFormatter={(value) => formatNumber(value)} />
-          <Tooltip formatter={(value) => formatNumber(Number(value))} />
-          <Legend />
-          <Bar dataKey="差旅及报销" stackId="a" fill="#007069" />
-          <Bar dataKey="人力成本" stackId="a" fill="#007069cc" />
-          <Bar dataKey="低负荷成本" stackId="a" fill="#00706999" />
-          <Bar dataKey="一般付款" stackId="a" fill="#007069aa" />
-          <Bar dataKey="涉外支付" stackId="a" fill="#007069bb" />
-          <Bar dataKey="设计服务分包" stackId="a" fill="#007069cc" />
-          <Bar dataKey="采购" stackId="a" fill="#007069dd" />
-          <Bar dataKey="施工分包" stackId="a" fill="#007069ee" />
-          <Bar dataKey="其他" stackId="a" fill="#007069ff" />
-        </BarChart>
-      </ResponsiveContainer>
-    </Card>
-  );
+    // 筛选数据
+    let filteredData = [...top20ProjectsData];
+    
+    if (showFilters) {
+      // 管理归属筛选
+      if (selectedManagement !== 'all') {
+        filteredData = filteredData.filter(item => item.management === selectedManagement);
+      }
+      
+      // 关键词搜索
+      if (searchKeyword) {
+        const keyword = searchKeyword.toLowerCase();
+        filteredData = filteredData.filter(item => 
+          item.id.toLowerCase().includes(keyword) ||
+          item.name.toLowerCase().includes(keyword) ||
+          item.manager.toLowerCase().includes(keyword) ||
+          item.client.toLowerCase().includes(keyword)
+        );
+      }
+    }
+
+    // 计算分页
+    const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const currentPageData = filteredData.slice(startIndex, endIndex);
+
+    // 导出数据函数
+    const exportData = () => {
+      // 创建CSV内容
+      const headers = ['项目编号', '项目名称', '甲方名称', '项目经理', '负责人', '管理归属', '业务类型', '日期', '金额（元）'];
+      const csvContent = [
+        headers.join(','),
+        ...filteredData.map(item => [
+          item.id,
+          item.name,
+          item.client,
+          item.manager,
+          item.responsible,
+          item.management,
+          item.businessType,
+          item.date,
+          item.amount
+        ].join(','))
+      ].join('\n');
+
+      // 创建Blob对象
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      
+      // 设置下载属性
+      link.setAttribute('href', url);
+      link.setAttribute('download', `${metrics.find(m => m.id === selectedMetric)?.name}_数据.csv`);
+      link.style.visibility = 'hidden';
+      
+      // 触发下载
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+
+    return (
+      <Card className="p-4 mt-4">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold">
+            {selectedMetric === 'newContracts' ? '年度新签合同额明细' : 'TOP20 项目'}
+          </h2>
+          
+          {/* 添加筛选和搜索区域 */}
+          {showFilters && (
+            <div className="flex items-center space-x-4">
+              <Select value={selectedManagement} onValueChange={setSelectedManagement}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="选择管理归属" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">全部</SelectItem>
+                  <SelectItem value="金山中心">金山中心</SelectItem>
+                  <SelectItem value="沈阳中心">沈阳中心</SelectItem>
+                </SelectContent>
+              </Select>
+              
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="搜索项目编号/名称/经理/甲方"
+                  value={searchKeyword}
+                  onChange={(e) => setSearchKeyword(e.target.value)}
+                  className="w-[300px] px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#007069]"
+                />
+                <SearchOutlined className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* 表格内容保持不变 */}
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead>
+              <tr>
+                <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">项目编号</th>
+                <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">项目名称</th>
+                <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">甲方名称</th>
+                <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">项目经理</th>
+                <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">负责人</th>
+                <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">管理归属</th>
+                <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">业务类型</th>
+                <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">日期</th>
+                <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">金额（元）</th>
+                {selectedMetric === 'newContracts' && (
+                  <th className="px-4 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">类型</th>
+                )}
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {currentPageData.map((project) => (
+                <tr key={project.id}>
+                  <td className="px-4 py-2 whitespace-nowrap">{project.id}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{project.name}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{project.client}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{project.manager}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{project.responsible}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{project.management}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{project.businessType}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{project.date}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">{formatNumber(project.amount)}</td>
+                  {selectedMetric === 'newContracts' && (
+                    <td className="px-4 py-2 whitespace-nowrap">{project.type}</td>
+                  )}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        
+        {/* 修改分页控制区域 */}
+        <div className="flex items-center justify-between mt-4 px-4">
+          <div className="text-sm text-gray-500">
+            共 {filteredData.length} 条记录
+          </div>
+          <div className="flex items-center space-x-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+            >
+              上一页
+            </Button>
+            <span className="text-sm">
+              第 {currentPage} / {totalPages} 页
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+            >
+              下一页
+            </Button>
+            
+            {/* 添加导出按钮 */}
+            {showFilters && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={exportData}
+                className="ml-4"
+              >
+                导出数据
+              </Button>
+            )}
+          </div>
+        </div>
+      </Card>
+    );
+  };
+
+  // 更新渲染项目成本图表的函数
+  const renderProjectCostChart = () => {
+    // 计算每个月的合同项目成本和部门项目成本
+    const chartData = projectCostData.map(item => ({
+      month: item.month,
+      合同项目成本: item.设计服务分包 + item.采购 + item.施工分包,
+      部门项目成本: item.差旅及报销 + item.人力成本 + item.低负荷成本 + item.一般付款 + item.涉外支付 + item.其他
+    }));
+
+    return (
+      <Card className="p-4 mb-4">
+        <h3 className="text-lg font-semibold mb-2">项目成本月度分布</h3>
+        <ResponsiveContainer width="100%" height={600}>
+          <BarChart data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="month" />
+            <YAxis tickFormatter={(value) => formatNumber(value)} />
+            <Tooltip formatter={(value) => formatNumber(Number(value))} />
+            <Legend />
+            <Bar dataKey="合同项目成本" stackId="a" fill="#007069" />
+            <Bar dataKey="部门项目成本" stackId="a" fill="#00706999" />
+          </BarChart>
+        </ResponsiveContainer>
+      </Card>
+    );
+  };
 
   const renderProjectCostTable = () => {
     // 计算汇总数据
     const totalCost = projectCostData.reduce((acc, item) => {
       Object.keys(item).forEach(key => {
         if (key !== 'month') {
-          acc[key as keyof typeof item] = ((acc[key as keyof typeof item] || 0) as number) + (item[key as keyof typeof item] as number);
+          acc[key as keyof typeof item] = (acc[key as keyof typeof item] || 0) as number + (item[key as keyof typeof item] as number)
         }
       });
       return acc;
     }, {} as Record<string, number>);
 
+    // 添加一个格式化函数来处理数值的显示
+    const formatCostValue = (value: number) => {
+      return value === 0 ? '-' : formatNumber(value, 2);
+    };
+
+    // 导出当前数据
+    const exportCurrentData = () => {
+      const headers = ['月份', '总成本', '差旅及报销', '人力成本', '低负荷成本', '一般付款', 
+        '涉外支付', '设计服务分包', '采购', '施工分包', '其他'];
+      
+      const csvContent = [
+        headers.join(','),
+        ...projectCostData.map(item => [
+          `${selectedYear}年${item.month}`,
+          formatCostValue(item.差旅及报销 + item.人力成本 + item.低负荷成本 + item.一般付款 + 
+            item.涉外支付 + item.设计服务分包 + item.采购 + item.施工分包 + item.其他),
+          formatCostValue(item.差旅及报销),
+          formatCostValue(item.人力成本),
+          formatCostValue(item.低负荷成本),
+          formatCostValue(item.一般付款),
+          formatCostValue(item.涉外支付),
+          formatCostValue(item.设计服务分包),
+          formatCostValue(item.采购),
+          formatCostValue(item.施工分包),
+          formatCostValue(item.其他)
+        ].join(','))
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `项目成本数据_${selectedYear}年.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+
+    // 导出明细数据
+    const exportDetailData = () => {
+      // 这里可以添加导出更详细数据的逻辑
+      alert('导出明细功能待实现');
+    };
+
     return (
       <Card className="p-4">
-        <h3 className="text-lg font-semibold mb-2">项目成本明细数据</h3>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-lg font-semibold">项目成本明细数据</h3>
+          <div className="flex items-center space-x-4">
+            {/* 管理归属选择 */}
+            <Select value={selectedCostManagement} onValueChange={setSelectedCostManagement}>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="选择管理归属" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">全部</SelectItem>
+                <SelectItem value="金山中心">金山中心</SelectItem>
+                <SelectItem value="沈阳中心">沈阳中心</SelectItem>
+              </SelectContent>
+            </Select>
+
+            {/* 项目类型选择 */}
+            <div className="flex items-center space-x-4 border rounded-md p-2">
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  value="all"
+                  checked={selectedProjectType === 'all'}
+                  onChange={(e) => setSelectedProjectType(e.target.value)}
+                  className="mr-2"
+                />
+                全部
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  value="contract"
+                  checked={selectedProjectType === 'contract'}
+                  onChange={(e) => setSelectedProjectType(e.target.value)}
+                  className="mr-2"
+                />
+                合同项目
+              </label>
+              <label className="flex items-center">
+                <input
+                  type="radio"
+                  value="department"
+                  checked={selectedProjectType === 'department'}
+                  onChange={(e) => setSelectedProjectType(e.target.value)}
+                  className="mr-2"
+                />
+                部门项目
+              </label>
+            </div>
+
+            {/* 导出按钮 */}
+            <Button
+              variant="outline"
+              onClick={exportCurrentData}
+            >
+              导出
+            </Button>
+            <Button
+              variant="outline"
+              onClick={exportDetailData}
+            >
+              导出明细
+            </Button>
+          </div>
+        </div>
+
         <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead>
@@ -368,37 +847,37 @@ const DataDashboard = () => {
               {/* 汇总行 */}
               <tr className="font-bold">
                 <td className="px-6 py-4 whitespace-nowrap">总计</td>
-                <td className="px-6 py-4 whitespace-nowrap">{formatNumber(
+                <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(
                   totalCost.差旅及报销 + totalCost.人力成本 + totalCost.低负荷成本 + totalCost.一般付款 + 
-                  totalCost.涉外支付 + totalCost.设计服务分包 + totalCost.采购 + totalCost.施工分包 + totalCost.其他, 2
+                  totalCost.涉外支付 + totalCost.设计服务分包 + totalCost.采购 + totalCost.施工分包 + totalCost.其他
                 )}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{formatNumber(totalCost.差旅及报销, 2)}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{formatNumber(totalCost.人力成本, 2)}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{formatNumber(totalCost.低负荷成本, 2)}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{formatNumber(totalCost.一般付款, 2)}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{formatNumber(totalCost.涉外支付, 2)}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{formatNumber(totalCost.设计服务分包, 2)}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{formatNumber(totalCost.采购, 2)}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{formatNumber(totalCost.施工分包, 2)}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{formatNumber(totalCost.其他, 2)}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(totalCost.差旅及报销)}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(totalCost.人力成本)}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(totalCost.低负荷成本)}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(totalCost.一般付款)}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(totalCost.涉外支付)}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(totalCost.设计服务分包)}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(totalCost.采购)}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(totalCost.施工分包)}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(totalCost.其他)}</td>
               </tr>
               {/* 月度数据行 */}
               {projectCostData.map((item) => (
                 <tr key={item.month}>
                   <td className="px-6 py-4 whitespace-nowrap font-bold">{selectedYear}年{item.month}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{formatNumber(
+                  <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(
                     item.差旅及报销 + item.人力成本 + item.低负荷成本 + item.一般付款 + 
-                    item.涉外支付 + item.设计服务分包 + item.采购 + item.施工分包 + item.其他, 2
+                    item.涉外支付 + item.设计服务分包 + item.采购 + item.施工分包 + item.其他
                   )}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{formatNumber(item.差旅及报销, 2)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{formatNumber(item.人力成本, 2)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{formatNumber(item.低负荷成本, 2)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{formatNumber(item.一般付款, 2)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{formatNumber(item.涉外支付, 2)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{formatNumber(item.设计服务分包, 2)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{formatNumber(item.采购, 2)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{formatNumber(item.施工分包, 2)}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">{formatNumber(item.其他, 2)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(item.差旅及报销)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(item.人力成本)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(item.低负荷成本)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(item.一般付款)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(item.涉外支付)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(item.设计服务分包)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(item.采购)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(item.施工分包)}</td>
+                  <td className="px-6 py-4 whitespace-nowrap">{formatCostValue(item.其他)}</td>
                 </tr>
               ))}
             </tbody>
@@ -489,7 +968,7 @@ const DataDashboard = () => {
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-center">{item.projectCount}</td>
                   <td className="px-4 py-2">
                     <div className="flex items-center">
-                      <span className="w-12 text-sm">{formatNumber(item.amount)}</span>
+                      <span className="w-24 text-sm">{formatNumber(item.amount / 10000, 2)}</span>
                       <div className="flex-1 h-4">
                         <Progress 
                           value={Math.max(10, (item.amount / maxAmount) * 100)}
@@ -559,7 +1038,9 @@ const DataDashboard = () => {
       </div>
 
       {/* 主要内容区域 */}
-      <div className="flex ml-16 w-full h-screen overflow-hidden bg-[#f8faff]">
+      <div className={`flex ml-16 w-full h-screen overflow-hidden bg-[#f8faff] ${
+        isSidebarExpanded ? '' : 'ml-0'
+      }`}>
         {/* 可折叠的二级目录 */}
         <div className={`${
           isSidebarExpanded ? 'w-[280px]' : 'w-8'
@@ -607,9 +1088,9 @@ const DataDashboard = () => {
                   <SelectValue placeholder="选择年份" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="2023">2023</SelectItem>
-                  <SelectItem value="2022">2022</SelectItem>
-                  <SelectItem value="2021">2021</SelectItem>
+                  <SelectItem value="2023">2025</SelectItem>
+                  <SelectItem value="2022">2024</SelectItem>
+                  <SelectItem value="2021">2023</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -630,7 +1111,11 @@ const DataDashboard = () => {
                     <Button
                       key={metric.id}
                       variant="ghost"
-                      className="w-full justify-start ml-4"
+                      className={`w-full justify-start ml-4 ${
+                        selectedMetric === metric.id 
+                          ? 'bg-[#007069]/10 text-[#007069] font-medium border-l-4 border-[#007069] pl-3'
+                          : 'text-gray-600 hover:bg-gray-100'
+                      }`}
                       onClick={() => {
                         setSelectedMetric(metric.id);
                         setSelectedSubmenu('operationalMetrics');
@@ -641,25 +1126,6 @@ const DataDashboard = () => {
                   ))}
                 </AccordionContent>
               </AccordionItem>
-              {/* <AccordionItem value="projectData">
-                <AccordionTrigger>
-                  <span className="flex items-center">
-                    <FolderOutlined className="w-5 h-5 mr-2" />
-                    项目数据
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start"
-                    onClick={() => {
-                      setSelectedSubmenu('projectDataOverview');
-                    }}
-                  >
-                    数据概览
-                  </Button>
-                </AccordionContent>
-              </AccordionItem> */}
               <AccordionItem value="costData">
                 <AccordionTrigger>
                   <span className="flex items-center">
@@ -669,22 +1135,17 @@ const DataDashboard = () => {
                 </AccordionTrigger>
                 <AccordionContent>
                   <Button
-                    variant="ghost"
-                    className="w-full justify-start"
+                    variant="ghost" 
+                    className={`w-full justify-start ${
+                      selectedSubmenu === 'sectorCost'
+                        ? 'bg-[#007069]/10 text-[#007069] font-medium border-l-4 border-[#007069] pl-3'
+                        : 'text-gray-600 hover:bg-gray-100'
+                    }`}
                     onClick={() => {
                       setSelectedSubmenu('sectorCost');
                     }}
                   >
                     项目成本
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start"
-                    onClick={() => {
-                      setSelectedSubmenu('managementCost');
-                    }}
-                  >
-                    管理成本
                   </Button>
                 </AccordionContent>
               </AccordionItem>
@@ -712,7 +1173,7 @@ const DataDashboard = () => {
                       <p className="text-4xl font-bold text-[#007069]">{metricInfo.totalAmount}</p>
                     </div>
                     <div className="bg-white p-4 rounded-lg">
-                      <p className="text-sm text-gray-500 mb-1">{metrics.find(m => m.id === selectedMetric)?.hasYearlyTarget ? '当月新增额（万元）' : '当月变化（万元）'}</p>
+                      <p className="text-sm text-gray-500 mb-1">{metrics.find(m => m.id === selectedMetric)?.hasYearlyTarget ? '当月新增额（万元）' : '上月变化（万元）'}</p>
                       <div className="flex items-center">
                         {metrics.find(m => m.id === selectedMetric)?.hasYearlyTarget ? (
                           <span className="text-4xl font-bold text-[#007069]">{metricInfo.currentMonthAmount}</span>
@@ -771,7 +1232,7 @@ const DataDashboard = () => {
 
                 {metrics.find(m => m.id === selectedMetric)?.hasYearlyTarget && (
                   <div className="flex mt-4 h-[500px]">
-                    <Card className="p-4 mb-4 flex-grow-[2] flex flex-col">
+                    <Card className="p-4 mb-4 w-full flex flex-col">
                       <h2 className="text-xl font-semibold mb-4">各月金额</h2>
                       <div className="flex-grow overflow-hidden">
                         <ResponsiveContainer width="100%" height="100%">
@@ -792,29 +1253,6 @@ const DataDashboard = () => {
                             <Line yAxisId="right" type="monotone" dataKey={`${selectedMetric}Cumulative`} name="当年累计" stroke="#85e5a7" strokeWidth={5} />
                           </ComposedChart>
                         </ResponsiveContainer>
-                      </div>
-                    </Card>
-                    
-                    {/* 详细信息表格 */}
-                    <Card className="p-4 ml-4 mb-4 flex-grow-[1] flex flex-col">
-                      <h2 className="text-xl font-semibold mb-4">详细数据</h2>
-                      <div className="flex-grow overflow-y-auto">
-                        <table className="min-w-full divide-y divide-gray-200">
-                          <thead className="bg-gray-50 sticky top-0">
-                            <tr>
-                              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">月份</th>
-                              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">金额（万元）</th>
-                            </tr>
-                          </thead>
-                          <tbody className="bg-white divide-y divide-gray-200">
-                            {data.map((item) => (
-                              <tr key={item.month}>
-                                <td className="px-6 py-3 whitespace-nowrap">{item.month}</td>
-                                <td className="px-6 py-3 whitespace-nowrap">{formatNumber(Number(item[selectedMetric as keyof typeof item]))}</td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
                       </div>
                     </Card>
                   </div>
