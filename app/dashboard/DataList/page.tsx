@@ -9,6 +9,8 @@ import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { LeftOutlined } from '@ant-design/icons';
 import { DashboardOutlined, BarChartOutlined, SettingOutlined, ArrowUpOutlined, ArrowDownOutlined, FolderOutlined, DollarOutlined } from '@ant-design/icons';
+import { metrics, monthlyData as data, projectData, projectCostData, managementCostData } from '@/lib/data/dashboard';
+
 
 // 添加千分符的辅助函数
 const formatNumber = (num: number | undefined | null, decimals: number = 0): string => {
@@ -41,67 +43,6 @@ const DataDashboard = () => {
   const [selectedSubmenu, setSelectedSubmenu] = useState('operationalMetrics');
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
 
-  const metrics = [
-    { id: 'newContracts', name: '年度新签合同额(万元)', hasYearlyTarget: true },
-    { id: 'completedContracts', name: '年度完成合同额(万元)', hasYearlyTarget: true },
-    { id: 'invoicedAmount', name: '年度完成开票额(万元)', hasYearlyTarget: true },
-    { id: 'receivedPayments', name: '年度完成回款额(万元)', hasYearlyTarget: true },
-    { id: 'wip', name: 'WIP(万元)', hasYearlyTarget: false },
-    { id: 'accountsReceivable', name: '应收账款(万元)', hasYearlyTarget: false },
-  ];
-
-  const data = [
-    { month: '1月', newContracts: 4000, completedContracts: 3500, invoicedAmount: 3200, receivedPayments: 3000, wip: 1000, accountsReceivable: 2000 },
-    { month: '2月', newContracts: 2000, completedContracts: 0, invoicedAmount: 0, receivedPayments: 0, wip: 0, accountsReceivable: 0 },
-    { month: '3月', newContracts: 4000, completedContracts: 0, invoicedAmount: 0, receivedPayments: 0, wip: 0, accountsReceivable: 0 },
-    { month: '4月', newContracts: 1000, completedContracts: 0, invoicedAmount: 0, receivedPayments: 0, wip: 0, accountsReceivable: 0 },
-    { month: '5月', newContracts: 0, completedContracts: 0, invoicedAmount: 0, receivedPayments: 0, wip: 0, accountsReceivable: 0 },
-    { month: '6月', newContracts: 0, completedContracts: 0, invoicedAmount: 0, receivedPayments: 0, wip: 0, accountsReceivable: 0 },
-    { month: '7月', newContracts: 0, completedContracts: 0, invoicedAmount: 0, receivedPayments: 0, wip: 0, accountsReceivable: 0 },
-    { month: '8月', newContracts: 0, completedContracts: 0, invoicedAmount: 0, receivedPayments: 0, wip: 0, accountsReceivable: 0 },
-    { month: '9月', newContracts: 0, completedContracts: 0, invoicedAmount: 0, receivedPayments: 0, wip: 0, accountsReceivable: 0 },
-    { month: '10月', newContracts: 0, completedContracts: 0, invoicedAmount: 0, receivedPayments: 0, wip: 0, accountsReceivable: 0 },
-    { month: '11月', newContracts: 0, completedContracts: 0, invoicedAmount: 0, receivedPayments: 0, wip: 0, accountsReceivable: 0 },
-    { month: '12月', newContracts: 0, completedContracts: 0, invoicedAmount: 0, receivedPayments: 0, wip: 0, accountsReceivable: 0 },
-  ];
-
-  // 新增项目数据
-  const projectData = {
-    managementDistribution: [
-      { name: '金山中心', value: 40 },
-      { name: '沈阳中心', value: 30 },
-      { name: '其他中心', value: 30 },
-    ],
-    businessTypeDistribution: [
-      { name: '工程总承包', value: 45 },
-      { name: '设计咨询', value: 35 },
-      { name: '其他业务', value: 20 },
-    ],
-  };
-
-  // 修改后的项目成本数据，包含九种成本类型
-  const projectCostData = [
-    { month: '1月', 差旅及报销: 10100.00, 人力成本: 80800.00, 低负荷成本: 10050.00, 一般付款: 20200.00, 涉外支付: 15150.00, 设计服务分包: 30300.00, 采购: 50500.00, 施工分包: 70700.00, 其他: 10100.00 },
-    { month: '2月', 差旅及报销: 10120.00, 人力成本: 85850.00, 低负荷成本: 10055.00, 一般付款: 22220.00, 涉外支付: 16160.00, 设计服务分包: 32320.00, 采购: 55550.00, 施工分包: 75750.00, 其他: 10110.00 },
-    { month: '3月', 差旅及报销: 10110.00, 人力成本: 90900.00, 低负荷成本: 10060.00, 一般付款: 21210.00, 涉外支付: 17170.00, 设计服务分包: 34340.00, 采购: 60600.00, 施工分包: 80800.00, 其他: 10120.00 },
-    { month: '4月', 差旅及报销: 10130.00, 人力成本: 95950.00, 低负荷成本: 10058.00, 一般付款: 23230.00, 涉外支付: 18180.00, 设计服务分包: 36360.00, 采购: 58580.00, 施工分包: 85850.00, 其他: 10130.00 },
-    { month: '5月', 差旅及报销: 10125.00, 人力成本: 92920.00, 低负荷成本: 10062.00, 一般付款: 22225.00, 涉外支付: 17175.00, 设计服务分包: 35350.00, 采购: 62620.00, 施工分包: 88880.00, 其他: 10125.00 },
-    { month: '6月', 差旅及报销: 10140.00, 人力成本: 100000.00, 低负荷成本: 10065.00, 一般付款: 24240.00, 涉外支付: 19190.00, 设计服务分包: 38380.00, 采购: 65650.00, 施工分包: 92920.00, 其他: 10140.00 },
-    { month: '7月', 差旅及报销: 10135.00, 人力成本: 98980.00, 低负荷成本: 10063.00, 一般付款: 23235.00, 涉外支付: 18185.00, 设计服务分包: 37370.00, 采购: 63630.00, 施工分包: 90900.00, 其他: 10135.00 },
-    { month: '8月', 差旅及报销: 10145.00, 人力成本: 105050.00, 低负荷成本: 10067.00, 一般付款: 24245.00, 涉外支付: 19195.00, 设计服务分包: 39390.00, 采购: 67670.00, 施工分包: 95950.00, 其他: 10145.00 },
-    { month: '9月', 差旅及报销: 10150.00, 人力成本: 110100.00, 低负荷成本: 10070.00, 一般付款: 25250.00, 涉外支付: 20200.00, 设计服务分包: 40400.00, 采购: 70700.00, 施工分包: 98980.00, 其他: 10150.00 },
-    { month: '10月', 差旅及报销: 10155.00, 人力成本: 115150.00, 低负荷成本: 10073.00, 一般付款: 25255.00, 涉外支付: 20205.00, 设计服务分包: 41410.00, 采购: 73730.00, 施工分包: 100000.00, 其他: 10155.00 },
-  ];
-
-  // 修改模拟数据，只保留最新一个月的数据
-  const managementCostData = {
-    费用支付金额: 100000,
-    转入成本: 50000,
-    转出成本: 30000,
-    部门工时成本: 200000,
-    低负荷成本: 80000,
-    部门管理成本: 150000
-  };
 
   const getMetricInfo = (metricId: string) => {
     type MetricItem = {
