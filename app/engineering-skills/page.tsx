@@ -6,13 +6,10 @@ import { ClearOutlined, SettingOutlined, PlusOutlined, MinusCircleOutlined, Uplo
 import type { DataNode } from 'antd/es/tree';
 import { cn } from '@/lib/utils'
 import styled from 'styled-components';
-import { peopleData } from '@/lib/ESK_Person_data';
-import type { PersonCard } from '@/lib/ESK_Person_data';
+import type { PersonCard } from '@/lib/types/esk';
 import type { ColumnsType, ColumnType } from 'antd/es/table';
-import { treeData } from '@/lib/ESK_Node_Data';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import wechatIcon from '@/lib/wechat.png';
 
 // 添加自定义样式的 Radio.Group
 const StyledRadioGroup = styled(Radio.Group)`
@@ -42,8 +39,7 @@ const getAllLeafKeys = (nodes: DataNode[]): string[] => {
   return leafKeys;
 };
 
-// 获取所有叶节点的 key
-const allSkillKeys = getAllLeafKeys(treeData);
+// 获取所有叶节点的 key（在组件内根据 treeData 计算）
 
 // 在组件顶部添加以下样式
 const tableHeaderStyle = `
@@ -66,6 +62,9 @@ interface LeaderboardData {
 
 const EngineeringSystemSkills = () => {
   const router = useRouter();
+  const [peopleData, setPeopleData] = useState<PersonCard[]>([]);
+  const [treeData, setTreeData] = useState<DataNode[]>([]);
+  const [dataLoading, setDataLoading] = useState(true);
   const [checkedSkills, setCheckedSkills] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedRegion, setSelectedRegion] = useState<string>('全部');
@@ -88,6 +87,19 @@ const EngineeringSystemSkills = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 10;
   const cardListRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    Promise.all([
+      fetch('/api/esk/people').then((r) => r.json()),
+      fetch('/api/esk/tree').then((r) => r.json()),
+    ]).then(([people, tree]) => {
+      setPeopleData(people);
+      setTreeData(tree);
+      setDataLoading(false);
+    }).catch(() => setDataLoading(false));
+  }, []);
+
+  const allSkillKeys = useMemo(() => getAllLeafKeys(treeData), [treeData]);
 
   // 添加搜索节点的函数
   const onSearchNode = (value: string) => {
@@ -144,7 +156,7 @@ const EngineeringSystemSkills = () => {
   };
 
   // 获取所有非叶节点的 key
-  const allNonLeafKeys = useMemo(() => getAllNonLeafKeys(treeData), []);
+  const allNonLeafKeys = useMemo(() => getAllNonLeafKeys(treeData), [treeData]);
 
   // 添加切换展开/收缩的函数
   const toggleExpand = () => {
@@ -312,6 +324,14 @@ const EngineeringSystemSkills = () => {
     setSelectedPerson(person);
     setDrawerVisible(true);
   };
+
+  if (dataLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="text-gray-500">加载中...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen">
@@ -535,6 +555,7 @@ const EngineeringSystemSkills = () => {
         setSelectedPerson={setSelectedPerson}
         isAddingNew={isAddingNew}
         setIsAddingNew={setIsAddingNew}
+        allSkillKeys={allSkillKeys}
       />
       <Drawer
         title={<span className="text-xl font-bold">人员详情</span>}
@@ -556,7 +577,7 @@ const EngineeringSystemSkills = () => {
             </div>
             <Divider className="my-4" />
             <div>
-              <h3 className="text-lg font-semibold mb-4">🖥️ 软件技能水</h3>
+              <h3 className="text-lg font-semibold mb-4">🖥️ 软件技能水平</h3>
               <div className="space-y-4">
                 {selectedPerson.skills
                   .sort((a, b) => b.level - a.level) // 添加这行来排序
@@ -649,6 +670,7 @@ interface ManagementModalProps {
   setSelectedPerson: (person: PersonCard | null) => void;
   isAddingNew: boolean;
   setIsAddingNew: (isAdding: boolean) => void;
+  allSkillKeys: string[];
 }
 
 const ManagementModal: React.FC<ManagementModalProps> = ({
@@ -659,7 +681,8 @@ const ManagementModal: React.FC<ManagementModalProps> = ({
   selectedPerson,
   setSelectedPerson,
   isAddingNew,
-  setIsAddingNew
+  setIsAddingNew,
+  allSkillKeys
 }) => {
   const [form] = Form.useForm();
   const [searchTerm, setSearchTerm] = useState('');
@@ -758,7 +781,7 @@ const ManagementModal: React.FC<ManagementModalProps> = ({
                             rules={[{ required: true, message: '请选择技能名称' }]}
                           >
                             <Select style={{ width: 340 }}>
-                              {allSkillKeys.map((skillKey) => (
+                              {allSkillKeys.map((skillKey: string) => (
                                 <Select.Option key={skillKey} value={skillKey}>
                                   {skillKey}
                                 </Select.Option>
@@ -1227,7 +1250,7 @@ const PersonCard: React.FC<{ person: PersonCard; checkedSkills: string[]; onClic
             </div>
             <div className="flex items-center space-x-1 text-[#3975c6]">
               <Image 
-                src={wechatIcon} 
+                src="/images/wechat.png" 
                 alt="企业微信" 
                 width={16} 
                 height={16} 

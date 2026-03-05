@@ -1,12 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
-import { personnelData } from '@/lib/SME_Person_data'
+
+type Personnel = {
+  name: string; email: string; phone?: string; department?: string; major?: string;
+  projects?: string[]; industries?: string[]; regions?: string[]; skills?: string[]; qualifications?: string[]; location?: string;
+};
 import { 
   MailOutlined, 
   PhoneOutlined, 
@@ -22,12 +26,16 @@ export default function PersonnelCards() {
   const [searchTerm, setSearchTerm] = useState('')
   const [departmentFilter, setDepartmentFilter] = useState('')
   const [majorFilter, setMajorFilter] = useState('')
+  const [personnelData, setPersonnelData] = useState<Personnel[]>([])
+  const [loading, setLoading] = useState(true)
 
-  // 获取唯一的部门和专业列表
-  const departments = Array.from(new Set(personnelData.map(p => p.department)))
-  const majors = Array.from(new Set(personnelData.map(p => p.major)))
+  useEffect(() => {
+    fetch('/api/sme/personnel').then((res) => res.json()).then((d) => { setPersonnelData(d); setLoading(false); }).catch(() => setLoading(false))
+  }, [])
 
-  // 过滤逻辑
+  const departments = Array.from(new Set(personnelData.map(p => p.department).filter(Boolean))) as string[]
+  const majors = Array.from(new Set(personnelData.map(p => p.major).filter(Boolean))) as string[]
+
   const filteredData = personnelData.filter(person => {
     const matchesSearch = Object.values(person).some(value => 
       Array.isArray(value) 
@@ -39,6 +47,8 @@ export default function PersonnelCards() {
 
     return matchesSearch && matchesDepartment && matchesMajor
   })
+
+  if (loading) return <div className="text-gray-500 p-4">加载中...</div>
 
   return (
     <div>
@@ -88,27 +98,27 @@ function formatPhoneNumber(phoneNumber: string): string {
   return `${phoneNumber.slice(0, 3)} ${phoneNumber.slice(3, 7)} ${phoneNumber.slice(7)}`;
 }
 
-// 添加这个函数来获取基于location的渐变色
+// 修改这个函数来返回纯色而不是渐变色
 function getLocationGradient(location: string): string {
-  const gradientMap: { [key: string]: string } = {
-    '徐汇': 'from-white via-[#ffffff]/20 to-[#00706a]/20',
-    '金山': 'from-white via-[#ffffff]/20 to-[#0272fe]/20',
-    '沈阳': 'from-white via-[#ffffff]/20 to-[#ff7138]/20',
-    '惠州': 'from-white via-[#ffffff]/20 to-[#9f0c90]/20',
-    '银川': 'from-white via-[#ffffff]/20 to-[#00d8ff]/20'
+  const colorMap: { [key: string]: string } = {
+    '徐汇': 'bg-[#f5fffe]',
+    '金山': 'bg-[#f5f9ff]',
+    '沈阳': 'bg-[#fff7f5]',
+    '惠州': 'bg-[#fdf5fd]',
+    '银川': 'bg-[#f5fdff]'
   }
-  return gradientMap[location] || 'from-white to-[#e5f4f3]/10' // 默认渐变色
+  return colorMap[location] || 'bg-[#f8f8f8]' // 默认背景v色
 }
 
 function PersonCard({ person }: { person: any }) {
   return (
     <Card className={cn(
-      "relative hover:shadow-lg transition-shadow duration-300 bg-gradient-to-l rounded-none border-none",
+      "relative hover:shadow-lg transition-shadow duration-300 rounded-none border-none",
       getLocationGradient(person.location)
     )}>
-      <div className="flex">
+      <div className="flex h-full">
         {/* 左侧信息区域 */}
-        <div className="w-1/3 p-6 flex flex-col justify-between">
+        <div className="w-1/3 p-6 flex flex-col justify-between h-full">
           <div className="mb-4">
             <CardTitle className="text-2xl font-bold text-gray-800">{person.name}</CardTitle>
             <p className="text-sm font-medium text-gray-600 mt-1">
@@ -118,7 +128,7 @@ function PersonCard({ person }: { person: any }) {
           
           <div className="space-y-3">
             <div className="flex items-center text-gray-600">
-              <MailOutlined className="mr-3 text-gray-800" /> 
+              <MailOutlined className="mr-3 text-gray-400" /> 
               <a 
                 href={`mailto:${person.email}`} 
                 className="text-sm hover:text-[#00706a] transition-colors cursor-pointer"
@@ -127,11 +137,11 @@ function PersonCard({ person }: { person: any }) {
               </a>
             </div>
             <div className="flex items-center text-gray-600">
-              <PhoneOutlined className="mr-3 text-gray-800" /> 
+              <PhoneOutlined className="mr-3 text-gray-400" /> 
               <span className="text-sm">{formatPhoneNumber(person.phone)}</span>
             </div>
             <div className="flex items-center text-gray-600">
-              <EnvironmentOutlined className="mr-3 text-gray-800" /> 
+              <EnvironmentOutlined className="mr-3 text-gray-400" /> 
               <span className="text-sm">{person.location}</span>
             </div>
           </div>
@@ -143,12 +153,12 @@ function PersonCard({ person }: { person: any }) {
             {/* 行业经验 */}
             <div>
               <div className="flex items-center mb-2">
-                <BankOutlined className="mr-2 text-gray-600" />
-                <span className="text-sm font-medium text-gray-600">擅长领域</span>
+                <BankOutlined className="mr-2 text-gray-400" />
+                <span className="text-sm font-medium text-gray-400">擅长领域</span>
               </div>
-              <div className="flex flex-wrap gap-1.5 max-h-[80px] overflow-y-auto">
+              <div className="flex flex-wrap gap-1.5">  {/* 移除 max-h-[80px] overflow-y-auto */}
                 {person.industries?.map((item: string, index: number) => (
-                  <Badge key={`industry-${index}`} variant="outline" className="text-sm text-gray-600 border-none bg-transparent hover:bg-transparent">
+                  <Badge key={`industry-${index}`} variant="outline" className="text-sm text-gray-600 bg-transparent hover:bg-transparent">
                     {item}
                   </Badge>
                 ))}
@@ -158,12 +168,12 @@ function PersonCard({ person }: { person: any }) {
             {/* 项目经验 */}
             <div>
               <div className="flex items-center mb-2">
-                <ProjectOutlined className="mr-2 text-gray-600" />
-                <span className="text-sm font-medium text-gray-600">项目经历</span>
+                <ProjectOutlined className="mr-2 text-gray-400" />
+                <span className="text-sm font-medium text-gray-400">项目经历</span>
               </div>
-              <div className="flex flex-wrap gap-1.5 max-h-[80px] overflow-y-auto">
+              <div className="flex flex-wrap gap-1.5">  {/* 移除 max-h-[80px] overflow-y-auto */}
                 {person.projects?.map((item: string, index: number) => (
-                  <Badge key={`project-${index}`} variant="outline" className="text-sm text-gray-600 border-none bg-transparent hover:bg-transparent">
+                  <Badge key={`project-${index}`} variant="outline" className="text-sm text-gray-600 bg-transparent hover:bg-transparent">
                     {item}
                   </Badge>
                 ))}
@@ -173,10 +183,10 @@ function PersonCard({ person }: { person: any }) {
             {/* 资质与技能 */}
             <div>
               <div className="flex items-center mb-2">
-                <ToolOutlined className="mr-2 text-gray-600" />
-                <span className="text-sm font-medium text-gray-600">资质与技能</span>
+                <TrophyOutlined className="mr-2 text-gray-400" />
+                <span className="text-sm font-medium text-gray-400">资质与技能</span>
               </div>
-              <div className="flex flex-wrap gap-1.5 max-h-[80px] overflow-y-auto">
+              <div className="flex flex-wrap gap-1.5">  {/* 移除 max-h-[80px] overflow-y-auto */}
                 {[...(person.qualifications || []), ...(person.skills || [])].map((item: string, index: number) => (
                   <Badge key={`skill-qual-${index}`} variant="outline" className="text-sm text-gray-600 bg-transparent hover:bg-transparent">
                     {item}

@@ -5,8 +5,6 @@ import { DownloadOutlined, ArrowUpOutlined, ArrowDownOutlined } from '@ant-desig
 import * as echarts from 'echarts';
 import { useEffect, useRef } from 'react';
 import { debounce } from 'lodash';
-// 引入中国地图数据
-import chinaJson from 'lib/china.json';
 
 const { Content } = Layout;
 const { Text } = Typography;
@@ -64,13 +62,14 @@ export default function MarketingDashboard() {
 
   useEffect(() => {
     if (!chartRef.current) return;
-    
-    console.log('地图数据:', chinaJson);
-    // 注册地图
-    echarts.registerMap('china', chinaJson);
-    
-    // 初始化图表
-    chartInstance.current = echarts.init(chartRef.current);
+
+    let cancelled = false;
+    fetch('/geo/china.json')
+      .then((res) => res.json())
+      .then((chinaJson) => {
+        if (cancelled || !chartRef.current) return;
+        echarts.registerMap('china', chinaJson);
+        chartInstance.current = echarts.init(chartRef.current);
     
     const option = {
       tooltip: {
@@ -501,6 +500,8 @@ export default function MarketingDashboard() {
 
       waterfallChartInstance.current.setOption(waterfallOption);
     }
+    });
+    }).catch((err) => console.error('加载中国地图数据失败:', err));
 
     // 监听容器尺寸变化
     const observer = new ResizeObserver(debounce(resizeHandler, 100));
@@ -513,6 +514,7 @@ export default function MarketingDashboard() {
     });
 
     return () => {
+      cancelled = true;
       observer.disconnect();
       chartInstance.current?.dispose();
       pieChart1Instance.current?.dispose();

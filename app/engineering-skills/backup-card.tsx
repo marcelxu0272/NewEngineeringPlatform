@@ -9,8 +9,7 @@ import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import Grid from '@mui/material/Grid'
 import styled from 'styled-components';
-import { peopleData } from '@/lib/ESK_Person_data';
-import type { PersonCard } from '@/lib/ESK_Person_data';
+import type { PersonCard } from '@/lib/types/esk';
 
 
 
@@ -90,6 +89,8 @@ const getAllLeafKeys = (nodes: DataNode[]): string[] => {
 const allSkillKeys = getAllLeafKeys(treeData);
 
 const EngineeringSystemSkills = () => {
+  const [peopleData, setPeopleData] = useState<PersonCard[]>([]);
+  const [dataLoading, setDataLoading] = useState(true);
   const [checkedSkills, setCheckedSkills] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [selectedRegion, setSelectedRegion] = useState<string>('');
@@ -98,6 +99,10 @@ const EngineeringSystemSkills = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedPerson, setSelectedPerson] = useState<PersonCard | null>(null);
   const [isAddingNew, setIsAddingNew] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/esk/people').then((r) => r.json()).then((d) => { setPeopleData(d); setDataLoading(false); }).catch(() => setDataLoading(false));
+  }, []);
 
   const onCheck = (checkedKeys: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }) => {
     if (Array.isArray(checkedKeys)) {
@@ -120,8 +125,8 @@ const EngineeringSystemSkills = () => {
     (selectedSpecialty === '' || person.specialty === selectedSpecialty)
   );
 
-  const regions = Array.from(new Set(peopleData.map(person => person.region)));
-  const specialties = Array.from(new Set(peopleData.map(person => person.specialty)));
+  const regions = Array.from(new Set(peopleData.map(person => person.region).filter(Boolean))) as string[];
+  const specialties = Array.from(new Set(peopleData.map(person => person.specialty).filter(Boolean))) as string[];
 
   const clearCheckedSkills = () => {
     setCheckedSkills([]);
@@ -141,6 +146,14 @@ const EngineeringSystemSkills = () => {
   const handleModalCancel = () => {
     setIsModalVisible(false);
   };
+
+  if (dataLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="text-gray-500">加载中...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen">

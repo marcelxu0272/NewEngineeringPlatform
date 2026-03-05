@@ -29,8 +29,8 @@ const HomePage = () => {
   const [image2Src, setImage2Src] = useState('');
 
   useEffect(() => {
-    import('../lib/HSE-POL-100001.png').then(image => setImage1Src(image.default.src));
-    import('../lib/wood_quality_policy.jpg').then(image => setImage2Src(image.default.src));
+    setImage1Src('/images/HSE-POL-100001.png');
+    setImage2Src('/images/wood_quality_policy.jpg');
   }, []);
 
   const fileItems = [

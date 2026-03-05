@@ -1,12 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
-import { personnelData } from '@/lib/SME_Person_data'
+
+type Personnel = {
+  name: string; email: string; phone?: string; department?: string; major?: string;
+  projects?: string[]; industries?: string[]; regions?: string[]; skills?: string[]; qualifications?: string[]; location?: string;
+};
 import { 
   MailOutlined, 
   PhoneOutlined, 
@@ -17,30 +21,34 @@ import {
   TrophyOutlined,     // 资质图标
   BookOutlined        // 专业图标
 } from '@ant-design/icons'
-import wechatIcon from '@/lib/wechat.png';
-import Image from 'next/image';
 
 export default function PersonnelCards() {
   const [searchTerm, setSearchTerm] = useState('')
-  const [departmentFilter, setDepartmentFilter] = useState('all')
-  const [majorFilter, setMajorFilter] = useState('all')
+  const [departmentFilter, setDepartmentFilter] = useState('')
+  const [majorFilter, setMajorFilter] = useState('')
+  const [personnelData, setPersonnelData] = useState<Personnel[]>([])
+  const [loading, setLoading] = useState(true)
 
-  // 获取唯一的部门和专业列表
-  const departments = Array.from(new Set(personnelData.map(p => p.department)))
-  const majors = Array.from(new Set(personnelData.map(p => p.major)))
+  useEffect(() => {
+    fetch('/api/sme/personnel').then((res) => res.json()).then((d) => { setPersonnelData(d); setLoading(false); }).catch(() => setLoading(false))
+  }, [])
 
-  // 更新过滤逻辑
+  const departments = Array.from(new Set(personnelData.map(p => p.department).filter(Boolean))) as string[]
+  const majors = Array.from(new Set(personnelData.map(p => p.major).filter(Boolean))) as string[]
+
   const filteredData = personnelData.filter(person => {
-    const matchesSearch = searchTerm === '' || Object.values(person).some(value => 
+    const matchesSearch = Object.values(person).some(value => 
       Array.isArray(value) 
         ? value.some(item => item.toLowerCase().includes(searchTerm.toLowerCase()))
         : typeof value === 'string' && value.toLowerCase().includes(searchTerm.toLowerCase())
     )
-    const matchesDepartment = departmentFilter === 'all' || person.department === departmentFilter
-    const matchesMajor = majorFilter === 'all' || person.major === majorFilter
+    const matchesDepartment = !departmentFilter || person.department === departmentFilter
+    const matchesMajor = !majorFilter || person.major === majorFilter
 
     return matchesSearch && matchesDepartment && matchesMajor
   })
+
+  if (loading) return <div className="text-gray-500 p-4">加载中...</div>
 
   return (
     <div>
@@ -93,36 +101,26 @@ function formatPhoneNumber(phoneNumber: string): string {
 // 添加这个函数来获取基于location的渐变色
 function getLocationGradient(location: string): string {
   const gradientMap: { [key: string]: string } = {
-    '徐汇': 'from-white via-[#ffffff]/30 to-[#16535a]/10',
-    '金山': 'from-white via-[#ffffff]/20 to-[#5b8641]/10', 
-    '沈阳': 'from-white via-[#ffffff]/20 to-[#5d62df]/10',
-    '惠州': 'from-white via-[#ffffff]/20 to-[#b65e3e]/10',
-    '银川': 'from-white via-[#ffffff]/20 to-[#4b006b]/10',
-    '湛江': 'from-white via-[#ffffff]/20 to-[#bb9144]/10'
+    '徐汇': 'from-white via-[#ffffff]/20 to-[#00706a]/20',
+    '金山': 'from-white via-[#ffffff]/20 to-[#0272fe]/20',
+    '沈阳': 'from-white via-[#ffffff]/20 to-[#ff7138]/20',
+    '惠州': 'from-white via-[#ffffff]/20 to-[#9f0c90]/20',
+    '银川': 'from-white via-[#ffffff]/20 to-[#00d8ff]/20'
   }
-  return gradientMap[location] || 'from-white via-[#ffffff]/20 to-[#f1f1f1]/100' // 默认渐变色
+  return gradientMap[location] || 'from-white to-[#e5f4f3]/10' // 默认渐变色
 }
 
 function PersonCard({ person }: { person: any }) {
   return (
     <Card className={cn(
-      "relative hover:shadow-lg transition-shadow duration-300 bg-gradient-to-l rounded-none",
+      "relative hover:shadow-lg transition-shadow duration-300 bg-gradient-to-l rounded-none border-none",
       getLocationGradient(person.location)
     )}>
-      <div className="flex h-full">
+      <div className="flex">
         {/* 左侧信息区域 */}
-        <div className="w-1/3 p-6 flex flex-col justify-between h-full">
+        <div className="w-1/3 p-6 flex flex-col justify-between">
           <div className="mb-4">
-            <div className="flex items-center gap-2">
-              <CardTitle className="text-2xl font-bold text-gray-800">{person.name}</CardTitle>
-              <Image 
-                src={wechatIcon} 
-                alt="WeChat" 
-                width={20} 
-                height={20}
-                className="cursor-pointer opacity-70 hover:opacity-100"
-              />
-            </div>
+            <CardTitle className="text-2xl font-bold text-gray-800">{person.name}</CardTitle>
             <p className="text-sm font-medium text-gray-600 mt-1">
               {person.department} · {person.major}
             </p>
@@ -130,20 +128,20 @@ function PersonCard({ person }: { person: any }) {
           
           <div className="space-y-3">
             <div className="flex items-center text-gray-600">
-              <MailOutlined className="mr-3 text-gray-400" /> 
+              <MailOutlined className="mr-3 text-gray-800" /> 
               <a 
                 href={`mailto:${person.email}`} 
-                className="text-sm text-blue-600 hover:text-blue-800 transition-colors cursor-pointer"
+                className="text-sm hover:text-[#00706a] transition-colors cursor-pointer"
               >
                 {person.email}
               </a>
             </div>
             <div className="flex items-center text-gray-600">
-              <PhoneOutlined className="mr-3 text-gray-400" /> 
+              <PhoneOutlined className="mr-3 text-gray-800" /> 
               <span className="text-sm">{formatPhoneNumber(person.phone)}</span>
             </div>
             <div className="flex items-center text-gray-600">
-              <EnvironmentOutlined className="mr-3 text-gray-400" /> 
+              <EnvironmentOutlined className="mr-3 text-gray-800" /> 
               <span className="text-sm">{person.location}</span>
             </div>
           </div>
@@ -155,12 +153,12 @@ function PersonCard({ person }: { person: any }) {
             {/* 行业经验 */}
             <div>
               <div className="flex items-center mb-2">
-                <BankOutlined className="mr-2 text-gray-400" />
-                <span className="text-sm font-medium text-gray-400">擅长领域</span>
+                <BankOutlined className="mr-2 text-gray-600" />
+                <span className="text-sm font-medium text-gray-600">擅长领域</span>
               </div>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-1.5 max-h-[80px] overflow-y-auto">
                 {person.industries?.map((item: string, index: number) => (
-                  <Badge key={`industry-${index}`} variant="outline" className="text-sm text-gray-600 bg-transparent hover:bg-transparent">
+                  <Badge key={`industry-${index}`} variant="outline" className="text-sm text-gray-600 border-none bg-transparent hover:bg-transparent">
                     {item}
                   </Badge>
                 ))}
@@ -170,12 +168,12 @@ function PersonCard({ person }: { person: any }) {
             {/* 项目经验 */}
             <div>
               <div className="flex items-center mb-2">
-                <ProjectOutlined className="mr-2 text-gray-400" />
-                <span className="text-sm font-medium text-gray-400">项目经历</span>
+                <ProjectOutlined className="mr-2 text-gray-600" />
+                <span className="text-sm font-medium text-gray-600">项目经历</span>
               </div>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-1.5 max-h-[80px] overflow-y-auto">
                 {person.projects?.map((item: string, index: number) => (
-                  <Badge key={`project-${index}`} variant="outline" className="text-sm text-gray-600 bg-transparent hover:bg-transparent">
+                  <Badge key={`project-${index}`} variant="outline" className="text-sm text-gray-600 border-none bg-transparent hover:bg-transparent">
                     {item}
                   </Badge>
                 ))}
@@ -185,10 +183,10 @@ function PersonCard({ person }: { person: any }) {
             {/* 资质与技能 */}
             <div>
               <div className="flex items-center mb-2">
-                <ToolOutlined className="mr-2 text-gray-400" />
-                <span className="text-sm font-medium text-gray-400">资质与技能</span>
+                <ToolOutlined className="mr-2 text-gray-600" />
+                <span className="text-sm font-medium text-gray-600">资质与技能</span>
               </div>
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-1.5 max-h-[80px] overflow-y-auto">
                 {[...(person.qualifications || []), ...(person.skills || [])].map((item: string, index: number) => (
                   <Badge key={`skill-qual-${index}`} variant="outline" className="text-sm text-gray-600 bg-transparent hover:bg-transparent">
                     {item}

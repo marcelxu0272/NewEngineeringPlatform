@@ -14,13 +14,20 @@ import {
   FolderOutlined,
   DollarOutlined,
   ArrowLeftOutlined,
-  SearchOutlined  // 添加这一行
+  SearchOutlined
 } from '@ant-design/icons';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Highcharts from 'highcharts';
 import { Progress } from "@/components/ui/progress";
 import { LayoutDashboard, BarChart2, Settings, ArrowUpIcon, ArrowDownIcon, Folder, DollarSign } from 'lucide-react';
-import { metrics, monthlyData as data, projectData, projectCostData, managementCostData } from '@/lib/data/dashboard';
+
+const defaultDashboard = {
+  metrics: [] as Array<{ id: string; name: string; hasYearlyTarget: boolean; subTargets?: Array<{ type: string; current: number; target: number }> }>,
+  monthlyData: [] as Array<{ month: string; newContracts: number; completedContracts: number; invoicedAmount: number; receivedPayments: number; wip: number; accountsReceivable: number }>,
+  projectData: { managementDistribution: [] as Array<{ name: string; value: number }>, businessTypeDistribution: [] as Array<{ name: string; value: number }> },
+  projectCostData: [] as Array<Record<string, unknown>>,
+  managementCostData: {} as Record<string, number>,
+};
 
 
 // 添加千分符的辅助函数
@@ -287,8 +294,20 @@ const DataDashboard = () => {
   const [selectedManagement, setSelectedManagement] = useState('all');
   const [selectedCostManagement, setSelectedCostManagement] = useState('all');
   const [selectedProjectType, setSelectedProjectType] = useState('all');
+  const [dashboard, setDashboard] = useState(defaultDashboard);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    fetch('/api/dashboard')
+      .then((res) => res.json())
+      .then((d) => {
+        setDashboard(d);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
 
+  const { metrics, monthlyData: data, projectData, projectCostData, managementCostData } = dashboard;
 
   const getMetricInfo = (metricId: string) => {
     // 找到最后一个非0值的月份数据
@@ -917,6 +936,14 @@ const DataDashboard = () => {
       </Card>
     );
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="text-gray-500">加载中...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="flex h-screen overflow-hidden bg-[#f8faff]">

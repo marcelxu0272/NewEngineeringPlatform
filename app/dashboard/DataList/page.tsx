@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Line, ComposedChart, PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { Card } from "@/components/ui/card";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -9,7 +9,14 @@ import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { LeftOutlined } from '@ant-design/icons';
 import { DashboardOutlined, BarChartOutlined, SettingOutlined, ArrowUpOutlined, ArrowDownOutlined, FolderOutlined, DollarOutlined } from '@ant-design/icons';
-import { metrics, monthlyData as data, projectData, projectCostData, managementCostData } from '@/lib/data/dashboard';
+
+const defaultDashboard = {
+  metrics: [] as Array<{ id: string; name: string; hasYearlyTarget: boolean; subTargets?: Array<{ type: string; current: number; target: number }> }>,
+  monthlyData: [] as Array<{ month: string; newContracts: number; completedContracts: number; invoicedAmount: number; receivedPayments: number; wip: number; accountsReceivable: number }>,
+  projectData: { managementDistribution: [] as Array<{ name: string; value: number }>, businessTypeDistribution: [] as Array<{ name: string; value: number }> },
+  projectCostData: [] as Array<Record<string, unknown>>,
+  managementCostData: {} as Record<string, number>,
+};
 
 
 // 添加千分符的辅助函数
@@ -42,7 +49,20 @@ const DataDashboard = () => {
   const [selectedYear, setSelectedYear] = useState('2023');
   const [selectedSubmenu, setSelectedSubmenu] = useState('operationalMetrics');
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
+  const [dashboard, setDashboard] = useState(defaultDashboard);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    fetch('/api/dashboard')
+      .then((res) => res.json())
+      .then((d) => {
+        setDashboard(d);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
+
+  const { metrics, monthlyData: data, projectData, projectCostData, managementCostData } = dashboard;
 
   const getMetricInfo = (metricId: string) => {
     type MetricItem = {
@@ -328,6 +348,14 @@ const DataDashboard = () => {
         return '数据看板';
     }
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <span className="text-gray-500">加载中...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="flex">
