@@ -558,117 +558,9 @@
         background: var(--color-scrollbar-thumb-hover);
       }
 
-      /* 主题切换器样式 */
-      .theme-switcher {
-        position: fixed;
-        bottom: 8px;
-        right: 8px;
-        z-index: 1000;
-        background: var(--color-white);
-        padding: 12px 18px;
-        border-radius: 8px;
-        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-size: 13px;
-      }
-
-      .theme-switcher label {
-        font-weight: 600;
-        color: var(--color-text-primary);
-        white-space: nowrap;
-      }
-
-      .theme-switcher select {
-        padding: 6px 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        background: var(--color-white);
-        color: var(--color-text-primary);
-        font-size: 13px;
-        cursor: pointer;
-        outline: none;
-        transition: border-color 0.2s;
-      }
-
-      .theme-switcher select:hover {
-        border-color: #999;
-      }
-
-      .theme-switcher select:focus {
-        border-color: var(--color-arrow);
-      }
-
-      .theme-switcher .checkbox-wrapper {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        cursor: pointer;
-      }
-
-      .theme-switcher input[type="checkbox"] {
-        width: 16px;
-        height: 16px;
-        cursor: pointer;
-      }
-
-      .theme-switcher .checkbox-label {
-        font-weight: 400;
-        font-size: 13px;
-        cursor: pointer;
-      }
-
-      /* 移动端适配 */
-      @media (max-width: 768px) {
-        .theme-switcher {
-          top: 10px;
-          right: 10px;
-          padding: 8px 12px;
-          font-size: 12px;
-          flex-wrap: wrap;
-        }
-
-        .theme-switcher select {
-          padding: 4px 8px;
-          font-size: 12px;
-        }
-
-        .theme-switcher .checkbox-wrapper {
-          font-size: 12px;
-        }
-      }
-
-      @media print {
-        .theme-switcher {
-          display: none;
-        }
-      }
     </style>
   </head>
   <body>
-    <!-- 主题切换器 -->
-    <div class="theme-switcher">
-      <label for="themeSelector">配色方案：</label>
-      <select id="themeSelector">
-        <option value="current">马到成功</option>
-        <option value="ocean">智领</option>
-        <option value="forest">一马当先</option>
-        <option value="sunset">破界</option>
-        <option value="tech">新业务</option>
-        <option value="classic">经典主题</option>
-        <option value="nature">古典青绿</option>
-        <option value="monochrome">黑白主题</option>
-        <option value="purple">紫红单色</option>
-        <option value="blue">蓝色单色</option>
-        <option value="teal">青色单色</option>
-      </select>
-      <div class="checkbox-wrapper">
-        <input type="checkbox" id="showBackground" checked>
-        <label for="showBackground" class="checkbox-label">显示底色</label>
-      </div>
-    </div>
-
     <div class="container">
       <div class="org-chart">
         <!-- 客户层 -->
@@ -1188,9 +1080,6 @@
         // 更新 SVG 箭头图标颜色（项目交付）
         updateArrowIcon(theme.colors["projects-delivery"]);
 
-        // 保存到 localStorage
-        localStorage.setItem("orgChartTheme", themeName);
-        localStorage.setItem("orgChartShowBackground", showBackground);
       }
 
       // 更新箭头图标颜色
@@ -1210,29 +1099,9 @@
         document.head.appendChild(style);
       }
 
-      // 初始化主题选择器
+      // 默认使用经典主题并显示底色
       document.addEventListener("DOMContentLoaded", function () {
-        const themeSelector = document.getElementById("themeSelector");
-        const showBackgroundCheckbox = document.getElementById("showBackground");
-
-        // 从 localStorage 读取保存的主题和底色设置
-        const savedTheme = localStorage.getItem("orgChartTheme") || "current";
-        const savedShowBackground = localStorage.getItem("orgChartShowBackground");
-        const showBackground = savedShowBackground === null ? true : savedShowBackground === "true";
-        
-        themeSelector.value = savedTheme;
-        showBackgroundCheckbox.checked = showBackground;
-        applyTheme(savedTheme, showBackground);
-
-        // 监听主题切换
-        themeSelector.addEventListener("change", function (e) {
-          applyTheme(e.target.value, showBackgroundCheckbox.checked);
-        });
-
-        // 监听底色显示切换
-        showBackgroundCheckbox.addEventListener("change", function (e) {
-          applyTheme(themeSelector.value, e.target.checked);
-        });
+        applyTheme("classic", true);
       });
     </script>
   </body>
