@@ -22,16 +22,19 @@ import { Select, Switch } from 'antd';
 import { Tooltip as AntTooltip } from 'antd';
 import { ConfigProvider } from 'antd';
 
-// ── 颜色常量（设计及咨询 / EPC / PMC）──────────────────────────────
-const COLOR_DESIGN = '#007069';
-const COLOR_EPC    = '#0272fd';
-const COLOR_PMC    = '#ff7038';
+// ── 板块颜色调色板（按事业群下板块顺序取色）────────────────────────
+const DIVISION_PALETTE = ['#007069', '#0272fd', '#ff7038', '#8b5cf6', '#ec4899', '#f59e0b'];
 
-const TYPE_COLORS: Record<string, string> = {
-  '设计及咨询': COLOR_DESIGN,
-  EPC: COLOR_EPC,
-  PMC: COLOR_PMC,
-};
+function getDivisionColors(divisions: string[]): Record<string, string> {
+  const out: Record<string, string> = {};
+  divisions.forEach((div, i) => {
+    out[div] = DIVISION_PALETTE[i % DIVISION_PALETTE.length];
+  });
+  return out;
+}
+
+// 市场数据仍按三大类型，使用前三个色
+const MARKET_TYPE_COLORS = ['#007069', '#0272fd', '#ff7038'];
 
 // ── 事业群元数据 ────────────────────────────────────────────────────
 const GROUP_META: Record<string, { name: string; divisions: string[] }> = {
@@ -57,68 +60,47 @@ const GROUP_META: Record<string, { name: string; divisions: string[] }> = {
   },
 };
 
-// ── 占位数据 ─────────────────────────────────────────────────────────
+// ── 占位数据（按事业群板块生成）──────────────────────────────────────
 
-const CARD_DATA = [
-  {
-    title: '年度新签合同额（万元）',
-    value: '23,860.41',
-    monthLabel: '本月新增',
-    monthValue: '1,520.00',
-    percentage: '39.77%',
-    donutValue: 39.8,
-    subTargets: [
-      { type: '设计及咨询', current: 8120.5, target: 15000 },
-      { type: 'EPC', current: 13580.3, target: 30000 },
-      { type: 'PMC', current: 2159.61, target: 6000 },
-    ],
-  },
-  {
-    title: '年度完成合同额（万元）',
-    value: '12,180.29',
-    monthLabel: '上月新增',
-    monthValue: '1,364.80',
-    percentage: '35.82%',
-    donutValue: 35.8,
-    subTargets: [
-      { type: '设计及咨询', current: 4085.2, target: 13000 },
-      { type: 'EPC', current: 6852.8, target: 24000 },
-      { type: 'PMC', current: 1242.29, target: 4500 },
-    ],
-  },
-  {
-    title: '年度完成开票额（万元）',
-    value: '13,020.20',
-    monthLabel: '上月新增',
-    monthValue: '1,264.80',
-    percentage: '40.69%',
-    donutValue: 40.7,
-    subTargets: [
-      { type: '设计及咨询', current: 4868.4, target: 14000 },
-      { type: 'EPC', current: 7100.5, target: 26000 },
-      { type: 'PMC', current: 1051.3, target: 5000 },
-    ],
-  },
-  {
-    title: '年度完成回款额（万元）',
-    value: '13,480.17',
-    monthLabel: '上月新增',
-    monthValue: '1,164.80',
-    percentage: '41.79%',
-    donutValue: 41.8,
-    subTargets: [
-      { type: '设计及咨询', current: 5345.2, target: 13500 },
-      { type: 'EPC', current: 6880.67, target: 25000 },
-      { type: 'PMC', current: 1254.3, target: 5500 },
-    ],
-  },
-];
+type SubTarget = { type: string; current: number; target: number };
 
-// 市场数据（占位）
+function buildCardData(divisions: string[]) {
+  const base = [
+    { title: '年度新签合同额（万元）', monthLabel: '本月新增', k: 0.4 },
+    { title: '年度完成合同额（万元）', monthLabel: '上月新增', k: 0.36 },
+    { title: '年度完成开票额（万元）', monthLabel: '上月新增', k: 0.41 },
+    { title: '年度完成回款额（万元）', monthLabel: '上月新增', k: 0.42 },
+  ];
+  return base.map((b, bi) => {
+    const subTargets: SubTarget[] = divisions.map((div, di) => {
+      const baseVal = 8000 + di * 2000 + bi * 1500;
+      const pct = 0.35 + (bi * 2 + di) % 5 * 0.08;
+      return {
+        type: div,
+        current: Math.round(baseVal * pct) + 500,
+        target: Math.round(15000 + di * 4000 + bi * 2000),
+      };
+    });
+    const totalCurrent = subTargets.reduce((s, t) => s + t.current, 0);
+    const totalTarget = subTargets.reduce((s, t) => s + t.target, 0);
+    const donutPct = totalTarget ? (totalCurrent / totalTarget) * 100 : 0;
+    return {
+      title: b.title,
+      value: totalCurrent.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+      monthLabel: b.monthLabel,
+      monthValue: (totalCurrent * 0.05).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+      percentage: `${donutPct.toFixed(1)}%`,
+      donutValue: Math.round(donutPct * 10) / 10,
+      subTargets,
+    };
+  });
+}
+
+// 市场数据（占位，按设计及咨询/EPC/PMC 三大类型，与板块区分）
 const MARKET_DATA = [
   {
     type: '设计及咨询',
-    color: COLOR_DESIGN,
+    color: MARKET_TYPE_COLORS[0],
     items: [
       { name: '预计投标额', value: 32000 },
       { name: '预计合同额', value: 22000 },
@@ -127,7 +109,7 @@ const MARKET_DATA = [
   },
   {
     type: 'EPC',
-    color: COLOR_EPC,
+    color: MARKET_TYPE_COLORS[1],
     items: [
       { name: '预计投标额', value: 85000 },
       { name: '预计合同额', value: 62000 },
@@ -136,7 +118,7 @@ const MARKET_DATA = [
   },
   {
     type: 'PMC',
-    color: COLOR_PMC,
+    color: MARKET_TYPE_COLORS[2],
     items: [
       { name: '预计投标额', value: 18000 },
       { name: '预计合同额', value: 13000 },
@@ -145,12 +127,15 @@ const MARKET_DATA = [
   },
 ];
 
-// 核心项目动态（占位）
-const PROJECT_ACTIVITIES = [
-  { id: 'P2025-001', name: '宁夏某石化改造项目', group: 'PMC', time: '2025-11-01', status: '新增' },
-  { id: 'P2024-082', name: '上海某炼油扩建项目', group: 'EPC', time: '2025-10-28', status: '项目信息变更' },
-  { id: 'P2024-057', name: '银川新材料研发中心', group: '设计及咨询', time: '2025-10-22', status: '保障活动更新' },
-];
+// 核心项目动态（占位，管理归属为当前事业群下的板块名称）
+function buildProjectActivities(divisions: string[]) {
+  const statuses = ['新增', '项目信息变更', '保障活动更新'] as const;
+  return [
+    { id: 'P2025-001', name: '宁夏某石化改造项目', group: divisions[0] ?? '—', time: '2025-11-01', status: statuses[0] },
+    { id: 'P2024-082', name: '上海某炼油扩建项目', group: divisions[1] ?? divisions[0] ?? '—', time: '2025-10-28', status: statuses[1] },
+    { id: 'P2024-057', name: '银川新材料研发中心', group: divisions[0] ?? '—', time: '2025-10-22', status: statuses[2] },
+  ];
+}
 
 const STATUS_COLOR: Record<string, string> = {
   '新增': 'bg-green-100 text-green-700',
@@ -172,19 +157,8 @@ const buildTrendData = (divisions: string[]) =>
     return base;
   });
 
-// 折线图系列颜色（事业群合计 + 各板块）
-const LINE_COLORS = [
-  '#374151', COLOR_DESIGN, COLOR_EPC, COLOR_PMC,
-  '#8b5cf6', '#ec4899', '#f59e0b',
-];
-
-// 部门选项（占位）
-const DEPT_OPTIONS = [
-  { value: 'all', label: '全部' },
-  { value: 'design', label: '设计及咨询' },
-  { value: 'epc', label: 'EPC' },
-  { value: 'pmc', label: 'PMC' },
-];
+// 事业群合计折线使用固定深色
+const AGGREGATE_LINE_COLOR = '#374151';
 
 const YEAR_OPTIONS = [
   { value: '2025', label: '2025年' },
@@ -211,6 +185,14 @@ export default function OrgGroupDashboard({
   const [selectedDept, setSelectedDept] = useState('all');
   const [selectedYear, setSelectedYear] = useState('2025');
   const [showSubTargets, setShowSubTargets] = useState(true);
+
+  const divisionColors = getDivisionColors(meta.divisions);
+  const cardData = buildCardData(meta.divisions);
+  const projectActivities = buildProjectActivities(meta.divisions);
+  const deptOptions = [
+    { value: 'all', label: '全部' },
+    ...meta.divisions.map((div) => ({ value: div, label: div })),
+  ];
 
   const trendData = buildTrendData(meta.divisions);
   const trendKeys = ['事业群合计', ...meta.divisions];
@@ -268,8 +250,8 @@ export default function OrgGroupDashboard({
               <Select
                 value={selectedDept}
                 onChange={setSelectedDept}
-                options={DEPT_OPTIONS}
-                style={{ width: 150 }}
+                options={deptOptions}
+                style={{ width: 180 }}
               />
               <Select
                 value={selectedYear}
@@ -283,15 +265,15 @@ export default function OrgGroupDashboard({
               </div>
             </div>
 
-            {/* ── 颜色图例栏 ── */}
-            <div className="px-4 pb-3 flex items-center gap-6">
-              {Object.entries(TYPE_COLORS).map(([label, color]) => (
-                <div key={label} className="flex items-center gap-1.5">
+            {/* ── 颜色图例栏（当前事业群下各板块）── */}
+            <div className="px-4 pb-3 flex items-center gap-6 flex-wrap">
+              {meta.divisions.map((div) => (
+                <div key={div} className="flex items-center gap-1.5">
                   <span
                     className="inline-block w-3 h-3 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: color }}
+                    style={{ backgroundColor: divisionColors[div] }}
                   />
-                  <span className="text-xs text-gray-600">{label}</span>
+                  <span className="text-xs text-gray-600">{div}</span>
                 </div>
               ))}
             </div>
@@ -299,7 +281,7 @@ export default function OrgGroupDashboard({
             {/* ── 四大 KPI 卡片 ── */}
             <div className="px-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {CARD_DATA.map((card, index) => (
+                {cardData.map((card, index) => (
                   <Card key={index} className="border-0 shadow-md">
                     <CardContent className="p-4">
                       {/* 标题 + 环形图 */}
@@ -336,7 +318,7 @@ export default function OrgGroupDashboard({
                                 stroke="none"
                               >
                                 {card.subTargets.map((t) => (
-                                  <Cell key={t.type} fill={TYPE_COLORS[t.type]} />
+                                  <Cell key={t.type} fill={divisionColors[t.type]} />
                                 ))}
                               </Pie>
                               <RechartsTooltip
@@ -362,7 +344,7 @@ export default function OrgGroupDashboard({
                         <div className="mt-3 pt-3 border-t border-gray-100 space-y-2">
                           {card.subTargets.map((t) => {
                             const pct = Math.min(100, (t.current / t.target) * 100);
-                            const color = TYPE_COLORS[t.type];
+                            const color = divisionColors[t.type];
                             return (
                               <AntTooltip
                                 key={t.type}
@@ -566,7 +548,7 @@ export default function OrgGroupDashboard({
                     </span>
                   </h3>
                   <div className="space-y-2">
-                    {PROJECT_ACTIVITIES.map((item) => (
+                    {projectActivities.map((item) => (
                       <AntTooltip
                         key={item.id}
                         title={`项目号：${item.id}；管理归属：${item.group}；时间：${item.time}`}
@@ -579,8 +561,8 @@ export default function OrgGroupDashboard({
                           <span
                             className="text-xs px-2 py-0.5 rounded-full flex-shrink-0"
                             style={{
-                              backgroundColor: `${TYPE_COLORS[item.group] ?? '#6b7280'}18`,
-                              color: TYPE_COLORS[item.group] ?? '#6b7280',
+                              backgroundColor: `${divisionColors[item.group] ?? '#6b7280'}18`,
+                              color: divisionColors[item.group] ?? '#6b7280',
                             }}
                           >
                             {item.group}
@@ -631,7 +613,6 @@ export default function OrgGroupDashboard({
                         name="万元/人"
                       />
                       <RechartsTooltip
-                        trigger="axis"
                         formatter={(value: number, name: string) => [
                           `${value.toFixed(2)} 万元/人`,
                           name,
@@ -641,12 +622,12 @@ export default function OrgGroupDashboard({
                       <Legend
                         wrapperStyle={{ fontSize: 11, paddingTop: 8 }}
                       />
-                      {trendKeys.map((key, i) => (
+                      {trendKeys.map((key) => (
                         <Line
                           key={key}
                           type="monotone"
                           dataKey={key}
-                          stroke={LINE_COLORS[i % LINE_COLORS.length]}
+                          stroke={key === '事业群合计' ? AGGREGATE_LINE_COLOR : (divisionColors[key] ?? '#6b7280')}
                           strokeWidth={key === '事业群合计' ? 2.5 : 1.5}
                           strokeDasharray={key === '事业群合计' ? undefined : '4 2'}
                           dot={false}
