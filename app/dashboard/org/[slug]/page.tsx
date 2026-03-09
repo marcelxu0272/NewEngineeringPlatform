@@ -344,11 +344,12 @@ export default function OrgDashboardPage() {
 
               <Card className="border-0 shadow-md h-full">
                 <CardContent className="p-4">
-                  <h3 className="font-medium text-sm text-gray-700 mb-2">市场数据（万元）</h3>
+                  <h3 className="font-medium text-sm text-gray-700 mb-1">市场数据（万元）</h3>
+                  <p className="text-xs text-gray-500 mb-2">预计合同额 → 预计投标额 → 权重合同额</p>
                   <div className="h-[180px]">
                     <ResponsiveContainer width="100%" height="100%">
                       <FunnelChart>
-                        <Legend />
+                        <Legend formatter={(_, entry) => (entry as { payload?: { name?: string } }).payload?.name ?? ''} />
                         <Funnel dataKey="value" data={funnelData} nameKey="name">
                           <LabelList position="right" fill="#000" dataKey="name" />
                           <LabelList position="right" fill="#007069" dataKey="value" formatter={(v: number) => v.toLocaleString()} />
