@@ -1,14 +1,11 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import {
   DashboardOutlined,
   BarChartOutlined,
   SettingOutlined,
-  ArrowLeftOutlined,
 } from '@ant-design/icons';
-import { Button } from '@/components/ui/button';
 import { ConfigProvider } from 'antd';
 
 /**
@@ -18,8 +15,6 @@ import { ConfigProvider } from 'antd';
 const IFRAME_SRC = '/202602/组织架构图_四列布局_base%20copy.html';
 
 export default function OrgChartPage() {
-  const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
-
   return (
     <ConfigProvider
       theme={{
@@ -60,47 +55,15 @@ export default function OrgChartPage() {
           </div>
         </div>
 
-        {/* 主区域：侧边栏 + 内容 */}
-        <div className={`flex ml-16 w-full h-screen overflow-hidden bg-[#f8faff] ${isSidebarExpanded ? '' : 'ml-16'}`}>
-          {/* 可折叠二级目录（与项目中台一致） */}
-          <div
-            className={`${isSidebarExpanded ? 'w-[280px]' : 'w-8'} h-screen overflow-hidden border-r transition-all duration-300 relative bg-white shrink-0`}
-          >
-            <button
-              onClick={() => setIsSidebarExpanded(!isSidebarExpanded)}
-              className="absolute text-gray-400 -right-2 top-1/2 -translate-y-1/2 w-6 h-20 bg-white border rounded-full flex items-center justify-center cursor-pointer shadow-md z-10"
-            >
-              {isSidebarExpanded ? '◀' : '▶'}
-            </button>
-
-            {/* 固定顶部 header（与项目中台一致） */}
-            <div className="fixed top-0 left-16 right-0 h-20 bg-white shadow-sm z-20">
-              <h2 className="pt-6 pl-6 text-2xl">组织架构图 &gt; 四列布局</h2>
-            </div>
-
-            <div
-              className={`${isSidebarExpanded ? 'opacity-100' : 'opacity-0 invisible'} transition-opacity duration-300 h-[calc(100vh-80px)] overflow-hidden w-full pt-24 px-6`}
-            >
-              <Button
-                asChild
-                variant="ghost"
-                className="text-[#007069] p-0 hover:bg-transparent mb-4"
-              >
-                <Link href="/">
-                  <ArrowLeftOutlined className="mr-2" />
-                  返回工程平台
-                </Link>
-              </Button>
-              <div className="border-t border-gray-200 mt-4 pt-4">
-                <p className="text-sm text-gray-500">
-                  将「组织架构图_四列布局_base copy.html」放入 <code className="bg-gray-100 px-1">public/202602/</code> 后，右侧将显示架构图。
-                </p>
-              </div>
-            </div>
+        {/* 主区域：header + 内容 */}
+        <div className="flex flex-col ml-16 w-full h-screen overflow-hidden bg-[#f8faff]">
+          {/* 固定顶部 header */}
+          <div className="fixed top-0 left-16 right-0 h-20 bg-white shadow-sm z-20">
+            <h2 className="pt-6 pl-6 text-2xl">组织架构图 &gt; 四列布局</h2>
           </div>
 
-          {/* 右侧内容区：组织架构图 iframe */}
-          <div className={`flex-1 transition-all duration-300 h-screen overflow-hidden pt-20 ${isSidebarExpanded ? '' : ''}`}>
+          {/* 内容区：组织架构图 iframe */}
+          <div className="flex-1 pt-20 h-full overflow-hidden">
             <div className="h-full w-full bg-white">
               <iframe
                 title="组织架构图"
