@@ -22,7 +22,14 @@ import { Select, Switch } from 'antd';
 import { Tooltip as AntTooltip } from 'antd';
 import { ConfigProvider } from 'antd';
 
-// ── 板块颜色调色板（按事业群下板块顺序取色）────────────────────────
+// ── 子目标类型颜色（与项目中台一致：设计及咨询 / EPC / PMC）────────
+const TYPE_COLORS: Record<string, string> = {
+  '设计及咨询': '#007069',
+  EPC: '#0272fd',
+  PMC: '#ff7038',
+};
+
+// 板块颜色调色板（仅用于人均产值趋势、核心项目动态管理归属等）
 const DIVISION_PALETTE = ['#007069', '#0272fd', '#ff7038', '#8b5cf6', '#ec4899', '#f59e0b'];
 
 function getDivisionColors(divisions: string[]): Record<string, string> {
@@ -32,9 +39,6 @@ function getDivisionColors(divisions: string[]): Record<string, string> {
   });
   return out;
 }
-
-// 市场数据仍按三大类型，使用前三个色
-const MARKET_TYPE_COLORS = ['#007069', '#0272fd', '#ff7038'];
 
 // ── 事业群元数据 ────────────────────────────────────────────────────
 const GROUP_META: Record<string, { name: string; divisions: string[] }> = {
@@ -60,25 +64,27 @@ const GROUP_META: Record<string, { name: string; divisions: string[] }> = {
   },
 };
 
-// ── 占位数据（按事业群板块生成）──────────────────────────────────────
+// ── 占位数据：子目标与项目中台一致（设计及咨询 / EPC / PMC），数值由各板块汇总 ──
 
 type SubTarget = { type: string; current: number; target: number };
 
-function buildCardData(divisions: string[]) {
+const SUB_TARGET_TYPES = ['设计及咨询', 'EPC', 'PMC'] as const;
+
+function buildCardData() {
   const base = [
-    { title: '年度新签合同额（万元）', monthLabel: '本月新增', k: 0.4 },
-    { title: '年度完成合同额（万元）', monthLabel: '上月新增', k: 0.36 },
-    { title: '年度完成开票额（万元）', monthLabel: '上月新增', k: 0.41 },
-    { title: '年度完成回款额（万元）', monthLabel: '上月新增', k: 0.42 },
+    { title: '年度新签合同额（万元）', monthLabel: '本月新增' },
+    { title: '年度完成合同额（万元）', monthLabel: '上月新增' },
+    { title: '年度完成开票额（万元）', monthLabel: '上月新增' },
+    { title: '年度完成回款额（万元）', monthLabel: '上月新增' },
   ];
   return base.map((b, bi) => {
-    const subTargets: SubTarget[] = divisions.map((div, di) => {
-      const baseVal = 8000 + di * 2000 + bi * 1500;
-      const pct = 0.35 + (bi * 2 + di) % 5 * 0.08;
+    const subTargets: SubTarget[] = SUB_TARGET_TYPES.map((type, ti) => {
+      const baseVal = 6000 + ti * 4000 + bi * 2000;
+      const pct = 0.32 + (bi + ti) % 3 * 0.12;
       return {
-        type: div,
-        current: Math.round(baseVal * pct) + 500,
-        target: Math.round(15000 + di * 4000 + bi * 2000),
+        type,
+        current: Math.round(baseVal * pct) + 800,
+        target: Math.round(12000 + ti * 8000 + bi * 3000),
       };
     });
     const totalCurrent = subTargets.reduce((s, t) => s + t.current, 0);
@@ -96,11 +102,11 @@ function buildCardData(divisions: string[]) {
   });
 }
 
-// 市场数据（占位，按设计及咨询/EPC/PMC 三大类型，与板块区分）
+// 市场数据（占位，按设计及咨询/EPC/PMC 三大类型）
 const MARKET_DATA = [
   {
     type: '设计及咨询',
-    color: MARKET_TYPE_COLORS[0],
+    color: TYPE_COLORS['设计及咨询'],
     items: [
       { name: '预计投标额', value: 32000 },
       { name: '预计合同额', value: 22000 },
@@ -109,7 +115,7 @@ const MARKET_DATA = [
   },
   {
     type: 'EPC',
-    color: MARKET_TYPE_COLORS[1],
+    color: TYPE_COLORS['EPC'],
     items: [
       { name: '预计投标额', value: 85000 },
       { name: '预计合同额', value: 62000 },
@@ -118,7 +124,7 @@ const MARKET_DATA = [
   },
   {
     type: 'PMC',
-    color: MARKET_TYPE_COLORS[2],
+    color: TYPE_COLORS['PMC'],
     items: [
       { name: '预计投标额', value: 18000 },
       { name: '预计合同额', value: 13000 },
@@ -187,7 +193,7 @@ export default function OrgGroupDashboard({
   const [showSubTargets, setShowSubTargets] = useState(true);
 
   const divisionColors = getDivisionColors(meta.divisions);
-  const cardData = buildCardData(meta.divisions);
+  const cardData = buildCardData();
   const projectActivities = buildProjectActivities(meta.divisions);
   const deptOptions = [
     { value: 'all', label: '全部' },
@@ -265,15 +271,15 @@ export default function OrgGroupDashboard({
               </div>
             </div>
 
-            {/* ── 颜色图例栏（当前事业群下各板块）── */}
+            {/* ── 颜色图例栏（子目标类型，与项目中台一致）── */}
             <div className="px-4 pb-3 flex items-center gap-6 flex-wrap">
-              {meta.divisions.map((div) => (
-                <div key={div} className="flex items-center gap-1.5">
+              {SUB_TARGET_TYPES.map((type) => (
+                <div key={type} className="flex items-center gap-1.5">
                   <span
                     className="inline-block w-3 h-3 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: divisionColors[div] }}
+                    style={{ backgroundColor: TYPE_COLORS[type] }}
                   />
-                  <span className="text-xs text-gray-600">{div}</span>
+                  <span className="text-xs text-gray-600">{type}</span>
                 </div>
               ))}
             </div>
@@ -318,7 +324,7 @@ export default function OrgGroupDashboard({
                                 stroke="none"
                               >
                                 {card.subTargets.map((t) => (
-                                  <Cell key={t.type} fill={divisionColors[t.type]} />
+                                  <Cell key={t.type} fill={TYPE_COLORS[t.type]} />
                                 ))}
                               </Pie>
                               <RechartsTooltip
@@ -344,7 +350,7 @@ export default function OrgGroupDashboard({
                         <div className="mt-3 pt-3 border-t border-gray-100 space-y-2">
                           {card.subTargets.map((t) => {
                             const pct = Math.min(100, (t.current / t.target) * 100);
-                            const color = divisionColors[t.type];
+                            const color = TYPE_COLORS[t.type];
                             return (
                               <AntTooltip
                                 key={t.type}
