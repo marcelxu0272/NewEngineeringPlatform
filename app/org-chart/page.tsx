@@ -59,7 +59,7 @@ export default function OrgChartPage() {
         <div className="flex flex-col ml-16 w-full h-screen overflow-hidden bg-[#f8faff]">
           {/* 固定顶部 header */}
           <div className="fixed top-0 left-16 right-0 h-20 bg-white shadow-sm z-20">
-            <h2 className="pt-6 pl-6 text-2xl">组织架构图 &gt; 四列布局</h2>
+            <h2 className="pt-6 pl-6 text-2xl">全局看板 &gt; 运营看板</h2>
           </div>
 
           {/* 内容区：组织架构图 iframe */}
