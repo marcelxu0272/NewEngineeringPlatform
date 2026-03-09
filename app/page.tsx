@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LayoutDashboard, Users, Wrench, Megaphone, BarChart3, FolderKanban, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, Users, Wrench, Megaphone, BarChart3, FolderKanban, ChevronRight, Network } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const routes = [
@@ -39,6 +39,12 @@ const routes = [
     title: '公告板',
     description: '查看公告与通知',
     icon: Megaphone,
+  },
+  {
+    href: '/org-chart',
+    title: '组织架构图',
+    description: '四列布局组织架构图',
+    icon: Network,
   },
 ];
 
