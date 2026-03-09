@@ -1,0 +1,1239 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>公司组织架构图 - 更新版</title>
+    <style>
+      /* ========== 颜色变量（统一管理） ========== */
+      :root {
+        /* 通用 */
+        --color-white: #ffffff;
+        --color-text-primary: #000000ee;
+        --color-border-neutral: #7f7f7f;
+        --color-bg-neutral-light: #f2f2f2;
+        --color-bg-neutral-medium: #d9d9d9;
+        --color-border-client: #7f8b98;
+        /* 滚动条 */
+        --color-scrollbar-track: #f1f1f1;
+        --color-scrollbar-thumb: #888;
+        --color-scrollbar-thumb-hover: #555;
+        /* 箭头/连接线 */
+        --color-arrow: #bebebe;
+        /* 董事会/管理团队 - 金黄色 */
+        --color-board-bg: #faf0d4;
+        --color-board-border: #b8860b;
+        /* 项目交付保障 - 主题 #2e659d */
+        --color-delivery-assurance: #2e659d;
+        --color-delivery-assurance-box-bg: #c5dae9;
+        --color-delivery-assurance-bg: #e8f0f7;
+        /* 项目交付 - 主题 #05367e */
+        --color-projects-delivery: #05367e;
+        --color-projects-delivery-item-bg: #c8d4e8;
+        --color-projects-delivery-bg: #e6ebf5;
+        /* 业务保障 - 主题 #b71938（与委员会互换） */
+        --color-business-assurance: #b71938;
+        --color-business-assurance-box-bg: #f5d4da;
+        --color-business-assurance-bg: #fce8ec;
+        /* 委员会 - 主题 #b05566（与业务保障互换） */
+        --color-committee-header: #b05566;
+        --color-committee-box-bg: #ecd4d9;
+        --color-committee-section-bg: #f9ecee;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
+        background-color: var(--color-white);
+        padding: 20px;
+        overflow-x: auto;
+      }
+
+      .container {
+        min-width: 1200px;
+        max-width: 1600px;
+        margin: 0 auto;
+      }
+
+      .org-chart {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* 箭头样式 */
+      .arrow-down {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 20px;
+        position: relative;
+      }
+
+      .arrow-down::before {
+        content: "";
+        width: 3px;
+        height: 15px;
+        background-color: var(--color-arrow);
+        position: absolute;
+        bottom: 0;
+      }
+
+      .arrow-down::after {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 12px solid var(--color-arrow);
+        position: absolute;
+        top: 0;
+      }
+
+      /* 顶层样式 */
+      .level {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .box {
+        padding: 12px 20px;
+        border: 1px solid;
+        text-align: center;
+        font-size: 14px;
+        border-radius: 4px;
+      }
+
+      .box-title {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+
+      .box-subtitle {
+        font-weight: 400;
+        font-size: 12px;
+      }
+
+      /* 董事会层级 */
+      .board-level .box {
+        background-color: var(--color-board-bg);
+        border-color: var(--color-board-border);
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          0 4px 16px rgba(184, 134, 11, 0.12),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        transition: all 0.3s ease;
+      }
+
+      .board-level .box:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.12),
+          0 8px 24px rgba(184, 134, 11, 0.18),
+          inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      }
+
+      /* 管理团队层级 */
+      .elt-level .box {
+        background-color: var(--color-board-bg);
+        border-color: var(--color-board-border);
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          0 4px 16px rgba(184, 134, 11, 0.12),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        transition: all 0.3s ease;
+      }
+
+      .elt-level .box:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.12),
+          0 8px 24px rgba(184, 134, 11, 0.18),
+          inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      }
+
+      /* 委员会 */
+      .committee-section {
+        background-color: var(--color-committee-section-bg);
+        border: 1px solid var(--color-committee-header);
+        padding: 15px;
+        border-radius: 4px;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          0 4px 16px rgba(0, 0, 0, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .committee-section:hover {
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.1),
+          0 8px 24px rgba(0, 0, 0, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      }
+
+      .committee-header {
+        background-color: var(--color-committee-header);
+        color: var(--color-white);
+        text-align: center;
+        padding: 8px 0;
+        margin: -15px -15px 15px -15px;
+        border-radius: 0;
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.15),
+          0 0 20px rgba(176, 85, 102, 0.2);
+      }
+
+      .committee-box {
+        background-color: var(--color-committee-box-bg);
+        border: 1px solid var(--color-committee-header);
+        padding: 8px 12px;
+        margin-bottom: 16px;
+        border-radius: 4px;
+        box-shadow: 
+          0 1px 3px rgba(0, 0, 0, 0.06),
+          0 0 8px rgba(176, 85, 102, 0.08);
+        transition: all 0.2s ease;
+      }
+
+      .committee-box:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.1),
+          0 0 12px rgba(176, 85, 102, 0.15);
+      }
+
+      /* 主业务区域 */
+      .main-section {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr 1fr;
+        gap: 20px;
+      }
+
+      /* 项目交付 */
+      .projects-delivery {
+        background-color: var(--color-projects-delivery-bg);
+        border: 1px solid var(--color-projects-delivery);
+        padding: 15px;
+        border-radius: 4px;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          0 4px 16px rgba(0, 0, 0, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .projects-delivery:hover {
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.1),
+          0 8px 24px rgba(0, 0, 0, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      }
+
+      .projects-delivery-header {
+        background-color: var(--color-projects-delivery);
+        color: var(--color-white);
+        text-align: center;
+        padding: 8px 0;
+        margin: -15px -15px 15px -15px;
+        border-radius: 0;
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.15),
+          0 0 20px rgba(5, 54, 126, 0.2);
+      }
+
+      .project-group {
+        margin-bottom: 20px;
+        border-radius: 4px;
+      }
+
+        /* 项目群行容器 - 用于两列布局 */
+        .project-group-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .project-group-row .project-group {
+            margin-bottom: 0;
+        }
+
+        /* 西部项目群和EPC容器 - 3列布局 */
+        .west-epc-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        /* 西部项目群占2列 */
+        .west-project-group {
+            grid-column: span 2;
+        }
+
+        /* 西部项目群内的项目行，使其项目占据一半（1列）*/
+        .west-project-group .project-items-row {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* 公司级EPC项目占1列 */
+        .epc-project-group {
+            grid-column: span 1;
+        }
+
+      .project-group-header {
+        font-weight: 700;
+        font-size: 20px;
+        color: var(--color-projects-delivery);
+        margin-bottom: 8px;
+        border-bottom: 2px solid var(--color-projects-delivery);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-shadow: 0 0 15px rgba(5, 54, 126, 0.15);
+        transition: text-shadow 0.3s ease;
+      }
+
+      .project-group-header:hover {
+        text-shadow: 0 0 20px rgba(5, 54, 126, 0.25);
+      }
+
+      .project-group-header > span:first-child {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .project-group-header > span:first-child::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+                /* 箭头图标 fill 与 --color-projects-delivery 一致 */
+        background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 1024 1024"%3E%3Cpath fill="%2305367e" d="M512 1024q-139 0-257-68.5T68.5 769T0 512t68.5-257T255 68.5T512 0t257 68.5T955.5 255t68.5 257t-68.5 257T769 955.5T512 1024m319-518v-4q0-3-1-5q0-1-.5-2.5t-1-2t-1-2.5t-.5-3q-5-14-13-22L623 274q-19-19-46-19t-46 19t-19 46t19 46l82 82H256q-26 0-45 19t-19 45t19 45t45 19h357l-82 82q-19 19-19 46t19 46t46 19t46-19l191-191q21-21 17-53"/%3E%3C/svg%3E');
+        background-size: 16px 16px;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      .project-group-leader {
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--color-projects-delivery);
+      }
+
+      .project-items-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .project-items-single-column {
+        grid-template-columns: 1fr !important;
+      }
+
+      .project-item {
+        background-color: var(--color-projects-delivery-item-bg);
+        border: 1px solid var(--color-projects-delivery);
+        padding: 8px 12px;
+        border-radius: 3px;
+        box-shadow: 
+          0 1px 3px rgba(0, 0, 0, 0.06),
+          0 0 8px rgba(5, 54, 126, 0.08);
+        transition: all 0.2s ease;
+      }
+
+      .project-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.1),
+          0 0 12px rgba(5, 54, 126, 0.15);
+      }
+
+      .project-item-title {
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      .project-item-manager {
+        font-weight: 400;
+        font-size: 12px;
+        margin-top: 3px;
+      }
+
+      /* 项目交付保障 */
+      .delivery-assurance {
+        background-color: var(--color-delivery-assurance-bg);
+        border: 1px solid var(--color-delivery-assurance);
+        padding: 15px;
+        border-radius: 4px;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          0 4px 16px rgba(0, 0, 0, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .delivery-assurance:hover {
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.1),
+          0 8px 24px rgba(0, 0, 0, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      }
+
+      .delivery-assurance-header {
+        background-color: var(--color-delivery-assurance);
+        color: var(--color-white);
+        text-align: center;
+        padding: 8px 0;
+        margin: -15px -15px 15px -15px;
+        border-radius: 0;
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.15),
+          0 0 20px rgba(46, 101, 157, 0.2);
+      }
+
+      .assurance-box {
+        background-color: var(--color-delivery-assurance-box-bg);
+        border: 1px solid var(--color-delivery-assurance);
+        padding: 8px 12px;
+        margin-bottom: 16px;
+        border-radius: 3px;
+        box-shadow: 
+          0 1px 3px rgba(0, 0, 0, 0.06),
+          0 0 8px rgba(46, 101, 157, 0.08);
+        transition: all 0.2s ease;
+      }
+
+      .assurance-box:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.1),
+          0 0 12px rgba(46, 101, 157, 0.15);
+      }
+
+      /* 业务保障 */
+      .business-assurance {
+        background-color: var(--color-business-assurance-bg);
+        border: 1px solid var(--color-business-assurance);
+        padding: 15px;
+        border-radius: 4px;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          0 4px 16px rgba(0, 0, 0, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .business-assurance:hover {
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.1),
+          0 8px 24px rgba(0, 0, 0, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      }
+
+      .business-assurance-header {
+        background-color: var(--color-business-assurance);
+        color: var(--color-white);
+        text-align: center;
+        padding: 8px 0;
+        margin: -15px -15px 15px -15px;
+        border-radius: 0;
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.15),
+          0 0 20px rgba(183, 25, 56, 0.2);
+      }
+
+      .business-box {
+        background-color: var(--color-business-assurance-box-bg);
+        border: 1px solid var(--color-business-assurance);
+        padding: 8px 12px;
+        margin-bottom: 16px;
+        border-radius: 3px;
+        box-shadow: 
+          0 1px 3px rgba(0, 0, 0, 0.06),
+          0 0 8px rgba(183, 25, 56, 0.08);
+        transition: all 0.2s ease;
+      }
+
+      .business-box:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.1),
+          0 0 12px rgba(183, 25, 56, 0.15);
+      }
+
+      /* 客户层级 */
+      .client-level .box {
+        background-color: var(--color-bg-neutral-light);
+        border-color: var(--color-border-client);
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.06),
+          0 4px 16px rgba(0, 0, 0, 0.03),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+      }
+
+      .client-level .box:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.1),
+          0 8px 24px rgba(0, 0, 0, 0.05),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 1400px) {
+        .container {
+          min-width: 100%;
+        }
+
+        .main-section {
+          grid-template-columns: 1fr;
+        }
+
+        .project-group {
+          break-inside: avoid;
+        }
+
+        .project-group-row {
+          grid-template-columns: 1fr;
+        }
+
+        .project-items-row {
+          grid-template-columns: 1fr;
+        }
+
+        /* 移动端下西部项目群内项目（如银川中心）占满整行 */
+        .west-project-group .project-items-row {
+          grid-template-columns: 1fr;
+        }
+
+        .west-epc-container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (min-width: 1401px) and (max-width: 1600px) {
+        .project-items-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media print {
+        body {
+          padding: 10px;
+        }
+
+        .container {
+          max-width: 100%;
+        }
+      }
+
+      /* 滚动条样式 */
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--color-scrollbar-track);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--color-scrollbar-thumb);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-scrollbar-thumb-hover);
+      }
+
+      /* 主题切换器样式 */
+      .theme-switcher {
+        position: fixed;
+        bottom: 8px;
+        right: 8px;
+        z-index: 1000;
+        background: var(--color-white);
+        padding: 12px 18px;
+        border-radius: 8px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 13px;
+      }
+
+      .theme-switcher label {
+        font-weight: 600;
+        color: var(--color-text-primary);
+        white-space: nowrap;
+      }
+
+      .theme-switcher select {
+        padding: 6px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: var(--color-white);
+        color: var(--color-text-primary);
+        font-size: 13px;
+        cursor: pointer;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .theme-switcher select:hover {
+        border-color: #999;
+      }
+
+      .theme-switcher select:focus {
+        border-color: var(--color-arrow);
+      }
+
+      .theme-switcher .checkbox-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+      }
+
+      .theme-switcher input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+      }
+
+      .theme-switcher .checkbox-label {
+        font-weight: 400;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      /* 移动端适配 */
+      @media (max-width: 768px) {
+        .theme-switcher {
+          top: 10px;
+          right: 10px;
+          padding: 8px 12px;
+          font-size: 12px;
+          flex-wrap: wrap;
+        }
+
+        .theme-switcher select {
+          padding: 4px 8px;
+          font-size: 12px;
+        }
+
+        .theme-switcher .checkbox-wrapper {
+          font-size: 12px;
+        }
+      }
+
+      @media print {
+        .theme-switcher {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 主题切换器 -->
+    <div class="theme-switcher">
+      <label for="themeSelector">配色方案：</label>
+      <select id="themeSelector">
+        <option value="current">马到成功</option>
+        <option value="ocean">智领</option>
+        <option value="forest">一马当先</option>
+        <option value="sunset">破界</option>
+        <option value="tech">新业务</option>
+        <option value="classic">经典主题</option>
+        <option value="nature">古典青绿</option>
+        <option value="monochrome">黑白主题</option>
+        <option value="purple">紫红单色</option>
+        <option value="blue">蓝色单色</option>
+        <option value="teal">青色单色</option>
+      </select>
+      <div class="checkbox-wrapper">
+        <input type="checkbox" id="showBackground" checked>
+        <label for="showBackground" class="checkbox-label">显示底色</label>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="org-chart">
+        <!-- 客户层 -->
+        <div class="level client-level">
+          <div class="box">
+            <div class="box-title">Clients 客户</div>
+          </div>
+        </div>
+
+        <!-- 箭头 -->
+        <div class="arrow-down"></div>
+
+        <!-- 主业务区域 -->
+        <div class="main-section">
+          <!-- 项目交付保障 -->
+          <div class="delivery-assurance">
+            <div class="delivery-assurance-header">
+              <div>Projects Delivery Assurance</div>
+              <div>项目交付保障</div>
+            </div>
+            <div class="assurance-box">
+              <div class="box-title">SAS410 工艺设备室</div>
+              <div class="box-subtitle">-</div>
+            </div>
+            <div class="assurance-box">
+              <div class="box-title">SAS420 配管室</div>
+              <div class="box-subtitle">张晓东</div>
+            </div>
+            <div class="assurance-box">
+              <div class="box-title">SAS440 仪电室</div>
+              <div class="box-subtitle">-</div>
+            </div>
+            <div class="assurance-box">
+              <div class="box-title">SAS450 项目管理服务部</div>
+              <div class="box-subtitle">吴爱军</div>
+            </div>
+            <div class="assurance-box">
+              <div class="box-title">SAS460 土建室</div>
+              <div class="box-subtitle">范少勇</div>
+            </div>
+          </div>
+
+          <!-- 项目交付 -->
+          <div class="projects-delivery">
+            <div class="projects-delivery-header">
+              <div>Projects Delivery</div>
+              <div>项目交付</div>
+            </div>
+            <!-- 新业务项目群 -->
+            <div class="project-group">
+              <div class="project-group-header">
+                <span>新业务项目群</span>
+                <span class="project-group-leader">任宇</span>
+              </div>
+              <div class="project-items-row">
+                <div class="project-item">
+                  <div class="project-item-title">SAS170 PMC板块</div>
+                  <div class="project-item-manager">颜中</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS610 咨询板块</div>
+                  <div class="project-item-manager">王建平</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS680 数字技术板块</div>
+                  <div class="project-item-manager">潘日成</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- NM&LS 项目群 -->
+            <div class="project-group">
+              <div class="project-group-header">
+                <span>NM&LS 项目群</span>
+                <span class="project-group-leader">潘建兴</span>
+              </div>
+              <div class="project-items-row">
+                <div class="project-item">
+                  <div class="project-item-title">SAS650 新材料板块</div>
+                  <div class="project-item-manager">陈贺明</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS710 生命科学板块</div>
+                  <div class="project-item-manager">杨润宇</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 海外项目群 -->
+            <div class="project-group">
+              <div class="project-group-header">
+                <span>海外项目群</span>
+                <span class="project-group-leader">李湛湘</span>
+              </div>
+              <div class="project-items-row">
+                <div class="project-item">
+                  <div class="project-item-title">SAS690 COII板块</div>
+                  <div class="project-item-manager">周翔</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS720 模块化板块</div>
+                  <div class="project-item-manager">朱勇</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS670 供应链板块</div>
+                  <div class="project-item-manager">张雯</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 东部项目群 -->
+            <div class="project-group">
+              <div class="project-group-header">
+                <span>东部项目群</span>
+                <span class="project-group-leader">钟富优</span>
+              </div>
+              <div class="project-items-row">
+                <div class="project-item">
+                  <div class="project-item-title">SAS520 金山中心</div>
+                  <div class="project-item-manager">钟富优</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS560 沈阳中心</div>
+                  <div class="project-item-manager">朱新辉</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS550 惠湛中心</div>
+                  <div class="project-item-manager">赵卫强</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 西部项目群和公司级EPC项目群 -->
+            <div class="west-epc-container">
+              <!-- 西部项目群 - 占2列 -->
+              <div class="west-project-group">
+                <div class="project-group" style="margin-bottom: 0px;">
+                  <div class="project-group-header" style="margin-right: 8px;">
+                    <span>西部项目群</span>
+                    <span class="project-group-leader">梁栋</span>
+                  </div>
+                  <div class="project-items-row">
+                    <div class="project-item">
+                      <div class="project-item-title">SAS530 银川中心</div>
+                      <div class="project-item-manager">杨科</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 公司级EPC项目 - 占1列 -->
+              <div class="epc-project-group">
+                <div class="project-group">
+                  <div class="project-group-header">
+                    <span>公司级EPC项目</span>
+                    <span class="project-group-leader"></span>
+                  </div>
+                  <div class="project-items-row">
+                    <!-- 空着，不显示具体项目 -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 业务保障 -->
+          <div class="business-assurance">
+            <div class="business-assurance-header">
+              <div>Business Assurance</div>
+              <div>业务保障</div>
+            </div>
+            <div class="business-box">
+              <div class="box-title">SAS110 运营保障部</div>
+              <div class="box-subtitle">李永辉</div>
+            </div>
+            <div class="business-box">
+              <div class="box-title">SAS130 采购管理部</div>
+              <div class="box-subtitle">李晶</div>
+            </div>
+            <div class="business-box">
+              <div class="box-title">SAS160 市场部</div>
+              <div class="box-subtitle">钱蓓</div>
+            </div>
+            <div class="business-box">
+              <div class="box-title">SAS180 绩效与财务部</div>
+              <div class="box-subtitle">沈风华</div>
+            </div>
+            <div class="business-box">
+              <div class="box-title">SAS150 人力资源部</div>
+              <div class="box-subtitle">董晓迪</div>
+            </div>
+          </div>
+
+          <!-- 委员会 -->
+          <div class="committee-section">
+            <div class="committee-header">
+              <div>Committee</div>
+              <div>委员会</div>
+            </div>
+            <div class="committee-box">
+              <div class="box-title">SAS210 技术委员会</div>
+              <div class="box-subtitle">梁泽磊</div>
+            </div>
+            <div class="committee-box">
+              <div class="box-title">SAS230 安全委员会</div>
+              <div class="box-subtitle">李永辉</div>
+            </div>
+            <div class="committee-box">
+              <div class="box-title" style="font-size: 13px">
+                SAS260 EPC 项目管理委员会
+              </div>
+              <div class="box-subtitle">潘建兴</div>
+            </div>
+            <div class="committee-box">
+              <div class="box-title">SAS270 合规委员会</div>
+              <div class="box-subtitle">仇振军</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 箭头 -->
+        <div class="arrow-down"></div>
+
+        <!-- 管理团队层 -->
+        <div class="level elt-level">
+          <div class="box">
+            <div class="box-title">
+              General Manager & ELT 总经理及公司管理团队
+            </div>
+          </div>
+        </div>
+
+        <!-- 箭头 -->
+        <div class="arrow-down"></div>
+
+        <!-- 董事会层 -->
+        <div class="level board-level">
+          <div class="box">
+            <div class="box-title">Board 董事会</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 自适应调整
+      function adjustLayout() {
+        const container = document.querySelector(".container");
+        const windowWidth = window.innerWidth;
+
+        if (windowWidth < 1400) {
+          container.style.minWidth = "100%";
+        } else {
+          container.style.minWidth = "1200px";
+        }
+      }
+
+      // 初始化和窗口大小变化时调整
+      window.addEventListener("load", adjustLayout);
+      window.addEventListener("resize", adjustLayout);
+
+      // 打印功能
+      function printChart() {
+        window.print();
+      }
+
+      // 可以添加打印按钮
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("组织架构图已加载");
+      });
+
+      // ========== 主题切换功能 ==========
+      const themes = {
+        // 当前方案（默认）
+        current: {
+          name: "当前方案",
+          colors: {
+            "board-bg": "#faf0d4",
+            "board-border": "#b8860b",
+            "delivery-assurance": "#2e659d",
+            "delivery-assurance-box-bg": "#c5dae9",
+            "delivery-assurance-bg": "#e8f0f7",
+            "projects-delivery": "#05367e",
+            "projects-delivery-item-bg": "#c8d4e8",
+            "projects-delivery-bg": "#e6ebf5",
+            "business-assurance": "#b71938",
+            "business-assurance-box-bg": "#f5d4da",
+            "business-assurance-bg": "#fce8ec",
+            "committee-header": "#b05566",
+            "committee-box-bg": "#ecd4d9",
+            "committee-section-bg": "#f9ecee",
+          },
+        },
+        // 蓝海主题
+        ocean: {
+          name: "智领主题",
+          colors: {
+            "board-bg": "#e3f2fd",
+            "board-border": "#1565c0",
+            "delivery-assurance": "#0288d1",
+            "delivery-assurance-box-bg": "#b3e5fc",
+            "delivery-assurance-bg": "#e1f5fe",
+            "projects-delivery": "#01579b",
+            "projects-delivery-item-bg": "#b3d9f2",
+            "projects-delivery-bg": "#e3f2fd",
+            "business-assurance": "#006064",
+            "business-assurance-box-bg": "#b2dfdb",
+            "business-assurance-bg": "#e0f2f1",
+            "committee-header": "#00838f",
+            "committee-box-bg": "#b2ebf2",
+            "committee-section-bg": "#e0f7fa",
+          },
+        },
+        // 一马当先主题
+        forest: {
+          name: "一马当先主题",
+          colors: {
+            "board-bg": "#fef5e6",
+            "board-border": "#f9be59",
+            "delivery-assurance": "#c4659f",
+            "delivery-assurance-box-bg": "#f5eafa",
+            "delivery-assurance-bg": "#faf0f9",
+            "projects-delivery": "#7b1a88",
+            "projects-delivery-item-bg": "#ddc4e3",
+            "projects-delivery-bg": "#f0e6f4",
+            "business-assurance": "#ec5544",
+            "business-assurance-box-bg": "#fbd9d5",
+            "business-assurance-bg": "#fef0ee",
+            "committee-header": "#f9be59",
+            "committee-box-bg": "#fef3dc",
+            "committee-section-bg": "#fffcf5",
+          },
+        },
+        // 破界主题 - 蓝调+暖色突破（已互换项目交付与项目交付保障）
+        sunset: {
+          name: "破界主题",
+          colors: {
+            "board-bg": "#e8ebf4",
+            "board-border": "#27355a",
+            "delivery-assurance": "#da5337",
+            "delivery-assurance-box-bg": "#f7ddd8",
+            "delivery-assurance-bg": "#fceeed",
+            "projects-delivery": "#34478d",
+            "projects-delivery-item-bg": "#d4dae9",
+            "projects-delivery-bg": "#e9ecf5",
+            "business-assurance": "#f36f1f",
+            "business-assurance-box-bg": "#fee5d5",
+            "business-assurance-bg": "#fff4ed",
+            "committee-header": "#eeab2f",
+            "committee-box-bg": "#fdf0d5",
+            "committee-section-bg": "#fffbf0",
+          },
+        },
+        // 科技主题 - 使用自定义配色（已循环互换）
+        tech: {
+          name: "科技主题",
+          colors: {
+            "board-bg": "#e8eaf5",
+            "board-border": "#212b72",
+            "delivery-assurance": "#212b72",
+            "delivery-assurance-box-bg": "#d4e4fc",
+            "delivery-assurance-bg": "#ebf2fe",
+            "projects-delivery": "#bf3992",
+            "projects-delivery-item-bg": "#f5d4e8",
+            "projects-delivery-bg": "#fceaf6",
+            "business-assurance": "#2d4dbe",
+            "business-assurance-box-bg": "#d0dbf7",
+            "business-assurance-bg": "#e8edfc",
+            "committee-header": "#7a83be",
+            "committee-box-bg": "#dfe1f3",
+            "committee-section-bg": "#eff0f9",
+          },
+        },
+        // 经典主题
+        classic: {
+          name: "经典主题",
+          colors: {
+            "board-bg": "#fadcdb",
+            "board-border": "#a23735",
+            "delivery-assurance": "#8dc84a",
+            "delivery-assurance-box-bg": "#d1e8b6",
+            "delivery-assurance-bg": "#eff8e8",
+            "projects-delivery": "#66386c",
+            "projects-delivery-item-bg": "#d4b7d9",
+            "projects-delivery-bg": "#f5ecf7",
+            "business-assurance": "#2b928d",
+            "business-assurance-box-bg": "#aaeae7",
+            "business-assurance-bg": "#e0f7f5",
+            "committee-header": "#7f7f7f",
+            "committee-box-bg": "#d9d9d9",
+            "committee-section-bg": "#f5f5f5",
+          },
+        },
+        // 青山主题
+        nature: {
+          name: "青山主题",
+          colors: {
+            "board-bg": "#f5f7e8",
+            "board-border": "#93ac06",
+            "delivery-assurance": "#3c6678",
+            "delivery-assurance-box-bg": "#d0dce2",
+            "delivery-assurance-bg": "#e9eff2",
+            "projects-delivery": "#547000",
+            "projects-delivery-item-bg": "#d7e0cc",
+            "projects-delivery-bg": "#eef2e6",
+            "business-assurance": "#55646c",
+            "business-assurance-box-bg": "#d7dcde",
+            "business-assurance-bg": "#eef0f1",
+            "committee-header": "#93ac06",
+            "committee-box-bg": "#e8edcc",
+            "committee-section-bg": "#f5f7e8",
+          },
+        },
+        // 黑白主题
+        monochrome: {
+          name: "黑白主题",
+          colors: {
+            "board-bg": "#ffffff",
+            "board-border": "#000000",
+            "delivery-assurance": "#000000",
+            "delivery-assurance-box-bg": "#f5f5f5",
+            "delivery-assurance-bg": "#ffffff",
+            "projects-delivery": "#000000",
+            "projects-delivery-item-bg": "#f5f5f5",
+            "projects-delivery-bg": "#ffffff",
+            "business-assurance": "#000000",
+            "business-assurance-box-bg": "#f5f5f5",
+            "business-assurance-bg": "#ffffff",
+            "committee-header": "#000000",
+            "committee-box-bg": "#f5f5f5",
+            "committee-section-bg": "#ffffff",
+          },
+        },
+        // 紫红单色主题
+        purple: {
+          name: "紫红单色",
+          colors: {
+            "board-bg": "#f9e6f6",
+            "board-border": "#9e0c8f",
+            "delivery-assurance": "#9e0c8f",
+            "delivery-assurance-box-bg": "#e8c9e3",
+            "delivery-assurance-bg": "#f5e6f2",
+            "projects-delivery": "#9e0c8f",
+            "projects-delivery-item-bg": "#e8c9e3",
+            "projects-delivery-bg": "#f5e6f2",
+            "business-assurance": "#9e0c8f",
+            "business-assurance-box-bg": "#e8c9e3",
+            "business-assurance-bg": "#f5e6f2",
+            "committee-header": "#9e0c8f",
+            "committee-box-bg": "#e8c9e3",
+            "committee-section-bg": "#f5e6f2",
+          },
+        },
+        // 蓝色单色主题
+        blue: {
+          name: "蓝色单色",
+          colors: {
+            "board-bg": "#e6f3ff",
+            "board-border": "#0172fb",
+            "delivery-assurance": "#0172fb",
+            "delivery-assurance-box-bg": "#c2deff",
+            "delivery-assurance-bg": "#e6f3ff",
+            "projects-delivery": "#0172fb",
+            "projects-delivery-item-bg": "#c2deff",
+            "projects-delivery-bg": "#e6f3ff",
+            "business-assurance": "#0172fb",
+            "business-assurance-box-bg": "#c2deff",
+            "business-assurance-bg": "#e6f3ff",
+            "committee-header": "#0172fb",
+            "committee-box-bg": "#c2deff",
+            "committee-section-bg": "#e6f3ff",
+          },
+        },
+        // 青色单色主题
+        teal: {
+          name: "青色单色",
+          colors: {
+            "board-bg": "#e6f5f4",
+            "board-border": "#00706a",
+            "delivery-assurance": "#00706a",
+            "delivery-assurance-box-bg": "#b3dfdc",
+            "delivery-assurance-bg": "#e0f2f1",
+            "projects-delivery": "#00706a",
+            "projects-delivery-item-bg": "#b3dfdc",
+            "projects-delivery-bg": "#e0f2f1",
+            "business-assurance": "#00706a",
+            "business-assurance-box-bg": "#b3dfdc",
+            "business-assurance-bg": "#e0f2f1",
+            "committee-header": "#00706a",
+            "committee-box-bg": "#b3dfdc",
+            "committee-section-bg": "#e0f2f1",
+          },
+        },
+      };
+
+      // 应用主题
+      function applyTheme(themeName, showBackground = true) {
+        const theme = themes[themeName];
+        if (!theme) return;
+
+        const root = document.documentElement;
+        Object.entries(theme.colors).forEach(([key, value]) => {
+          // 如果不显示底色
+          if (!showBackground && key.includes('-bg')) {
+            // box背景使用浅灰色
+            if (key.includes('box-bg') || key.includes('item-bg')) {
+              root.style.setProperty(`--color-${key}`, '#f5f5f5');
+            } else {
+              // 其他背景使用白色
+              root.style.setProperty(`--color-${key}`, '#ffffff');
+            }
+          } else {
+            root.style.setProperty(`--color-${key}`, value);
+          }
+        });
+
+        // 更新 SVG 箭头图标颜色（项目交付）
+        updateArrowIcon(theme.colors["projects-delivery"]);
+
+        // 保存到 localStorage
+        localStorage.setItem("orgChartTheme", themeName);
+        localStorage.setItem("orgChartShowBackground", showBackground);
+      }
+
+      // 更新箭头图标颜色
+      function updateArrowIcon(color) {
+        // 移除 # 号并转换为 URL 编码
+        const encodedColor = encodeURIComponent(color);
+        const style = document.createElement("style");
+        style.textContent = `
+          .project-group-header > span:first-child::after {
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 1024 1024"%3E%3Cpath fill="${encodedColor}" d="M512 1024q-139 0-257-68.5T68.5 769T0 512t68.5-257T255 68.5T512 0t257 68.5T955.5 255t68.5 257t-68.5 257T769 955.5T512 1024m319-518v-4q0-3-1-5q0-1-.5-2.5t-1-2t-1-2.5t-.5-3q-5-14-13-22L623 274q-19-19-46-19t-46 19t-19 46t19 46l82 82H256q-26 0-45 19t-19 45t19 45t45 19h357l-82 82q-19 19-19 46t19 46t46 19t46-19l191-191q21-21 17-53"/%3E%3C/svg%3E') !important;
+          }
+        `;
+        // 移除旧的动态样式
+        const oldStyle = document.getElementById("dynamic-arrow-style");
+        if (oldStyle) oldStyle.remove();
+        style.id = "dynamic-arrow-style";
+        document.head.appendChild(style);
+      }
+
+      // 初始化主题选择器
+      document.addEventListener("DOMContentLoaded", function () {
+        const themeSelector = document.getElementById("themeSelector");
+        const showBackgroundCheckbox = document.getElementById("showBackground");
+
+        // 从 localStorage 读取保存的主题和底色设置
+        const savedTheme = localStorage.getItem("orgChartTheme") || "current";
+        const savedShowBackground = localStorage.getItem("orgChartShowBackground");
+        const showBackground = savedShowBackground === null ? true : savedShowBackground === "true";
+        
+        themeSelector.value = savedTheme;
+        showBackgroundCheckbox.checked = showBackground;
+        applyTheme(savedTheme, showBackground);
+
+        // 监听主题切换
+        themeSelector.addEventListener("change", function (e) {
+          applyTheme(e.target.value, showBackgroundCheckbox.checked);
+        });
+
+        // 监听底色显示切换
+        showBackgroundCheckbox.addEventListener("change", function (e) {
+          applyTheme(themeSelector.value, e.target.checked);
+        });
+      });
+    </script>
+  </body>
+</html>
