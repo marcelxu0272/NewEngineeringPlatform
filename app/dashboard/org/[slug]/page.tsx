@@ -3,22 +3,19 @@
 import { useParams, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
-import {
-  LineChart,
-  Line,
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip as RechartsTooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-  LabelList,
-  Legend,
-} from 'recharts';
+import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import * as HighchartsFunnelModule from 'highcharts/modules/funnel';
+import * as HighchartsAnnotationsModule from 'highcharts/modules/annotations';
+import { useMemo } from 'react';
+
+if (typeof Highcharts === 'object') {
+  const funnelFn = (HighchartsFunnelModule as unknown as { default?: (h: typeof Highcharts) => void }).default ?? (HighchartsFunnelModule as unknown as (h: typeof Highcharts) => void);
+  if (typeof funnelFn === 'function') funnelFn(Highcharts);
+  const annFn = (HighchartsAnnotationsModule as unknown as { default?: (h: typeof Highcharts) => void }).default ?? (HighchartsAnnotationsModule as unknown as (h: typeof Highcharts) => void);
+  if (typeof annFn === 'function') annFn(Highcharts);
+}
 import {
   ArrowUpOutlined,
   DashboardOutlined,
@@ -111,11 +108,8 @@ const cardData = [
   },
 ];
 
-const marketDataLine = [
-  { name: '预计合同额', value: 120000 },
-  { name: '预计投标额', value: 85000 },
-  { name: '权重合同额', value: 62000 },
-];
+const marketDataFunnelValues = [120000, 85000, 62000]; // 预计合同额、预计投标额、权重合同额（万元）
+const marketDataFunnelNames = ['预计合同额', '预计投标额', '权重合同额'];
 
 const STATUS_TOOLTIP: Record<string, string> = {
   '新增': '该项目已被纳入核心项目跟踪，开始进行重点关注与保障。',
@@ -131,12 +125,12 @@ const projectActivityData = [
 
 const outputTrendMonths = ['9月', '10月', '11月', '12月', '1月', '2月'];
 const outputTrendData = [
-  { month: '9月', total: 12.5, sectorA: 4.2, sectorB: 3.8, sectorC: 4.5 },
-  { month: '10月', total: 13.1, sectorA: 4.5, sectorB: 4.0, sectorC: 4.6 },
-  { month: '11月', total: 12.8, sectorA: 4.3, sectorB: 4.2, sectorC: 4.3 },
-  { month: '12月', total: 14.0, sectorA: 4.8, sectorB: 4.5, sectorC: 4.7 },
-  { month: '1月', total: 13.5, sectorA: 4.6, sectorB: 4.3, sectorC: 4.6 },
-  { month: '2月', total: 13.2, sectorA: 4.4, sectorB: 4.4, sectorC: 4.4 },
+  { month: '9月',  sectorA: 4200, sectorB: 3800, sectorC: 4500 },
+  { month: '10月', sectorA: 4500, sectorB: 4000, sectorC: 4600 },
+  { month: '11月',  sectorA: 4300, sectorB: 4200, sectorC: 4300 },
+  { month: '12月',  sectorA: 4800, sectorB: 4500, sectorC: 4700 },
+  { month: '1月',  sectorA: 4600, sectorB: 4300, sectorC: 4600 },
+  { month: '2月',  sectorA: 4400, sectorB: 4400, sectorC: 4400 },
 ];
 
 function getDonutConfigBySector(segments: number[], size: 'large' | 'small') {
@@ -170,7 +164,6 @@ export default function OrgDashboardPage() {
   const slug = params?.slug as string | undefined;
   const [selectedDept, setSelectedDept] = useState('all');
   const [showSubTargets, setShowSubTargets] = useState(false);
-  const [hiddenOutputKeys, setHiddenOutputKeys] = useState<Record<string, boolean>>({});
 
   if (!slug || !ORG_SLUGS.includes(slug as OrgSlug)) {
     notFound();
@@ -181,6 +174,86 @@ export default function OrgDashboardPage() {
   const sectors = SLUG_TO_SECTORS[orgSlug];
 
   const departmentOptions = [{ value: 'all', label: '全部' }, ...sectors.map((s) => ({ value: s, label: s }))];
+
+  const stackedBarOptions = useMemo<Highcharts.Options>(() => ({
+    chart: { type: 'column', height: 220, backgroundColor: 'transparent', style: { fontFamily: 'inherit' }, margin: [10, 110, 30, 40] },
+    title: { text: undefined },
+    credits: { enabled: false },
+    xAxis: { categories: outputTrendData.map(d => d.month), lineColor: 'transparent', tickColor: 'transparent', labels: { style: { color: '#115e59', fontSize: '11px' } } },
+    yAxis: { title: { text: null }, gridLineColor: 'rgba(0,112,105,0.1)', labels: { style: { color: '#115e59', fontSize: '11px' } } },
+    legend: { layout: 'vertical', align: 'right', verticalAlign: 'middle', itemStyle: { color: '#374151', fontWeight: 'normal', fontSize: '11px' } },
+    tooltip: { shared: true, valueDecimals: 0, valueSuffix: ' 元/小时' },
+    plotOptions: { column: { stacking: 'normal', borderWidth: 0, borderRadius: 2, groupPadding: 0.15 } },
+    series: [
+      { type: 'column', name: sectors[0] || '板块1', data: outputTrendData.map(d => d.sectorA), color: SECTOR_COLORS[0] },
+      ...(sectors[1] ? [{ type: 'column' as const, name: sectors[1], data: outputTrendData.map(d => d.sectorB), color: SECTOR_COLORS[1] }] : []),
+      ...(sectors[2] ? [{ type: 'column' as const, name: sectors[2], data: outputTrendData.map(d => d.sectorC), color: SECTOR_COLORS[2] }] : []),
+    ],
+  }), [sectors]);
+
+  const funnelOptions = useMemo<Highcharts.Options>(() => {
+    const rate1 = marketDataFunnelValues[1] != null && marketDataFunnelValues[0]
+      ? ((marketDataFunnelValues[1] / marketDataFunnelValues[0]) * 100).toFixed(1)
+      : '';
+    const rate2 = marketDataFunnelValues[2] != null && marketDataFunnelValues[1]
+      ? ((marketDataFunnelValues[2] / marketDataFunnelValues[1]) * 100).toFixed(1)
+      : '';
+    return {
+      chart: { type: 'funnel', height: 170, backgroundColor: 'transparent', style: { fontFamily: 'inherit' }, margin: [10, 100, 10, 10] },
+      title: { text: undefined },
+      credits: { enabled: false },
+      plotOptions: {
+        funnel: {
+          dataLabels: {
+            enabled: true,
+            format: '<b>{point.name}</b><br/>{point.y:,.0f} 万元',
+            style: { color: '#374151', fontSize: '11px', fontWeight: 'normal', textOutline: 'none' },
+            softConnector: true,
+            crop: false,
+            overflow: 'allow',
+          },
+          neckWidth: '28%',
+          neckHeight: '20%',
+        },
+      },
+      legend: { enabled: false },
+      tooltip: { valueDecimals: 0, valueSuffix: ' 万元' },
+      series: [{
+        type: 'funnel',
+        name: '金额（万元）',
+        data: marketDataFunnelNames.map((name, i) => ({
+          name,
+          y: marketDataFunnelValues[i],
+          color: SECTOR_COLORS[i],
+          ...(i < 2 ? { id: `funnel-${i}` } : {}),
+        })),
+      }],
+      annotations: [
+        ...(rate1 ? [{
+          labels: [{
+            point: 'funnel-0',
+            text: rate1 + '%',
+            style: { color: '#fff', fontWeight: 'bold', fontSize: '14px', textOutline: '1px contrast' },
+            y: 32,
+            verticalAlign: 'bottom' as const,
+            backgroundColor: 'transparent',
+            borderWidth: 0,
+          }],
+        }] : []),
+        ...(rate2 ? [{
+          labels: [{
+            point: 'funnel-1',
+            text: rate2 + '%',
+            style: { color: '#fff', fontWeight: 'bold', fontSize: '14px', textOutline: '1px contrast' },
+            y: 24,
+            verticalAlign: 'bottom' as const,
+            backgroundColor: 'transparent',
+            borderWidth: 0,
+          }],
+        }] : []),
+      ] as Highcharts.AnnotationsOptions[],
+    };
+  }, []);
 
   return (
     <ConfigProvider
@@ -392,20 +465,8 @@ export default function OrgDashboardPage() {
 
               <Card className="border-0 shadow-md h-full">
                 <CardContent className="p-4">
-                  <h3 className="font-medium text-sm text-gray-700 mb-1">市场数据（万元）</h3>
-                  <div className="h-[160px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={marketDataLine} margin={{ top: 32, right: 36, left: 36, bottom: 0 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,112,105,0.1)" vertical={false} />
-                        <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#115e59' }} axisLine={false} tickLine={false} interval={0} />
-                        <YAxis hide />
-                        <RechartsTooltip formatter={(value: number) => value.toLocaleString()} />
-                        <Line type="monotone" dataKey="value" stroke="#007069" strokeWidth={2} dot={{ r: 4, fill: '#007069' }} activeDot={{ r: 5 }} connectNulls>
-                          <LabelList position="top" dataKey="value" formatter={(v: number) => v.toLocaleString()} fill="#007069" fontSize={12} />
-                        </Line>
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </div>
+                  <h3 className="font-medium text-sm text-gray-700 mb-1">市场机会（万元）</h3>
+                  <HighchartsReact highcharts={Highcharts} options={funnelOptions} />
                 </CardContent>
               </Card>
             </div>
@@ -450,35 +511,8 @@ export default function OrgDashboardPage() {
 
               <Card className="border-0 shadow-md">
                 <CardContent className="p-4">
-                  <h3 className="font-medium text-sm text-gray-700 mb-2">单位工时创造产值（万元/小时）</h3>
-                  <div className="h-[220px]">
-                    <ResponsiveContainer width="100%" height="100%">
-                      <BarChart data={outputTrendData} margin={{ top: 5, right: 0, left: -20, bottom: 0 }} barCategoryGap="25%">
-                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,112,105,0.1)" vertical={false} />
-                        <XAxis dataKey="month" tick={{ fontSize: 12, fill: '#115e59' }} axisLine={false} tickLine={false} />
-                        <YAxis tick={{ fontSize: 11, fill: '#115e59' }} axisLine={false} tickLine={false} />
-                        <RechartsTooltip formatter={(value: number) => value.toFixed(2)} />
-                        <Legend
-                          verticalAlign="middle"
-                          align="right"
-                          layout="vertical"
-                          wrapperStyle={{ paddingLeft: 16, fontSize: 12 }}
-                          onClick={(data, _index, _e) => {
-                            const key = data?.dataKey != null ? String(data.dataKey) : '';
-                            if (key) setHiddenOutputKeys((prev) => ({ ...prev, [key]: !prev[key] }));
-                          }}
-                          formatter={(value, entry) => {
-                            const key = entry?.dataKey != null ? String(entry.dataKey) : '';
-                            const hidden = key && hiddenOutputKeys[key];
-                            return <span style={{ cursor: 'pointer', opacity: hidden ? 0.5 : 1, fontSize: 12 }}>{value}</span>;
-                          }}
-                        />
-                        <Bar dataKey="sectorA" name={sectors[0] || '板块1'} stackId="a" fill={SECTOR_COLORS[0]} hide={!!hiddenOutputKeys.sectorA} radius={[0, 0, 0, 0]} />
-                        {sectors[1] && <Bar dataKey="sectorB" name={sectors[1]} stackId="a" fill={SECTOR_COLORS[1]} hide={!!hiddenOutputKeys.sectorB} />}
-                        {sectors[2] && <Bar dataKey="sectorC" name={sectors[2]} stackId="a" fill={SECTOR_COLORS[2]} hide={!!hiddenOutputKeys.sectorC} radius={[3, 3, 0, 0]} />}
-                      </BarChart>
-                    </ResponsiveContainer>
-                  </div>
+                  <h3 className="font-medium text-sm text-gray-700 mb-2">单位工时创造产值（元/小时）</h3>
+                  <HighchartsReact highcharts={Highcharts} options={stackedBarOptions} />
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-md">
