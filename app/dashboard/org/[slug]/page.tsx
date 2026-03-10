@@ -123,6 +123,32 @@ const projectActivityData = [
   { id: 'G25009', name: '神华化工公司重点工程项目项目管理服务', sector: 'PMC板块', time: '2025-02-25', status: '保障活动更新', subStatus: undefined },
 ];
 
+// 工作负荷数据：key 与 SLUG_TO_SECTORS 的板块顺序对应，sectorA/B/C
+const workloadData: Record<string, { annual: number; current: number; f1: number; f2: number; f3: number }[]> = {
+  'xinyewu': [
+    { annual: 88.5, current: 92.0, f1: 19, f2: 8, f3: 8 },
+    { annual: 91.2, current: 95.0, f1: 19, f2: 9, f3: 8 },
+    { annual: 85.0, current: 88.0, f1: 19, f2: 8, f3: 8 },
+  ],
+  'nm-ls': [
+    { annual: 90.0, current: 94.0, f1: 19, f2: 9, f3: 8 },
+    { annual: 87.5, current: 91.0, f1: 19, f2: 9, f3: 8 },
+  ],
+  'haiwai': [
+    { annual: 92.0, current: 96.0, f1: 19, f2: 9, f3: 9 },
+    { annual: 88.0, current: 91.5, f1: 19, f2: 9, f3: 9 },
+    { annual: 86.5, current: 89.0, f1: 19, f2: 9, f3: 8 },
+  ],
+  'dongbu': [
+    { annual: 91.46, current: 100.0, f1: 19, f2: 9, f3: 9 },
+    { annual: 89.0, current: 93.0, f1: 19, f2: 9, f3: 9 },
+    { annual: 87.5, current: 90.0, f1: 19, f2: 9, f3: 9 },
+  ],
+  'xibu': [
+    { annual: 85.0, current: 88.0, f1: 9, f2: 9, f3: 8 },
+  ],
+};
+
 const outputTrendMonths = ['9月', '10月', '11月', '12月', '1月', '2月'];
 const outputTrendData = [
   { month: '9月',  sectorA: 4200, sectorB: 3800, sectorC: 4500 },
@@ -354,7 +380,7 @@ export default function OrgDashboardPage() {
                             </div>
                           </div>
                           <div className="relative w-24 h-24">
-                            <div className="absolute inset-0 flex items-center justify-center">{getDonutConfigBySector(card.donutBySector, 'large')}</div>
+                            <div className="absolute inset-0 flex items-center justify-center">{getDonutConfigBySector(card.donutBySector.slice(0, sectors.length), 'large')}</div>
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-bold text-[#007069]">{card.donutValue}%</div>
                           </div>
                         </div>
@@ -363,7 +389,8 @@ export default function OrgDashboardPage() {
                         <div className="mt-4 pt-4 border-t border-[#007069]/20">
                           {card.subTargets.map((target, idx) => {
                             const percentage = Math.min(100, (target.current / target.target) * 100).toFixed(1);
-                            const bySector = target.bySector ?? [target.current];
+                            const rawBySector = target.bySector ?? [target.current];
+                            const bySector = rawBySector.slice(0, sectors.length);
                             return (
                               <div key={idx} className="mb-2 last:mb-0">
                                 <div className="flex text-sm mb-1">
@@ -465,7 +492,14 @@ export default function OrgDashboardPage() {
 
               <Card className="border-0 shadow-md h-full">
                 <CardContent className="p-4">
-                  <h3 className="font-medium text-sm text-gray-700 mb-1">市场机会（万元）</h3>
+                  <div className="flex items-center justify-between mb-1">
+                    <h3 className="font-medium text-sm text-gray-700">市场机会（万元）</h3>
+                    <AntTooltip title="查看详情">
+                      <button type="button" className="w-5 h-5 rounded-full bg-[#007069]/10 flex items-center justify-center hover:bg-[#007069]/20 transition-colors">
+                        <RightOutlined className="text-xs text-[#007069]" />
+                      </button>
+                    </AntTooltip>
+                  </div>
                   <HighchartsReact highcharts={Highcharts} options={funnelOptions} />
                 </CardContent>
               </Card>
@@ -511,13 +545,60 @@ export default function OrgDashboardPage() {
 
               <Card className="border-0 shadow-md">
                 <CardContent className="p-4">
-                  <h3 className="font-medium text-sm text-gray-700 mb-2">单位工时创造产值（元/小时）</h3>
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-medium text-sm text-gray-700">单位工时创造产值（元/小时）</h3>
+                    <AntTooltip title="导出明细">
+                      <button type="button" className="w-5 h-5 rounded-full bg-[#007069]/10 flex items-center justify-center hover:bg-[#007069]/20 transition-colors">
+                        <RightOutlined className="text-xs text-[#007069]" />
+                      </button>
+                    </AntTooltip>
+                  </div>
                   <HighchartsReact highcharts={Highcharts} options={stackedBarOptions} />
                 </CardContent>
               </Card>
               <Card className="border-0 shadow-md">
                 <CardContent className="p-4">
-
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-medium text-sm text-gray-700">工作负荷一览</h3>
+                    <AntTooltip title="查看详情">
+                      <button type="button" className="w-5 h-5 rounded-full bg-[#007069]/10 flex items-center justify-center hover:bg-[#007069]/20 transition-colors">
+                        <RightOutlined className="text-xs text-[#007069]" />
+                      </button>
+                    </AntTooltip>
+                  </div>
+                  <div
+                    className="grid gap-2"
+                    style={{ gridTemplateColumns: `repeat(${sectors.length}, minmax(0, 1fr))` }}
+                  >
+                    {sectors.map((sector, si) => {
+                      const wl = (workloadData[orgSlug] ?? [])[si];
+                      if (!wl) return null;
+                      const rows: { label: string; value: number }[] = [
+                        { label: '全年', value: wl.annual },
+                        { label: '当月', value: wl.current },
+                        { label: '未来第一月预测', value: wl.f1 },
+                        { label: '未来第二月预测', value: wl.f2 },
+                        { label: '未来第三月预测', value: wl.f3 },
+                      ];
+                      return (
+                        <div key={sector}>
+                          <p className="text-xs font-medium text-[#007069] mb-1.5 truncate" title={sector}>{sector}</p>
+                          <div className="space-y-1">
+                            {rows.map(({ label, value }) => (
+                              <div key={label} className="relative flex items-center justify-between px-2 py-2 rounded overflow-hidden bg-[#007069]/10">
+                                <div
+                                  className="absolute inset-0 bg-[#007069]/15"
+                                  style={{ width: `${Math.min(value, 100)}%` }}
+                                />
+                                <span className="relative z-10 text-[11px] text-[#007069]">{label}</span>
+                                <span className="relative z-10 text-[11px] font-semibold text-[#007069] tabular-nums whitespace-nowrap">{value.toFixed(2)} %</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </CardContent>
               </Card>
             </div>
