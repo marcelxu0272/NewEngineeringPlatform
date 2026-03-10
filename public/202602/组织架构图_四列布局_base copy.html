@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>公司组织架构图 - 更新版</title>
     <style>
-      /* ========== 颜色变量（统一管理） ========== */
+      /* ========== 颜色变量（经典主题） ========== */
       :root {
         /* 通用 */
         --color-white: #ffffff;
@@ -20,25 +20,34 @@
         --color-scrollbar-thumb-hover: #555;
         /* 箭头/连接线 */
         --color-arrow: #bebebe;
-        /* 董事会/管理团队 - 金黄色 */
-        --color-board-bg: #faf0d4;
-        --color-board-border: #b8860b;
-        /* 项目交付保障 - 主题 #2e659d */
-        --color-delivery-assurance: #2e659d;
-        --color-delivery-assurance-box-bg: #c5dae9;
-        --color-delivery-assurance-bg: #e8f0f7;
-        /* 项目交付 - 主题 #05367e */
-        --color-projects-delivery: #05367e;
-        --color-projects-delivery-item-bg: #c8d4e8;
-        --color-projects-delivery-bg: #e6ebf5;
-        /* 业务保障 - 主题 #b71938（与委员会互换） */
-        --color-business-assurance: #b71938;
-        --color-business-assurance-box-bg: #f5d4da;
-        --color-business-assurance-bg: #fce8ec;
-        /* 委员会 - 主题 #b05566（与业务保障互换） */
-        --color-committee-header: #b05566;
-        --color-committee-box-bg: #ecd4d9;
+        /* 董事会/管理团队 - #fe7138 色系 */
+        --color-board-bg: #fff0eb;
+        --color-board-border: #fe7138;
+        /* 项目交付保障 - 经典主题 */
+        --color-delivery-assurance: #00706a;
+        --color-delivery-assurance-box-bg: #b3dfdc;
+        --color-delivery-assurance-bg: #e0f2f1;
+
+        /* 项目交付 - 经典主题 */
+        --color-projects-delivery: #66386c;
+        --color-projects-delivery-item-bg: #d4b7d9;
+        --color-projects-delivery-bg: #f5ecf7;
+        /* 业务保障 - 经典主题 */
+        --color-business-assurance: #002fa7;
+        --color-business-assurance-box-bg: #b8c4eb;
+        --color-business-assurance-bg: #e8eaf5; 
+        /* 委员会 - 主色 #630507 */
+        --color-committee-header: #630507;
+        --color-committee-box-bg: #ecd4d5;
         --color-committee-section-bg: #f9ecee;
+
+        /* --color-delivery-assurance: #00706a;
+        --color-delivery-assurance-box-bg: #b3dfdc;
+        --color-delivery-assurance-bg: #e0f2f1;
+
+        --color-business-assurance: #002fa7;
+        --color-business-assurance-box-bg: #b8c4eb;
+        --color-business-assurance-bg: #e8eaf5; */
       }
 
       * {
@@ -126,7 +135,7 @@
         border-color: var(--color-board-border);
         box-shadow: 
           0 2px 8px rgba(0, 0, 0, 0.08),
-          0 4px 16px rgba(184, 134, 11, 0.12),
+          0 4px 16px rgba(254, 113, 56, 0.12),
           inset 0 1px 0 rgba(255, 255, 255, 0.6);
         transition: all 0.3s ease;
       }
@@ -135,7 +144,7 @@
         transform: translateY(-2px);
         box-shadow: 
           0 4px 12px rgba(0, 0, 0, 0.12),
-          0 8px 24px rgba(184, 134, 11, 0.18),
+          0 8px 24px rgba(254, 113, 56, 0.18),
           inset 0 1px 0 rgba(255, 255, 255, 0.7);
       }
 
@@ -145,7 +154,7 @@
         border-color: var(--color-board-border);
         box-shadow: 
           0 2px 8px rgba(0, 0, 0, 0.08),
-          0 4px 16px rgba(184, 134, 11, 0.12),
+          0 4px 16px rgba(254, 113, 56, 0.12),
           inset 0 1px 0 rgba(255, 255, 255, 0.6);
         transition: all 0.3s ease;
       }
@@ -154,7 +163,7 @@
         transform: translateY(-2px);
         box-shadow: 
           0 4px 12px rgba(0, 0, 0, 0.12),
-          0 8px 24px rgba(184, 134, 11, 0.18),
+          0 8px 24px rgba(254, 113, 56, 0.18),
           inset 0 1px 0 rgba(255, 255, 255, 0.7);
       }
 
@@ -182,12 +191,13 @@
         background-color: var(--color-committee-header);
         color: var(--color-white);
         text-align: center;
+        font-size: 14px;
         padding: 4px 0;
         margin: -15px -15px 15px -15px;
         border-radius: 0;
         box-shadow: 
           0 2px 6px rgba(0, 0, 0, 0.15),
-          0 0 20px rgba(176, 85, 102, 0.2);
+          0 0 20px rgba(99, 5, 7, 0.2);
       }
 
       .committee-box {
@@ -198,7 +208,7 @@
         border-radius: 4px;
         box-shadow: 
           0 1px 3px rgba(0, 0, 0, 0.06),
-          0 0 8px rgba(176, 85, 102, 0.08);
+          0 0 8px rgba(99, 5, 7, 0.08);
         transition: all 0.2s ease;
       }
 
@@ -206,7 +216,7 @@
         transform: translateY(-3px);
         box-shadow: 
           0 2px 6px rgba(0, 0, 0, 0.1),
-          0 0 12px rgba(176, 85, 102, 0.15);
+          0 0 12px rgba(99, 5, 7, 0.15);
       }
 
       /* 主业务区域 */
@@ -240,6 +250,7 @@
         background-color: var(--color-projects-delivery);
         color: var(--color-white);
         text-align: center;
+        font-size: 14px;
         padding: 4px 0;
         margin: -15px -15px 15px -15px;
         border-radius: 0;
@@ -289,7 +300,7 @@
 
       .project-group-header {
         font-weight: 700;
-        font-size: 20px;
+        font-size: 14px;
         color: var(--color-projects-delivery);
         margin-bottom: 8px;
         border-bottom: 2px solid var(--color-projects-delivery);
@@ -404,6 +415,7 @@
         background-color: var(--color-delivery-assurance);
         color: var(--color-white);
         text-align: center;
+        font-size: 14px;
         padding: 4px 0;
         margin: -15px -15px 15px -15px;
         border-radius: 0;
@@ -455,6 +467,7 @@
         background-color: var(--color-business-assurance);
         color: var(--color-white);
         text-align: center;
+        font-size: 14px;
         padding: 4px 0;
         margin: -15px -15px 15px -15px;
         border-radius: 0;
@@ -627,15 +640,15 @@
               </a>
               <div class="project-items-row">
                 <div class="project-item">
-                  <div class="project-item-title">SAS170 PMC板块</div>
+                  <div class="project-item-title">PMC板块</div>
                   <div class="project-item-manager">颜中</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">SAS610 咨询板块</div>
+                  <div class="project-item-title">咨询板块</div>
                   <div class="project-item-manager">王建平</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">SAS680 数字技术板块</div>
+                  <div class="project-item-title">数字技术板块</div>
                   <div class="project-item-manager">潘日成</div>
                 </div>
               </div>
@@ -649,11 +662,11 @@
               </a>
               <div class="project-items-row">
                 <div class="project-item">
-                  <div class="project-item-title">SAS650 新材料板块</div>
+                  <div class="project-item-title">新材料板块</div>
                   <div class="project-item-manager">陈贺明</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">SAS710 生命科学板块</div>
+                  <div class="project-item-title">生命科学板块</div>
                   <div class="project-item-manager">杨润宇</div>
                 </div>
               </div>
@@ -667,15 +680,15 @@
               </a>
               <div class="project-items-row">
                 <div class="project-item">
-                  <div class="project-item-title">SAS690 COII板块</div>
+                  <div class="project-item-title">COII板块</div>
                   <div class="project-item-manager">周翔</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">SAS720 模块化板块</div>
+                  <div class="project-item-title">模块化板块</div>
                   <div class="project-item-manager">朱勇</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">SAS670 供应链板块</div>
+                  <div class="project-item-title">供应链板块</div>
                   <div class="project-item-manager">张雯</div>
                 </div>
               </div>
@@ -689,15 +702,15 @@
               </a>
               <div class="project-items-row">
                 <div class="project-item">
-                  <div class="project-item-title">SAS520 金山中心</div>
+                  <div class="project-item-title">金山中心</div>
                   <div class="project-item-manager">钟富优</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">SAS560 沈阳中心</div>
+                  <div class="project-item-title">沈阳中心</div>
                   <div class="project-item-manager">朱新辉</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">SAS550 惠湛中心</div>
+                  <div class="project-item-title">惠湛中心</div>
                   <div class="project-item-manager">赵卫强</div>
                 </div>
               </div>
@@ -714,7 +727,7 @@
                   </a>
                   <div class="project-items-row">
                     <div class="project-item">
-                      <div class="project-item-title">SAS530 银川中心</div>
+                      <div class="project-item-title">银川中心</div>
                       <div class="project-item-manager">杨科</div>
                     </div>
                   </div>
@@ -842,259 +855,13 @@
         console.log("组织架构图已加载");
       });
 
-      // ========== 主题切换功能 ==========
-      const themes = {
-        // 当前方案（默认）
-        current: {
-          name: "当前方案",
-          colors: {
-            "board-bg": "#faf0d4",
-            "board-border": "#b8860b",
-            "delivery-assurance": "#2e659d",
-            "delivery-assurance-box-bg": "#c5dae9",
-            "delivery-assurance-bg": "#e8f0f7",
-            "projects-delivery": "#05367e",
-            "projects-delivery-item-bg": "#c8d4e8",
-            "projects-delivery-bg": "#e6ebf5",
-            "business-assurance": "#b71938",
-            "business-assurance-box-bg": "#f5d4da",
-            "business-assurance-bg": "#fce8ec",
-            "committee-header": "#b05566",
-            "committee-box-bg": "#ecd4d9",
-            "committee-section-bg": "#f9ecee",
-          },
-        },
-        // 蓝海主题
-        ocean: {
-          name: "智领主题",
-          colors: {
-            "board-bg": "#e3f2fd",
-            "board-border": "#1565c0",
-            "delivery-assurance": "#0288d1",
-            "delivery-assurance-box-bg": "#b3e5fc",
-            "delivery-assurance-bg": "#e1f5fe",
-            "projects-delivery": "#01579b",
-            "projects-delivery-item-bg": "#b3d9f2",
-            "projects-delivery-bg": "#e3f2fd",
-            "business-assurance": "#006064",
-            "business-assurance-box-bg": "#b2dfdb",
-            "business-assurance-bg": "#e0f2f1",
-            "committee-header": "#00838f",
-            "committee-box-bg": "#b2ebf2",
-            "committee-section-bg": "#e0f7fa",
-          },
-        },
-        // 一马当先主题
-        forest: {
-          name: "一马当先主题",
-          colors: {
-            "board-bg": "#fef5e6",
-            "board-border": "#f9be59",
-            "delivery-assurance": "#c4659f",
-            "delivery-assurance-box-bg": "#f5eafa",
-            "delivery-assurance-bg": "#faf0f9",
-            "projects-delivery": "#7b1a88",
-            "projects-delivery-item-bg": "#ddc4e3",
-            "projects-delivery-bg": "#f0e6f4",
-            "business-assurance": "#ec5544",
-            "business-assurance-box-bg": "#fbd9d5",
-            "business-assurance-bg": "#fef0ee",
-            "committee-header": "#f9be59",
-            "committee-box-bg": "#fef3dc",
-            "committee-section-bg": "#fffcf5",
-          },
-        },
-        // 破界主题 - 蓝调+暖色突破（已互换项目交付与项目交付保障）
-        sunset: {
-          name: "破界主题",
-          colors: {
-            "board-bg": "#e8ebf4",
-            "board-border": "#27355a",
-            "delivery-assurance": "#da5337",
-            "delivery-assurance-box-bg": "#f7ddd8",
-            "delivery-assurance-bg": "#fceeed",
-            "projects-delivery": "#34478d",
-            "projects-delivery-item-bg": "#d4dae9",
-            "projects-delivery-bg": "#e9ecf5",
-            "business-assurance": "#f36f1f",
-            "business-assurance-box-bg": "#fee5d5",
-            "business-assurance-bg": "#fff4ed",
-            "committee-header": "#eeab2f",
-            "committee-box-bg": "#fdf0d5",
-            "committee-section-bg": "#fffbf0",
-          },
-        },
-        // 科技主题 - 使用自定义配色（已循环互换）
-        tech: {
-          name: "科技主题",
-          colors: {
-            "board-bg": "#e8eaf5",
-            "board-border": "#212b72",
-            "delivery-assurance": "#212b72",
-            "delivery-assurance-box-bg": "#d4e4fc",
-            "delivery-assurance-bg": "#ebf2fe",
-            "projects-delivery": "#bf3992",
-            "projects-delivery-item-bg": "#f5d4e8",
-            "projects-delivery-bg": "#fceaf6",
-            "business-assurance": "#2d4dbe",
-            "business-assurance-box-bg": "#d0dbf7",
-            "business-assurance-bg": "#e8edfc",
-            "committee-header": "#7a83be",
-            "committee-box-bg": "#dfe1f3",
-            "committee-section-bg": "#eff0f9",
-          },
-        },
-        // 经典主题
-        classic: {
-          name: "经典主题",
-          colors: {
-            "board-bg": "#fadcdb",
-            "board-border": "#a23735",
-            "delivery-assurance": "#8dc84a",
-            "delivery-assurance-box-bg": "#d1e8b6",
-            "delivery-assurance-bg": "#eff8e8",
-            "projects-delivery": "#66386c",
-            "projects-delivery-item-bg": "#d4b7d9",
-            "projects-delivery-bg": "#f5ecf7",
-            "business-assurance": "#2b928d",
-            "business-assurance-box-bg": "#aaeae7",
-            "business-assurance-bg": "#e0f7f5",
-            "committee-header": "#7f7f7f",
-            "committee-box-bg": "#d9d9d9",
-            "committee-section-bg": "#f5f5f5",
-          },
-        },
-        // 青山主题
-        nature: {
-          name: "青山主题",
-          colors: {
-            "board-bg": "#f5f7e8",
-            "board-border": "#93ac06",
-            "delivery-assurance": "#3c6678",
-            "delivery-assurance-box-bg": "#d0dce2",
-            "delivery-assurance-bg": "#e9eff2",
-            "projects-delivery": "#547000",
-            "projects-delivery-item-bg": "#d7e0cc",
-            "projects-delivery-bg": "#eef2e6",
-            "business-assurance": "#55646c",
-            "business-assurance-box-bg": "#d7dcde",
-            "business-assurance-bg": "#eef0f1",
-            "committee-header": "#93ac06",
-            "committee-box-bg": "#e8edcc",
-            "committee-section-bg": "#f5f7e8",
-          },
-        },
-        // 黑白主题
-        monochrome: {
-          name: "黑白主题",
-          colors: {
-            "board-bg": "#ffffff",
-            "board-border": "#000000",
-            "delivery-assurance": "#000000",
-            "delivery-assurance-box-bg": "#f5f5f5",
-            "delivery-assurance-bg": "#ffffff",
-            "projects-delivery": "#000000",
-            "projects-delivery-item-bg": "#f5f5f5",
-            "projects-delivery-bg": "#ffffff",
-            "business-assurance": "#000000",
-            "business-assurance-box-bg": "#f5f5f5",
-            "business-assurance-bg": "#ffffff",
-            "committee-header": "#000000",
-            "committee-box-bg": "#f5f5f5",
-            "committee-section-bg": "#ffffff",
-          },
-        },
-        // 紫红单色主题
-        purple: {
-          name: "紫红单色",
-          colors: {
-            "board-bg": "#f9e6f6",
-            "board-border": "#9e0c8f",
-            "delivery-assurance": "#9e0c8f",
-            "delivery-assurance-box-bg": "#e8c9e3",
-            "delivery-assurance-bg": "#f5e6f2",
-            "projects-delivery": "#9e0c8f",
-            "projects-delivery-item-bg": "#e8c9e3",
-            "projects-delivery-bg": "#f5e6f2",
-            "business-assurance": "#9e0c8f",
-            "business-assurance-box-bg": "#e8c9e3",
-            "business-assurance-bg": "#f5e6f2",
-            "committee-header": "#9e0c8f",
-            "committee-box-bg": "#e8c9e3",
-            "committee-section-bg": "#f5e6f2",
-          },
-        },
-        // 蓝色单色主题
-        blue: {
-          name: "蓝色单色",
-          colors: {
-            "board-bg": "#e6f3ff",
-            "board-border": "#0172fb",
-            "delivery-assurance": "#0172fb",
-            "delivery-assurance-box-bg": "#c2deff",
-            "delivery-assurance-bg": "#e6f3ff",
-            "projects-delivery": "#0172fb",
-            "projects-delivery-item-bg": "#c2deff",
-            "projects-delivery-bg": "#e6f3ff",
-            "business-assurance": "#0172fb",
-            "business-assurance-box-bg": "#c2deff",
-            "business-assurance-bg": "#e6f3ff",
-            "committee-header": "#0172fb",
-            "committee-box-bg": "#c2deff",
-            "committee-section-bg": "#e6f3ff",
-          },
-        },
-        // 青色单色主题
-        teal: {
-          name: "青色单色",
-          colors: {
-            "board-bg": "#e6f5f4",
-            "board-border": "#00706a",
-            "delivery-assurance": "#00706a",
-            "delivery-assurance-box-bg": "#b3dfdc",
-            "delivery-assurance-bg": "#e0f2f1",
-            "projects-delivery": "#00706a",
-            "projects-delivery-item-bg": "#b3dfdc",
-            "projects-delivery-bg": "#e0f2f1",
-            "business-assurance": "#00706a",
-            "business-assurance-box-bg": "#b3dfdc",
-            "business-assurance-bg": "#e0f2f1",
-            "committee-header": "#00706a",
-            "committee-box-bg": "#b3dfdc",
-            "committee-section-bg": "#e0f2f1",
-          },
-        },
+      // ========== 经典主题（箭头图标颜色初始化） ==========
+      const CLASSIC_THEME_COLORS = {
+        "projects-delivery": "#66386c",
       };
-
-      // 应用主题
-      function applyTheme(themeName, showBackground = true) {
-        const theme = themes[themeName];
-        if (!theme) return;
-
-        const root = document.documentElement;
-        Object.entries(theme.colors).forEach(([key, value]) => {
-          // 如果不显示底色
-          if (!showBackground && key.includes('-bg')) {
-            // box背景使用浅灰色
-            if (key.includes('box-bg') || key.includes('item-bg')) {
-              root.style.setProperty(`--color-${key}`, '#f5f5f5');
-            } else {
-              // 其他背景使用白色
-              root.style.setProperty(`--color-${key}`, '#ffffff');
-            }
-          } else {
-            root.style.setProperty(`--color-${key}`, value);
-          }
-        });
-
-        // 更新 SVG 箭头图标颜色（项目交付）
-        updateArrowIcon(theme.colors["projects-delivery"]);
-
-      }
 
       // 更新箭头图标颜色
       function updateArrowIcon(color) {
-        // 移除 # 号并转换为 URL 编码
         const encodedColor = encodeURIComponent(color);
         const style = document.createElement("style");
         style.textContent = `
@@ -1102,16 +869,14 @@
             background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 1024 1024"%3E%3Cpath fill="${encodedColor}" d="M512 1024q-139 0-257-68.5T68.5 769T0 512t68.5-257T255 68.5T512 0t257 68.5T955.5 255t68.5 257t-68.5 257T769 955.5T512 1024m319-518v-4q0-3-1-5q0-1-.5-2.5t-1-2t-1-2.5t-.5-3q-5-14-13-22L623 274q-19-19-46-19t-46 19t-19 46t19 46l82 82H256q-26 0-45 19t-19 45t19 45t45 19h357l-82 82q-19 19-19 46t19 46t46 19t46-19l191-191q21-21 17-53"/%3E%3C/svg%3E') !important;
           }
         `;
-        // 移除旧的动态样式
         const oldStyle = document.getElementById("dynamic-arrow-style");
         if (oldStyle) oldStyle.remove();
         style.id = "dynamic-arrow-style";
         document.head.appendChild(style);
       }
 
-      // 默认使用经典主题并显示底色
       document.addEventListener("DOMContentLoaded", function () {
-        applyTheme("classic", true);
+        updateArrowIcon(CLASSIC_THEME_COLORS["projects-delivery"]);
       });
     </script>
   </body>

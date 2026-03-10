@@ -166,7 +166,7 @@ const cardData = [
 
 export default function Component() {
   const [selectedDept, setSelectedDept] = useState('all');
-  const [showSubTargets, setShowSubTargets] = useState(true);
+  const [showSubTargets, setShowSubTargets] = useState(false);
 
   return (
     <ConfigProvider
@@ -214,12 +214,24 @@ export default function Component() {
           {/* 添加顶部内边距以防止内容被遮挡 */}
           <div className="pt-20">
             {/* 部门选择器 */}
-            <div className="px-4 pt-0 pb-2 flex items-center gap-4">
+            <div className="px-4 pt-0 pb-2 flex flex-wrap items-center gap-4">
               <Select
                 value={selectedDept}
                 onChange={setSelectedDept}
                 options={departments}
                 style={{ width: 150 }}
+                className="text-[#007069]"
+              />
+              <Select
+                placeholder="选择项目经理"
+                allowClear
+                style={{ width: 160 }}
+                options={[
+                  { value: 'pm1', label: '张伟' },
+                  { value: 'pm2', label: '李娜' },
+                  { value: 'pm3', label: '王磊' },
+                  { value: 'pm4', label: '赵静' },
+                ]}
                 className="text-[#007069]"
               />
               {/* 添加年份选择器 */}
@@ -240,6 +252,10 @@ export default function Component() {
                   onChange={setShowSubTargets}
                 />
               </div>
+              <button className="ml-auto flex items-center gap-2 px-4 py-1.5 bg-[#007069] text-white text-sm rounded-lg hover:bg-[#005c56] transition-colors shrink-0">
+                <BarChartOutlined />
+                月度统计
+              </button>
             </div>
 
             <div className="px-4">

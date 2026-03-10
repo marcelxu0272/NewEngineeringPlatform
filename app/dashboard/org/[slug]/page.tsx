@@ -14,8 +14,6 @@ import {
   PieChart,
   Pie,
   Cell,
-  FunnelChart,
-  Funnel,
   LabelList,
   Legend,
 } from 'recharts';
@@ -42,14 +40,15 @@ const SLUG_TO_NAME: Record<OrgSlug, string> = {
 };
 
 const SLUG_TO_SECTORS: Record<OrgSlug, string[]> = {
-  'xinyewu': ['SAS170 PMC板块', 'SAS610 咨询板块', 'SAS680 数字技术板块'],
-  'nm-ls': ['SAS650 新材料板块', 'SAS710 生命科学板块'],
-  'haiwai': ['SAS690 COII板块', 'SAS720 模块化板块', 'SAS670 供应链板块'],
-  'dongbu': ['SAS520 金山中心', 'SAS560 沈阳中心', 'SAS550 惠湛中心'],
-  'xibu': ['SAS530 银川中心'],
+  'xinyewu': ['PMC板块', '咨询板块', '数字技术板块'],
+  'nm-ls': ['新材料板块', '生命科学板块'],
+  'haiwai': ['COII板块', '模块化板块', '供应链板块'],
+  'dongbu': ['金山中心', '沈阳中心', '惠湛中心'],
+  'xibu': ['银川中心'],
 };
 
-const SECTOR_COLORS = ['#007069', '#005c56', '#0d9488', '#2dd4bf', '#14b8a6'];
+// 同一青绿色系，由深到浅提高区分度
+const SECTOR_COLORS = ['#004d47', '#0d9488', '#14b8a6', '#2dd4bf', '#5eead4'];
 
 const cardData = [
   {
@@ -59,10 +58,11 @@ const cardData = [
     monthValue: '5,364.80',
     percentage: '12.5%',
     donutValue: 45.9,
+    donutBySector: [16, 15.5, 14.4],
     subTargets: [
-      { type: '设计及咨询', current: 25430.5, target: 40000 },
-      { type: 'EPC', current: 42785.3, target: 80000 },
-      { type: 'PMC', current: 6904.61, target: 15000 },
+      { type: '设计及咨询', current: 25430.5, target: 40000, bySector: [8500, 9430.5, 7500] },
+      { type: 'EPC', current: 42785.3, target: 80000, bySector: [14000, 14785.3, 14000] },
+      { type: 'PMC', current: 6904.61, target: 15000, bySector: [2300, 2302.31, 2302.3] },
     ],
   },
   {
@@ -72,10 +72,11 @@ const cardData = [
     monthValue: '5,364.80',
     percentage: '8.3%',
     donutValue: 37.1,
+    donutBySector: [12.5, 13.2, 11.4],
     subTargets: [
-      { type: '设计及咨询', current: 12845.2, target: 35000 },
-      { type: 'EPC', current: 21634.8, target: 65000 },
-      { type: 'PMC', current: 3842.29, target: 12000 },
+      { type: '设计及咨询', current: 12845.2, target: 35000, bySector: [4200, 4345.2, 4300] },
+      { type: 'EPC', current: 21634.8, target: 65000, bySector: [7200, 7214.8, 7220] },
+      { type: 'PMC', current: 3842.29, target: 12000, bySector: [1280, 1281.09, 1281.2] },
     ],
   },
   {
@@ -85,10 +86,11 @@ const cardData = [
     monthValue: '5,364.80',
     percentage: '8.3%',
     donutValue: 42.0,
+    donutBySector: [14, 14.5, 13.5],
     subTargets: [
-      { type: '设计及咨询', current: 15268.4, target: 38000 },
-      { type: 'EPC', current: 22389.5, target: 70000 },
-      { type: 'PMC', current: 3051.3, target: 13000 },
+      { type: '设计及咨询', current: 15268.4, target: 38000, bySector: [5100, 5084.4, 5084] },
+      { type: 'EPC', current: 22389.5, target: 70000, bySector: [7460, 7464.5, 7465] },
+      { type: 'PMC', current: 3051.3, target: 13000, bySector: [1017, 1017.1, 1017.2] },
     ],
   },
   {
@@ -98,24 +100,25 @@ const cardData = [
     monthValue: '5,364.80',
     percentage: '8.3%',
     donutValue: 44.5,
+    donutBySector: [15, 15.2, 14.3],
     subTargets: [
-      { type: '设计及咨询', current: 16845.2, target: 36000 },
-      { type: 'EPC', current: 21583.67, target: 68000 },
-      { type: 'PMC', current: 3736.3, target: 14000 },
+      { type: '设计及咨询', current: 16845.2, target: 36000, bySector: [5615, 5615.2, 5615] },
+      { type: 'EPC', current: 21583.67, target: 68000, bySector: [7194, 7194.89, 7194.78] },
+      { type: 'PMC', current: 3736.3, target: 14000, bySector: [1245, 1245.1, 1246.2] },
     ],
   },
 ];
 
-const funnelData = [
-  { name: '预计投标额', value: 120000, fill: '#007069' },
-  { name: '预计合同额', value: 85000, fill: '#005c56' },
-  { name: '权重合同额', value: 62000, fill: '#0d9488' },
+const marketDataLine = [
+  { name: '预计合同额', value: 120000 },
+  { name: '预计投标额', value: 85000 },
+  { name: '权重合同额', value: 62000 },
 ];
 
 const projectActivityData = [
-  { id: 'P001', name: '某炼油厂扩建项目', sector: 'SAS520 金山中心', time: '2025-03-01', status: '新增' },
-  { id: 'P002', name: '某石化储备库项目', sector: 'SAS560 沈阳中心', time: '2025-02-28', status: '项目信息变更' },
-  { id: 'P003', name: '某化工园区建设项目', sector: 'SAS170 PMC板块', time: '2025-02-25', status: '保障活动更新' },
+  { id: 'C25088', name: '上海石化公司全面技术改造和提质升级项目20万吨/年碳五分离装置（异戊烯部分）', sector: '金山中心', time: '2025-03-01', status: '新增' },
+  { id: 'G25007', name: '梨树风光制绿氢生物质耦合绿色甲醇项目业主工程师服务', sector: '沈阳中心', time: '2025-02-28', status: '项目信息变更' },
+  { id: 'G25009', name: '神华化工公司重点工程项目项目管理服务', sector: 'PMC板块', time: '2025-02-25', status: '保障活动更新' },
 ];
 
 const outputTrendMonths = ['9月', '10月', '11月', '12月', '1月', '2月'];
@@ -128,12 +131,11 @@ const outputTrendData = [
   { month: '2月', total: 13.2, sectorA: 4.4, sectorB: 4.4, sectorC: 4.4 },
 ];
 
-function getDonutConfig(value: number, size: 'large' | 'small') {
-  const data = [
-    { name: 'Filled', value },
-    { name: 'Unfilled', value: 100 - value },
-  ];
-  const colors = ['#007069', 'rgba(0, 112, 105, 0.2)'];
+function getDonutConfigBySector(segments: number[], size: 'large' | 'small') {
+  const total = segments.reduce((a, b) => a + b, 0);
+  const unfilled = Math.max(0, 100 - total);
+  const data = [...segments.map((v, i) => ({ name: `Sector${i}`, value: v })), { name: 'Unfilled', value: unfilled }];
+  const colors = [...segments.map((_, i) => SECTOR_COLORS[i % SECTOR_COLORS.length]), 'rgba(0, 112, 105, 0.2)'];
   return (
     <ResponsiveContainer width={size === 'large' ? 100 : 80} height={size === 'large' ? 100 : 80}>
       <PieChart>
@@ -159,7 +161,8 @@ export default function OrgDashboardPage() {
   const params = useParams();
   const slug = params?.slug as string | undefined;
   const [selectedDept, setSelectedDept] = useState('all');
-  const [showSubTargets, setShowSubTargets] = useState(true);
+  const [showSubTargets, setShowSubTargets] = useState(false);
+  const [hiddenOutputKeys, setHiddenOutputKeys] = useState<Record<string, boolean>>({});
 
   if (!slug || !ORG_SLUGS.includes(slug as OrgSlug)) {
     notFound();
@@ -206,8 +209,20 @@ export default function OrgDashboardPage() {
           </div>
 
           <div className="pt-20">
-            <div className="px-4 pt-0 pb-2 flex items-center gap-4">
+            <div className="px-4 pt-0 pb-2 flex flex-wrap items-center gap-4">
               <Select value={selectedDept} onChange={setSelectedDept} options={departmentOptions} style={{ width: 200 }} className="text-[#007069]" />
+              <Select
+                placeholder="选择项目经理"
+                allowClear
+                style={{ width: 160 }}
+                options={[
+                  { value: 'pm1', label: '张伟' },
+                  { value: 'pm2', label: '李娜' },
+                  { value: 'pm3', label: '王磊' },
+                  { value: 'pm4', label: '赵静' },
+                ]}
+                className="text-[#007069]"
+              />
               <Select
                 defaultValue="2025年"
                 style={{ width: 90 }}
@@ -222,17 +237,18 @@ export default function OrgDashboardPage() {
                 <span className="text-sm text-[#007069]">显示子目标</span>
                 <Switch checked={showSubTargets} onChange={setShowSubTargets} />
               </div>
-            </div>
-
-            {/* 板块图例 */}
-            <div className="px-4 pb-2 flex flex-wrap items-center gap-4">
-              <span className="text-sm font-medium text-gray-600">板块：</span>
-              {sectors.map((sector, i) => (
-                <span key={sector} className="flex items-center gap-1.5 text-sm">
-                  <span className="w-4 h-4 rounded" style={{ backgroundColor: SECTOR_COLORS[i % SECTOR_COLORS.length] }} />
-                  {sector}
-                </span>
-              ))}
+              <span className="ml-2 pl-4 border-l border-gray-200 flex items-center gap-3 flex-wrap flex-1">
+                {sectors.map((sector, i) => (
+                  <span key={sector} className="flex items-center gap-1.5 text-sm text-gray-600">
+                    <span className="w-4 h-4 rounded shrink-0" style={{ backgroundColor: SECTOR_COLORS[i % SECTOR_COLORS.length] }} />
+                    {sector}
+                  </span>
+                ))}
+              </span>
+              <button className="ml-auto flex items-center gap-2 px-4 py-1.5 bg-[#007069] text-white text-sm rounded-lg hover:bg-[#005c56] transition-colors shrink-0">
+                <BarChartOutlined />
+                月度统计
+              </button>
             </div>
 
             <div className="px-4">
@@ -257,7 +273,7 @@ export default function OrgDashboardPage() {
                             </div>
                           </div>
                           <div className="relative w-24 h-24">
-                            <div className="absolute inset-0 flex items-center justify-center">{getDonutConfig(card.donutValue, 'large')}</div>
+                            <div className="absolute inset-0 flex items-center justify-center">{getDonutConfigBySector(card.donutBySector, 'large')}</div>
                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-bold text-[#007069]">{card.donutValue}%</div>
                           </div>
                         </div>
@@ -266,6 +282,7 @@ export default function OrgDashboardPage() {
                         <div className="mt-4 pt-4 border-t border-[#007069]/20">
                           {card.subTargets.map((target, idx) => {
                             const percentage = Math.min(100, (target.current / target.target) * 100).toFixed(1);
+                            const bySector = target.bySector ?? [target.current];
                             return (
                               <div key={idx} className="mb-2 last:mb-0">
                                 <div className="flex text-sm mb-1">
@@ -275,10 +292,19 @@ export default function OrgDashboardPage() {
                                   </span>
                                 </div>
                                 <div className="flex items-center gap-2">
-                                  <div className="flex-1 h-3 bg-[#007069]/20 rounded-full overflow-hidden">
-                                    <div className="h-full bg-[#007069] rounded-full transition-all duration-500" style={{ width: `${percentage}%` }} />
+                                  <div className="flex-1 h-3 bg-[#007069]/20 rounded-full overflow-hidden flex">
+                                    {bySector.map((seg, si) => {
+                                      const segPct = Math.min(100, (seg / target.target) * 100);
+                                      return (
+                                        <div
+                                          key={si}
+                                          className="h-full transition-all duration-500 first:rounded-l-full last:rounded-r-full"
+                                          style={{ width: `${segPct}%`, backgroundColor: SECTOR_COLORS[si % SECTOR_COLORS.length] }}
+                                        />
+                                      );
+                                    })}
                                   </div>
-                                  <span className="text-sm text-[#007069]">{percentage}%</span>
+                                  <span className="text-sm text-[#007069] shrink-0">{percentage}%</span>
                                 </div>
                               </div>
                             );
@@ -326,16 +352,30 @@ export default function OrgDashboardPage() {
                   <div className="space-y-2">
                     <div className="bg-[#007069]/10 p-3 rounded-lg">
                       <p className="text-xl font-bold text-[#007069]">33,199.69</p>
-                      <p className="text-sm text-[#007069] mt-1">合计成本</p>
+                      <div className="flex items-center gap-2 mt-1">
+                        <p className="text-sm text-[#007069]">合计成本</p>
+                        <AntTooltip title="查看详情">
+                          <Link href="/dashboard/cost-detail" className="w-5 h-5 rounded-full bg-[#007069]/10 flex items-center justify-center hover:bg-[#007069]/20 transition-colors">
+                            <RightOutlined className="text-xs text-[#007069]" />
+                          </Link>
+                        </AntTooltip>
+                      </div>
                     </div>
                     <div className="flex gap-2 w-full">
                       <div className="flex-1 bg-[#007069]/5 p-2 rounded-lg">
                         <p className="text-lg font-bold text-[#007069]">27,167.37</p>
-                        <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">已签项目成本</p>
+                        <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">项目成本</p>
                       </div>
                       <div className="flex-1 bg-[#007069]/5 p-2 rounded-lg">
                         <p className="text-lg font-bold text-[#007069]">6,032.32</p>
-                        <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">部门成本</p>
+                        <div className="flex items-center gap-2 mt-1">
+                          <p className="text-sm text-[#007069] whitespace-nowrap">管理成本</p>
+                          <AntTooltip title="查看详情">
+                            <Link href="/dashboard/department-cost-detail" className="w-5 h-5 rounded-full bg-[#007069]/10 flex items-center justify-center hover:bg-[#007069]/20 transition-colors">
+                              <RightOutlined className="text-xs text-[#007069]" />
+                            </Link>
+                          </AntTooltip>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -345,57 +385,94 @@ export default function OrgDashboardPage() {
               <Card className="border-0 shadow-md h-full">
                 <CardContent className="p-4">
                   <h3 className="font-medium text-sm text-gray-700 mb-1">市场数据（万元）</h3>
-                  <p className="text-xs text-gray-500 mb-2">预计合同额 → 预计投标额 → 权重合同额</p>
-                  <div className="h-[180px]">
+                  <div className="h-[160px]">
                     <ResponsiveContainer width="100%" height="100%">
-                      <FunnelChart>
-                        <Legend formatter={(_, entry) => (entry as { payload?: { name?: string } }).payload?.name ?? ''} />
-                        <Funnel dataKey="value" data={funnelData} nameKey="name">
-                          <LabelList position="right" fill="#000" dataKey="name" />
-                          <LabelList position="right" fill="#007069" dataKey="value" formatter={(v: number) => v.toLocaleString()} />
-                        </Funnel>
-                      </FunnelChart>
+                      <LineChart data={marketDataLine} margin={{ top: 32, right: 36, left: 36, bottom: 0 }}>
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,112,105,0.1)" vertical={false} />
+                        <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#115e59' }} axisLine={false} tickLine={false} interval={0} />
+                        <YAxis hide />
+                        <RechartsTooltip formatter={(value: number) => value.toLocaleString()} />
+                        <Line type="monotone" dataKey="value" stroke="#007069" strokeWidth={2} dot={{ r: 4, fill: '#007069' }} activeDot={{ r: 5 }} connectNulls>
+                          <LabelList position="top" dataKey="value" formatter={(v: number) => v.toLocaleString()} fill="#007069" fontSize={12} />
+                        </Line>
+                      </LineChart>
                     </ResponsiveContainer>
                   </div>
                 </CardContent>
               </Card>
             </div>
 
-            <div className="px-4 grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
+            <div className="px-4 grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
               <Card className="border-0 shadow-md">
                 <CardContent className="p-4">
-                  <h3 className="font-medium text-sm text-gray-700 mb-2">核心项目动态（最新3条）</h3>
+                  <h3 className="font-medium text-sm text-gray-700 mb-3">最新核心项目动态</h3>
                   <div className="space-y-2">
-                    {projectActivityData.map((row) => (
-                      <div key={row.id} className="flex flex-wrap items-center gap-x-4 gap-y-1 py-2 border-b border-gray-100 last:border-0 text-sm">
-                        <span className="font-medium text-[#007069]">{row.id}</span>
-                        <span>{row.name}</span>
-                        <span className="text-gray-500">{row.sector}</span>
-                        <span className="text-gray-500">{row.time}</span>
-                        <span className="px-2 py-0.5 rounded bg-[#007069]/10 text-[#007069]">{row.status}</span>
-                      </div>
-                    ))}
+                    {projectActivityData.map((row) => {
+                      const statusColor: Record<string, { bg: string; text: string; dot: string }> = {
+                        '新增': { bg: 'bg-emerald-50', text: 'text-emerald-700', dot: 'bg-emerald-500' },
+                        '项目信息变更': { bg: 'bg-amber-50', text: 'text-amber-700', dot: 'bg-amber-500' },
+                        '保障活动更新': { bg: 'bg-sky-50', text: 'text-sky-700', dot: 'bg-sky-500' },
+                      };
+                      const sc = statusColor[row.status] ?? { bg: 'bg-gray-50', text: 'text-gray-600', dot: 'bg-gray-400' };
+                      return (
+                        <div key={row.id} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 hover:bg-[#007069]/5 transition-colors">
+                          <div className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${sc.dot}`} />
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 justify-between mb-1">
+                              <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${sc.bg} ${sc.text}`}>{row.status}</span>
+                              <span className="text-xs text-gray-400">{row.time}</span>
+                            </div>
+                            <div className="flex items-center gap-2 min-w-0">
+                              <span className="text-xs text-gray-400 font-mono shrink-0">{row.id}</span>
+                              <span className="text-sm font-medium text-gray-800 truncate flex-1" title={row.name}>{row.name}</span>
+                              <span className="text-xs text-[#007069] shrink-0">{row.sector}</span>
+                            </div>
+
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </CardContent>
               </Card>
 
               <Card className="border-0 shadow-md">
                 <CardContent className="p-4">
-                  <h3 className="font-medium text-sm text-gray-700 mb-2">人均产值趋势（万元/人，最近6个月）</h3>
+                  <h3 className="font-medium text-sm text-gray-700 mb-2">单位工时创造产值（万元/小时）</h3>
                   <div className="h-[200px]">
                     <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={outputTrendData} margin={{ top: 5, right: 20, left: -10, bottom: 0 }}>
+                      <LineChart data={outputTrendData} margin={{ top: 5, right: 0, left: -20, bottom: 0 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,112,105,0.1)" />
                         <XAxis dataKey="month" tick={{ fontSize: 12, fill: '#115e59' }} axisLine={false} tickLine={false} />
                         <YAxis tick={{ fontSize: 11, fill: '#115e59' }} axisLine={false} tickLine={false} />
                         <RechartsTooltip formatter={(value: number) => value.toFixed(2)} />
-                        <Line type="monotone" dataKey="total" name="事业群合计" stroke="#007069" strokeWidth={2} dot={{ r: 3 }} />
-                        <Line type="monotone" dataKey="sectorA" name={sectors[0] || '板块1'} stroke="#005c56" strokeWidth={1.5} dot={{ r: 2 }} />
-                        {sectors[1] && <Line type="monotone" dataKey="sectorB" name={sectors[1]} stroke="#0d9488" strokeWidth={1.5} dot={{ r: 2 }} />}
-                        {sectors[2] && <Line type="monotone" dataKey="sectorC" name={sectors[2]} stroke="#2dd4bf" strokeWidth={1.5} dot={{ r: 2 }} />}
+                        <Legend
+                          verticalAlign="middle"
+                          align="right"
+                          layout="vertical"
+                          wrapperStyle={{ paddingLeft: 16 }}
+                          onClick={(data, _index, _e) => {
+                            const key = data?.dataKey != null ? String(data.dataKey) : '';
+                            if (key) setHiddenOutputKeys((prev) => ({ ...prev, [key]: !prev[key] }));
+                          }}
+                          formatter={(value, entry) => {
+                            const key = entry?.dataKey != null ? String(entry.dataKey) : '';
+                            const hidden = key && hiddenOutputKeys[key];
+                            return <span style={{ cursor: 'pointer', opacity: hidden ? 0.5 : 1 }}>{value}</span>;
+                          }}
+                        />
+                        <Line type="monotone" dataKey="total" name="事业群合计" stroke="#007069" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenOutputKeys.total} />
+                        <Line type="monotone" dataKey="sectorA" name={sectors[0] || '板块1'} stroke="#005c56" strokeWidth={1.5} dot={{ r: 2 }} hide={!!hiddenOutputKeys.sectorA} />
+                        {sectors[1] && <Line type="monotone" dataKey="sectorB" name={sectors[1]} stroke="#0d9488" strokeWidth={1.5} dot={{ r: 2 }} hide={!!hiddenOutputKeys.sectorB} />}
+                        {sectors[2] && <Line type="monotone" dataKey="sectorC" name={sectors[2]} stroke="#2dd4bf" strokeWidth={1.5} dot={{ r: 2 }} hide={!!hiddenOutputKeys.sectorC} />}
                       </LineChart>
                     </ResponsiveContainer>
                   </div>
+                </CardContent>
+              </Card>
+              <Card className="border-0 shadow-md">
+                <CardContent className="p-4">
+
                 </CardContent>
               </Card>
             </div>
