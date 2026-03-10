@@ -6,6 +6,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import {
   LineChart,
   Line,
+  BarChart,
+  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -115,10 +117,16 @@ const marketDataLine = [
   { name: '权重合同额', value: 62000 },
 ];
 
+const STATUS_TOOLTIP: Record<string, string> = {
+  '新增': '该项目已被纳入核心项目跟踪，开始进行重点关注与保障。',
+  '项目信息变更': '项目关键信息发生变化，包括：工程平台发起的 CRB 变更，以及数据中台发起的项目经理、项目名称、客户名称、执行日期等信息变更。',
+  '保障活动更新': '该核心项目的保障活动配置项状态已更新，请关注最新进展。',
+};
+
 const projectActivityData = [
-  { id: 'C25088', name: '上海石化公司全面技术改造和提质升级项目20万吨/年碳五分离装置（异戊烯部分）', sector: '金山中心', time: '2025-03-01', status: '新增' },
-  { id: 'G25007', name: '梨树风光制绿氢生物质耦合绿色甲醇项目业主工程师服务', sector: '沈阳中心', time: '2025-02-28', status: '项目信息变更' },
-  { id: 'G25009', name: '神华化工公司重点工程项目项目管理服务', sector: 'PMC板块', time: '2025-02-25', status: '保障活动更新' },
+  { id: 'C25088', name: '上海石化公司全面技术改造和提质升级项目20万吨/年碳五分离装置（异戊烯部分）', sector: '金山中心', time: '2025-03-01', status: '新增', subStatus: undefined },
+  { id: 'G25007', name: '梨树风光制绿氢生物质耦合绿色甲醇项目业主工程师服务', sector: '沈阳中心', time: '2025-02-28', status: '项目信息变更', subStatus: 'CRB变更' },
+  { id: 'G25009', name: '神华化工公司重点工程项目项目管理服务', sector: 'PMC板块', time: '2025-02-25', status: '保障活动更新', subStatus: undefined },
 ];
 
 const outputTrendMonths = ['9月', '10月', '11月', '12月', '1月', '2月'];
@@ -414,20 +422,24 @@ export default function OrgDashboardPage() {
                         '保障活动更新': { bg: 'bg-sky-50', text: 'text-sky-700', dot: 'bg-sky-500' },
                       };
                       const sc = statusColor[row.status] ?? { bg: 'bg-gray-50', text: 'text-gray-600', dot: 'bg-gray-400' };
+                      const statusLabel = row.subStatus ? `${row.status} · ${row.subStatus}` : row.status;
                       return (
                         <div key={row.id} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 hover:bg-[#007069]/5 transition-colors">
                           <div className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${sc.dot}`} />
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center gap-2 justify-between mb-1">
-                              <span className={`text-xs px-1.5 py-0.5 rounded font-medium ${sc.bg} ${sc.text}`}>{row.status}</span>
+                              <AntTooltip title={STATUS_TOOLTIP[row.status]} placement="topLeft">
+                                <span className={`text-xs px-1.5 py-0.5 rounded font-medium cursor-default ${sc.bg} ${sc.text}`}>
+                                  {statusLabel}
+                                </span>
+                              </AntTooltip>
                               <span className="text-xs text-gray-400">{row.time}</span>
                             </div>
                             <div className="flex items-center gap-2 min-w-0">
-                              <span className="text-xs text-gray-400 font-mono shrink-0">{row.id}</span>
+                              <span className="text-sm font-medium text-gray-800 font-mono shrink-0">{row.id}</span>
                               <span className="text-sm font-medium text-gray-800 truncate flex-1" title={row.name}>{row.name}</span>
                               <span className="text-xs text-[#007069] shrink-0">{row.sector}</span>
                             </div>
-
                           </div>
                         </div>
                       );
@@ -439,10 +451,10 @@ export default function OrgDashboardPage() {
               <Card className="border-0 shadow-md">
                 <CardContent className="p-4">
                   <h3 className="font-medium text-sm text-gray-700 mb-2">单位工时创造产值（万元/小时）</h3>
-                  <div className="h-[200px]">
+                  <div className="h-[220px]">
                     <ResponsiveContainer width="100%" height="100%">
-                      <LineChart data={outputTrendData} margin={{ top: 5, right: 0, left: -20, bottom: 0 }}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,112,105,0.1)" />
+                      <BarChart data={outputTrendData} margin={{ top: 5, right: 0, left: -20, bottom: 0 }} barCategoryGap="25%">
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,112,105,0.1)" vertical={false} />
                         <XAxis dataKey="month" tick={{ fontSize: 12, fill: '#115e59' }} axisLine={false} tickLine={false} />
                         <YAxis tick={{ fontSize: 11, fill: '#115e59' }} axisLine={false} tickLine={false} />
                         <RechartsTooltip formatter={(value: number) => value.toFixed(2)} />
@@ -450,7 +462,7 @@ export default function OrgDashboardPage() {
                           verticalAlign="middle"
                           align="right"
                           layout="vertical"
-                          wrapperStyle={{ paddingLeft: 16 }}
+                          wrapperStyle={{ paddingLeft: 16, fontSize: 12 }}
                           onClick={(data, _index, _e) => {
                             const key = data?.dataKey != null ? String(data.dataKey) : '';
                             if (key) setHiddenOutputKeys((prev) => ({ ...prev, [key]: !prev[key] }));
@@ -458,14 +470,13 @@ export default function OrgDashboardPage() {
                           formatter={(value, entry) => {
                             const key = entry?.dataKey != null ? String(entry.dataKey) : '';
                             const hidden = key && hiddenOutputKeys[key];
-                            return <span style={{ cursor: 'pointer', opacity: hidden ? 0.5 : 1 }}>{value}</span>;
+                            return <span style={{ cursor: 'pointer', opacity: hidden ? 0.5 : 1, fontSize: 12 }}>{value}</span>;
                           }}
                         />
-                        <Line type="monotone" dataKey="total" name="事业群合计" stroke="#007069" strokeWidth={2} dot={{ r: 3 }} hide={!!hiddenOutputKeys.total} />
-                        <Line type="monotone" dataKey="sectorA" name={sectors[0] || '板块1'} stroke="#005c56" strokeWidth={1.5} dot={{ r: 2 }} hide={!!hiddenOutputKeys.sectorA} />
-                        {sectors[1] && <Line type="monotone" dataKey="sectorB" name={sectors[1]} stroke="#0d9488" strokeWidth={1.5} dot={{ r: 2 }} hide={!!hiddenOutputKeys.sectorB} />}
-                        {sectors[2] && <Line type="monotone" dataKey="sectorC" name={sectors[2]} stroke="#2dd4bf" strokeWidth={1.5} dot={{ r: 2 }} hide={!!hiddenOutputKeys.sectorC} />}
-                      </LineChart>
+                        <Bar dataKey="sectorA" name={sectors[0] || '板块1'} stackId="a" fill={SECTOR_COLORS[0]} hide={!!hiddenOutputKeys.sectorA} radius={[0, 0, 0, 0]} />
+                        {sectors[1] && <Bar dataKey="sectorB" name={sectors[1]} stackId="a" fill={SECTOR_COLORS[1]} hide={!!hiddenOutputKeys.sectorB} />}
+                        {sectors[2] && <Bar dataKey="sectorC" name={sectors[2]} stackId="a" fill={SECTOR_COLORS[2]} hide={!!hiddenOutputKeys.sectorC} radius={[3, 3, 0, 0]} />}
+                      </BarChart>
                     </ResponsiveContainer>
                   </div>
                 </CardContent>
