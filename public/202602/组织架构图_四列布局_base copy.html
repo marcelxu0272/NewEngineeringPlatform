@@ -325,6 +325,16 @@
         color: inherit;
       }
 
+      button.project-group-header {
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      button.project-group-header:hover {
+        color: inherit;
+      }
+
       .project-group-header > span:first-child {
         display: inline-flex;
         align-items: center;
@@ -389,6 +399,73 @@
         font-weight: 400;
         font-size: 12px;
         margin-top: 3px;
+      }
+
+      /* 公司级EPC指标弹窗 */
+      .epc-metrics-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+      }
+      .epc-metrics-overlay.is-open {
+        display: flex;
+      }
+      .epc-metrics-modal {
+        background: var(--color-white);
+        border: 1px solid var(--color-projects-delivery);
+        border-radius: 6px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        min-width: 320px;
+        padding: 0;
+        overflow: hidden;
+      }
+      .epc-metrics-modal .epc-metrics-title {
+        background: var(--color-projects-delivery);
+        color: var(--color-white);
+        font-size: 14px;
+        font-weight: 700;
+        padding: 10px 16px;
+        margin: 0;
+      }
+      .epc-metrics-modal .epc-metrics-body {
+        padding: 16px;
+      }
+      .epc-metrics-modal .epc-metrics-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--color-bg-neutral-light);
+        font-size: 14px;
+      }
+      .epc-metrics-modal .epc-metrics-row:last-child {
+        border-bottom: none;
+      }
+      .epc-metrics-modal .epc-metrics-label {
+        color: var(--color-text-primary);
+      }
+      .epc-metrics-modal .epc-metrics-value {
+        font-weight: 700;
+        color: var(--color-projects-delivery);
+      }
+      .epc-metrics-modal .epc-metrics-close {
+        display: block;
+        width: 100%;
+        margin-top: 12px;
+        padding: 8px 16px;
+        font-size: 14px;
+        color: var(--color-projects-delivery);
+        background: var(--color-projects-delivery-bg);
+        border: 1px solid var(--color-projects-delivery);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .epc-metrics-modal .epc-metrics-close:hover {
+        background: var(--color-projects-delivery-item-bg);
       }
 
       /* 项目交付保障 */
@@ -635,20 +712,20 @@
             <!-- 新业务项目群 -->
             <div class="project-group">
               <a class="project-group-header" href="/dashboard/org/xinyewu" target="_top">
-                <span>新业务项目群</span>
+                <span>SAS850 新业务项目群</span>
                 <span class="project-group-leader">任宇</span>
               </a>
               <div class="project-items-row">
                 <div class="project-item">
-                  <div class="project-item-title">PMC板块</div>
+                  <div class="project-item-title">SAS170 PMC板块</div>
                   <div class="project-item-manager">颜中</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">咨询板块</div>
+                  <div class="project-item-title">SAS610 咨询板块</div>
                   <div class="project-item-manager">王建平</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">数字技术板块</div>
+                  <div class="project-item-title">SAS680 数字技术板块</div>
                   <div class="project-item-manager">潘日成</div>
                 </div>
               </div>
@@ -657,16 +734,16 @@
             <!-- NM&LS 项目群 -->
             <div class="project-group">
               <a class="project-group-header" href="/dashboard/org/nm-ls" target="_top">
-                <span>NM&LS 项目群</span>
+                <span>SAS840 NM&LS 项目群</span>
                 <span class="project-group-leader">潘建兴</span>
               </a>
               <div class="project-items-row">
                 <div class="project-item">
-                  <div class="project-item-title">新材料板块</div>
+                  <div class="project-item-title">SAS650 新材料板块</div>
                   <div class="project-item-manager">陈贺明</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">生命科学板块</div>
+                  <div class="project-item-title">SAS710 生命科学板块</div>
                   <div class="project-item-manager">杨润宇</div>
                 </div>
               </div>
@@ -675,20 +752,20 @@
             <!-- 海外项目群 -->
             <div class="project-group">
               <a class="project-group-header" href="/dashboard/org/haiwai" target="_top">
-                <span>海外项目群</span>
+                <span>SAS830 海外项目群</span>
                 <span class="project-group-leader">李湛湘</span>
               </a>
               <div class="project-items-row">
                 <div class="project-item">
-                  <div class="project-item-title">COII板块</div>
+                  <div class="project-item-title">SAS690 COII板块</div>
                   <div class="project-item-manager">周翔</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">模块化板块</div>
+                  <div class="project-item-title">SAS720 模块化板块</div>
                   <div class="project-item-manager">朱勇</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">供应链板块</div>
+                  <div class="project-item-title">SAS670 供应链板块</div>
                   <div class="project-item-manager">张雯</div>
                 </div>
               </div>
@@ -697,20 +774,20 @@
             <!-- 东部项目群 -->
             <div class="project-group">
               <a class="project-group-header" href="/dashboard/org/dongbu" target="_top">
-                <span>东部项目群</span>
+                <span>SAS810 东部项目群</span>
                 <span class="project-group-leader">钟富优</span>
               </a>
               <div class="project-items-row">
                 <div class="project-item">
-                  <div class="project-item-title">金山中心</div>
+                  <div class="project-item-title">SAS520 金山中心</div>
                   <div class="project-item-manager">钟富优</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">沈阳中心</div>
+                  <div class="project-item-title">SAS560 沈阳中心</div>
                   <div class="project-item-manager">朱新辉</div>
                 </div>
                 <div class="project-item">
-                  <div class="project-item-title">惠湛中心</div>
+                  <div class="project-item-title">SAS550 惠湛中心</div>
                   <div class="project-item-manager">赵卫强</div>
                 </div>
               </div>
@@ -722,12 +799,12 @@
               <div class="west-project-group">
                 <div class="project-group" style="margin-bottom: 0px;">
                   <a class="project-group-header" href="/dashboard/org/xibu" target="_top" style="margin-right: 8px;">
-                    <span>西部项目群</span>
+                    <span>SAS820 西部项目群</span>
                     <span class="project-group-leader">梁栋</span>
                   </a>
                   <div class="project-items-row">
                     <div class="project-item">
-                      <div class="project-item-title">银川中心</div>
+                      <div class="project-item-title">SAS530 银川中心</div>
                       <div class="project-item-manager">杨科</div>
                     </div>
                   </div>
@@ -737,10 +814,10 @@
               <!-- 公司级EPC项目 - 占1列 -->
               <div class="epc-project-group">
                 <div class="project-group">
-                  <div class="project-group-header">
+                  <a class="project-group-header project-group-header-epc" id="epc-detail-trigger" title="查看指标">
                     <span>公司级EPC项目</span>
                     <span class="project-group-leader"></span>
-                  </div>
+                  </a>
                   <div class="project-items-row">
                     <!-- 空着，不显示具体项目 -->
                   </div>
@@ -828,6 +905,32 @@
       </div>
     </div>
 
+    <!-- 公司级EPC指标弹窗 -->
+    <div class="epc-metrics-overlay" id="epc-metrics-overlay" role="dialog" aria-modal="true" aria-labelledby="epc-metrics-title">
+      <div class="epc-metrics-modal">
+        <h2 class="epc-metrics-title" id="epc-metrics-title">公司级EPC项目 指标</h2>
+        <div class="epc-metrics-body">
+          <div class="epc-metrics-row">
+            <span class="epc-metrics-label">新增合同额</span>
+            <span class="epc-metrics-value">80,000</span>
+          </div>
+          <div class="epc-metrics-row">
+            <span class="epc-metrics-label">完成合同额（外部产值）</span>
+            <span class="epc-metrics-value">30,000</span>
+          </div>
+          <div class="epc-metrics-row">
+            <span class="epc-metrics-label">开票额</span>
+            <span class="epc-metrics-value">30,000</span>
+          </div>
+          <div class="epc-metrics-row">
+            <span class="epc-metrics-label">回款额</span>
+            <span class="epc-metrics-value">30,000</span>
+          </div>
+          <button type="button" class="epc-metrics-close" id="epc-metrics-close">关闭</button>
+        </div>
+      </div>
+    </div>
+
     <script>
       // 自适应调整
       function adjustLayout() {
@@ -877,6 +980,25 @@
 
       document.addEventListener("DOMContentLoaded", function () {
         updateArrowIcon(CLASSIC_THEME_COLORS["projects-delivery"]);
+
+        // 公司级EPC指标弹窗
+        var overlay = document.getElementById("epc-metrics-overlay");
+        var trigger = document.getElementById("epc-detail-trigger");
+        var closeBtn = document.getElementById("epc-metrics-close");
+        if (trigger) {
+          trigger.addEventListener("click", function () {
+            if (overlay) overlay.classList.add("is-open");
+          });
+        }
+        function closeEpcModal() {
+          if (overlay) overlay.classList.remove("is-open");
+        }
+        if (closeBtn) closeBtn.addEventListener("click", closeEpcModal);
+        if (overlay) {
+          overlay.addEventListener("click", function (e) {
+            if (e.target === overlay) closeEpcModal();
+          });
+        }
       });
     </script>
   </body>
