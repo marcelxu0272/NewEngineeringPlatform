@@ -3,7 +3,7 @@
 import { useParams, notFound } from 'next/navigation';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
-import { ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from 'recharts';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import * as HighchartsFunnelModule from 'highcharts/modules/funnel';
@@ -24,7 +24,7 @@ import {
   RightOutlined,
 } from '@ant-design/icons';
 import { Select, Switch, Tooltip as AntTooltip } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ConfigProvider } from 'antd';
 
 const ORG_SLUGS = ['xinyewu', 'nm-ls', 'haiwai', 'dongbu', 'xibu'] as const;
@@ -159,14 +159,24 @@ const outputTrendData = [
   { month: '2月',  sectorA: 4400, sectorB: 4400, sectorC: 4400 },
 ];
 
-function getDonutConfigBySector(segments: number[], size: 'large' | 'small') {
+function getDonutConfigBySector(segments: number[], size: 'large' | 'small', sectorNames?: string[]) {
   const total = segments.reduce((a, b) => a + b, 0);
   const unfilled = Math.max(0, 100 - total);
-  const data = [...segments.map((v, i) => ({ name: `Sector${i}`, value: v })), { name: 'Unfilled', value: unfilled }];
+  const data = [
+    ...segments.map((v, i) => ({ name: sectorNames?.[i] ?? `板块${i + 1}`, value: v })),
+    { name: '未完成', value: unfilled },
+  ];
   const colors = [...segments.map((_, i) => SECTOR_COLORS[i % SECTOR_COLORS.length]), 'rgba(0, 112, 105, 0.2)'];
   return (
     <ResponsiveContainer width={size === 'large' ? 100 : 80} height={size === 'large' ? 100 : 80}>
       <PieChart>
+        <Tooltip
+          formatter={(value: number, name: string) => [name === '未完成' ? `${value.toFixed(1)}%` : `${value}%`, name]}
+          contentStyle={{ fontSize: '12px', padding: '8px 12px' }}
+          wrapperStyle={{ zIndex: 10, transform: 'translateY(-100%) translateY(4px)' }}
+          offset={0}
+          separator=": "
+        />
         <Pie
           data={data}
           innerRadius="70%"
@@ -185,10 +195,21 @@ function getDonutConfigBySector(segments: number[], size: 'large' | 'small') {
   );
 }
 
+// 构建「事业群 + 项目交付板块」的层级选项（事业群为组，组标题作为第一项可选，其下为各板块）
+const ORG_GROUPED_OPTIONS: { label: string; options: { value: string; label: string }[] }[] = ORG_SLUGS.map(
+  (s) => ({
+    label: SLUG_TO_NAME[s],
+    options: [
+      { value: s, label: SLUG_TO_NAME[s] },
+      ...SLUG_TO_SECTORS[s].map((sec) => ({ value: `${s}__${sec}`, label: sec })),
+    ],
+  })
+);
+
 export default function OrgDashboardPage() {
   const params = useParams();
   const slug = params?.slug as string | undefined;
-  const [selectedDept, setSelectedDept] = useState('all');
+  const [selectedDept, setSelectedDept] = useState<string>(() => slug!);
   const [showSubTargets, setShowSubTargets] = useState(false);
 
   if (!slug || !ORG_SLUGS.includes(slug as OrgSlug)) {
@@ -199,7 +220,10 @@ export default function OrgDashboardPage() {
   const orgName = SLUG_TO_NAME[orgSlug];
   const sectors = SLUG_TO_SECTORS[orgSlug];
 
-  const departmentOptions = [{ value: 'all', label: '全部' }, ...sectors.map((s) => ({ value: s, label: s }))];
+  // 路由切换事业群时，同步选择器为当前事业群
+  useEffect(() => {
+    setSelectedDept(slug!);
+  }, [slug]);
 
   const stackedBarOptions = useMemo<Highcharts.Options>(() => ({
     chart: { type: 'column', height: 220, backgroundColor: 'transparent', style: { fontFamily: 'inherit' }, margin: [10, 110, 30, 40] },
@@ -209,7 +233,7 @@ export default function OrgDashboardPage() {
     yAxis: { title: { text: null }, gridLineColor: 'rgba(0,112,105,0.1)', labels: { style: { color: '#115e59', fontSize: '11px' } } },
     legend: { layout: 'vertical', align: 'right', verticalAlign: 'middle', itemStyle: { color: '#374151', fontWeight: 'normal', fontSize: '11px' } },
     tooltip: { shared: true, valueDecimals: 0, valueSuffix: ' 元/小时' },
-    plotOptions: { column: { stacking: 'normal', borderWidth: 0, borderRadius: 2, groupPadding: 0.15 } },
+    plotOptions: { column: { borderWidth: 0, borderRadius: 2, groupPadding: 0.1} },
     series: [
       { type: 'column', name: sectors[0] || '板块1', data: outputTrendData.map(d => d.sectorA), color: SECTOR_COLORS[0] },
       ...(sectors[1] ? [{ type: 'column' as const, name: sectors[1], data: outputTrendData.map(d => d.sectorB), color: SECTOR_COLORS[1] }] : []),
@@ -317,8 +341,16 @@ export default function OrgDashboardPage() {
 
           <div className="pt-20">
             <div className="px-4 pt-0 pb-2 flex flex-wrap items-center gap-4">
-              <Select value={selectedDept} onChange={setSelectedDept} options={departmentOptions} style={{ width: 200 }} className="text-[#007069]" />
               <Select
+                value={selectedDept}
+                onChange={setSelectedDept}
+                options={ORG_GROUPED_OPTIONS}
+                style={{ width: 240 }}
+                className="text-[#007069]"
+                placeholder="选择事业群 / 板块"
+                listHeight={320}
+              />
+              {/* <Select
                 placeholder="选择项目经理"
                 allowClear
                 style={{ width: 160 }}
@@ -329,7 +361,7 @@ export default function OrgDashboardPage() {
                   { value: 'pm4', label: '赵静' },
                 ]}
                 className="text-[#007069]"
-              />
+              /> */}
               <Select
                 defaultValue="2025年"
                 style={{ width: 90 }}
@@ -346,10 +378,16 @@ export default function OrgDashboardPage() {
               </div>
               <span className="ml-2 pl-4 border-l border-gray-200 flex items-center gap-3 flex-wrap flex-1">
                 {sectors.map((sector, i) => (
-                  <span key={sector} className="flex items-center gap-1.5 text-sm text-gray-600">
+                  <button
+                    key={sector}
+                    type="button"
+                    className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-[#007069] cursor-pointer transition-colors rounded px-1 py-0.5 -m-0.5 hover:bg-[#007069]/5"
+                    title="点击筛选（功能开发中）"
+                  >
                     <span className="w-4 h-4 rounded shrink-0" style={{ backgroundColor: SECTOR_COLORS[i % SECTOR_COLORS.length] }} />
                     {sector}
-                  </span>
+                    <RightOutlined className="text-[10px] opacity-70" />
+                  </button>
                 ))}
               </span>
               <button className="ml-auto flex items-center gap-2 px-4 py-1.5 bg-[#007069] text-white text-sm rounded-lg hover:bg-[#005c56] transition-colors shrink-0">
@@ -363,7 +401,7 @@ export default function OrgDashboardPage() {
                 {cardData.map((card, index) => (
                   <Card key={index} className="border-0 shadow-md">
                     <CardContent className="p-4">
-                      <AntTooltip title={`${card.title}，由下属板块汇总`}>
+                      <AntTooltip >
                         <div className="flex justify-between items-center">
                           <div>
                             <div className="flex items-center gap-2 mb-2">
@@ -380,8 +418,10 @@ export default function OrgDashboardPage() {
                             </div>
                           </div>
                           <div className="relative w-24 h-24">
-                            <div className="absolute inset-0 flex items-center justify-center">{getDonutConfigBySector(card.donutBySector.slice(0, sectors.length), 'large')}</div>
-                            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-sm font-bold text-[#007069]">{card.donutValue}%</div>
+                            <div className="absolute inset-0 flex items-center justify-center">
+                              {getDonutConfigBySector(card.donutBySector.slice(0, sectors.length), 'large', sectors)}
+                              <div className="absolute inset-0 flex items-center justify-center pointer-events-none text-sm font-bold text-[#007069]" style={{ zIndex: 1 }}>{card.donutValue}%</div>
+                            </div>
                           </div>
                         </div>
                       </AntTooltip>
@@ -403,12 +443,14 @@ export default function OrgDashboardPage() {
                                   <div className="flex-1 h-3 bg-[#007069]/20 rounded-full overflow-hidden flex">
                                     {bySector.map((seg, si) => {
                                       const segPct = Math.min(100, (seg / target.target) * 100);
+                                      const sectorName = sectors[si] ?? `板块${si + 1}`;
                                       return (
-                                        <div
-                                          key={si}
-                                          className="h-full transition-all duration-500 first:rounded-l-full last:rounded-r-full"
-                                          style={{ width: `${segPct}%`, backgroundColor: SECTOR_COLORS[si % SECTOR_COLORS.length] }}
-                                        />
+                                        <AntTooltip key={si} title={`${sectorName}: ${seg.toLocaleString()} 万元`} placement="top">
+                                          <div
+                                            className="h-full transition-all duration-500 first:rounded-l-full last:rounded-r-full cursor-default min-w-[2px]"
+                                            style={{ width: `${segPct}%`, backgroundColor: SECTOR_COLORS[si % SECTOR_COLORS.length] }}
+                                          />
+                                        </AntTooltip>
                                       );
                                     })}
                                   </div>
