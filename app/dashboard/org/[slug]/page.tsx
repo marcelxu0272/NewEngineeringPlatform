@@ -110,6 +110,8 @@ const cardData = [
 
 const marketDataFunnelValues = [120000, 85000, 62000]; // 预计合同额、预计投标额、权重合同额（万元）
 const marketDataFunnelNames = ['预计合同额', '预计投标额', '权重合同额'];
+// 漏斗图专用浅色系，与板块主题色区分
+const FUNNEL_COLORS = ['#e5f0f0', '#c3dddc', '#a5d2ca'];
 
 const STATUS_TOOLTIP: Record<string, string> = {
   '新增': '该项目已被纳入核心项目跟踪，开始进行重点关注与保障。',
@@ -274,7 +276,7 @@ export default function OrgDashboardPage() {
         data: marketDataFunnelNames.map((name, i) => ({
           name,
           y: marketDataFunnelValues[i],
-          color: SECTOR_COLORS[i],
+          color: FUNNEL_COLORS[i],
           ...(i < 2 ? { id: `funnel-${i}` } : {}),
         })),
       }],
@@ -283,7 +285,7 @@ export default function OrgDashboardPage() {
           labels: [{
             point: 'funnel-0',
             text: rate1 + '%',
-            style: { color: '#fff', fontWeight: 'bold', fontSize: '14px', textOutline: '1px contrast' },
+            style: { color: '#374151', fontWeight: 'bold', fontSize: '14px' },
             y: 32,
             verticalAlign: 'bottom' as const,
             backgroundColor: 'transparent',
@@ -294,7 +296,7 @@ export default function OrgDashboardPage() {
           labels: [{
             point: 'funnel-1',
             text: rate2 + '%',
-            style: { color: '#fff', fontWeight: 'bold', fontSize: '14px', textOutline: '1px contrast' },
+            style: { color: '#374151', fontWeight: 'bold', fontSize: '14px' },
             y: 24,
             verticalAlign: 'bottom' as const,
             backgroundColor: 'transparent',
@@ -336,12 +338,12 @@ export default function OrgDashboardPage() {
 
         <div className="ml-16 pb-4 space-y-4 bg-[#f8faff] w-[calc(100%-4rem)] min-h-screen overflow-x-hidden">
           <div className="fixed top-0 left-16 right-0 h-20 bg-white shadow-sm z-20">
-            <h2 className="pt-6 pl-6 text-2xl">运营看板 - {orgName}</h2>
+            <h2 className="pt-6 pl-6 text-2xl">运营看板 {'>'} {orgName}</h2>
           </div>
 
           <div className="pt-20">
             <div className="px-4 pt-0 pb-2 flex flex-wrap items-center gap-4">
-              <Select
+              {/* <Select
                 value={selectedDept}
                 onChange={setSelectedDept}
                 options={ORG_GROUPED_OPTIONS}
@@ -349,7 +351,7 @@ export default function OrgDashboardPage() {
                 className="text-[#007069]"
                 placeholder="选择事业群 / 板块"
                 listHeight={320}
-              />
+              /> */}
               {/* <Select
                 placeholder="选择项目经理"
                 allowClear
