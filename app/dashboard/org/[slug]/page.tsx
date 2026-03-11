@@ -111,7 +111,7 @@ const cardData = [
 const marketDataFunnelValues = [120000, 85000, 62000]; // 预计合同额、预计投标额、权重合同额（万元）
 const marketDataFunnelNames = ['预计合同额', '预计投标额', '权重合同额'];
 // 漏斗图专用浅色系，与板块主题色区分
-const FUNNEL_COLORS = ['#e5f0f0', '#c3dddc', '#a5d2ca'];
+const FUNNEL_COLORS = ['#e5f9f7', '#b9e6e0', '#82cdbb'];
 
 const STATUS_TOOLTIP: Record<string, string> = {
   '新增': '该项目已被纳入核心项目跟踪，开始进行重点关注与保障。',
@@ -151,14 +151,14 @@ const workloadData: Record<string, { annual: number; current: number; f1: number
   ],
 };
 
-const outputTrendMonths = ['9月', '10月', '11月', '12月', '1月', '2月'];
-const outputTrendData = [
-  { month: '9月',  sectorA: 4200, sectorB: 3800, sectorC: 4500 },
-  { month: '10月', sectorA: 4500, sectorB: 4000, sectorC: 4600 },
-  { month: '11月',  sectorA: 4300, sectorB: 4200, sectorC: 4300 },
-  { month: '12月',  sectorA: 4800, sectorB: 4500, sectorC: 4700 },
-  { month: '1月',  sectorA: 4600, sectorB: 4300, sectorC: 4600 },
-  { month: '2月',  sectorA: 4400, sectorB: 4400, sectorC: 4400 },
+// WIP及应收账款转化趋势（万元）
+const wipReceivableTrendData = [
+  { month: '9月', wip: 18520, receivable: 12430 },
+  { month: '10月', wip: 19200, receivable: 13100 },
+  { month: '11月', wip: 22947, receivable: 12435 },
+  { month: '12月', wip: 21500, receivable: 11800 },
+  { month: '1月', wip: 20800, receivable: 12900 },
+  { month: '2月', wip: 22100, receivable: 13200 },
 ];
 
 function getDonutConfigBySector(segments: number[], size: 'large' | 'small', sectorNames?: string[]) {
@@ -227,21 +227,56 @@ export default function OrgDashboardPage() {
     setSelectedDept(slug!);
   }, [slug]);
 
-  const stackedBarOptions = useMemo<Highcharts.Options>(() => ({
-    chart: { type: 'column', height: 220, backgroundColor: 'transparent', style: { fontFamily: 'inherit' }, margin: [10, 110, 30, 40] },
-    title: { text: undefined },
-    credits: { enabled: false },
-    xAxis: { categories: outputTrendData.map(d => d.month), lineColor: 'transparent', tickColor: 'transparent', labels: { style: { color: '#115e59', fontSize: '11px' } } },
-    yAxis: { title: { text: null }, gridLineColor: 'rgba(0,112,105,0.1)', labels: { style: { color: '#115e59', fontSize: '11px' } } },
-    legend: { layout: 'vertical', align: 'right', verticalAlign: 'middle', itemStyle: { color: '#374151', fontWeight: 'normal', fontSize: '11px' } },
-    tooltip: { shared: true, valueDecimals: 0, valueSuffix: ' 元/小时' },
-    plotOptions: { column: { borderWidth: 0, borderRadius: 2, groupPadding: 0.1} },
-    series: [
-      { type: 'column', name: sectors[0] || '板块1', data: outputTrendData.map(d => d.sectorA), color: SECTOR_COLORS[0] },
-      ...(sectors[1] ? [{ type: 'column' as const, name: sectors[1], data: outputTrendData.map(d => d.sectorB), color: SECTOR_COLORS[1] }] : []),
-      ...(sectors[2] ? [{ type: 'column' as const, name: sectors[2], data: outputTrendData.map(d => d.sectorC), color: SECTOR_COLORS[2] }] : []),
-    ],
-  }), [sectors]);
+  const wipReceivableBarOptions = useMemo<Highcharts.Options>(
+    () => ({
+      chart: {
+        type: "column",
+        height: 220,
+        backgroundColor: "transparent",
+        style: { fontFamily: "inherit" },
+        margin: [-20, 90, 30, 0],
+      },
+      title: { text: undefined },
+      credits: { enabled: false },
+      xAxis: {
+        categories: wipReceivableTrendData.map((d) => d.month),
+        lineColor: "transparent",
+        tickColor: "transparent",
+        labels: { style: { color: "#115e59", fontSize: "11px" } },
+      },
+      yAxis: {
+        visible:false,
+        title: { text: null },
+        gridLineColor: "rgba(0,112,105,0.1)",
+        labels: { style: { color: "#115e59", fontSize: "11px" } },
+      },
+      legend: {
+        layout: "vertical",
+        align: "right",
+        verticalAlign: "middle",
+        itemStyle: { color: "#374151", fontWeight: "normal", fontSize: "11px" },
+      },
+      tooltip: { shared: true, valueDecimals: 0, valueSuffix: " 万元" },
+      plotOptions: {
+        column: { borderWidth: 0, borderRadius: 2, groupPadding: 0.1, pointPadding: 0.05 },
+      },
+      series: [
+        {
+          type: "column",
+          name: "WIP",
+          data: wipReceivableTrendData.map((d) => d.wip),
+          color: FUNNEL_COLORS[2],
+        },
+        {
+          type: "column",
+          name: "应收账款",
+          data: wipReceivableTrendData.map((d) => d.receivable),
+          color: FUNNEL_COLORS[1],
+        },
+      ],
+    }),
+    [],
+  );
 
   const funnelOptions = useMemo<Highcharts.Options>(() => {
     const rate1 = marketDataFunnelValues[1] != null && marketDataFunnelValues[0]
@@ -285,8 +320,8 @@ export default function OrgDashboardPage() {
           labels: [{
             point: 'funnel-0',
             text: rate1 + '%',
-            style: { color: '#374151', fontWeight: 'bold', fontSize: '14px' },
-            y: 32,
+            style: { color: '#007069', fontWeight: 'bold', fontSize: '20px' },
+            y: 36,
             verticalAlign: 'bottom' as const,
             backgroundColor: 'transparent',
             borderWidth: 0,
@@ -296,8 +331,8 @@ export default function OrgDashboardPage() {
           labels: [{
             point: 'funnel-1',
             text: rate2 + '%',
-            style: { color: '#374151', fontWeight: 'bold', fontSize: '14px' },
-            y: 24,
+            style: { color: '#007069', fontWeight: 'bold', fontSize: '20px' },
+            y: 28,
             verticalAlign: 'bottom' as const,
             backgroundColor: 'transparent',
             borderWidth: 0,
@@ -552,54 +587,20 @@ export default function OrgDashboardPage() {
             <div className="px-4 grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
               <Card className="border-0 shadow-md">
                 <CardContent className="p-4">
-                  <h3 className="font-medium text-sm text-gray-700 mb-3">最新核心项目动态</h3>
-                  <div className="space-y-2">
-                    {projectActivityData.map((row) => {
-                      const statusColor: Record<string, { bg: string; text: string; dot: string }> = {
-                        '新增': { bg: 'bg-emerald-50', text: 'text-emerald-700', dot: 'bg-emerald-500' },
-                        '项目信息变更': { bg: 'bg-amber-50', text: 'text-amber-700', dot: 'bg-amber-500' },
-                        '保障活动更新': { bg: 'bg-sky-50', text: 'text-sky-700', dot: 'bg-sky-500' },
-                      };
-                      const sc = statusColor[row.status] ?? { bg: 'bg-gray-50', text: 'text-gray-600', dot: 'bg-gray-400' };
-                      const statusLabel = row.subStatus ? `${row.status} · ${row.subStatus}` : row.status;
-                      return (
-                        <div key={row.id} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 hover:bg-[#007069]/5 transition-colors">
-                          <div className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${sc.dot}`} />
-                          <div className="flex-1 min-w-0">
-                            <div className="flex items-center gap-2 justify-between mb-1">
-                              <AntTooltip title={STATUS_TOOLTIP[row.status]} placement="topLeft">
-                                <span className={`text-xs px-1.5 py-0.5 rounded font-medium cursor-default ${sc.bg} ${sc.text}`}>
-                                  {statusLabel}
-                                </span>
-                              </AntTooltip>
-                              <span className="text-xs text-gray-400">{row.time}</span>
-                            </div>
-                            <div className="flex items-center gap-2 min-w-0">
-                              <span className="text-sm font-medium text-gray-800 font-mono shrink-0">{row.id}</span>
-                              <span className="text-sm font-medium text-gray-800 truncate flex-1" title={row.name}>{row.name}</span>
-                              <span className="text-xs text-[#007069] shrink-0">{row.sector}</span>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-0 shadow-md">
-                <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-medium text-sm text-gray-700">单位工时创造产值（元/小时）</h3>
+                    <h3 className="font-medium text-sm text-gray-700">WIP及应收账款转化趋势（万元）</h3>
                     <AntTooltip title="导出明细">
                       <button type="button" className="w-5 h-5 rounded-full bg-[#007069]/10 flex items-center justify-center hover:bg-[#007069]/20 transition-colors">
                         <RightOutlined className="text-xs text-[#007069]" />
                       </button>
                     </AntTooltip>
                   </div>
-                  <HighchartsReact highcharts={Highcharts} options={stackedBarOptions} />
+                  <HighchartsReact highcharts={Highcharts} options={wipReceivableBarOptions} />
                 </CardContent>
               </Card>
+
+
+
               <Card className="border-0 shadow-md">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-2">
@@ -638,6 +639,42 @@ export default function OrgDashboardPage() {
                                 <span className="relative z-10 text-[11px] font-semibold text-[#007069] tabular-nums whitespace-nowrap">{value.toFixed(2)} %</span>
                               </div>
                             ))}
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+              <Card className="border-0 shadow-md">
+                <CardContent className="p-4">
+                  <h3 className="font-medium text-sm text-gray-700 mb-3">最新核心项目动态</h3>
+                  <div className="space-y-2">
+                    {projectActivityData.map((row) => {
+                      const statusColor: Record<string, { bg: string; text: string; dot: string }> = {
+                        '新增': { bg: 'bg-emerald-50', text: 'text-emerald-700', dot: 'bg-emerald-500' },
+                        '项目信息变更': { bg: 'bg-amber-50', text: 'text-amber-700', dot: 'bg-amber-500' },
+                        '保障活动更新': { bg: 'bg-sky-50', text: 'text-sky-700', dot: 'bg-sky-500' },
+                      };
+                      const sc = statusColor[row.status] ?? { bg: 'bg-gray-50', text: 'text-gray-600', dot: 'bg-gray-400' };
+                      const statusLabel = row.subStatus ? `${row.status} · ${row.subStatus}` : row.status;
+                      return (
+                        <div key={row.id} className="flex items-start gap-3 p-3 rounded-lg bg-gray-50 hover:bg-[#007069]/5 transition-colors">
+                          <div className={`mt-1.5 w-2 h-2 rounded-full shrink-0 ${sc.dot}`} />
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 justify-between mb-1">
+                              <AntTooltip title={STATUS_TOOLTIP[row.status]} placement="topLeft">
+                                <span className={`text-xs px-1.5 py-0.5 rounded font-medium cursor-default ${sc.bg} ${sc.text}`}>
+                                  {statusLabel}
+                                </span>
+                              </AntTooltip>
+                              <span className="text-xs text-gray-400">{row.time}</span>
+                            </div>
+                            <div className="flex items-center gap-2 min-w-0">
+                              <span className="text-sm font-medium text-gray-800 font-mono shrink-0">{row.id}</span>
+                              <span className="text-sm font-medium text-gray-800 truncate flex-1" title={row.name}>{row.name}</span>
+                              <span className="text-xs text-[#007069] shrink-0">{row.sector}</span>
+                            </div>
                           </div>
                         </div>
                       );
