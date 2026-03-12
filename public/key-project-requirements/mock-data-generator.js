@@ -49,6 +49,7 @@ window.MockDataGenerator = {
                         // 1. 待审批状态：刚提交的需求
                         {
                             requirementId: 'D25999-SAS999-0001',
+                            staffingMethods: ['internal'],
                             discipline: [['设计', '工艺']],
                             requirementType: 'epc',
                             jobTitle: '高级工艺工程师',
@@ -96,9 +97,10 @@ window.MockDataGenerator = {
                             closeTime: ''
                         },
                         
-                        // 2. 进行中状态：第一步审批通过，第二步待审批
+                        // 2. 审批已通过、内部+第三方双线并存：内部招聘进行中 + 人员匹配进行中（暂无候选人）
                         {
                             requirementId: 'D25999-SAS999-0002',
+                            staffingMethods: ['internal', 'partner'],
                             discipline: [['设计', '电气']],
                             requirementType: 'epc',
                             jobTitle: '电气设计工程师',
@@ -116,7 +118,7 @@ window.MockDataGenerator = {
                             educationRequirement: '本科及以上学历，电气工程及其自动化等相关专业',
                             languageRequirement: '英语CET-6，具备良好的英语读写能力',
                             otherRequirements: '具备良好的技术分析能力和创新思维',
-                            status: '进行中',
+                            status: '匹配中',
                             submitter: '张明华',
                             submitTime: '2025-10-20 10:00',
                             approvalFlow: {
@@ -134,13 +136,14 @@ window.MockDataGenerator = {
                                     {
                                         step: 2,
                                         name: '专业审批人审批',
-                                        status: 'pending',
-                                        approver: '张明华',
-                                        approvalTime: null,
-                                        comment: null
+                                        status: 'approved',
+                                        approver: '李工程师',
+                                        approvalTime: '2025-10-20 16:00',
+                                        comment: '审批通过，内部与第三方同步推进'
                                     }
                                 ]
                             },
+                            internalRecruitment: { status: '进行中', feedbackResult: '', feedbackTime: '' },
                             closeReason: '',
                             closeOperator: '',
                             closeTime: ''
@@ -149,6 +152,7 @@ window.MockDataGenerator = {
                         // 3. 匹配中状态：所有审批通过，但还没有候选人
                         {
                             requirementId: 'D25999-SAS999-0003',
+                            staffingMethods: ['partner'],
                             discipline: [['安全', '管理']],
                             requirementType: 'epc',
                             jobTitle: '安全工程师',
@@ -196,9 +200,11 @@ window.MockDataGenerator = {
                             closeTime: ''
                         },
                         
-                        // 4. 匹配完成状态：所有审批通过，有候选人
+                        // 4. 匹配完成状态：所有审批通过，有候选人（内部招聘+第三方均有）
                         {
                             requirementId: 'D25999-SAS999-0004',
+                            staffingMethods: ['internal', 'partner'],
+                            internalRecruitment: { status: '已完成', feedbackResult: '已通过内部渠道推荐 2 名候选人，其中 1 人进入面试。', feedbackTime: '2025-10-16 10:00' },
                             discipline: [['施工', '管理']],
                             requirementType: 'epc',
                             jobTitle: '施工管理工程师',
@@ -305,9 +311,11 @@ window.MockDataGenerator = {
                             ]
                         },
                         
-                        // 5. 另一个匹配完成的需求
+                        // 5. 另一个匹配完成的需求（仅第三方有候选人；内部招聘也已完成）
                         {
                             requirementId: 'D25999-SAS999-0005',
+                            staffingMethods: ['internal', 'partner'],
+                            internalRecruitment: { status: '已完成', feedbackResult: '内部暂无合适人选，已转由生态平台推送。', feedbackTime: '2025-10-14 09:30' },
                             discipline: [['设计', '管道设计']],
                             requirementType: 'epc',
                             jobTitle: '管道设计工程师',
@@ -397,6 +405,7 @@ window.MockDataGenerator = {
                         // 6. 已关闭状态：审批被驳回
                         {
                             requirementId: 'D25999-SAS999-0006',
+                            staffingMethods: ['internal'],
                             discipline: [['质量', '管理']],
                             requirementType: 'epc',
                             jobTitle: '质量工程师',

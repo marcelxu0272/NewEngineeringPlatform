@@ -348,45 +348,28 @@
                                                 </div>
                                                 <div class="p-3">
                                                 <div v-if="selectedPosition">
-                                                    <el-form-item label="增员方式" :prop="`payload.positions[${selectedPositionIndex}].staffingMethods`">
-                                                        <el-select
-                                                            size="mini"
-                                                            v-model="selectedPosition.staffingMethods"
-                                                            multiple
-                                                            collapse-tags
-                                                            placeholder="请选择增员方式（可多选）"
-                                                            class="w-full"
-                                                        >
-                                                            <el-option
-                                                                label="内部招聘"
-                                                                value="internal"
-                                                            >
-                                                                <span>
-                                                                    内部招聘
-                                                                    <el-tooltip
-                                                                        content="需求将由公司人力资源部门处理，走公司内部招聘流程。"
-                                                                        placement="top"
-                                                                    >
-                                                                        <i class="el-icon-question ml-1 text-gray-400"></i>
-                                                                    </el-tooltip>
-                                                                </span>
-                                                            </el-option>
-                                                            <el-option
-                                                                label="第三方合作"
-                                                                value="partner"
-                                                            >
-                                                                <span>
-                                                                    第三方合作
-                                                                    <el-tooltip
-                                                                        content="需求将同步至生态合作平台，由外部合作供应商推荐符合条件的人选。"
-                                                                        placement="top"
-                                                                    >
-                                                                        <i class="el-icon-question ml-1 text-gray-400"></i>
-                                                                    </el-tooltip>
-                                                                </span>
-                                                            </el-option>
-                                                        </el-select>
-                                                        <div class="text-xs text-gray-500 mt-1">
+                                                    <el-form-item label="增员方式" :prop="`payload.positions[${selectedPositionIndex}].staffingMethods`" :rules="[{ required: true, type: 'array', message: '请至少选择一种增员方式', trigger: 'change' }]">
+                                                        <div class="border border-gray-200 rounded-lg  bg-gray-50">
+                                                            <el-checkbox-group v-model="selectedPosition.staffingMethods" class="flex flex-wrap gap-4">
+                                                                <el-checkbox label="internal" class="staffing-option">
+                                                                    <span class="inline-flex items-center text-base">
+                                                                        内部招聘
+                                                                        <el-tooltip content="需求将由公司人力资源部门处理，走公司内部招聘流程。" placement="top">
+                                                                            <i class="el-icon-question ml-1 text-gray-400 cursor-help"></i>
+                                                                        </el-tooltip>
+                                                                    </span>
+                                                                </el-checkbox>
+                                                                <el-checkbox label="partner" class="staffing-option">
+                                                                    <span class="inline-flex items-center text-base">
+                                                                        第三方
+                                                                        <el-tooltip content="需求将同步至生态合作平台，由外部合作供应商推荐符合条件的人选。" placement="top">
+                                                                            <i class="el-icon-question ml-1 text-gray-400 cursor-help"></i>
+                                                                        </el-tooltip>
+                                                                    </span>
+                                                                </el-checkbox>
+                                                            </el-checkbox-group>
+                                                        </div>
+                                                        <div class="text-xs text-gray-500 mt-2">
                                                             可同时勾选多种增员渠道，系统会按所选渠道分发岗位需求。
                                                         </div>
                                                     </el-form-item>
@@ -405,6 +388,7 @@
                                                     </el-row>
                                                     <el-form-item label="岗位核心职责" :prop="`payload.positions[${selectedPositionIndex}].coreResponsibilities`" :rules="[{ required: true, message: '请填写核心职责', trigger: 'blur' }]">
                                                         <el-input size="mini" type="textarea" :rows="5" v-model="selectedPosition.coreResponsibilities" placeholder="请详细描述该岗位的核心工作职责，建议分点说明"></el-input>
+                                                        <div class="text-xs text-gray-500 mt-1">若部门用人需参与指定项目，请写明项目。</div>
                                                     </el-form-item>
                                                     <el-row :gutter="12">
                                                         <el-col :span="6">

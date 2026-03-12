@@ -751,3 +751,23 @@ body.dialog-open {
     color: #606266;
     margin-top: 7px;
 }
+
+/* 增员方式选项：更大字号与点击区域 */
+.staffing-option.el-checkbox {
+    margin-right: 0;
+    padding: 10px 16px;
+    min-height: 44px;
+}
+.staffing-option .el-checkbox__label {
+    font-size: 15px;
+    line-height: 1.5;
+    padding-left: 10px;
+}
+.staffing-option .el-checkbox__inner {
+    width: 18px;
+    height: 18px;
+}
+.staffing-option .el-checkbox__inner::after {
+    height: 9px;
+    left: 6px;
+}

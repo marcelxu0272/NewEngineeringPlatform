@@ -57,8 +57,10 @@ window.HRFormModule = {
      */
     createNewPosition() {
         return {
-            // 增员方式：内部招聘 / 第三方合作，可多选
+            // 增员方式：内部招聘 / 第三方，可多选
             staffingMethods: [],
+            // 内部招聘状态与反馈（审批通过后若选了内部招聘则由详情页维护）
+            internalRecruitment: null,
             discipline: [],
             requirementType: '',
             jobTitle: '',

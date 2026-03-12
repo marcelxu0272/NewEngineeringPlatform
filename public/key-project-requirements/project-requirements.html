@@ -124,6 +124,7 @@
                                             <el-tag 
                                                 :type="
                                                     calculatePositionStatus(pos) === '匹配中' ? 'success' : 
+                                                    calculatePositionStatus(pos) === '匹配完成' ? 'success' : 
                                                     calculatePositionStatus(pos) === '已关闭' ? 'info' : 
                                                     'warning'
                                                 " 
@@ -132,7 +133,7 @@
                                             </el-tag>
                                             <!-- 匹配人数标签 -->
                                             <el-tag
-                                                v-if="calculatePositionStatus(pos) === '匹配中' && pos.matchedCandidates && pos.matchedCandidates.length > 0"
+                                                v-if="(calculatePositionStatus(pos) === '匹配中' || calculatePositionStatus(pos) === '匹配完成') && pos.matchedCandidates && pos.matchedCandidates.length > 0"
                                                 size="mini"
                                                 type="success">
                                                 已推送 {{ pos.matchedCandidates.length }} 人
@@ -195,16 +196,23 @@
                                             <span v-if="selectedPosition && isPendingMyApproval(selectedPosition)" 
                                                   class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
                                         </button>
-                                        <button v-if="selectedPosition && calculatePositionStatus(selectedPosition) === '匹配中' && selectedPosition.matchedCandidates && selectedPosition.matchedCandidates.length > 0" 
+                                        <button v-if="selectedPosition && hasInternalAndBothApproved(selectedPosition)" 
+                                                type="button" 
+                                                @click="scrollToSection('sec-internal-feedback')"
+                                                :class="['px-3 py-1 rounded-full relative', activeSection==='sec-internal-feedback' ? 'bg-blue-600 text-white font-semibold' : 'bg-gray-100 hover:bg-gray-200']">
+                                            内部招聘反馈
+                                            <span v-if="hasInternalAndBothApproved(selectedPosition) && !isInternalRecruitmentCompleted(selectedPosition)" 
+                                                  class="absolute -top-1 -right-1 w-2 h-2 bg-yellow-500 rounded-full border border-white"></span>
+                                        </button>
+                                        <button v-if="selectedPosition && hasPartnerStaffing(selectedPosition) && (calculatePositionStatus(selectedPosition) === '匹配中' || calculatePositionStatus(selectedPosition) === '匹配完成') && selectedPosition.matchedCandidates && selectedPosition.matchedCandidates.length > 0" 
                                                 type="button" 
                                                 @click="scrollToSection('sec-candidates')"
                                                 :class="['px-3 py-1 rounded-full relative', activeSection==='sec-candidates' ? 'bg-blue-600 text-white font-semibold' : 'bg-gray-100 hover:bg-gray-200']">
                                             企业推送人员
-                                            <!-- 红点提示：未处理时显示 -->
                                             <span v-if="!isCandidateSelectionCompleted()" 
                                                   class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
                                         </button>
-                                        <button v-if="selectedPosition" 
+                                        <button v-if="selectedPosition && hasPartnerStaffing(selectedPosition)" 
                                                 type="button" 
                                                 @click="scrollToSection('sec-messages')"
                                                 :class="['px-3 py-1 rounded-full relative', activeSection==='sec-messages' ? 'bg-blue-600 text-white font-semibold' : 'bg-gray-100 hover:bg-gray-200']">
@@ -272,6 +280,13 @@
                                                         </el-form-item>
                                                     </el-col>
                                                     <el-col :span="8">
+                                                        <el-form-item label="是否派遣到指定项目">
+                                                            <el-input size="mini" :value="isAssignToSpecifiedProject(selectedProject) ? '是' : '否'" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                </el-row>
+                                                <el-row :gutter="12">
+                                                    <el-col :span="8">
                                                         <el-form-item label="需求类型">
                                                             <el-input size="mini" :value="getRequirementTypeLabel(selectedPosition.requirementType || selectedProject.payload.requirementType) || '-'" readonly></el-input>
                                                         </el-form-item>
@@ -289,10 +304,17 @@
                                                 </h4>
                                                 <el-row :gutter="12">
                                                     <el-col :span="12">
+                                                        <el-form-item label="增员方式">
+                                                            <el-input size="mini" :value="formatStaffingMethods(selectedPosition.staffingMethods)" readonly placeholder="-"></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="12">
                                                         <el-form-item label="专业">
                                                             <el-input size="mini" :value="formatDiscipline(selectedPosition.discipline)" readonly></el-input>
                                                         </el-form-item>
                                                     </el-col>
+                                                </el-row>
+                                                <el-row :gutter="12">
                                                     <el-col :span="12">
                                                         <el-form-item label="职位/岗位名称">
                                                             <el-input size="mini" :value="selectedPosition.jobTitle || '-'" readonly></el-input>
@@ -474,19 +496,66 @@
                                                          </div>
                                                      </div>
                                                     
-                                                    <!-- 匹配中记录 -->
-                                                    <div v-if="calculatePositionStatus(selectedPosition) === '匹配中' && selectedPosition.matchedCandidates && selectedPosition.matchedCandidates.length > 0" class="flex items-start space-x-3 p-3 rounded-lg border bg-green-50 border-green-200">
+                                                    <!-- 人员内部招聘进行中（仅当选择了内部招聘且两级审批通过、且未完成时显示） -->
+                                                    <div v-if="hasInternalAndBothApproved(selectedPosition) && !isInternalRecruitmentCompleted(selectedPosition)" class="flex items-start space-x-3 p-3 rounded-lg border bg-yellow-50 border-yellow-200">
+                                                        <div class="flex-shrink-0">
+                                                            <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium bg-yellow-500 text-white">●</span>
+                                                        </div>
+                                                        <div class="flex-1 min-w-0">
+                                                            <div class="flex items-center justify-between">
+                                                                <h4 class="text-sm font-medium text-gray-900">人员内部招聘进行中</h4>
+                                                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-yellow-100 text-yellow-800">进行中</span>
+                                                            </div>
+                                                            <p class="text-sm text-gray-500 mt-1">我们的招聘同事已接收到该条人员需求，请耐心等待~</p>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 人员内部招聘已完成 -->
+                                                    <div v-if="hasInternalAndBothApproved(selectedPosition) && isInternalRecruitmentCompleted(selectedPosition)" class="flex items-start space-x-3 p-3 rounded-lg border bg-green-50 border-green-200">
                                                         <div class="flex-shrink-0">
                                                             <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium bg-green-500 text-white">✓</span>
                                                         </div>
                                                         <div class="flex-1 min-w-0">
                                                             <div class="flex items-center justify-between">
-                                                                <h4 class="text-sm font-medium text-gray-900">人员匹配进行中</h4>
-                                                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">匹配中</span>
+                                                                <h4 class="text-sm font-medium text-gray-900">人员内部招聘已完成</h4>
+                                                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">已完成</span>
                                                             </div>
-                                                            <p class="text-sm text-gray-500 mt-1">完成时间：{{ getMatchCompleteTime(selectedPosition) }}</p>
-                                                            <p class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded">
-                                                                <span class="font-medium">匹配结果：</span>已成功推送 {{ selectedPosition.matchedCandidates ? selectedPosition.matchedCandidates.length : 0 }} 名候选人
+                                                            <p class="text-sm text-gray-500 mt-1">完成时间：{{ selectedPosition.internalRecruitment.feedbackTime || '-' }}</p>
+                                                            <p v-if="selectedPosition.internalRecruitment.feedbackResult" class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded"><span class="font-medium">反馈结果：</span>{{ selectedPosition.internalRecruitment.feedbackResult }}</p>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!-- 人员匹配进行中（选了第三方且审批通过即显示，与内部招聘卡片并存） -->
+                                                    <div v-if="hasPartnerStaffing(selectedPosition) && calculatePositionStatus(selectedPosition) === '匹配中'" class="flex items-start space-x-3 p-3 rounded-lg border bg-blue-50 border-blue-200">
+                                                        <div class="flex-shrink-0">
+                                                            <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium bg-blue-500 text-white">●</span>
+                                                        </div>
+                                                        <div class="flex-1 min-w-0">
+                                                            <div class="flex items-center justify-between">
+                                                                <h4 class="text-sm font-medium text-gray-900">人员匹配进行中</h4>
+                                                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">匹配中</span>
+                                                            </div>
+                                                            <p v-if="!selectedPosition.matchedCandidates || selectedPosition.matchedCandidates.length === 0" class="text-sm text-gray-600 mt-1">需求已同步至生态合作平台，等待合作方推送候选人。</p>
+                                                            <template v-else>
+                                                                <p class="text-sm text-gray-500 mt-1">完成时间：{{ getMatchCompleteTime(selectedPosition) }}</p>
+                                                                <p class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded">
+                                                                    <span class="font-medium">匹配结果：</span>已成功推送 {{ selectedPosition.matchedCandidates.length }} 名候选人
+                                                                </p>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 匹配完成记录（仅当选择了第三方时显示） -->
+                                                    <div v-if="hasPartnerStaffing(selectedPosition) && calculatePositionStatus(selectedPosition) === '匹配完成'" class="flex items-start space-x-3 p-3 rounded-lg border bg-blue-50 border-blue-200">
+                                                        <div class="flex-shrink-0">
+                                                            <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium bg-blue-500 text-white">✓</span>
+                                                        </div>
+                                                        <div class="flex-1 min-w-0">
+                                                            <div class="flex items-center justify-between">
+                                                                <h4 class="text-sm font-medium text-gray-900">人员匹配已完成</h4>
+                                                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800">已完成</span>
+                                                            </div>
+                                                            <p class="text-sm text-gray-500 mt-1">完成时间：{{ selectedPosition.matchCompleteTime || getMatchCompleteTime(selectedPosition) || '-' }}</p>
+                                                            <p v-if="selectedPosition.matchedCandidates && selectedPosition.matchedCandidates.length > 0" class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded">
+                                                                <span class="font-medium">匹配结果：</span>共 {{ selectedPosition.matchedCandidates.length }} 名候选人
                                                             </p>
                                                         </div>
                                                     </div>
@@ -518,8 +587,40 @@
                                                 </div>
                                             </div>
 
-                                            <!-- 企业推送人员（独立区域，仅对匹配中且有候选人的项目显示） -->
-                                            <div id="sec-candidates" v-if="calculatePositionStatus(selectedPosition) === '匹配中' && selectedPosition.matchedCandidates && selectedPosition.matchedCandidates.length > 0" class="mt-6">
+                                            <!-- 内部招聘反馈（仅当选择了内部招聘且两级审批通过时显示） -->
+                                            <div id="sec-internal-feedback" v-if="hasInternalAndBothApproved(selectedPosition)" class="mt-6 p-4 bg-gray-50 rounded-lg">
+                                                <h4 class="text-sm font-medium text-blue-800 mb-3 flex items-center gap-2">
+                                                    <i class="el-icon-edit-outline"></i>
+                                                    <span>内部招聘反馈</span>
+                                                </h4>
+                                                <template v-if="!isInternalRecruitmentCompleted(selectedPosition)">
+                                                    <el-form-item label="反馈结果">
+                                                        <el-input
+                                                            type="textarea"
+                                                            :rows="4"
+                                                            v-model="internalFeedbackResult"
+                                                            placeholder="请填写内部招聘反馈结果，如推荐人选、最终结果等。"
+                                                            maxlength="2000"
+                                                            show-word-limit>
+                                                        </el-input>
+                                                    </el-form-item>
+                                                    <div class="flex justify-end">
+                                                        <el-button type="primary" @click="submitInternalRecruitmentFeedback" :disabled="!internalFeedbackResult || !internalFeedbackResult.trim()">
+                                                            提交反馈
+                                                        </el-button>
+                                                    </div>
+                                                </template>
+                                                <template v-else>
+                                                    <p class="text-sm text-gray-600 mb-1">完成时间：{{ selectedPosition.internalRecruitment.feedbackTime || '-' }}</p>
+                                                    <div class="text-sm text-gray-700 bg-white p-3 rounded border border-gray-200">
+                                                        <span class="font-medium text-gray-600">反馈结果：</span>
+                                                        <span>{{ selectedPosition.internalRecruitment.feedbackResult || '-' }}</span>
+                                                    </div>
+                                                </template>
+                                            </div>
+
+                                            <!-- 企业推送人员（仅当选择了第三方且匹配中/匹配完成且有候选人时显示） -->
+                                            <div id="sec-candidates" v-if="hasPartnerStaffing(selectedPosition) && (calculatePositionStatus(selectedPosition) === '匹配中' || calculatePositionStatus(selectedPosition) === '匹配完成') && selectedPosition.matchedCandidates && selectedPosition.matchedCandidates.length > 0" class="mt-6">
                                                 <div class="p-4 bg-blue-50 rounded-lg">
                                                     <h4 class="text-sm font-medium text-blue-800 mb-3 flex items-center gap-2">
                                                         <i class="el-icon-user-solid"></i>
@@ -647,8 +748,8 @@
                                                 </div>
                                             </div>
 
-                                            <!-- 留言模块 -->
-                                            <div id="sec-messages" class="mt-6 p-4 bg-gray-50 rounded-lg">
+                                            <!-- 留言模块（仅当选择了第三方时显示） -->
+                                            <div id="sec-messages" v-if="hasPartnerStaffing(selectedPosition)" class="mt-6 p-4 bg-gray-50 rounded-lg">
                                                 <h4 class="text-sm font-medium text-blue-800 mb-3 flex items-center gap-2">
                                                     <i class="el-icon-chat-line-round"></i>
                                                     <span>留言</span>
@@ -880,7 +981,15 @@
                  },
                  // 需求清单过滤
                  positionSearchKeyword: '', // 搜索关键词
-                 hideClosedPositions: false // 隐藏已关闭的需求
+                 hideClosedPositions: false, // 隐藏已关闭的需求
+                 // 内部招聘反馈（当前编辑的反馈文案，提交后写入 position.internalRecruitment）
+                 internalFeedbackResult: '',
+                 // 管理归属对应部门号（与创建表单一致，用于判断是否派遣到指定项目）
+                 departmentCodeMap: {
+                     'PMC 板块': 'SAS410-0000', '银川中心': 'SAS411-0000', '总部人力': 'SAS412-0000',
+                     '结构专业室': 'SAS413-0000', '电气专业室': 'SAS414-0000', '工艺专业室': 'SAS415-0000',
+                     '仪表专业室': 'SAS416-0000', '暖通专业室': 'SAS417-0000'
+                 }
              },
             computed: {
                 selectedPosition() {
@@ -1012,7 +1121,7 @@
                 handleScroll() {
                     const container = this.$refs.detailScroll;
                     if (!container) return;
-                    const sections = ['sec-meta','sec-project','sec-position','sec-approval','sec-actions','sec-candidates']
+                    const sections = ['sec-meta','sec-project','sec-position','sec-approval','sec-actions','sec-internal-feedback','sec-candidates','sec-messages']
                         .map(id => ({ id, el: container.querySelector('#' + id) }))
                         .filter(s => s.el);
                     const scrollTop = container.scrollTop;
@@ -1055,6 +1164,7 @@
                     const index = positions.findIndex(pos => pos.requirementId === requirementId);
                     if (index !== -1) {
                         this.selectedPositionIndex = index;
+                        this.internalFeedbackResult = '';
                     }
                 },
                 /**
@@ -1193,11 +1303,18 @@
                     // 检查是否所有审批都通过
                     const allApproved = steps.every(step => step.status === 'approved');
                     if (allApproved) {
-                        // 如果显式设置了状态，使用设置的状态
                         if (position.status === '已关闭') {
                             return '已关闭';
                         }
-                        // 统一为匹配中（无论是否有候选人）
+                        // 仅内部招聘且内部招聘已完成：岗位流程已关闭
+                        const hasInternal = position.staffingMethods && position.staffingMethods.includes('internal');
+                        const hasPartner = position.staffingMethods && position.staffingMethods.includes('partner');
+                        if (hasInternal && !hasPartner && position.internalRecruitment && position.internalRecruitment.status === '已完成') {
+                            return '已关闭';
+                        }
+                        if (position.status === '匹配完成') {
+                            return '匹配完成';
+                        }
                         return '匹配中';
                     }
                     
@@ -1255,6 +1372,12 @@
                         position.approvalFlow.currentStep = currentStep + 1;
                     } else {
                         position.status = '匹配中';
+                        // 选择了内部招聘时，初始化内部招聘状态
+                        if (position.staffingMethods && position.staffingMethods.includes('internal')) {
+                            if (!position.internalRecruitment) {
+                                this.$set(position, 'internalRecruitment', { status: '进行中', feedbackResult: '', feedbackTime: '' });
+                            }
+                        }
                     }
                     this.approvalComment = '';
                     this.$forceUpdate && this.$forceUpdate();
@@ -1292,7 +1415,60 @@
                 getRequirementTypeLabel(type) {
                     const map = { design: '设计类', pmc: 'PMC', epc: 'EPC', consulting: '咨询类' };
                     return map[type] || type;
-                 },
+                },
+                /** 提交内部招聘反馈：将「人员内部招聘进行中」置为已完成；若未选第三方则关闭岗位 */
+                submitInternalRecruitmentFeedback() {
+                    const pos = this.selectedPosition;
+                    if (!pos || !this.hasInternalAndBothApproved(pos) || this.isInternalRecruitmentCompleted(pos)) return;
+                    const text = (this.internalFeedbackResult || '').trim();
+                    if (!text) {
+                        this.$message && this.$message.warning && this.$message.warning('请填写反馈结果');
+                        return;
+                    }
+                    const now = new Date().toLocaleString('zh-CN');
+                    if (!pos.internalRecruitment) this.$set(pos, 'internalRecruitment', {});
+                    this.$set(pos.internalRecruitment, 'status', '已完成');
+                    this.$set(pos.internalRecruitment, 'feedbackResult', text);
+                    this.$set(pos.internalRecruitment, 'feedbackTime', now);
+                    const onlyInternal = this.hasInternalStaffing(pos) && !this.hasPartnerStaffing(pos);
+                    if (onlyInternal) {
+                        this.$set(pos, 'status', '已关闭');
+                        this.$set(pos, 'closeReason', '内部招聘已完成');
+                        this.$set(pos, 'closeOperator', this.currentUser || '当前用户');
+                        this.$set(pos, 'closeTime', now);
+                    }
+                    this.internalFeedbackResult = '';
+                    this.$forceUpdate && this.$forceUpdate();
+                    this.$message && this.$message.success && this.$message.success(onlyInternal ? '反馈已提交，该岗位流程已关闭' : '反馈已提交');
+                },
+                /** 是否派遣到指定项目：项目号为部门号时为否，否则为是 */
+                isAssignToSpecifiedProject(project) {
+                    if (!project || !project.payload) return true;
+                    const pn = project.payload.projectNumber || '';
+                    return !Object.values(this.departmentCodeMap || {}).includes(pn);
+                },
+                /** 增员方式多选转展示文案 */
+                formatStaffingMethods(methods) {
+                    if (!methods || !Array.isArray(methods)) return '-';
+                    const map = { internal: '内部招聘', partner: '第三方' };
+                    const labels = methods.map(m => map[m] || m).filter(Boolean);
+                    return labels.length ? labels.join('、') : '-';
+                },
+                hasInternalStaffing(position) {
+                    return position && position.staffingMethods && position.staffingMethods.includes('internal');
+                },
+                hasPartnerStaffing(position) {
+                    return position && position.staffingMethods && position.staffingMethods.includes('partner');
+                },
+                /** 是否已两级审批通过且选了内部招聘（用于显示内部招聘进行中/已完成卡片） */
+                hasInternalAndBothApproved(position) {
+                    if (!this.hasInternalStaffing(position) || !position.approvalFlow || !position.approvalFlow.steps) return false;
+                    return position.approvalFlow.steps.every(s => s.status === 'approved');
+                },
+                /** 内部招聘是否已完成 */
+                isInternalRecruitmentCompleted(position) {
+                    return position && position.internalRecruitment && position.internalRecruitment.status === '已完成';
+                },
                 /**
                  * 获取排序后的需求列表
                  * @param {Array} positions - 需求列表
