@@ -1,0 +1,2729 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双周报及月报管理系统</title>
+    <!-- Element UI CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.15.14/lib/theme-chalk/index.css">
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Mock Data Generator Module -->
+    <script src="mock-data-generator.js"></script>
+    <!-- HR Form Module -->
+    <script src="hr-form-module.js"></script>
+</head>
+<body>
+    <div id="app" class="flex flex-col">
+        <!-- Header -->
+        <header class="bg-white shadow-md p-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-gray-800">报表体系 > 资源与交付保障</h1>
+            <span class="text-sm text-gray-500"></span>
+        </header>
+
+        <!-- Main Content with Tabs -->
+        <div class="tabs-header-container m-4">
+            <el-tabs v-model="activeTab" class="flex-grow" style="min-height: calc(100vh - 96px);">
+                <el-tab-pane v-for="tab in tabs" :key="tab.name" :label="tab.label" :name="tab.name">
+                <main v-if="tab.name === 'hr'" class="main-container">
+                    <!-- 人员需求小组件卡片式布局 -->
+                    <div class="hr-widget-layout">
+                        
+
+                        <!-- 人员需求：项目列表 -->
+                        <div class="space-y-6">
+                            <el-card class="key-roles-card">
+                                <div class="mb-4 flex items-center">
+                                    <el-button type="primary" icon="el-icon-plus" @click="selectMemoType('人员需求')">
+                                        创建人员需求
+                                    </el-button>
+                                </div>
+                                <!-- 筛选控件 -->
+                                <div class="mb-4 p-4 bg-gray-50 rounded-lg">
+                                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                                        <!-- 筛选条件列：板块归属 -->
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">管理归属</label>
+                                            <el-select v-model="keyMemoFilters.board" placeholder="全部板块" clearable class="w-full" size="small">
+                                                <el-option label="全部板块" value=""></el-option>
+                                                <el-option v-for="board in uniqueBoards" :key="board" :label="board" :value="board"></el-option>
+                                            </el-select>
+                                        </div>
+                                        
+                                        <!-- 筛选条件列：需求专业 -->
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">需求专业</label>
+                                            <el-select v-model="keyMemoFilters.major" placeholder="全部专业" clearable class="w-full" size="small">
+                                                <el-option label="全部专业" value=""></el-option>
+                                                <el-option v-for="major in uniqueMajors" :key="major" :label="major" :value="major"></el-option>
+                                            </el-select>
+                                        </div>
+                                        
+                                        <!-- 搜索框：占据两列 -->
+                                        <div class="md:col-span-2">
+                                            <label class="block text-sm font-medium text-gray-700 mb-1">搜索</label>
+                                            <el-input 
+                                                v-model="keyMemoSearchText" 
+                                                placeholder="搜索项目号、项目名称、专业、业务类型等..." 
+                                                size="small"
+                                                clearable
+                                                prefix-icon="el-icon-search">
+                                            </el-input>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 筛选结果统计和排序 -->
+                                    <div class="flex justify-between items-center text-sm text-gray-600">
+                                        <div class="flex items-center gap-4">
+                                            <!-- 翻页器 -->
+                                            <el-pagination
+                                                small
+                                                background
+                                                layout="prev, pager, next"
+                                                :page-size="keyMemoPagination.pageSize"
+                                                :current-page.sync="keyMemoPagination.page"
+                                                :total="filteredKeyMemos.length"
+                                                :pager-count="5">
+                                            </el-pagination>
+                                            <span>共 {{ filteredKeyMemos.length }} 条</span>
+                                        </div>
+                                        <div class="flex gap-2 items-center">
+                                            <!-- 仅显示待我审批/处理复选框 -->
+                                            <el-checkbox v-model="showOnlyMyApprovals" @change="onMyApprovalsFilterChange" size="mini">
+                                                <span class="text-sm text-gray-600">仅显示待我审批/处理</span>
+                                            </el-checkbox>
+                                            <span class="text-gray-300">|</span>
+                                            <span class="text-gray-500">排序方式：</span>
+                                            <el-select v-model="keyMemoSortBy" size="mini" style="width: 140px;">
+                                                <el-option label="默认" value="default"></el-option>
+                                                <el-option label="按项目号" value="projectNumber"></el-option>
+                                            </el-select>
+                                            <el-button size="mini" @click="resetKeyMemoFilters">重置筛选</el-button>
+                                            <el-button size="mini" type="primary" style="width: 120px;" @click="executeSearch">查询</el-button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 项目列表 -->
+                                <div class="key-memos-content flex flex-col" style="max-height: calc(100vh - 360px);">
+                                    <div class="memo-list flex-1 overflow-y-auto">
+                                        <div v-for="memo in pagedKeyMemos" :key="memo.id"
+                                             class="memo-item p-4 mb-3 rounded-sm border border-gray-200 bg-white cursor-pointer hover:shadow-sm transition-shadow hover:border-gray-300"
+                                             @click="viewProjectRequirements(memo)">
+                                            <!-- 项目标题 -->
+                                            <div class="flex justify-between items-start mb-3">
+                                                <div class="text-lg font-semibold text-gray-800">
+                                                    {{ memo.payload.projectNumber || '未命名项目' }} {{ memo.payload.projectName ? '  ' + memo.payload.projectName : '' }}
+                                                </div>
+                                            </div>
+
+                                            
+                                            <!-- 项目信息摘要 -->
+                                            <div class="flex items-center justify-between text-sm text-gray-600">
+                                                <!-- 
+                                                    使用Grid布局替换原有flex布局，使信息分布更均匀且易于扩展。
+                                                    grid-cols-2 表示两列布局，gap-x-12 控制列间距。
+                                                    这样便于后续添加更多项目信息字段时，布局依然整齐。
+                                                -->
+                                                <!-- 
+                                                    使用Grid布局并为每列设置固定宽度，确保条目之间对齐。
+                                                    通过min-w和max-w限制每列宽度，避免内容过长导致错位。
+                                                    可根据实际内容调整宽度值。
+                                                -->
+                                                <div class="grid grid-cols-3 gap-x-4 items-center">
+                                                    <div class="col-span-1" style="width: 200px;">
+                                                        <span class="font-semibold inline-block mr-2 text-gray-500" >管理归属</span>
+                                                        <span class="tag tag-secondary-1" style="display: inline-block;">
+                                                            {{ memo.payload.department ||  '-' }}
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-span-1" style="width: 200px; ">
+                                                        <span class="font-semibold inline-block mr-2 text-gray-500" >项目经理</span>
+                                                        <span style="display: inline-block;">
+                                                            {{ memo.payload.projectManager || '-' }}
+                                                        </span>
+                                                    </div>
+                                                    <div class="col-span-1" style="width: 200px; ">
+                                                        <span class="font-semibold inline-block mr-2 text-gray-500" >业务类型</span>
+                                                        <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium" 
+                                                              :class="memo.payload.businessType === 'EPC' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'">
+                                                            {{ memo.payload.businessType || '-' }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- 岗位统计 -->
+                                                <div class="flex items-center gap-4 text-sm text-gray-500">
+                                                    <span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 text-gray-700 gap-2">
+                                                        <span class="flex items-center gap-1">
+                                                            <i class="el-icon-user"></i>
+                                                            <span class="font-medium">{{ (memo.payload.positions || []).length }} </span>
+                                                            <span>条需求</span>
+                                                        </span>
+                                                        <span class="text-gray-300">|</span>
+                                                        <span class="flex items-center gap-2">
+                                                            <span class="font-medium">{{ projectStatistics[memo.payload.projectNumber]?.processingRequirements || 0 }}</span>
+                                                            <span>进行中</span>
+                                                        </span>
+                                                        
+                                                        
+                                                        <span class="text-gray-300">|</span>
+                                                        <span class="flex items-center gap-2">
+                                                            <span class="font-medium">{{ projectStatistics[memo.payload.projectNumber]?.closedRequirements || 0 }}</span>
+                                                            <span>已关闭</span>
+                                                        </span>
+                                                    </span>
+                                                    <span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 text-gray-700 gap-2">
+                                                        <span class="flex items-center gap-2">
+                                                            <span :class="['font-semibold', projectStatistics[memo.payload.projectNumber]?.pendingMyApprovalOrProcess > 0 ? 'text-red-500' : '']">
+                                                                {{ projectStatistics[memo.payload.projectNumber]?.pendingMyApprovalOrProcess || 0 }}
+                                                            </span>
+                                                            <span>待我审批/处理</span>
+                                                        </span>
+                                                    </span>
+                                                    <span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-100 text-gray-700">
+                                                        <i class="el-icon-s-custom mr-1"></i>
+                                                        共 {{ getTotalQuantity(memo.payload.positions || []) }} 人
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <el-empty v-if="filteredKeyMemos.length === 0" description="无人员需求" :image-size="80"></el-empty>
+                                    </div>
+                                </div>
+                            </el-card>
+                        </div>
+                        </div>
+
+                    <!-- 创建/编辑备忘录表单弹窗 -->
+                    <el-dialog 
+                        :title="getHrDialogTitle()"
+                        :visible.sync="hrFormDialogVisible"
+                        width="85%"
+                        top="8vh"
+                        custom-class="form-dialog"
+                        :before-close="closeHrFormDialog">
+                        <div class="form-content-wrapper" style="max-height: calc(90vh - 180px); overflow-y: auto;">
+                            <el-form v-if="hrViewMode === 'create' || hrViewMode === 'edit' || hrViewMode === 'view'" :model="hrForm" :rules="hrFormRules" ref="hrFormRef" label-position="top">
+                                <!-- 人员需求：岗位管理 -->
+                                <div v-if="hrForm.eventType === '人员需求'" >
+                                    <!-- 填写说明 -->
+                                    <div class="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                                        <div class="flex items-start gap-3">
+                                            <i class="el-icon-info text-blue-600 text-lg mt-0.5"></i>
+                                            <div class="text-sm text-blue-800">
+                                                <div class="font-medium mb-1">填写说明</div>
+                                                <div class="space-y-1 text-sm leading-relaxed">
+                                                    <div>• 首先选择管理归属，再选择是否派遣到指定项目（否则项目号自动带出部门号且不可改）；然后选择需求类型与项目号，其他项目信息会自动带出；</div>
+                                                    <div>• 若项目有多个人员需求，可在左侧岗位列表中点击"新增岗位"逐一添加，或选择"批量导入"批量添加人员需求；</div>
+                                                    <div>• 选择岗位后，在右侧填写详细的岗位要求、职责等信息。</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 项目信息（简化版，仅用于创建/编辑时）：先选管理归属，再选是否派遣到指定项目，再选项目号 -->
+                                    <div class="mb-4 bg-gray-50 rounded-lg">
+                                        <div class="p-2 bg-blue-900 rounded-t-lg">
+                                            <div class="text-sm font-medium text-white font-semibold">项目信息</div>
+                                        </div>
+                                        <div class="p-4">
+                                        <el-row :gutter="12">
+                                            <el-col :span="6">
+                                                <el-form-item label="需求类型" prop="payload.requirementType">
+                                                    <el-select size="mini" v-model="hrForm.payload.requirementType" placeholder="请选择需求类型" class="w-full">
+                                                        <el-option label="设计类" value="design"></el-option>
+                                                        <el-option label="PMC" value="pmc"></el-option>
+                                                        <el-option label="EPC" value="epc"></el-option>
+                                                        <el-option label="咨询类" value="consulting"></el-option>
+                                                    </el-select>
+                                                </el-form-item>
+                                            </el-col>
+                                            <el-col :span="6">
+                                                <el-form-item label="管理归属" prop="payload.department">
+                                                    <el-select size="mini" v-model="hrForm.payload.department" placeholder="请先选择管理归属" class="w-full" @change="onManagementChange" clearable>
+                                                        <el-option v-for="opt in managementOptions" :key="opt" :label="opt" :value="opt"></el-option>
+                                                    </el-select>
+                                                </el-form-item>
+                                            </el-col>
+                                            <el-col :span="6">
+                                                <el-form-item label="是否派遣到指定项目" prop="assignToSpecifiedProject">
+                                                    <el-radio-group v-model="assignToSpecifiedProject" size="mini" @change="onAssignToSpecifiedProjectChange">
+                                                        <el-radio :label="true">是</el-radio>
+                                                        <el-radio :label="false">否</el-radio>
+                                                    </el-radio-group>
+                                                </el-form-item>
+                                            </el-col>
+                                            <el-col :span="6">
+                                                <el-form-item label="项目号" prop="payload.projectNumber">
+                                                    <el-select v-if="assignToSpecifiedProject" size="mini" v-model="hrForm.payload.projectNumber" filterable allow-create default-first-option placeholder="请选择项目号" @change="onProjectNumberChange" class="w-full">
+                                                        <el-option v-for="num in projectNumberOptions" :key="num" :label="num" :value="num"></el-option>
+                                                    </el-select>
+                                                    <el-input v-else size="mini" :value="effectiveDepartmentProjectNumber" placeholder="先选择管理归属" disabled class="w-full"></el-input>
+                                                </el-form-item>
+                                            </el-col>
+                                        </el-row>
+                                        <el-row :gutter="12">
+                                            <el-col :span="12">
+                                                <el-form-item label="项目名称" prop="payload.projectName">
+                                                    <el-input size="mini" v-model="hrForm.payload.projectName" placeholder="系统自动带出" disabled></el-input>
+                                                </el-form-item>
+                                            </el-col>
+                                            <el-col :span="12">
+                                                <el-form-item label="项目经理" prop="payload.projectManager">
+                                                    <el-input size="mini" v-model="hrForm.payload.projectManager" placeholder="系统自动带出" disabled></el-input>
+                                                </el-form-item>
+                                            </el-col>
+                                        </el-row>
+                                        </div>
+                                    </div>
+                                    <el-row :gutter="16">
+                                        <el-col :span="8">
+
+                                            <el-card body-style="padding:0px;" :shadow="'never'">
+                                                <!-- 岗位列表标题和操作按钮 -->
+                                                <div class="p-2 bg-blue-900 rounded-t-lg">
+                                                    <div class="text-sm font-medium text-white font-semibold">岗位列表</div>
+                                                </div>
+                                                <div class="p-3">
+                                                    <div class="mb-3">
+                                                        <!-- 操作区域：新增岗位和批量导入按钮 -->
+                                                        <div class="flex items-center justify-between mb-2">
+                                                            <div class="flex items-center gap-2">
+                                                                <el-button type="primary" size="mini" icon="el-icon-plus" @click="addPosition">新增岗位</el-button>
+                                                                <el-button type="success" size="mini" icon="el-icon-upload" @click="showBulkImportDialog">批量导入</el-button>
+                                                            </div>
+                                                            <span class="text-xs text-gray-600">
+                                                                {{ (hrForm.payload.positions||[]).length }} 个岗位
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                <div>
+                                                    <div v-for="(pos, pIndex) in (hrForm.payload.positions || [])" :key="'plist-' + pIndex" class="p-2 rounded border cursor-pointer hover:bg-gray-50 mb-2 transition-all duration-300 relative"
+                                                         :class="{ 
+                                                             'bg-blue-50': selectedPositionIndex === pIndex,
+                                                             'border-gray-200 bg-white hover:border-gray-300': selectedPositionIndex !== pIndex
+                                                         }"
+                                                         @click="selectPosition(pIndex)">
+                                                        <div class="text-xs text-gray-600 mb-1 flex items-center gap-2">
+                                                            <span class="text-gray-500">岗位 {{ pIndex + 1 }}</span>
+                                                            <!-- 编辑状态指示器 -->
+                                                            <span v-if="selectedPositionIndex === pIndex" class="inline-flex items-center px-2 rounded-full text-xs font-medium bg-blue-100 text-blue-800 border border-blue-200">
+                                                                <i class="el-icon-edit mr-1"></i>
+                                                                正在编辑
+                                                            </span>
+                                                        </div>
+                                                        <div class="flex justify-between items-center">
+                                                            <div class="text-sm">
+                                                                <span class="text-gray-900 font-semibold">{{ pos.jobTitle || '未命名岗位' }}</span>
+                                                                <span class="ml-2 text-gray-500">× {{ pos.quantity || 1 }}</span>
+                                                            </div>
+                                                            <div class="flex items-center">
+                                                                <el-button size="mini" icon="el-icon-document-copy" @click.stop="copyPosition(pIndex)" circle></el-button>
+                                                                <el-button size="mini" type="danger" icon="el-icon-delete" @click.stop="removePosition(pIndex)" circle></el-button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-xs text-gray-500 mt-1">最晚 {{ pos.requiredOnboardDate || '-' }} 到岗</div>
+                                                        <div class="mt-1">
+                                                            <template v-if="Array.isArray(pos.discipline)">
+                                                                <el-tag v-for="(d, di) in pos.discipline" :key="'ptag-' + pIndex + '-' + di" size="mini" effect="plain" type="success" style="margin-right:4px;">
+                                                                    {{ Array.isArray(d) ? ((d[0] || '-') + ' / ' + (d[1] || '-')) : d }}
+                                                                </el-tag>
+                                                            </template>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </el-card>
+                                        </el-col>
+                                        <el-col :span="16">
+                                            <el-card body-style="padding:0px;" :shadow="'never'">
+                                                <div class="p-2 bg-blue-900 rounded-t-lg">
+                                                    <div class="text-sm font-medium text-white font-semibold">岗位详情</div>
+                                                </div>
+                                                <div class="p-3">
+                                                <div v-if="selectedPosition">
+                                                    <el-form-item label="增员方式" :prop="`payload.positions[${selectedPositionIndex}].staffingMethods`">
+                                                        <el-select
+                                                            size="mini"
+                                                            v-model="selectedPosition.staffingMethods"
+                                                            multiple
+                                                            collapse-tags
+                                                            placeholder="请选择增员方式（可多选）"
+                                                            class="w-full"
+                                                        >
+                                                            <el-option
+                                                                label="内部招聘"
+                                                                value="internal"
+                                                            >
+                                                                <span>
+                                                                    内部招聘
+                                                                    <el-tooltip
+                                                                        content="需求将由公司人力资源部门处理，走公司内部招聘流程。"
+                                                                        placement="top"
+                                                                    >
+                                                                        <i class="el-icon-question ml-1 text-gray-400"></i>
+                                                                    </el-tooltip>
+                                                                </span>
+                                                            </el-option>
+                                                            <el-option
+                                                                label="第三方合作"
+                                                                value="partner"
+                                                            >
+                                                                <span>
+                                                                    第三方合作
+                                                                    <el-tooltip
+                                                                        content="需求将同步至生态合作平台，由外部合作供应商推荐符合条件的人选。"
+                                                                        placement="top"
+                                                                    >
+                                                                        <i class="el-icon-question ml-1 text-gray-400"></i>
+                                                                    </el-tooltip>
+                                                                </span>
+                                                            </el-option>
+                                                        </el-select>
+                                                        <div class="text-xs text-gray-500 mt-1">
+                                                            可同时勾选多种增员渠道，系统会按所选渠道分发岗位需求。
+                                                        </div>
+                                                    </el-form-item>
+                                                    <el-row :gutter="12">
+                                                        <el-col :span="12">
+                                                            <el-form-item label="专业" :prop="`payload.positions[${selectedPositionIndex}].discipline`" :rules="[{ required: true, type: 'array', message: '请选择专业', trigger: 'change' }]">
+                                                                <el-cascader size="mini" class="w-full" :options="disciplineOptions" :props="{ multiple: false, emitPath: true }" v-model="selectedPosition.discipline" placeholder="请选择专业大类 / 二级专业"></el-cascader>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                        
+                                                        <el-col :span="12">
+                                                            <el-form-item label="职位/岗位名称" :prop="`payload.positions[${selectedPositionIndex}].jobTitle`" :rules="[{ required: true, message: '请输入职位/岗位名称', trigger: 'blur' }]">
+                                                                <el-input size="mini" v-model="selectedPosition.jobTitle" placeholder="请输入职位或岗位名称"></el-input>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-form-item label="岗位核心职责" :prop="`payload.positions[${selectedPositionIndex}].coreResponsibilities`" :rules="[{ required: true, message: '请填写核心职责', trigger: 'blur' }]">
+                                                        <el-input size="mini" type="textarea" :rows="5" v-model="selectedPosition.coreResponsibilities" placeholder="请详细描述该岗位的核心工作职责，建议分点说明"></el-input>
+                                                    </el-form-item>
+                                                    <el-row :gutter="12">
+                                                        <el-col :span="6">
+                                                            <el-form-item label="数量" :prop="`payload.positions[${selectedPositionIndex}].quantity`" :rules="[{ required: true, type: 'number', message: '请输入数量(>=1)', trigger: 'change' }]">
+                                                                <el-input-number v-model="selectedPosition.quantity" :min="1" class="w-full" size="mini"></el-input-number>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                        <el-col :span="6">
+                                                            <el-form-item label="工作地点" :prop="`payload.positions[${selectedPositionIndex}].workLocation`" :rules="[{ required: true, message: '请输入工作地点', trigger: 'blur' }]">
+                                                                <el-input size="mini" v-model="selectedPosition.workLocation" placeholder="请输入详细工作地点"></el-input>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                        <el-col :span="6">
+                                                            <el-form-item label="要求到岗时间" :prop="`payload.positions[${selectedPositionIndex}].requiredOnboardDate`" :rules="[{ required: true, message: '请选择到岗时间', trigger: 'change' }]" style="max-width: 140px;">
+                                                                <el-date-picker size="mini" v-model="selectedPosition.requiredOnboardDate" type="date" placeholder="请选择日期" value-format="yyyy-MM-dd" style="width: 200px;"></el-date-picker>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                        <el-col :span="6">
+                                                            <el-form-item label="岗位周期" :prop="`payload.positions[${selectedPositionIndex}].positionCycle`">
+                                                                <el-input size="mini" v-model="selectedPosition.positionCycle" placeholder="例如：6个月 或 项目期"></el-input>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                    </el-row>
+                                                    
+                                                    <el-row :gutter="12">
+                                                        
+                                                    </el-row>
+                                                    <el-row :gutter="12">
+                                                        <el-col :span="6">
+                                                            <el-form-item label="最低年龄要求" :prop="`payload.positions[${selectedPositionIndex}].ageRequirement.minAge`">
+                                                                <el-input-number v-model="selectedPosition.ageRequirement.minAge" :min="16" class="w-full" size="mini"></el-input-number>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                        <el-col :span="6">
+                                                            <el-form-item label="最高年龄要求" :prop="`payload.positions[${selectedPositionIndex}].ageRequirement.maxAge`" :rules="[{ validator: validateAgeRangePosition(selectedPositionIndex), trigger: 'change' }]">
+                                                                <el-input-number v-model="selectedPosition.ageRequirement.maxAge" :min="16" class="w-full" size="mini"></el-input-number>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                        <el-col :span="12">
+                                                            <el-form-item label="性别" :prop="`payload.positions[${selectedPositionIndex}].gender`">
+                                                                <el-radio-group v-model="selectedPosition.gender" size="mini">
+                                                                    <el-radio label="male">男</el-radio>
+                                                                    <el-radio label="female">女</el-radio>
+                                                                    <el-radio label="any">不限</el-radio>
+                                                                </el-radio-group>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <!-- <h5 class="text-sm font-semibold text-gray-700 mb-2">资格要求</h5> -->
+                                                    <el-row :gutter="12">
+                                                        <el-col :span="12">
+                                                            <el-form-item label="职称要求" :prop="`payload.positions[${selectedPositionIndex}].titleRequirement`">
+                                                                <el-select size="mini" v-model="selectedPosition.titleRequirement" placeholder="请选择职称要求" class="w-full">
+                                                                    <el-option label="初级" value="junior"></el-option>
+                                                                    <el-option label="中级" value="intermediate"></el-option>
+                                                                    <el-option label="高级" value="senior"></el-option>
+                                                                    <el-option label="正高级" value="professor_level"></el-option>
+                                                                </el-select>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                        <el-col :span="12">
+                                                            <el-form-item label="教育背景" :prop="`payload.positions[${selectedPositionIndex}].educationRequirement`">
+                                                                <el-input size="mini" type="textarea" :rows="2" v-model="selectedPosition.educationRequirement" placeholder="例如：本科及以上，相关专业"></el-input>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-row :gutter="12">
+                                                        <el-col :span="12">
+                                                            <el-form-item label="专业资格证书" :prop="`payload.positions[${selectedPositionIndex}].professionalCertificates`">
+                                                                <el-select 
+                                                                    size="mini" 
+                                                                    v-model="selectedPosition.professionalCertificates" 
+                                                                    multiple 
+                                                                    collapse-tags
+                                                                    placeholder="请选择专业资格证书"
+                                                                    style="width: 100%;"
+                                                                    @change="handleCertificationChange">
+                                                                    <el-option 
+                                                                        v-for="cert in certificationOptions" 
+                                                                        :key="cert.value" 
+                                                                        :label="cert.label" 
+                                                                        :value="cert.value">
+                                                                    </el-option>
+                                                                </el-select>
+                                                                <!-- 自定义其他证书输入 -->
+                                                                <div v-if="selectedPosition.professionalCertificates && selectedPosition.professionalCertificates.includes('其他')" style="margin-top: 8px;">
+                                                                    <el-input 
+                                                                        size="mini" 
+                                                                        v-model="selectedPosition.customCertifications" 
+                                                                        placeholder="请输入其他证书，多个用中文逗号，隔开"
+                                                                        @input="updateCustomCertifications">
+                                                                    </el-input>
+                                                                    <small style="color: #666; display: block; margin-top: 4px;">例如：其他资格证书1，其他资格证书2，其他资格证书3（多个证书用中文逗号，分隔）</small>
+                                                                </div>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                        <el-col :span="12">
+                                                            <el-form-item label="语言能力" :prop="`payload.positions[${selectedPositionIndex}].languageRequirement`">
+                                                                <el-input size="mini" type="textarea" :rows="2" v-model="selectedPosition.languageRequirement" placeholder="例如：英语CET-6..." ></el-input>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-row :gutter="12">
+                                                        <el-col :span="24">
+                                                            <el-form-item label="经验要求" :prop="`payload.positions[${selectedPositionIndex}].experienceRequirement`">
+                                                                <el-input size="mini" type="textarea" :rows="2" v-model="selectedPosition.experienceRequirement" placeholder="例如：5年以上相关领域经验..." ></el-input>
+                                                            </el-form-item>
+                                                        </el-col>
+                                                    </el-row>
+                                                    <el-form-item label="其他要求" :prop="`payload.positions[${selectedPositionIndex}].otherRequirements`">
+                                                        <el-input size="mini" type="textarea" :rows="2" v-model="selectedPosition.otherRequirements" placeholder="请填写其他补充要求"></el-input>
+                                                    </el-form-item>
+                                                </div>
+                                                <div v-else class="text-sm text-gray-500">请选择左侧岗位查看详情</div>
+                                                </div>
+                                            </el-card>
+                                        </el-col>
+                                    </el-row>
+                                </div>
+
+
+
+                            </el-form>
+                        </div>
+                        <span slot="footer" class="dialog-footer">
+                            <el-button @click="closeHrFormDialog">
+                                {{ hrViewMode === 'view' ? '关 闭' : '取 消' }}
+                            </el-button>
+                            <el-button v-if="hrViewMode !== 'view'" type="primary" @click="hrSaveMemoSimple">保 存</el-button>
+                        </span>
+                    </el-dialog>
+
+
+                    <!-- 批量导入岗位对话框 -->
+                    <el-dialog 
+                        title="批量导入岗位"
+                        :visible.sync="bulkImportDialogVisible"
+                        width="70%"
+                        top="8vh"
+                        custom-class="bulk-import-dialog"
+                        :before-close="closeBulkImportDialog">
+                        <div class="bulk-import-content">
+                            <!-- 导入说明和模板下载 -->
+                            <div class="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                                <div class="flex items-start gap-3">
+                                    <i class="el-icon-info text-blue-600 text-lg mt-0.5"></i>
+                                    <div class="text-sm text-blue-800">
+                                        <div class="font-medium mb-2">导入说明</div>
+                                        <div class="space-y-1 text-xs leading-relaxed">
+                                            <div>• 请先下载模板文件，按照模板格式填写岗位信息；</div>
+                                            <div>• 支持Excel文件(.xlsx)和CSV文件(.csv)格式；</div>
+                                            <div>• 专业字段请按照"大类/二级专业"格式填写；</div>
+                                            <div>• 导入的岗位将添加到当前项目的岗位列表中。</div>
+                                        </div>
+                                        <div class="mt-3">
+                                            <el-button type="primary" size="mini" icon="el-icon-download" @click="downloadImportTemplate">下载导入模板</el-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 文件上传区域 -->
+                            <div class="mb-4">
+                                <el-upload
+                                    ref="bulkImportUpload"
+                                    :auto-upload="false"
+                                    :on-change="handleImportFileChange"
+                                    :before-upload="beforeImportUpload"
+                                    :file-list="importFileList"
+                                    accept=".xlsx,.csv"
+                                    drag
+                                    class="bulk-import-uploader">
+                                    <i class="el-icon-upload"></i>
+                                    <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                                    <div class="el-upload__tip" slot="tip">只能上传Excel(.xlsx)或CSV(.csv)文件</div>
+                                </el-upload>
+                            </div>
+
+                            <!-- 预览导入数据 -->
+                            <div v-if="importPreviewData.length > 0" class="mb-4">
+                                <h4 class="text-sm font-medium text-gray-700 mb-3">导入预览 ({{ importPreviewData.length }} 个岗位)</h4>
+                                <div class="max-h-60 overflow-y-auto border border-gray-200 rounded">
+                                    <el-table :data="importPreviewData" size="mini" stripe>
+                                        <el-table-column prop="jobTitle" label="岗位名称" width="150"></el-table-column>
+                                        <el-table-column prop="discipline" label="专业" width="200"></el-table-column>
+                                        <el-table-column prop="quantity" label="数量" width="80"></el-table-column>
+                                        <el-table-column prop="workLocation" label="工作地点" width="120"></el-table-column>
+                                        <el-table-column prop="requiredOnboardDate" label="到岗日期" width="120"></el-table-column>
+                                        <el-table-column prop="positionCycle" label="岗位周期" width="120"></el-table-column>
+                                        <el-table-column label="状态" width="100">
+                                            <template slot-scope="scope">
+                                                <el-tag type="success" size="mini">已解析</el-tag>
+                                            </template>
+                                        </el-table-column>
+                                    </el-table>
+                                </div>
+                            </div>
+                        </div>
+                        <span slot="footer" class="dialog-footer">
+                            <el-button @click="closeBulkImportDialog">取 消</el-button>
+                            <el-button type="primary" @click="confirmBulkImport" :disabled="importPreviewData.length === 0">确认导入</el-button>
+                        </span>
+                    </el-dialog>
+
+                </main>
+                
+                <!-- 专业审批人管理标签页 -->
+                <main v-if="tab.name === 'approver'" class="main-container">
+                    <div class="approver-management-layout">
+
+                        <!-- 专业审批人配置区域 -->
+                        <el-card class="approver-config-card">
+                            
+                            <!-- 筛选区域 -->
+                            <div class="approver-filters mb-4 p-4 bg-gray-50 rounded-lg">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <!-- 一级专业筛选 -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">一级专业</label>
+                                        <el-select 
+                                            v-model="approverFilters.primaryDiscipline" 
+                                            placeholder="全部一级专业" 
+                                            clearable
+                                            size="small"
+                                            class="w-full">
+                                            <el-option label="全部一级专业" value=""></el-option>
+                                            <el-option 
+                                                v-for="discipline in uniquePrimaryDisciplines" 
+                                                :key="discipline" 
+                                                :label="discipline" 
+                                                :value="discipline">
+                                            </el-option>
+                                        </el-select>
+                                    </div>
+                                    
+                                    <!-- 二级专业筛选 -->
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">二级专业</label>
+                                        <el-select 
+                                            v-model="approverFilters.secondaryDiscipline" 
+                                            placeholder="全部二级专业" 
+                                            clearable
+                                            size="small"
+                                            class="w-full">
+                                            <el-option label="全部二级专业" value=""></el-option>
+                                            <el-option 
+                                                v-for="discipline in filteredSecondaryDisciplines" 
+                                                :key="discipline" 
+                                                :label="discipline" 
+                                                :value="discipline">
+                                            </el-option>
+                                        </el-select>
+                                    </div>
+                                </div>
+                                
+                                <!-- 筛选结果统计 -->
+                                <div class="mt-3 flex justify-between items-center text-sm text-gray-600">
+                                    <div>
+                                        共 {{ filteredApproverListData.length }} 条记录
+                                    </div>
+                                    <div>
+                                        当前显示第 {{ approverPagination.page }} 页，共 {{ Math.ceil(filteredApproverListData.length / approverPagination.pageSize) }} 页
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 专业审批人列表 -->
+                            <div class="approver-list-container">
+                                <el-table 
+                                    :data="pagedApproverListData" 
+                                    stripe 
+                                    border
+                                    class="approver-table"
+                                    :header-cell-style="{ background: '#f5f7fa', color: '#606266', fontWeight: 'bold' }">
+                                    
+                                    <!-- 一级专业列 -->
+                                    <el-table-column 
+                                        prop="primaryDiscipline" 
+                                        label="一级专业" 
+                                        width="280"
+                                        align="center">
+                                        <template slot-scope="scope">
+                                            <span class="primary-discipline-text">
+                                                {{ scope.row.primaryDiscipline }}
+                                            </span>
+                                        </template>
+                                    </el-table-column>
+                                    
+                                    <!-- 二级专业列 -->
+                                    <el-table-column 
+                                        prop="secondaryDiscipline" 
+                                        label="二级专业" 
+                                        width="280"
+                                        align="center">
+                                        <template slot-scope="scope">
+                                            <span class="secondary-discipline-text">
+                                                {{ scope.row.secondaryDiscipline }}
+                                            </span>
+                                        </template>
+                                    </el-table-column>
+                                    
+                                    <!-- 审批人列 -->
+                                    <el-table-column 
+                                        prop="approver" 
+                                        label="审批人" 
+                                        min-width="200">
+                                        <template slot-scope="scope">
+                                            <el-select 
+                                                v-model="approverConfig[scope.row.disciplineKey]" 
+                                                placeholder="请选择审批人" 
+                                                clearable
+                                                filterable
+                                                size="small"
+                                                class="approver-select-full"
+                                                @change="autoSaveApproverConfig">
+                                                <el-option 
+                                                    v-for="person in availableApprovers" 
+                                                    :key="person.value" 
+                                                    :label="person.label" 
+                                                    :value="person.value">
+                                                </el-option>
+                                            </el-select>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+                                
+                                <!-- 分页组件 -->
+                                <div class="pagination-container">
+                                    <el-pagination
+                                        @size-change="handleApproverPageSizeChange"
+                                        @current-change="handleApproverPageChange"
+                                        :current-page="approverPagination.page"
+                                        :page-sizes="[10, 20, 50, 100]"
+                                        :page-size="approverPagination.pageSize"
+                                        layout="total, sizes, prev, pager, next, jumper"
+                                        :total="filteredApproverListData.length">
+                                    </el-pagination>
+                                </div>
+                            </div>
+                        </el-card>
+                    </div>
+                </main>
+            </el-tab-pane>
+        </el-tabs>
+        </div>
+    </div>
+
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!-- Element UI JS -->
+    <script src="https://cdn.jsdelivr.net/npm/element-ui@2.15.14/lib/index.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                activeTab: 'hr',
+                tabs: {
+                    'hr': { name: 'hr', label: '人员需求'},
+                    'approver': { name: 'approver', label: '专业审批人管理'},
+                },
+                uploadVisible: {}, // 控制每个内容项的上传模块显示状态
+                filtersCollapsed: true, // 控制筛选区域的折叠状态，默认折叠
+                previewDialogVisible: false, // 控制预览对话框的显示状态
+                previewActiveTab: 'bi-weekly', // 预览对话框中的活动tab
+                previewData: {
+                    hr: []
+                },
+                hrReports: [],
+                // HR 备忘录模式专用
+                hrMemos: [],
+                hrActiveMemo: null,
+                // 岗位级需求单存储
+                positionRequirements: [],
+                hrViewMode: 'welcome', // welcome | view | create | edit
+                // 审批相关数据
+                approvalComment: '', // 审批意见
+                hrFormDialogVisible: false, // 表单弹窗显示状态
+                // 人员与板块映射关系
+                peopleSectionMap: {
+                    // PMC 板块
+                    '张明华': 'PMC 板块',
+                    '李工程师': 'PMC 板块',
+                    '符明辉': 'PMC 板块',
+                    '张东': 'PMC 板块',
+                    '杨帅': 'PMC 板块',
+                    '朱贻文': 'PMC 板块',
+                    '王谦男': 'PMC 板块',
+                    '董烨': 'PMC 板块',
+                    // 沈阳中心
+                    '刘志强': '沈阳中心',
+                    '王工程师': '沈阳中心',
+                    '章乃元': '沈阳中心',
+                    '田一': '沈阳中心',
+                    '关雅楠': '沈阳中心',
+                    '杨琼': '沈阳中心',
+                    '周子渊': '沈阳中心',
+                    '徐天宇': '沈阳中心',
+                    '李秀玲': '沈阳中心',
+                    '王冠鹏': '沈阳中心',
+                    '刘思弘': '沈阳中心',
+                    '范梅': '沈阳中心',
+                    // 银川中心
+                    '陈晓峰': '银川中心',
+                    '赵工程师': '银川中心',
+                    '赵建会': '银川中心',
+                    '叶科': '银川中心',
+                    '兰力泓': '银川中心',
+                    '崔晨': '银川中心',
+                    '王文升': '银川中心',
+                    '陈志军': '银川中心',
+                    '郭峰': '银川中心',
+                    '宋扬': '银川中心',
+                    '朱劲峰': '银川中心',
+                    '郑连忠': '银川中心'
+                },
+                // 专业审批人管理相关数据
+                approverConfig: {}, // 存储各专业的审批人配置 {专业名: 审批人姓名}
+                approverPagination: { page: 1, pageSize: 10 }, // 审批人列表分页
+                approverFilters: {
+                    primaryDiscipline: '', // 一级专业筛选
+                    secondaryDiscipline: '' // 二级专业筛选
+                },
+                availableApprovers: [
+                    // PMC 板块审批人
+                    { label: '张明华', value: '张明华' },
+                    { label: '李工程师', value: '李工程师' },
+                    { label: '符明辉', value: '符明辉' },
+                    { label: '张东', value: '张东' },
+                    { label: '杨帅', value: '杨帅' },
+                    { label: '朱贻文', value: '朱贻文' },
+                    { label: '王谦男', value: '王谦男' },
+                    { label: '董烨', value: '董烨' },
+                    // 沈阳中心审批人
+                    { label: '刘志强', value: '刘志强' },
+                    { label: '王工程师', value: '王工程师' },
+                    { label: '章乃元', value: '章乃元' },
+                    { label: '田一', value: '田一' },
+                    { label: '关雅楠', value: '关雅楠' },
+                    { label: '杨琼', value: '杨琼' },
+                    { label: '周子渊', value: '周子渊' },
+                    { label: '徐天宇', value: '徐天宇' },
+                    { label: '李秀玲', value: '李秀玲' },
+                    { label: '王冠鹏', value: '王冠鹏' },
+                    { label: '刘思弘', value: '刘思弘' },
+                    { label: '范梅', value: '范梅' },
+                    // 银川中心审批人
+                    { label: '陈晓峰', value: '陈晓峰' },
+                    { label: '赵工程师', value: '赵工程师' },
+                    { label: '赵建会', value: '赵建会' },
+                    { label: '叶科', value: '叶科' },
+                    { label: '兰力泓', value: '兰力泓' },
+                    { label: '崔晨', value: '崔晨' },
+                    { label: '王文升', value: '王文升' },
+                    { label: '陈志军', value: '陈志军' },
+                    { label: '郭峰', value: '郭峰' },
+                    { label: '宋扬', value: '宋扬' },
+                    { label: '朱劲峰', value: '朱劲峰' },
+                    { label: '郑连忠', value: '郑连忠' }
+                ],
+                // 人员需求分页
+                keyMemoPagination: { page: 1, pageSize: 5 },
+                // 人员需求筛选和排序
+                keyMemoFilters: {
+                    board: '',
+                    major: ''
+                },
+                // 实际用于筛选的条件（查询时才会更新）
+                activeKeyMemoFilters: {
+                    board: '',
+                    major: '',
+                    searchText: ''
+                },
+                keyMemoSortBy: 'default', // 排序方式：default, createdTime, projectNumber
+                keyMemoSearchText: '', // 搜索文本
+                showOnlyMyApprovals: false, // 仅显示待我审批
+                // 选中的需求项（用于详情展示）
+                selectedRequirement: null,
+                hrForm: {
+                    id: null,
+                    section: '',
+                    reporter: '人资填报人',
+                    createdTime: '',
+                    status: 'open', // open | closed
+                    closeOutcome: '', // resolved | terminated
+                    eventType: '', // 人员需求
+                    payload: {}
+                },
+                // 岗位折叠面板当前项（只展开一个，避免表单过长）
+                hrPositionsActive: '',
+                selectedPositionIndex: 0,
+                hrEventTypeOptions: ['人员需求'],
+                hrFormRules: {
+                    // 人员需求（对齐 YAML）
+                    'payload.projectNumber': [{ required: true, message: '请选择项目号', trigger: 'change' }],
+                    'payload.projectName': [{ required: false }],
+                    'payload.projectManager': [{ required: false }],
+                    'payload.department': [{ required: false }],
+                    'payload.discipline': [{ required: true, message: '请选择专业', trigger: 'change', type: 'array' }],
+                    'payload.requirementType': [{ required: true }],
+                    'payload.jobTitle': [{ required: true, message: '请输入职位/岗位名称', trigger: 'blur' }],
+                    'payload.coreResponsibilities': [{ required: true, message: '请填写核心职责', trigger: 'blur' }],
+                    'payload.workLocation': [{ required: true, message: '请输入工作地点', trigger: 'blur' }],
+                    'payload.requiredOnboardDate': [{ required: true, message: '请选择到岗时间', trigger: 'change' }],
+                    'payload.positionCycle': [{ required: false }],
+                    'payload.quantity': [{ required: true, type: 'number', message: '请输入数量(>=1)', trigger: 'change' }],
+                    'payload.gender': [{ required: false }],
+                    'payload.ageRequirement.minAge': [{ required: false }],
+                    'payload.ageRequirement.maxAge': [{ required: false, validator: function(){}, trigger: 'change' }],
+                    'payload.titleRequirement': [{ required: false }],
+                    'payload.professionalCertificates': [{ required: false }],
+                    'payload.experienceRequirement': [{ required: false }],
+                    'payload.educationRequirement': [{ required: false }],
+                    'payload.languageRequirement': [{ required: false }],
+                    'payload.otherRequirements': [{ required: false }],
+                    'payload.name': [{ required: true, message: '请输入姓名', trigger: 'blur' }],
+                    'payload.department': [{ required: true, message: '请输入所属部门', trigger: 'blur' }],
+                    'payload.major': [{ required: true, message: '请输入主专业', trigger: 'blur' }],
+                    'payload.qualification': [{ required: true, message: '请输入主专业资格', trigger: 'blur' }],
+                    'payload.content': [{ required: true, message: '请输入记录内容', trigger: 'blur' }],
+                    
+                },
+                // 人员需求：静态字典（源自 人员需求表单.yaml）
+                disciplineOptions: [
+                    { label: '施工', value: '施工', children: [
+                        { label: '管理', value: '管理' },{ label: '综合', value: '综合' },{ label: '吊装', value: '吊装' },{ label: '调度', value: '调度' },{ label: '总图', value: '总图' },{ label: '土建', value: '土建' },{ label: '静设备', value: '静设备' },{ label: '动设备', value: '动设备' },{ label: '管道', value: '管道' },{ label: '电气', value: '电气' },{ label: '仪表', value: '仪表' },{ label: '防腐保温', value: '防腐保温' },{ label: '完工', value: '完工' },{ label: '其他', value: '其他' }
+                    ]},
+                    { label: '质量', value: '质量', children: [
+                        { label: '管理', value: '管理' },{ label: '综合', value: '综合' },{ label: '体系', value: '体系' },{ label: '焊接&无损检测', value: '焊接&无损检测' },{ label: '检试验', value: '检试验' },{ label: '其他', value: '其他' }
+                    ]},
+                    { label: '安全', value: '安全', children: [
+                        { label: '管理', value: '管理' },{ label: '综合', value: '综合' },{ label: '培训', value: '培训' },{ label: '脚手架', value: '脚手架' },{ label: '临电', value: '临电' },{ label: '起重吊装', value: '起重吊装' },{ label: '作业许可', value: '作业许可' },{ label: '机具', value: '机具' },{ label: '无损检测', value: '无损检测' },{ label: '其他', value: '其他' }
+                    ]},
+                    { label: '控制', value: '控制', children: [
+                        { label: '管理', value: '管理' },{ label: '综合', value: '综合' },{ label: '费控', value: '费控' },{ label: '计划', value: '计划' },{ label: '文控', value: '文控' },{ label: '档案', value: '档案' },{ label: '合同', value: '合同' },{ label: '其他', value: '其他' }
+                    ]},
+                    { label: '设计', value: '设计', children: [
+                        { label: '工艺', value: '工艺' },{ label: '储运', value: '储运' },{ label: '热工', value: '热工' },{ label: '环保', value: '环保' },{ label: '静设备', value: '静设备' },{ label: '机械', value: '机械' },{ label: '粉体', value: '粉体' },{ label: '工业炉', value: '工业炉' },{ label: '概算', value: '概算' },{ label: '技术经济', value: '技术经济' },{ label: '管道设计', value: '管道设计' },{ label: '管道应力', value: '管道应力' },{ label: '管道材料', value: '管道材料' },{ label: '给排水消防', value: '给排水消防' },{ label: '建筑', value: '建筑' },{ label: '结构', value: '结构' },{ label: '暖通', value: '暖通' },{ label: '总图', value: '总图' },{ label: '电气', value: '电气' },{ label: '电信', value: '电信' },{ label: '仪表', value: '仪表' }
+                    ]},
+                    { label: '职能', value: '职能', children: [
+                        { label: '项目行政', value: '项目行政' },{ label: '项目助理', value: '项目助理' },{ label: '项目秘书', value: '项目秘书' },{ label: '翻译', value: '翻译' },{ label: 'IT', value: 'IT' }
+                    ]},
+                    { label: '造价', value: '造价', children: [
+                        { label: '安装', value: '安装' },{ label: '土建', value: '土建' },{ label: '电仪', value: '电仪' }
+                    ]},
+                    { label: '管理', value: '管理', children: [
+                        { label: '项目经理', value: '项目经理' },{ label: '项目工程师', value: '项目工程师' },{ label: '项目主任', value: '项目主任' }
+                    ]},
+                    { label: '采购', value: '采购', children: [
+                        { label: '采购', value: '采购' },{ label: '采买', value: '采买' },{ label: '催交', value: '催交' },{ label: '检验', value: '检验' },{ label: '物流', value: '物流' },{ label: '仓储', value: '仓储' },{ label: '材控', value: '材控' }
+                    ]}
+                ],
+                // 专业资格证书选项（源自 人员需求表单.yaml）
+                certificationOptions: [
+                    { label: '注册化工', value: '注册化工' },
+                    { label: '注册电气', value: '注册电气' },
+                    { label: '注册给排水', value: '注册给排水' },
+                    { label: '注册动力', value: '注册动力' },
+                    { label: '注册暖通', value: '注册暖通' },
+                    { label: '注册建筑', value: '注册建筑' },
+                    { label: '注册一级结构', value: '注册一级结构' },
+                    { label: '注册咨询', value: '注册咨询' },
+                    { label: '注册一级建造', value: '注册一级建造' },
+                    { label: '注册一级造价', value: '注册一级造价' },
+                    { label: '注册安全', value: '注册安全' },
+                    { label: '注册监理', value: '注册监理' },
+                    { label: '三类人员B证', value: '三类人员B证' },
+                    { label: '三类人员C证', value: '三类人员C证' },
+                    { label: 'TUV', value: 'TUV' },
+                    { label: 'PMP', value: 'PMP' },
+                    { label: 'IPMP', value: 'IPMP' },
+                    { label: '其他', value: '其他' }
+                ],
+                projectNumberOptions: ['G24007','C24035','PRJ-2024-001'],
+                projectMetaMap: {
+                    'G24007': { projectName: '哈密PMC项目', projectManager: '项目经理A', department: 'PMC 板块' },
+                    'C24035': { projectName: '海槿年产10万吨绿色甲醇项目', projectManager: '项目经理B', department: '银川中心' },
+                    'PRJ-2024-001': { projectName: '示例项目', projectManager: '示例经理', department: '总部人力' }
+                },
+                // 创建人员需求：是否派遣到指定项目（是=可自由选项目号，否=项目号为管理归属对应部门号且不可选）
+                assignToSpecifiedProject: true,
+                // 管理归属下拉选项（与 departmentCodeMap 对应）
+                managementOptions: ['PMC 板块', '银川中心', '总部人力', '结构专业室', '电气专业室', '工艺专业室', '仪表专业室', '暖通专业室'],
+                // 管理归属 -> 部门号（不派遣时项目号自动带出）
+                departmentCodeMap: {
+                    'PMC 板块': 'SAS410-0000',
+                    '银川中心': 'SAS411-0000',
+                    '总部人力': 'SAS412-0000',
+                    '结构专业室': 'SAS413-0000',
+                    '电气专业室': 'SAS414-0000',
+                    '工艺专业室': 'SAS415-0000',
+                    '仪表专业室': 'SAS416-0000',
+                    '暖通专业室': 'SAS417-0000'
+                },
+                filters: {
+                    'bi-weekly': { section: '', time: '', reporter: '' },
+                    'monthly': { section: '', time: '', reporter: '' },
+                    'hr': { section: '', time: '', reporter: '' }
+                },
+                appliedFilters: {
+                    'bi-weekly': { section: '', time: '', reporter: '' },
+                    'monthly': { section: '', time: '', reporter: '' },
+                    'hr': { section: '', time: '', reporter: '' }
+                },
+                // 板块标签选择状态
+                selectedSectionTag: 'all', // 当前选中的板块标签
+                activeReport: null,
+                viewMode: 'welcome', // welcome, view, create, edit
+                form: {
+                    id: null,
+                    section: '',
+                    time: '',
+                    reporter: '',
+                    generatedTime: '',
+                    status: 'generating',
+                    items: []
+                },
+                formRules: {
+                    section: [{ required: true, message: '请选择管理板块/专业室', trigger: 'change' }],
+                    time: [{ required: true, message: '请选择周报日期', trigger: 'change' }]
+                },
+                allSections: {
+                    'bi-weekly': [],
+                    'monthly': [],
+                    'hr': ['总部人力', '结构专业室', '电气专业室', '工艺专业室', '仪表专业室', '暖通专业室']
+                },
+                allReporters: ['张三', '李四', '王五', '赵六', '孙七', '周八', '吴九', '郑十', '陈一一', '林一二', '钱七', '孙八', '李九', '周十', '吴一一', '郑一二', '王一三', '陈一四'],
+                availableTimes: {
+                    'hr': []
+                },
+                batchExportDialogVisible: false,
+                batchExportForm: {
+                    sections: [],
+                    times: [],
+                },
+                batchExportRules: {
+                    sections: [{ type: 'array', required: true, message: '请至少选择一个板块/专业室', trigger: 'change' }],
+                    times: [{ type: 'array', required: true, message: '请至少选择一个时间', trigger: 'change' }],
+                },
+                // 保存和生成报告的状态管理
+                savingState: {
+                    isSaving: false,
+                    isGenerating: false,
+                    saveType: null 
+                },
+
+                // 岗位工具栏与缓存（简化版）
+                posTools: {
+                    searchText: '',
+                    filterDisciplines: [],
+                    sortBy: '',
+                    _backupPositions: null
+                },
+                // 批量导入岗位相关数据
+                bulkImportDialogVisible: false,
+                importFileList: [],
+                importPreviewData: []
+            },
+            computed: {
+                selectedPosition() {
+                    // 使用hrForm的positions
+                    const list = (this.hrForm && this.hrForm.payload && this.hrForm.payload.positions) ? this.hrForm.payload.positions : [];
+                    const i = this.selectedPositionIndex;
+                    if (typeof i !== 'number' || i < 0 || i >= list.length) return null;
+                    return list[i];
+                },
+                positionsCount() {
+                    return (this.hrForm && this.hrForm.payload && this.hrForm.payload.positions) ? this.hrForm.payload.positions.length : 0;
+                },
+                totalQuantity() {
+                    const list = (this.hrForm && this.hrForm.payload && this.hrForm.payload.positions) ? this.hrForm.payload.positions : [];
+                    return list.reduce((sum, p) => sum + (Number(p.quantity) || 0), 0);
+                },
+                disciplineDistribution() {
+                    const dist = {};
+                    const list = (this.hrForm && this.hrForm.payload && this.hrForm.payload.positions) ? this.hrForm.payload.positions : [];
+                    list.forEach(p => {
+                        (Array.isArray(p.discipline) ? p.discipline : (p.discipline ? [p.discipline] : [])).forEach(d => {
+                            const label = Array.isArray(d) ? ((d[0]||'-') + ' / ' + (d[1]||'-')) : d;
+                            dist[label] = (dist[label] || 0) + (Number(p.quantity) || 0);
+                        });
+                    });
+                    return dist;
+                },
+                disciplineDistributionTop() {
+                    const entries = Object.entries(this.disciplineDistribution);
+                    entries.sort((a,b) => b[1] - a[1]);
+                    return entries.slice(0, 12);
+                },
+                currentReports() {
+                    if (this.activeTab === 'bi-weekly') return this.biWeeklyReports;
+                    if (this.activeTab === 'monthly') return this.monthlyReports;
+                    return this.hrReports;
+                },
+                // 人员需求：项目列表过滤与分页（兼容旧数据的“岗位需求需求”事件类型）
+                filteredKeyMemos() {
+                    let result = (this.hrMemos || []).filter(m => 
+                        m.eventType === '人员需求' || m.eventType === '岗位需求需求'
+                    );
+                    
+                    // 仅显示待我审批/处理的筛选
+                    if (this.showOnlyMyApprovals) {
+                        result = result.filter(memo => {
+                            const pendingCount = this.getMyPendingApprovalOrProcessCount(memo.payload.positions || []);
+                            return pendingCount > 0;
+                        });
+                    }
+                    
+                    // 板块归属筛选
+                    if (this.activeKeyMemoFilters.board) {
+                        result = result.filter(memo => memo.payload.board === this.activeKeyMemoFilters.board);
+                    }
+                    
+                    // 需求专业筛选（支持完整专业路径）
+                    if (this.activeKeyMemoFilters.major) {
+                        result = result.filter(memo => {
+                            if (!memo.payload.positions || !Array.isArray(memo.payload.positions)) {
+                                return false;
+                            }
+                            
+                            // 检查是否有任何岗位的专业匹配筛选条件
+                            return memo.payload.positions.some(pos => {
+                                if (!pos.discipline || !Array.isArray(pos.discipline)) {
+                                    return false;
+                                }
+                                
+                                // 检查每个专业是否匹配筛选条件
+                                return pos.discipline.some(discipline => {
+                                    let disciplineText = '';
+                                    if (Array.isArray(discipline) && discipline.length >= 2) {
+                                        disciplineText = `${discipline[0]} / ${discipline[1]}`;
+                                    } else if (Array.isArray(discipline) && discipline.length === 1) {
+                                        disciplineText = discipline[0];
+                                    } else if (typeof discipline === 'string') {
+                                        disciplineText = discipline;
+                                    }
+                                    
+                                    return disciplineText === this.activeKeyMemoFilters.major;
+                                });
+                            });
+                        });
+                    }
+                    
+                    // 全字段搜索（包含完整专业路径搜索）
+                    if (this.activeKeyMemoFilters.searchText) {
+                        const searchText = this.activeKeyMemoFilters.searchText.toLowerCase();
+                        result = result.filter(memo => {
+                            // 构建专业搜索文本
+                            let disciplineText = '';
+                            if (memo.payload.positions && Array.isArray(memo.payload.positions)) {
+                                const disciplines = memo.payload.positions
+                                    .filter(pos => pos.discipline && Array.isArray(pos.discipline))
+                                    .flatMap(pos => pos.discipline)
+                                    .map(discipline => {
+                                        if (Array.isArray(discipline) && discipline.length >= 2) {
+                                            return `${discipline[0]} / ${discipline[1]}`;
+                                        } else if (Array.isArray(discipline) && discipline.length === 1) {
+                                            return discipline[0];
+                                        } else if (typeof discipline === 'string') {
+                                            return discipline;
+                                        }
+                                        return '';
+                                    })
+                                    .filter(d => d && d.trim() !== '');
+                                disciplineText = disciplines.join(' ');
+                            }
+                            
+                            const searchableText = [
+                                memo.payload.projectNumber || '',
+                                memo.payload.projectName || '',
+                                memo.payload.board || '',
+                                disciplineText,
+                                memo.reporter || ''
+                            ].join(' ').toLowerCase();
+                            return searchableText.includes(searchText);
+                        });
+                    }
+                    
+                    // 排序
+                    result.sort((a, b) => {
+                        switch (this.keyMemoSortBy) {
+                            case 'default':
+                                // 默认排序：待我审批/处理的项目在前，其次按创建时间
+                                // 直接计算待我审批/处理的数量，避免依赖projectStatistics
+                                const aHasMyPending = this.getMyPendingApprovalOrProcessCount(a.payload.positions || []) > 0;
+                                const bHasMyPending = this.getMyPendingApprovalOrProcessCount(b.payload.positions || []) > 0;
+                                
+                                if (aHasMyPending && !bHasMyPending) return -1; // a排前
+                                if (!aHasMyPending && bHasMyPending) return 1;  // b排前
+                                
+                                // 如果都待我审批/处理或都不待我审批/处理，按创建时间排序
+                                return new Date(b.createdTime) - new Date(a.createdTime);
+                            case 'createdTime':
+                                return new Date(b.createdTime) - new Date(a.createdTime);
+                            case 'projectNumber':
+                                return (a.payload.projectNumber || '').localeCompare(b.payload.projectNumber || '');
+                            default:
+                                return 0;
+                        }
+                    });
+                    
+                    return result;
+                },
+                
+                // 获取所有唯一的板块归属（兼容“人员需求”和旧的“岗位需求需求”）
+                uniqueBoards() {
+                    const boards = this.hrMemos
+                        .filter(memo => 
+                            (memo.eventType === '人员需求' || memo.eventType === '岗位需求需求') 
+                            && memo.payload.board
+                        )
+                        .map(memo => memo.payload.board);
+                    return [...new Set(boards)].sort();
+                },
+                
+                // 不派遣到指定项目时，项目号显示为管理归属对应的部门号
+                effectiveDepartmentProjectNumber() {
+                    const dep = this.hrForm.payload && this.hrForm.payload.department;
+                    return (dep && this.departmentCodeMap[dep]) ? this.departmentCodeMap[dep] : '';
+                },
+                // 获取所有唯一的需求专业（显示完整的一级/二级专业路径，兼容旧数据）
+                uniqueMajors() {
+                    const majors = this.hrMemos
+                        .filter(memo => 
+                            (memo.eventType === '人员需求' || memo.eventType === '岗位需求需求') 
+                            && memo.payload.positions
+                        )
+                        .flatMap(memo => memo.payload.positions)
+                        .filter(pos => pos.discipline && Array.isArray(pos.discipline))
+                        .flatMap(pos => pos.discipline)
+                        .map(discipline => {
+                            // 处理专业数据格式：可能是数组[一级, 二级]或字符串
+                            if (Array.isArray(discipline) && discipline.length >= 2) {
+                                return `${discipline[0]} / ${discipline[1]}`;
+                            } else if (Array.isArray(discipline) && discipline.length === 1) {
+                                return discipline[0];
+                            } else if (typeof discipline === 'string') {
+                                return discipline;
+                            }
+                            return null;
+                        })
+                        .filter(major => major && major.trim() !== '');
+                    return [...new Set(majors)].sort();
+                },
+                pagedKeyMemos() {
+                    const start = (this.keyMemoPagination.page - 1) * this.keyMemoPagination.pageSize;
+                    return this.filteredKeyMemos.slice(start, start + this.keyMemoPagination.pageSize);
+                },
+                
+                // 项目统计：计算每个项目的需求状态统计
+                projectStatistics() {
+                    const stats = {};
+                    this.filteredKeyMemos.forEach(project => {
+                        const projectKey = project.payload.projectNumber;
+                        if (!stats[projectKey]) {
+                            stats[projectKey] = {
+                                projectName: project.payload.projectName,
+                                projectNumber: project.payload.projectNumber,
+                                totalRequirements: 0,
+                                processingRequirements: 0,
+                                closedRequirements: 0,
+                                matchedRequirements: 0,
+                                totalMatchedCandidates: 0,
+                                pendingMyApprovalOrProcess: 0,
+                                requirements: []
+                            };
+                        }
+                        
+                        // 统计每个需求的状态
+                        if (project.payload.positions && Array.isArray(project.payload.positions)) {
+                            project.payload.positions.forEach(requirement => {
+                                stats[projectKey].totalRequirements++;
+                                const calculatedStatus = this.calculatePositionStatus(requirement);
+                                stats[projectKey].requirements.push({
+                                    id: requirement.requirementId,
+                                    title: requirement.jobTitle,
+                                    status: calculatedStatus,
+                                    quantity: requirement.quantity || 1
+                                });
+                                
+                                if (calculatedStatus === '已关闭') {
+                                    stats[projectKey].closedRequirements++;
+                                } else if (calculatedStatus === '匹配中' && requirement.matchedCandidates && requirement.matchedCandidates.length > 0) {
+                                    stats[projectKey].matchedRequirements++;
+                                    // 统计匹配人数
+                                    stats[projectKey].totalMatchedCandidates += this.getMatchedCandidatesCount(requirement);
+                                } else {
+                                    stats[projectKey].processingRequirements++;
+                                }
+                                
+                                // 统计待我审批/处理的需求（待审批 + 匹配中）
+                                if (this.isPendingMyApproval(requirement) || calculatedStatus === '匹配中') {
+                                    stats[projectKey].pendingMyApprovalOrProcess++;
+                                }
+                            });
+                        }
+                    });
+                    
+                    return stats;
+                },
+                // 各类型进行中数量统计
+                // 移除数量统计，因为不再需要显示数量
+                // HR 备忘录过滤视图（按筛选条件）
+                hrFilteredMemos() {
+                    let result = this.hrMemos.slice();
+                    const currentFilters = this.appliedFilters['hr'] || { section: '', time: '', reporter: '' };
+                    if (currentFilters.section) {
+                        result = result.filter(m => m.section === currentFilters.section);
+                    }
+                    if (currentFilters.time) {
+                        result = result.filter(m => m.month === currentFilters.time);
+                    }
+                    if (currentFilters.reporter) {
+                        result = result.filter(m => m.reporter === currentFilters.reporter);
+                    }
+                    return result.sort((a, b) => b.id - a.id);
+                },
+                filteredReports() {
+                    let result = this.currentReports;
+                    const currentFilters = this.appliedFilters[this.activeTab];
+                    
+                    // 优先使用板块标签筛选
+                    if (this.selectedSectionTag && this.selectedSectionTag !== 'all') {
+                        result = result.filter(r => r.section === this.selectedSectionTag);
+                    } else if (currentFilters.section) {
+                        result = result.filter(r => r.section === currentFilters.section);
+                    }
+                    
+                    if (currentFilters.time) {
+                        result = result.filter(r => r.time === currentFilters.time);
+                    }
+                    if (currentFilters.reporter) {
+                        result = result.filter(r => r.reporter === currentFilters.reporter);
+                    }
+                    return result.sort((a, b) => {
+                        if (a.status === 'generating' && b.status !== 'generating') return -1;
+                        if (a.status !== 'generating' && b.status === 'generating') return 1;
+                        return b.id - a.id;
+                    });
+                },
+                allTimes() {
+                    const hrTimes = new Set(this.hrReports.map(r => r.time));
+                    
+                    // 人员需求按年月排序（从新到旧）
+                    const sortedHr = Array.from(hrTimes).sort((a, b) => {
+                        const dateA = new Date(a.replace('年', '-').replace('月', '-01'));
+                        const dateB = new Date(b.replace('年', '-').replace('月', '-01'));
+                        return dateB - dateA; // 从新到旧
+                    });
+                    
+                    return {
+                        'bi-weekly': [],
+                        'monthly': [],
+                        'hr': sortedHr
+                    };
+                },
+                isEditing() {
+                    return this.viewMode === 'edit';
+                },
+                previewStats() {
+                    const allReports = [...this.hrReports];
+                    return {
+                        notStarted: allReports.filter(r => !r.status || r.status === 'not_started').length,
+                        generating: allReports.filter(r => r.status === 'generating').length,
+                        generated: allReports.filter(r => r.status === 'generated').length
+                    };
+                },
+                availableSectionsForForm() {
+                    // 在创建模式下，显示所有板块选项
+                    return this.allSections[this.activeTab].map(s => ({ 
+                        label: s, 
+                        value: s, 
+                        disabled: false 
+                    }));
+                },
+                availableTimesForForm() {
+                    // 只有选择了板块后才显示可用日期
+                    if (!this.form.section) {
+                        return [];
+                    }
+                    
+                    // 获取该板块已有报告的日期
+                    const timesWithReports = this.currentReports
+                        .filter(r => r.section === this.form.section)
+                        .map(r => r.time);
+                    
+                    // 过滤掉已有报告的日期
+                    return this.availableTimes[this.activeTab].filter(time => 
+                        !timesWithReports.includes(time)
+                    );
+                },
+                // 控制保存按钮是否可用
+                canSave() {
+                    if (this.viewMode !== 'create' && this.viewMode !== 'edit') return false;
+                    // 只检查管理板块和周报日期
+                    return !!(this.form.section && this.form.time);
+                },
+                // 控制生成报告按钮是否可用
+                canGenerate() {
+                    if (!this.canSave) return false;
+                    // 至少存在一个填写了文字或上传了图片的内容
+                    return this.form.items && this.form.items.some(item => 
+                        item.contents && item.contents.some(content => 
+                            (content.text && content.text.trim().length > 0) || 
+                            (content.images && content.images.length > 0)
+                        )
+                    );
+                },
+                // 检查是否有未保存的更改
+                hasUnsavedChanges() {
+                    if (this.viewMode !== 'create' && this.viewMode !== 'edit') return false;
+                    if (this.viewMode === 'create') {
+                        return this.canSave; // 新建模式下有内容就算有未保存更改
+                    }
+                    // 编辑模式下比较与原始数据的差异
+                    if (!this.activeReport) return false;
+                    return JSON.stringify(this.form) !== JSON.stringify(this.activeReport);
+                },
+                
+                /**
+                 * 生成审批人列表数据
+                 * 将专业选项转换为表格数据格式，包含一级专业、二级专业、审批人三列
+                 * 只显示二级专业，每行都显示对应的一级专业
+                 */
+                approverListData() {
+                    const listData = [];
+                    
+                    this.disciplineOptions.forEach(discipline => {
+                        // 只添加二级专业行，每行都显示一级专业名称
+                        if (discipline.children && discipline.children.length > 0) {
+                            discipline.children.forEach(subDiscipline => {
+                                listData.push({
+                                    primaryDiscipline: discipline.label, // 每行都显示一级专业
+                                    secondaryDiscipline: subDiscipline.label,
+                                    disciplineKey: subDiscipline.value
+                                });
+                            });
+                        } else {
+                            // 如果没有二级专业，则显示一级专业本身
+                            listData.push({
+                                primaryDiscipline: discipline.label,
+                                secondaryDiscipline: discipline.label,
+                                disciplineKey: discipline.value
+                            });
+                        }
+                    });
+                    
+                    return listData;
+                },
+                
+                /**
+                 * 获取所有唯一的一级专业
+                 */
+                uniquePrimaryDisciplines() {
+                    const primaryDisciplines = this.disciplineOptions.map(d => d.label);
+                    return [...new Set(primaryDisciplines)].sort();
+                },
+                
+                /**
+                 * 根据一级专业筛选过滤后的二级专业列表
+                 */
+                filteredSecondaryDisciplines() {
+                    if (!this.approverFilters.primaryDiscipline) {
+                        // 如果没有选择一级专业，返回所有二级专业
+                        const allSecondary = this.disciplineOptions
+                            .flatMap(d => d.children ? d.children.map(c => c.label) : [d.label]);
+                        return [...new Set(allSecondary)].sort();
+                    } else {
+                        // 如果选择了一级专业，返回该专业下的二级专业
+                        const selectedDiscipline = this.disciplineOptions.find(d => d.label === this.approverFilters.primaryDiscipline);
+                        if (selectedDiscipline && selectedDiscipline.children) {
+                            return selectedDiscipline.children.map(c => c.label).sort();
+                        } else {
+                            return [selectedDiscipline.label];
+                        }
+                    }
+                },
+                
+                /**
+                 * 根据筛选条件过滤后的审批人列表数据
+                 */
+                filteredApproverListData() {
+                    let filtered = this.approverListData;
+                    
+                    // 一级专业筛选
+                    if (this.approverFilters.primaryDiscipline) {
+                        filtered = filtered.filter(item => item.primaryDiscipline === this.approverFilters.primaryDiscipline);
+                    }
+                    
+                    // 二级专业筛选
+                    if (this.approverFilters.secondaryDiscipline) {
+                        filtered = filtered.filter(item => item.secondaryDiscipline === this.approverFilters.secondaryDiscipline);
+                    }
+                    
+                    return filtered;
+                },
+                
+                /**
+                 * 分页后的审批人列表数据
+                 */
+                pagedApproverListData() {
+                    const start = (this.approverPagination.page - 1) * this.approverPagination.pageSize;
+                    const end = start + this.approverPagination.pageSize;
+                    return this.filteredApproverListData.slice(start, end);
+                }
+            },
+            watch: {
+                activeTab() {
+                    this.viewMode = 'welcome';
+                    this.activeReport = null;
+                    this.selectedSectionTag = 'all'; // 切换标签页时重置板块标签选择
+                },
+                // 监听筛选条件中板块选择的变化，同步更新标签选择
+                filters: {
+                    handler(newFilters, oldFilters) {
+                        // 检查当前活动标签页的板块选择是否发生变化
+                        if (newFilters[this.activeTab] && oldFilters[this.activeTab]) {
+                            const newSection = newFilters[this.activeTab].section;
+                            const oldSection = oldFilters[this.activeTab].section;
+                            
+                            if (newSection !== oldSection) {
+                                if (newSection) {
+                                    this.selectedSectionTag = newSection;
+                                } else {
+                                    this.selectedSectionTag = 'all';
+                                }
+                            }
+                        }
+                    },
+                    deep: true
+                }
+                ,
+                filteredKeyMemos(newList) {
+                    const maxPage = Math.max(1, Math.ceil((newList || []).length / this.keyMemoPagination.pageSize));
+                    if (this.keyMemoPagination.page > maxPage) {
+                        this.keyMemoPagination.page = maxPage;
+                    }
+                },
+                
+                // 监听审批人筛选条件变化，自动重置分页
+                approverFilters: {
+                    handler() {
+                        this.approverPagination.page = 1; // 筛选条件变化时重置到第一页
+                    },
+                    deep: true
+                }
+            },
+            mounted() {
+                this.init();
+                // 加载审批人配置
+                this.loadApproverConfig();
+                // 添加键盘快捷键支持
+                document.addEventListener('keydown', this.handleKeydown);
+            },
+            beforeDestroy() {
+                // 清理事件监听器
+                document.removeEventListener('keydown', this.handleKeydown);
+            },
+            methods: {
+                selectPosition(idx) {
+                    this.$set(this, 'selectedPositionIndex', idx);
+                },
+                
+                
+                // 切换需求状态（已废弃，保留以防其他地方调用）
+                toggleRequirementStatus(positionIndex) {
+                    this.$message.warning('需求状态管理功能已移除');
+                },
+
+                /**
+                 * 获取当前审批步骤
+                 * @param {Object} position - 岗位对象
+                 * @returns {number} 当前步骤
+                 */
+                getCurrentApprovalStep(position) {
+                    if (!position || !position.approvalFlow) return 0;
+                    return position.approvalFlow.currentStep || 1;
+                },
+
+                /**
+                 * 获取当前步骤信息
+                 * @param {Object} position - 岗位对象
+                 * @returns {Object} 当前步骤信息
+                 */
+                getCurrentStepInfo(position) {
+                    if (!position || !position.approvalFlow || !position.approvalFlow.steps) {
+                        return { name: '未知', approver: '未知' };
+                    }
+                    const currentStep = this.getCurrentApprovalStep(position);
+                    const step = position.approvalFlow.steps.find(s => s.step === currentStep);
+                    return step || { name: '未知', approver: '未知' };
+                },
+
+                // 获取项目岗位的专业分布统计
+                getProjectDisciplineDistribution(positions) {
+                    const dist = {};
+                    if (!positions || !Array.isArray(positions)) return dist;
+                    
+                    positions.forEach(p => {
+                        (Array.isArray(p.discipline) ? p.discipline : (p.discipline ? [p.discipline] : [])).forEach(d => {
+                            const label = Array.isArray(d) ? ((d[0]||'-') + ' / ' + (d[1]||'-')) : d;
+                            dist[label] = (dist[label] || 0) + (Number(p.quantity) || 0);
+                        });
+                    });
+                    return dist;
+                },
+                // 生成人员需求编号
+                getPositionRequirementId(position, positionIndex) {
+                    if (!this.selectedProject) return null;
+                    const projectNumber = this.selectedProject.payload.projectNumber || '';
+                    const department = this.selectedProject.payload.department || this.selectedProject.payload.board || '';
+                    const sequence = String(positionIndex + 1).padStart(4, '0');
+                    return `${projectNumber}-${department}-${sequence}`;
+                },
+                // 获取需求类型的中文标签
+                getRequirementTypeLabel(type) {
+                    const typeMap = {
+                        'design': '设计类',
+                        'pmc': 'PMC',
+                        'epc': 'EPC',
+                        'consulting': '咨询类'
+                    };
+                    return typeMap[type] || type;
+                },
+                // 获取性别标签
+                getGenderLabel(gender) {
+                    const genderMap = {
+                        'male': '男',
+                        'female': '女',
+                        'any': '不限'
+                    };
+                    return genderMap[gender] || gender;
+                },
+                // 获取职称标签
+                getTitleLabel(title) {
+                    const titleMap = {
+                        'junior': '初级',
+                        'intermediate': '中级',
+                        'senior': '高级',
+                        'professor_level': '正高级'
+                    };
+                    return titleMap[title] || title;
+                },
+                // 处理专业资格证书选择变化
+                handleCertificationChange(value) {
+                    window.HRFormModule.handleCertificationChange(this, value);
+                },
+                // 更新自定义证书
+                updateCustomCertifications(value) {
+                    window.HRFormModule.updateCustomCertifications(this, value);
+                },
+                // 格式化证书显示
+                formatCertifications(certificates, customCertifications) {
+                    return window.HRFormModule.formatCertifications(certificates, customCertifications);
+                },
+                // 格式化专业显示
+                formatDiscipline(discipline) {
+                    return window.HRFormModule.formatDiscipline(discipline);
+                },
+                // 格式化性别显示
+                formatGender(gender) {
+                    return window.HRFormModule.formatGender(gender);
+                },
+                // 格式化职称显示
+                formatTitle(title) {
+                    return window.HRFormModule.formatTitle(title);
+                },
+                // 格式化年龄范围显示
+                formatAgeRange(ageRequirement) {
+                    return window.HRFormModule.formatAgeRange(ageRequirement);
+                },
+                // 迁移旧数据格式到新格式
+                migrateCertificationData(position) {
+                    window.HRFormModule.migrateCertificationData(position);
+                },
+                applyPositionSortFilter() {
+                    if (!this.hrForm.payload) return;
+                    const list = this.hrForm.payload.positions || [];
+                    // 备份原顺序
+                    if (!this.posTools._backupPositions) this.posTools._backupPositions = list.slice();
+                    // 使用模块中的过滤和排序功能
+                    const filtered = window.HRFormModule.applyPositionFilters(list, this.posTools);
+                    this.$set(this.hrForm.payload, 'positions', filtered);
+                },
+                resetPositionSortFilter() {
+                    if (this.posTools._backupPositions) {
+                        this.$set(this.hrForm.payload, 'positions', this.posTools._backupPositions);
+                        this.posTools._backupPositions = null;
+                    }
+                    this.posTools.searchText = '';
+                    this.posTools.filterDisciplines = [];
+                    this.posTools.sortBy = '';
+                },
+                // 创建一个岗位默认对象
+                newPosition() {
+                    return window.HRFormModule.createNewPosition();
+                },
+                addPosition() {
+                    if (!this.hrForm.payload.positions) this.$set(this.hrForm.payload, 'positions', []);
+                    this.hrForm.payload.positions.push(this.newPosition());
+                },
+                removePosition(idx) {
+                    if (!this.hrForm.payload.positions) return;
+                    if (this.hrForm.payload.positions.length <= 1) { this.$message.warning('至少保留一个岗位'); return; }
+                    this.hrForm.payload.positions.splice(idx, 1);
+                },
+                copyPosition(idx) {
+                    if (!this.hrForm.payload.positions) return;
+                    const copy = JSON.parse(JSON.stringify(this.hrForm.payload.positions[idx]));
+                    this.hrForm.payload.positions.splice(idx + 1, 0, copy);
+                },
+                // 校验：年龄区间
+                validateAgeRange(rule, value, callback) {
+                    const ageRequirement = this.hrForm?.payload?.ageRequirement;
+                    const validation = window.HRFormModule.validateAgeRange(ageRequirement);
+                    if (!validation.valid) {
+                        callback(new Error(validation.message));
+                        return;
+                    }
+                    callback();
+                },
+                // 生成针对岗位的年龄区间校验器
+                validateAgeRangePosition(pIndex) {
+                    return window.HRFormModule.createAgeRangeValidator(this, pIndex);
+                },
+                // 选择项目号联动项目名称、经理与管理归属（仅当“派遣到指定项目=是”时生效）
+                onProjectNumberChange(val) {
+                    const meta = this.projectMetaMap[val];
+                    if (!this.hrForm.payload) this.$set(this.hrForm, 'payload', {});
+                    if (meta) {
+                        this.$set(this.hrForm.payload, 'projectName', meta.projectName || '');
+                        this.$set(this.hrForm.payload, 'projectManager', meta.projectManager || '');
+                        this.$set(this.hrForm.payload, 'department', meta.department || '');
+                        if (meta.department) this.hrForm.section = meta.department;
+                    } else {
+                        this.$set(this.hrForm.payload, 'projectName', '');
+                        this.$set(this.hrForm.payload, 'projectManager', '');
+                        // 不覆盖管理归属，用户可能已先选
+                    }
+                },
+                // 管理归属变更：若为“不派遣到指定项目”，则项目号设为对应部门号并清空项目名称/经理
+                onManagementChange(department) {
+                    if (!this.hrForm.payload) this.$set(this.hrForm, 'payload', {});
+                    if (!this.assignToSpecifiedProject && department) {
+                        const code = this.departmentCodeMap[department];
+                        if (code) {
+                            this.$set(this.hrForm.payload, 'projectNumber', code);
+                            this.$set(this.hrForm.payload, 'projectName', '');
+                            this.$set(this.hrForm.payload, 'projectManager', '');
+                        }
+                    }
+                    if (department) this.hrForm.section = department;
+                },
+                // “是否派遣到指定项目”变更：选“否”时项目号设为管理归属部门号并禁用选择
+                onAssignToSpecifiedProjectChange(isAssign) {
+                    if (!this.hrForm.payload) this.$set(this.hrForm, 'payload', {});
+                    if (!isAssign) {
+                        const dep = this.hrForm.payload.department;
+                        const code = dep && this.departmentCodeMap[dep];
+                        if (code) {
+                            this.$set(this.hrForm.payload, 'projectNumber', code);
+                            this.$set(this.hrForm.payload, 'projectName', '');
+                            this.$set(this.hrForm.payload, 'projectManager', '');
+                        }
+                    }
+                },
+                // 获取人力资源对话框标题
+                getHrDialogTitle() {
+                    if (this.hrViewMode === 'edit') {
+                        return '编辑' + (this.hrForm.eventType || '');
+                    } else if (this.hrViewMode === 'view') {
+                        return '查看' + (this.hrForm.eventType || '');
+                    } else {
+                        return '创建' + (this.hrForm.eventType || '');
+                    }
+                },
+
+                // 审批流程相关样式方法
+                /**
+                 * 获取审批步骤卡片样式类
+                 * @param {string} status - 审批状态
+                 * @returns {string} CSS类名
+                 */
+                getStepCardClass(status) {
+                    switch (status) {
+                        case 'pending':
+                            return 'bg-gray-50 border-gray-200';
+                        case 'approved':
+                            return 'bg-green-50 border-green-200';
+                        case 'rejected':
+                            return 'bg-red-50 border-red-200';
+                        case 'terminated':
+                            return 'bg-gray-50 border-gray-300';
+                        default:
+                            return 'bg-gray-50 border-gray-200';
+                    }
+                },
+
+                /**
+                 * 获取审批步骤图标样式类
+                 * @param {string} status - 审批状态
+                 * @returns {string} CSS类名
+                 */
+                getStepIconClass(status) {
+                    switch (status) {
+                        case 'pending':
+                            return 'bg-gray-300 text-gray-600';
+                        case 'approved':
+                            return 'bg-green-500 text-white';
+                        case 'rejected':
+                            return 'bg-red-500 text-white';
+                        case 'terminated':
+                            return 'bg-gray-400 text-white';
+                        default:
+                            return 'bg-gray-300 text-gray-600';
+                    }
+                },
+
+                /**
+                 * 获取审批步骤状态样式类
+                 * @param {string} status - 审批状态
+                 * @returns {string} CSS类名
+                 */
+                getStepStatusClass(status) {
+                    switch (status) {
+                        case 'pending':
+                            return 'bg-gray-100 text-gray-800';
+                        case 'approved':
+                            return 'bg-green-100 text-green-800';
+                        case 'rejected':
+                            return 'bg-red-100 text-red-800';
+                        case 'terminated':
+                            return 'bg-gray-100 text-gray-600';
+                        default:
+                            return 'bg-gray-100 text-gray-800';
+                    }
+                },
+
+                /**
+                 * 获取审批步骤状态文本
+                 * @param {string} status - 审批状态
+                 * @returns {string} 状态文本
+                 */
+                getStepStatusText(status) {
+                    switch (status) {
+                        case 'pending':
+                            return '待审批';
+                        case 'approved':
+                            return '已通过';
+                        case 'rejected':
+                            return '已驳回';
+                        case 'terminated':
+                            return '已终止';
+                        default:
+                            return '待审批';
+                    }
+                },
+
+                /**
+                 * 获取板块总监审批人
+                 * @param {string} department - 部门名称
+                 * @returns {string} 板块总监姓名
+                 */
+                getBoardDirector(department) {
+                    return window.HRFormModule.getBoardDirector(department);
+                },
+
+                /**
+                 * 获取专业审批人
+                 * @param {Array} discipline - 专业信息 [一级专业, 二级专业]
+                 * @returns {string} 专业审批人姓名
+                 */
+                getProfessionalApprover(discipline) {
+                    return window.HRFormModule.getProfessionalApprover(discipline, this.approverConfig);
+                },
+
+                /**
+                 * 计算岗位状态
+                 * @param {Object} position - 岗位对象
+                 * @returns {string} 状态值
+                 */
+                calculatePositionStatus(position) {
+                    if (!position) return '未知';
+                    
+                    // 如果没有审批流程，返回原状态
+                    if (!position.approvalFlow || !position.approvalFlow.steps) {
+                        return position.status || '待审批';
+                    }
+                    
+                    const steps = position.approvalFlow.steps;
+                    
+                    // 检查是否有任何审批被驳回
+                    const hasRejected = steps.some(step => step.status === 'rejected');
+                    if (hasRejected) {
+                        return '已关闭';
+                    }
+                    
+                    // 检查是否所有审批都通过
+                    const allApproved = steps.every(step => step.status === 'approved');
+                    
+                    if (allApproved) {
+                        // 如果显式设置了状态，使用设置的状态
+                        if (position.status === '已关闭') {
+                            return '已关闭';
+                        }
+                        // 统一为匹配中（无论是否有候选人）
+                        return '匹配中';
+                    }
+                    
+                    // 有pending的审批，状态为进行中
+                    const hasPending = steps.some(step => step.status === 'pending');
+                    if (hasPending) {
+                        return '进行中';
+                    }
+                    
+                    return position.status || '待审批';
+                },
+
+                /**
+                 * 判断需求是否待当前用户审批
+                 * @param {Object} position - 岗位对象
+                 * @returns {boolean} 是否待当前用户审批
+                 */
+                isPendingMyApproval(position) {
+                    if (!position || !position.approvalFlow || !position.approvalFlow.steps) {
+                        return false;
+                    }
+                    
+                    const currentStep = this.getCurrentApprovalStep(position);
+                    const currentStepData = position.approvalFlow.steps.find(s => s.step === currentStep);
+                    
+                    if (!currentStepData || currentStepData.status !== 'pending') {
+                        console.log(`岗位 ${position.requirementId || 'unknown'} 不在待审批状态`, {
+                            currentStep,
+                            currentStepData,
+                            status: currentStepData?.status
+                        });
+                        return false;
+                    }
+                    
+                    // 获取当前用户（支持多种方式获取）
+                    const currentUser = this.getCurrentUser();
+                    
+                    // 判断当前用户是否为审批人 
+                    const isApprover = currentStepData.approver === currentUser || 
+                           currentStepData.approver === '待分配' ||
+                           !currentStepData.approver || 
+                           currentStepData.approver.trim() === '';
+                    
+                    // 添加调试信息
+                    if (position.requirementId && position.requirementId.includes('D25999-SAS999-0002')) {
+                        console.log(`岗位 ${position.requirementId} 审批检查:`, {
+                            currentStep,
+                            currentStepData,
+                            currentUser,
+                            isApprover
+                        });
+                    }
+                    
+                    return isApprover;
+                },
+                
+                /**
+                 * 获取当前用户
+                 * @returns {string} 当前用户名
+                 */
+                getCurrentUser() {
+                    // 优先级：URL参数 > localStorage > 默认值
+                    const urlParams = new URLSearchParams(window.location.search);
+                    const urlUser = urlParams.get('u') || urlParams.get('user');
+                    const localUser = localStorage.getItem('currentUserName');
+                    
+                    return (urlUser && urlUser.trim()) || 
+                           (localUser && localUser.trim()) || 
+                           '张明华'; // 默认用户
+                },
+
+                /**
+                 * 根据审批流程结果生成关闭理由
+                 * @param {Object} item - 备忘录对象或岗位对象
+                 * @returns {string} 关闭理由
+                 */
+                generateCloseReason(item) {
+                    // 处理岗位级别的审批流程
+                    if (item && item.approvalFlow) {
+                        const steps = item.approvalFlow.steps || [];
+                        
+                        // 检查是否有审批被驳回
+                        const hasRejected = steps.some(step => step.status === 'rejected');
+                        if (hasRejected) {
+                            return '审批流程中存在驳回，需求自动关闭';
+                        }
+                        
+                        // 检查是否所有审批都通过
+                        const allApproved = steps.every(step => step.status === 'approved');
+                        if (allApproved) {
+                            return '审批流程已完成，需求自动关闭';
+                        }
+                        
+                        // 默认情况
+                        return '需求已关闭';
+                    }
+                    
+                    // 处理项目级别的审批流程（原有逻辑）
+                    if (!item || !item.payload || !item.payload.approvalFlow) {
+                        return '项目已关闭';
+                    }
+
+                    const approvalFlow = item.payload.approvalFlow;
+                    const steps = approvalFlow.steps || [];
+                    
+                    // 检查是否有审批被驳回
+                    const hasRejected = steps.some(step => step.status === 'rejected');
+                    if (hasRejected) {
+                        return '审批流程中存在驳回，项目自动关闭';
+                    }
+                    
+                    // 检查是否所有审批都通过
+                    const allApproved = steps.every(step => step.status === 'approved');
+                    if (allApproved) {
+                        return '审批流程已完成，项目自动关闭';
+                    }
+                    
+                    // 默认情况
+                    return '项目已关闭';
+                },
+
+                /**
+                 * 获取单个需求的匹配人数
+                 * @param {Object} position - 岗位对象
+                 * @returns {number} 匹配人数
+                 */
+                getMatchedCandidatesCount(position) {
+                    if (!position || !position.matchedCandidates) {
+                        return 0;
+                    }
+                    return position.matchedCandidates.length;
+                },
+
+                /**
+                 * 获取项目所有需求的总匹配人数
+                 * @param {Array} positions - 岗位数组
+                 * @returns {number} 总匹配人数
+                 */
+                getTotalMatchedCandidates(positions) {
+                    if (!positions || !Array.isArray(positions)) {
+                        return 0;
+                    }
+                    return positions.reduce((total, pos) => {
+                        return total + this.getMatchedCandidatesCount(pos);
+                    }, 0);
+                },
+
+
+                /**
+                 * 获取岗位状态类型（用于标签颜色）
+                 * @param {Object} position - 岗位对象
+                 * @returns {string} 标签类型
+                 */
+                getPositionStatusType(position) {
+                    const status = this.calculatePositionStatus(position);
+                    switch (status) {
+                        case '匹配中':
+                            return 'success';
+                        case '已关闭':
+                            return 'info';
+                        case '进行中':
+                        case '待审批':
+                        default:
+                            return 'warning';
+                    }
+                },
+
+                /**
+                 * 获取岗位状态文本
+                 * @param {Object} position - 岗位对象
+                 * @returns {string} 状态文本
+                 */
+                getPositionStatusText(position) {
+                    return this.calculatePositionStatus(position);
+                },
+
+                /**
+                 * 获取备忘录状态类型（用于标签颜色）
+                 * @param {Object} memo - 备忘录对象
+                 * @returns {string} 标签类型
+                 */
+                getMemoStatusType(memo) {
+                    // 统一优先级：顶层 status 优先，其次 payload.status 映射
+                    if (!memo) return 'info';
+                    if (memo.status === 'closed') return 'info';
+
+                    const payloadStatus = memo && memo.payload ? memo.payload.status : undefined;
+                    const typeMap = {
+                        '进行中': 'warning',  // 原"待审批"状态改名为"进行中"
+                        '已关闭': 'info',
+                    };
+
+
+                    // 兜底：open 用 warning，其它也给 warning，保持与现有视觉一致
+                    return memo.status === 'open' ? 'warning' : 'warning';
+                },
+
+                /**
+                 * 获取备忘录状态文本
+                 * @param {Object} memo - 备忘录对象
+                 * @returns {string} 状态文本
+                 */
+                getMemoStatusText(memo) {
+                    if (memo.status === 'closed') {
+                        return '已关闭';
+                    }
+                    
+                    
+                    return memo.status === 'closed' ? '已关闭' : '进行中';
+                },
+                // --- 新的小组件布局方法 ---
+                // 控制页面滚动
+                disableBodyScroll() {
+                    document.body.classList.add('dialog-open');
+                },
+                enableBodyScroll() {
+                    document.body.classList.remove('dialog-open');
+                },
+                // 选择备忘录类型
+                selectMemoType(type) {
+                    this.resetHrForm();
+                    this.assignToSpecifiedProject = true; // 创建时默认“派遣到指定项目=是”
+                    this.hrForm.eventType = type;
+                    this.hrFormDialogVisible = true;
+                    this.hrViewMode = 'create';
+                    // 初始化岗位数组（人员需求）
+                    if (type === '人员需求') {
+                        if (!this.hrForm.payload) this.hrForm.payload = {};
+                        this.$set(this.hrForm.payload, 'positions', [ this.newPosition() ]);
+                    }
+                },
+                // 人员选择变化时的处理
+                onPeopleChange(people) {
+                    if (people && this.peopleSectionMap[people]) {
+                        this.hrForm.payload.section = this.peopleSectionMap[people];
+                    } else {
+                        this.hrForm.payload.section = '';
+                    }
+                },
+                // 关闭表单弹窗
+                closeHrFormDialog() {
+                    this.hrFormDialogVisible = false;
+                    this.hrViewMode = 'welcome';
+                    this.resetHrForm();
+                    this.enableBodyScroll();
+                },
+                // 重置表单
+                resetHrForm() {
+                    this.hrForm = window.HRFormModule.getInitialFormData();
+                },
+                // 重置人员需求筛选
+                resetKeyMemoFilters() {
+                    this.keyMemoFilters = {
+                        board: '',
+                        major: ''
+                    };
+                    this.activeKeyMemoFilters = {
+                        board: '',
+                        major: '',
+                        searchText: ''
+                    };
+                    this.keyMemoSortBy = 'default';
+                    this.keyMemoSearchText = '';
+                    this.showOnlyMyApprovals = false;
+                    this.keyMemoPagination.page = 1;
+                },
+                
+                /**
+                 * 执行查询操作
+                 * 将当前筛选条件应用到实际筛选逻辑中
+                 */
+                executeSearch() {
+                    // 将当前筛选条件复制到活跃筛选条件中
+                    this.activeKeyMemoFilters = {
+                        board: this.keyMemoFilters.board,
+                        major: this.keyMemoFilters.major,
+                        searchText: this.keyMemoSearchText
+                    };
+                    // 重置到第一页
+                    this.keyMemoPagination.page = 1;
+                },
+                
+                /**
+                 * 处理"仅显示待我审批"复选框变化
+                 */
+                onMyApprovalsFilterChange() {
+                    // 重置到第一页以显示新的过滤结果
+                    this.keyMemoPagination.page = 1;
+                },
+                
+                /**
+                 * 计算指定项目中待我审批的需求数量
+                 * @param {Array} positions - 项目中的岗位列表
+                 * @returns {number} 待我审批的需求数量
+                 */
+                getMyPendingApprovalCount(positions) {
+                    if (!positions || !Array.isArray(positions)) return 0;
+                    
+                    return positions.filter(pos => this.isPendingMyApproval(pos)).length;
+                },
+                
+                /**
+                 * 计算指定项目中待我审批/处理的需求数量（待审批 + 匹配中）
+                 * @param {Array} positions - 项目中的岗位列表
+                 * @returns {number} 待我审批/处理的需求数量
+                 */
+                getMyPendingApprovalOrProcessCount(positions) {
+                    if (!positions || !Array.isArray(positions)) return 0;
+                    
+                    return positions.filter(pos => {
+                        const status = this.calculatePositionStatus(pos);
+                        return this.isPendingMyApproval(pos) || status === '匹配中';
+                    }).length;
+                },
+                
+                // 保存备忘录
+                hrSaveMemo() {
+                    console.log('hrSaveMemo 被调用，当前状态:', {
+                        hrViewMode: this.hrViewMode,
+                        hrFormDialogVisible: this.hrFormDialogVisible,
+                        hrFormRef: this.$refs.hrFormRef
+                    });
+                    
+                    // 确保表单弹窗是打开的
+                    if (!this.hrFormDialogVisible) {
+                        this.$message.error('表单弹窗未打开');
+                        return;
+                    }
+                    
+                    const tryValidate = (retryCount = 0) => {
+                        this.$nextTick(() => {
+                            console.log('尝试验证表单，重试次数:', retryCount, '表单引用:', this.$refs.hrFormRef);
+                            
+                            if (!this.$refs.hrFormRef) {
+                                console.log('表单引用不存在');
+                                if (retryCount < 5) { 
+                                    setTimeout(() => tryValidate(retryCount + 1), 200); 
+                                    return; 
+                                } 
+                                this.$message.error('表单未正确加载，请重试'); 
+                                return; 
+                            }
+                            
+                            if (typeof this.$refs.hrFormRef.validate !== 'function') {
+                                console.log('表单验证方法不存在');
+                                if (retryCount < 5) { 
+                                    setTimeout(() => tryValidate(retryCount + 1), 200); 
+                                    return; 
+                                } 
+                                this.$message.error('表单验证功能未正确加载，请重试'); 
+                                return; 
+                            }
+                            
+                            console.log('开始验证表单');
+                            this.$refs.hrFormRef.validate((valid) => {
+                                console.log('表单验证结果:', valid);
+                                if (!valid) { 
+                                    this.$message.error('请完善表单信息'); 
+                                    return; 
+                                }
+                                
+                                const now = this.formatDateTime(new Date());
+                                if (this.hrViewMode === 'edit' && this.hrActiveMemo) {
+                                    // 编辑模式
+                                    const idx = this.hrMemos.findIndex(m => m.id === this.hrActiveMemo.id);
+                                    if (idx !== -1) { 
+                                        this.$set(this.hrMemos, idx, JSON.parse(JSON.stringify(this.hrForm))); 
+                                    }
+                                    this.$message.success('保存成功');
+                                    this.hrActiveMemo = JSON.parse(JSON.stringify(this.hrForm));
+                                } else {
+                                    // 创建模式
+                                    this.hrForm.id = Date.now();
+                                    this.hrForm.createdTime = now;
+                                    this.hrMemos.unshift(JSON.parse(JSON.stringify(this.hrForm)));
+                                    this.$message.success('已创建备忘录');
+                                    this.hrActiveMemo = JSON.parse(JSON.stringify(this.hrForm));
+                                }
+                                // 关闭表单弹窗
+                                this.hrFormDialogVisible = false;
+                                this.hrViewMode = 'welcome';
+                                this.resetHrForm();
+                                this.enableBodyScroll();
+                            });
+                        });
+                    };
+                    tryValidate();
+                },
+                // 生成需求编号
+                generateRequirementId(projectNumber, department, sequenceNumber) {
+                    return window.HRFormModule.generateRequirementId(projectNumber, department, sequenceNumber);
+                },
+                
+                // 更新岗位级需求单的编辑信息
+                updatePositionRequirementEditInfo(requirementId, editor, editTime) {
+                    const requirement = this.positionRequirements.find(req => req.requirementId === requirementId);
+                    if (requirement) {
+                        requirement.lastEditor = editor || '当前用户';
+                        requirement.lastEditTime = editTime || window.HRFormModule.formatDateTime(new Date());
+                    }
+                },
+                
+                // 生成岗位级需求单
+                generatePositionRequirements() {
+                    return window.HRFormModule.generatePositionRequirements(this.hrForm, this.hrForm.reporter);
+                },
+
+                // 保存备忘录
+                hrSaveMemoSimple() {
+                    
+                    // 基本字段验证
+                    if (!this.hrForm.eventType) {
+                        this.$message.error('请选择事件类型');
+                        return;
+                    }
+                    
+                    
+                    const now = this.formatDateTime(new Date());
+                    
+                    
+                    // 若关键岗位人力需求：生成岗位级需求单
+                    if (this.hrForm.eventType === '关键岗位人力需求') {
+                        const positions = (this.hrForm.payload && this.hrForm.payload.positions) ? this.hrForm.payload.positions : [];
+                        if (positions.length > 0) {
+                            // 使用模块函数准备保存数据
+                            this.hrForm = window.HRFormModule.prepareSaveData(this.hrForm, this.approverConfig, this.hrForm.reporter);
+                            
+                            // 将岗位级需求单存储到全局数组中
+                            const positionRequirements = this.hrForm.payload.positionRequirements || [];
+                            positionRequirements.forEach(req => {
+                                this.positionRequirements.push(req);
+                            });
+                            
+                            // 显示生成的需求单信息
+                            console.log('生成岗位级需求单:', positionRequirements);
+                            this.$message.success(`成功生成 ${positionRequirements.length} 个岗位级需求单`);
+                        }
+                    }
+
+                    // 检查是否需要自动关闭（仅对关键岗位人力需求、旧逻辑保留）
+                    if (this.hrForm.eventType === '关键岗位人力需求' && 
+                        (this.hrForm.payload.resolved === 'resolved' || this.hrForm.payload.resolved === 'terminated')) {
+                        this.hrForm.status = 'closed';
+                        this.hrForm.closeOutcome = this.hrForm.payload.resolved === 'resolved' ? 'resolved' : 'terminated';
+                    }
+                    
+                    if (this.hrViewMode === 'edit' && this.hrActiveMemo) {
+                        // 编辑模式
+                        const idx = this.hrMemos.findIndex(m => m.id === this.hrActiveMemo.id);
+                        if (idx !== -1) { 
+                            // 更新最后编辑信息
+                            this.hrForm.lastEditor = this.hrForm.reporter || '当前用户';
+                            this.hrForm.lastEditTime = now;
+                            
+                            // 如果是关键岗位人力需求，同时更新岗位级需求单的编辑信息
+                            if (this.hrForm.eventType === '关键岗位人力需求' && this.hrForm.payload.positionRequirements) {
+                                this.hrForm.payload.positionRequirements.forEach(req => {
+                                    this.updatePositionRequirementEditInfo(req.requirementId, this.hrForm.reporter, now);
+                                });
+                            }
+                            
+                            this.$set(this.hrMemos, idx, JSON.parse(JSON.stringify(this.hrForm))); 
+                        }
+                        this.$message.success('保存成功');
+                        this.hrActiveMemo = JSON.parse(JSON.stringify(this.hrForm));
+                    } else {
+                        // 创建模式
+                        this.hrForm.id = Date.now();
+                        this.hrForm.createdTime = now;
+                        // 设置创建者信息
+                        this.hrForm.creator = this.hrForm.reporter || '当前用户';
+                        this.hrForm.createTime = now;
+                        this.hrForm.lastEditor = this.hrForm.reporter || '当前用户';
+                        this.hrForm.lastEditTime = now;
+                        this.hrMemos.unshift(JSON.parse(JSON.stringify(this.hrForm)));
+                        this.$message.success('已创建备忘录');
+                        this.hrActiveMemo = JSON.parse(JSON.stringify(this.hrForm));
+                    }
+                    // 关闭表单弹窗
+                    this.hrFormDialogVisible = false;
+                    this.hrViewMode = 'welcome';
+                    this.resetHrForm();
+                    this.enableBodyScroll();
+                },
+                // --- Initialization ---
+                init() {
+                    this.generateHrMemoMockData();
+                    this.availableTimes['hr'] = this.generateAvailableReportMonths();
+                },
+
+                generateAvailableReportMonths() {
+                    const today = new Date();
+                    const months = new Set();
+                    for (let i = 2; i >= -2; i--) {
+                        const d = new Date(today.getFullYear(), today.getMonth() - i, 1);
+                        months.add(`${d.getFullYear()}年${d.getMonth() + 1}月`);
+                    }
+                    return Array.from(months).sort().reverse();
+                },
+                // 生成人员需求模拟数据（已迁移到 mock-data-generator.js）
+                generateKeyPositionMockData() {
+                    return window.MockDataGenerator.generateKeyPositionMockData();
+                },
+                // HR 备忘录：模拟数据（已迁移到 mock-data-generator.js）
+                generateHrMemoMockData() {
+                    this.hrMemos = window.MockDataGenerator.generateHrMemoMockData();
+                },
+
+
+                
+                // --- HR Memo Actions ---
+                hrShowCreateMemo() {
+                    this.hrActiveMemo = null;
+                    this.resetHrForm();
+                    this.hrForm.reporter = '人资填报人'; // 自动填充填报人
+                    this.hrViewMode = 'create';
+                    this.hrFormDialogVisible = true;
+                    this.disableBodyScroll();
+                    this.$nextTick(() => { if (this.$refs.hrFormRef && typeof this.$refs.hrFormRef.clearValidate === 'function') this.$refs.hrFormRef.clearValidate(); });
+                },
+                hrShowViewMemo() {
+                    if (!this.hrActiveMemo) { this.$message.error('请先选择备忘录'); return; }
+                    // 深拷贝备忘录数据到表单
+                    this.hrForm = JSON.parse(JSON.stringify(this.hrActiveMemo));
+                    
+                    // 确保新字段存在
+                    if (!this.hrForm.payload) {
+                        this.hrForm.payload = {};
+                    }
+                    // 若项目号为部门号则视为“不派遣到指定项目”
+                    this.assignToSpecifiedProject = !Object.values(this.departmentCodeMap).includes(this.hrForm.payload.projectNumber || '');
+                    
+                    this.hrViewMode = 'view';
+                    this.hrFormDialogVisible = true;
+                    this.disableBodyScroll();
+                },
+                hrShowEditMemo() {
+                    if (!this.hrActiveMemo) { this.$message.error('请先选择备忘录'); return; }
+                    // 深拷贝备忘录数据到表单
+                    this.hrForm = JSON.parse(JSON.stringify(this.hrActiveMemo));
+                    
+                    // 确保新字段存在
+                    if (!this.hrForm.payload) {
+                        this.hrForm.payload = {};
+                    }
+                    // 若项目号为部门号则视为“不派遣到指定项目”
+                    this.assignToSpecifiedProject = !Object.values(this.departmentCodeMap).includes(this.hrForm.payload.projectNumber || '');
+                    
+                    this.hrViewMode = 'edit';
+                    this.hrFormDialogVisible = true;
+                    this.disableBodyScroll();
+                    this.$nextTick(() => { if (this.$refs.hrFormRef && typeof this.$refs.hrFormRef.clearValidate === 'function') this.$refs.hrFormRef.clearValidate(); });
+                },
+                hrSelectMemo(memo) {
+                    this.hrActiveMemo = memo;
+                    // 直接显示编辑界面
+                    this.hrShowEditMemo();
+                },
+                // 选择需求项（用于新的需求清单界面）
+                selectRequirement(memo) {
+                    this.selectedRequirement = memo;
+                },
+                // 创建新需求
+                createNewRequirement() {
+                    this.resetHrForm();
+                    this.assignToSpecifiedProject = true;
+                    this.hrForm.eventType = '人员需求';
+                    this.hrFormDialogVisible = true;
+                    this.hrViewMode = 'create';
+                    // 初始化岗位数组
+                    if (!this.hrForm.payload) this.hrForm.payload = {};
+                    this.$set(this.hrForm.payload, 'positions', [this.newPosition()]);
+                },
+                // 编辑选中的需求
+                editSelectedRequirement() {
+                    if (!this.selectedRequirement) return;
+                    this.hrActiveMemo = this.selectedRequirement;
+                    this.hrShowEditMemo();
+                },
+                // 获取岗位总数量
+                getTotalQuantity(positions) {
+                    if (!positions || !Array.isArray(positions)) return 0;
+                    return positions.reduce((total, pos) => total + (pos.quantity || 0), 0);
+                },
+                // 查看项目需求详情（在新页面打开）
+                viewProjectRequirements(project) {
+                    try {
+                        const key = 'selectedProjectForDetails_' + Date.now();
+                        localStorage.setItem(key, JSON.stringify(project));
+                        const url = 'project-requirements.html?k=' + encodeURIComponent(key);
+                        window.open(url, '_blank');
+                    } catch (e) {
+                        console.error('打开项目需求详情失败:', e);
+                        this.$message.error('打开项目需求详情失败，请重试');
+                    }
+                },
+                
+                // 批量导入岗位相关方法
+                showBulkImportDialog() {
+                    this.bulkImportDialogVisible = true;
+                    this.importFileList = [];
+                    this.importPreviewData = [];
+                },
+                closeBulkImportDialog() {
+                    this.bulkImportDialogVisible = false;
+                    this.importFileList = [];
+                    this.importPreviewData = [];
+                },
+                
+                // 下载导入模板
+                downloadImportTemplate() {
+                    const csvContent = window.HRFormModule.generateTemplateCSV();
+                    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                    const link = document.createElement('a');
+                    const url = URL.createObjectURL(blob);
+                    link.setAttribute('href', url);
+                    link.setAttribute('download', '岗位导入模板.csv');
+                    link.style.visibility = 'hidden';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    this.$message.success('模板下载完成');
+                },
+                
+                // 处理文件选择变化
+                handleImportFileChange(file, fileList) {
+                    this.importFileList = fileList;
+                    if (file.raw) {
+                        this.parseImportFile(file.raw);
+                    }
+                },
+                
+                // 文件上传前验证
+                beforeImportUpload(file) {
+                    const isValidType = file.type === 'text/csv' || 
+                                       file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
+                                       file.name.endsWith('.csv') || 
+                                       file.name.endsWith('.xlsx');
+                    if (!isValidType) {
+                        this.$message.error('只能上传CSV或Excel文件');
+                        return false;
+                    }
+                    const isLt10M = file.size / 1024 / 1024 < 10;
+                    if (!isLt10M) {
+                        this.$message.error('文件大小不能超过10MB');
+                        return false;
+                    }
+                    return false; // 阻止自动上传，我们手动处理
+                },
+                
+                // 解析导入文件
+                parseImportFile(file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        try {
+                            let data;
+                            if (file.name.endsWith('.csv')) {
+                                data = window.HRFormModule.parseCSV(e.target.result);
+                            } else {
+                                this.$message.error('暂不支持Excel文件解析，请使用CSV格式');
+                                return;
+                            }
+                            this.processImportData(data);
+                        } catch (error) {
+                            this.$message.error('文件解析失败：' + error.message);
+                        }
+                    };
+                    reader.readAsText(file, 'utf-8');
+                },
+                
+                // 处理导入数据
+                processImportData(data) {
+                    const processedData = window.HRFormModule.processImportData(data);
+                    this.importPreviewData = processedData;
+                    this.$message.success(`成功解析 ${processedData.length} 个岗位`);
+                },
+                
+                // 确认导入
+                confirmBulkImport() {
+                    if (this.importPreviewData.length === 0) {
+                        this.$message.error('没有岗位数据可以导入');
+                        return;
+                    }
+                    
+                    // 确保hrForm.payload.positions存在
+                    if (!this.hrForm.payload.positions) {
+                        this.$set(this.hrForm.payload, 'positions', []);
+                    }
+                    
+                    // 添加导入的岗位到现有岗位列表
+                    this.importPreviewData.forEach(position => {
+                        this.hrForm.payload.positions.push(position);
+                    });
+                    
+                    // 选中第一个新导入的岗位
+                    if (this.hrForm.payload.positions.length > 0) {
+                        this.selectedPositionIndex = this.hrForm.payload.positions.length - this.importPreviewData.length;
+                    }
+                    
+                    this.closeBulkImportDialog();
+                    this.$message.success(`成功导入 ${this.importPreviewData.length} 个岗位`);
+                },
+                // 编辑项目需求
+                editProjectRequirements() {
+                    if (!this.selectedProject) return;
+                    this.hrActiveMemo = this.selectedProject;
+                    this.projectRequirementsDialogVisible = false;
+                    this.hrShowEditMemo();
+                },
+                hrCancelForm() {
+                    this.hrViewMode = this.hrActiveMemo ? 'view' : 'welcome';
+                    this.$message.info('已取消编辑');
+                },
+                hrSaveDraft() {
+                    const tryValidate = (retryCount = 0) => {
+                        this.$nextTick(() => {
+                            if (!this.$refs.hrFormRef || typeof this.$refs.hrFormRef.validate !== 'function') { if (retryCount < 3) { setTimeout(() => tryValidate(retryCount + 1), 100); return; } this.$message.error('表单未正确加载'); return; }
+                            this.$refs.hrFormRef.validate((valid) => {
+                                if (!valid) { this.$message.error('请完善表单'); return; }
+                                const now = this.formatDateTime(new Date());
+                                if (this.hrViewMode === 'edit' && this.hrActiveMemo) {
+                                    const idx = this.hrMemos.findIndex(m => m.id === this.hrActiveMemo.id);
+                                    if (idx !== -1) { this.$set(this.hrMemos, idx, JSON.parse(JSON.stringify(this.hrForm))); }
+                                    this.$message.success('保存成功');
+                                    this.hrActiveMemo = JSON.parse(JSON.stringify(this.hrForm));
+                                    this.hrViewMode = 'view';
+                                } else {
+                                    this.hrForm.id = Date.now();
+                                    this.hrForm.createdTime = now;
+                                    this.hrMemos.unshift(JSON.parse(JSON.stringify(this.hrForm)));
+                                    this.$message.success('已创建备忘录');
+                                    this.hrActiveMemo = JSON.parse(JSON.stringify(this.hrForm));
+                                    this.hrViewMode = 'view';
+                                }
+                            });
+                        });
+                    };
+                    tryValidate();
+                },
+                
+                // 专业审批人管理相关方法
+                /**
+                 * 自动保存审批人配置
+                 * 当审批人选择发生变化时自动保存到本地存储
+                 */
+                autoSaveApproverConfig() {
+                    try {
+                        // 将审批人配置保存到localStorage
+                        localStorage.setItem('approverConfig', JSON.stringify(this.approverConfig));
+                        
+                        console.log('审批人配置已自动保存:', this.approverConfig);
+                    } catch (error) {
+                        console.error('自动保存审批人配置失败:', error);
+                    }
+                },
+                
+                /**
+                 * 加载审批人配置
+                 * 从本地存储中加载之前保存的审批人配置
+                 */
+                loadApproverConfig() {
+                    try {
+                        const savedConfig = localStorage.getItem('approverConfig');
+                        if (savedConfig) {
+                            this.approverConfig = JSON.parse(savedConfig);
+                            console.log('审批人配置已加载:', this.approverConfig);
+                        }
+                    } catch (error) {
+                        console.error('加载审批人配置失败:', error);
+                        this.$message.warning('加载配置失败，将使用默认配置');
+                    }
+                },
+                
+                /**
+                 * 获取指定专业的审批人
+                 * @param {string} discipline - 专业名称
+                 * @returns {string} 审批人姓名，如果没有配置则返回空字符串
+                 */
+                getApproverForDiscipline(discipline) {
+                    return this.approverConfig[discipline] || '';
+                },
+                
+
+                
+                /**
+                 * 处理审批人列表页面大小变化
+                 * @param {number} newSize - 新的页面大小
+                 */
+                handleApproverPageSizeChange(newSize) {
+                    this.approverPagination.pageSize = newSize;
+                    this.approverPagination.page = 1; // 重置到第一页
+                },
+                
+                /**
+                 * 处理审批人列表页码变化
+                 * @param {number} newPage - 新的页码
+                 */
+                handleApproverPageChange(newPage) {
+                    this.approverPagination.page = newPage;
+                },
+                
+                /**
+                 * 重置审批人筛选条件
+                 */
+                resetApproverFilters() {
+                    this.approverFilters = {
+                        primaryDiscipline: '',
+                        secondaryDiscipline: ''
+                    };
+                    this.approverPagination.page = 1; // 重置到第一页
+                }
+        }
+    });
+    </script>
+</body>
+</html>

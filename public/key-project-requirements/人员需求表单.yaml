@@ -1,0 +1,394 @@
+# 人员需求申请表单定义 (Personnel Requisition Form Definition)
+# 版本: 1.0
+# 描述: 用于定义人员需求申请的表单结构、类型和校验规则
+
+form_name: PersonnelRequisitionForm
+form_label: 人员需求申请单
+
+fields:
+  # 需求信息 (Requirement ID)，无需用户填写，系统自动生成
+  - name: requirementId # 创建后才显示此字段
+    label: 需求编号
+    type: text
+    readonly: true
+    hint: '格式为：项目编码-部门编码-四位流水号 (例如 D25999-SAS999-0001)'
+  - name: applicant
+    label: 申请人
+    type: text
+    readonly: true
+  - name: applicationTime
+    label: 申请时间
+    type: datetime # 使用日期时间类型更准确
+    required: false
+    readonly: true
+
+  # 项目信息 (Basic Information)
+  - name: projectNumber
+    label: 项目号
+    type: select
+    placeholder: '请选择项目号' # 包含前期项目、合同项目、部门项目，支持模糊搜索
+    required: true
+  - name: projectName
+    label: 项目名称
+    type: text
+    required: false
+    readonly: true
+    hint: '系统自动带出'
+  - name: projectManager
+    label: 项目经理
+    type: text
+    required: false
+    readonly: true
+    hint: '系统自动带出'
+  - name: department
+    label: 管理归属
+    type: text
+    required: false
+    readonly: true
+    hint: '系统自动带出'
+
+  # 需求详情 (Requirement Details)
+  - name: discipline
+    label: 专业
+    type: cascader # 二级级联：一级为专业大类，二级为二级专业
+    required: true
+    placeholder: '请选择专业大类 / 二级专业'
+    hint: '从专业大类→二级专业依次选择；返回值为[大类, 二级]'
+    options:
+      - label: '施工'
+        value: '施工'
+        children:
+          - label: '管理'
+            value: '管理'
+          - label: '综合'
+            value: '综合'
+          - label: '吊装'
+            value: '吊装'
+          - label: '调度'
+            value: '调度'
+          - label: '总图'
+            value: '总图'
+          - label: '土建'
+            value: '土建'
+          - label: '静设备'
+            value: '静设备'
+          - label: '动设备'
+            value: '动设备'
+          - label: '管道'
+            value: '管道'
+          - label: '电气'
+            value: '电气'
+          - label: '仪表'
+            value: '仪表'
+          - label: '防腐保温'
+            value: '防腐保温'
+          - label: '完工'
+            value: '完工'
+          - label: '其他'
+            value: '其他'
+      - label: '质量'
+        value: '质量'
+        children:
+          - label: '管理'
+            value: '管理'
+          - label: '综合'
+            value: '综合'
+          - label: '体系'
+            value: '体系'
+          - label: '焊接&无损检测'
+            value: '焊接&无损检测'
+          - label: '检试验'
+            value: '检试验'
+          - label: '其他'
+            value: '其他'
+      - label: '安全'
+        value: '安全'
+        children:
+          - label: '管理'
+            value: '管理'
+          - label: '综合'
+            value: '综合'
+          - label: '培训'
+            value: '培训'
+          - label: '脚手架'
+            value: '脚手架'
+          - label: '临电'
+            value: '临电'
+          - label: '起重吊装'
+            value: '起重吊装'
+          - label: '作业许可'
+            value: '作业许可'
+          - label: '机具'
+            value: '机具'
+          - label: '无损检测'
+            value: '无损检测'
+          - label: '其他'
+            value: '其他'
+      - label: '控制'
+        value: '控制'
+        children:
+          - label: '管理'
+            value: '管理'
+          - label: '综合'
+            value: '综合'
+          - label: '费控'
+            value: '费控'
+          - label: '计划'
+            value: '计划'
+          - label: '文控'
+            value: '文控'
+          - label: '档案'
+            value: '档案'
+          - label: '合同'
+            value: '合同'
+          - label: '其他'
+            value: '其他'
+      - label: '设计'
+        value: '设计'
+        children:
+          - label: '工艺'
+            value: '工艺'
+          - label: '储运'
+            value: '储运'
+          - label: '热工'
+            value: '热工'
+          - label: '环保'
+            value: '环保'
+          - label: '静设备'
+            value: '静设备'
+          - label: '机械'
+            value: '机械'
+          - label: '粉体'
+            value: '粉体'
+          - label: '工业炉'
+            value: '工业炉'
+          - label: '概算'
+            value: '概算'
+          - label: '技术经济'
+            value: '技术经济'
+          - label: '管道设计'
+            value: '管道设计'
+          - label: '管道应力'
+            value: '管道应力'
+          - label: '管道材料'
+            value: '管道材料'
+          - label: '给排水消防'
+            value: '给排水消防'
+          - label: '建筑'
+            value: '建筑'
+          - label: '结构'
+            value: '结构'
+          - label: '暖通'
+            value: '暖通'
+          - label: '总图'
+            value: '总图'
+          - label: '电气'
+            value: '电气'
+          - label: '电信'
+            value: '电信'
+          - label: '仪表'
+            value: '仪表'
+      - label: '职能'
+        value: '职能'
+        children:
+          - label: '项目行政'
+            value: '项目行政'
+          - label: '项目助理'
+            value: '项目助理'
+          - label: '项目秘书'
+            value: '项目秘书'
+          - label: '翻译'
+            value: '翻译'
+          - label: 'IT'
+            value: 'IT'
+      - label: '造价'
+        value: '造价'
+        children:
+          - label: '安装'
+            value: '安装'
+          - label: '土建'
+            value: '土建'
+          - label: '电仪'
+            value: '电仪'
+      - label: '管理'
+        value: '管理'
+        children:
+          - label: '项目经理'
+            value: '项目经理'
+          - label: '项目工程师'
+            value: '项目工程师'
+          - label: '项目主任'
+            value: '项目主任'
+      - label: '采购'
+        value: '采购'
+        children:
+          - label: '采购'
+            value: '采购'
+          - label: '采买'
+            value: '采买'
+          - label: '催交'
+            value: '催交'
+          - label: '检验'
+            value: '检验'
+          - label: '物流'
+            value: '物流'
+          - label: '仓储'
+            value: '仓储'
+          - label: '材控'
+            value: '材控'
+  - name: requirementType
+    label: 需求类型
+    type: select
+    required: false
+    placeholder: '请选择需求类型'
+    options:
+      - label: '设计类'
+        value: 'design'
+      - label: 'PMC'
+        value: 'pmc'
+      - label: 'EPC'
+        value: 'epc'
+      - label: '咨询类'
+        value: 'consulting'
+  - name: jobTitle
+    label: 职位/岗位名称
+    type: text
+    required: true
+    placeholder: '请输入职位或岗位名称'
+  - name: coreResponsibilities
+    label: 岗位核心职责
+    type: textarea # 使用多行文本框以便输入详细职责
+    required: true
+    placeholder: '请详细描述该岗位的核心工作职责，建议分点说明'
+  - name: workLocation
+    label: 工作地点
+    type: text
+    required: true
+    placeholder: '请输入详细工作地点，例如：上海市'
+  - name: requiredOnboardDate
+    label: 要求到岗时间
+    type: date # 使用日期选择器控件
+    required: true
+    placeholder: '请选择期望的到岗日期'
+  - name: positionCycle
+    label: 岗位周期
+    type: text
+    required: false
+    placeholder: '例如：6个月 或 项目期'
+  - name: quantity
+    label: 数量
+    type: number # 使用数字输入框
+    required: true
+    defaultValue: 1
+    validation:
+      min: 1
+  - name: gender
+    label: 性别
+    type: radio # 使用单选按钮更直观
+    required: false
+    options:
+      - label: '男'
+        value: 'male'
+      - label: '女'
+        value: 'female'
+      - label: '不限' # 补充“不限”选项，更符合招聘场景
+        value: 'any'
+  - name: ageRequirement
+    label: 年龄要求
+    type: age_range # 自定义一个复合类型，便于前端解析
+    required: false
+    hint: 空缺视为无要求
+    fields:
+      - name: minAge
+        label: 最低年龄
+        type: number
+        validation:
+          min: 16
+      - name: maxAge
+        label: 最高年龄
+        type: number
+        validation:
+          min: 16
+
+  # 资格要求 (Qualification Requirements)
+  - name: titleRequirement
+    label: 职称要求
+    type: select
+    required: false
+    placeholder: '请选择职称要求'
+    options:
+      - label: '初级'
+        value: 'junior'
+      - label: '中级'
+        value: 'intermediate'
+      - label: '高级'
+        value: 'senior'
+      - label: '正高级'
+        value: 'professor_level'
+  - name: professionalCertificates
+    label: 专业资格证书
+    type: multiselect
+    required: false
+    placeholder: '请选择专业资格证书'
+    hint: '可多选，支持自定义其他证书'
+    options:
+      - label: '注册化工'
+        value: '注册化工'
+      - label: '注册电气'
+        value: '注册电气'
+      - label: '注册给排水'
+        value: '注册给排水'
+      - label: '注册动力'
+        value: '注册动力'
+      - label: '注册暖通'
+        value: '注册暖通'
+      - label: '注册建筑'
+        value: '注册建筑'
+      - label: '注册一级结构'
+        value: '注册一级结构'
+      - label: '注册咨询'
+        value: '注册咨询'
+      - label: '注册一级建造'
+        value: '注册一级建造'
+      - label: '注册一级造价'
+        value: '注册一级造价'
+      - label: '注册安全'
+        value: '注册安全'
+      - label: '注册监理'
+        value: '注册监理'
+      - label: '三类人员B证'
+        value: '三类人员B证'
+      - label: '三类人员C证'
+        value: '三类人员C证'
+      - label: 'TUV'
+        value: 'TUV'
+      - label: 'PMP'
+        value: 'PMP'
+      - label: 'IPMP'
+        value: 'IPMP'
+      - label: '其他'
+        value: '其他'
+    allowCustom: true
+    customPlaceholder: '请输入其他证书，多个用中文逗号，隔开'
+    customHint: '例如：其他资格证书1，其他资格证书2，其他资格证书3（多个证书用中文逗号，分隔）'
+  - name: experienceRequirement
+    label: 经验要求
+    type: textarea
+    required: false
+    placeholder: '例如：5年以上相关领域设计经验，有大型EPC项目经验者优先'
+  - name: educationRequirement
+    label: 教育背景
+    type: textarea
+    required: false
+    placeholder: '例如：本科及以上学历，化学工程或相关专业'
+  - name: languageRequirement
+    label: 语言能力
+    type: textarea
+    required: false
+    placeholder: '例如：英语CET-6，具备流利的英语读写和沟通能力'
+  - name: otherRequirements
+    label: 其他要求
+    type: textarea
+    required: false
+    placeholder: '请填写其他补充要求'
+

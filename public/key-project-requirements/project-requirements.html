@@ -1,0 +1,1874 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目需求详情</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui@2.15.14/lib/theme-chalk/index.css">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app" class="flex flex-col">
+        <header class="bg-white shadow-md p-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold text-gray-800">
+                {{ selectedProject && selectedProject.payload && (selectedProject.payload.projectNumber || selectedProject.payload.projectName)
+                    ? ((selectedProject.payload.projectNumber || '-') + (selectedProject.payload.projectName ? ' ' + selectedProject.payload.projectName : '') + ' 需求详情')
+                    : '项目需求详情' }}
+            </h1>
+            <span class="text-sm text-gray-500"></span>
+        </header>
+
+        <div class="m-4" style="height: calc(100vh - 94px);">
+            <!-- 复用弹窗内部结构：去掉外层 el-dialog，仅保留内容区域，宽度布局与弹窗一致 -->
+            <div class="project-requirements-content" style="height: 100%;">
+                <div v-if="selectedProject" class="h-full">
+                    <div class="flex gap-4 h-full">
+                        <!-- 左侧：需求清单列表 -->
+                        <div class="w-1/3 flex flex-col" style="min-height: 0;">
+                            <el-card body-style="padding:0px;" :shadow="'never'" style="flex-shrink: 0;">
+                                <div class="p-2 bg-blue-900 rounded-t-lg">
+                                    <div class="text-sm font-medium text-white font-semibold">数据统计</div>
+                                </div>
+                                <div class="grid grid-cols-3 items-center gap-2 p-3">
+                                    <!-- 需求统计：占1列，内部保持2列分列 -->
+                                    <div class="grid grid-cols-2 gap-2 p-2 bg-gray-50 rounded border border-gray-200">
+                                        <div class="flex items-center gap-1">
+                                            <span class="text-xs text-gray-500">需求数</span>
+                                            <span class="text-sm font-semibold text-gray-800">
+                                                {{ (selectedProject.payload.positions || []).length }}
+                                            </span>
+                                        </div>
+                                        <div class="flex items-center gap-1">
+                                            <span class="text-xs text-gray-500">进行中</span>
+                                            <span class="text-sm font-semibold text-yellow-600">{{ getProcessingRequirementsCount(selectedProject.payload.positions || []) }}</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 人数统计：占2列，内部保持3列分列 -->
+                                    <div class="col-span-2 grid grid-cols-3 gap-2 p-2 bg-gray-50 rounded border border-gray-200">
+                                        <div class="flex items-center gap-1">
+                                            <span class="text-xs text-gray-500">总人数</span>
+                                            <span class="text-sm font-semibold text-gray-800">{{ getTotalQuantity(selectedProject.payload.positions || []) }}</span>
+                                        </div>
+                                        <div class="flex items-center gap-1">
+                                            <span class="text-xs text-gray-500">进行中</span>
+                                            <span class="text-sm font-semibold text-yellow-600">{{ getProcessingCount(selectedProject.payload.positions || []) }}</span>
+                                        </div>
+                                        <div class="flex items-center gap-1">
+                                            <span class="text-xs text-gray-500">未解决</span>
+                                            <span class="text-sm font-semibold text-red-600">{{ getUnsolvedCount(selectedProject.payload.positions || []) }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="px-3 pb-3">
+                                    <div class="text-xs text-gray-500 mb-1">按专业/人员数量</div>
+                                    <div>
+                                        <el-tag v-for="(qty, name) in getProjectDisciplineDistribution(selectedProject.payload.positions || [])" :key="'dist-' + name" size="mini" effect="plain" type="info" style="margin:2px;">
+                                            {{ name }} × {{ qty }}
+                                        </el-tag>
+                                    </div>
+                                </div>
+                            </el-card>
+                            <el-card :body-style="{ padding: '0px', display: 'flex', flexDirection: 'column', height: '100%', minHeight: '0' }" class="mt-2 flex-1" :shadow="'never'" style="min-height: 0;">
+                                <div class="border-b border-gray-200 mb-2">
+                                    <div class="p-2 bg-blue-900 rounded-t-lg">
+                                        <div class="text-sm font-medium text-white font-semibold">需求清单</div>
+                                    </div>
+                                    <!-- 搜索和过滤选项 -->
+                                    <div class="px-2 py-2 flex items-center gap-2">
+                                        <el-input
+                                            v-model="positionSearchKeyword"
+                                            size="mini"
+                                            placeholder="搜索需求ID/岗位名称"
+                                            clearable
+                                            class="flex-1">
+                                            <i slot="prefix" class="el-input__icon el-icon-search"></i>
+                                        </el-input>
+                                        <el-checkbox
+                                            v-model="hideClosedPositions"
+                                            size="mini">
+                                            隐藏已关闭需求
+                                        </el-checkbox>
+                                    </div>
+                                </div>
+                                <div class="overflow-y-auto px-2 mb-4" style="flex: 1; min-height: 0;">
+                                    <div v-for="(pos, pi) in getFilteredPositions()" :key="'plist-' + pos.requirementId" 
+                                        class="p-2 rounded border cursor-pointer hover:bg-gray-50 mb-2 transition-all duration-300 relative"
+                                        :class="{ 'bg-blue-50': pos.requirementId === selectedPosition?.requirementId, 'border-gray-200 bg-white hover:border-gray-300': pos.requirementId !== selectedPosition?.requirementId }"
+                                        @click="selectPositionByRequirementId(pos.requirementId)">
+                                        <div class="absolute top-2 right-2 flex items-center gap-2">
+                                            <!-- 待我审批标签（优先级最高） -->
+                                            <el-tag
+                                                v-if="isPendingMyApproval(pos)"
+                                                size="mini"
+                                                type="danger"
+                                                effect="dark"
+                                                disable-transitions
+                                                :disable="true"
+                                            >
+                                                待我审批
+                                            </el-tag>
+                                            <!-- 待处理标签（匹配中且有候选人未处理，优先级第二） -->
+                                            <el-tag
+                                                v-else-if="isMatchedAndPending(pos)"
+                                                size="mini"
+                                                type="warning"
+                                                effect="dark"
+                                                disable-transitions
+                                                :disable="true"
+                                            >
+                                                待我处理
+                                            </el-tag>
+                                            <!-- 状态标签 -->
+                                            <el-tag 
+                                                :type="
+                                                    calculatePositionStatus(pos) === '匹配中' ? 'success' : 
+                                                    calculatePositionStatus(pos) === '已关闭' ? 'info' : 
+                                                    'warning'
+                                                " 
+                                                size="mini">
+                                                {{ calculatePositionStatus(pos) }}
+                                            </el-tag>
+                                            <!-- 匹配人数标签 -->
+                                            <el-tag
+                                                v-if="calculatePositionStatus(pos) === '匹配中' && pos.matchedCandidates && pos.matchedCandidates.length > 0"
+                                                size="mini"
+                                                type="success">
+                                                已推送 {{ pos.matchedCandidates.length }} 人
+                                            </el-tag>
+                                        </div>
+                                        <div class="text-xs text-gray-600 mb-1 flex items-center gap-2 pr-16">
+                                            <span class="font-mono text-blue-600">{{ pos.requirementId || '-' }}</span>
+                                            <span v-if="pos.requirementId === selectedPosition?.requirementId" class="inline-flex items-center px-2 rounded-full text-xs font-medium bg-blue-100 text-blue-800 border border-blue-200">
+                                                <i class="el-icon-view mr-1"></i>
+                                                正在查看
+                                            </span>
+                                        </div>
+                                        <div class="flex justify-between items-center pr-16">
+                                            <div class="text-sm">
+                                                <span class="text-gray-900 font-semibold">{{ pos.jobTitle || '未命名岗位' }}</span>
+                                                <span class="ml-2 text-gray-500">× {{ pos.quantity || 1 }}</span>
+                                            </div>
+                                        </div>
+                                        <div class="text-xs text-gray-500 mt-1 pr-16">最晚 {{ pos.requiredOnboardDate || '-' }} 到岗</div>
+                                        <div class="mt-1">
+                                            <template v-if="Array.isArray(pos.discipline)">
+                                                <el-tag v-for="(d, di) in pos.discipline" :key="'ptag-' + pi + '-' + di" size="mini" effect="plain" type="success" style="margin-right:4px;">
+                                                    {{ Array.isArray(d) ? ((d[0] || '-') + ' / ' + (d[1] || '-')) : d }}
+                                                </el-tag>
+                                            </template>
+                                        </div>
+                                    </div>
+                                    <div v-if="getFilteredPositions().length === 0" class="text-center text-gray-500 py-8">
+                                        <i class="el-icon-user text-4xl mb-2"></i>
+                                        <div v-if="!selectedProject.payload.positions || selectedProject.payload.positions.length === 0">暂无岗位需求</div>
+                                        <div v-else>未找到匹配的需求</div>
+                                    </div>
+                                </div>
+                            </el-card>
+                        </div>
+
+                        <!-- 右侧：需求单详情（只读） -->
+                        <div class="w-2/3 flex flex-col">
+                            <div class="flex flex-col h-full border border-gray-200 rounded-lg bg-white">
+                                <div class="p-2 bg-blue-900 rounded-t-lg">
+                                    <div class="text-sm font-medium text-white font-semibold"> {{ selectedPosition && selectedPosition.requirementId || '-' }} 需求单详情</div>
+                                </div>
+                                <!-- 置顶目录栏（粘性在滚动容器顶部） -->
+                                <div class="px-3 py-2 bg-white border-b border-gray-200" style="position: sticky; top: 0; z-index: 5;">
+                                    <div class="flex flex-wrap gap-2 text-sm">
+                                        <button type="button" @click="scrollToSection('sec-meta')"
+                                            :class="['px-3 py-1 rounded-full', activeSection==='sec-meta' ? 'bg-blue-600 text-white font-semibold' : 'bg-gray-100 hover:bg-gray-200']">元信息</button>
+                                        <button type="button" @click="scrollToSection('sec-project')"
+                                            :class="['px-3 py-1 rounded-full', activeSection==='sec-project' ? 'bg-blue-600 text-white font-semibold' : 'bg-gray-100 hover:bg-gray-200']">项目信息</button>
+                                        <button type="button" @click="scrollToSection('sec-position')"
+                                            :class="['px-3 py-1 rounded-full', activeSection==='sec-position' ? 'bg-blue-600 text-white font-semibold' : 'bg-gray-100 hover:bg-gray-200']">岗位要求</button>
+                                        <button type="button" @click="scrollToSection('sec-approval')"
+                                            :class="['px-3 py-1 rounded-full', activeSection==='sec-approval' ? 'bg-blue-600 text-white font-semibold' : 'bg-gray-100 hover:bg-gray-200']">需求状态管理</button>
+                                        <button v-if="selectedPosition && selectedPosition.approvalFlow && calculatePositionStatus(selectedPosition) === '进行中'" 
+                                                type="button" 
+                                                @click="scrollToSection('sec-actions')"
+                                                :class="['px-3 py-1 rounded-full relative', activeSection==='sec-actions' ? 'bg-blue-600 text-white font-semibold' : 'bg-gray-100 hover:bg-gray-200']">
+                                            审批操作
+                                            <!-- 红点提示：待我审批时显示 -->
+                                            <span v-if="selectedPosition && isPendingMyApproval(selectedPosition)" 
+                                                  class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                                        </button>
+                                        <button v-if="selectedPosition && calculatePositionStatus(selectedPosition) === '匹配中' && selectedPosition.matchedCandidates && selectedPosition.matchedCandidates.length > 0" 
+                                                type="button" 
+                                                @click="scrollToSection('sec-candidates')"
+                                                :class="['px-3 py-1 rounded-full relative', activeSection==='sec-candidates' ? 'bg-blue-600 text-white font-semibold' : 'bg-gray-100 hover:bg-gray-200']">
+                                            企业推送人员
+                                            <!-- 红点提示：未处理时显示 -->
+                                            <span v-if="!isCandidateSelectionCompleted()" 
+                                                  class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                                        </button>
+                                        <button v-if="selectedPosition" 
+                                                type="button" 
+                                                @click="scrollToSection('sec-messages')"
+                                                :class="['px-3 py-1 rounded-full relative', activeSection==='sec-messages' ? 'bg-blue-600 text-white font-semibold' : 'bg-gray-100 hover:bg-gray-200']">
+                                            留言
+                                            <!-- 红点提示：有未回复留言时显示 -->
+                                            <span v-if="hasUnrepliedMessages(selectedPosition)" 
+                                                  class="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="p-3" ref="detailScroll" style="flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden;">
+                                    <div v-if="selectedPosition">
+                                        <el-form :model="selectedPosition" label-position="top" class="readonly-form">
+                                            <!-- 元数据信息 -->
+                                            <div id="sec-meta" class="mb-4  px-4 rounded-lg">
+                                                <h4 class="text-sm font-medium text-blue-800 mb-3">元信息</h4>
+                                                <el-row :gutter="12">
+                                                    <el-col :span="6">
+                                                        <el-form-item label="创建者">
+                                                            <el-input size="mini" :value="selectedProject.reporter || '-'" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="6">
+                                                        <el-form-item label="创建时间">
+                                                            <el-input size="mini" :value="selectedProject.createdTime || '-'" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="6">
+                                                        <el-form-item label="最后编辑者">
+                                                            <el-input size="mini" :value="selectedProject.payload.lastEditor || selectedProject.reporter || '-'" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="6">
+                                                        <el-form-item label="最后编辑时间">
+                                                            <el-input size="mini" :value="selectedProject.payload.lastEditTime || selectedProject.createdTime || '-'" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                </el-row>
+                                            </div>
+
+                                            <!-- 项目信息 -->
+                                            <div id="sec-project" class="mb-4 p-4 bg-gray-50 rounded-lg">
+                                                <h4 class="text-sm font-medium text-blue-800 mb-3 ">项目信息</h4>
+                                                <el-row :gutter="12">
+                                                    <el-col :span="8">
+                                                        <el-form-item label="项目号">
+                                                            <el-input size="mini" :value="selectedProject.payload.projectNumber || '-'" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="16">
+                                                        <el-form-item label="项目名称">
+                                                            <el-input size="mini" :value="selectedProject.payload.projectName || '-'" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                </el-row>
+                                                <el-row :gutter="12">
+                                                    <el-col :span="8">
+                                                        <el-form-item label="项目经理">
+                                                            <el-input size="mini" :value="selectedProject.payload.projectManager || '-'" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="8">
+                                                        <el-form-item label="管理归属">
+                                                            <el-input size="mini" :value="selectedProject.payload.department || selectedProject.payload.board || '-'" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="8">
+                                                        <el-form-item label="需求类型">
+                                                            <el-input size="mini" :value="getRequirementTypeLabel(selectedPosition.requirementType || selectedProject.payload.requirementType) || '-'" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                </el-row>
+                                            </div>
+
+                                            <!-- 岗位详情 -->
+                                            <div id="sec-position" class="mb-4 p-4 bg-gray-50 rounded-lg">
+                                                <h4 class="text-sm font-medium text-blue-800 mb-3">
+                                                    岗位要求
+                                                    <span v-if="isPendingMyApproval(selectedPosition)" class="text-xs text-orange-600 ml-2">
+                                                        （您可编辑）
+                                                    </span>
+                                                </h4>
+                                                <el-row :gutter="12">
+                                                    <el-col :span="12">
+                                                        <el-form-item label="专业">
+                                                            <el-input size="mini" :value="formatDiscipline(selectedPosition.discipline)" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="12">
+                                                        <el-form-item label="职位/岗位名称">
+                                                            <el-input size="mini" :value="selectedPosition.jobTitle || '-'" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                </el-row>
+                                                <el-form-item label="岗位核心职责">
+                                                    <el-input 
+                                                        size="mini" 
+                                                        type="textarea" 
+                                                        :rows="5" 
+                                                        :value="selectedPosition.coreResponsibilities || '-'" 
+                                                        :readonly="!isPendingMyApproval(selectedPosition)"
+                                                        @input="updatePositionField('coreResponsibilities', $event)"
+                                                        placeholder="请详细描述该岗位的核心工作职责"
+                                                    ></el-input>
+                                                </el-form-item>
+                                                <el-row :gutter="12">
+                                                    <el-col :span="6">
+                                                        <el-form-item label="数量">
+                                                            <el-input-number 
+                                                                size="mini" 
+                                                                :value="selectedPosition.quantity || 1" 
+                                                                :readonly="!isPendingMyApproval(selectedPosition)"
+                                                                @change="updatePositionField('quantity', $event)"
+                                                                style="width: 100%;"
+                                                                :min="1"
+                                                            ></el-input-number>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="6">
+                                                        <el-form-item label="工作地点">
+                                                            <el-input 
+                                                                size="mini" 
+                                                                :value="selectedPosition.workLocation || '-'" 
+                                                                :readonly="!isPendingMyApproval(selectedPosition)"
+                                                                @input="updatePositionField('workLocation', $event)"
+                                                                placeholder="请输入工作地点"
+                                                            ></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="6">
+                                                        <el-form-item label="要求到岗时间">
+                                                            <el-date-picker
+                                                                size="mini"
+                                                                type="date"
+                                                                :value="selectedPosition.requiredOnboardDate || ''"
+                                                                :readonly="!isPendingMyApproval(selectedPosition)"
+                                                                @change="updatePositionField('requiredOnboardDate', $event)"
+                                                                value-format="yyyy-MM-dd"
+                                                                placeholder="选择到岗日期"
+                                                                style="width: 100%;"
+                                                            ></el-date-picker>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="6">
+                                                        <el-form-item label="岗位周期">
+                                                            <el-input 
+                                                                size="mini" 
+                                                                :value="selectedPosition.positionCycle || '-'" 
+                                                                :readonly="!isPendingMyApproval(selectedPosition)"
+                                                                @input="updatePositionField('positionCycle', $event)"
+                                                                placeholder="如：6个月或项目期"
+                                                            ></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                </el-row>
+                                                <el-row :gutter="12">
+                                                    <el-col :span="6">
+                                                        <el-form-item label="年龄要求">
+                                                            <el-input size="mini" :value="formatAgeRange(selectedPosition.ageRequirement)" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="6">
+                                                        <el-form-item label="性别要求">
+                                                            <el-input size="mini" :value="formatGender(selectedPosition.gender)" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                </el-row>
+                                                <el-row :gutter="12">
+                                                    <el-col :span="12">
+                                                        <el-form-item label="职称要求">
+                                                            <el-input size="mini" :value="formatTitle(selectedPosition.titleRequirement)" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="12">
+                                                        <el-form-item label="教育背景">
+                                                            <el-input 
+                                                                size="mini" 
+                                                                type="textarea" 
+                                                                :rows="2" 
+                                                                :value="selectedPosition.educationRequirement || '-'" 
+                                                                :readonly="!isPendingMyApproval(selectedPosition)"
+                                                                @input="updatePositionField('educationRequirement', $event)"
+                                                                placeholder="如：本科及以上学历，化学工程或相关专业"
+                                                            ></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                </el-row>
+                                                <el-row :gutter="12">
+                                                    <el-col :span="12">
+                                                        <el-form-item label="专业资格证书">
+                                                            <el-input size="mini" type="textarea" :rows="2" :value="formatCertifications(selectedPosition.professionalCertificates, selectedPosition.customCertifications)" readonly></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                    <el-col :span="12">
+                                                        <el-form-item label="语言要求">
+                                                            <el-input 
+                                                                size="mini" 
+                                                                type="textarea" 
+                                                                :rows="2" 
+                                                                :value="selectedPosition.languageRequirement || '-'" 
+                                                                :readonly="!isPendingMyApproval(selectedPosition)"
+                                                                @input="updatePositionField('languageRequirement', $event)"
+                                                                placeholder="如：英语CET-6，具备流利的英语读写和沟通能力"
+                                                            ></el-input>
+                                                        </el-form-item>
+                                                    </el-col>
+                                                </el-row>
+                                                <el-form-item label="经验要求">
+                                                    <el-input 
+                                                        size="mini" 
+                                                        type="textarea" 
+                                                        :rows="2" 
+                                                        :value="selectedPosition.experienceRequirement || '-'" 
+                                                        :readonly="!isPendingMyApproval(selectedPosition)"
+                                                        @input="updatePositionField('experienceRequirement', $event)"
+                                                        placeholder="如：5年以上相关领域设计经验，有大型EPC项目经验者优先"
+                                                    ></el-input>
+                                                </el-form-item>
+                                                <el-form-item label="其他要求">
+                                                    <el-input 
+                                                        size="mini" 
+                                                        type="textarea" 
+                                                        :rows="2" 
+                                                        :value="selectedPosition.otherRequirements || '-'" 
+                                                        :readonly="!isPendingMyApproval(selectedPosition)"
+                                                        @input="updatePositionField('otherRequirements', $event)"
+                                                        placeholder="请填写其他补充要求"
+                                                    ></el-input>
+                                                </el-form-item>
+                                            </div>
+
+                                            <!-- 需求状态管理（流程展示） -->
+                                            <div id="sec-approval" class="mt-6 p-4 bg-blue-50 rounded-lg" v-if="selectedPosition.approvalFlow">
+                                                <h4 class="text-sm font-medium text-blue-800 mb-3">需求状态管理</h4>
+                                                <div class="space-y-3">
+                                                    <div class="flex items-start space-x-3 p-3 rounded-lg border bg-green-50 border-green-200">
+                                                        <div class="flex-shrink-0">
+                                                            <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium bg-green-500 text-white">✓</span>
+                                                        </div>
+                                                        <div class="flex-1 min-w-0">
+                                                            <div class="flex items-center justify-between">
+                                                                <h4 class="text-sm font-medium text-gray-900">提交申请</h4>
+                                                            </div>
+                                                            <p class="text-sm text-gray-600 mt-1">提交者：{{ selectedPosition.submitter || '未知' }}</p>
+                                                            <p class="text-sm text-gray-500 mt-1">提交时间：{{ selectedPosition.submitTime || '未知' }}</p>
+                                                        </div>
+                                                    </div>
+                                                     <div v-for="(step, index) in selectedPosition.approvalFlow.steps" :key="step.step" class="flex items-start space-x-3 p-3 rounded-lg border" :class="[getStepCardClass(step.status), isMyPendingStep(step, selectedPosition) ? 'ring-2 ring-orange-300' : '']">
+                                                         <div class="flex-shrink-0">
+                                                             <span :class="['w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium', getStepIconClass(step.status)]">
+                                                                 <span v-if="step.status === 'pending'">●</span>
+                                                                 <span v-else-if="step.status === 'approved'">✓</span>
+                                                                 <span v-else-if="step.status === 'rejected'">✗</span>
+                                                                 <span v-else-if="step.status === 'terminated'">—</span>
+                                                             </span>
+                                                         </div>
+                                                         <div class="flex-1 min-w-0">
+                                                             <div class="flex items-center justify-between">
+                                                                 <h4 class="text-sm font-medium text-gray-900">
+                                                                     {{ step.name }}
+                                                                 </h4>
+                                                                 <span :class="['px-2 py-1 text-xs font-medium rounded-full', getStepStatusClass(step.status)]">{{ getStepStatusText(step.status) }}</span>
+                                                             </div>
+                                                             <p class="text-sm text-gray-600 mt-1">审批人：{{ step.approver || '待分配' }}</p>
+                                                             <p v-if="step.approvalTime" class="text-sm text-gray-500 mt-1">审批时间：{{ step.approvalTime }}</p>
+                                                             <p v-if="step.comment" class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded"><span class="font-medium">审批意见：</span>{{ step.comment }}</p>
+                                                         </div>
+                                                     </div>
+                                                    
+                                                    <!-- 匹配中记录 -->
+                                                    <div v-if="calculatePositionStatus(selectedPosition) === '匹配中' && selectedPosition.matchedCandidates && selectedPosition.matchedCandidates.length > 0" class="flex items-start space-x-3 p-3 rounded-lg border bg-green-50 border-green-200">
+                                                        <div class="flex-shrink-0">
+                                                            <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-medium bg-green-500 text-white">✓</span>
+                                                        </div>
+                                                        <div class="flex-1 min-w-0">
+                                                            <div class="flex items-center justify-between">
+                                                                <h4 class="text-sm font-medium text-gray-900">人员匹配进行中</h4>
+                                                                <span class="px-2 py-1 text-xs font-medium rounded-full bg-green-100 text-green-800">匹配中</span>
+                                                            </div>
+                                                            <p class="text-sm text-gray-500 mt-1">完成时间：{{ getMatchCompleteTime(selectedPosition) }}</p>
+                                                            <p class="text-sm text-gray-700 mt-2 bg-gray-50 p-2 rounded">
+                                                                <span class="font-medium">匹配结果：</span>已成功推送 {{ selectedPosition.matchedCandidates ? selectedPosition.matchedCandidates.length : 0 }} 名候选人
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <!-- 审批操作区域（进行中且待我审批时显示） -->
+                                                     <div id="sec-actions" v-if="selectedPosition.approvalFlow && calculatePositionStatus(selectedPosition) === '进行中' && isPendingMyApproval(selectedPosition)" class="mt-4">
+                                                        <div class="mb-2">
+                                                            <label class="block text-sm font-medium text-gray-700 mb-2">审批意见</label>
+                                                            <textarea 
+                                                                v-model="approvalComment"
+                                                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                                rows="3"
+                                                                placeholder="请输入审批意见...">
+                                                            </textarea>
+                                                        </div>
+                                                        <div class="flex justify-end gap-3">
+                                                             <button type="button"
+                                                                 @click="rejectApproval"
+                                                                 class="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md transition-colors">
+                                                                驳回
+                                                            </button>
+                                                             <button type="button"
+                                                                 @click="approveApproval"
+                                                                 class="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-md transition-colors">
+                                                                通过
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- 企业推送人员（独立区域，仅对匹配中且有候选人的项目显示） -->
+                                            <div id="sec-candidates" v-if="calculatePositionStatus(selectedPosition) === '匹配中' && selectedPosition.matchedCandidates && selectedPosition.matchedCandidates.length > 0" class="mt-6">
+                                                <div class="p-4 bg-blue-50 rounded-lg">
+                                                    <h4 class="text-sm font-medium text-blue-800 mb-3 flex items-center gap-2">
+                                                        <i class="el-icon-user-solid"></i>
+                                                        <span>企业推送人员</span>
+                                                        <span class="text-xs font-normal text-gray-600">(共 {{ selectedPosition.matchedCandidates.length }} 人)</span>
+                                                    </h4>
+                                                    
+                                                    <div class="space-y-3 mb-4">
+                                                        <div v-for="(candidate, index) in selectedPosition.matchedCandidates" :key="index" 
+                                                             class="p-4 border rounded-lg border-gray-200 bg-white hover:border-blue-300 hover:shadow-sm transition-all relative">
+                                                            <!-- 反馈按钮和状态显示（右上角） -->
+                                                            <div class="absolute top-3 right-3 z-10">
+                                                                <div v-if="isCandidateFeedbackCompleted(candidate)">
+                                                                </div>
+                                                                <div v-else>
+                                                                    <!-- 反馈按钮 -->
+                                                                    <el-button
+                                                                        type="primary"
+                                                                        size="small"
+                                                                        @click="openFeedbackDialog(candidate, index)">
+                                                                        {{ getFeedbackButtonText(candidate) }}
+                                                                    </el-button>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- 企业信息 -->
+                                                            <div class="flex items-center gap-2 mb-3 pr-20 relative">
+                                                                <span class="text-sm font-medium text-gray-600">企业名称：</span>
+                                                                <span class="text-sm text-gray-900">{{ candidate.companyName }}</span>
+                                                                <el-tooltip placement="top">
+                                                                    <div slot="content">
+                                                                        <div class="text-sm">
+                                                                            <div><strong>面试联系人：</strong>{{ candidate.companyContact }}</div>
+                                                                            <div class="mt-1"><strong>联系方式：</strong>{{ candidate.companyPhone }}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <i class="el-icon-info text-blue-500 cursor-pointer hover:text-blue-600"></i>
+                                                                </el-tooltip>
+                                                            </div>
+                                                            
+                                                            <!-- 候选人信息（三列均匀排列：姓名、可到岗时间、费率） -->
+                                                            <div class="grid grid-cols-3 gap-4 mb-3 pr-20 relative z-10">
+                                                                <div class="flex items-center gap-2">
+                                                                    <span class="text-sm font-medium text-gray-600">候选人姓名：</span>
+                                                                    <span class="text-sm font-semibold text-gray-900">{{ candidate.candidateName }}</span>
+                                                                </div>
+                                                                <div class="flex items-center gap-2">
+                                                                    <span class="text-sm font-medium text-gray-600">可到岗时间：</span>
+                                                                    <span class="text-sm font-semibold">{{ candidate.availableDate }}</span>
+                                                                </div>
+                                                                <div class="flex items-center gap-2">
+                                                                    <span class="text-sm font-medium text-gray-600">费率：</span>
+                                                                    <span class="text-sm font-semibold">{{ candidate.rate }}</span>
+                                                                </div>
+                                                            </div>
+                                                
+                                                            <!-- 附件列表 -->
+                                                            <div v-if="candidate.attachments && candidate.attachments.length > 0" class="mt-3 pt-3 border-t border-gray-100 relative z-10">
+                                                                <div class="text-sm font-medium text-gray-600 mb-2">附件：</div>
+                                                                <div class="flex flex-wrap gap-2">
+                                                                    <div v-for="(attachment, attIndex) in candidate.attachments" :key="attIndex"
+                                                                         class="inline-flex items-center gap-1 px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded cursor-pointer transition-colors"
+                                                                         @click="handleAttachmentClick(attachment)">
+                                                                        <i :class="getFileIcon(attachment.type)"></i>
+                                                                        <span class="text-xs">{{ attachment.name }}</span>
+                                                                        <i v-if="attachment.type === 'pdf'" class="el-icon-view text-xs ml-1"></i>
+                                                                        <i v-else class="el-icon-download text-xs ml-1"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- 反馈详情显示 -->
+                                                            <div v-if="candidate.firstStageFeedback" class="mt-3 pt-3 border-t border-gray-100 relative z-10">
+                                                                <div class="text-sm font-medium text-gray-600 mb-2">反馈详情：</div>
+                                                                <div class="text-sm text-gray-700 bg-gray-50 p-3 rounded space-y-3">
+                                                                    <!-- 第一阶段反馈 -->
+                                                                    <div v-if="candidate.firstStageFeedback" :class="candidate.secondStageFeedback ? 'pb-3 border-b border-gray-200' : ''">
+                                                                        <div class="font-semibold text-gray-800 mb-2">第一阶段反馈（初步反馈）</div>
+                                                                        <div class="mb-1">
+                                                                            <span class="font-medium">结果：</span>
+                                                                            <span :class="candidate.firstStageFeedback.result === 'not-suitable' ? 'text-red-600' : 'text-green-600'">
+                                                                                {{ candidate.firstStageFeedback.result === 'not-suitable' ? '不合适' : '安排面试' }}
+                                                                            </span>
+                                                                        </div>
+                                                                        <div v-if="candidate.firstStageFeedback.description" class="mt-1">
+                                                                            <span class="font-medium">{{ candidate.firstStageFeedback.result === 'not-suitable' ? '原因' : '相关内容' }}：</span>
+                                                                            <span>{{ candidate.firstStageFeedback.description }}</span>
+                                                                        </div>
+                                                                        <!-- 安排面试时显示联系人和联系方式 -->
+                                                                        <template v-if="candidate.firstStageFeedback.result === 'interview-arranged'">
+                                                                            <div v-if="candidate.firstStageFeedback.contactPerson" class="mt-1">
+                                                                                <span class="font-medium">面试联系人：</span>
+                                                                                <span>{{ candidate.firstStageFeedback.contactPerson }}</span>
+                                                                            </div>
+                                                                            <div v-if="candidate.firstStageFeedback.contactPhone" class="mt-1">
+                                                                                <span class="font-medium">联系方式：</span>
+                                                                                <span>{{ candidate.firstStageFeedback.contactPhone }}</span>
+                                                                            </div>
+                                                                        </template>
+                                                                        <div v-if="candidate.firstStageFeedback.time" class="text-xs text-gray-500 mt-2">
+                                                                            反馈时间：{{ candidate.firstStageFeedback.time }}
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- 第二阶段反馈（仅在第一阶段选择了安排面试时显示） -->
+                                                                    <div v-if="candidate.secondStageFeedback" class="pt-3">
+                                                                        <div class="font-semibold text-gray-800 mb-2">第二阶段反馈（结果反馈）</div>
+                                                                        <div class="mb-1">
+                                                                            <span class="font-medium">结果：</span>
+                                                                            <span :class="candidate.secondStageFeedback.result === 'hired' ? 'text-green-600' : 'text-red-600'">
+                                                                                {{ candidate.secondStageFeedback.result === 'hired' ? '录用' : '未录用' }}
+                                                                            </span>
+                                                                        </div>
+                                                                        <div v-if="candidate.secondStageFeedback.description" class="mt-1">
+                                                                            <span class="font-medium">{{ candidate.secondStageFeedback.result === 'hired' ? '描述' : '原因' }}：</span>
+                                                                            <span>{{ candidate.secondStageFeedback.description }}</span>
+                                                                        </div>
+                                                                        <div v-if="candidate.secondStageFeedback.time" class="text-xs text-gray-500 mt-2">
+                                                                            反馈时间：{{ candidate.secondStageFeedback.time }}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- 留言模块 -->
+                                            <div id="sec-messages" class="mt-6 p-4 bg-gray-50 rounded-lg">
+                                                <h4 class="text-sm font-medium text-blue-800 mb-3 flex items-center gap-2">
+                                                    <i class="el-icon-chat-line-round"></i>
+                                                    <span>留言</span>
+                                                    <span v-if="selectedPosition && getMessages(selectedPosition).length > 0" class="text-xs font-normal text-gray-600">(共 {{ getMessages(selectedPosition).length }} 条)</span>
+                                                </h4>
+                                                
+                                                <div v-if="selectedPosition && getMessages(selectedPosition).length > 0" class="space-y-4">
+                                                    <div v-for="(message, index) in getMessages(selectedPosition)" :key="index" 
+                                                         class="p-4 border rounded-lg border-gray-200 bg-white">
+                                                        <!-- 留言内容 -->
+                                                        <div class="mb-3">
+                                                            <div class="text-sm font-medium text-gray-900 mb-1">{{ message.content }}</div>
+                                                            <div v-if="message.company" class="text-xs text-gray-500 mb-1">企业: {{ message.company }}</div>
+                                                            <div class="text-xs text-gray-500">回复时间: {{ message.time }}</div>
+                                                        </div>
+                                                        
+                                                        <!-- 回复内容显示 -->
+                                                        <div v-if="message.reply && message.reply.content" class="mt-3 pt-3 border-t border-gray-100 bg-green-50 rounded p-3">
+                                                            <div class="text-sm font-medium text-gray-700 mb-1">回复：</div>
+                                                            <div class="text-sm text-gray-900 mb-1">{{ message.reply.content }}</div>
+                                                            <div class="text-xs text-gray-500">时间: {{ message.reply.time }}</div>
+                                                        </div>
+                                                        
+                                                        <!-- 回复输入框 -->
+                                                        <div class="mt-3 pt-3 border-t border-gray-100">
+                                                            <div class="flex gap-2">
+                                                                <el-input
+                                                                    v-model="message.replyInput"
+                                                                    type="textarea"
+                                                                    :rows="2"
+                                                                    placeholder="请输入回复内容..."
+                                                                    size="small"
+                                                                    class="flex-1">
+                                                                </el-input>
+                                                                <el-button
+                                                                    type="primary"
+                                                                    size="small"
+                                                                    @click="submitReply(selectedPosition, index)"
+                                                                    :disabled="!message.replyInput || !message.replyInput.trim()">
+                                                                    {{ message.reply && message.reply.content ? '更新回复' : '回复' }}
+                                                                </el-button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div v-else class="text-center text-gray-500 py-6">
+                                                    <i class="el-icon-chat-line-round text-4xl mb-2"></i>
+                                                    <div>暂无留言</div>
+                                                </div>
+                                            </div>
+                                            
+                                        </el-form>
+                                    </div>
+                                    <div v-else class="text-center text-gray-500 py-8">
+                                        <i class="el-icon-document text-4xl mb-2"></i>
+                                        <div>请选择左侧岗位查看详情</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-else class="text-center text-gray-500 py-8">
+                    <i class="el-icon-document text-4xl mb-2"></i>
+                    <div>未选择项目或数据未加载</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 反馈弹窗 -->
+        <el-dialog 
+            title="人员反馈"
+            :visible.sync="feedbackDialogVisible"
+            width="600px"
+            top="15vh"
+            :before-close="closeFeedbackDialog">
+            <div v-if="currentFeedbackCandidate" class="feedback-dialog-content">
+                <!-- 候选人基本信息 -->
+                <div class="candidate-info mb-8 p-3 bg-gray-50 rounded-lg">
+                    <div class="text-sm text-gray-600 mb-2">
+                        <div >企业：<span class="text-sm font-semibold text-gray-900">{{ currentFeedbackCandidate.companyName }}</span></div>
+                    </div>
+                    <div class="text-sm text-gray-600 mb-2">
+                        <div >姓名：<span class="text-sm font-semibold text-gray-900"></span>{{ currentFeedbackCandidate.candidateName }}</span></div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-sm text-gray-600">
+                        <div>可到岗时间：<span class="text-sm font-semibold text-gray-900">{{ currentFeedbackCandidate.availableDate }}</span></div>
+                        <div>费率：<span class="text-sm font-semibold text-gray-900">{{ currentFeedbackCandidate.rate }}</span></div>
+                    </div>
+                </div>
+                
+                <!-- 反馈表单 -->
+                <el-form :model="feedbackForm" label-position="top">
+                    <!-- 第一阶段反馈（初步反馈） -->
+                    <div v-if="feedbackForm.stage === 'first'">
+                        <div class="mb-4 pb-3 border-b border-gray-200">
+                            <div class="text-sm font-medium text-blue-800 mb-2">第一阶段反馈（初步反馈）</div>
+                            <el-form-item label="反馈结果" required>
+                                <el-radio-group v-model="feedbackForm.firstStage.result">
+                                    <el-radio label="not-suitable">不合适</el-radio>
+                                    <el-radio label="interview-arranged">安排面试</el-radio>
+                                </el-radio-group>
+                            </el-form-item>
+                            
+                             <!-- 安排面试时显示联系人和联系方式字段 -->
+                             <template v-if="feedbackForm.firstStage.result === 'interview-arranged'">
+                                <el-row :gutter="12">
+                                    <el-col :span="12">
+                                        <el-form-item label="面试联系人" required>
+                                            <el-input
+                                                v-model="feedbackForm.firstStage.contactPerson"
+                                                placeholder="请输入联系人姓名"
+                                                maxlength="50">
+                                            </el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                    <el-col :span="12">
+                                        <el-form-item label="联系方式" required>
+                                            <el-input
+                                                v-model="feedbackForm.firstStage.contactPhone"
+                                                placeholder="请输入联系电话或邮箱"
+                                                maxlength="50">
+                                            </el-input>
+                                        </el-form-item>
+                                    </el-col>
+                                </el-row>
+                            </template>
+
+                            <el-form-item label="说明内容" required>
+                                <el-input
+                                    type="textarea"
+                                    :rows="4"
+                                    v-model="feedbackForm.firstStage.description"
+                                    :placeholder="feedbackForm.firstStage.result === 'not-suitable' ? '请输入不合适的具体原因...' : '请输入面试安排的相关内容，如面试时间、地点等...'"
+                                    maxlength="500"
+                                    show-word-limit>
+                                </el-input>
+                            </el-form-item>
+                            
+                           
+                        </div>
+                    </div>
+                    
+                    <!-- 第二阶段反馈（结果反馈） -->
+                    <div v-if="feedbackForm.stage === 'second'">
+                        <div class="mb-4 pb-3 border-b border-gray-200">
+                            <div class="text-sm font-medium text-blue-800 mb-3">第二阶段反馈（结果反馈）</div>
+                            <el-form-item label="反馈结果" required>
+                                <el-radio-group v-model="feedbackForm.secondStage.result">
+                                    <el-radio label="hired">录用</el-radio>
+                                    <el-radio label="rejected">未录用</el-radio>
+                                </el-radio-group>
+                            </el-form-item>
+                            
+                            <el-form-item :label="feedbackForm.secondStage.result === 'rejected' ? '说明内容' : '说明内容'" 
+                                          :required="feedbackForm.secondStage.result === 'rejected'">
+                                <el-input
+                                    type="textarea"
+                                    :rows="4"
+                                    v-model="feedbackForm.secondStage.description"
+                                    :placeholder="feedbackForm.secondStage.result === 'rejected' ? '请输入未录用的具体原因...' : '可以输入录用相关的描述信息（可选）...'"
+                                    maxlength="500"
+                                    show-word-limit>
+                                </el-input>
+                            </el-form-item>
+                        </div>
+                    </div>
+                </el-form>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="closeFeedbackDialog">取 消</el-button>
+                <el-button type="primary" @click="submitFeedback" :disabled="!canSubmitFeedback">提 交</el-button>
+            </span>
+        </el-dialog>
+        
+        <!-- PDF预览对话框 -->
+        <el-dialog 
+            :title="pdfPreviewTitle"
+            :visible.sync="pdfPreviewVisible"
+            width="80%"
+            top="5vh"
+            custom-class="pdf-preview-dialog"
+            :before-close="closePDFPreview">
+            <div class="pdf-preview-content" style="height: 75vh; display: flex; align-items: center; justify-content: center; background-color: #f5f5f5;">
+                <div class="text-center text-gray-500">
+                    <i class="el-icon-document text-6xl mb-4" style="font-size: 80px; color: #909399;"></i>
+                    <div class="text-lg">PDF 预览功能开发中...</div>
+                    <div class="text-sm mt-2">您可以点击下载按钮下载文件后查看</div>
+                </div>
+            </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="closePDFPreview">关 闭</el-button>
+            </span>
+        </el-dialog>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/element-ui@2.15.14/lib/index.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+             data: {
+                 selectedProject: null,
+                 selectedPositionIndex: 0,
+                 approvalComment: '',
+                 activeSection: 'sec-meta',
+                 currentUser: '',  // 添加当前用户字段
+                 dataLoaded: false,  // 标记数据是否已加载
+                 // PDF预览相关
+                 pdfPreviewVisible: false,
+                 pdfPreviewTitle: '',
+                 // 候选人反馈相关
+                 feedbackDialogVisible: false,
+                 currentFeedbackCandidate: null, // 当前进行反馈的候选人
+                 currentFeedbackIndex: -1, // 当前反馈候选人的索引
+                 feedbackForm: {
+                     stage: 'first', // 当前反馈阶段：'first' 或 'second'
+                     firstStage: {
+                         result: '', // 第一阶段结果：'not-suitable' 或 'interview-arranged'
+                         description: '', // 第一阶段描述/原因
+                         contactPerson: '', // 联系人（安排面试时必填）
+                         contactPhone: '' // 联系方式（安排面试时必填）
+                     },
+                     secondStage: {
+                         result: '', // 第二阶段结果：'hired' 或 'rejected'
+                         description: '' // 第二阶段描述/原因
+                     }
+                 },
+                 // 需求清单过滤
+                 positionSearchKeyword: '', // 搜索关键词
+                 hideClosedPositions: false // 隐藏已关闭的需求
+             },
+            computed: {
+                selectedPosition() {
+                    if (!this.selectedProject) return null;
+                    const list = this.selectedProject.payload.positions || [];
+                    const i = this.selectedPositionIndex;
+                    if (typeof i !== 'number' || i < 0 || i >= list.length) return null;
+                    return list[i];
+                },
+                // 是否可以提交反馈
+                canSubmitFeedback() {
+                    // 第一阶段验证
+                    if (this.feedbackForm.stage === 'first') {
+                        if (!this.feedbackForm.firstStage.result) {
+                            return false;
+                        }
+                        // 第一阶段必须填写描述
+                        if (!this.feedbackForm.firstStage.description || !this.feedbackForm.firstStage.description.trim()) {
+                            return false;
+                        }
+                        // 如果选择安排面试，联系人和联系方式必填
+                        if (this.feedbackForm.firstStage.result === 'interview-arranged') {
+                            if (!this.feedbackForm.firstStage.contactPerson || !this.feedbackForm.firstStage.contactPerson.trim()) {
+                                return false;
+                            }
+                            if (!this.feedbackForm.firstStage.contactPhone || !this.feedbackForm.firstStage.contactPhone.trim()) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    }
+                    // 第二阶段验证（只有第一阶段选择了安排面试才会进入第二阶段）
+                    if (this.feedbackForm.stage === 'second') {
+                        if (!this.feedbackForm.secondStage.result) {
+                            return false;
+                        }
+                        // 如果第二阶段选择未录用，必须填写原因
+                        if (this.feedbackForm.secondStage.result === 'rejected' && 
+                            (!this.feedbackForm.secondStage.description || !this.feedbackForm.secondStage.description.trim())) {
+                            return false;
+                        }
+                        return true;
+                    }
+                    return false;
+                },
+                // 是否需要显示第二阶段反馈
+                needSecondStageFeedback() {
+                    if (!this.currentFeedbackCandidate) return false;
+                    // 如果已经有第一阶段反馈，且结果为"安排面试"，则需要第二阶段反馈
+                    const firstStage = this.currentFeedbackCandidate.firstStageFeedback;
+                    return firstStage && firstStage.result === 'interview-arranged' && !this.currentFeedbackCandidate.secondStageFeedback;
+                },
+                // 是否已完成反馈（第一阶段选择不合适，或已完成第二阶段）
+                isFeedbackCompleted() {
+                    if (!this.currentFeedbackCandidate) return false;
+                    const firstStage = this.currentFeedbackCandidate.firstStageFeedback;
+                    const secondStage = this.currentFeedbackCandidate.secondStageFeedback;
+                    // 如果第一阶段选择不合适，则已完成
+                    if (firstStage && firstStage.result === 'not-suitable') {
+                        return true;
+                    }
+                    // 如果有第二阶段反馈，则已完成
+                    if (secondStage) {
+                        return true;
+                    }
+                    return false;
+                }
+            },
+             mounted() {
+                 try {
+                     const params = new URLSearchParams(window.location.search);
+                     const key = params.get('k');
+                     
+                     // 解析当前登录用户（用于"待我审批"判断）。优先级：URL参数u/user > localStorage > 默认值
+                     const u1 = params.get('u') || params.get('user');
+                     const u2 = localStorage.getItem('currentUserName');
+                     this.currentUser = (u1 && u1.trim()) || (u2 && u2.trim()) || '张明华';  // 默认设为张明华
+                     
+                     if (key) {
+                         console.log('尝试加载项目数据，key:', key);
+                         const raw = localStorage.getItem(key);
+                         console.log('localStorage原始数据:', raw ? '存在' : '不存在');
+                         if (raw) {
+                             try {
+                                 this.selectedProject = JSON.parse(raw);
+                                 console.log('项目数据解析成功:', this.selectedProject?.payload?.projectNumber);
+                                 // 标记数据已加载
+                                 this.dataLoaded = true;
+                                 // 同步更新窗口标题
+                                 const pn = this.selectedProject && this.selectedProject.payload && this.selectedProject.payload.projectNumber || '';
+                                 const pnName = this.selectedProject && this.selectedProject.payload && this.selectedProject.payload.projectName || '';
+                                 if (pn || pnName) {
+                                     document.title = `${pn}${pnName ? ' ' + pnName : ''} 需求详情`;
+                                 }
+                                 // 若还未识别到currentUser，尝试从项目数据推断
+                                 if (!this.currentUser) {
+                                     const pu = (this.selectedProject.currentUser || (this.selectedProject.payload && this.selectedProject.payload.currentUser)) || '';
+                                     if (pu && typeof pu === 'string') this.currentUser = pu;
+                                 }
+                                 
+                                 // 不自动清理localStorage，让用户手动控制或依赖浏览器清理
+                                 // 这样可以支持页面刷新、前进后退等操作
+                                 console.log('项目数据已加载，localStorage数据保留用于页面刷新');
+                             } catch (parseError) {
+                                 console.error('解析项目数据失败:', parseError);
+                                 console.error('原始数据:', raw);
+                             }
+                         } else {
+                             console.warn('未找到localStorage数据，key:', key);
+                             // 列出所有localStorage中的key，帮助调试
+                             console.log('当前localStorage中的所有key:', Object.keys(localStorage));
+                         }
+                     } else {
+                         console.warn('URL中未找到key参数');
+                     }
+                 } catch (e) {
+                     console.error('加载项目数据失败', e);
+                 }
+                // 监听滚动，更新当前区块
+                this.$nextTick(() => {
+                    const container = this.$refs.detailScroll;
+                    if (!container) return;
+                    container.addEventListener('scroll', this.handleScroll, { passive: true });
+                    // 初始化一次
+                    this.handleScroll();
+                });
+            },
+            methods: {
+                handleScroll() {
+                    const container = this.$refs.detailScroll;
+                    if (!container) return;
+                    const sections = ['sec-meta','sec-project','sec-position','sec-approval','sec-actions','sec-candidates']
+                        .map(id => ({ id, el: container.querySelector('#' + id) }))
+                        .filter(s => s.el);
+                    const scrollTop = container.scrollTop;
+                    const threshold = 160; // 进入区块的阈值
+                    let current = this.activeSection;
+                    for (let i = sections.length - 1; i >= 0; i--) {
+                        const top = sections[i].el.offsetTop;
+                        if (scrollTop + threshold >= top) {
+                            current = sections[i].id;
+                            break;
+                        }
+                    }
+                    if (current !== this.activeSection) this.activeSection = current;
+                },
+                scrollToSection(id) {
+                    try {
+                        const container = this.$refs.detailScroll;
+                        const target = container && container.querySelector('#' + id);
+                        if (!container || !target) return;
+                        const offsetTop = target.offsetTop-160; // 微调
+                        container.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                        this.activeSection = id;
+                    } catch (e) {
+                        console.warn && console.warn('滚动失败', e);
+                    }
+                },
+                getCurrentApprovalStep(position) {
+                    if (!position || !position.approvalFlow) return 0;
+                    return position.approvalFlow.currentStep || 1;
+                },
+                selectPosition(idx) {
+                    this.$set(this, 'selectedPositionIndex', idx);
+                },
+                /**
+                 * 根据需求ID选择需求
+                 * @param {string} requirementId - 需求ID
+                 */
+                selectPositionByRequirementId(requirementId) {
+                    const positions = this.selectedProject.payload.positions || [];
+                    const index = positions.findIndex(pos => pos.requirementId === requirementId);
+                    if (index !== -1) {
+                        this.selectedPositionIndex = index;
+                    }
+                },
+                /**
+                 * 更新岗位字段值（仅在审批状态下可用）
+                 */
+                updatePositionField(fieldName, value) {
+                    if (!this.selectedProject || !this.selectedProject.payload.positions) {
+                        return;
+                    }
+                    
+                    const position = this.selectedProject.payload.positions[this.selectedPositionIndex];
+                    if (!position) {
+                        return;
+                    }
+                    
+                    // 检查当前岗位是否正在等待我审批
+                    if (!this.isPendingMyApproval(position)) {
+                        console.log('只有待审批的需求才能编辑');
+                        return;
+                    }
+                    
+                    // 更新字段值
+                    this.$set(position, fieldName, value);
+                    
+                    // 标记该字段已被审批人修改
+                    if (!position.approvalModifications) {
+                        this.$set(position, 'approvalModifications', {});
+                    }
+                    this.$set(position.approvalModifications, fieldName, {
+                        modifiedBy: this.currentUser,
+                        modifiedTime: new Date().toLocaleString('zh-CN'),
+                        newValue: value
+                    });
+                    
+                    console.log(`字段 ${fieldName} 已更新为:`, value);
+                },
+                getTotalQuantity(positions) {
+                    if (!positions || !Array.isArray(positions)) return 0;
+                    return positions.reduce((total, pos) => total + (pos.quantity || 0), 0);
+                },
+                /**
+                 * 获取未解决人数（即未关闭需求中，需求人数减去已录用人数）
+                 * @param {Array} positions - 岗位列表
+                 * @returns {number} 未解决人数
+                 */
+                getUnsolvedCount(positions) {
+                    if (!positions || !Array.isArray(positions)) return 0;
+                    let unsolvedCount = 0;
+                    
+                    positions.forEach(position => {
+                        // 只统计未关闭的需求
+                        if (this.calculatePositionStatus(position) !== '已关闭') {
+                            const requiredCount = position.quantity || 0;
+                            let hiredCount = 0;
+                            
+                            // 统计该岗位已录用人数
+                            if (position.matchedCandidates && Array.isArray(position.matchedCandidates)) {
+                                position.matchedCandidates.forEach(candidate => {
+                                    // 检查是否有第二阶段反馈，且结果为录用
+                                    if (candidate.secondStageFeedback && 
+                                        candidate.secondStageFeedback.result === 'hired') {
+                                        hiredCount++;
+                                    }
+                                });
+                            }
+                            
+                            // 未解决人数 = 需求人数 - 已录用人数（如果大于0）
+                            const unsolved = requiredCount - hiredCount;
+                            if (unsolved > 0) {
+                                unsolvedCount += unsolved;
+                            }
+                        }
+                    });
+                    
+                    return unsolvedCount;
+                },
+                /**
+                 * 获取进行中人数（即未关闭需求的总人数）
+                 * @param {Array} positions - 岗位列表
+                 * @returns {number} 进行中人数
+                 */
+                getProcessingCount(positions) {
+                    if (!positions || !Array.isArray(positions)) return 0;
+                    let count = 0;
+                    positions.forEach(position => {
+                        // 只统计未关闭的需求
+                        if (this.calculatePositionStatus(position) !== '已关闭') {
+                            count += (position.quantity || 0);
+                        }
+                    });
+                    return count;
+                },
+                /**
+                 * 获取进行中的需求数（即状态为"进行中"的岗位需求个数）
+                 * @param {Array} positions - 岗位列表
+                 * @returns {number} 进行中需求数
+                 */
+                getProcessingRequirementsCount(positions) {
+                    if (!positions || !Array.isArray(positions)) return 0;
+                    let count = 0;
+                    positions.forEach(position => {
+                        // 检查岗位状态是否为"进行中"
+                        if (this.calculatePositionStatus(position) === '进行中') {
+                            count++;
+                        }
+                    });
+                    return count;
+                },
+                getProjectDisciplineDistribution(positions) {
+                    const dist = {};
+                    if (!positions || !Array.isArray(positions)) return dist;
+                    positions.forEach(p => {
+                        (Array.isArray(p.discipline) ? p.discipline : (p.discipline ? [p.discipline] : [])).forEach(d => {
+                            const label = Array.isArray(d) ? ((d[0]||'-') + ' / ' + (d[1]||'-')) : d;
+                            dist[label] = (dist[label] || 0) + (Number(p.quantity) || 0);
+                        });
+                    });
+                    return dist;
+                },
+                calculatePositionStatus(position) {
+                    if (!position) return '未知';
+                    
+                    // 如果没有审批流程，返回原状态
+                    if (!position.approvalFlow || !position.approvalFlow.steps) {
+                        return position.status || '待审批';
+                    }
+                    
+                    const steps = position.approvalFlow.steps;
+                    
+                    // 检查是否有任何审批被驳回
+                    const hasRejected = steps.some(step => step.status === 'rejected');
+                    if (hasRejected) {
+                        return '已关闭';
+                    }
+                    
+                    // 检查是否所有审批都通过
+                    const allApproved = steps.every(step => step.status === 'approved');
+                    if (allApproved) {
+                        // 如果显式设置了状态，使用设置的状态
+                        if (position.status === '已关闭') {
+                            return '已关闭';
+                        }
+                        // 统一为匹配中（无论是否有候选人）
+                        return '匹配中';
+                    }
+                    
+                    // 有pending的审批，状态为进行中
+                    const hasPending = steps.some(step => step.status === 'pending');
+                    if (hasPending) {
+                        return '进行中';
+                    }
+                    
+                    return position.status || '待审批';
+                },
+                 isPendingMyApproval(position) {
+                     if (!position || !position.approvalFlow || !position.approvalFlow.steps) return false;
+                     const currentStep = position.approvalFlow.currentStep || 1;
+                     const currentStepData = position.approvalFlow.steps.find(s => s.step === currentStep);
+                     if (!currentStepData || currentStepData.status !== 'pending') return false;
+                     const user = (this.currentUser || '').trim();
+                     if (!user) return false;
+                     return currentStepData.approver === user;
+                 },
+                 // 判断某一步是否为"待我审批"
+                 isMyPendingStep(step, position) {
+                     if (!step || !position || !position.approvalFlow) return false;
+                     const currentStep = position.approvalFlow.currentStep || 1;
+                     if (step.step !== currentStep) return false;
+                     if (step.status !== 'pending') return false;
+                     const user = (this.currentUser || '').trim();
+                     if (!user) return false;
+                     return step.approver === user;
+                 },
+                approveApproval() {
+                    if (!this.approvalComment || this.approvalComment.trim() === '') {
+                        this.$message && this.$message.warning && this.$message.warning('请填写审批意见');
+                        return;
+                    }
+                    if (!this.selectedProject || !this.selectedProject.payload || !this.selectedProject.payload.positions) {
+                        console.warn && console.warn('项目数据异常');
+                        return;
+                    }
+                    const position = this.selectedProject.payload.positions[this.selectedPositionIndex];
+                    if (!position || !position.approvalFlow) { console.warn && console.warn('需求数据异常'); return; }
+                    const currentStep = this.getCurrentApprovalStep(position);
+                    const step = position.approvalFlow.steps.find(s => s.step === currentStep);
+                    if (!step) { console.warn && console.warn('审批步骤数据异常'); return; }
+                    step.status = 'approved';
+                    step.comment = this.approvalComment;
+                    step.approvalTime = new Date().toLocaleString('zh-CN');
+                    
+                    // 记录审批人的修改历史
+                    if (position.approvalModifications && Object.keys(position.approvalModifications).length > 0) {
+                        step.fieldModifications = position.approvalModifications;
+                        console.log('审批过程中的字段修改:', position.approvalModifications);
+                    }
+                    if (currentStep < (position.approvalFlow.totalSteps || 1)) {
+                        position.approvalFlow.currentStep = currentStep + 1;
+                    } else {
+                        position.status = '匹配中';
+                    }
+                    this.approvalComment = '';
+                    this.$forceUpdate && this.$forceUpdate();
+                    this.$message && this.$message.success && this.$message.success('审批通过');
+                },
+                rejectApproval() {
+                    if (!this.approvalComment || this.approvalComment.trim() === '') {
+                        this.$message && this.$message.warning && this.$message.warning('请填写审批意见');
+                        return;
+                    }
+                    if (!this.selectedProject || !this.selectedProject.payload || !this.selectedProject.payload.positions) { console.warn && console.warn('项目数据异常'); return; }
+                    const position = this.selectedProject.payload.positions[this.selectedPositionIndex];
+                    if (!position || !position.approvalFlow) { console.warn && console.warn('需求数据异常'); return; }
+                    const currentStep = this.getCurrentApprovalStep(position);
+                    const step = position.approvalFlow.steps.find(s => s.step === currentStep);
+                    if (!step) { console.warn && console.warn('审批步骤数据异常'); return; }
+                    step.status = 'rejected';
+                    step.comment = this.approvalComment;
+                    step.approvalTime = new Date().toLocaleString('zh-CN');
+                    // 将后续pending节点标记为终止
+                    position.approvalFlow.steps = position.approvalFlow.steps.map((s, idx) => {
+                        if (idx > currentStep - 1 && s.status === 'pending') {
+                            return { ...s, status: 'terminated', approvalTime: new Date().toLocaleString('zh-CN'), comment: s.comment || '审批流程因前置步骤被驳回而终止' };
+                        }
+                        return s;
+                    });
+                    position.status = '已关闭';
+                    position.closeReason = '审批流程中存在驳回，需求自动关闭';
+                    position.closeOperator = step.approver || '系统';
+                    position.closeTime = new Date().toLocaleString('zh-CN');
+                    this.approvalComment = '';
+                    this.$forceUpdate && this.$forceUpdate();
+                    this.$message && this.$message.success && this.$message.success('审批驳回');
+                },
+                getRequirementTypeLabel(type) {
+                    const map = { design: '设计类', pmc: 'PMC', epc: 'EPC', consulting: '咨询类' };
+                    return map[type] || type;
+                 },
+                /**
+                 * 获取排序后的需求列表
+                 * @param {Array} positions - 需求列表
+                 * @returns {Array} 排序后的需求列表
+                 */
+                getSortedPositions(positions) {
+                    if (!positions || !Array.isArray(positions)) return [];
+                    
+                    return [...positions].sort((a, b) => {
+                        // 优先级1: 待我审批的需求排在最前
+                        const aIsPending = this.isPendingMyApproval(a);
+                        const bIsPending = this.isPendingMyApproval(b);
+                        
+                        if (aIsPending && !bIsPending) return -1;
+                        if (!aIsPending && bIsPending) return 1;
+                        
+                        // 优先级2: 匹配中且有候选人待处理的需求排在前（仅次于待我审批）
+                        const aIsMatchedPending = this.isMatchedAndPending(a);
+                        const bIsMatchedPending = this.isMatchedAndPending(b);
+                        
+                        if (aIsMatchedPending && !bIsMatchedPending) return -1;
+                        if (!aIsMatchedPending && bIsMatchedPending) return 1;
+                        
+                        // 优先级3: 有匹配候选人的匹配中排在没有候选人的匹配中之前
+                        const aStatus = this.calculatePositionStatus(a);
+                        const bStatus = this.calculatePositionStatus(b);
+                        
+                        if (aStatus === '匹配中' && bStatus === '匹配中') {
+                            const aHasCandidates = a.matchedCandidates && a.matchedCandidates.length > 0;
+                            const bHasCandidates = b.matchedCandidates && b.matchedCandidates.length > 0;
+                            if (aHasCandidates && !bHasCandidates) return -1;
+                            if (!aHasCandidates && bHasCandidates) return 1;
+                        }
+                        
+                        // 其他情况按需求编号升序排序
+                        const aId = a.requirementId || '';
+                        const bId = b.requirementId || '';
+                        return aId.localeCompare(bId);
+                    });
+                },
+                
+                /**
+                 * 获取过滤后的需求列表
+                 * @returns {Array} 过滤后的需求列表
+                 */
+                getFilteredPositions() {
+                    let positions = this.getSortedPositions(this.selectedProject?.payload?.positions || []);
+                    
+                    // 根据搜索关键词过滤
+                    if (this.positionSearchKeyword && this.positionSearchKeyword.trim()) {
+                        const keyword = this.positionSearchKeyword.trim().toLowerCase();
+                        positions = positions.filter(pos => {
+                            const requirementId = (pos.requirementId || '').toLowerCase();
+                            const jobTitle = (pos.jobTitle || '').toLowerCase();
+                            return requirementId.includes(keyword) || jobTitle.includes(keyword);
+                        });
+                    }
+                    
+                    // 根据"隐藏已关闭"过滤
+                    if (this.hideClosedPositions) {
+                        positions = positions.filter(pos => {
+                            return this.calculatePositionStatus(pos) !== '已关闭';
+                        });
+                    }
+                    
+                    return positions;
+                },
+                
+                /**
+                 * 判断是否为匹配中且有候选人待处理的需求
+                 * @param {Object} position - 岗位对象
+                 * @returns {boolean} 是否为匹配中且有候选人待处理
+                 */
+                isMatchedAndPending(position) {
+                    if (!position) return false;
+                    const status = this.calculatePositionStatus(position);
+                    if (status !== '匹配中') return false;
+                    // 必须有匹配的候选人
+                    if (!position.matchedCandidates || position.matchedCandidates.length === 0) return false;
+                    // 如果已经完成候选人选择，返回false（不需要提示）
+                    if (position.candidateSelectionCompleted) return false;
+                    return true;
+                },
+                formatDiscipline(discipline) {
+                    if (!discipline || !Array.isArray(discipline)) return '-';
+                    return discipline.map(d => Array.isArray(d) ? d.join(' / ') : d).join('、');
+                },
+                formatGender(gender) {
+                    const map = { male: '男', female: '女', any: '不限' };
+                    return map[gender] || gender || '-';
+                },
+                formatTitle(title) {
+                    const map = { junior: '初级', intermediate: '中级', senior: '高级', professor_level: '正高级' };
+                    return map[title] || title || '-';
+                },
+                formatCertifications(certificates, customCertifications) {
+                    if (!certificates || certificates.length === 0) {
+                        return customCertifications || '';
+                    }
+                    if (typeof certificates === 'string') {
+                        return certificates || '';
+                    }
+                    if (!Array.isArray(certificates)) {
+                        return customCertifications || '';
+                    }
+                    let result = certificates.join('，');
+                    if (certificates.includes('其他') && customCertifications && customCertifications.trim()) {
+                        result += '，' + customCertifications.trim();
+                    }
+                    return result;
+                },
+                formatAgeRange(ageRequirement) {
+                    if (!ageRequirement) return '-';
+                    const minAge = ageRequirement.minAge || '不限';
+                    const maxAge = ageRequirement.maxAge || '不限';
+                    return `${minAge} - ${maxAge} 岁`;
+                },
+                getStepCardClass(status) {
+                    switch (status) {
+                        case 'pending': return 'bg-gray-50 border-gray-200';
+                        case 'approved': return 'bg-green-50 border-green-200';
+                        case 'rejected': return 'bg-red-50 border-red-200';
+                        case 'terminated': return 'bg-gray-50 border-gray-300';
+                        default: return 'bg-gray-50 border-gray-200';
+                    }
+                },
+                getStepIconClass(status) {
+                    switch (status) {
+                        case 'pending': return 'bg-gray-300 text-gray-600';
+                        case 'approved': return 'bg-green-500 text-white';
+                        case 'rejected': return 'bg-red-500 text-white';
+                        case 'terminated': return 'bg-gray-400 text-white';
+                        default: return 'bg-gray-300 text-gray-600';
+                    }
+                },
+                getStepStatusClass(status) {
+                    switch (status) {
+                        case 'pending': return 'bg-gray-100 text-gray-800';
+                        case 'approved': return 'bg-green-100 text-green-800';
+                        case 'rejected': return 'bg-red-100 text-red-800';
+                        case 'terminated': return 'bg-gray-100 text-gray-600';
+                        default: return 'bg-gray-100 text-gray-800';
+                    }
+                },
+                getStepStatusText(status) {
+                    switch (status) {
+                        case 'pending': return '待审批';
+                        case 'approved': return '已通过';
+                        case 'rejected': return '已驳回';
+                        case 'terminated': return '已终止';
+                        default: return '待审批';
+                    }
+                },
+                
+                /**
+                 * 下载附件
+                 * @param {Object} attachment - 附件对象
+                 */
+                downloadAttachment(attachment) {
+                    if (!attachment || !attachment.url) {
+                        this.$message && this.$message.error && this.$message.error('附件信息不完整');
+                        return;
+                    }
+                    
+                    // 创建一个临时的a标签用于下载
+                    const link = document.createElement('a');
+                    link.href = attachment.url;
+                    link.download = attachment.name || '附件';
+                    link.target = '_blank';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    
+                    this.$message && this.$message.success && this.$message.success('开始下载：' + attachment.name);
+                },
+
+                /**
+                 * 预览PDF文件
+                 * @param {Object} attachment - 附件对象
+                 */
+                previewPDF(attachment) {
+                    if (!attachment || !attachment.url) {
+                        this.$message && this.$message.error && this.$message.error('附件信息不完整');
+                        return;
+                    }
+                    
+                    // 显示预览对话框
+                    this.pdfPreviewTitle = attachment.name || 'PDF预览';
+                    this.pdfPreviewVisible = true;
+                },
+                
+                /**
+                 * 关闭PDF预览
+                 */
+                closePDFPreview() {
+                    this.pdfPreviewVisible = false;
+                    this.pdfPreviewTitle = '';
+                },
+
+                /**
+                 * 根据文件类型返回对应图标
+                 * @param {string} fileType - 文件类型
+                 * @returns {string} 图标类名
+                 */
+                getFileIcon(fileType) {
+                    const iconMap = {
+                        'pdf': 'el-icon-document',
+                        'doc': 'el-icon-document-copy',
+                        'docx': 'el-icon-document-copy',
+                        'xlsx': 'el-icon-tickets',
+                        'xls': 'el-icon-tickets',
+                        'ppt': 'el-icon-picture-outline',
+                        'pptx': 'el-icon-picture-outline',
+                        'zip': 'el-icon-folder-opened',
+                        'rar': 'el-icon-folder-opened'
+                    };
+                    return iconMap[fileType] || 'el-icon-document';
+                },
+
+                /**
+                 * 处理附件点击事件
+                 * @param {Object} attachment - 附件对象
+                 */
+                handleAttachmentClick(attachment) {
+                    if (!attachment || !attachment.type) {
+                        this.downloadAttachment(attachment);
+                        return;
+                    }
+                    
+                    // 如果是PDF文件，显示预览
+                    if (attachment.type === 'pdf') {
+                        this.previewPDF(attachment);
+                    } else {
+                        // 其他文件类型直接下载
+                        this.downloadAttachment(attachment);
+                    }
+                },
+
+                /**
+                 * 获取匹配开始时间
+                 * @param {Object} position - 岗位对象
+                 * @returns {string} 匹配开始时间
+                 */
+                getMatchCompleteTime(position) {
+                    if (!position || !position.matchedCandidates || position.matchedCandidates.length === 0) {
+                        return '未知';
+                    }
+                    
+                    // 如果有匹配开始时间字段，使用它
+                    if (position.matchCompleteTime) {
+                        return position.matchCompleteTime;
+                    }
+                    
+                    // 否则使用最后一个审批步骤的时间
+                    if (position.approvalFlow && position.approvalFlow.steps) {
+                        const lastStep = position.approvalFlow.steps[position.approvalFlow.steps.length - 1];
+                        if (lastStep && lastStep.approvalTime) {
+                            return lastStep.approvalTime;
+                        }
+                    }
+                    
+                    // 默认返回当前时间
+                    return new Date().toLocaleString('zh-CN');
+                },
+                
+                /**
+                 * 打开反馈对话框
+                 * @param {Object} candidate - 候选人对象
+                 * @param {number} index - 候选人索引
+                 */
+                openFeedbackDialog(candidate, index) {
+                    this.currentFeedbackCandidate = candidate;
+                    this.currentFeedbackIndex = index;
+                    
+                    // 判断应该显示哪个阶段的反馈
+                    // 如果还没有第一阶段反馈，显示第一阶段
+                    if (!candidate.firstStageFeedback) {
+                        this.feedbackForm = {
+                            stage: 'first',
+                            firstStage: {
+                                result: '',
+                                description: '',
+                                contactPerson: '',
+                                contactPhone: ''
+                            },
+                            secondStage: {
+                                result: '',
+                                description: ''
+                            }
+                        };
+                    } else if (candidate.firstStageFeedback.result === 'interview-arranged' && !candidate.secondStageFeedback) {
+                        // 如果第一阶段选择了安排面试，且还没有第二阶段反馈，显示第二阶段
+                        this.feedbackForm = {
+                            stage: 'second',
+                            firstStage: {
+                                result: candidate.firstStageFeedback.result,
+                                description: candidate.firstStageFeedback.description,
+                                contactPerson: candidate.firstStageFeedback.contactPerson || '',
+                                contactPhone: candidate.firstStageFeedback.contactPhone || ''
+                            },
+                            secondStage: {
+                                result: '',
+                                description: ''
+                            }
+                        };
+                    } else {
+                        // 已完成反馈，不应该打开对话框
+                        return;
+                    }
+                    
+                    this.feedbackDialogVisible = true;
+                },
+                
+                /**
+                 * 关闭反馈对话框
+                 */
+                closeFeedbackDialog() {
+                    this.feedbackDialogVisible = false;
+                    this.currentFeedbackCandidate = null;
+                    this.currentFeedbackIndex = -1;
+                    this.feedbackForm = {
+                        stage: 'first',
+                        firstStage: {
+                            result: '',
+                            description: '',
+                            contactPerson: '',
+                            contactPhone: ''
+                        },
+                        secondStage: {
+                            result: '',
+                            description: ''
+                        }
+                    };
+                },
+                
+                /**
+                 * 提交反馈
+                 */
+                submitFeedback() {
+                    if (!this.canSubmitFeedback) {
+                        this.$message && this.$message.warning && this.$message.warning('请完善反馈信息');
+                        return;
+                    }
+                    
+                    if (!this.selectedPosition || !this.selectedPosition.matchedCandidates) {
+                        this.$message && this.$message.error && this.$message.error('数据异常，请刷新页面重试');
+                        return;
+                    }
+                    
+                    // 更新候选人反馈信息
+                    const candidate = this.selectedPosition.matchedCandidates[this.currentFeedbackIndex];
+                    if (!candidate) {
+                        return;
+                    }
+                    
+                    const currentTime = new Date().toLocaleString('zh-CN');
+                    
+                    if (this.feedbackForm.stage === 'first') {
+                        // 提交第一阶段反馈
+                        const firstStageData = {
+                            result: this.feedbackForm.firstStage.result,
+                            description: this.feedbackForm.firstStage.description,
+                            time: currentTime
+                        };
+                        // 如果选择安排面试，保存联系人和联系方式
+                        if (this.feedbackForm.firstStage.result === 'interview-arranged') {
+                            firstStageData.contactPerson = this.feedbackForm.firstStage.contactPerson;
+                            firstStageData.contactPhone = this.feedbackForm.firstStage.contactPhone;
+                        }
+                        this.$set(candidate, 'firstStageFeedback', firstStageData);
+                        
+                        // 显示成功消息
+                        const resultText = this.feedbackForm.firstStage.result === 'not-suitable' ? '不合适' : '安排面试';
+                        this.$message && this.$message.success && this.$message.success(`已提交第一阶段反馈：${resultText}`);
+                        
+                        // 如果选择不合适，反馈完成；如果选择安排面试，下次可以提交第二阶段反馈
+                        if (this.feedbackForm.firstStage.result === 'not-suitable') {
+                            this.closeFeedbackDialog();
+                        } else {
+                            // 选择安排面试后，自动关闭对话框，下次打开时会显示第二阶段
+                            this.closeFeedbackDialog();
+                        }
+                    } else if (this.feedbackForm.stage === 'second') {
+                        // 提交第二阶段反馈
+                        this.$set(candidate, 'secondStageFeedback', {
+                            result: this.feedbackForm.secondStage.result,
+                            description: this.feedbackForm.secondStage.description || '',
+                            time: currentTime
+                        });
+                        
+                        // 显示成功消息
+                        const resultText = this.feedbackForm.secondStage.result === 'hired' ? '录用' : '未录用';
+                        this.$message && this.$message.success && this.$message.success(`已提交第二阶段反馈：${resultText}`);
+                        
+                        // 关闭对话框
+                        this.closeFeedbackDialog();
+                    }
+                    
+                    // 强制更新视图
+                    this.$forceUpdate();
+                },
+                
+                /**
+                 * 判断候选人反馈是否已完成
+                 * @returns {boolean} 是否已完成
+                 */
+                isCandidateSelectionCompleted() {
+                    if (!this.selectedPosition || !this.selectedPosition.matchedCandidates) return true;
+                    
+                    // 检查是否所有候选人都已反馈
+                    const allFeedbackCompleted = this.selectedPosition.matchedCandidates.every(candidate => 
+                        this.isCandidateFeedbackCompleted(candidate)
+                    );
+                    
+                    return allFeedbackCompleted;
+                },
+                
+                /**
+                 * 判断单个候选人的反馈是否已完成
+                 * @param {Object} candidate - 候选人对象
+                 * @returns {boolean} 是否已完成反馈
+                 */
+                isCandidateFeedbackCompleted(candidate) {
+                    if (!candidate) return false;
+                    const firstStage = candidate.firstStageFeedback;
+                    const secondStage = candidate.secondStageFeedback;
+                    
+                    // 如果第一阶段选择不合适，则已完成
+                    if (firstStage && firstStage.result === 'not-suitable') {
+                        return true;
+                    }
+                    // 如果有第二阶段反馈，则已完成
+                    if (secondStage) {
+                        return true;
+                    }
+                    return false;
+                },
+                
+                /**
+                 * 获取反馈按钮的文本
+                 * @param {Object} candidate - 候选人对象
+                 * @returns {string} 按钮文本
+                 */
+                getFeedbackButtonText(candidate) {
+                    if (!candidate) return '反馈';
+                    const firstStage = candidate.firstStageFeedback;
+                    const secondStage = candidate.secondStageFeedback;
+                    
+                    // 如果还没有第一阶段反馈，显示"初步反馈"
+                    if (!firstStage) {
+                        return '初步反馈';
+                    }
+                    // 如果第一阶段选择了安排面试，且还没有第二阶段反馈，显示"结果反馈"
+                    if (firstStage.result === 'interview-arranged' && !secondStage) {
+                        return '结果反馈';
+                    }
+                    return '反馈';
+                },
+                
+                /**
+                 * 获取留言列表（从第三方平台抓取，这里使用模拟数据）
+                 * @param {Object} position - 岗位对象
+                 * @returns {Array} 留言列表
+                 */
+                getMessages(position) {
+                    if (!position) return [];
+                    
+                    // 如果position中已有messages字段，直接返回
+                    if (position.messages && Array.isArray(position.messages)) {
+                        // 确保每条留言都有replyInput字段（用于输入框）
+                        return position.messages.map(msg => {
+                            if (!msg.hasOwnProperty('replyInput')) {
+                                this.$set(msg, 'replyInput', '');
+                            }
+                            return msg;
+                        });
+                    }
+                    
+                    // 模拟数据：从第三方平台抓取的留言
+                    // 实际使用时，这些数据应该从API获取
+                    const mockMessages = [
+                        {
+                            content: '你好，需要人吗',
+                            company: '某某科技有限公司',
+                            time: '2025-10-29 15:00',
+                            reply: null,
+                            replyInput: ''
+                        }
+                    ];
+                    
+                    // 初始化messages字段
+                    if (!position.messages) {
+                        this.$set(position, 'messages', mockMessages);
+                    }
+                    
+                    return position.messages;
+                },
+                
+                /**
+                 * 检查是否有未回复的留言
+                 * @param {Object} position - 岗位对象
+                 * @returns {boolean} 是否有未回复的留言
+                 */
+                hasUnrepliedMessages(position) {
+                    if (!position) return false;
+                    const messages = this.getMessages(position);
+                    if (!messages || messages.length === 0) return false;
+                    
+                    // 检查是否有任何一条留言没有回复
+                    return messages.some(msg => !msg.reply || !msg.reply.content);
+                },
+                
+                /**
+                 * 提交回复
+                 * @param {Object} position - 岗位对象
+                 * @param {number} messageIndex - 留言索引
+                 */
+                submitReply(position, messageIndex) {
+                    if (!position || !position.messages || !position.messages[messageIndex]) {
+                        return;
+                    }
+                    
+                    const message = position.messages[messageIndex];
+                    const replyContent = message.replyInput && message.replyInput.trim();
+                    
+                    if (!replyContent) {
+                        this.$message.warning('请输入回复内容');
+                        return;
+                    }
+                    
+                    // 获取当前时间
+                    const now = new Date();
+                    const timeStr = now.getFullYear() + '-' + 
+                                  String(now.getMonth() + 1).padStart(2, '0') + '-' + 
+                                  String(now.getDate()).padStart(2, '0') + ' ' + 
+                                  String(now.getHours()).padStart(2, '0') + ':' + 
+                                  String(now.getMinutes()).padStart(2, '0');
+                    
+                    // 更新或创建回复
+                    if (!message.reply) {
+                        // 新增回复
+                        this.$set(message, 'reply', {
+                            content: replyContent,
+                            time: timeStr
+                        });
+                        // 清空输入框
+                        message.replyInput = '';
+                        // 显示成功消息
+                        this.$message.success('回复成功');
+                        // 强制更新视图
+                        this.$forceUpdate();
+                    } else {
+                        // 更新现有回复前显示确认弹窗
+                        this.$confirm('本次回复内容将替换之前内容', '提示', {
+                            confirmButtonText: '确定',
+                            cancelButtonText: '取消',
+                            type: 'warning'
+                        }).then(() => {
+                            // 用户确认后更新回复
+                            message.reply.content = replyContent;
+                            message.reply.time = timeStr;
+                            // 清空输入框
+                            message.replyInput = '';
+                            // 显示成功消息
+                            this.$message.success('回复已更新');
+                            // 强制更新视图
+                            this.$forceUpdate();
+                        }).catch(() => {
+                            // 用户取消，不做任何操作
+                        });
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+

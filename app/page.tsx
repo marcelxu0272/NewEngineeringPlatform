@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LayoutDashboard, Users, Wrench, Megaphone, BarChart3, FolderKanban, ChevronRight, Network } from 'lucide-react';
+import { LayoutDashboard, Users, Wrench, Megaphone, BarChart3, FolderKanban, ChevronRight, Network, ClipboardList } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const routes = [
@@ -45,6 +45,12 @@ const routes = [
     title: '组织架构图',
     description: '四列布局组织架构图',
     icon: Network,
+  },
+  {
+    href: '/project-requirements',
+    title: '关键项目岗位需求',
+    description: '报表体系 · 资源与交付保障、关键岗位人力需求',
+    icon: ClipboardList,
   },
 ];
 
