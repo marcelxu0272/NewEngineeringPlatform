@@ -143,7 +143,7 @@ window.MockDataGenerator = {
                                     }
                                 ]
                             },
-                            internalRecruitment: { status: '进行中', feedbackResult: '', feedbackTime: '' },
+                            internalRecruitment: { status: '进行中', feedbackResult: '', feedbackTime: '', resolvedCount: 0 },
                             closeReason: '',
                             closeOperator: '',
                             closeTime: ''
@@ -204,7 +204,7 @@ window.MockDataGenerator = {
                         {
                             requirementId: 'D25999-SAS999-0004',
                             staffingMethods: ['internal', 'partner'],
-                            internalRecruitment: { status: '已完成', feedbackResult: '已通过内部渠道推荐 2 名候选人，其中 1 人进入面试。', feedbackTime: '2025-10-16 10:00' },
+                            internalRecruitment: { status: '已完成', feedbackResult: '已通过内部渠道推荐 2 名候选人，其中 1 人进入面试。', feedbackTime: '2025-10-16 10:00', resolvedCount: 1 },
                             discipline: [['施工', '管理']],
                             requirementType: 'epc',
                             jobTitle: '施工管理工程师',
@@ -315,7 +315,7 @@ window.MockDataGenerator = {
                         {
                             requirementId: 'D25999-SAS999-0005',
                             staffingMethods: ['internal', 'partner'],
-                            internalRecruitment: { status: '已完成', feedbackResult: '内部暂无合适人选，已转由生态平台推送。', feedbackTime: '2025-10-14 09:30' },
+                            internalRecruitment: { status: '已完成', feedbackResult: '内部暂无合适人选，已转由生态平台推送。', feedbackTime: '2025-10-14 09:30', resolvedCount: 0 },
                             discipline: [['设计', '管道设计']],
                             requirementType: 'epc',
                             jobTitle: '管道设计工程师',

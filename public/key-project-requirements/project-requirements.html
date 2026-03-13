@@ -594,6 +594,14 @@
                                                     <span>内部招聘反馈</span>
                                                 </h4>
                                                 <template v-if="!isInternalRecruitmentCompleted(selectedPosition)">
+                                                    <el-form-item label="已解决人数">
+                                                        <el-input-number
+                                                            v-model.number="internalResolvedCount"
+                                                            :min="0"
+                                                            :step="1"
+                                                            size="mini">
+                                                        </el-input-number>
+                                                    </el-form-item>
                                                     <el-form-item label="反馈结果">
                                                         <el-input
                                                             type="textarea"
@@ -605,13 +613,23 @@
                                                         </el-input>
                                                     </el-form-item>
                                                     <div class="flex justify-end">
-                                                        <el-button type="primary" @click="submitInternalRecruitmentFeedback" :disabled="!internalFeedbackResult || !internalFeedbackResult.trim()">
+                                                        <el-button
+                                                            type="primary"
+                                                            @click="submitInternalRecruitmentFeedback"
+                                                            :disabled="!internalFeedbackResult || !internalFeedbackResult.trim() || internalResolvedCount < 0">
                                                             提交反馈
                                                         </el-button>
                                                     </div>
                                                 </template>
                                                 <template v-else>
                                                     <p class="text-sm text-gray-600 mb-1">完成时间：{{ selectedPosition.internalRecruitment.feedbackTime || '-' }}</p>
+                                                    <p class="text-sm text-gray-600 mb-1">
+                                                        已解决人数：
+                                                        <span class="font-medium">
+                                                            {{ (selectedPosition.internalRecruitment.resolvedCount != null ? selectedPosition.internalRecruitment.resolvedCount : 0) }}
+                                                        </span>
+                                                        <span class="text-gray-500"> / {{ selectedPosition.quantity || '-' }}</span>
+                                                    </p>
                                                     <div class="text-sm text-gray-700 bg-white p-3 rounded border border-gray-200">
                                                         <span class="font-medium text-gray-600">反馈结果：</span>
                                                         <span>{{ selectedPosition.internalRecruitment.feedbackResult || '-' }}</span>
@@ -984,6 +1002,7 @@
                  hideClosedPositions: false, // 隐藏已关闭的需求
                  // 内部招聘反馈（当前编辑的反馈文案，提交后写入 position.internalRecruitment）
                  internalFeedbackResult: '',
+                 internalResolvedCount: 0,
                  // 管理归属对应部门号（与创建表单一致，用于判断是否派遣到指定项目）
                  departmentCodeMap: {
                      'PMC 板块': 'SAS410-0000', '银川中心': 'SAS411-0000', '总部人力': 'SAS412-0000',
@@ -1425,11 +1444,18 @@
                         this.$message && this.$message.warning && this.$message.warning('请填写反馈结果');
                         return;
                     }
+                    let resolved = Number(this.internalResolvedCount);
+                    if (isNaN(resolved)) resolved = 0;
+                    if (resolved < 0) {
+                        this.$message && this.$message.warning && this.$message.warning('已解决人数不能小于 0');
+                        return;
+                    }
                     const now = new Date().toLocaleString('zh-CN');
                     if (!pos.internalRecruitment) this.$set(pos, 'internalRecruitment', {});
                     this.$set(pos.internalRecruitment, 'status', '已完成');
                     this.$set(pos.internalRecruitment, 'feedbackResult', text);
                     this.$set(pos.internalRecruitment, 'feedbackTime', now);
+                    this.$set(pos.internalRecruitment, 'resolvedCount', resolved);
                     const onlyInternal = this.hasInternalStaffing(pos) && !this.hasPartnerStaffing(pos);
                     if (onlyInternal) {
                         this.$set(pos, 'status', '已关闭');
@@ -1438,6 +1464,7 @@
                         this.$set(pos, 'closeTime', now);
                     }
                     this.internalFeedbackResult = '';
+                    this.internalResolvedCount = 0;
                     this.$forceUpdate && this.$forceUpdate();
                     this.$message && this.$message.success && this.$message.success(onlyInternal ? '反馈已提交，该岗位流程已关闭' : '反馈已提交');
                 },

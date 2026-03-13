@@ -837,9 +837,16 @@ export default function OrgDashboardPage() {
               <Card className="border-0 shadow-md h-full">
                 <CardContent className="p-4">
                   <div className="flex items-center justify-between mb-1">
-                    <h3 className="font-medium text-sm text-gray-700">
-                      市场机会（万元）
-                    </h3>
+                    <div className="flex items-center gap-1.5">
+                      <h3 className="font-medium text-sm text-gray-700">
+                        市场机会（万元）
+                      </h3>
+                      <AntTooltip title="所有 CRB1、CRB2 和未确认完成的 CRB3 的合同金额均为市场机会，时间范围与工程平台「市场看板 - 机会清单」的默认范围一致。">
+                        <span className="inline-flex items-center justify-center w-4 h-4 rounded-full bg-[#007069]/10 text-xs text-[#007069] cursor-default">
+                          ?
+                        </span>
+                      </AntTooltip>
+                    </div>
                     <AntTooltip title="查看详情">
                       <button
                         type="button"
