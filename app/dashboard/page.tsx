@@ -192,12 +192,15 @@ export default function Component() {
           
           {/* 菜单按钮 */}
           <div className="flex-1 flex flex-col mt-8 space-y-8">
-            <button className="w-6 h-6 text-white hover:bg-gray-700 rounded-lg flex items-center justify-center">
+            <span className="w-6 h-6 text-white bg-gray-700 rounded-lg flex items-center justify-center" title="项目中台">
               <DashboardOutlined className="w-6 h-6" />
-            </button>
-            <button className="w-6 h-6 text-gray-400 hover:bg-gray-700 rounded-lg flex items-center justify-center">
+            </span>
+            <Link href="/dashboard/org/xinyewu" className="w-6 h-6 text-gray-400 hover:bg-gray-700 rounded-lg flex items-center justify-center" title="事业群看板">
               <BarChartOutlined className="w-6 h-6" />
-            </button>
+            </Link>
+            <Link href="/dashboard/org/xx" className="w-6 h-6 text-gray-400 hover:bg-gray-700 rounded-lg flex items-center justify-center" title="xx项目群">
+              <BarChartOutlined className="w-6 h-6" />
+            </Link>
             <button className="w-6 h-6 text-gray-400 hover:bg-gray-700 rounded-lg flex items-center justify-center">
               <SettingOutlined className="w-6 h-6" />
             </button>

@@ -17,6 +17,12 @@ const routes = [
     icon: BarChart3,
   },
   {
+    href: '/dashboard/org/xx',
+    title: 'xx项目群',
+    description: 'A/B/C 板块看板与项目动态',
+    icon: BarChart3,
+  },
+  {
     href: '/project-management',
     title: '项目管理',
     description: '项目管理相关功能',

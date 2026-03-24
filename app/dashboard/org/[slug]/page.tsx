@@ -39,7 +39,7 @@ import { Select, Switch, Tooltip as AntTooltip } from "antd";
 import { useState, useEffect } from "react";
 import { ConfigProvider } from "antd";
 
-const ORG_SLUGS = ["xinyewu", "nm-ls", "haiwai", "dongbu", "xibu"] as const;
+const ORG_SLUGS = ["xinyewu", "nm-ls", "haiwai", "dongbu", "xibu", "xx"] as const;
 type OrgSlug = (typeof ORG_SLUGS)[number];
 
 const SLUG_TO_NAME: Record<OrgSlug, string> = {
@@ -48,6 +48,7 @@ const SLUG_TO_NAME: Record<OrgSlug, string> = {
   haiwai: "海外项目群",
   dongbu: "东部项目群",
   xibu: "西部项目群",
+  xx: "xx项目群",
 };
 
 const SLUG_TO_SECTORS: Record<OrgSlug, string[]> = {
@@ -56,6 +57,7 @@ const SLUG_TO_SECTORS: Record<OrgSlug, string[]> = {
   haiwai: ["COII板块", "模块化板块", "供应链板块"],
   dongbu: ["金山中心", "沈阳中心", "惠湛中心"],
   xibu: ["银川中心"],
+  xx: ["A板块", "B板块", "C板块"],
 };
 
 // 同一青绿色系，由深到浅提高区分度
@@ -182,6 +184,74 @@ const cardData = [
 
 const marketDataFunnelValues = [120000, 85000, 62000]; // 预计合同额、预计投标额、权重合同额（万元）
 const marketDataFunnelNames = ["预计合同额", "预计投标额", "权重合同额"];
+
+// xx项目群：虚拟 A/B/C 板块，整数占位数据
+const DEMO_CARD_DATA = [
+  {
+    title: "年度新签合同额（万元）",
+    value: "80,000",
+    monthLabel: "11月新增",
+    monthValue: "6,000",
+    percentage: "10%",
+    donutValue: 48,
+    donutBySector: [20, 18, 17],
+    subTargets: [
+      { type: "设计及咨询", current: 25000, target: 40000, bySector: [8000, 9000, 8000] },
+      { type: "EPC", current: 45000, target: 80000, bySector: [15000, 15000, 15000] },
+      { type: "PMC", current: 10000, target: 15000, bySector: [3500, 3500, 3000] },
+    ],
+  },
+  {
+    title: "年度完成合同额（万元）",
+    value: "40,000",
+    monthLabel: "上月新增",
+    monthValue: "4,000",
+    percentage: "8%",
+    donutValue: 38,
+    donutBySector: [14, 13, 12],
+    subTargets: [
+      { type: "设计及咨询", current: 13000, target: 35000, bySector: [4500, 4500, 4000] },
+      { type: "EPC", current: 22000, target: 65000, bySector: [7500, 7500, 7000] },
+      { type: "PMC", current: 5000, target: 12000, bySector: [1700, 1700, 1600] },
+    ],
+  },
+  {
+    title: "年度完成开票额（万元）",
+    value: "42,000",
+    monthLabel: "上月新增",
+    monthValue: "4,200",
+    percentage: "8%",
+    donutValue: 42,
+    donutBySector: [15, 14, 13],
+    subTargets: [
+      { type: "设计及咨询", current: 15000, target: 38000, bySector: [5000, 5000, 5000] },
+      { type: "EPC", current: 23000, target: 70000, bySector: [7800, 7800, 7400] },
+      { type: "PMC", current: 4000, target: 13000, bySector: [1400, 1400, 1200] },
+    ],
+  },
+  {
+    title: "年度完成回款额（万元）",
+    value: "44,000",
+    monthLabel: "上月新增",
+    monthValue: "4,400",
+    percentage: "9%",
+    donutValue: 45,
+    donutBySector: [16, 15, 14],
+    subTargets: [
+      { type: "设计及咨询", current: 16500, target: 36000, bySector: [5500, 5500, 5500] },
+      { type: "EPC", current: 23500, target: 68000, bySector: [8000, 8000, 7500] },
+      { type: "PMC", current: 4000, target: 14000, bySector: [1400, 1400, 1200] },
+    ],
+  },
+];
+
+const DEMO_MARKET_FUNNEL_VALUES = [100000, 70000, 50000];
+
+const DEMO_PROJECT_ACTIVITY_DATA = [
+  { id: "D25001", name: "某EPC项目", sector: "A板块", time: "2025-03-01", status: "新增", subStatus: undefined },
+  { id: "D25002", name: "某PMC项目", sector: "B板块", time: "2025-02-28", status: "项目信息变更", subStatus: "CRB变更" },
+  { id: "D25003", name: "某咨询项目", sector: "C板块", time: "2025-02-25", status: "保障活动更新", subStatus: undefined },
+];
 // 漏斗图专用浅色系，与板块主题色区分
 const FUNNEL_COLORS = ["#e5f9f7", "#b9e6e0", "#82cdbb"];
 
@@ -244,6 +314,11 @@ const workloadData: Record<
     { annual: 87.5, current: 90.0, f1: 19, f2: 9, f3: 9 },
   ],
   xibu: [{ annual: 85.0, current: 88.0, f1: 9, f2: 9, f3: 8 }],
+  xx: [
+    { annual: 88, current: 92, f1: 19, f2: 8, f3: 8 },
+    { annual: 90, current: 94, f1: 19, f2: 9, f3: 8 },
+    { annual: 86, current: 89, f1: 19, f2: 8, f3: 8 },
+  ],
 };
 
 // WIP及应收账款转化趋势（万元）
@@ -337,6 +412,12 @@ export default function OrgDashboardPage() {
   const orgName = SLUG_TO_NAME[orgSlug];
   const sectors = SLUG_TO_SECTORS[orgSlug];
 
+  const effectiveCardData = orgSlug === "xx" ? DEMO_CARD_DATA : cardData;
+  const effectiveMarketFunnelValues =
+    orgSlug === "xx" ? DEMO_MARKET_FUNNEL_VALUES : marketDataFunnelValues;
+  const effectiveProjectActivityData =
+    orgSlug === "xx" ? DEMO_PROJECT_ACTIVITY_DATA : projectActivityData;
+
   // 路由切换事业群时，同步选择器为当前事业群
   useEffect(() => {
     setSelectedDept(slug!);
@@ -399,20 +480,11 @@ export default function OrgDashboardPage() {
   );
 
   const funnelOptions = useMemo<Highcharts.Options>(() => {
+    const values = effectiveMarketFunnelValues;
     const rate1 =
-      marketDataFunnelValues[1] != null && marketDataFunnelValues[0]
-        ? (
-            (marketDataFunnelValues[1] / marketDataFunnelValues[0]) *
-            100
-          ).toFixed(1)
-        : "";
+      values[1] != null && values[0] ? ((values[1] / values[0]) * 100).toFixed(1) : "";
     const rate2 =
-      marketDataFunnelValues[2] != null && marketDataFunnelValues[1]
-        ? (
-            (marketDataFunnelValues[2] / marketDataFunnelValues[1]) *
-            100
-          ).toFixed(1)
-        : "";
+      values[2] != null && values[1] ? ((values[2] / values[1]) * 100).toFixed(1) : "";
     return {
       chart: {
         type: "funnel",
@@ -450,7 +522,7 @@ export default function OrgDashboardPage() {
           name: "金额（万元）",
           data: marketDataFunnelNames.map((name, i) => ({
             name,
-            y: marketDataFunnelValues[i],
+            y: values[i],
             color: FUNNEL_COLORS[i],
             ...(i < 2 ? { id: `funnel-${i}` } : {}),
           })),
@@ -501,7 +573,7 @@ export default function OrgDashboardPage() {
           : []),
       ] as Highcharts.AnnotationsOptions[],
     };
-  }, []);
+  }, [effectiveMarketFunnelValues]);
 
   return (
     <ConfigProvider
@@ -530,12 +602,24 @@ export default function OrgDashboardPage() {
             >
               <DashboardOutlined className="w-6 h-6" />
             </Link>
-            <span
-              className="w-6 h-6 text-white bg-gray-700 rounded-lg flex items-center justify-center"
+            <Link
+              href="/dashboard/org/xinyewu"
+              className={`w-6 h-6 rounded-lg flex items-center justify-center ${
+                orgSlug !== "xx" ? "text-white bg-gray-700" : "text-gray-400 hover:bg-gray-700"
+              }`}
               title="事业群看板"
             >
               <BarChartOutlined className="w-6 h-6" />
-            </span>
+            </Link>
+            <Link
+              href="/dashboard/org/xx"
+              className={`w-6 h-6 rounded-lg flex items-center justify-center ${
+                orgSlug === "xx" ? "text-white bg-gray-700" : "text-gray-400 hover:bg-gray-700"
+              }`}
+              title="xx项目群"
+            >
+              <BarChartOutlined className="w-6 h-6" />
+            </Link>
             <span className="w-6 h-6 text-gray-400 hover:bg-gray-700 rounded-lg flex items-center justify-center">
               <SettingOutlined className="w-6 h-6" />
             </span>
@@ -614,7 +698,7 @@ export default function OrgDashboardPage() {
 
             <div className="px-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {cardData.map((card, index) => (
+                {effectiveCardData.map((card, index) => (
                   <Card key={index} className="border-0 shadow-md">
                     <CardContent className="p-4">
                       <AntTooltip>
@@ -744,11 +828,11 @@ export default function OrgDashboardPage() {
                     <div className="bg-[#007069]/10 p-3 rounded-lg">
                       <div className="flex items-center justify-between">
                         <p className="text-xl font-bold text-[#007069]">
-                          22,947.25
+                          10,000.00
                         </p>
                         <div className="flex items-center text-red-500 text-sm whitespace-nowrap">
                           <ArrowUpOutlined className="w-4 h-4 mr-1" />
-                          <span>1,344</span>
+                          <span>1,000</span>
                         </div>
                       </div>
                       <div className="flex items-center gap-2 mt-1">
@@ -763,11 +847,11 @@ export default function OrgDashboardPage() {
                     <div className="bg-[#007069]/10 p-3 rounded-lg">
                       <div className="flex items-center justify-between">
                         <p className="text-xl font-bold text-[#007069]">
-                          12,434.70
+                          8,000.00
                         </p>
                         <div className="flex items-center text-red-500 text-sm whitespace-nowrap">
                           <ArrowUpOutlined className="w-4 h-4 mr-1" />
-                          <span>2,043</span>
+                          <span>2,000</span>
                         </div>
                       </div>
                       <div className="flex items-center gap-2 mt-1">
@@ -791,7 +875,7 @@ export default function OrgDashboardPage() {
                   <div className="space-y-2">
                     <div className="bg-[#007069]/10 p-3 rounded-lg">
                       <p className="text-xl font-bold text-[#007069]">
-                        33,199.69
+                        10,000.00
                       </p>
                       <div className="flex items-center gap-2 mt-1">
                         <p className="text-sm text-[#007069]">合计成本</p>
@@ -808,15 +892,15 @@ export default function OrgDashboardPage() {
                     <div className="flex gap-2 w-full">
                       <div className="flex-1 bg-[#007069]/5 p-2 rounded-lg">
                         <p className="text-lg font-bold text-[#007069]">
-                          27,167.37
+                          8,000.00
                         </p>
                         <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">
                           项目成本
                         </p>
                       </div>
-                      <div className="flex-1 bg-[#007069]/5 p-2 rounded-lg">
+                      <div className="flex-1 bg-[#007069]/5 p-2 rounded-lg">  
                         <p className="text-lg font-bold text-[#007069]">
-                          6,032.32
+                          2000.00
                         </p>
                         <div className="flex items-center gap-2 mt-1">
                           <p className="text-sm text-[#007069] whitespace-nowrap">
@@ -957,7 +1041,7 @@ export default function OrgDashboardPage() {
                     最新核心项目动态
                   </h3>
                   <div className="space-y-2">
-                    {projectActivityData.map((row) => {
+                    {effectiveProjectActivityData.map((row) => {
                       const statusColor: Record<
                         string,
                         { bg: string; text: string; dot: string }
