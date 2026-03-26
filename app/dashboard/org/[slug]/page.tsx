@@ -2,32 +2,11 @@
 
 import { useParams, notFound } from "next/navigation";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { Card, CardContent } from "@/components/ui/card";
 import { ResponsiveContainer, PieChart, Pie, Cell, Tooltip } from "recharts";
-import Highcharts from "highcharts";
-import HighchartsReact from "highcharts-react-official";
-import * as HighchartsFunnelModule from "highcharts/modules/funnel";
-import * as HighchartsAnnotationsModule from "highcharts/modules/annotations";
-import { useMemo } from "react";
-
-if (typeof Highcharts === "object") {
-  const funnelFn =
-    (
-      HighchartsFunnelModule as unknown as {
-        default?: (h: typeof Highcharts) => void;
-      }
-    ).default ??
-    (HighchartsFunnelModule as unknown as (h: typeof Highcharts) => void);
-  if (typeof funnelFn === "function") funnelFn(Highcharts);
-  const annFn =
-    (
-      HighchartsAnnotationsModule as unknown as {
-        default?: (h: typeof Highcharts) => void;
-      }
-    ).default ??
-    (HighchartsAnnotationsModule as unknown as (h: typeof Highcharts) => void);
-  if (typeof annFn === "function") annFn(Highcharts);
-}
+import type { Options as HighchartsOptions } from "highcharts";
+import { useMemo, useState, useEffect } from "react";
 import {
   ArrowUpOutlined,
   DashboardOutlined,
@@ -35,30 +14,38 @@ import {
   SettingOutlined,
   RightOutlined,
 } from "@ant-design/icons";
-import { Select, Switch, Tooltip as AntTooltip } from "antd";
-import { useState, useEffect } from "react";
-import { ConfigProvider } from "antd";
+import { Select, Switch, Tooltip as AntTooltip, ConfigProvider } from "antd";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  ORG_SLUGS,
+  type OrgSlug,
+  SLUG_TO_NAME,
+  SLUG_TO_SECTORS,
+} from "@/lib/data/org-dashboard-meta";
+import {
+  getCoreActivityFeedPreview,
+  STATUS_TOOLTIP,
+} from "@/lib/data/org-core-project-activity";
 
-const ORG_SLUGS = ["xinyewu", "nm-ls", "haiwai", "dongbu", "xibu", "xx"] as const;
-type OrgSlug = (typeof ORG_SLUGS)[number];
+const MarketFunnelChart = dynamic(
+  () =>
+    import("@/components/dashboard/org-highcharts-client").then(
+      (m) => m.MarketFunnelChart,
+    ),
+  { ssr: false, loading: () => <div className="h-[170px] w-full" /> },
+);
 
-const SLUG_TO_NAME: Record<OrgSlug, string> = {
-  xinyewu: "新业务项目群",
-  "nm-ls": "NM&LS 项目群",
-  haiwai: "海外项目群",
-  dongbu: "东部项目群",
-  xibu: "西部项目群",
-  xx: "xx项目群",
-};
-
-const SLUG_TO_SECTORS: Record<OrgSlug, string[]> = {
-  xinyewu: ["PMC板块", "咨询板块", "数字技术板块"],
-  "nm-ls": ["新材料板块", "生命科学板块"],
-  haiwai: ["COII板块", "模块化板块", "供应链板块"],
-  dongbu: ["金山中心", "沈阳中心", "惠湛中心"],
-  xibu: ["银川中心"],
-  xx: ["A板块", "B板块", "C板块"],
-};
+const WipReceivableBarChart = dynamic(
+  () =>
+    import("@/components/dashboard/org-highcharts-client").then(
+      (m) => m.WipReceivableBarChart,
+    ),
+  { ssr: false, loading: () => <div className="h-[220px] w-full" /> },
+);
 
 // 同一青绿色系，由深到浅提高区分度
 const SECTOR_COLORS = ["#004d47", "#0d9488", "#14b8a6", "#2dd4bf", "#5eead4"];
@@ -247,47 +234,8 @@ const DEMO_CARD_DATA = [
 
 const DEMO_MARKET_FUNNEL_VALUES = [100000, 70000, 50000];
 
-const DEMO_PROJECT_ACTIVITY_DATA = [
-  { id: "D25001", name: "某EPC项目", sector: "A板块", time: "2025-03-01", status: "新增", subStatus: undefined },
-  { id: "D25002", name: "某PMC项目", sector: "B板块", time: "2025-02-28", status: "项目信息变更", subStatus: "CRB变更" },
-  { id: "D25003", name: "某咨询项目", sector: "C板块", time: "2025-02-25", status: "保障活动更新", subStatus: undefined },
-];
 // 漏斗图专用浅色系，与板块主题色区分
 const FUNNEL_COLORS = ["#e5f9f7", "#b9e6e0", "#82cdbb"];
-
-const STATUS_TOOLTIP: Record<string, string> = {
-  新增: "该项目已被纳入核心项目跟踪，开始进行重点关注与保障。",
-  项目信息变更:
-    "项目关键信息发生变化，包括：工程平台发起的 CRB 变更，以及数据中台发起的项目经理、项目名称、客户名称、执行日期等信息变更。",
-  保障活动更新: "该核心项目的保障活动配置项状态已更新，请关注最新进展。",
-};
-
-const projectActivityData = [
-  {
-    id: "C25088",
-    name: "上海石化公司全面技术改造和提质升级项目20万吨/年碳五分离装置（异戊烯部分）",
-    sector: "金山中心",
-    time: "2025-03-01",
-    status: "新增",
-    subStatus: undefined,
-  },
-  {
-    id: "G25007",
-    name: "梨树风光制绿氢生物质耦合绿色甲醇项目业主工程师服务",
-    sector: "沈阳中心",
-    time: "2025-02-28",
-    status: "项目信息变更",
-    subStatus: "CRB变更",
-  },
-  {
-    id: "G25009",
-    name: "神华化工公司重点工程项目项目管理服务",
-    sector: "PMC板块",
-    time: "2025-02-25",
-    status: "保障活动更新",
-    subStatus: undefined,
-  },
-];
 
 // 工作负荷数据：key 与 SLUG_TO_SECTORS 的板块顺序对应，sectorA/B/C
 const workloadData: Record<
@@ -403,6 +351,7 @@ export default function OrgDashboardPage() {
   const slug = params?.slug as string | undefined;
   const [selectedDept, setSelectedDept] = useState<string>(() => slug!);
   const [showSubTargets, setShowSubTargets] = useState(false);
+  const [coreActivityModalOpen, setCoreActivityModalOpen] = useState(false);
 
   if (!slug || !ORG_SLUGS.includes(slug as OrgSlug)) {
     notFound();
@@ -415,15 +364,14 @@ export default function OrgDashboardPage() {
   const effectiveCardData = orgSlug === "xx" ? DEMO_CARD_DATA : cardData;
   const effectiveMarketFunnelValues =
     orgSlug === "xx" ? DEMO_MARKET_FUNNEL_VALUES : marketDataFunnelValues;
-  const effectiveProjectActivityData =
-    orgSlug === "xx" ? DEMO_PROJECT_ACTIVITY_DATA : projectActivityData;
+  const effectiveProjectActivityData = getCoreActivityFeedPreview(orgSlug, 3);
 
   // 路由切换事业群时，同步选择器为当前事业群
   useEffect(() => {
     setSelectedDept(slug!);
   }, [slug]);
 
-  const wipReceivableBarOptions = useMemo<Highcharts.Options>(
+  const wipReceivableBarOptions = useMemo<HighchartsOptions>(
     () => ({
       chart: {
         type: "column",
@@ -479,7 +427,7 @@ export default function OrgDashboardPage() {
     [],
   );
 
-  const funnelOptions = useMemo<Highcharts.Options>(() => {
+  const funnelOptions = useMemo<HighchartsOptions>(() => {
     const values = effectiveMarketFunnelValues;
     const rate1 =
       values[1] != null && values[0] ? ((values[1] / values[0]) * 100).toFixed(1) : "";
@@ -571,7 +519,7 @@ export default function OrgDashboardPage() {
               },
             ]
           : []),
-      ] as Highcharts.AnnotationsOptions[],
+      ] as HighchartsOptions["annotations"],
     };
   }, [effectiveMarketFunnelValues]);
 
@@ -940,10 +888,7 @@ export default function OrgDashboardPage() {
                       </button>
                     </AntTooltip>
                   </div>
-                  <HighchartsReact
-                    highcharts={Highcharts}
-                    options={funnelOptions}
-                  />
+                  <MarketFunnelChart options={funnelOptions} />
                 </CardContent>
               </Card>
             </div>
@@ -964,10 +909,7 @@ export default function OrgDashboardPage() {
                       </button>
                     </AntTooltip>
                   </div>
-                  <HighchartsReact
-                    highcharts={Highcharts}
-                    options={wipReceivableBarOptions}
-                  />
+                  <WipReceivableBarChart options={wipReceivableBarOptions} />
                 </CardContent>
               </Card>
 
@@ -1037,9 +979,21 @@ export default function OrgDashboardPage() {
               </Card>
               <Card className="border-0 shadow-md">
                 <CardContent className="p-4">
-                  <h3 className="font-medium text-sm text-gray-700 mb-3">
-                    最新核心项目动态
-                  </h3>
+                  <div className="mb-3 flex items-center justify-between gap-2">
+                    <h3 className="font-medium text-sm text-gray-700">
+                      最新核心项目动态
+                    </h3>
+                    <AntTooltip title="查看全部核心项目与动态">
+                      <button
+                        type="button"
+                        onClick={() => setCoreActivityModalOpen(true)}
+                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#007069]/10 transition-colors hover:bg-[#007069]/20"
+                        aria-label="打开核心项目动态详情"
+                      >
+                        <RightOutlined className="text-xs text-[#007069]" />
+                      </button>
+                    </AntTooltip>
+                  </div>
                   <div className="space-y-2">
                     {effectiveProjectActivityData.map((row) => {
                       const statusColor: Record<
@@ -1119,6 +1073,18 @@ export default function OrgDashboardPage() {
           </div>
         </div>
       </div>
+
+      <Dialog open={coreActivityModalOpen} onOpenChange={setCoreActivityModalOpen}>
+        <DialogContent className="flex h-[640px] w-[880px] max-h-[calc(100vh-2rem)] max-w-[calc(100vw-2rem)] flex-col gap-0 overflow-hidden border-gray-200 p-0 sm:rounded-lg">
+          <DialogTitle className="sr-only">核心项目动态</DialogTitle>
+          <iframe
+            key={orgSlug}
+            title="核心项目动态"
+            className="h-full min-h-0 w-full flex-1 border-0"
+            src={`/dashboard/core-project-activity-detail.html?slug=${encodeURIComponent(orgSlug)}`}
+          />
+        </DialogContent>
+      </Dialog>
     </ConfigProvider>
   );
 }

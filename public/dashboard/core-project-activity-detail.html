@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>核心项目动态</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              brand: "#007069",
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body class="m-0 h-screen overflow-hidden bg-[#f8faff] font-sans text-sm text-gray-800 antialiased">
+    <div class="flex h-full min-h-0 flex-col">
+      <!-- 固定标题栏 -->
+      <header class="shrink-0 border-b border-gray-200 bg-white px-4 py-3">
+        <h1 class="text-base font-semibold text-gray-800">核心项目动态</h1>
+      </header>
+
+      <!-- 固定筛选区（点击搜索后生效） -->
+      <div class="shrink-0 border-b border-gray-200 bg-white px-4 py-3">
+        <div class="flex flex-wrap items-end gap-3">
+          <label class="flex flex-col gap-1">
+            <span class="text-xs text-gray-500">板块归属</span>
+            <select
+              id="filter-sector"
+              class="h-9 min-w-[140px] rounded border border-gray-200 bg-white px-2 text-sm text-gray-800 focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand"
+            >
+              <option value="">全部</option>
+            </select>
+          </label>
+          <label class="flex min-w-[200px] flex-1 flex-col gap-1">
+            <span class="text-xs text-gray-500">项目号 / 项目名称</span>
+            <input
+              id="filter-keyword"
+              type="text"
+              placeholder="支持模糊匹配项目号或名称"
+              class="h-9 w-full rounded border border-gray-200 px-2 text-sm focus:border-brand focus:outline-none focus:ring-1 focus:ring-brand"
+            />
+          </label>
+          <button
+            type="button"
+            id="btn-search"
+            class="h-9 shrink-0 rounded bg-brand px-4 text-sm font-medium text-white hover:bg-[#005c56]"
+          >
+            搜索
+          </button>
+        </div>
+      </div>
+
+      <!-- 可滚动内容区 -->
+      <div id="scroll-area" class="min-h-0 flex-1 overflow-y-auto px-4 py-3">
+        <div id="loading" class="py-12 text-center text-gray-500">加载中...</div>
+        <div id="error" class="hidden py-12 text-center text-red-600"></div>
+        <div id="empty" class="hidden py-12 text-center text-gray-500">暂无符合条件的核心项目</div>
+        <ul id="project-list" class="hidden space-y-3"></ul>
+      </div>
+
+      <!-- 固定分页 -->
+      <footer
+        class="flex shrink-0 items-center justify-between border-t border-gray-200 bg-white px-4 py-2.5"
+      >
+        <span id="page-info" class="text-xs text-gray-500"></span>
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            id="btn-prev"
+            class="rounded border border-gray-200 px-3 py-1 text-xs text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            上一页
+          </button>
+          <button
+            type="button"
+            id="btn-next"
+            class="rounded border border-gray-200 px-3 py-1 text-xs text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            下一页
+          </button>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        var PAGE_SIZE = 10;
+        var ACTIVITY_PREVIEW = 3;
+
+        function escapeHtml(s) {
+          return String(s)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/"/g, "&quot;");
+        }
+
+        function getSlug() {
+          var q = new URLSearchParams(window.location.search);
+          return q.get("slug") || "";
+        }
+
+        function latestActivityTime(project) {
+          var acts = project.activities || [];
+          if (!acts.length) return "";
+          var t = acts[0].time;
+          for (var i = 1; i < acts.length; i++) {
+            if (acts[i].time > t) t = acts[i].time;
+          }
+          return t;
+        }
+
+        function sortActivitiesDesc(activities) {
+          return activities.slice().sort(function (a, b) {
+            return b.time.localeCompare(a.time);
+          });
+        }
+
+        function sortProjectsByLatest(projects) {
+          return projects.slice().sort(function (a, b) {
+            return latestActivityTime(b).localeCompare(latestActivityTime(a));
+          });
+        }
+
+        var state = {
+          rawProjects: [],
+          statusTooltips: {},
+          sectorApplied: "",
+          keywordApplied: "",
+          page: 1,
+          expanded: {},
+          filteredSorted: [],
+        };
+
+        function applyFilters() {
+          var sector = state.sectorApplied;
+          var kw = state.keywordApplied.trim().toLowerCase();
+          var list = state.rawProjects.filter(function (p) {
+            if (sector && p.sector !== sector) return false;
+            if (kw) {
+              var idMatch = String(p.id).toLowerCase().indexOf(kw) !== -1;
+              var nameMatch = String(p.name).toLowerCase().indexOf(kw) !== -1;
+              if (!idMatch && !nameMatch) return false;
+            }
+            return true;
+          });
+          state.filteredSorted = sortProjectsByLatest(list);
+          state.page = 1;
+        }
+
+        function statusClass(status) {
+          if (status === "新增")
+            return { bg: "bg-emerald-50", text: "text-emerald-700", dot: "bg-emerald-500" };
+          if (status === "项目信息变更")
+            return { bg: "bg-amber-50", text: "text-amber-700", dot: "bg-amber-500" };
+          if (status === "保障活动更新")
+            return { bg: "bg-sky-50", text: "text-sky-700", dot: "bg-sky-500" };
+          return { bg: "bg-gray-50", text: "text-gray-600", dot: "bg-gray-400" };
+        }
+
+        function render() {
+          var listEl = document.getElementById("project-list");
+          var emptyEl = document.getElementById("empty");
+          var loadingEl = document.getElementById("loading");
+          var errorEl = document.getElementById("error");
+          loadingEl.classList.add("hidden");
+          errorEl.classList.add("hidden");
+
+          var total = state.filteredSorted.length;
+          if (total === 0) {
+            listEl.classList.add("hidden");
+            emptyEl.classList.remove("hidden");
+            document.getElementById("page-info").textContent = "";
+            document.getElementById("btn-prev").disabled = true;
+            document.getElementById("btn-next").disabled = true;
+            return;
+          }
+          emptyEl.classList.add("hidden");
+          listEl.classList.remove("hidden");
+
+          var totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+          if (state.page > totalPages) state.page = totalPages;
+          var start = (state.page - 1) * PAGE_SIZE;
+          var slice = state.filteredSorted.slice(start, start + PAGE_SIZE);
+
+          document.getElementById("page-info").textContent =
+            "第 " +
+            state.page +
+            " / " +
+            totalPages +
+            " 页，共 " +
+            total +
+            " 个核心项目";
+
+          document.getElementById("btn-prev").disabled = state.page <= 1;
+          document.getElementById("btn-next").disabled = state.page >= totalPages;
+
+          var html = "";
+          for (var i = 0; i < slice.length; i++) {
+            var p = slice[i];
+            var acts = sortActivitiesDesc(p.activities || []);
+            var expanded = !!state.expanded[p.id];
+            var showActs = expanded ? acts : acts.slice(0, ACTIVITY_PREVIEW);
+            var hasMore = acts.length > ACTIVITY_PREVIEW;
+
+            html += '<li class="rounded-lg border border-gray-100 bg-white p-3 shadow-sm">';
+            html +=
+              '<div class="mb-2 flex flex-wrap items-start justify-between gap-2 border-b border-gray-100 pb-2">';
+            html += '<div class="min-w-0 flex-1">';
+            html +=
+              '<div class="mb-1 flex flex-wrap items-center gap-2"><span class="font-mono text-sm font-semibold text-gray-800">' +
+              escapeHtml(p.id) +
+              '</span><span class="text-xs font-medium text-brand">' +
+              escapeHtml(p.sector) +
+              "</span></div>";
+            html +=
+              '<p class="text-sm font-medium leading-snug text-gray-800">' +
+              escapeHtml(p.name) +
+              "</p>";
+            html += "</div></div>";
+
+            html += '<div class="space-y-2">';
+            for (var j = 0; j < showActs.length; j++) {
+              var a = showActs[j];
+              var sc = statusClass(a.status);
+              var tip = state.statusTooltips[a.status] || "";
+              var label = a.subStatus ? a.status + " · " + a.subStatus : a.status;
+              html += '<div class="flex items-start gap-3 rounded-lg bg-gray-50 p-2.5">';
+              html += '<div class="mt-1.5 h-2 w-2 shrink-0 rounded-full ' + sc.dot + '"></div>';
+              html += '<div class="min-w-0 flex-1">';
+              html += '<div class="mb-1 flex flex-wrap items-center justify-between gap-2">';
+              html +=
+                '<span class="cursor-default rounded px-1.5 py-0.5 text-xs font-medium ' +
+                sc.bg +
+                " " +
+                sc.text +
+                '" title="' +
+                escapeHtml(tip) +
+                '">' +
+                escapeHtml(label) +
+                "</span>";
+              html +=
+                '<span class="shrink-0 text-xs text-gray-400">' +
+                escapeHtml(a.time) +
+                "</span>";
+              html += "</div></div></div>";
+            }
+            html += "</div>";
+
+            if (hasMore) {
+              html +=
+                '<div class="mt-2 text-center"><button type="button" class="toggle-expand text-xs font-medium text-brand hover:underline" data-id="' +
+                escapeHtml(p.id) +
+                '">' +
+                (expanded ? "收起" : "展开全部（共 " + acts.length + " 条）") +
+                "</button></div>";
+            }
+
+            html += "</li>";
+          }
+          listEl.innerHTML = html;
+
+          listEl.querySelectorAll(".toggle-expand").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              var id = btn.getAttribute("data-id");
+              state.expanded[id] = !state.expanded[id];
+              render();
+            });
+          });
+        }
+
+        function load() {
+          var slug = getSlug();
+          if (!slug) {
+            document.getElementById("loading").classList.add("hidden");
+            document.getElementById("error").textContent = "缺少事业群参数";
+            document.getElementById("error").classList.remove("hidden");
+            return;
+          }
+          fetch("/api/org/" + encodeURIComponent(slug) + "/core-project-activity")
+            .then(function (r) {
+              if (!r.ok) throw new Error("加载失败");
+              return r.json();
+            })
+            .then(function (data) {
+              state.rawProjects = data.projects || [];
+              state.statusTooltips = data.statusTooltips || {};
+              var sel = document.getElementById("filter-sector");
+              var sectors = data.sectors || [];
+              sel.innerHTML = '<option value="">全部</option>';
+              sectors.forEach(function (s) {
+                var o = document.createElement("option");
+                o.value = s;
+                o.textContent = s;
+                sel.appendChild(o);
+              });
+              sel.value = state.sectorApplied;
+              applyFilters();
+              render();
+            })
+            .catch(function () {
+              document.getElementById("loading").classList.add("hidden");
+              document.getElementById("error").textContent = "数据加载失败，请稍后重试";
+              document.getElementById("error").classList.remove("hidden");
+            });
+        }
+
+        document.getElementById("btn-search").addEventListener("click", function () {
+          state.sectorApplied = document.getElementById("filter-sector").value;
+          state.keywordApplied = document.getElementById("filter-keyword").value;
+          state.expanded = {};
+          applyFilters();
+          render();
+        });
+
+        document.getElementById("btn-prev").addEventListener("click", function () {
+          if (state.page > 1) {
+            state.page--;
+            render();
+          }
+        });
+        document.getElementById("btn-next").addEventListener("click", function () {
+          var totalPages = Math.max(
+            1,
+            Math.ceil(state.filteredSorted.length / PAGE_SIZE),
+          );
+          if (state.page < totalPages) {
+            state.page++;
+            render();
+          }
+        });
+
+        load();
+      })();
+    </script>
+  </body>
+</html>
