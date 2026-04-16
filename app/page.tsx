@@ -64,6 +64,12 @@ const routes = [
     description: '合作方人员信息、CSV 批量导入与导出',
     icon: UserCog,
   },
+  {
+    href: '/delivery-assurance-action-items-config',
+    title: '交付保障行动项配置',
+    description: '交付保障行动项配置、审批与版本管理',
+    icon: ClipboardList,
+  },
 ];
 
 export default function Home() {

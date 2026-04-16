@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>交付保障行动项配置</title>
+    
+    <!-- Tailwind CSS -->
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+    <!-- Element UI CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.14/lib/theme-chalk/index.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
+    <!-- 自定义样式 -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- 简洁加载状态 -->
+        <div v-if="isLoading" class="loading-overlay">
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <p>加载中...</p>
+            </div>
+        </div>
+
+        <!-- 顶部控制栏 -->
+        <div class="top-toolbar bg-white shadow-sm border-b">
+            <div class="flex justify-between items-center px-6 py-3">
+                <div class="flex items-center space-x-4">
+                    <h1 class="text-xl font-bold text-gray-800">交付保障行动项</h1>
+                    <span class="text-sm text-gray-500">当前版本: {{ currentVersion }}</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <!-- 审批日志按钮 -->
+                    <el-button 
+                        size="small" 
+                        @click="showApprovalLogDialog = true"
+                        icon="el-icon-document"
+                    >
+                        审批日志
+                    </el-button>
+                    
+                    <el-dropdown v-if="shouldShowVersionHistory" @command="handleVersionCommand">
+                        <el-button size="small">
+                            历史版本 <i class="el-icon-arrow-down el-icon--right"></i>
+                        </el-button>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item 
+                                v-for="version in availableVersionHistory" 
+                                :key="version.id"
+                                :command="version.id"
+                            >
+                                <span>
+                                    版本 V{{ version.version }} ({{ version.createTime }})
+                                    <el-tag 
+                                        v-if="version.status === 'pending'" 
+                                        size="mini" 
+                                        type="warning" 
+                                        style="margin-left: 8px;"
+                                    >
+                                        审核中
+                                    </el-tag>
+                                    <el-tag 
+                                        v-else-if="version.isApproved" 
+                                        size="mini" 
+                                        type="success" 
+                                        style="margin-left: 8px;"
+                                    >
+                                        已通过
+                                    </el-tag>
+                                </span>
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                    
+                    <!-- 配置阶段：提交配置按钮 -->
+                    <el-tooltip 
+                        v-if="currentStatus === 'configuring'" 
+                        :content="submitButtonTooltip" 
+                        placement="bottom"
+                    >
+                        <el-button 
+                            type="primary" 
+                            size="small" 
+                            :disabled="!canSubmitConfiguration"
+                            @click="submitConfiguration"
+                        >
+                            <i class="fas fa-check-circle" v-if="canSubmitConfiguration"></i>
+                            <i class="fas fa-exclamation-triangle" v-else></i>
+                            提交配置
+                        </el-button>
+                    </el-tooltip>
+                    
+                    <!-- 审批阶段：通过和驳回按钮 -->
+                    <template v-if="currentStatus === 'pending'">
+                        <el-button 
+                            type="success" 
+                            size="small" 
+                            @click="approveConfiguration"
+                        >
+                            <i class="fas fa-check"></i>
+                            通过
+                        </el-button>
+                        <el-button 
+                            type="danger" 
+                            size="small" 
+                            @click="showRejectDialog = true"
+                        >
+                            <i class="fas fa-times"></i>
+                            驳回
+                        </el-button>
+                    </template>
+                    
+                    <!-- 已审批通过：创建新版本按钮 -->
+                    <el-button 
+                        v-if="currentStatus === 'approved'" 
+                        type="success" 
+                        size="small" 
+                        @click="createNewVersion"
+                    >
+                        创建新版本
+                    </el-button>
+                    
+                    <!-- 配置阶段：重置配置按钮 -->
+                    <el-button 
+                        v-if="currentStatus === 'configuring'" 
+                        size="small" 
+                        @click="resetConfiguration"
+                    >
+                        重置配置
+                    </el-button>
+                    
+                    <!-- 重新开始按钮 -->
+                    <el-dropdown trigger="click" style="margin-left: 10px;">
+                        <el-button size="small" type="text">
+                            <i class="el-icon-more"></i>
+                        </el-button>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item @click.native="clearAllDataAndRestart">
+                                <span style="color: #f56c6c;">
+                                    <i class="el-icon-delete"></i>
+                                    重新开始（仅原型阶段测试使用，正式开发请删掉！） 
+                                </span>
+                            </el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主内容区域 -->
+        <div class="main-content" :class="{ 'approved-layout': currentStatus === 'approved' }">
+            <!-- 配置模式布局 -->
+            <div v-if="currentStatus === 'configuring' || currentStatus === 'pending'" class="configuration-layout flex h-full">
+                <!-- 左侧配置项菜单 -->
+                <div class="left-panel w-1/3 bg-gray-50 border-r">
+                    <div class="panel-header p-4 border-b flex justify-between">
+                        <h3 class="mb-0">配置菜单</h3>
+                            <el-button size="mini" @click="showManageItemsDialog = true">
+                                <i class="fas fa-cog p-0"></i> 
+                            </el-button>
+
+                    </div>
+                    
+                    <!-- 搜索框 -->
+                    <div class="search-box p-4">
+                        <el-input
+                            v-model="searchKeyword"
+                            placeholder="搜索配置项..."
+                            prefix-icon="el-icon-search"
+                            size="small"
+                            clearable
+                        ></el-input>
+                    </div>
+                    
+                    <!-- 配置项列表 -->
+                    <div class="config-items-list p-4">
+                        <div 
+                            v-for="item in filteredConfigItems" 
+                            :key="item.id"
+                            class="config-item bg-white p-3 mb-2 rounded shadow cursor-move"
+                            :class="{ 'dragging': isItemInAnyPhase(item.id) }"
+                            draggable="true"
+                            @dragstart="onDragStart($event, item)"
+                            @dragend="onDragEnd($event)"
+                        >
+                            <div class="flex justify-between items-start">
+                                <div class="flex-1">
+                                    <div class="font-medium text-sm">{{ item.name }}</div>
+                                    <div class="text-xs text-gray-500 mt-1" v-if="item.chineseName">{{ item.chineseName }}</div>
+                                    <div class="flex flex-wrap gap-1 mt-1">
+                                        <el-tag 
+                                            v-for="tag in item.tags" 
+                                            :key="tag"
+                                            size="mini"
+                                            :type="getTagType(tag)"
+                                            style="margin-right: 5px; margin-bottom: 3px;"
+                                        >
+                                            {{ tag }}
+                                        </el-tag>
+                                    </div>
+                                </div>
+                                <div class="flex-shrink-0 ml-2">
+                                    <el-popover
+                                        placement="bottom-end"
+                                        width="300"
+                                        trigger="click"
+                                    >
+                                        <div class="standard-files-list">
+                                            <div class="text-sm font-medium mb-2 text-gray-700">标准文件列表</div>
+                                            <div 
+                                                v-for="(file, index) in item.standardFiles" 
+                                                :key="index"
+                                                class="file-item flex items-center p-2 hover:bg-gray-50 rounded cursor-pointer"
+                                                @click="viewStandardFile(item, index)"
+                                            >
+                                                <i :class="getFileTypeIcon(file)" class="mr-2 text-blue-500"></i>
+                                                <span class="text-sm text-gray-700 flex-1">{{ getStandardFileName(file, index) }}</span>
+                                                <span class="text-xs text-gray-400 ml-2">{{ formatFileSize(file) }}</span>
+                                            </div>
+                                            <div v-if="!item.standardFiles || item.standardFiles.length === 0" class="text-xs text-gray-400 text-center py-2">
+                                                暂无标准文件
+                                            </div>
+                                        </div>
+                                        <el-button 
+                                            slot="reference"
+                                            type="text" 
+                                            size="mini" 
+                                            class="file-icon-btn"
+                                            style="padding: 4px; min-width: auto;"
+                                        >
+                                            <i class="el-icon-document" style="font-size: 14px; color: #409EFF;"></i>
+                                        </el-button>
+                                    </el-popover>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右侧项目阶段配置区域 -->
+                <div class="right-panel flex-1">
+                    <div class="phases-container flex h-full">
+                        <div 
+                            v-for="phase in phases" 
+                            :key="phase.id"
+                            class="phase-column flex-1 border-r last:border-r-0"
+                            @dragover.prevent
+                            @drop="onDrop($event, phase.id)"
+                        >
+                            <div class="phase-header p-4 bg-gray-100 border-b">
+                                <h3 class="font-semibold">{{ phase.name }}</h3>
+                            </div>
+                            
+                            <div class="phase-content p-4 h-full overflow-y-auto">
+                                <div 
+                                    v-for="(item, index) in getPhaseItems(phase.id)" 
+                                    :key="`${item.id}_${index}`"
+                                    class="phase-item p-3 mb-3 border rounded cursor-pointer relative group"
+                                    :class="getItemStatusClass(item)"
+                                    @click="openItemDetail(item, phase.id, index)"
+                                >
+                                    <div class="flex justify-between items-start">
+                                        <div class="flex-1">
+                                            <div class="font-medium text-sm">
+                                                {{ item.name }}
+                                                <span v-if="item.sequence" class="text-xs px-1 py-0.5 bg-green-500 text-white rounded ml-2">#{{ item.sequence }}</span>
+                                            </div>
+                                            <div class="text-xs text-gray-500 mt-1" v-if="item.chineseName">{{ item.chineseName }}</div>
+                                        </div>
+                                        <i 
+                                            class="fas fa-times text-red-500 opacity-0 group-hover:opacity-100 cursor-pointer"
+                                            @click.stop="removePhaseItem(phase.id, index)"
+                                        ></i>
+                                    </div>
+                                    <div class="text-sm text-gray-600 mt-1">
+                                        <div v-if="item.plannedTime">计划: {{ item.plannedTime }}</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 拖拽提示区域 -->
+                                <div v-if="getPhaseItems(phase.id).length === 0" class="drop-hint text-center text-gray-400 py-8 border-2 border-dashed border-gray-300 rounded">
+                                    拖拽配置项到此处
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 审批后视图 -->
+            <div v-else class="approved-view p-6">
+                <div class="phases-grid grid grid-cols-3 gap-6">
+                    <div 
+                        v-for="phase in phases" 
+                        :key="phase.id"
+                        class="phase-section"
+                    >
+                        <div class="phase-header-approved mb-4">
+                            <h3 class="text-lg font-semibold">{{ phase.name }}</h3>
+                            <div class="text-sm text-gray-600">
+                                总计{{ getPhaseItemsCount(phase.id) }} | 
+                                完成{{ getPhaseCompletedCount(phase.id) }} | 
+                                进行{{ getPhaseProgressCount(phase.id) }} | 
+                                终止{{ getPhaseTerminatedCount(phase.id) }}
+                            </div>
+                        </div>
+                        
+                        <div class="approved-items space-y-3">
+                            <div 
+                                v-for="(item, index) in getPhaseItems(phase.id)" 
+                                :key="`${item.id}_${index}`"
+                                class="approved-item p-3 border rounded cursor-pointer"
+                                :class="getItemStatusClass(item)"
+                                @click="openItemDetail(item, phase.id, index)"
+                            >
+                                <div class="flex justify-between items-center">
+                                    <div class="flex-1">
+                                        <div class="font-medium text-sm">
+                                            {{ item.name }}
+                                            <span v-if="item.sequence" class="text-xs px-1 py-0.5 bg-green-500 text-white rounded ml-2">#{{ item.sequence }}</span>
+                                        </div>
+                                        <div class="text-xs text-gray-500 mt-1" v-if="item.chineseName">{{ item.chineseName }}</div>
+                                        <div class="text-sm text-gray-600 mt-1">
+                                            <div v-if="item.plannedTime">计划: {{ item.plannedTime }}</div>
+                                            <div v-if="item.completedTime" class="text-green-600">完成: {{ item.completedTime }}</div>
+                                            <div v-if="item.terminatedTime" class="text-red-600">终止: {{ item.terminatedTime }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="status-indicator">
+                                        <i :class="getStatusIcon(item)"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 配置项详情对话框 -->
+        <el-dialog
+            :title="currentStatus === 'approved' ? '配置详情' : '设置配置项'"
+            :visible.sync="showItemDetail"
+            width="600px"
+            @close="resetItemDetail"
+        >
+            <div v-if="selectedItem">
+                <el-form :model="itemDetailForm" label-width="100px">
+                    <el-form-item label="项目阶段">
+                        <span>{{ getPhaseNameById(selectedPhaseId) }}</span>
+                    </el-form-item>
+                    
+                    <el-form-item label="配置项名称">
+                        <div>
+                            <div>{{ selectedItem.name }}</div>
+                            <div class="text-xs text-gray-500 mt-1" v-if="selectedItem.chineseName">{{ selectedItem.chineseName }}</div>
+                        </div>
+                    </el-form-item>
+                    
+                    <!-- 审批后才显示状态 -->
+                    <el-form-item v-if="currentStatus === 'approved'" label="状态">
+                        <span class="status-display" :class="getStatusDisplayClass(itemDetailForm.status)">
+                            <i :class="getStatusIcon({ status: itemDetailForm.status })" class="mr-2"></i>
+                            {{ getStatusDisplayText(itemDetailForm.status) }}
+                        </span>
+                    </el-form-item>
+                    
+                    <!-- 审批后才显示标准文件 -->
+                    <el-form-item v-if="currentStatus === 'approved'" label="标准文件">
+                        <div v-if="selectedItem.standardFiles && selectedItem.standardFiles.length > 0" class="standard-files-list">
+                            <div 
+                                v-for="(file, index) in selectedItem.standardFiles" 
+                                :key="index"
+                                class="standard-file-item mb-2"
+                            >
+                                <el-button 
+                                    type="text" 
+                                    @click="viewStandardFile(selectedItem, index)"
+                                    style="padding: 0; color: #409eff; text-decoration: none; display: flex; align-items: center;"
+                                >
+                                    <i class="fas fa-file-pdf text-red-500 mr-2"></i>
+                                    {{ getStandardFileName(file, index) }}
+                                </el-button>
+                            </div>
+                        </div>
+                        <div v-else class="no-standard-file">
+                            <span class="text-gray-500">
+                                <i class="fas fa-file text-gray-400 mr-2"></i>
+                                暂无标准文件
+                            </span>
+                        </div>
+                    </el-form-item>
+                    
+                    <el-form-item label="计划时间" required>
+                        <el-date-picker
+                            v-model="itemDetailForm.plannedTime"
+                            type="date"
+                            placeholder="选择计划时间（必填）"
+                            value-format="yyyy-MM-dd"
+                            style="width: 100%"
+                            :disabled="isItemReadOnly"
+                        ></el-date-picker>
+                        <div class="text-xs text-red-500 mt-1" v-if="currentStatus === 'configuring'">
+                            <i class="fas fa-info-circle"></i> 
+                            计划时间为必填项，所有配置项都必须填写计划时间后才能提交审批
+                        </div>
+                    </el-form-item>
+                    
+                    <!-- 配置阶段简化备注 -->
+                    <el-form-item :label="currentStatus === 'approved' ? '备注描述' : '备注'">
+                        <el-input
+                            v-model="itemDetailForm.notes"
+                            type="textarea"
+                            :rows="currentStatus === 'approved' ? 3 : 2"
+                            :placeholder="currentStatus === 'approved' ? '业务交接评审准备中' : '可选填写备注信息'"
+                            :disabled="isItemReadOnly"
+                        ></el-input>
+                    </el-form-item>
+                    
+                    <!-- 审批后才显示文件附件链接 -->
+                    <el-form-item v-if="currentStatus === 'approved'" label="相关附件">
+                        <div class="file-link-area">
+                            <el-button 
+                                type="text" 
+                                @click="openFileUploadPage"
+                                style="padding: 0; color: #409eff; text-decoration: none; font-size: 14px;"
+                            >
+                                <i class="fas fa-folder-open text-blue-500 "></i>
+                                上传文件
+                            </el-button>
+                        </div>
+                    </el-form-item>
+                </el-form>
+            </div>
+            
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="showItemDetail = false">{{ currentStatus === 'approved' && isItemReadOnly ? '关闭' : '取消' }}</el-button>
+                <!-- 配置阶段或可编辑状态才显示保存按钮 -->
+                <el-button 
+                    v-if="!isItemReadOnly" 
+                    type="primary" 
+                    @click="saveItemDetail"
+                >
+                    {{ currentStatus === 'approved' ? '保存更改' : '保存设置' }}
+                </el-button>
+                <!-- 审批后且进行中状态才显示状态操作按钮 -->
+                <el-button 
+                    v-if="currentStatus === 'approved' && itemDetailForm.status === 'progress'" 
+                    type="success" 
+                    @click="markItemCompleted"
+                >
+                    标记完成
+                </el-button>
+                <el-button 
+                    v-if="currentStatus === 'approved' && itemDetailForm.status === 'progress'" 
+                    type="danger" 
+                    @click="markItemTerminated"
+                >
+                    标记终止
+                </el-button>
+            </div>
+        </el-dialog>
+        
+        <!-- 标准文件查看对话框 -->
+        <el-dialog
+            :visible.sync="showStandardFileDialog"
+            width="60%"
+            :close-on-click-modal="true"
+            custom-class="standard-file-dialog"
+            :show-close="false"
+            @close="closeStandardFileDialog"
+        >
+            <div v-if="currentStandardFile" class="standard-file-container">
+                <!-- 文件预览区域 -->
+                <div class="file-preview-area" style="height: 600px; border: none; border-radius: 0; overflow: hidden;">
+                    <!-- PDF文件预览 -->
+                    <div v-if="isPdfFile(currentStandardFile)" class="pdf-preview h-full">
+                        <iframe 
+                            v-if="filePreviewUrl"
+                            :src="filePreviewUrl + '#toolbar=1&navpanes=1&scrollbar=1&view=FitH'"
+                            style="width: 100%; height: 100%; border: none;"
+                            @load="onPreviewLoad"
+                            @error="onPreviewError"
+                        ></iframe>
+                        <div v-else class="preview-loading flex items-center justify-center h-full bg-gray-50">
+                            <div class="text-center">
+                                <i class="el-icon-loading text-3xl text-gray-400 mb-2 block"></i>
+                                <p class="text-gray-600">正在加载PDF预览...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 图像文件预览 -->
+                    <div v-else-if="isImageFile(currentStandardFile)" class="image-preview h-full flex items-center justify-center bg-gray-50">
+                        <img 
+                            v-if="filePreviewUrl"
+                            :src="filePreviewUrl" 
+                            :alt="currentStandardFile.name"
+                            style="max-width: 100%; max-height: 100%; object-fit: contain;"
+                            @load="onPreviewLoad"
+                            @error="onPreviewError"
+                        />
+                        <div v-else class="preview-loading text-center">
+                            <i class="el-icon-loading text-3xl text-gray-400 mb-2 block"></i>
+                            <p class="text-gray-600">正在加载图片预览...</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 文本文件预览 -->
+                    <div v-else-if="isTextFile(currentStandardFile)" class="text-preview h-full">
+                        <div v-if="filePreviewContent" class="p-4 h-full overflow-auto">
+                            <pre class="whitespace-pre-wrap text-sm">{{ filePreviewContent }}</pre>
+                        </div>
+                        <div v-else class="preview-loading flex items-center justify-center h-full bg-gray-50">
+                            <div class="text-center">
+                                <i class="el-icon-loading text-3xl text-gray-400 mb-2 block"></i>
+                                <p class="text-gray-600">正在加载文本内容...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 不支持预览的文件类型 -->
+                    <div v-else class="unsupported-preview flex items-center justify-center h-full bg-gray-50">
+                        <div class="text-center">
+                            <i :class="getFileTypeIcon(currentStandardFile)" class="text-6xl text-gray-400 mb-4 block"></i>
+                            <h5 class="text-lg font-medium text-gray-700 mb-2">{{ getFileTypeName(currentStandardFile) }}</h5>
+                            <p class="text-gray-600 mb-4">此文件类型暂不支持在线预览</p>
+                            <el-button type="primary" @click="downloadStandardFile">
+                                <i class="fas fa-download mr-1"></i>
+                                下载文件查看
+                            </el-button>
+                        </div>
+                    </div>
+                    
+                    <!-- 预览错误状态 -->
+                    <div v-if="previewError" class="preview-error flex items-center justify-center h-full bg-red-50">
+                        <div class="text-center">
+                            <i class="fas fa-exclamation-triangle text-4xl text-red-400 mb-3 block"></i>
+                            <h5 class="text-lg font-medium text-red-700 mb-2">预览加载失败</h5>
+                            <p class="text-red-600 mb-4">{{ previewErrorMessage || '文件可能损坏或格式不受支持' }}</p>
+                            <el-button type="primary" @click="downloadStandardFile">
+                                <i class="fas fa-download mr-1"></i>
+                                下载文件
+                            </el-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div slot="footer" class="dialog-footer text-right" style="padding: 10px;">
+                <el-button @click="closeStandardFileDialog" size="small">关闭</el-button>
+            </div>
+        </el-dialog>
+        
+        <!-- 管理配置项对话框 -->
+        <el-dialog
+            title="管理配置项"
+            :visible.sync="showManageItemsDialog"
+            width="1000px"
+            :close-on-click-modal="false"
+            custom-class="manage-items-dialog"
+        >
+            <div class="manage-items-container" style="height: 500px; display: flex;">
+                <!-- 左侧配置项列表区域 -->
+                <div class="list-section" style="width: 400px; padding: 20px; border-right: 1px solid #e4e7ed;">
+                    <div class="list-header" style="margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                        <h4 style="margin: 0; color: #303133; font-size: 16px; font-weight: 600;">
+                            配置项列表 <span style="color: #909399; font-size: 14px; font-weight: normal;">({{ configItems.length }}项)</span>
+                        </h4>
+                    </div>
+                    
+                    <!-- 搜索和过滤控制 -->
+                    <div style="margin-bottom: 15px; display: flex; gap: 8px; align-items: center;">
+                        <!-- 状态过滤器 -->
+                        <el-select 
+                            v-model="manageStatusFilter" 
+                            size="small" 
+                            style="width: 120px; flex-shrink: 0;"
+                            placeholder="筛选状态"
+                        >
+                            <el-option label="全部配置项" value="all"></el-option>
+                            <el-option label="已启用" value="enabled"></el-option>
+                            <el-option label="已禁用" value="disabled"></el-option>
+                        </el-select>
+                        
+                        <el-input
+                            v-model="manageSearchKeyword"
+                            placeholder="搜索配置项..."
+                            prefix-icon="el-icon-search"
+                            size="small"
+                            clearable
+                            style="flex: 1;"
+                        ></el-input>
+                    </div>
+                    
+                    <div class="config-items-container" style="height: 400px; overflow-y: auto; border: 1px solid #e4e7ed; background: white;">
+                        <div v-if="filteredManageItems.length === 0" class="empty-state" style="text-align: center; padding: 60px 20px; color: #909399;">
+                            <i class="el-icon-document-delete" style="font-size: 48px; margin-bottom: 15px; display: block;"></i>
+                            <div>{{ getEmptyStateMessage() }}</div>
+                            <div style="font-size: 12px; margin-top: 5px;">
+                                {{ getEmptyStateTip() }}
+                            </div>
+                        </div>
+                        
+                        <div v-else class="items-list">
+                            <div 
+                                v-for="(item, index) in filteredManageItems" 
+                                :key="item.id"
+                                class="config-item-card"
+                                :class="{ 'editing': editingItem && editingItem.id === item.id, 'disabled': !item.enabled }"
+                                style="margin: 8px; padding: 12px; border: 1px solid #e4e7ed; background: #fff; cursor: pointer;"
+                                @click="startEditItem(item)"
+                                @mouseenter="$event.target.style.borderColor = '#c0c4cc'"
+                                @mouseleave="$event.target.style.borderColor = editingItem && editingItem.id === item.id ? '#409eff' : '#e4e7ed'"
+                            >
+                                <div class="item-header" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                                    <div class="item-title" style="font-weight: 500; color: #303133; font-size: 14px; flex: 1; margin-right: 10px;">
+                                        <div>{{ item.name }}</div>
+                                        <div style="font-size: 12px; color: #909399; font-weight: normal; margin-top: 2px;" v-if="item.chineseName">{{ item.chineseName }}</div>
+                                    </div>
+                                    <div class="item-actions" style="display: flex; gap: 3px;" @click.stop>
+                                        <el-tooltip :content="item.enabled ? '禁用配置项' : '启用配置项'" placement="top">
+                                            <el-button 
+                                                size="mini" 
+                                                type="text" 
+                                                :icon="item.enabled ? 'el-icon-turn-off' : 'el-icon-open'" 
+                                                @click="toggleConfigItemStatus(item.id)"
+                                                :style="{ color: item.enabled ? '#f56c6c' : '#67c23a' }"
+                                            ></el-button>
+                                        </el-tooltip>
+                                    </div>
+                                </div>
+                                
+                                <div class="item-tags" style="margin-bottom: 8px;">
+                                    <el-tag 
+                                        v-for="tag in item.tags" 
+                                        :key="tag"
+                                        size="mini"
+                                        :type="getTagType(tag)"
+                                        style="margin-right: 5px; margin-bottom: 3px;"
+                                    >
+                                        {{ tag }}
+                                    </el-tag>
+                                </div>
+                                
+                                <div class="item-meta" style="font-size: 12px; color: #909399; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>
+                                        <i class="el-icon-document"></i>
+                                        {{ getStandardFilesCountText(item) }}
+                                    </span>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <el-tag 
+                                            :type="item.enabled ? 'success' : 'danger'" 
+                                            size="mini"
+                                            style="margin: 0;"
+                                        >
+                                            {{ item.enabled ? '已启用' : '已禁用' }}
+                                        </el-tag>
+                                        <span>ID: {{ item.id }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右侧表单区域 -->
+                <div class="" style="flex: 1; padding: 4px; display: flex; flex-direction: column; height: 100%;">
+                    <div class="" style="padding: 20px; flex-shrink: 0;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 1;">
+                            <div>
+                                <h4 style="margin: 0; color: #303133; font-size: 16px; font-weight: 600;">
+                                    <i class="el-icon-edit-outline" style="margin-right: 8px;"></i>
+                                    {{ editingItem ? '编辑配置项' : '添加新的配置项' }}
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="" style="padding: 20px; flex: 1; overflow-y: auto;">
+                        <el-form :model="itemForm" :rules="itemFormRules" ref="itemFormRef" label-width="100px" size="medium">
+                            <el-form-item label="配置项名称" prop="name">
+                                <el-input 
+                                    v-model="itemForm.name" 
+                                    placeholder="请输入配置项名称"
+                                    :maxlength="50"
+                                    show-word-limit
+                                    style="width: 80%;"
+                                >
+                                </el-input>
+                            </el-form-item>
+                            
+                            <el-form-item label="中文名称" prop="chineseName">
+                                <el-input 
+                                    v-model="itemForm.chineseName" 
+                                    placeholder="请输入中文名称"
+                                    :maxlength="50"
+                                    show-word-limit
+                                    style="width: 80%;"
+                                >
+                                </el-input>
+                            </el-form-item>
+                            
+                            <el-form-item label="配置标签" prop="tags">
+                                <el-select
+                                    v-model="itemForm.tags"
+                                    multiple
+                                    filterable
+                                    allow-create
+                                    placeholder="选择或创建标签来分类配置项"
+                                    style="width: 80%"
+                                    collapse-tags
+                                >
+                                    <el-option
+                                        v-for="tag in availableTags"
+                                        :key="tag"
+                                        :label="tag"
+                                        :value="tag"
+                                    >
+                                        <span style="float: left">{{ tag }}</span>
+                                        <span style="float: right; color: #8cc; font-size: 13px">{{ getTagIcon(tag) }}</span>
+                                    </el-option>
+                                </el-select>
+                            </el-form-item>
+                            
+                            <el-form-item label="标准文件">
+                                <div class="upload-section">
+                                    <el-upload
+                                        ref="standardFileUpload"
+                                        action="#"
+                                        :file-list="itemForm.standardFiles"
+                                        :on-change="handleStandardFileChange"
+                                        :on-remove="handleStandardFileRemove"
+                                        :auto-upload="false"
+                                        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+                                        :limit="5"
+                                        drag
+                                    >
+                                        <div v-if="itemForm.standardFiles.length === 0">
+                                            <i class="el-icon-upload" style="font-size: 28px; color: #c0c4cc; margin-bottom: 10px;"></i>
+                                            <div style="color: #606266; font-size: 14px; margin-bottom: 5px;">点击或拖拽文件到此处上传</div>
+                                            <div style="color: #909399; font-size: 12px;">支持 PDF、Word、Excel、PPT 格式，最多上传5个文件，单个文件不超过 10MB</div>
+                                        </div>
+                                        <div v-else style="color: #67c23a;margin-top: 10px;">
+                                            <i class="el-icon-circle-check" style="font-size: 28px; margin-bottom: 10px;"></i>
+                                            <div style="font-size: 14px;">已选择 {{ itemForm.standardFiles.length }} 个文件，点击继续添加</div>
+                                        </div>
+                                    </el-upload>
+                                </div>
+                            </el-form-item>
+                            
+                            <el-form-item style="margin-top: 35px; margin-bottom: 0;">
+                                <div style="text-align: right;">
+                                    <el-button 
+                                        v-if="editingItem" 
+                                        @click="cancelEdit"
+                                        style="margin-right: 10px;"
+                                    >
+                                        取消编辑
+                                    </el-button>
+                                    <el-button 
+                                        type="primary" 
+                                        @click="saveConfigItem" 
+                                        :loading="saving"
+                                        style="width: 140px; "
+                                        size="medium"
+                                    >
+                                        <i class="el-icon-check" v-if="!saving"></i>
+                                        {{ editingItem ? '保存修改' : '添加配置项' }}
+                                    </el-button>
+                                </div>
+                            </el-form-item>
+                        </el-form>
+                    </div>
+                </div>
+            </div>
+            
+            <div slot="footer" class="dialog-footer" style="text-align: right;">
+                <el-button @click="closeManageDialog">关闭</el-button>
+            </div>
+        </el-dialog>
+        
+        <!-- 审批日志对话框 -->
+        <el-dialog
+            title="审批日志"
+            :visible.sync="showApprovalLogDialog"
+            width="800px"
+            :close-on-click-modal="false"
+        >
+            <div class="approval-log-container" style="height: 500px;">
+                <div v-if="sortedApprovalLogs.length === 0" class="empty-state text-center py-8" style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <i class="el-icon-document-delete text-4xl text-gray-400 mb-3 block"></i>
+                    <h5 class="text-lg text-gray-600 mb-2">暂无审批记录</h5>
+                    <p class="text-gray-500">还没有提交过配置，暂无审批记录</p>
+                </div>
+                
+                <div v-else class="logs-list" style="height: 100%; overflow-y: auto; padding: 0 5px;">
+                    <div 
+                        v-for="(log, index) in sortedApprovalLogs" 
+                        :key="log.id"
+                        class="log-item p-4 mb-3 border "
+                        :class="getLogItemClass(log)"
+                    >
+                        <div class="log-header flex justify-between items-start mb-2">
+                            <div class="log-info">
+                                <h6 class="font-medium text-sm mb-1">
+                                    <i :class="getLogIcon(log)" class="mr-2"></i>
+                                    {{ getLogTitle(log) }}
+                                </h6>
+                                <div class="text-xs text-gray-500">
+                                    版本: {{ log.version }} | 时间: {{ log.createTime }}
+                                </div>
+                            </div>
+                            <el-tag 
+                                :type="getLogTagType(log)" 
+                                size="mini"
+                            >
+                                {{ getLogStatusText(log) }}
+                            </el-tag>
+                        </div>
+                        
+                        <div v-if="log.description" class="log-description text-sm text-gray-700 mb-2">
+                            {{ log.description }}
+                        </div>
+                        
+                        <div v-if="log.rejectReason" class="reject-reason bg-red-50 rounded">
+                            <div class="text-sm ">驳回原因：{{ log.rejectReason }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="showApprovalLogDialog = false">关闭</el-button>
+            </div>
+        </el-dialog>
+        
+        <!-- 驳回配置对话框 -->
+        <el-dialog
+            title="驳回配置"
+            :visible.sync="showRejectDialog"
+            width="500px"
+            :close-on-click-modal="false"
+        >
+            <el-form :model="rejectForm" :rules="rejectFormRules" ref="rejectFormRef" label-width="80px">
+                <el-form-item label="驳回原因" prop="reason">
+                    <el-input
+                        v-model="rejectForm.reason"
+                        type="textarea"
+                        :rows="4"
+                        placeholder="请详细说明驳回的原因，以便配置人员了解需要修改的内容..."
+                        maxlength="500"
+                        show-word-limit
+                    ></el-input>
+                </el-form-item>
+            </el-form>
+            
+            <div slot="footer" class="dialog-footer">
+                <el-button @click="showRejectDialog = false">取消</el-button>
+                <el-button 
+                    type="danger" 
+                    @click="confirmRejectConfiguration"
+                    :loading="rejecting"
+                >
+                    确认驳回
+                </el-button>
+            </div>
+        </el-dialog>
+    </div>
+
+    <!-- Vue.js -->
+    <script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
+    
+    <!-- Vue Router -->
+    <script src="https://unpkg.com/vue-router@3.0.2/dist/vue-router.js"></script>
+    
+    <!-- Element UI -->
+    <script src="https://unpkg.com/element-ui@2.15.14/lib/index.js"></script>
+    
+    <!-- ECharts -->
+    <script src="https://unpkg.com/echarts@5.4.3/dist/echarts.min.js"></script>
+    
+    <!-- 主要业务逻辑 -->
+    <script src="js/app.js"></script>
+</body>
+</html>
