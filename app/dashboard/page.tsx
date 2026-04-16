@@ -11,6 +11,7 @@ import {
   SettingOutlined,
   CalendarOutlined,
   RightOutlined,
+  TeamOutlined,
 } from '@ant-design/icons'
 import { Select, Switch } from 'antd';
 import { useState } from 'react';
@@ -200,6 +201,9 @@ export default function Component() {
             </Link>
             <Link href="/dashboard/org/xx" className="w-6 h-6 text-gray-400 hover:bg-gray-700 rounded-lg flex items-center justify-center" title="xx项目群">
               <BarChartOutlined className="w-6 h-6" />
+            </Link>
+            <Link href="/third-party-personnel" className="w-6 h-6 text-gray-400 hover:bg-gray-700 rounded-lg flex items-center justify-center" title="第三方人员管理">
+              <TeamOutlined className="w-6 h-6" />
             </Link>
             <button className="w-6 h-6 text-gray-400 hover:bg-gray-700 rounded-lg flex items-center justify-center">
               <SettingOutlined className="w-6 h-6" />

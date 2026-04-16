@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { DashboardOutlined, FileTextOutlined, SettingOutlined } from '@ant-design/icons';
+import { DashboardOutlined, FileTextOutlined, SettingOutlined, TeamOutlined } from '@ant-design/icons';
 
 export default function ProjectRequirementsPage() {
   return (
@@ -18,6 +18,9 @@ export default function ProjectRequirementsPage() {
           <span className="w-6 h-6 text-white bg-gray-700 rounded-lg flex items-center justify-center" title="关键项目岗位需求">
             <FileTextOutlined className="w-6 h-6" />
           </span>
+          <Link href="/third-party-personnel" className="w-6 h-6 text-gray-400 hover:bg-gray-700 rounded-lg flex items-center justify-center" title="第三方人员管理">
+            <TeamOutlined className="w-6 h-6" />
+          </Link>
           <span className="w-6 h-6 text-gray-400 hover:bg-gray-700 rounded-lg flex items-center justify-center">
             <SettingOutlined className="w-6 h-6" />
           </span>

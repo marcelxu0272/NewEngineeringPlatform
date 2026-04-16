@@ -96,7 +96,7 @@ const HomePage = () => {
   ];
 
   const functionModules = [
-    "Wood 工程平台首页", "项目中台", "OA管理", "设计管理",
+    "Wood 工程平台首页", "项目中台", "第三方人员管理", "OA管理", "设计管理",
     "费用管理", "文档管理", "合同管理", "资源管理",
     "计划管理", "个人中心", "平台管理", "物资采购", "AI&Tools"
   ];
@@ -169,6 +169,9 @@ const HomePage = () => {
     setSelectedModule(module);
     if (module === "项目中台") {
       router.push('/dashboard');
+    }
+    if (module === "第三方人员管理") {
+      router.push('/third-party-personnel');
     }
   };
 
