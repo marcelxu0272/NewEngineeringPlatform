@@ -88,6 +88,8 @@ const app = new Vue({
             // 界面状态
             searchKeyword: '',
             draggedItem: null,
+            // 审批通过后列表「相关附件」全局折叠：勾选后仅显示「首文件名 + 等N个文件」
+            relatedAttachmentsCollapsed: false,
             
             // 对话框状态
             showItemDetail: false,
@@ -2020,6 +2022,65 @@ const app = new Vue({
             } else {
                 return `已上传${item.standardFiles.length}个标准文件`;
             }
+        },
+
+        // 获取相关附件展示名称列表（优先真实数据，无数据时使用模拟数据）
+        getRelatedFileDisplayNames(item) {
+            const relatedFiles = Array.isArray(item && item.files) ? item.files : [];
+            const fileNames = relatedFiles.map((file) => {
+                if (typeof file === 'string') {
+                    return file;
+                }
+                const realFile = this.getRealFileObject(file);
+                if (realFile && realFile.name) {
+                    return realFile.name;
+                }
+                if (file && file.name) {
+                    return file.name;
+                }
+                return '';
+            }).filter(Boolean);
+
+            if (fileNames.length > 0) {
+                return fileNames;
+            }
+
+            return [
+                'MTBE基础设计进度计划_20251128.pdf',
+                '项目交付保障行动项跟踪表_20251201.xlsx',
+                '执行阶段风险评审记录_20251203.docx'
+            ];
+        },
+
+        // 根据文件名推断图标
+        getFileTypeIconByFileName(fileName) {
+            if (!fileName || typeof fileName !== 'string') {
+                return 'fas fa-file text-gray-400';
+            }
+            const lowerName = fileName.toLowerCase();
+            if (lowerName.endsWith('.pdf')) return 'fas fa-file-pdf text-red-500';
+            if (lowerName.endsWith('.doc') || lowerName.endsWith('.docx')) return 'fas fa-file-word text-blue-500';
+            if (lowerName.endsWith('.xls') || lowerName.endsWith('.xlsx')) return 'fas fa-file-excel text-green-500';
+            if (lowerName.endsWith('.ppt') || lowerName.endsWith('.pptx')) return 'fas fa-file-powerpoint text-orange-500';
+            if (/\.(jpg|jpeg|png|gif|bmp|svg|webp)$/i.test(lowerName)) return 'fas fa-file-image text-purple-500';
+            if (/\.(txt|md|json|xml|csv|log|js|css|html|htm)$/i.test(lowerName)) return 'fas fa-file-alt text-gray-500';
+            return 'fas fa-file text-gray-400';
+        },
+
+        // 折叠模式：仅首文件名可点链，「等N个文件」在链外展示
+        getRelatedFilesFirstName(item) {
+            const names = this.getRelatedFileDisplayNames(item);
+            return names.length ? names[0] : '';
+        },
+        getRelatedFilesExtraCount(item) {
+            const names = this.getRelatedFileDisplayNames(item);
+            return names.length > 1 ? names.length - 1 : 0;
+        },
+
+        // 相关附件点击（优先于整行点击）。后续可替换为跳转到具体文件逻辑。
+        handleRelatedFileClick(fileName, item, phaseId, itemIndex) {
+            // 当前先保留为打开配置项详情，确保行为稳定
+            this.openItemDetail(item, phaseId, itemIndex);
         }
     }
 });

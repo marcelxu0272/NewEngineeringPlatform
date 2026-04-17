@@ -35,6 +35,13 @@
                     <span class="text-sm text-gray-500">当前版本: {{ currentVersion }}</span>
                 </div>
                 <div class="flex items-center space-x-3">
+                    <el-checkbox
+                        v-if="currentStatus === 'approved'"
+                        v-model="relatedAttachmentsCollapsed"
+                        size="small"
+                    >
+                        折叠相关附件
+                    </el-checkbox>
                     <!-- 审批日志按钮 -->
                     <el-button 
                         size="small" 
@@ -278,7 +285,8 @@
                                         ></i>
                                     </div>
                                     <div class="text-sm text-gray-600 mt-1">
-                                        <div v-if="item.plannedTime">计划: {{ item.plannedTime }}</div>
+                                        <div v-if="item.plannedTime"><strong>计划:</strong> {{ item.plannedTime }}</div>
+                                        <div><strong>备注:</strong> {{ item.notes || '无' }}</div>
                                     </div>
                                 </div>
                                 
@@ -314,26 +322,80 @@
                             <div 
                                 v-for="(item, index) in getPhaseItems(phase.id)" 
                                 :key="`${item.id}_${index}`"
-                                class="approved-item p-3 border rounded cursor-pointer"
+                                class="approved-item relative p-3 border rounded cursor-pointer"
                                 :class="getItemStatusClass(item)"
                                 @click="openItemDetail(item, phase.id, index)"
                             >
-                                <div class="flex justify-between items-center">
-                                    <div class="flex-1">
+                                <div class="flex">
+                                    <div class="flex-1 pr-7">
                                         <div class="font-medium text-sm">
                                             {{ item.name }}
                                             <span v-if="item.sequence" class="text-xs px-1 py-0.5 bg-green-500 text-white rounded ml-2">#{{ item.sequence }}</span>
                                         </div>
                                         <div class="text-xs text-gray-500 mt-1" v-if="item.chineseName">{{ item.chineseName }}</div>
                                         <div class="text-sm text-gray-600 mt-1">
-                                            <div v-if="item.plannedTime">计划: {{ item.plannedTime }}</div>
-                                            <div v-if="item.completedTime" class="text-green-600">完成: {{ item.completedTime }}</div>
-                                            <div v-if="item.terminatedTime" class="text-red-600">终止: {{ item.terminatedTime }}</div>
+                                            <div>
+                                                <span v-if="item.plannedTime"><strong>计划:</strong> {{ item.plannedTime }}</span>
+                                                <span v-if="item.completedTime" class="text-green-600 ml-3"><strong>完成:</strong> {{ item.completedTime }}</span>
+                                                <span v-if="item.terminatedTime" class="text-red-600 ml-3"><strong>终止:</strong> {{ item.terminatedTime }}</span>
+                                            </div>
+                                            <div><strong>备注:</strong> {{ item.notes || '无' }}</div>
+                                            <div v-if="phase.id === 'phase2'">
+                                                <strong>相关附件:</strong>
+                                                <div class="pl-4 mt-1">
+                                                    <div
+                                                        v-if="relatedAttachmentsCollapsed"
+                                                        class="flex items-center justify-between rounded px-2 py-1 cursor-pointer hover:bg-blue-50 transition-colors"
+                                                        @click.stop="openItemDetail(item, phase.id, index)"
+                                                    >
+                                                        <template v-if="getRelatedFileDisplayNames(item).length === 0">
+                                                            <span class="text-gray-500">暂无附件</span>
+                                                        </template>
+                                                        <template v-else>
+                                                            <div class="flex min-w-0 items-center">
+                                                                <i :class="`${getFileTypeIconByFileName(getRelatedFilesFirstName(item))} mr-2`"></i>
+                                                                <span
+                                                                    class="truncate"
+                                                                    @click.stop="handleRelatedFileClick(getRelatedFilesFirstName(item), item, phase.id, index)"
+                                                                >{{ getRelatedFilesFirstName(item) }}</span>
+                                                                <span
+                                                                    v-if="getRelatedFilesExtraCount(item) > 0"
+                                                                    class="ml-1 text-gray-600 flex-shrink-0"
+                                                                >等{{ getRelatedFilesExtraCount(item) }}个文件</span>
+                                                            </div>
+                                                            <i
+                                                                class="el-icon-arrow-right text-blue-500 hover:text-blue-700"
+                                                                @click.stop="openItemDetail(item, phase.id, index)"
+                                                            ></i>
+                                                        </template>
+                                                    </div>
+                                                    <template v-else>
+                                                        <div
+                                                            v-for="(fileName, fileIndex) in getRelatedFileDisplayNames(item)"
+                                                            :key="`${item.id}_approved_related_${fileIndex}`"
+                                                            class="flex items-center justify-between rounded px-2 py-1 cursor-pointer hover:bg-blue-50 transition-colors"
+                                                            @click.stop="openItemDetail(item, phase.id, index)"
+                                                        >
+                                                            <div class="flex min-w-0 items-center">
+                                                                <i :class="`${getFileTypeIconByFileName(fileName)} mr-2`"></i>
+                                                                <span
+                                                                    class="truncate"
+                                                                    @click.stop="handleRelatedFileClick(fileName, item, phase.id, index)"
+                                                                >{{ fileName }}</span>
+                                                            </div>
+                                                            <i
+                                                                class="el-icon-arrow-right text-blue-500 hover:text-blue-700"
+                                                                @click.stop="openItemDetail(item, phase.id, index)"
+                                                            ></i>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="status-indicator">
-                                        <i :class="getStatusIcon(item)"></i>
-                                    </div>
+                                </div>
+                                <div class="status-indicator absolute right-2 top-2">
+                                    <i :class="getStatusIcon(item)"></i>
                                 </div>
                             </div>
                         </div>
