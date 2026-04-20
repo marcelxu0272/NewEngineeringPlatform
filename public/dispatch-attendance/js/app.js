@@ -16,6 +16,24 @@
     { id: 'VND-7800', name: '广州鸿达工程咨询' },
   ];
 
+  /** 与「第三方人员管理」对齐的 Mock：按项目带出默认派遣名单（可增删改） */
+  const PROJECT_THIRD_PARTY_PERSONNEL = {
+    'PJT-10023': [
+      { name: '张三', vendorId: 'VND-7788' },
+      { name: '李四', vendorId: 'VND-7788' },
+      { name: '王五', vendorId: 'VND-7799' },
+    ],
+    'PJT-10024': [
+      { name: '刘一', vendorId: 'VND-7799' },
+      { name: '陈二', vendorId: 'VND-7800' },
+    ],
+    'PJT-10025': [
+      { name: '周强', vendorId: 'VND-7788' },
+      { name: '吴敏', vendorId: 'VND-7800' },
+      { name: '郑华', vendorId: 'VND-7800' },
+    ],
+  };
+
   const STATUS_LIST = [
     { value: 'DRAFT', label: '草稿', tag: 'info' },
     { value: 'SUBMITTED', label: '待采购确认', tag: 'warning' },
@@ -28,7 +46,21 @@
 
   const STATUS_MAP = STATUS_LIST.reduce((m, s) => ((m[s.value] = s), m), {});
 
-  // 符号/数值解析：支持 8 / 4 / + / ⊕ / ○ / √ / ☆ / ×
+  /** 日格下拉候选项（值与 parseDay 约定一致；亦可 allow-create 输入其他数字工时） */
+  const DAY_ENTRY_OPTIONS = [
+    { value: '8', meaning: '全日出勤（8h）' },
+    { value: '9', meaning: '全日出勤（9h）' },
+    { value: '4', meaning: '半日出勤（4h）' },
+    { value: '+', meaning: '事假' },
+    { value: '⊕', meaning: '病假' },
+    { value: '○', meaning: '调休' },
+    { value: '√', meaning: '年休' },
+    { value: '☆', meaning: '法定节假日加班' },
+    { value: '×', meaning: '旷工' },
+    { value: '▲', meaning: '项目假' },
+  ];
+
+  // 符号/数值解析：支持 8 / 4 / + / ⊕ / ○ / √ / ☆ / × / ▲
   function parseDay(raw) {
     const v = (raw || '').toString().trim();
     if (!v) return null;
@@ -38,6 +70,7 @@
     if (v === '√') return { type: 'annual', hours: 8 };
     if (v === '☆') return { type: 'legal', hours: 8 };
     if (v === '×') return { type: 'absent', hours: 0 };
+    if (v === '▲') return { type: 'projectLeave', hours: 8 };
     const num = Number(v);
     if (!isNaN(num)) {
       if (num >= 8) return { type: 'actual', hours: 8, ot: num - 8 };
@@ -62,6 +95,8 @@
       vendorId,
       rate: { normal: rate || 150, otWeekdayCoef: 1.5, otWeekendCoef: 2, otHolidayCoef: 3 },
       days: Array(31).fill(''),
+      otherAttendance: '',
+      remark: '',
       summary: emptySummary(),
     };
   }
@@ -76,6 +111,7 @@
       annual: 0,
       personal: 0,
       sick: 0,
+      projectLeave: 0,
       absent: 0,
     };
   }
@@ -101,6 +137,9 @@
           break;
         case 'sick':
           sum.sick += parsed.hours;
+          break;
+        case 'projectLeave':
+          sum.projectLeave += parsed.hours;
           break;
         case 'comp':
           sum.compOff += parsed.hours;
@@ -261,6 +300,8 @@
           { name: '周三', vendorName: '广州鸿达工程咨询', actual: 152 },
         ],
 
+        dayEntryOptions: DAY_ENTRY_OPTIONS,
+
         currentSheetId: null,
 
         tableHeaderStyle: { background: '#f7f9fb', color: '#374151', fontWeight: 600 },
@@ -331,6 +372,10 @@
           if (row.summary.personal > 0 && row.summary.personal % 4 !== 0) {
             msgs.push(`「${row.name}」事假合计不是 4 的倍数`);
           }
+          const pl = row.summary.projectLeave || 0;
+          if (pl > 0 && pl % 4 !== 0) {
+            msgs.push(`「${row.name}」项目假合计不是 4 的倍数`);
+          }
         });
         return msgs;
       },
@@ -375,6 +420,10 @@
       formatAmount(v) {
         return (Number(v) || 0).toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       },
+      formatProjectDisplay(project) {
+        if (!project) return '';
+        return `${project.code}  ${project.name}`;
+      },
       vendorName(id) {
         const v = this.vendors.find((x) => x.id === id);
         return v ? v.name : id || '—';
@@ -409,6 +458,26 @@
       onProjectChange(id) {
         const p = this.projects.find((x) => x.id === id);
         this.editForm.projectCode = p ? p.code : '';
+        if (this.editMode !== 'create' || !id) return;
+        this.applyThirdPartyPersonnelForProject(id);
+      },
+      applyThirdPartyPersonnelForProject(projectId) {
+        const list = PROJECT_THIRD_PARTY_PERSONNEL[projectId];
+        if (!list || list.length === 0) {
+          this.editForm.persons = [];
+          return;
+        }
+        this.editForm.persons = list.map((x, i) => makeRow(x.name, x.vendorId, 150 + (i % 3) * 10));
+        const period = this.editForm.period;
+        if (!period) return;
+        const [y, mo] = period.split('-').map(Number);
+        this.editForm.persons.forEach((row) => recalcRow(row, y, mo));
+      },
+      onEditPeriodChange() {
+        const p = this.editForm.period;
+        if (!p || !this.editForm.persons.length) return;
+        const [y, m] = p.split('-').map(Number);
+        this.editForm.persons.forEach((row) => recalcRow(row, y, m));
       },
       openCreate() {
         this.editMode = 'create';
@@ -426,9 +495,17 @@
           persons: sheet.persons.map((p) => ({
             ...p,
             days: [...p.days],
-            summary: { ...p.summary },
+            otherAttendance: p.otherAttendance || '',
+            remark: p.remark || '',
+            summary: { ...emptySummary(), ...p.summary },
           })),
         };
+        this.$nextTick(() => {
+          const period = this.editForm.period;
+          if (!period) return;
+          const [y, mo] = period.split('-').map(Number);
+          this.editForm.persons.forEach((row) => recalcRow(row, y, mo));
+        });
         this.editDrawer = true;
       },
       addPerson() {
@@ -447,6 +524,46 @@
         const [y, m] = p.split('-').map(Number);
         recalcRow(row, y, m);
       },
+      setDayCell(row, idx, val) {
+        const s = val === null || val === undefined ? '' : String(val).trim();
+        this.$set(row.days, idx, s);
+        this.recalcRow(row);
+      },
+      /** 从 el-select 实例读取 filter 输入框内容（filterable + allow-create 失焦未点选项时仍保留） */
+      getSelectQuery(selectInst) {
+        if (!selectInst) return '';
+        const raw =
+          selectInst.query !== undefined
+            ? selectInst.query
+            : selectInst.$data && selectInst.$data.query;
+        return raw != null ? String(raw).trim() : '';
+      },
+      selectRef(refKey) {
+        const r = this.$refs[refKey];
+        return r && (Array.isArray(r) ? r[0] : r);
+      },
+      /**
+       * 下拉关闭时把当前检索词写回业务值（避免必须点选列表项）
+       */
+      flushFilterableSelect(refKey, apply) {
+        const tryOnce = () => {
+          const inst = this.selectRef(refKey);
+          const q = this.getSelectQuery(inst);
+          if (q === '') return false;
+          apply(q);
+          if (inst && Object.prototype.hasOwnProperty.call(inst, 'query')) inst.query = '';
+          return true;
+        };
+        tryOnce();
+        this.$nextTick(() => {
+          tryOnce();
+        });
+      },
+      onDayVisibleChange(visible, row, dayNum) {
+        if (visible) return;
+        const refKey = 'daySel_' + row._key + '_' + dayNum;
+        this.flushFilterableSelect(refKey, (q) => this.setDayCell(row, dayNum - 1, q));
+      },
       copyFromLastMonth() {
         if (!this.editForm.projectId) {
           this.$message.warning('请先选择项目');
@@ -458,18 +575,37 @@
         );
         this.$message.success('已复制上月人员名单');
       },
-      fillWeekdayEight() {
+      fillWeekdayByHours() {
+        if (!this.editForm.projectId) {
+          this.$message.warning('请先选择项目');
+          return;
+        }
+        this.$prompt('请输入工作日默认工时（支持小数）', '一键填充工作日', {
+          confirmButtonText: '填充',
+          cancelButtonText: '取消',
+          inputValue: '8',
+          inputPlaceholder: '例如 8 或 9',
+          inputPattern: /^([1-9]\d?)(\.\d{1,2})?$/,
+          inputErrorMessage: '请输入大于 0 且最多两位小数的小时数',
+        })
+          .then(({ value }) => {
+            this.applyWeekdayHours(value);
+          })
+          .catch(() => {});
+      },
+      applyWeekdayHours(hourValue) {
         const p = this.editForm.period;
         if (!p) return;
         const [y, m] = p.split('-').map(Number);
         const max = daysInMonth(y, m);
+        const normalized = String(Number(hourValue));
         this.editForm.persons.forEach((row) => {
           for (let d = 1; d <= max; d++) {
-            if (!isWeekend(y, m, d)) row.days[d - 1] = '8';
+            if (!isWeekend(y, m, d)) row.days[d - 1] = normalized;
           }
           this.recalcRow(row);
         });
-        this.$message.success('已填充所有工作日为 8 小时');
+        this.$message.success(`已填充所有工作日为 ${normalized} 小时`);
       },
       saveDraft() {
         this._persist('DRAFT');

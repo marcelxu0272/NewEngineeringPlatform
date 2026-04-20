@@ -161,6 +161,12 @@ body {
     max-width: 36px;
     width: 36px;
 }
+/* 编辑态日格：下拉选择需略宽于只读数字格 */
+.attendance-matrix:not(.read-only) .day-col {
+    min-width: 56px;
+    width: 56px;
+    max-width: 58px;
+}
 .attendance-matrix .day-col.weekend,
 .attendance-matrix .day-cell.weekend {
     background: #fef9ee;
@@ -183,11 +189,103 @@ body {
     border-color: #007069;
     box-shadow: 0 0 0 2px rgba(0, 112, 105, .12);
 }
+
+.attendance-matrix:not(.read-only) .day-select.el-select {
+    display: block;
+    width: 100%;
+}
+.attendance-matrix:not(.read-only) .day-select .el-input__inner {
+    height: 26px !important;
+    line-height: 26px !important;
+    padding-left: 4px !important;
+    padding-right: 22px !important;
+    text-align: center;
+    font-size: 12px;
+    border-radius: 4px;
+}
+.attendance-matrix:not(.read-only) .day-select .el-input__inner:focus {
+    border-color: #007069;
+    box-shadow: 0 0 0 2px rgba(0, 112, 105, .12);
+}
+.attendance-matrix:not(.read-only) .day-select .el-input__suffix {
+    right: 0;
+}
+
+/* 日格：外观同普通输入框，隐藏下拉箭头；清空按钮（有值时悬停）仍保留 */
+.attendance-matrix:not(.read-only) .day-select-plain .el-select__caret {
+    display: none !important;
+}
+.attendance-matrix:not(.read-only) .day-select-plain .el-input__inner {
+    border: 1px solid #e5e7eb !important;
+    background: #fff !important;
+    padding-right: 8px !important;
+    box-shadow: none;
+}
+.attendance-matrix:not(.read-only) .day-select-plain .el-input__suffix {
+    right: 2px;
+}
+
+/* 供应商选择：外观为输入框，不显示下拉箭头；保留下拉选择与输入能力 */
+.attendance-matrix:not(.read-only) .vendor-select-plain .el-select__caret {
+    display: none !important;
+}
+.attendance-matrix:not(.read-only) .vendor-select-plain .el-input__inner {
+    height: 26px !important;
+    line-height: 26px !important;
+    border: 1px solid #e5e7eb !important;
+    border-radius: 4px !important;
+    background: #fff !important;
+    padding-right: 8px !important;
+}
+.attendance-matrix:not(.read-only) .vendor-select-plain .el-input__suffix {
+    right: 2px;
+}
+
+/* 日格下拉：左侧为填写值，右侧为含义说明 */
+.day-entry-select-dropdown.el-select-dropdown {
+    min-width: 280px;
+    max-width: 360px;
+}
+.day-entry-select-dropdown .el-select-dropdown__item {
+    height: auto !important;
+    line-height: 1.35 !important;
+    padding: 8px 12px !important;
+    white-space: normal;
+}
+.day-opt-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+}
+.day-opt-val {
+    font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
+    font-weight: 600;
+    color: #111827;
+    flex-shrink: 0;
+    min-width: 1.25rem;
+}
+.day-opt-mean {
+    font-size: 12px;
+    color: #6b7280;
+    text-align: right;
+    flex: 1;
+}
 .attendance-matrix .sum-col {
     min-width: 64px;
     background: #f9fafb;
     font-weight: 600;
     color: #374151;
+}
+.attendance-matrix .extra-col {
+    background: #fff;
+    text-align: left;
+}
+.attendance-matrix .remark-col {
+    min-width: 180px;
+    background: #fff;
+    text-align: left;
 }
 .attendance-matrix .op-col {
     min-width: 60px;
@@ -243,3 +341,25 @@ body {
 
 /* tab 上方留白 */
 .el-tabs__nav-wrap { padding-top: 4px; }
+
+/* 项目选择：同一条内展示项目号 + 项目名 */
+.project-option-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+.project-option-code {
+    font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
+    color: #374151;
+    flex-shrink: 0;
+    min-width: 72px;
+}
+.project-option-name {
+    color: #111827;
+    text-align: right;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -60,7 +60,16 @@
                 <div class="flex-1 min-w-[200px]">
                     <label class="block text-xs text-gray-500 mb-1">项目</label>
                     <el-select v-model="filter.project" clearable size="small" placeholder="全部项目" class="w-full">
-                        <el-option v-for="p in projects" :key="p.id" :label="p.name" :value="p.id"></el-option>
+                        <el-option
+                            v-for="p in projects"
+                            :key="p.id"
+                            :label="formatProjectDisplay(p)"
+                            :value="p.id">
+                            <div class="project-option-row">
+                                <span class="project-option-code">{{ p.code }}</span>
+                                <span class="project-option-name">{{ p.name }}</span>
+                            </div>
+                        </el-option>
                     </el-select>
                 </div>
                 <div class="flex-1 min-w-[160px]">
@@ -178,30 +187,46 @@
     <el-drawer :title="editMode === 'create' ? '新建考勤单' : '编辑考勤单'"
                :visible.sync="editDrawer" size="92%" direction="rtl" :wrapper-closable="false">
         <div class="px-6 pb-24 space-y-6">
+            <div v-if="editMode === 'create'" class="rounded-lg border border-[#cfe9e6] bg-[#f3fbfa] p-4">
+                <div class="text-sm font-semibold text-[#007069] mb-2">操作说明</div>
+                <div class="text-xs text-gray-700 leading-6">
+                    1）先选择项目与年月，系统会自动带出该项目在「第三方人员管理」维护的人员与供应商。<br/>
+                    2）可继续增删人员，日格支持输入数字小时数，或从候选项选择请假/符号（含 ▲ 项目假 / + 事假 / ⊕ 病假 / ○ 调休 / √ 年休 / ☆ 法定 / × 旷工）。<br/>
+                    3）工作日批量填充可输入标准工时（如 8、9、8.5），系统将按工作日统一填入。<br/>
+                    4）31 日后可补充「其他出勤小时数（例如夜间值班等）」和「备注」说明特殊情况。
+                </div>
+            </div>
+
             <!-- 基础信息 -->
             <div class="bg-gray-50 rounded-lg p-4">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
                         <label class="block text-xs text-gray-500 mb-1">项目 *</label>
                         <el-select v-model="editForm.projectId" size="small" placeholder="选择项目" class="w-full"
                                    :disabled="editMode==='edit'" @change="onProjectChange">
-                            <el-option v-for="p in projects" :key="p.id" :label="p.name" :value="p.id"></el-option>
+                            <el-option
+                                v-for="p in projects"
+                                :key="p.id"
+                                :label="formatProjectDisplay(p)"
+                                :value="p.id">
+                                <div class="project-option-row">
+                                    <span class="project-option-code">{{ p.code }}</span>
+                                    <span class="project-option-name">{{ p.name }}</span>
+                                </div>
+                            </el-option>
                         </el-select>
+                        <p v-if="editMode === 'create'" class="text-xs text-gray-400 mt-1 leading-snug">
+                            选择项目后，人员与供应商默认从「第三方人员管理」带出，可继续增删或修改。
+                        </p>
                     </div>
                     <div>
                         <label class="block text-xs text-gray-500 mb-1">年月 *</label>
                         <el-date-picker v-model="editForm.period" type="month" size="small" value-format="yyyy-MM"
                                         :disabled="editMode==='edit'"
-                                        placeholder="选择年月" class="!w-full"></el-date-picker>
+                                        placeholder="选择年月" class="!w-full"
+                                        @change="onEditPeriodChange"></el-date-picker>
                     </div>
-                    <div>
-                        <label class="block text-xs text-gray-500 mb-1">项目号码</label>
-                        <el-input v-model="editForm.projectCode" size="small" disabled></el-input>
-                    </div>
-                    <div>
-                        <label class="block text-xs text-gray-500 mb-1">制表人</label>
-                        <el-input :value="currentUser.name" size="small" disabled></el-input>
-                    </div>
+
                 </div>
             </div>
 
@@ -214,12 +239,9 @@
                         复制上月名单
                     </el-button>
                     <el-button size="small" icon="el-icon-upload2" @click="openImport">Excel 导入</el-button>
-                    <el-button size="small" icon="el-icon-refresh" @click="fillWeekdayEight">一键填充工作日 8h</el-button>
+                    <el-button size="small" icon="el-icon-refresh" @click="fillWeekdayByHours">一键填充工作日</el-button>
                 </div>
-                <div class="text-xs text-gray-500 flex items-center gap-2">
-                    <i class="fas fa-info-circle"></i>
-                    符号：8 全日 / 4 半日 / + 事假 / ⊕ 病假 / ○ 调休 / √ 年休 / ☆ 法定 / × 旷工
-                </div>
+
             </div>
 
             <!-- 日历矩阵 -->
@@ -229,34 +251,77 @@
                         <thead>
                         <tr class="bg-gray-50 text-gray-600">
                             <th class="sticky-col-1">#</th>
+                            <th class="op-col">操作</th>
                             <th class="sticky-col-2">姓名</th>
                             <th class="sticky-col-3">供应商</th>
                             <th v-for="d in daysInMonth" :key="'d'+d"
                                 :class="['day-col', isWeekend(d) ? 'weekend' : '']">{{ d }}</th>
+                            <th class="extra-col">其他出勤小时数<br/><span class="text-[10px] text-gray-400 font-normal">例如夜间值班等</span></th>
+                            <th class="remark-col">备注</th>
                             <th class="sum-col">实际</th>
                             <th class="sum-col">平时加班</th>
                             <th class="sum-col">周末加班</th>
                             <th class="sum-col">法定加班</th>
                             <th class="sum-col">事假</th>
                             <th class="sum-col">病假</th>
-                            <th class="op-col">操作</th>
+                            <th class="sum-col">项目假</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr v-for="(row, idx) in editForm.persons" :key="row._key">
                             <td class="sticky-col-1">{{ idx + 1 }}</td>
+                            <td class="op-col">
+                                <el-button size="mini" type="text"  @click="removePerson(idx)">
+                                    <i class="fas fa-times text-red-500"></i>
+                                </el-button>
+                            </td>
                             <td class="sticky-col-2">
                                 <el-input v-model="row.name" size="mini" placeholder="姓名"></el-input>
                             </td>
                             <td class="sticky-col-3">
-                                <el-select v-model="row.vendorId" size="mini" placeholder="选择" class="!w-[130px]">
+                                <el-select
+                                    v-model="row.vendorId"
+                                    size="mini"
+                                    placeholder="供应商"
+                                    class="!w-[130px] vendor-select-plain"
+                                    filterable
+                                    allow-create
+                                    default-first-option>
                                     <el-option v-for="v in vendors" :key="v.id" :label="v.name" :value="v.id"></el-option>
                                 </el-select>
                             </td>
                             <td v-for="d in daysInMonth" :key="'c'+row._key+d"
                                 :class="['day-cell', isWeekend(d) ? 'weekend' : '']">
-                                <input class="day-input" v-model="row.days[d-1]" @input="recalcRow(row)"
-                                       :placeholder="''" maxlength="3" />
+                                <el-select
+                                    :ref="'daySel_' + row._key + '_' + d"
+                                    :value="row.days[d-1] === '' ? undefined : row.days[d-1]"
+                                    size="mini"
+                                    class="day-select day-select-plain"
+                                    clearable
+                                    filterable
+                                    allow-create
+                                    default-first-option
+                                    placeholder=""
+                                    popper-class="day-entry-select-dropdown"
+                                    @visible-change="onDayVisibleChange($event, row, d)"
+                                    @change="setDayCell(row, d - 1, $event)">
+                                    <el-option
+                                        v-for="opt in dayEntryOptions"
+                                        :key="row._key + '-' + d + '-' + opt.value"
+                                        :label="opt.value"
+                                        :value="opt.value">
+                                        <div class="day-opt-row">
+                                            <span class="day-opt-val">{{ opt.value }}</span>
+                                            <span class="day-opt-mean">{{ opt.meaning }}</span>
+                                        </div>
+                                    </el-option>
+                                </el-select>
+                            </td>
+                            <td class="extra-col">
+                                <el-input v-model="row.otherAttendance" size="mini" placeholder=""></el-input>
+                            </td>
+                            <td class="remark-col">
+                                <el-input v-model="row.remark" size="mini" placeholder="特殊情况备注"></el-input>
                             </td>
                             <td class="sum-col">{{ row.summary.actual }}</td>
                             <td class="sum-col">{{ row.summary.otWeekday }}</td>
@@ -264,14 +329,10 @@
                             <td class="sum-col">{{ row.summary.otHoliday }}</td>
                             <td class="sum-col">{{ row.summary.personal }}</td>
                             <td class="sum-col">{{ row.summary.sick }}</td>
-                            <td class="op-col">
-                                <el-button size="mini" type="text" class="!text-red-500" @click="removePerson(idx)">
-                                    删除
-                                </el-button>
-                            </td>
+                            <td class="sum-col">{{ row.summary.projectLeave }}</td>
                         </tr>
                         <tr v-if="editForm.persons.length === 0">
-                            <td :colspan="daysInMonth + 10" class="text-center py-8 text-gray-400">
+                            <td :colspan="daysInMonth + 13" class="text-center py-8 text-gray-400">
                                 暂无人员，点击上方「添加人员」开始录入
                             </td>
                         </tr>
@@ -311,7 +372,7 @@
         <div class="px-6 pb-24 space-y-6" v-if="currentSheet">
             <div class="review-head">
                 <div>
-                    <div class="text-lg font-semibold">{{ currentSheet.projectName }} <span class="text-gray-400 text-sm ml-2">{{ currentSheet.sheetNo }}</span></div>
+                    <div class="text-lg font-semibold">{{ currentSheet.projectCode }} {{ currentSheet.projectName }} <span class="text-gray-400 text-sm ml-2">{{ currentSheet.sheetNo }}</span></div>
                     <div class="text-sm text-gray-500">
                         期间：{{ currentSheet.year }}-{{ String(currentSheet.month).padStart(2,'0') }} ·
                         制表人：{{ currentSheet.createdBy }} ·
@@ -331,9 +392,15 @@
                             <th class="sticky-col-3">供应商</th>
                             <th v-for="d in daysInSheet(currentSheet)" :key="'rd'+d"
                                 :class="['day-col', isWeekendOf(currentSheet, d) ? 'weekend' : '']">{{ d }}</th>
+                            <th class="extra-col">其他出勤小时数<br/><span class="text-[10px] text-gray-400 font-normal">例如夜间值班等</span></th>
+                            <th class="remark-col">备注</th>
                             <th class="sum-col">实际</th>
-                            <th class="sum-col">加班合计</th>
-                            <th class="sum-col">请假合计</th>
+                            <th class="sum-col">平时加班</th>
+                            <th class="sum-col">周末加班</th>
+                            <th class="sum-col">法定加班</th>
+                            <th class="sum-col">事假</th>
+                            <th class="sum-col">病假</th>
+                            <th class="sum-col">项目假</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -345,9 +412,15 @@
                                 :class="['day-cell', isWeekendOf(currentSheet, d) ? 'weekend' : '']">
                                 {{ row.days[d-1] || '' }}
                             </td>
+                            <td class="extra-col">{{ row.otherAttendance || '—' }}</td>
+                            <td class="remark-col">{{ row.remark || '—' }}</td>
                             <td class="sum-col">{{ row.summary.actual }}</td>
-                            <td class="sum-col">{{ row.summary.otWeekday + row.summary.otWeekend + row.summary.otHoliday }}</td>
-                            <td class="sum-col">{{ row.summary.personal + row.summary.sick + row.summary.annual }}</td>
+                            <td class="sum-col">{{ row.summary.otWeekday }}</td>
+                            <td class="sum-col">{{ row.summary.otWeekend }}</td>
+                            <td class="sum-col">{{ row.summary.otHoliday }}</td>
+                            <td class="sum-col">{{ row.summary.personal }}</td>
+                            <td class="sum-col">{{ row.summary.sick }}</td>
+                            <td class="sum-col">{{ row.summary.projectLeave }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -506,7 +579,7 @@
         <div class="px-6 pb-10 space-y-4" v-if="currentSheet">
             <div class="review-head">
                 <div>
-                    <div class="text-lg font-semibold">{{ currentSheet.projectName }}
+                    <div class="text-lg font-semibold">{{ currentSheet.projectCode }} {{ currentSheet.projectName }}
                         <span class="text-gray-400 text-sm ml-2">{{ currentSheet.sheetNo }}</span>
                     </div>
                     <div class="text-sm text-gray-500">
@@ -535,9 +608,15 @@
                                     <th class="sticky-col-3">供应商</th>
                                     <th v-for="d in daysInSheet(currentSheet)" :key="'dd'+d"
                                         :class="['day-col', isWeekendOf(currentSheet, d) ? 'weekend' : '']">{{ d }}</th>
+                                    <th class="extra-col">其他出勤小时数<br/><span class="text-[10px] text-gray-400 font-normal">例如夜间值班等</span></th>
+                                    <th class="remark-col">备注</th>
                                     <th class="sum-col">实际</th>
-                                    <th class="sum-col">加班</th>
-                                    <th class="sum-col">请假</th>
+                                    <th class="sum-col">平时加班</th>
+                                    <th class="sum-col">周末加班</th>
+                                    <th class="sum-col">法定加班</th>
+                                    <th class="sum-col">事假</th>
+                                    <th class="sum-col">病假</th>
+                                    <th class="sum-col">项目假</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -549,9 +628,15 @@
                                         :class="['day-cell', isWeekendOf(currentSheet, d) ? 'weekend' : '']">
                                         {{ row.days[d-1] || '' }}
                                     </td>
+                                    <td class="extra-col">{{ row.otherAttendance || '—' }}</td>
+                                    <td class="remark-col">{{ row.remark || '—' }}</td>
                                     <td class="sum-col">{{ row.summary.actual }}</td>
-                                    <td class="sum-col">{{ row.summary.otWeekday + row.summary.otWeekend + row.summary.otHoliday }}</td>
-                                    <td class="sum-col">{{ row.summary.personal + row.summary.sick + row.summary.annual }}</td>
+                                    <td class="sum-col">{{ row.summary.otWeekday }}</td>
+                                    <td class="sum-col">{{ row.summary.otWeekend }}</td>
+                                    <td class="sum-col">{{ row.summary.otHoliday }}</td>
+                                    <td class="sum-col">{{ row.summary.personal }}</td>
+                                    <td class="sum-col">{{ row.summary.sick }}</td>
+                                    <td class="sum-col">{{ row.summary.projectLeave }}</td>
                                 </tr>
                                 </tbody>
                             </table>
