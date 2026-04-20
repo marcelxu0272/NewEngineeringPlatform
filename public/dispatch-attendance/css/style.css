@@ -1,0 +1,245 @@
+[v-cloak] { display: none; }
+
+html, body { height: 100%; }
+
+body {
+    font-family: 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, sans-serif;
+    color: #1f2937;
+}
+
+/* 顶部栏 */
+.top-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+/* 统计卡片 */
+.stat-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.06);
+    border: 1px solid #eef1f5;
+    position: relative;
+    overflow: hidden;
+}
+.stat-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0; width: 3px;
+    background: #007069;
+    opacity: .85;
+}
+.stat-label {
+    font-size: 13px;
+    color: #6b7280;
+}
+.stat-value {
+    margin-top: 6px;
+    font-size: 26px;
+    font-weight: 700;
+    color: #111827;
+}
+.stat-hint {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #9ca3af;
+}
+
+/* Element UI 主色覆盖（部分常见组件） */
+.el-button--primary {
+    --primary: #007069;
+}
+.el-radio-button__inner:hover {
+    color: #007069;
+}
+.el-radio-button__original-radio:checked + .el-radio-button__inner {
+    background-color: #007069;
+    border-color: #007069;
+    box-shadow: -1px 0 0 0 #007069;
+}
+.el-tabs__item.is-active {
+    color: #007069;
+}
+.el-tabs__active-bar {
+    background-color: #007069;
+}
+.el-tabs__item:hover {
+    color: #007069;
+}
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #007069;
+}
+.el-step__head.is-process {
+    color: #007069;
+    border-color: #007069;
+}
+.el-step__head.is-success {
+    color: #007069;
+    border-color: #007069;
+}
+.el-step__title.is-process,
+.el-step__title.is-success {
+    color: #007069;
+}
+
+/* 考勤矩阵
+ * 横向滚动时前三列使用 position:sticky + 固定 left 偏移，须与真实列宽严格一致。
+ * 若 table 为 width:100% 且列仅用 min-width，列 2/3 会被拉宽，而 left 仍为 40/140px，
+ * 会导致首列日期被压在固定列下仅露一条细缝。故：table-layout:fixed、前三列定宽、表格按内容撑开。 */
+.attendance-matrix {
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+    width: max-content;
+    max-width: none;
+    font-size: 12px;
+}
+.attendance-matrix th, .attendance-matrix td {
+    box-sizing: border-box;
+    border-bottom: 1px solid #edf0f3;
+    border-right: 1px solid #edf0f3;
+    padding: 4px 6px;
+    background: #fff;
+    vertical-align: middle;
+    text-align: center;
+    white-space: nowrap;
+}
+.attendance-matrix thead th {
+    position: sticky;
+    top: 0;
+    z-index: 3;
+    background: #f7f9fb;
+    font-weight: 600;
+    color: #374151;
+}
+.attendance-matrix .sticky-col-1 {
+    position: sticky;
+    left: 0;
+    z-index: 4;
+    background: #fff;
+    width: 40px;
+    min-width: 40px;
+    max-width: 40px;
+}
+.attendance-matrix .sticky-col-2 {
+    position: sticky;
+    left: 40px;
+    z-index: 4;
+    background: #fff;
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    text-align: left;
+}
+.attendance-matrix .sticky-col-3 {
+    position: sticky;
+    left: 140px;
+    z-index: 4;
+    background: #fff;
+    width: 140px;
+    min-width: 140px;
+    max-width: 140px;
+    text-align: left;
+}
+.attendance-matrix.read-only .sticky-col-2,
+.attendance-matrix.read-only .sticky-col-3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.attendance-matrix:not(.read-only) .sticky-col-2,
+.attendance-matrix:not(.read-only) .sticky-col-3 {
+    overflow: visible;
+}
+.attendance-matrix thead .sticky-col-1,
+.attendance-matrix thead .sticky-col-2,
+.attendance-matrix thead .sticky-col-3 { z-index: 5; background: #f7f9fb; }
+
+.attendance-matrix .day-col {
+    min-width: 36px;
+    max-width: 36px;
+    width: 36px;
+}
+.attendance-matrix .day-col.weekend,
+.attendance-matrix .day-cell.weekend {
+    background: #fef9ee;
+}
+.attendance-matrix .day-cell {
+    padding: 2px;
+}
+.attendance-matrix .day-input {
+    width: 32px;
+    height: 26px;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 12px;
+    outline: none;
+    background: #fff;
+    transition: all .15s;
+}
+.attendance-matrix .day-input:focus {
+    border-color: #007069;
+    box-shadow: 0 0 0 2px rgba(0, 112, 105, .12);
+}
+.attendance-matrix .sum-col {
+    min-width: 64px;
+    background: #f9fafb;
+    font-weight: 600;
+    color: #374151;
+}
+.attendance-matrix .op-col {
+    min-width: 60px;
+    background: #fff;
+}
+
+.attendance-matrix.read-only .day-cell {
+    font-weight: 500;
+}
+
+/* 抽屉底部操作条 */
+.drawer-footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 56px;
+    padding: 0 24px;
+    background: #ffffffee;
+    backdrop-filter: blur(6px);
+    border-top: 1px solid #edf0f3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, .04);
+}
+
+/* 采购确认 / 详情头 */
+.review-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f7f9fb;
+    border: 1px solid #eef1f5;
+    border-radius: 8px;
+    padding: 14px 18px;
+}
+
+/* 表格头部加底色 */
+.el-table th.el-table__cell {
+    background-color: #f7f9fb !important;
+}
+
+/* 抽屉标题紧凑一点 */
+.el-drawer__header {
+    margin-bottom: 12px;
+    padding: 12px 20px;
+    border-bottom: 1px solid #edf0f3;
+}
+
+/* tag 圆角柔和 */
+.el-tag { border-radius: 4px; }
+
+/* tab 上方留白 */
+.el-tabs__nav-wrap { padding-top: 4px; }

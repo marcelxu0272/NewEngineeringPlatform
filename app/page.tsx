@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LayoutDashboard, Users, Wrench, Megaphone, BarChart3, FolderKanban, ChevronRight, Network, ClipboardList, UserCog } from 'lucide-react';
+import { LayoutDashboard, Users, Wrench, Megaphone, BarChart3, FolderKanban, ChevronRight, Network, ClipboardList, UserCog, CalendarCheck } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const routes = [
@@ -63,6 +63,12 @@ const routes = [
     title: '第三方人员管理',
     description: '合作方人员信息、CSV 批量导入与导出',
     icon: UserCog,
+  },
+  {
+    href: '/dispatch-attendance',
+    title: '派遣人员考勤',
+    description: '月度考勤、采购确认、成本测算与应付单推送',
+    icon: CalendarCheck,
   },
   {
     href: '/delivery-assurance-action-items-config',

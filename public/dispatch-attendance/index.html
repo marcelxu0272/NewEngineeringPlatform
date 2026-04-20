@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>派遣人员考勤</title>
+
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.14/lib/theme-chalk/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="bg-gray-100">
+<div id="app" v-cloak>
+    <!-- 顶部栏 -->
+    <div class="top-toolbar bg-white border-b shadow-sm">
+        <div class="flex items-center justify-between px-6 py-3">
+            <div class="flex items-center space-x-4">
+                <h1 class="text-xl font-bold text-gray-800">派遣人员月度考勤</h1>
+                <span class="text-sm text-gray-500">外部派遣人员考勤 · 采购确认 · 测算 · 应付</span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="text-sm text-gray-500">当前身份：</span>
+                <el-radio-group v-model="currentRole" size="small">
+                    <el-radio-button label="PM">项目经理</el-radio-button>
+                    <el-radio-button label="PURCHASER">采购</el-radio-button>
+                </el-radio-group>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-6 py-6 max-w-[1600px] mx-auto">
+        <!-- 统计卡片 -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="stat-card">
+                <div class="stat-label">本月考勤单</div>
+                <div class="stat-value">{{ stats.total }}</div>
+                <div class="stat-hint">当前年月：{{ currentPeriodLabel }}</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">待采购确认</div>
+                <div class="stat-value text-[#d48806]">{{ stats.pending }}</div>
+                <div class="stat-hint">需采购处理</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">已推送付款</div>
+                <div class="stat-value text-[#007069]">{{ stats.pushed }}</div>
+                <div class="stat-hint">本月累计</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">本月应付总额</div>
+                <div class="stat-value">¥ {{ formatAmount(stats.amount) }}</div>
+                <div class="stat-hint">以已确认为准</div>
+            </div>
+        </div>
+
+        <!-- 筛选 + 操作 -->
+        <div class="bg-white rounded-lg shadow p-4 mb-4">
+            <div class="flex flex-wrap items-end gap-4">
+                <div class="flex-1 min-w-[200px]">
+                    <label class="block text-xs text-gray-500 mb-1">项目</label>
+                    <el-select v-model="filter.project" clearable size="small" placeholder="全部项目" class="w-full">
+                        <el-option v-for="p in projects" :key="p.id" :label="p.name" :value="p.id"></el-option>
+                    </el-select>
+                </div>
+                <div class="flex-1 min-w-[160px]">
+                    <label class="block text-xs text-gray-500 mb-1">年月</label>
+                    <el-date-picker v-model="filter.period" type="month" size="small" value-format="yyyy-MM"
+                                    placeholder="选择年月" class="!w-full"></el-date-picker>
+                </div>
+                <div class="flex-1 min-w-[140px]">
+                    <label class="block text-xs text-gray-500 mb-1">状态</label>
+                    <el-select v-model="filter.status" clearable size="small" placeholder="全部状态" class="w-full">
+                        <el-option v-for="s in statusOptions" :key="s.value" :label="s.label" :value="s.value"></el-option>
+                    </el-select>
+                </div>
+                <div class="flex-1 min-w-[200px]">
+                    <label class="block text-xs text-gray-500 mb-1">单号/项目/供应商</label>
+                    <el-input v-model="filter.keyword" size="small" clearable placeholder="输入关键字搜索"></el-input>
+                </div>
+                <div class="flex gap-2">
+                    <el-button size="small" @click="resetFilter">重置</el-button>
+                    <el-button size="small" type="primary" class="!bg-[#007069] !border-[#007069]"
+                               icon="el-icon-plus" @click="openCreate">新建考勤单</el-button>
+                    <el-button size="small" icon="el-icon-upload2" @click="openImport">Excel 导入</el-button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 列表 -->
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <el-table :data="pagedSheets" stripe style="width: 100%" :header-cell-style="tableHeaderStyle">
+                <el-table-column prop="sheetNo" label="单号" width="170"></el-table-column>
+                <el-table-column label="项目" min-width="180">
+                    <template slot-scope="scope">
+                        <div class="font-medium text-gray-800">{{ scope.row.projectName }}</div>
+                        <div class="text-xs text-gray-500">{{ scope.row.projectCode }}</div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="期间" width="110">
+                    <template slot-scope="scope">
+                        {{ scope.row.year }}-{{ String(scope.row.month).padStart(2,'0') }}
+                    </template>
+                </el-table-column>
+                <el-table-column label="供应商数" width="100" align="center">
+                    <template slot-scope="scope">{{ vendorCount(scope.row) }}</template>
+                </el-table-column>
+                <el-table-column label="人数" width="80" align="center">
+                    <template slot-scope="scope">{{ scope.row.persons.length }}</template>
+                </el-table-column>
+                <el-table-column label="状态" width="130">
+                    <template slot-scope="scope">
+                        <el-tag :type="statusMap[scope.row.status].tag" size="small" effect="light">
+                            {{ statusMap[scope.row.status].label }}
+                        </el-tag>
+                        <div v-if="scope.row.status === 'PUSH_FAILED'" class="text-xs text-red-500 mt-1">
+                            已重试 {{ scope.row.pushAttempts }} 次
+                        </div>
+                    </template>
+                </el-table-column>
+                <el-table-column label="应付金额" width="140" align="right">
+                    <template slot-scope="scope">
+                        <span v-if="scope.row.amount" class="font-semibold text-gray-800">
+                            ¥ {{ formatAmount(scope.row.amount) }}
+                        </span>
+                        <span v-else class="text-gray-400">—</span>
+                    </template>
+                </el-table-column>
+                <el-table-column prop="updatedAt" label="更新时间" width="160"></el-table-column>
+                <el-table-column label="操作" width="240" fixed="right">
+                    <template slot-scope="scope">
+                        <el-button size="mini" type="text" @click="openDetail(scope.row)">查看</el-button>
+
+                        <!-- 项目经理动作 -->
+                        <template v-if="currentRole === 'PM'">
+                            <el-button size="mini" type="text"
+                                       v-if="['DRAFT','REJECTED'].includes(scope.row.status)"
+                                       @click="openEdit(scope.row)">编辑</el-button>
+                            <el-button size="mini" type="text"
+                                       v-if="['DRAFT','REJECTED'].includes(scope.row.status)"
+                                       @click="submitSheet(scope.row)">送采购确认</el-button>
+                        </template>
+
+                        <!-- 采购动作 -->
+                        <template v-if="currentRole === 'PURCHASER'">
+                            <el-button size="mini" type="text"
+                                       v-if="scope.row.status === 'SUBMITTED'"
+                                       @click="openReview(scope.row)">确认</el-button>
+                            <el-button size="mini" type="text" class="!text-[#007069]"
+                                       v-if="scope.row.status === 'APPROVED'"
+                                       @click="openCalc(scope.row)">成本测算</el-button>
+                            <el-button size="mini" type="text" class="!text-[#007069]"
+                                       v-if="scope.row.status === 'PAYABLE_GENERATED' || scope.row.status === 'PUSH_FAILED'"
+                                       @click="openPayable(scope.row)">应付/推送</el-button>
+                            <el-button size="mini" type="text"
+                                       v-if="scope.row.status === 'PUSHED_TO_PAYMENT'"
+                                       @click="openPayable(scope.row)">查看应付</el-button>
+                        </template>
+                    </template>
+                </el-table-column>
+            </el-table>
+
+            <div class="flex items-center justify-between px-4 py-3 border-t border-gray-200">
+                <div class="text-sm text-gray-600">
+                    共 <span class="font-medium">{{ filteredSheets.length }}</span> 条
+                </div>
+                <el-pagination background layout="prev, pager, next, sizes"
+                               :current-page.sync="page.current"
+                               :page-size.sync="page.size"
+                               :page-sizes="[10,20,50]"
+                               :total="filteredSheets.length">
+                </el-pagination>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新建/编辑 抽屉 -->
+    <el-drawer :title="editMode === 'create' ? '新建考勤单' : '编辑考勤单'"
+               :visible.sync="editDrawer" size="92%" direction="rtl" :wrapper-closable="false">
+        <div class="px-6 pb-24 space-y-6">
+            <!-- 基础信息 -->
+            <div class="bg-gray-50 rounded-lg p-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">项目 *</label>
+                        <el-select v-model="editForm.projectId" size="small" placeholder="选择项目" class="w-full"
+                                   :disabled="editMode==='edit'" @change="onProjectChange">
+                            <el-option v-for="p in projects" :key="p.id" :label="p.name" :value="p.id"></el-option>
+                        </el-select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">年月 *</label>
+                        <el-date-picker v-model="editForm.period" type="month" size="small" value-format="yyyy-MM"
+                                        :disabled="editMode==='edit'"
+                                        placeholder="选择年月" class="!w-full"></el-date-picker>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">项目号码</label>
+                        <el-input v-model="editForm.projectCode" size="small" disabled></el-input>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-gray-500 mb-1">制表人</label>
+                        <el-input :value="currentUser.name" size="small" disabled></el-input>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 工具条 -->
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <el-button size="small" icon="el-icon-plus" type="primary"
+                               class="!bg-[#007069] !border-[#007069]" @click="addPerson">添加人员</el-button>
+                    <el-button size="small" icon="el-icon-document-copy" @click="copyFromLastMonth">
+                        复制上月名单
+                    </el-button>
+                    <el-button size="small" icon="el-icon-upload2" @click="openImport">Excel 导入</el-button>
+                    <el-button size="small" icon="el-icon-refresh" @click="fillWeekdayEight">一键填充工作日 8h</el-button>
+                </div>
+                <div class="text-xs text-gray-500 flex items-center gap-2">
+                    <i class="fas fa-info-circle"></i>
+                    符号：8 全日 / 4 半日 / + 事假 / ⊕ 病假 / ○ 调休 / √ 年休 / ☆ 法定 / × 旷工
+                </div>
+            </div>
+
+            <!-- 日历矩阵 -->
+            <div class="rounded-lg overflow-hidden border border-gray-200">
+                <div class="overflow-x-auto">
+                    <table class="attendance-matrix">
+                        <thead>
+                        <tr class="bg-gray-50 text-gray-600">
+                            <th class="sticky-col-1">#</th>
+                            <th class="sticky-col-2">姓名</th>
+                            <th class="sticky-col-3">供应商</th>
+                            <th v-for="d in daysInMonth" :key="'d'+d"
+                                :class="['day-col', isWeekend(d) ? 'weekend' : '']">{{ d }}</th>
+                            <th class="sum-col">实际</th>
+                            <th class="sum-col">平时加班</th>
+                            <th class="sum-col">周末加班</th>
+                            <th class="sum-col">法定加班</th>
+                            <th class="sum-col">事假</th>
+                            <th class="sum-col">病假</th>
+                            <th class="op-col">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(row, idx) in editForm.persons" :key="row._key">
+                            <td class="sticky-col-1">{{ idx + 1 }}</td>
+                            <td class="sticky-col-2">
+                                <el-input v-model="row.name" size="mini" placeholder="姓名"></el-input>
+                            </td>
+                            <td class="sticky-col-3">
+                                <el-select v-model="row.vendorId" size="mini" placeholder="选择" class="!w-[130px]">
+                                    <el-option v-for="v in vendors" :key="v.id" :label="v.name" :value="v.id"></el-option>
+                                </el-select>
+                            </td>
+                            <td v-for="d in daysInMonth" :key="'c'+row._key+d"
+                                :class="['day-cell', isWeekend(d) ? 'weekend' : '']">
+                                <input class="day-input" v-model="row.days[d-1]" @input="recalcRow(row)"
+                                       :placeholder="''" maxlength="3" />
+                            </td>
+                            <td class="sum-col">{{ row.summary.actual }}</td>
+                            <td class="sum-col">{{ row.summary.otWeekday }}</td>
+                            <td class="sum-col">{{ row.summary.otWeekend }}</td>
+                            <td class="sum-col">{{ row.summary.otHoliday }}</td>
+                            <td class="sum-col">{{ row.summary.personal }}</td>
+                            <td class="sum-col">{{ row.summary.sick }}</td>
+                            <td class="op-col">
+                                <el-button size="mini" type="text" class="!text-red-500" @click="removePerson(idx)">
+                                    删除
+                                </el-button>
+                            </td>
+                        </tr>
+                        <tr v-if="editForm.persons.length === 0">
+                            <td :colspan="daysInMonth + 10" class="text-center py-8 text-gray-400">
+                                暂无人员，点击上方「添加人员」开始录入
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 校验提示 -->
+            <div v-if="validationMessages.length" class="rounded-lg border border-yellow-200 bg-yellow-50 p-4">
+                <div class="font-medium text-yellow-700 mb-2">
+                    <i class="fas fa-exclamation-triangle mr-1"></i>共 {{ validationMessages.length }} 条校验提示
+                </div>
+                <ul class="text-sm text-yellow-700 list-disc pl-6 space-y-1">
+                    <li v-for="(m,i) in validationMessages" :key="i">{{ m }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 底部操作 -->
+        <div class="drawer-footer">
+            <div class="text-sm text-gray-500">
+                共 <span class="font-semibold">{{ editForm.persons.length }}</span> 人 ·
+                合计实际 {{ totalActualHours }} h · 合计加班 {{ totalOtHours }} h
+            </div>
+            <div class="flex gap-2">
+                <el-button size="small" @click="editDrawer=false">取消</el-button>
+                <el-button size="small" @click="saveDraft">保存草稿</el-button>
+                <el-button size="small" type="primary" class="!bg-[#007069] !border-[#007069]"
+                           @click="submitFromEdit">保存并送采购确认</el-button>
+            </div>
+        </div>
+    </el-drawer>
+
+    <!-- 采购确认抽屉 -->
+    <el-drawer title="考勤单确认" :visible.sync="reviewDrawer" size="92%" direction="rtl">
+        <div class="px-6 pb-24 space-y-6" v-if="currentSheet">
+            <div class="review-head">
+                <div>
+                    <div class="text-lg font-semibold">{{ currentSheet.projectName }} <span class="text-gray-400 text-sm ml-2">{{ currentSheet.sheetNo }}</span></div>
+                    <div class="text-sm text-gray-500">
+                        期间：{{ currentSheet.year }}-{{ String(currentSheet.month).padStart(2,'0') }} ·
+                        制表人：{{ currentSheet.createdBy }} ·
+                        提交时间：{{ currentSheet.submittedAt }}
+                    </div>
+                </div>
+                <el-tag :type="statusMap[currentSheet.status].tag">{{ statusMap[currentSheet.status].label }}</el-tag>
+            </div>
+
+            <div class="rounded-lg overflow-hidden border border-gray-200">
+                <div class="overflow-x-auto">
+                    <table class="attendance-matrix read-only">
+                        <thead>
+                        <tr class="bg-gray-50 text-gray-600">
+                            <th class="sticky-col-1">#</th>
+                            <th class="sticky-col-2">姓名</th>
+                            <th class="sticky-col-3">供应商</th>
+                            <th v-for="d in daysInSheet(currentSheet)" :key="'rd'+d"
+                                :class="['day-col', isWeekendOf(currentSheet, d) ? 'weekend' : '']">{{ d }}</th>
+                            <th class="sum-col">实际</th>
+                            <th class="sum-col">加班合计</th>
+                            <th class="sum-col">请假合计</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="(row, idx) in currentSheet.persons" :key="'r'+row._key">
+                            <td class="sticky-col-1">{{ idx + 1 }}</td>
+                            <td class="sticky-col-2">{{ row.name }}</td>
+                            <td class="sticky-col-3">{{ vendorName(row.vendorId) }}</td>
+                            <td v-for="d in daysInSheet(currentSheet)" :key="'rc'+row._key+d"
+                                :class="['day-cell', isWeekendOf(currentSheet, d) ? 'weekend' : '']">
+                                {{ row.days[d-1] || '' }}
+                            </td>
+                            <td class="sum-col">{{ row.summary.actual }}</td>
+                            <td class="sum-col">{{ row.summary.otWeekday + row.summary.otWeekend + row.summary.otHoliday }}</td>
+                            <td class="sum-col">{{ row.summary.personal + row.summary.sick + row.summary.annual }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm text-gray-600 mb-1">确认意见</label>
+                <el-input type="textarea" :rows="3" v-model="reviewComment" placeholder="确认通过可不填；驳回时请写明原因"></el-input>
+            </div>
+        </div>
+        <div class="drawer-footer" v-if="currentSheet">
+            <div class="text-sm text-gray-500">确认后，明细将被冻结，如需修改请使用「作废重开」。</div>
+            <div class="flex gap-2">
+                <el-button size="small" @click="reviewDrawer=false">取消</el-button>
+                <el-button size="small" type="danger" @click="doReject">驳回</el-button>
+                <el-button size="small" type="primary" class="!bg-[#007069] !border-[#007069]" @click="doApprove">
+                    确认通过
+                </el-button>
+            </div>
+        </div>
+    </el-drawer>
+
+    <!-- 成本测算 Dialog -->
+    <el-dialog title="成本测算" :visible.sync="calcDialog" width="1000px" :close-on-click-modal="false">
+        <div v-if="currentSheet" class="space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <div class="font-semibold">{{ currentSheet.projectName }}
+                        <span class="text-gray-400 text-sm ml-2">{{ currentSheet.sheetNo }}</span>
+                    </div>
+                    <div class="text-xs text-gray-500">期间 {{ currentSheet.year }}-{{ String(currentSheet.month).padStart(2,'0') }} · 费率快照版本 v{{ currentSheet.rateVersion || 1 }}</div>
+                </div>
+                <div class="text-right">
+                    <div class="text-xs text-gray-500">测算应付总额</div>
+                    <div class="text-2xl font-bold text-[#007069]">¥ {{ formatAmount(calcTotal) }}</div>
+                </div>
+            </div>
+
+            <el-table :data="calcRows" size="small" stripe style="width: 100%">
+                <el-table-column prop="name" label="姓名" width="100"></el-table-column>
+                <el-table-column label="供应商" width="160">
+                    <template slot-scope="s">{{ vendorName(s.row.vendorId) }}</template>
+                </el-table-column>
+                <el-table-column label="基本费率" width="110" align="right">
+                    <template slot-scope="s">¥ {{ s.row.rate.normal }}/h</template>
+                </el-table-column>
+                <el-table-column label="实际工时" width="90" align="right">
+                    <template slot-scope="s">{{ s.row.summary.actual }} h</template>
+                </el-table-column>
+                <el-table-column label="平加(x1.5)" width="100" align="right">
+                    <template slot-scope="s">{{ s.row.summary.otWeekday }} h</template>
+                </el-table-column>
+                <el-table-column label="周加(x2)" width="100" align="right">
+                    <template slot-scope="s">{{ s.row.summary.otWeekend }} h</template>
+                </el-table-column>
+                <el-table-column label="法加(x3)" width="100" align="right">
+                    <template slot-scope="s">{{ s.row.summary.otHoliday }} h</template>
+                </el-table-column>
+                <el-table-column label="金额" align="right">
+                    <template slot-scope="s">
+                        <span class="font-semibold text-gray-800">¥ {{ formatAmount(s.row.amount) }}</span>
+                    </template>
+                </el-table-column>
+            </el-table>
+
+            <div class="rounded bg-gray-50 p-3 text-xs text-gray-600">
+                <i class="fas fa-info-circle mr-1"></i>
+                金额 = 实际 × 基本费率 + 平加工时 × 基本费率 × 1.5 + 周加 × 基本 × 2 + 法加 × 基本 × 3 （系数由合同规则决定，本页为模拟值）
+            </div>
+        </div>
+        <div slot="footer">
+            <el-button size="small" @click="calcDialog=false">关闭</el-button>
+            <el-button size="small" type="primary" class="!bg-[#007069] !border-[#007069]" @click="generatePayable">
+                生成应付单
+            </el-button>
+        </div>
+    </el-dialog>
+
+    <!-- 应付单推送 Dialog -->
+    <el-dialog title="应付单" :visible.sync="payableDialog" width="800px" :close-on-click-modal="false">
+        <div v-if="currentSheet" class="space-y-4">
+            <div class="grid grid-cols-2 gap-4">
+                <div class="rounded bg-gray-50 p-3">
+                    <div class="text-xs text-gray-500">应付单号</div>
+                    <div class="font-semibold">{{ currentSheet.payableNo }}</div>
+                </div>
+                <div class="rounded bg-gray-50 p-3">
+                    <div class="text-xs text-gray-500">项目</div>
+                    <div class="font-semibold">{{ currentSheet.projectName }}</div>
+                </div>
+                <div class="rounded bg-gray-50 p-3">
+                    <div class="text-xs text-gray-500">期间</div>
+                    <div class="font-semibold">{{ currentSheet.year }}-{{ String(currentSheet.month).padStart(2,'0') }}</div>
+                </div>
+                <div class="rounded bg-gray-50 p-3">
+                    <div class="text-xs text-gray-500">应付总额</div>
+                    <div class="font-semibold text-[#007069]">¥ {{ formatAmount(currentSheet.amount) }}</div>
+                </div>
+            </div>
+
+            <div>
+                <div class="text-sm text-gray-600 mb-2">按供应商聚合</div>
+                <el-table :data="payableByVendor" size="small" border>
+                    <el-table-column label="供应商" prop="vendorName"></el-table-column>
+                    <el-table-column label="人数" prop="count" width="100" align="center"></el-table-column>
+                    <el-table-column label="金额" align="right">
+                        <template slot-scope="s">¥ {{ formatAmount(s.row.amount) }}</template>
+                    </el-table-column>
+                </el-table>
+            </div>
+
+            <div class="rounded border border-gray-200 p-3">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <div class="text-sm font-medium text-gray-700">推送至平台付款模块</div>
+                        <div class="text-xs text-gray-500 mt-1">
+                            幂等键：{{ currentSheet.payableNo }}-v{{ currentSheet.versionNo || 1 }}
+                        </div>
+                    </div>
+                    <div>
+                        <el-tag v-if="currentSheet.status==='PAYABLE_GENERATED'" type="warning">待推送</el-tag>
+                        <el-tag v-if="currentSheet.status==='PUSH_FAILED'" type="danger">推送失败</el-tag>
+                        <el-tag v-if="currentSheet.status==='PUSHED_TO_PAYMENT'" type="success">已推送</el-tag>
+                    </div>
+                </div>
+                <div v-if="currentSheet.lastPushError" class="mt-2 text-xs text-red-500">
+                    上次错误：{{ currentSheet.lastPushError }}
+                </div>
+                <div v-if="currentSheet.externalPaymentId" class="mt-2 text-xs text-gray-500">
+                    付款模块回执 ID：{{ currentSheet.externalPaymentId }}
+                </div>
+            </div>
+
+            <div class="rounded bg-gray-50 p-3 text-xs text-gray-600 leading-relaxed">
+                <div class="font-semibold text-gray-700 mb-1">
+                    <i class="fas fa-plug mr-1"></i>接口契约（预留，当前为本地模拟）
+                </div>
+                <div>POST <code>/api/payment-intake/payables</code></div>
+                <div>Header: <code>X-Idempotency-Key</code>、<code>X-Trace-Id</code></div>
+                <div>载荷含：项目、供应商、期间、金额、行明细、费率快照、审计信息（操作人/时间/计算快照 ID）。</div>
+            </div>
+        </div>
+        <div slot="footer">
+            <el-button size="small" @click="payableDialog=false">关闭</el-button>
+            <el-button size="small" v-if="currentSheet && currentSheet.status==='PUSH_FAILED'"
+                       @click="retryPush">重试推送</el-button>
+            <el-button size="small" type="primary" class="!bg-[#007069] !border-[#007069]"
+                       v-if="currentSheet && ['PAYABLE_GENERATED','PUSH_FAILED'].includes(currentSheet.status)"
+                       @click="pushPayment">推送到付款模块</el-button>
+        </div>
+    </el-dialog>
+
+    <!-- 查看详情 Drawer（只读） -->
+    <el-drawer title="考勤单详情" :visible.sync="detailDrawer" size="80%" direction="rtl">
+        <div class="px-6 pb-10 space-y-4" v-if="currentSheet">
+            <div class="review-head">
+                <div>
+                    <div class="text-lg font-semibold">{{ currentSheet.projectName }}
+                        <span class="text-gray-400 text-sm ml-2">{{ currentSheet.sheetNo }}</span>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        期间：{{ currentSheet.year }}-{{ String(currentSheet.month).padStart(2,'0') }} ·
+                        制表人：{{ currentSheet.createdBy }} ·
+                        状态：<el-tag size="mini" :type="statusMap[currentSheet.status].tag">{{ statusMap[currentSheet.status].label }}</el-tag>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-xs text-gray-500">应付金额</div>
+                    <div class="text-xl font-semibold text-[#007069]">
+                        {{ currentSheet.amount ? '¥ ' + formatAmount(currentSheet.amount) : '未生成' }}
+                    </div>
+                </div>
+            </div>
+
+            <el-tabs>
+                <el-tab-pane label="考勤明细">
+                    <div class="rounded-lg overflow-hidden border border-gray-200">
+                        <div class="overflow-x-auto">
+                            <table class="attendance-matrix read-only">
+                                <thead>
+                                <tr class="bg-gray-50 text-gray-600">
+                                    <th class="sticky-col-1">#</th>
+                                    <th class="sticky-col-2">姓名</th>
+                                    <th class="sticky-col-3">供应商</th>
+                                    <th v-for="d in daysInSheet(currentSheet)" :key="'dd'+d"
+                                        :class="['day-col', isWeekendOf(currentSheet, d) ? 'weekend' : '']">{{ d }}</th>
+                                    <th class="sum-col">实际</th>
+                                    <th class="sum-col">加班</th>
+                                    <th class="sum-col">请假</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="(row, idx) in currentSheet.persons" :key="'dr'+row._key">
+                                    <td class="sticky-col-1">{{ idx + 1 }}</td>
+                                    <td class="sticky-col-2">{{ row.name }}</td>
+                                    <td class="sticky-col-3">{{ vendorName(row.vendorId) }}</td>
+                                    <td v-for="d in daysInSheet(currentSheet)" :key="'dc'+row._key+d"
+                                        :class="['day-cell', isWeekendOf(currentSheet, d) ? 'weekend' : '']">
+                                        {{ row.days[d-1] || '' }}
+                                    </td>
+                                    <td class="sum-col">{{ row.summary.actual }}</td>
+                                    <td class="sum-col">{{ row.summary.otWeekday + row.summary.otWeekend + row.summary.otHoliday }}</td>
+                                    <td class="sum-col">{{ row.summary.personal + row.summary.sick + row.summary.annual }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </el-tab-pane>
+                <el-tab-pane label="操作记录">
+                    <el-timeline>
+                        <el-timeline-item v-for="(log, i) in currentSheet.logs" :key="i"
+                                          :timestamp="log.at" :color="logColor(log.action)">
+                            <div class="font-medium">{{ log.actionLabel }}</div>
+                            <div class="text-xs text-gray-500">{{ log.operator }} · {{ log.comment || '无备注' }}</div>
+                        </el-timeline-item>
+                    </el-timeline>
+                </el-tab-pane>
+            </el-tabs>
+        </div>
+    </el-drawer>
+
+    <!-- Excel 导入 Dialog（占位） -->
+    <el-dialog title="Excel 导入" :visible.sync="importDialog" width="620px">
+        <div class="space-y-4">
+            <el-steps :active="importStep" align-center>
+                <el-step title="上传文件"></el-step>
+                <el-step title="预览数据"></el-step>
+                <el-step title="确认导入"></el-step>
+            </el-steps>
+            <div v-if="importStep===0" class="rounded-lg border-2 border-dashed border-gray-300 p-8 text-center hover:border-[#007069] cursor-pointer"
+                 @click="mockUploadStep">
+                <i class="fas fa-cloud-upload-alt text-3xl text-gray-400"></i>
+                <p class="mt-2 text-gray-600">点击或拖拽 Excel 文件到此处</p>
+                <p class="text-xs text-gray-400 mt-1">模板下载：参考《众一伍德派遣项目月度考勤表-模板》</p>
+            </div>
+            <div v-if="importStep===1">
+                <div class="text-sm text-gray-600 mb-2">解析到 <b class="text-[#007069]">{{ mockImportPersons.length }}</b> 行人员（示例）</div>
+                <el-table :data="mockImportPersons" size="small" border max-height="240">
+                    <el-table-column prop="name" label="姓名" width="100"></el-table-column>
+                    <el-table-column prop="vendorName" label="供应商"></el-table-column>
+                    <el-table-column prop="actual" label="实际出勤(h)" width="110" align="right"></el-table-column>
+                </el-table>
+            </div>
+            <div v-if="importStep===2" class="rounded bg-green-50 border border-green-200 p-4 text-green-700 text-center">
+                <i class="fas fa-check-circle mr-1"></i>导入成功，共 {{ mockImportPersons.length }} 条记录已写入考勤单。
+            </div>
+        </div>
+        <div slot="footer">
+            <el-button size="small" v-if="importStep>0" @click="importStep--">上一步</el-button>
+            <el-button size="small" @click="importDialog=false">关闭</el-button>
+            <el-button size="small" type="primary" class="!bg-[#007069] !border-[#007069]"
+                       v-if="importStep<2" @click="importStep++">下一步</el-button>
+        </div>
+    </el-dialog>
+</div>
+
+<script src="https://unpkg.com/vue@2.6.14/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui@2.15.14/lib/index.js"></script>
+<script src="https://unpkg.com/element-ui@2.15.14/lib/umd/locale/zh-CN.js"></script>
+<script>ELEMENT.locale(ELEMENT.lang.zhCN);</script>
+<script src="js/app.js"></script>
+</body>
+</html>

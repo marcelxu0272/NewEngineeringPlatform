@@ -96,7 +96,7 @@ const HomePage = () => {
   ];
 
   const functionModules = [
-    "Wood 工程平台首页", "项目中台", "第三方人员管理", "交付保障行动项配置", "OA管理", "设计管理",
+    "Wood 工程平台首页", "项目中台", "第三方人员管理", "派遣人员考勤", "交付保障行动项配置", "OA管理", "设计管理",
     "费用管理", "文档管理", "合同管理", "资源管理",
     "计划管理", "个人中心", "平台管理", "物资采购", "AI&Tools"
   ];
@@ -172,6 +172,9 @@ const HomePage = () => {
     }
     if (module === "第三方人员管理") {
       router.push('/third-party-personnel');
+    }
+    if (module === "派遣人员考勤") {
+      router.push('/dispatch-attendance');
     }
     if (module === "交付保障行动项配置") {
       router.push('/delivery-assurance-action-items-config');
