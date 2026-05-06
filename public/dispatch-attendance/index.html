@@ -323,13 +323,13 @@
                             <td class="remark-col">
                                 <el-input v-model="row.remark" size="mini" placeholder="特殊情况备注"></el-input>
                             </td>
-                            <td class="sum-col">{{ row.summary.actual }}</td>
-                            <td class="sum-col">{{ row.summary.otWeekday }}</td>
-                            <td class="sum-col">{{ row.summary.otWeekend }}</td>
-                            <td class="sum-col">{{ row.summary.otHoliday }}</td>
-                            <td class="sum-col">{{ row.summary.personal }}</td>
-                            <td class="sum-col">{{ row.summary.sick }}</td>
-                            <td class="sum-col">{{ row.summary.projectLeave }}</td>
+                            <td :class="['sum-col', row.summary.actual > 0 ? 'text-gray-900' : 'text-gray-300']">{{ row.summary.actual }}</td>
+                            <td :class="['sum-col', row.summary.otWeekday > 0 ? 'text-gray-900' : 'text-gray-300']">{{ row.summary.otWeekday }}</td>
+                            <td :class="['sum-col', row.summary.otWeekend > 0 ? 'text-gray-900' : 'text-gray-300']">{{ row.summary.otWeekend }}</td>
+                            <td :class="['sum-col', row.summary.otHoliday > 0 ? 'text-gray-900' : 'text-gray-300']">{{ row.summary.otHoliday }}</td>
+                            <td :class="['sum-col', row.summary.personal > 0 ? 'text-gray-900' : 'text-gray-300']">{{ row.summary.personal }}</td>
+                            <td :class="['sum-col', row.summary.sick > 0 ? 'text-gray-900' : 'text-gray-300']">{{ row.summary.sick }}</td>
+                            <td :class="['sum-col', row.summary.projectLeave > 0 ? 'text-gray-900' : 'text-gray-300']">{{ row.summary.projectLeave }}</td>
                         </tr>
                         <tr v-if="editForm.persons.length === 0">
                             <td :colspan="daysInMonth + 13" class="text-center py-8 text-gray-400">

@@ -8,6 +8,13 @@ export type ThirdPartyPerson = {
   arrivalDate: string;
   projectDuration: string;
   phone: string;
+  weeklyWorkTime: string;
+  baseRate: number;
+  weekdayOvertimeRate: number;
+  weekendOvertimeRate: number;
+  holidayOvertimeRate: number;
+  status: '在岗' | '离岗';
+  leaveDate: string;
 };
 
 export const THIRD_PARTY_STORAGE_KEY = 'engineering-platform-third-party-personnel-v1';
@@ -25,6 +32,13 @@ export const DEFAULT_PERSONNEL: ThirdPartyPerson[] = [
     arrivalDate: '2024-01-15',
     projectDuration: '6个月',
     phone: '13812345678',
+    weeklyWorkTime: '5*8',
+    baseRate: 120,
+    weekdayOvertimeRate: 160,
+    weekendOvertimeRate: 180,
+    holidayOvertimeRate: 240,
+    status: '在岗',
+    leaveDate: '',
   },
   {
     id: 2,
@@ -36,6 +50,13 @@ export const DEFAULT_PERSONNEL: ThirdPartyPerson[] = [
     arrivalDate: '2024-02-01',
     projectDuration: '3个月',
     phone: '13987654321',
+    weeklyWorkTime: '5*8',
+    baseRate: 135,
+    weekdayOvertimeRate: 175,
+    weekendOvertimeRate: 195,
+    holidayOvertimeRate: 255,
+    status: '在岗',
+    leaveDate: '',
   },
   {
     id: 3,
@@ -47,6 +68,13 @@ export const DEFAULT_PERSONNEL: ThirdPartyPerson[] = [
     arrivalDate: '2024-01-20',
     projectDuration: '12个月',
     phone: '13765432198',
+    weeklyWorkTime: '6*8',
+    baseRate: 140,
+    weekdayOvertimeRate: 185,
+    weekendOvertimeRate: 210,
+    holidayOvertimeRate: 280,
+    status: '在岗',
+    leaveDate: '',
   },
 ];
 

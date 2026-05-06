@@ -38,3 +38,5 @@ next-env.d.ts
 
 # SQLite database (generated at runtime)
 /data/
+
+/docs/

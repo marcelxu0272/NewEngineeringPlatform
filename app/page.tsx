@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LayoutDashboard, Users, Wrench, Megaphone, BarChart3, FolderKanban, ChevronRight, Network, ClipboardList, UserCog, CalendarCheck } from 'lucide-react';
+import { LayoutDashboard, Users, Wrench, Megaphone, BarChart3, FolderKanban, ChevronRight, Network, ClipboardList, UserCog, CalendarCheck, Palette, TrendingUp } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const routes = [
@@ -75,6 +75,18 @@ const routes = [
     title: '交付保障行动项配置',
     description: '交付保障行动项配置、审批与版本管理',
     icon: ClipboardList,
+  },
+  {
+    href: '/cash-flow-dashboard',
+    title: '现金流仪表盘',
+    description: '三级联动现金流看板，WIP / AR / Cash In / Cash Out',
+    icon: TrendingUp,
+  },
+  {
+    href: '/design',
+    title: '设计系统展示',
+    description: '色彩、字体、组件与布局规范预览',
+    icon: Palette,
   },
 ];
 

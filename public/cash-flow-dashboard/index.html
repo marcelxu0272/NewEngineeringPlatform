@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>现金流仪表盘</title>
+
+  <!-- Tailwind CSS -->
+  <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <!-- Element UI CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.14/lib/theme-chalk/index.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <!-- 自定义样式 -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app" v-cloak>
+
+  <!-- 加载遮罩 -->
+  <div v-if="isLoading" class="loading-overlay">
+    <div class="loading-container">
+      <div class="loading-spinner"></div>
+      <p>加载中...</p>
+    </div>
+  </div>
+
+  <!-- ===== PC 顶部工具栏（仅层级切换） ===== -->
+  <header class="top-toolbar" v-if="!isMobile">
+    <div class="toolbar-left">
+      <span class="toolbar-title">现金流仪表盘</span>
+      <div class="level-tabs">
+        <button
+          v-for="tab in levelTabs"
+          :key="tab.key"
+          class="level-tab"
+          :class="{ active: currentLevel === tab.key }"
+          @click="switchLevel(tab.key)"
+        >{{ tab.label }}</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== 移动端顶部栏 ===== -->
+  <header class="mobile-header" v-if="isMobile">
+    <div class="mobile-header-left">
+      <span class="mobile-title">现金流仪表盘</span>
+      <span class="mobile-org-label">{{ currentOrgLabel }}</span>
+    </div>
+  </header>
+
+  <!-- ===== 主内容区 ===== -->
+  <main class="main-content" :class="{ 'has-bottom-nav': isMobile }">
+
+    <!-- ── 筛选与数据日期（内容区最前） ── -->
+    <section class="content-filter-bar">
+      <div class="content-filter-group content-filter-org">
+        <el-select
+          v-if="currentLevel === 'projectGroup'"
+          v-model="selectedProjectGroup"
+          size="small"
+          class="content-filter-select"
+          @change="onOrgChange"
+        >
+          <el-option v-for="g in projectGroups" :key="g.code" :label="g.name" :value="g.code"></el-option>
+        </el-select>
+        <el-select
+          v-else-if="currentLevel === 'board'"
+          v-model="selectedBoard"
+          size="small"
+          class="content-filter-select"
+          @change="onOrgChange"
+        >
+          <el-option v-for="b in boards" :key="b.code" :label="b.name" :value="b.code"></el-option>
+        </el-select>
+      </div>
+      <div class="content-filter-group content-filter-dates">
+        <el-select v-model="filterYear" size="small" class="content-filter-year">
+          <el-option v-for="y in yearOptions" :key="y" :label="y+'年'" :value="y"></el-option>
+        </el-select>
+        <el-button type="primary" size="small" @click="onSearch">
+          <i class="fas fa-search"></i> 查询
+        </el-button>
+      </div>
+      <div class="content-filter-meta">
+        最后更新日期：{{ lastUpdatedDateText }}
+      </div>
+    </section>
+
+    <!-- ── KPI 卡片区 ── -->
+    <section class="kpi-section">
+      <!-- Phase 1 卡片 -->
+      <div
+        v-for="card in kpiCards"
+        :key="card.key"
+        class="kpi-card"
+        :class="[card.colorClass, { 'kpi-card--drill': card.drillable }]"
+        @click="onKpiCardClick(card)"
+      >
+        <i v-if="card.drillable" class="fas fa-chevron-right kpi-drill-arrow" aria-hidden="true"></i>
+        <div class="kpi-card-header">
+          <span class="kpi-title-wrap">
+            <span class="kpi-label">{{ card.label }}（{{ card.unit }}）</span>
+            <i class="fas fa-info-circle kpi-tip" @click.stop="openTip(card.label, card.tooltip)"></i>
+          </span>
+        </div>
+        <div class="kpi-value">{{ formatAmount(card.value) }}</div>
+        <div class="kpi-change" :class="card.changePositive ? 'change-up' : 'change-down'">
+          <i :class="card.changePositive ? 'fas fa-arrow-up' : 'fas fa-arrow-down'"></i>
+          <span>环比 {{ card.changeText }}</span>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── Phase 3 占位：预算达成 ── 
+    <section class="phase-placeholder-block">
+      <div class="placeholder-block-inner">
+        <i class="fas fa-chart-bar"></i>
+        <span>预算 vs 实际对比（Phase 3 功能，建设中）</span>
+      </div>
+    </section>-->
+
+    <!-- ── 趋势图区 ── -->
+    <section class="chart-section">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <span class="chart-title">近 12 个月 Cash In / Cash Out 趋势（万元）</span>
+        </div>
+        <div :id="'cashflow-trend-chart'" class="chart-container"></div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <span class="chart-title">近 12 个月 AR / WIP 趋势（万元）</span>
+        </div>
+        <div :id="'ar-wip-trend-chart'" class="chart-container"></div>
+      </div>
+
+      <!-- Phase 3：未来 6 个月现金流预测（暂时隐藏）
+      <div class="chart-card chart-card-placeholder">
+        <div class="chart-card-header">
+          <span class="chart-title">未来 6 个月现金流预测（Phase 3）</span>
+        </div>
+        <div class="chart-placeholder-inner">
+          <i class="fas fa-magic"></i>
+          <p>基于合同里程碑的预测功能，Phase 3 建设中</p>
+        </div>
+      </div>
+      -->
+    </section>
+
+    <!-- ── 板块健康度矩阵（板块级不显示排名，无对比意义） ── -->
+    <section class="health-section" v-if="currentLevel !== 'board'">
+      <div class="chart-card health-chart-card">
+        <div class="chart-card-header">
+          <span class="chart-title">板块净现金流排名（万元）</span>
+        </div>
+        <div id="cashflow-rank-chart" class="chart-container"></div>
+      </div>
+
+      <div class="chart-card health-chart-card">
+        <div class="chart-card-header">
+          <span class="chart-title">板块回款率排名</span>
+          <span class="chart-subtitle">基准线 85%</span>
+        </div>
+        <div id="collection-rate-chart" class="chart-container"></div>
+      </div>
+
+      <!-- Phase 2：AR 账龄分析（暂时隐藏）
+      <div class="chart-card health-chart-card chart-card-placeholder">
+        <div class="chart-card-header">
+          <span class="chart-title">AR 账龄分析（Phase 2）</span>
+        </div>
+        <div class="chart-placeholder-inner">
+          <i class="fas fa-layer-group"></i>
+          <p>30 / 60 / 90 / 180+ 天账龄分层图，Phase 2 接入开票回款明细后启用</p>
+        </div>
+      </div>
+      -->
+    </section>
+
+    <!-- ── 预警列表 ── -->
+    <section class="alert-section">
+      <div class="alert-section-header">
+        <i class="fas fa-exclamation-triangle"></i>
+        <span>异常预警</span>
+        <!-- Phase 3 推送按钮 -->
+        <el-button size="mini" disabled class="phase-badge">
+          <i class="fas fa-paper-plane"></i> 自动推送至企业微信（Phase 3）
+        </el-button>
+      </div>
+      <div v-if="alerts.length === 0" class="alert-empty">
+        <i class="fas fa-check-circle"></i> 当前无异常预警
+      </div>
+      <div v-else>
+        <el-alert
+          v-for="(alert, idx) in visibleAlerts"
+          :key="idx"
+          :title="alert.title"
+          :description="alert.desc"
+          :type="alert.type"
+          show-icon
+          :closable="false"
+          class="alert-item"
+        ></el-alert>
+        <!-- 超出 5 条时的展开/收起控件 -->
+        <div v-if="alerts.length > 5" class="alert-more-row">
+          <button class="alert-more-btn" @click="alertsExpanded = !alertsExpanded">
+            <i :class="alertsExpanded ? 'fas fa-chevron-up' : 'fas fa-chevron-down'"></i>
+            {{ alertsExpanded ? '收起' : '查看全部 ' + alerts.length + ' 条预警' }}
+          </button>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── 板块级：项目明细占位（Phase 2） ── -->
+    <section v-if="currentLevel === 'board'" class="phase-placeholder-block">
+      <div class="placeholder-block-inner">
+        <i class="fas fa-table"></i>
+        <span>项目明细下钻（Phase 2 功能：接入项目级数据后启用，支持分页 10 条/页）</span>
+      </div>
+    </section>
+
+    <!-- ── 公司级：共享兑现状态栏（放在页面末尾） ── -->
+    <section class="fulfillment-bar" v-if="currentLevel === 'company'">
+      <div class="fulfillment-header">
+        <i class="fas fa-award"></i>
+        <span>利润共享兑现状态</span>
+        <i class="fas fa-info-circle tip-icon" @click.stop="openTip('兑现状态说明', '● 正常发放：P > 0 且净现金流 > 0\n● 缓发：P > 0 但净现金流 ≤ 0，待现金流转正后发放\n● 扣减发放：P < 0 且净现金流 > 0，无奖金，工资按比例扣减后发放（共担亏损 40%）\n● 扣减+缓发：P < 0 且净现金流 ≤ 0，按比例扣减后缓发，待现金流转正后补发\n\n利润贡献值 (P)：P = 年度开票收入 R – 年度总实际发生成本 – 公司管理费 OH\n\n看板仅做数据展示与判定辅助，最终兑现决策以管理会决议为准。')"></i>
+        <!-- Phase 3：自动判定按钮占位 -->
+        <el-button size="mini" disabled class="phase-badge">
+          <i class="fas fa-robot"></i> 自动判定（Phase 3）
+        </el-button>
+      </div>
+      <div class="fulfillment-list">
+        <el-tooltip
+          v-for="item in fulfillmentStatus"
+          :key="item.name"
+          :content="fulfillmentTip(item)"
+          placement="top"
+          :enterable="false"
+        >
+          <div class="fulfillment-item" :class="item.status">
+            <i :class="fulfillmentIcon(item.status)"></i>
+            <span class="fulfillment-name">{{ item.name }}</span>
+          </div>
+        </el-tooltip>
+      </div>
+      <div class="fulfillment-summary">
+        <span class="ff-stat">
+          <i class="fas fa-check-circle ff-eligible"></i>
+          正常发放 <strong style="color:var(--success)">{{ eligibleCount }}</strong>
+        </span>
+        <span class="ff-divider">|</span>
+        <span class="ff-stat">
+          <i class="fas fa-clock ff-deferred"></i>
+          缓发 <strong style="color:var(--warning)">{{ deferredCount }}</strong>
+        </span>
+        <span class="ff-divider">|</span>
+        <span class="ff-stat">
+          <i class="fas fa-minus-circle ff-deduct"></i>
+          扣减发放 <strong style="color:#e06820">{{ deductCount }}</strong>
+        </span>
+        <span class="ff-divider">|</span>
+        <span class="ff-stat">
+          <i class="fas fa-times-circle ff-deduct_deferred"></i>
+          扣减+缓发 <strong style="color:var(--danger)">{{ deductDeferredCount }}</strong>
+        </span>
+        <span class="ff-divider">·</span>
+        <span>共 {{ fulfillmentStatus.length }} 个板块</span>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== 移动端底部 Tab Bar ===== -->
+  <nav class="bottom-nav" v-if="isMobile">
+    <button
+      v-for="tab in levelTabs"
+      :key="tab.key"
+      class="bottom-nav-item"
+      :class="{ active: currentLevel === tab.key }"
+      @click="switchLevel(tab.key)"
+    >
+      <i :class="tab.icon"></i>
+      <span>{{ tab.label }}</span>
+    </button>
+  </nav>
+
+  <!-- ===== 指标说明弹窗（全端通用，替代 tooltip hover） ===== -->
+  <el-dialog
+    :title="tipTitle"
+    :visible.sync="tipVisible"
+    :width="isMobile ? '90%' : '420px'"
+    :modal-append-to-body="false"
+    custom-class="tip-dialog"
+  >
+    <p class="tip-dialog-content" style="white-space: pre-line;">{{ tipContent }}</p>
+    <div slot="footer">
+      <el-button type="primary" @click="tipVisible = false">知道了</el-button>
+    </div>
+  </el-dialog>
+
+  <!-- 公司管理费明细（下探） -->
+  <el-dialog
+    title="公司管理费 — 项目明细"
+    :visible.sync="mgmtFeeDialogVisible"
+    :width="isMobile ? '96%' : '960px'"
+    top="6vh"
+    append-to-body
+    custom-class="cf-mgmt-fee-dialog"
+    :close-on-click-modal="false"
+    @close="mgmtFeePage = 1"
+  >
+    <div class="mgmt-fee-dialog-inner">
+      <div class="mgmt-fee-filter-bar">
+        <el-select v-model="mgmtFeeFilterDraft.mgmtAttr" size="small" placeholder="管理归属" clearable class="mgmt-fee-filter-select">
+          <el-option v-for="x in mgmtFeeMgmtAttrOptions" :key="'ma-'+x" :label="x" :value="x"></el-option>
+        </el-select>
+        <el-select v-model="mgmtFeeFilterDraft.bizType" size="small" placeholder="业务类型" clearable class="mgmt-fee-filter-select">
+          <el-option v-for="x in mgmtFeeBizTypeOptions" :key="'bt-'+x" :label="x" :value="x"></el-option>
+        </el-select>
+        <el-input
+          v-model="mgmtFeeFilterDraft.keyword"
+          size="small"
+          clearable
+          class="mgmt-fee-filter-keyword"
+          placeholder="搜索项目编号/项目名称/甲方/项目经理/负责人"
+        ></el-input>
+        <el-button type="primary" size="small" @click="applyMgmtFeeFilter">
+          <i class="fas fa-search"></i> 搜索
+        </el-button>
+        <el-button size="small" @click="resetMgmtFeeFilter">重置</el-button>
+      </div>
+      <div class="mgmt-fee-table-wrap">
+        <el-table
+          :data="mgmtFeePagedRows"
+          stripe
+          border
+          size="small"
+          style="width:100%"
+          empty-text="暂无数据"
+        >
+          <el-table-column prop="projectNo" label="项目编号" min-width="104" show-overflow-tooltip>
+            <template slot-scope="scope">
+              <a href="javascript:;" class="mgmt-fee-link" @click.stop>{{ scope.row.projectNo }}</a>
+            </template>
+          </el-table-column>
+          <el-table-column prop="projectName" label="项目名称" min-width="160" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="partyA" label="甲方名称" min-width="140" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="pm" label="项目经理" width="88" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="owner" label="负责人" width="88" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="mgmtAttr" label="管理归属" min-width="100" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="bizType" label="业务类型" width="96" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="date" label="日期" width="104"></el-table-column>
+          <el-table-column label="金额（元）" width="132" align="right">
+            <template slot-scope="scope">{{ formatYuan(scope.row.amountYuan) }}</template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="mgmt-fee-pagination-bar">
+        <el-pagination
+          layout="total, prev, pager, next"
+          :total="mgmtFeeFilteredRows.length"
+          :page-size="mgmtFeePageSize"
+          :current-page.sync="mgmtFeePage"
+          small
+        ></el-pagination>
+      </div>
+    </div>
+    <div slot="footer" class="cf-mgmt-fee-footer">
+      <el-button type="primary" plain @click="mgmtFeeDialogVisible = false">关闭</el-button>
+    </div>
+  </el-dialog>
+
+  <!-- ===== AR 应收账款分析（下探） ===== -->
+  <el-dialog
+    title="应收账款分析"
+    :visible.sync="arDialogVisible"
+    :width="isMobile ? '96%' : '1100px'"
+    top="4vh"
+    append-to-body
+    custom-class="cf-drill-dialog"
+    :close-on-click-modal="false"
+    @opened="buildArCharts"
+  >
+    <div class="drill-dialog-inner" v-if="arDetail">
+      <div class="drill-section-title">应收账款账期统计（万元）</div>
+      <table class="ar-aging-table">
+        <thead>
+          <tr>
+            <th>业务类型</th><th>账期内</th><th>90天以内</th>
+            <th class="ar-warn">180-360天</th><th class="ar-danger">360天以上</th><th>合计</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="bt in arDetail.bizTypes" :key="bt">
+            <td>{{ bt }}</td>
+            <td>{{ formatAmount(arDetail.agingByBiz[bt].current) }}</td>
+            <td>{{ formatAmount(arDetail.agingByBiz[bt].d90) }}</td>
+            <td class="ar-warn">{{ formatAmount(arDetail.agingByBiz[bt].d180) }}</td>
+            <td class="ar-danger">{{ formatAmount(arDetail.agingByBiz[bt].d360) }}</td>
+            <td class="ar-total-cell">{{ formatAmount(arDetail.agingByBiz[bt].current + arDetail.agingByBiz[bt].d90 + arDetail.agingByBiz[bt].d180 + arDetail.agingByBiz[bt].d360) }}</td>
+          </tr>
+          <tr class="ar-total-row">
+            <td>总计</td>
+            <td>{{ formatAmount(arDetail.total.current) }}</td>
+            <td>{{ formatAmount(arDetail.total.d90) }}</td>
+            <td class="ar-warn">{{ formatAmount(arDetail.total.d180) }}</td>
+            <td class="ar-danger">{{ formatAmount(arDetail.total.d360) }}</td>
+            <td class="ar-total-cell">{{ formatAmount(arDetail.total.current + arDetail.total.d90 + arDetail.total.d180 + arDetail.total.d360) }}</td>
+          </tr>
+          <tr class="ar-pct-row">
+            <td>占比%</td>
+            <td>{{ arAgingTotalPct('current') }}%</td>
+            <td>{{ arAgingTotalPct('d90') }}%</td>
+            <td class="ar-warn">{{ arAgingTotalPct('d180') }}%</td>
+            <td class="ar-danger">{{ arAgingTotalPct('d360') }}%</td>
+            <td>100%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="drill-charts-row">
+        <div class="drill-chart-half">
+          <div class="drill-section-title">各项目经理应收款汇总</div>
+          <div id="ar-pm-chart" style="height:200px;width:100%;"></div>
+        </div>
+        <div class="drill-chart-half">
+          <div class="drill-section-title">账期分布</div>
+          <div id="ar-aging-chart" style="height:200px;width:100%;"></div>
+        </div>
+      </div>
+
+      <div class="drill-section-title">应收账款项目详情</div>
+      <div class="mgmt-fee-filter-bar">
+        <el-select v-model="arProjectFilterDraft.bizType" size="small" placeholder="业务类型" clearable class="mgmt-fee-filter-select">
+          <el-option v-for="x in arBizTypeOptions" :key="'abt-'+x" :label="x" :value="x"></el-option>
+        </el-select>
+        <el-select v-model="arProjectFilterDraft.pm" size="small" placeholder="项目经理" clearable class="mgmt-fee-filter-select">
+          <el-option v-for="x in arPmOptions" :key="'apm-'+x" :label="x" :value="x"></el-option>
+        </el-select>
+        <el-input v-model="arProjectFilterDraft.keyword" size="small" clearable class="mgmt-fee-filter-keyword" placeholder="搜索项目编号/项目名称/客户名称"></el-input>
+        <el-button type="primary" size="small" @click="applyArFilter"><i class="fas fa-search"></i> 搜索</el-button>
+        <el-button size="small" @click="resetArFilter">重置</el-button>
+      </div>
+      <div class="mgmt-fee-table-wrap" style="flex:none;max-height:230px;overflow:auto;">
+        <el-table :data="arProjectPagedRows" stripe border size="small" style="width:100%" empty-text="暂无数据">
+          <el-table-column prop="projectNo" label="项目编号" width="88" show-overflow-tooltip>
+            <template slot-scope="scope">
+              <a href="javascript:;" class="mgmt-fee-link" @click.stop>{{ scope.row.projectNo }}</a>
+            </template>
+          </el-table-column>
+          <el-table-column prop="projectName" label="项目名称" min-width="130" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="clientName" label="客户名称" min-width="130" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="pm" label="项目经理" width="76"></el-table-column>
+          <el-table-column prop="paymentNode" label="付款节点" width="84" show-overflow-tooltip></el-table-column>
+          <el-table-column prop="nodeDesc" label="节点描述" min-width="120" show-overflow-tooltip></el-table-column>
+          <el-table-column label="付款比例" width="76" align="right">
+            <template slot-scope="scope">{{ scope.row.paymentPct }}%</template>
+          </el-table-column>
+          <el-table-column label="金额(万元)" width="88" align="right">
+            <template slot-scope="scope">{{ formatAmount(scope.row.amountWan) }}</template>
+          </el-table-column>
+          <el-table-column prop="invoiceDate" label="开票时间" width="96"></el-table-column>
+          <el-table-column label="计划回款" width="96">
+            <template slot-scope="scope">
+              <span :class="{ 'ar-date-danger': scope.row.planOverdue }">{{ scope.row.planDate }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column label="预测回款" width="96">
+            <template slot-scope="scope">
+              <span :class="{ 'ar-date-warn': scope.row.forecastOverdue }">{{ scope.row.forecastDate }}</span>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      <div class="mgmt-fee-pagination-bar">
+        <el-pagination layout="total, prev, pager, next" :total="arProjectFilteredRows.length" :page-size="arProjectPageSize" :current-page.sync="arProjectPage" small></el-pagination>
+      </div>
+    </div>
+    <div slot="footer">
+      <el-button type="primary" plain @click="arDialogVisible = false">关闭</el-button>
+    </div>
+  </el-dialog>
+
+  <!-- ===== WIP & 存货分析（下探） ===== -->
+  <el-dialog
+    title="WIP 及存货分析"
+    :visible.sync="wipDialogVisible"
+    :width="isMobile ? '96%' : '920px'"
+    top="4vh"
+    append-to-body
+    custom-class="cf-drill-dialog"
+    :close-on-click-modal="false"
+    @opened="buildWipChart"
+  >
+    <div class="drill-dialog-inner" v-if="wipDetail">
+      <div class="drill-section-title">截止上年度末数据</div>
+      <div class="wip-summary-cards">
+        <div class="wip-summary-card">
+          <div class="wip-sc-label">上年度成合同额</div>
+          <div class="wip-sc-value">{{ formatAmount(wipDetail.prevYear.contractAmt) }} <span class="wip-sc-unit">万元</span></div>
+        </div>
+        <div class="wip-summary-card">
+          <div class="wip-sc-label">上年度员外费额</div>
+          <div class="wip-sc-value">{{ formatAmount(wipDetail.prevYear.extCost) }} <span class="wip-sc-unit">万元</span></div>
+        </div>
+        <div class="wip-summary-card">
+          <div class="wip-sc-label">累计WIP余额</div>
+          <div class="wip-sc-value">{{ formatAmount(wipDetail.prevYear.cumWip) }} <span class="wip-sc-unit">万元</span></div>
+        </div>
+        <div class="wip-summary-card">
+          <div class="wip-sc-label">累计存货额</div>
+          <div class="wip-sc-value">{{ formatAmount(wipDetail.prevYear.cumInv) }} <span class="wip-sc-unit">万元</span></div>
+        </div>
+        <div class="wip-summary-card">
+          <div class="wip-sc-label">存货/WIP占比</div>
+          <div class="wip-sc-value">{{ wipDetail.prevYear.invWipRatio }} <span class="wip-sc-unit">%</span></div>
+        </div>
+      </div>
+
+      <div class="drill-section-title" style="margin-top:16px;">当年汇总数据（万元）</div>
+      <div style="overflow-x:auto;margin-bottom:12px;">
+        <table class="drill-data-table">
+          <thead>
+            <tr>
+              <th class="dt-label-col">类别</th>
+              <th v-for="row in wipDetail.monthly" :key="row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.month }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="dt-label-col">完成合同额</td>
+              <td v-for="row in wipDetail.monthly" :key="'c'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.contract }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">开票额</td>
+              <td v-for="row in wipDetail.monthly" :key="'i'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.invoice }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">当月WIP增量</td>
+              <td v-for="row in wipDetail.monthly" :key="'d'+row.month" :class="[{ 'dt-forecast': row.isForecast }, row.wipDelta < 0 ? 'dt-neg' : 'dt-pos']">{{ row.wipDelta }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">累计WIP余额</td>
+              <td v-for="row in wipDetail.monthly" :key="'w'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.cumWip }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">累计存货</td>
+              <td v-for="row in wipDetail.monthly" :key="'n'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.cumInv }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">存货/WIP比例</td>
+              <td v-for="row in wipDetail.monthly" :key="'r'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.invRatio }}%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="drill-section-title">存货/WIP变化趋势</div>
+      <div id="wip-trend-chart" style="height:220px;width:100%;"></div>
+    </div>
+    <div slot="footer">
+      <el-button type="primary" plain @click="wipDialogVisible = false">关闭</el-button>
+    </div>
+  </el-dialog>
+
+  <!-- ===== 现金流数据（下探） ===== -->
+  <el-dialog
+    title="年度现金流数据"
+    :visible.sync="cashFlowDialogVisible"
+    :width="isMobile ? '96%' : '1000px'"
+    top="4vh"
+    append-to-body
+    custom-class="cf-drill-dialog"
+    :close-on-click-modal="false"
+    @opened="buildCashFlowDetailChart"
+  >
+    <div class="drill-dialog-inner" v-if="cashFlowDetail">
+      <div class="drill-section-title">现金流趋势</div>
+      <div id="cf-detail-chart" style="height:220px;width:100%;margin-bottom:12px;"></div>
+
+      <div class="drill-section-title">月度明细（万元）</div>
+      <div style="overflow-x:auto;margin-bottom:12px;">
+        <table class="drill-data-table">
+          <thead>
+            <tr>
+              <th class="dt-label-col">类别</th>
+              <th v-for="row in cashFlowDetail.monthly" :key="row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.month }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="dt-label-col">现金流入</td>
+              <td v-for="row in cashFlowDetail.monthly" :key="'in'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.inflow }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">现金流出</td>
+              <td v-for="row in cashFlowDetail.monthly" :key="'out'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.outflow }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">经营性净现金流</td>
+              <td v-for="row in cashFlowDetail.monthly" :key="'net'+row.month" :class="[{ 'dt-forecast': row.isForecast }, row.netCash < 0 ? 'dt-neg' : 'dt-pos']">{{ row.netCash }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">累计经营性净现金流</td>
+              <td v-for="row in cashFlowDetail.monthly" :key="'cum'+row.month" :class="[{ 'dt-forecast': row.isForecast }, row.cumNetCash < 0 ? 'dt-neg' : 'dt-pos']">{{ row.cumNetCash }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">公司管理费分摊</td>
+              <td v-for="row in cashFlowDetail.monthly" :key="'mgmt'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.mgmtFeeAllocated }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">累计公司管理费分摊</td>
+              <td v-for="row in cashFlowDetail.monthly" :key="'cmgmt'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.cumMgmtFeeAllocated }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">现金流贡献</td>
+              <td v-for="row in cashFlowDetail.monthly" :key="'ctb'+row.month" :class="[{ 'dt-forecast': row.isForecast }, row.cashContrib < 0 ? 'dt-neg' : 'dt-pos']">{{ row.cashContrib }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cf-summary-cards">
+        <div class="cf-summary-card">
+          <div class="cf-sc-title">上一年度</div>
+          <div class="cf-sc-row"><span>经营性净现金流</span><strong>{{ formatAmount(cashFlowDetail.prevYear.netCash) }} 万元</strong></div>
+          <div class="cf-sc-row"><span>现金流贡献</span><strong>{{ formatAmount(cashFlowDetail.prevYear.cashContrib) }} 万元</strong></div>
+        </div>
+        <div class="cf-summary-card cf-summary-card--primary">
+          <div class="cf-sc-title">预测本年度</div>
+          <div class="cf-sc-row"><span>经营性净现金流</span><strong>{{ formatAmount(cashFlowDetail.forecastYear.netCash) }} 万元</strong></div>
+          <div class="cf-sc-row"><span>现金流贡献</span><strong>{{ formatAmount(cashFlowDetail.forecastYear.cashContrib) }} 万元</strong></div>
+        </div>
+        <div class="cf-summary-card">
+          <div class="cf-sc-title">预测截止今年年底过去两年</div>
+          <div class="cf-sc-row"><span>经营性净现金流</span><strong>{{ formatAmount(cashFlowDetail.twoYearForecast.netCash) }} 万元</strong></div>
+          <div class="cf-sc-row"><span>现金流贡献</span><strong>{{ formatAmount(cashFlowDetail.twoYearForecast.cashContrib) }} 万元</strong></div>
+        </div>
+      </div>
+    </div>
+    <div slot="footer">
+      <el-button type="primary" plain @click="cashFlowDialogVisible = false">关闭</el-button>
+    </div>
+  </el-dialog>
+
+  <!-- ===== 收入与毛利（下探） ===== -->
+  <el-dialog
+    title="收入与毛利分析"
+    :visible.sync="revenueDialogVisible"
+    :width="isMobile ? '96%' : '1100px'"
+    top="4vh"
+    append-to-body
+    custom-class="cf-drill-dialog"
+    :close-on-click-modal="false"
+  >
+    <div class="drill-dialog-inner" v-if="revenueDetail">
+      <div class="rev-kpi-section">
+        <div class="rev-kpi-label-row">
+          <span class="rev-kpi-badge rev-badge-forecast">全年预测</span>
+        </div>
+        <div class="rev-kpi-cards">
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">完成合同额</div>
+            <div class="rev-kc-value">{{ formatAmount(revenueDetail.forecast.contract) }}</div>
+            <div class="rev-kc-unit">万元</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">营业收入</div>
+            <div class="rev-kc-value">{{ formatAmount(revenueDetail.forecast.revenue) }}</div>
+            <div class="rev-kc-unit">万元</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">项目成本</div>
+            <div class="rev-kc-value">{{ formatAmount(revenueDetail.forecast.cost) }}</div>
+            <div class="rev-kc-unit">万元</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">项目毛利</div>
+            <div class="rev-kc-value">{{ formatAmount(revenueDetail.forecast.profit) }}</div>
+            <div class="rev-kc-unit">万元</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">项目毛利率</div>
+            <div class="rev-kc-value">{{ revenueDetail.forecast.profitRate }}</div>
+            <div class="rev-kc-unit">%</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">板块管理费</div>
+            <div class="rev-kc-value">{{ formatAmount(revenueDetail.forecast.divMgmt) }}</div>
+            <div class="rev-kc-unit">万元</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">板块毛利</div>
+            <div class="rev-kc-value">{{ formatAmount(revenueDetail.forecast.divProfit) }}</div>
+            <div class="rev-kc-unit">万元</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">板块毛利率</div>
+            <div class="rev-kc-value">{{ revenueDetail.forecast.divProfitRate }}</div>
+            <div class="rev-kc-unit">%</div>
+          </div>
+        </div>
+        <div class="rev-kpi-label-row" style="margin-top:10px;">
+          <span class="rev-kpi-badge rev-badge-ytd">今年累计</span>
+        </div>
+        <div class="rev-kpi-cards rev-kpi-cards--ytd">
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">完成合同额</div>
+            <div class="rev-kc-value">{{ formatAmount(revenueDetail.ytd.contract) }}</div>
+            <div class="rev-kc-unit">万元</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">营业收入</div>
+            <div class="rev-kc-value">{{ formatAmount(revenueDetail.ytd.revenue) }}</div>
+            <div class="rev-kc-unit">万元</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">项目成本</div>
+            <div class="rev-kc-value">{{ formatAmount(revenueDetail.ytd.cost) }}</div>
+            <div class="rev-kc-unit">万元</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">项目毛利</div>
+            <div class="rev-kc-value">{{ formatAmount(revenueDetail.ytd.profit) }}</div>
+            <div class="rev-kc-unit">万元</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">项目毛利率</div>
+            <div class="rev-kc-value">{{ revenueDetail.ytd.profitRate }}</div>
+            <div class="rev-kc-unit">%</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">板块管理费</div>
+            <div class="rev-kc-value">{{ formatAmount(revenueDetail.ytd.divMgmt) }}</div>
+            <div class="rev-kc-unit">万元</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">板块毛利</div>
+            <div class="rev-kc-value">{{ formatAmount(revenueDetail.ytd.divProfit) }}</div>
+            <div class="rev-kc-unit">万元</div>
+          </div>
+          <div class="rev-kpi-card">
+            <div class="rev-kc-label">板块毛利率</div>
+            <div class="rev-kc-value">{{ revenueDetail.ytd.divProfitRate }}</div>
+            <div class="rev-kc-unit">%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="drill-section-title" style="margin-top:16px;">月度数据汇总（万元）</div>
+      <div style="overflow-x:auto;">
+        <table class="drill-data-table">
+          <thead>
+            <tr>
+              <th class="dt-label-col">类别</th>
+              <th v-for="row in revenueDetail.monthly" :key="row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.month }}</th>
+              <th class="dt-total-col">合计</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="dt-label-col">完成合同额</td>
+              <td v-for="row in revenueDetail.monthly" :key="'rc'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.contract }}</td>
+              <td class="dt-total-col">{{ revenueDetail.forecast.contract }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">营业收入</td>
+              <td v-for="row in revenueDetail.monthly" :key="'rr'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.revenue }}</td>
+              <td class="dt-total-col">{{ revenueDetail.forecast.revenue }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">项目成本</td>
+              <td v-for="row in revenueDetail.monthly" :key="'rco'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.cost }}</td>
+              <td class="dt-total-col">{{ revenueDetail.forecast.cost }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">项目毛利</td>
+              <td v-for="row in revenueDetail.monthly" :key="'rp'+row.month" :class="[{ 'dt-forecast': row.isForecast }, row.profit < 0 ? 'dt-neg' : '']">{{ row.profit }}</td>
+              <td class="dt-total-col">{{ revenueDetail.forecast.profit }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">项目毛利率(%)</td>
+              <td v-for="row in revenueDetail.monthly" :key="'rpr'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.profitRate }}%</td>
+              <td class="dt-total-col">{{ revenueDetail.forecast.profitRate }}%</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">板块管理费</td>
+              <td v-for="row in revenueDetail.monthly" :key="'rdm'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.divMgmt }}</td>
+              <td class="dt-total-col">{{ revenueDetail.forecast.divMgmt }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">板块毛利</td>
+              <td v-for="row in revenueDetail.monthly" :key="'rdp'+row.month" :class="[{ 'dt-forecast': row.isForecast }, row.divProfit < 0 ? 'dt-neg' : '']">{{ row.divProfit }}</td>
+              <td class="dt-total-col">{{ revenueDetail.forecast.divProfit }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">板块毛利率(%)</td>
+              <td v-for="row in revenueDetail.monthly" :key="'rdpr'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.divProfitRate }}%</td>
+              <td class="dt-total-col">{{ revenueDetail.forecast.divProfitRate }}%</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">公司管理费分摊</td>
+              <td v-for="row in revenueDetail.monthly" :key="'rma'+row.month" :class="{ 'dt-forecast': row.isForecast }">{{ row.mgmtFeeAlloc }}</td>
+              <td class="dt-total-col">{{ revenueDetail.forecast.mgmtAlloc }}</td>
+            </tr>
+            <tr>
+              <td class="dt-label-col">EBIT贡献</td>
+              <td v-for="row in revenueDetail.monthly" :key="'rebit'+row.month" :class="[{ 'dt-forecast': row.isForecast }, row.ebitContrib < 0 ? 'dt-neg' : 'dt-pos']">{{ row.ebitContrib }}</td>
+              <td class="dt-total-col">{{ revenueDetail.forecast.ebit }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div slot="footer">
+      <el-button type="primary" plain @click="revenueDialogVisible = false">关闭</el-button>
+    </div>
+  </el-dialog>
+
+</div><!-- /#app -->
+
+<!-- Vue.js -->
+<script src="https://unpkg.com/vue@2.5.22/dist/vue.js"></script>
+<!-- Element UI -->
+<script src="https://unpkg.com/element-ui@2.15.14/lib/index.js"></script>
+<!-- ECharts -->
+<script src="https://unpkg.com/echarts@5.4.3/dist/echarts.min.js"></script>
+<!-- 业务逻辑 -->
+<script src="js/app.js"></script>
+</body>
+</html>

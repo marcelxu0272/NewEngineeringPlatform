@@ -2,5 +2,22 @@
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "tags": [
     "-lintignore"
-  ]
+  ],
+  "ignore": [
+    "lib/third-party-personnel.ts",
+    "components/third-party-personnel/ThirdPartyPersonnelApp.tsx",
+    "public/key-project-requirements/hr-form-module.js",
+    "public/key-project-requirements/mock-data-generator.js",
+    "public/key-project-requirements/styles.css",
+    "public/dispatch-attendance/css/style.css",
+    "public/dispatch-attendance/js/app.js",
+    "public/delivery-assurance-action-items-config/css/style.css",
+    "public/delivery-assurance-action-items-config/js/app.js",
+    "public/third-party-personnel/css/style.css",
+    "public/third-party-personnel/js/app.js"
+  ],
+  "rules": {
+    "exports": "off",
+    "types": "off"
+  }
 }

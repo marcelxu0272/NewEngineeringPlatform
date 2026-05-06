@@ -24,13 +24,30 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
+function getTodayString(): string {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function normalizePerson(person: ThirdPartyPerson): ThirdPartyPerson {
+  return {
+    ...person,
+    weeklyWorkTime: person.weeklyWorkTime || '5*8',
+    baseRate: Number(person.baseRate) || 0,
+    weekdayOvertimeRate: Number(person.weekdayOvertimeRate) || 0,
+    weekendOvertimeRate: Number(person.weekendOvertimeRate) || 0,
+    holidayOvertimeRate: Number(person.holidayOvertimeRate) || 0,
+    status: person.status === '离岗' ? '离岗' : '在岗',
+    leaveDate: person.leaveDate || '',
+  };
+}
+
 function loadStored(): ThirdPartyPerson[] | null {
   if (typeof window === 'undefined') return null;
   try {
     const raw = localStorage.getItem(THIRD_PARTY_STORAGE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as ThirdPartyPerson[];
-    return Array.isArray(parsed) ? parsed : null;
+    return Array.isArray(parsed) ? parsed.map((person) => normalizePerson(person as ThirdPartyPerson)) : null;
   } catch {
     return null;
   }
@@ -42,6 +59,14 @@ function formatFileSize(bytes: number): string {
   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return `${parseFloat((bytes / k ** i).toFixed(2))} ${sizes[i]}`;
+}
+
+function RequiredLabel({ text }: { text: string }) {
+  return (
+    <>
+      {text} <span className="text-red-500">*</span>
+    </>
+  );
 }
 
 export function ThirdPartyPersonnelApp() {
@@ -56,6 +81,7 @@ export function ThirdPartyPersonnelApp() {
 
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
+  const [showStatusDialog, setShowStatusDialog] = useState(false);
   const [showImportDialog, setShowImportDialog] = useState(false);
   const [importStep, setImportStep] = useState(1);
   const [importFile, setImportFile] = useState<File | null>(null);
@@ -83,6 +109,24 @@ export function ThirdPartyPersonnelApp() {
     arrivalDate: '',
     projectDuration: '',
     phone: '',
+    weeklyWorkTime: '5*8',
+    baseRate: 0,
+    weekdayOvertimeRate: 0,
+    weekendOvertimeRate: 0,
+    holidayOvertimeRate: 0,
+    status: '在岗',
+    leaveDate: '',
+  });
+  const [statusFormData, setStatusFormData] = useState<{
+    id: number | null;
+    name: string;
+    status: '在岗' | '离岗';
+    leaveDate: string;
+  }>({
+    id: null,
+    name: '',
+    status: '在岗',
+    leaveDate: '',
   });
 
   useEffect(() => {
@@ -155,6 +199,13 @@ export function ThirdPartyPersonnelApp() {
       arrivalDate: '',
       projectDuration: '',
       phone: '',
+      weeklyWorkTime: '5*8',
+      baseRate: 0,
+      weekdayOvertimeRate: 0,
+      weekendOvertimeRate: 0,
+      holidayOvertimeRate: 0,
+      status: '在岗',
+      leaveDate: '',
     });
   }, []);
 
@@ -162,6 +213,11 @@ export function ThirdPartyPersonnelApp() {
     setShowAddDialog(false);
     setShowEditDialog(false);
     resetFormData();
+  };
+
+  const closeStatusDialog = () => {
+    setShowStatusDialog(false);
+    setStatusFormData({ id: null, name: '', status: '在岗', leaveDate: '' });
   };
 
   const validateForm = (): boolean => {
@@ -198,6 +254,26 @@ export function ThirdPartyPersonnelApp() {
       message.error('请输入正确的11位手机号码');
       return false;
     }
+    if (!/^\d+(\.\d+)?\*\d+(\.\d+)?$/.test(formData.weeklyWorkTime.trim())) {
+      message.error('周工作时间格式应为“天数*小时”，如 5*8');
+      return false;
+    }
+    if (formData.baseRate <= 0) {
+      message.error('请输入有效的基本费率');
+      return false;
+    }
+    if (formData.weekdayOvertimeRate <= 0) {
+      message.error('请输入有效的工作日加班费率');
+      return false;
+    }
+    if (formData.weekendOvertimeRate <= 0) {
+      message.error('请输入有效的周末加班费率');
+      return false;
+    }
+    if (formData.holidayOvertimeRate <= 0) {
+      message.error('请输入有效的法定假日加班费率');
+      return false;
+    }
     return true;
   };
 
@@ -224,6 +300,40 @@ export function ThirdPartyPersonnelApp() {
     setShowEditDialog(true);
   };
 
+  const openStatusDialog = (person: ThirdPartyPerson) => {
+    setStatusFormData({
+      id: person.id,
+      name: person.name,
+      status: person.status,
+      leaveDate: person.leaveDate || (person.status === '离岗' ? getTodayString() : ''),
+    });
+    setShowStatusDialog(true);
+  };
+
+  const saveStatusChange = () => {
+    if (statusFormData.id === null) {
+      message.error('未找到需要更新的人员');
+      return;
+    }
+    if (statusFormData.status === '离岗' && !statusFormData.leaveDate) {
+      message.error('状态为离岗时请填写离岗时间');
+      return;
+    }
+    setPersonnelList((prev) =>
+      prev.map((person) =>
+        person.id === statusFormData.id
+          ? {
+              ...person,
+              status: statusFormData.status,
+              leaveDate: statusFormData.status === '离岗' ? statusFormData.leaveDate : '',
+            }
+          : person,
+      ),
+    );
+    message.success('状态信息更新成功');
+    closeStatusDialog();
+  };
+
   const deletePerson = (id: number) => {
     Modal.confirm({
       title: '确认删除',
@@ -242,7 +352,24 @@ export function ThirdPartyPersonnelApp() {
       message.warning('没有数据可以导出');
       return;
     }
-    const headers = ['序号', '公司名称', '姓名', '性别', '年龄', '所属项目', '到岗时间', '项目周期', '联系电话'];
+    const headers = [
+      '序号',
+      '公司名称',
+      '姓名',
+      '性别',
+      '年龄',
+      '所属项目',
+      '到岗时间',
+      '项目周期',
+      '周工作时间',
+      '基本费率(元/小时)',
+      '工作日加班费率(元/小时)',
+      '周末加班费率(元/小时)',
+      '法定假日加班费率(元/小时)',
+      '人员状态',
+      '离岗时间',
+      '联系电话',
+    ];
     const csvContent = [
       headers.join(','),
       ...filteredData.map((person, index) =>
@@ -255,6 +382,13 @@ export function ThirdPartyPersonnelApp() {
           person.project,
           person.arrivalDate,
           person.projectDuration,
+          person.weeklyWorkTime,
+          person.baseRate,
+          person.weekdayOvertimeRate,
+          person.weekendOvertimeRate,
+          person.holidayOvertimeRate,
+          person.status,
+          person.leaveDate || '-',
           person.phone,
         ].join(','),
       ),
@@ -341,6 +475,13 @@ export function ThirdPartyPersonnelApp() {
         arrivalDate: String(row.arrivalDate ?? ''),
         projectDuration: String(row.projectDuration ?? ''),
         phone: String(row.phone ?? ''),
+        weeklyWorkTime: '5*8',
+        baseRate: 0,
+        weekdayOvertimeRate: 0,
+        weekendOvertimeRate: 0,
+        holidayOvertimeRate: 0,
+        status: '在岗',
+        leaveDate: '',
       }));
       setPersonnelList((prev) => [...prev, ...additions]);
       setImportResult({ success: true, imported: additions.length, message: '' });
@@ -472,7 +613,22 @@ export function ThirdPartyPersonnelApp() {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  {['序号', '公司名称', '姓名', '性别', '年龄', '所属项目', '到岗时间', '项目周期', '联系电话', '操作'].map(
+                  {[
+                    '序号',
+                    '公司名称',
+                    '姓名',
+                    '性别',
+                    '年龄',
+                    '所属项目',
+                    '到岗时间',
+                    '项目周期',
+                    '周工作时间',
+                    '费率(基/工作日/周末/法假)',
+                    '人员状态',
+                    '离岗时间',
+                    '联系电话',
+                    '操作',
+                  ].map(
                     (h) => (
                       <th
                         key={h}
@@ -497,10 +653,33 @@ export function ThirdPartyPersonnelApp() {
                     <td className="whitespace-nowrap px-4 py-3 text-sm">{person.project}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-sm">{person.arrivalDate}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-sm">{person.projectDuration}</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-sm">{person.weeklyWorkTime}</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-sm">
+                      {person.baseRate}/{person.weekdayOvertimeRate}/{person.weekendOvertimeRate}/{person.holidayOvertimeRate}
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-3 text-sm">
+                      <span
+                        className={`rounded px-2 py-1 text-xs ${
+                          person.status === '在岗'
+                            ? 'bg-emerald-50 text-emerald-700'
+                            : 'bg-amber-50 text-amber-700'
+                        }`}
+                      >
+                        {person.status}
+                      </span>
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-3 text-sm">{person.leaveDate || '-'}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-sm">{person.phone}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-sm font-medium">
                       <button type="button" className="mr-3 text-blue-600 hover:text-blue-900" onClick={() => editPerson(person)}>
                         编辑
+                      </button>
+                      <button
+                        type="button"
+                        className="mr-3 text-blue-600 hover:text-blue-900"
+                        onClick={() => openStatusDialog(person)}
+                      >
+                        状态调整
                       </button>
                       <button type="button" className="text-red-600 hover:text-red-900" onClick={() => deletePerson(person.id)}>
                         删除
@@ -510,7 +689,7 @@ export function ThirdPartyPersonnelApp() {
                 ))}
                 {filteredPersonnel.length === 0 && (
                   <tr>
-                    <td colSpan={10} className="px-4 py-8 text-center text-gray-500">
+                    <td colSpan={14} className="px-4 py-8 text-center text-gray-500">
                       暂无人员信息
                     </td>
                   </tr>
@@ -547,24 +726,33 @@ export function ThirdPartyPersonnelApp() {
         </div>
 
         <Dialog open={formOpen} onOpenChange={(o) => !o && closeDialog()}>
-          <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
+          <DialogContent className="max-h-[90vh] w-[1080px] max-w-[1080px] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>{showAddDialog ? '添加人员信息' : '编辑人员信息'}</DialogTitle>
             </DialogHeader>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="mb-3 rounded-md border border-[#d8ecea] bg-[#f2fbfa] px-3 py-2 text-xs text-[#007069]">
+              带 * 为必填项。费率单位统一为 元/小时，周工作时间格式为“天数*小时”，示例：5*8。
+            </div>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               <div>
-                <label className="mb-1 block text-sm">公司名称 *</label>
+                <label className="mb-1 block text-sm">
+                  <RequiredLabel text="公司名称" />
+                </label>
                 <Input
                   value={formData.companyName}
                   onChange={(e) => setFormData((f) => ({ ...f, companyName: e.target.value }))}
                 />
               </div>
               <div>
-                <label className="mb-1 block text-sm">姓名 *</label>
+                <label className="mb-1 block text-sm">
+                  <RequiredLabel text="姓名" />
+                </label>
                 <Input value={formData.name} onChange={(e) => setFormData((f) => ({ ...f, name: e.target.value }))} />
               </div>
               <div>
-                <label className="mb-1 block text-sm">性别 *</label>
+                <label className="mb-1 block text-sm">
+                  <RequiredLabel text="性别" />
+                </label>
                 <Select
                   value={formData.gender || undefined}
                   onValueChange={(v) => setFormData((f) => ({ ...f, gender: v }))}
@@ -579,7 +767,9 @@ export function ThirdPartyPersonnelApp() {
                 </Select>
               </div>
               <div>
-                <label className="mb-1 block text-sm">年龄 *</label>
+                <label className="mb-1 block text-sm">
+                  <RequiredLabel text="年龄" />
+                </label>
                 <Input
                   type="number"
                   min={18}
@@ -589,7 +779,9 @@ export function ThirdPartyPersonnelApp() {
                 />
               </div>
               <div>
-                <label className="mb-1 block text-sm">所属项目 *</label>
+                <label className="mb-1 block text-sm">
+                  <RequiredLabel text="所属项目" />
+                </label>
                 <Select
                   value={formData.project || undefined}
                   onValueChange={(v) => setFormData((f) => ({ ...f, project: v }))}
@@ -607,23 +799,29 @@ export function ThirdPartyPersonnelApp() {
                 </Select>
               </div>
               <div>
-                <label className="mb-1 block text-sm">实际到岗时间 *</label>
+                <label className="mb-1 block text-sm">
+                  <RequiredLabel text="实际到岗时间" />
+                </label>
                 <Input
                   type="date"
                   value={formData.arrivalDate}
                   onChange={(e) => setFormData((f) => ({ ...f, arrivalDate: e.target.value }))}
                 />
               </div>
-              <div className="sm:col-span-2">
-                <label className="mb-1 block text-sm">项目周期 *</label>
+              <div>
+                <label className="mb-1 block text-sm">
+                  <RequiredLabel text="项目周期" />
+                </label>
                 <Input
                   value={formData.projectDuration}
                   onChange={(e) => setFormData((f) => ({ ...f, projectDuration: e.target.value }))}
                   placeholder="如：3个月、6个月等"
                 />
               </div>
-              <div className="sm:col-span-2">
-                <label className="mb-1 block text-sm">联系电话 *</label>
+              <div>
+                <label className="mb-1 block text-sm">
+                  <RequiredLabel text="联系电话" />
+                </label>
                 <Input
                   maxLength={11}
                   value={formData.phone}
@@ -631,11 +829,123 @@ export function ThirdPartyPersonnelApp() {
                   placeholder="11位手机号码"
                 />
               </div>
+              <div>
+                <label className="mb-1 block text-sm">
+                  <RequiredLabel text="周工作时间（天*小时）" />
+                </label>
+                <Input
+                  value={formData.weeklyWorkTime}
+                  onChange={(e) => setFormData((f) => ({ ...f, weeklyWorkTime: e.target.value.replace(/\s+/g, '') }))}
+                  placeholder="如：5*8"
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm">
+                  <RequiredLabel text="基本费率（元/小时）" />
+                </label>
+                <Input
+                  type="number"
+                  min={0}
+                  step="0.01"
+                  value={formData.baseRate}
+                  onChange={(e) => setFormData((f) => ({ ...f, baseRate: Number(e.target.value) || 0 }))}
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm">
+                  <RequiredLabel text="工作日加班费率（元/小时）" />
+                </label>
+                <Input
+                  type="number"
+                  min={0}
+                  step="0.01"
+                  value={formData.weekdayOvertimeRate}
+                  onChange={(e) => setFormData((f) => ({ ...f, weekdayOvertimeRate: Number(e.target.value) || 0 }))}
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm">
+                  <RequiredLabel text="周末加班费率（元/小时）" />
+                </label>
+                <Input
+                  type="number"
+                  min={0}
+                  step="0.01"
+                  value={formData.weekendOvertimeRate}
+                  onChange={(e) => setFormData((f) => ({ ...f, weekendOvertimeRate: Number(e.target.value) || 0 }))}
+                />
+              </div>
+              <div>
+                <label className="mb-1 block text-sm">
+                  <RequiredLabel text="法定假日加班费率（元/小时）" />
+                </label>
+                <Input
+                  type="number"
+                  min={0}
+                  step="0.01"
+                  value={formData.holidayOvertimeRate}
+                  onChange={(e) => setFormData((f) => ({ ...f, holidayOvertimeRate: Number(e.target.value) || 0 }))}
+                />
+              </div>
             </div>
             <div className="mt-6 flex justify-end gap-2">
               <Button onClick={closeDialog}>取消</Button>
               <Button type="primary" onClick={savePerson}>
                 {showAddDialog ? '添加' : '保存'}
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+
+        <Dialog open={showStatusDialog} onOpenChange={(o) => !o && closeStatusDialog()}>
+          <DialogContent className="max-h-[90vh] w-[560px] max-w-[560px] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>状态切换与离岗时间</DialogTitle>
+            </DialogHeader>
+            <div className="space-y-4">
+              <div className="rounded-md bg-[#f8faff] px-3 py-2 text-sm text-gray-700">
+                当前人员：<span className="font-medium text-gray-900">{statusFormData.name || '-'}</span>
+              </div>
+              <div>
+                <label className="mb-1 block text-sm">人员状态</label>
+                <Select
+                  value={statusFormData.status}
+                  onValueChange={(v: '在岗' | '离岗') =>
+                    setStatusFormData((prev) => ({
+                      ...prev,
+                      status: v,
+                      leaveDate: v === '离岗' ? prev.leaveDate || getTodayString() : '',
+                    }))
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="在岗">在岗</SelectItem>
+                    <SelectItem value="离岗">离岗</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <label className="mb-1 block text-sm">离岗时间</label>
+                <Input
+                  type="date"
+                  disabled={statusFormData.status !== '离岗'}
+                  value={statusFormData.leaveDate}
+                  onChange={(e) =>
+                    setStatusFormData((prev) => ({
+                      ...prev,
+                      leaveDate: e.target.value,
+                    }))
+                  }
+                />
+              </div>
+            </div>
+            <div className="mt-6 flex justify-end gap-2">
+              <Button onClick={closeStatusDialog}>取消</Button>
+              <Button type="primary" onClick={saveStatusChange}>
+                保存
               </Button>
             </div>
           </DialogContent>
