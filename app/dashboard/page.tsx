@@ -352,7 +352,7 @@ export default function Component() {
                         </div>
                       </div>
                       <div className="flex items-center gap-2 mt-1">
-                        <p className="text-sm text-[#007069]">当前WIP</p>
+                        <p className="text-sm text-[#007069]">WIP</p>
                         <AntTooltip title="查看详情">
                           <Link 
                             href={`/dashboard/wip-detail`}
@@ -423,7 +423,7 @@ export default function Component() {
                     </div> */}
                     <div className="flex-1 bg-[#007069]/5 p-2 rounded-lg">
                       <p className="text-lg font-bold text-[#007069]">27,167.37</p>
-                      <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">已签项目成本</p>
+                      <p className="text-sm text-[#007069] mt-1 whitespace-nowrap">项目成本</p>
                     </div>
                     <div className="flex-1 bg-[#007069]/5 p-2 rounded-lg">
                       <div>
