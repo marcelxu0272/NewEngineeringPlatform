@@ -163,13 +163,168 @@
     }
     .prog-pct { font-size: 13px; color: #007069; }
 
-    /* ─── Finance row (4 cols: 应收 | 新增指标 | 现金流 | 成本) ─── */
+    /* ─── Finance row (3 cols: 应收+其他 | 现金流 | 项目执行+负荷率) ─── */
     .finance-row {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
       padding: 12px 12px 0;
     }
+    /* 应收+运营合并卡：2×2 网格 */
+    .rx-ops-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+    .rx-ops-item {
+      background: rgba(0,112,105,0.08);
+      border-radius: 8px;
+      padding: 8px 10px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      min-height: 0;
+    }
+    .rx-ops-label { font-size: 11px; color: #6b7280; margin-bottom: 2px; }
+    .rx-ops-val { font-size: 20px; font-weight: 700; color: #007069; }
+    .rx-ops-sub { font-size: 11px; display: flex; align-items: center; gap: 3px; margin-top: 2px; }
+    /* 现金流卡：支出明细网格 */
+    .cf-flow-area { margin-top: 6px; }
+    .cf-out-pointer {
+      display: flex; justify-content: center; 
+    }
+    .cf-out-pointer svg { width: 22px; height: 12px; color: #d97706; }
+    .cf-out-panel {
+      background: #fff7ed;
+      border-radius: 4px;
+      padding: 4px;
+    }
+    .cf-breakdown-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6px 8px;
+    }
+    .cf-breakdown-item {
+      display: flex; align-items: flex-start; gap: 5px; min-width: 0;
+      border-radius: 8px; padding: 2px 2px;
+    }
+    .cf-breakdown-item.tone-teal { background: #e2f0ee; }
+    .cf-breakdown-item.tone-amber { background: #fef3e8; }
+    .cf-breakdown-item.tone-slate { background: #fef3e8; }
+    .cf-bd-icon {
+      width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px;
+      background: #ffedd5; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: #d97706;
+    }
+    .cf-bd-icon svg { width: 11px; height: 11px; }
+    .cf-bd-body { flex: 1; min-width: 0; }
+    .cf-bd-line {
+      display: flex; align-items: baseline; justify-content: space-between;
+      gap: 6px; flex-wrap: wrap;
+    }
+    .cf-bd-name {
+      font-size: 11px; color: #6b7280;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
+      flex: 1 1 84px;
+    }
+    .cf-bd-row { display: flex; align-items: baseline; gap: 4px; flex: 0 0 auto; white-space: nowrap; }
+    .cf-bd-amt { font-size: 13px;  color: #6b7280; }
+    .cf-bd-pct {
+      font-size: 10px; font-weight: 500; color: #92400e;
+      background: #fef3c7; padding: 0 5px; border-radius: 999px; white-space: nowrap;
+    }
+    .cf-bd-null { font-size: 11px; color: #9ca3af; }
+    /* 项目交付保障明细 */
+    .delivery-panel {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .delivery-kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .delivery-kpi {
+      border-radius: 8px;
+      padding: 12px 12px;
+      background: rgba(0,112,105,0.08);
+      min-width: 0;
+    }
+    .delivery-kpi.warn,
+    .delivery-kpi.danger {
+      background: rgba(0,112,105,0.08);
+      border-color: rgba(0,112,105,0.15);
+    }
+    .delivery-kpi-label { font-size: 11px; color: #6b7280; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .delivery-kpi-value { font-size: 22px; font-weight: 700; color: #007069; line-height: 1.1; }
+    .delivery-kpi.warn .delivery-kpi-value,
+    .delivery-kpi.danger .delivery-kpi-value { color: #007069; }
+    .delivery-phase-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+    }
+    .delivery-phase-chip {
+      border-radius: 999px;
+      padding: 4px 8px;
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+      font-size: 11px;
+      color: #4b5563;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .delivery-top-list {
+      flex: 1 1 auto;
+      min-height: 0;
+      overflow-y: auto;
+      display: grid;
+      gap: 6px;
+      padding-right: 2px;
+    }
+    .delivery-top-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 7px 9px;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .delivery-top-main { min-width: 0; }
+    .delivery-top-id { font-size: 11px; font-weight: 600; color: #007069; margin-right: 6px; }
+    .delivery-top-phase { font-size: 11px; color: #9ca3af; margin-right: 4px; }
+    .delivery-top-sep { font-size: 11px; color: #9ca3af; margin-right: 4px; }
+    .delivery-top-name { font-size: 12px; color: #374151; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .delivery-top-meta { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .delivery-tag {
+      font-size: 10px; padding: 1px 7px; border-radius: 999px;
+      background: rgba(0,112,105,0.1); color: #007069; white-space: nowrap;
+    }
+    .delivery-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: #007069;
+      white-space: nowrap;
+    }
+    .delivery-status svg {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+      color: currentColor;
+    }
+    .delivery-status.placeholder { color: #9ca3af; }
     .inv-list { display: grid; gap: 10px; }
     .inv-item {
       background: rgba(0,112,105,0.08);
@@ -185,32 +340,47 @@
     }
     .inv-name { font-size: 12px; color: #6b7280; }
     .inv-value { font-size: 18px; font-weight: 700; color: #007069; letter-spacing: -0.3px; }
-    /* 现金流卡片 */
+    /* 现金流卡片：三大指标块 */
     .cf-metrics {
-      display: flex; align-items: center; gap: 4px; margin-bottom: 8px;
+      display: flex; align-items: stretch; gap: 6px; margin-bottom: 0;
     }
     .cf-metric-op {
-      flex-shrink: 0; font-size: 15px; font-weight: 600;
-      color: #94a3b8; line-height: 1; padding: 0 2px;
+      flex-shrink: 0; font-size: 16px; font-weight: 600;
+      color: #94a3b8; align-self: center; padding: 0 1px;
     }
-    .cf-metric {
-      flex: 1; background: #f8fafc; border-radius: 6px;
-      padding: 8px 10px; min-width: 0;
+    .cf-metric-block {
+      flex: 1; border-radius: 10px; padding: 8px 10px; min-width: 0;
+      display: flex; flex-direction: column; gap: 3px;
     }
+    .cf-metric-block.in  { background: #e2f0ee; }
+    .cf-metric-block.out { background: #fef3e8; }
+    .cf-metric-block.net { background: #e2f0ee; }
+    .cf-metric-top { display: flex; align-items: center; gap: 5px; }
+    .cf-metric-icon {
+      width: 20px; height: 20px; border-radius: 50%; background: rgba(255,255,255,0.7);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .cf-metric-icon svg { width: 11px; height: 11px; }
+    .cf-metric-icon.in  { color: #007069; }
+    .cf-metric-icon.out { color: #d97706; }
+    .cf-metric-icon.net { color: #007069; }
     .cf-metric-label {
-      font-size: 11px; color: #6b7280; margin-bottom: 4px; white-space: nowrap;
+      font-size: 11px; font-weight: 500; white-space: nowrap;
     }
+    .cf-metric-label.in,
+    .cf-metric-label.out,
+    .cf-metric-label.net { color: #6b7280; }
     .cf-metric-val {
-      font-size: 15px; font-weight: 700; color: #0f172a; letter-spacing: -0.3px;
+      font-size: 17px; font-weight: 700; letter-spacing: -0.5px; padding-left: 2px;
     }
-    .cf-metric-val.in { color: #007069; }
-    .cf-metric-val.out { color: #5f9f9a; }
-    .cf-metric-val.net.net-pos { color: #166534; }
-    .cf-metric-val.net.net-neg { color: #ef4444; }
+    .cf-metric-val.in  { color: #007069; }
+    .cf-metric-val.out { color: #d97706; }
+    .cf-metric-val.net.net-pos { color: #007069; }
+    .cf-metric-val.net.net-neg { color: #dc2626; }
     .cf-chart-wrap { width: 100%; margin-top: -4px; }
     .cf-chart { width: 100%; height: 80px; }
     .cf-head-row {
-      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;padding-bottom:8px;
     }
     .cf-prev-year {
       background: rgba(0,112,105,0.08);
@@ -353,10 +523,43 @@
       color: #007069; cursor: pointer; flex-shrink: 0;
     }
     .ws-tab-arrow svg { width: 12px; height: 12px; }
+    .ws-body {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 6px;
+      overflow: hidden;
+    }
+    .ws-half {
+      flex: 1 1 0;
+      min-height: 0;
+    }
+    .ws-top-third {
+      min-height: 84px;
+    }
+    .ws-bottom-two-third {
+      min-height: 0;
+      overflow: auto;
+    }
+    .ws-top-third,
+    .ws-bottom-two-third {
+      height: auto;
+      align-self: stretch;
+    }
+    .ws-top3-row.ws-bottom-two-third {
+      align-content: start;
+    }
+    .ws-inout-grid.ws-top-third {
+      grid-auto-rows: minmax(0, 1fr);
+    }
+    .ws-inout-block {
+      min-height: 0;
+    }
 
     /* 本板块：两列并排 */
     .ws-inout-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 10px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
     }
     .ws-inout-block {
       background: rgba(0,112,105,0.08); border-radius: 8px; padding: 10px 8px;
@@ -370,18 +573,29 @@
     /* 公司整体 */
     .ws-total-block {
       background: rgba(0,112,105,0.08); border-radius: 8px;
-      padding: 12px 14px; margin-bottom: 10px;
-      display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-rows: auto auto;
+      align-items: start;
+      gap: 4px 10px;
+      overflow: hidden;
     }
+    .ws-total-main { min-width: 0; grid-column: 1 / 2; grid-row: 1 / 3; }
+    .ws-total-title { font-size: 12px; color: #6b7280; margin-bottom: 4px; }
     .ws-total-val { font-size: 22px; font-weight: 700; color: #007069; line-height: 1.1; }
     .ws-total-unit { font-size: 12px; color: #007069; margin-left: 2px; }
-    .ws-total-meta { font-size: 12px; color: #9ca3af; white-space: nowrap; }
+    .ws-total-meta {
+      font-size: 12px; color: #9ca3af; white-space: nowrap;
+      grid-column: 2 / 3; grid-row: 1 / 2; align-self: start;
+    }
     .ws-total-meta em { font-style: normal; color: #007069; font-weight: 600; }
 
     /* Top3 区域 */
     .ws-top3-row {
       display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
     }
+    .ws-top3-row.ws-half { overflow: auto; }
     .ws-top3-block { min-width: 0; }
     .ws-top3-head {
       display: flex; justify-content: space-between; align-items: center;
@@ -390,7 +604,7 @@
     .ws-top3-head-amt { color: #007069; font-weight: 500; }
     .ws-top3-item {
       display: flex; align-items: center; justify-content: space-between;
-      font-size: 12px; padding: 3px 0;
+      font-size: 12px; padding: 4px 0;
       border-bottom: 1px solid rgba(0,112,105,0.06);
     }
     .ws-top3-item:last-child { border-bottom: 0; }
@@ -412,8 +626,15 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 16px;
+      align-items: stretch;
+      min-height: 0;
     }
-    .workload-grid > div { min-width: 0; }
+    .workload-grid > div {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
     .section-title {
       font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 8px;
     }
@@ -453,12 +674,18 @@
     .notice-text strong { color: #fff; }
     .notice-text span { color: #fdba74; }
 
-    .forecast-svg-wrap { min-height: 100px; display: flex; align-items: center; }
+    .forecast-svg-wrap { min-height: 0; height: 100%; display: flex; align-items: center; }
     .forecast-chart { width: 100%; height: 100px; }
     .rate-item {
       position: relative; padding: 8px; border-radius: 8px;
       overflow: hidden; background: rgba(0,112,105,0.1); margin-bottom: 8px;
     }
+    .workload-grid > div:first-child .rate-item {
+      flex: 1 1 0;
+      display: flex;
+      align-items: center;
+    }
+    .workload-grid > div:first-child .rate-row { width: 100%; }
     .rate-item:last-child { margin-bottom: 0; }
     .rate-row { position: relative; display: flex; align-items: center; justify-content: space-between; }
     .rate-name { font-size: 13px; color: #007069; }
@@ -467,10 +694,11 @@
     .right-cards {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
       min-width: 0;
       height: 100%;
     }
+    .right-half { flex: 1 1 0; min-height: 0; }
     .merge-title {
       display: flex;
       align-items: center;
@@ -511,22 +739,30 @@
     }
     .merge-arrow svg { width: 12px; height: 12px; }
     .sw-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-    .sw-item { background: rgba(0,112,105,0.1); padding: 10px 12px; border-radius: 8px; }
+    .sw-item { background: rgba(0,112,105,0.1); padding: 12px; border-radius: 8px; }
     .sw-val { font-size: 20px; line-height: 1.05; font-weight: 700; color: #007069; }
-    .sw-lbl { font-size: 12px; color: #007069; margin-top: 4px; }
-    .action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .sw-lbl { font-size: 12px; color: #6b7280;  }
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      flex: 1 1 0;
+      min-height: 0;
+    }
     .action-btn {
       border: 1px solid #e4e8ec;
       border-radius: 8px;
       background: #ffffff;
       color: #007069;
-      height: 48px;
+      height: auto;
       font-size: 12px;
       font-weight: 500;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
+      min-height: 0;
     }
     .action-btn svg { width: 14px; height: 14px; }
 
@@ -683,169 +919,155 @@
           </div>
         </div>
 
-        <!-- 财务行：四列网格，应收 / 成本 各占两列 -->
+        <!-- 财务行：三列 应收+其他 | 现金流 | 项目执行+负荷率 -->
         <div class="finance-row">
 
-          <!-- Receivables -->
+          <!-- Col 1: 应收与其他运营指标合并 -->
           <div class="card">
-            <div class="card-body">
-              <div class="section-title">应收款项（万元）</div>
-              <div class="rx-block">
-                <div class="rx-val-row">
-                  <span class="rx-val">20,996.97</span>
-                  <span class="rx-up" style="color:#ef4444;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <div class="card-body" style="height:100%;display:flex;flex-direction:column;">
+              <div class="section-title">应收与其他运营指标（万元）</div>
+              <div class="rx-ops-grid">
+                <div class="rx-ops-item">
+                  <div class="rx-ops-label" style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
+                    <span>WIP 应收</span>
+                    <button class="detail-btn" title="查看明细">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#007069" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="rx-ops-val">20,996.97</div>
+                  <div class="rx-ops-sub" style="color:#ef4444;">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                       <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
                     </svg>
                     1,394.45
-                  </span>
+                  </div>
                 </div>
-                <div class="rx-label">
-                  WIP
-                  <button class="detail-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#007069" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="9 18 15 12 9 6"/>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div class="rx-block">
-                <div class="rx-val-row">
-                  <span class="rx-val">8,798.88</span>
-                  <span class="rx-up" style="color:#14b8a6;">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <div class="rx-ops-item">
+                  <div class="rx-ops-label" style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
+                    <span>应收账款</span>
+                    <button class="detail-btn" title="查看明细">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#007069" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="rx-ops-val">8,798.88</div>
+                  <div class="rx-ops-sub" style="color:#14b8a6;">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                       <line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/>
                     </svg>
                     309.41
-                  </span>
+                  </div>
                 </div>
-                <div class="rx-label">
-                  应收账款
-                  <button class="detail-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#007069" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="9 18 15 12 9 6"/>
+                <div class="rx-ops-item">
+                  <div class="rx-ops-label">存货</div>
+                  <div class="rx-ops-val">9,468.20</div>
+                  <div class="rx-ops-sub" style="color:#14b8a6;">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/>
                     </svg>
-                  </button>
+                    428.36
+                  </div>
+                </div>
+                <div class="rx-ops-item">
+                  <div class="rx-ops-label">营业收入</div>
+                  <div class="rx-ops-val">45,732.16</div>
+                  <div class="rx-ops-sub" style="color:#14b8a6;">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
+                    </svg>
+                    2,156.74
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Inventory / Company Mgmt Fee / Revenue -->
+          <!-- Col 2: 现金流 -->
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="height:100%;display:flex;flex-direction:column;">
               <div class="cf-head-row">
-                <div class="section-title">其他运营指标（万元）</div>
-                <button class="detail-btn" @click="openOpsDetailModal" title="查看月度明细">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#007069" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <polyline points="9 18 15 12 9 6"/>
-                  </svg>
-                </button>
-              </div>
-              <div class="inv-list">
-                <div class="inv-item">
-                  <div class="inv-name-wrap">
-                    <svg class="inv-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M3 7h18v10H3z"/><path d="M8 7V5h8v2"/><path d="M10 12h4"/>
-                    </svg>
-                    <div class="inv-name">存货</div>
-                  </div>
-                  <div class="inv-value">9,468.20</div>
-                </div>
-                <div class="inv-item">
-                  <div class="inv-name-wrap">
-                    <svg class="inv-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="8" y1="14" x2="8" y2="16"/>
-                    </svg>
-                    <div class="inv-name">公司管理费</div>
-                  </div>
-                  <div class="inv-value">2,828.92</div>
-                </div>
-                <div class="inv-item">
-                  <div class="inv-name-wrap">
-                    <svg class="inv-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                      <line x1="4" y1="20" x2="20" y2="20"/><line x1="7" y1="20" x2="7" y2="12"/><line x1="12" y1="20" x2="12" y2="8"/><line x1="17" y1="20" x2="17" y2="5"/>
-                    </svg>
-                    <div class="inv-name">营业收入</div>
-                  </div>
-                  <div class="inv-value">45,732.16</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Cash Flow -->
-          <div class="card">
-            <div class="card-body">
-              <div class="cf-head-row">
-                <div class="section-title">年度现金流（万元）</div>
+                <div class="section-title">现金流（万元）</div>
                 <button class="detail-btn" @click="openCfDetailModal" title="查看月度明细">
                   <svg viewBox="0 0 24 24" fill="none" stroke="#007069" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"/>
                   </svg>
                 </button>
               </div>
+              <div class="cf-flow-area">
+              <!-- 三大指标块 -->
               <div class="cf-metrics">
-                <div class="cf-metric">
-                  <div class="cf-metric-label">现金流入</div>
+                <!-- 现金流入 -->
+                <div class="cf-metric-block in">
+                  <div class="cf-metric-top">
+                    <div class="cf-metric-icon in">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/>
+                      </svg>
+                    </div>
+                    <span class="cf-metric-label in">现金流入</span>
+                  </div>
                   <div class="cf-metric-val in">{{ fmtNum(cfInflow) }}</div>
                 </div>
                 <span class="cf-metric-op">-</span>
-                <div class="cf-metric">
-                  <div class="cf-metric-label">现金流出</div>
+                <!-- 现金流出 -->
+                <div class="cf-metric-block out">
+                  <div class="cf-metric-top">
+                    <div class="cf-metric-icon out">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
+                      </svg>
+                    </div>
+                    <span class="cf-metric-label out">现金流出</span>
+                  </div>
                   <div class="cf-metric-val out">{{ fmtNum(cfOutflow) }}</div>
                 </div>
                 <span class="cf-metric-op">=</span>
-                <div class="cf-metric">
-                  <div class="cf-metric-label">净现金流</div>
+                <!-- 净现金流 -->
+                <div class="cf-metric-block net">
+                  <div class="cf-metric-top">
+                    <div class="cf-metric-icon net">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+                      </svg>
+                    </div>
+                    <span class="cf-metric-label net">净现金流</span>
+                  </div>
                   <div class="cf-metric-val net" :class="cfNetCash >= 0 ? 'net-pos' : 'net-neg'">{{ fmtNum(cfNetCash) }}</div>
                 </div>
               </div>
-              <!-- 迷你柱状图 -->
-              <div class="cf-chart-wrap">
-                <div id="cf-mini-chart" class="cf-chart"></div>
+              <div class="cf-out-pointer">
+                <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="2,2 12,10 22,2"></polyline>
+                </svg>
               </div>
-            </div>
-          </div>
-
-          <!-- Cost Analysis -->
-          <div class="card">
-            <div class="card-body">
-              <div class="section-title">成本分析（万元）</div>
-              <div class="cost-main">
-                <div class="cost-main-val">13,704.51</div>
-                <div class="cost-main-lbl">
-                  合计成本
-                  <button class="detail-btn">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#007069" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                      <polyline points="9 18 15 12 9 6"/>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-              <div class="cost-sub-row">
-                <div class="cost-sub">
-                  <div class="cost-sub-val">10,875.59</div>
-                  <div class="cost-sub-lbl">项目成本</div>
-                </div>
-                <div class="cost-sub">
-                  <div class="cost-sub-val">2,828.92</div>
-                  <div class="cost-sub-lbl">
-                    管理成本
-                    <button class="detail-btn">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="#007069" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"/>
-                      </svg>
-                    </button>
+              <!-- 2列支出明细（橙色框） -->
+              <div class="cf-out-panel">
+              <div class="cf-breakdown-grid">
+                <div class="cf-breakdown-item" :class="'tone-' + item.tone" v-for="item in cfOutItems" :key="item.name">
+                  <div class="cf-bd-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" v-html="item.iconPath"></svg>
+                  </div>
+                  <div class="cf-bd-body">
+                    <div class="cf-bd-line">
+                      <div class="cf-bd-name">{{ item.name }}</div>
+                      <div class="cf-bd-row" v-if="item.amt">
+                        <span class="cf-bd-amt">{{ fmtNum(item.amt) }}</span>
+                        <span class="cf-bd-pct">{{ item.pct }}%</span>
+                      </div>
+                      <div class="cf-bd-null" v-else>暂无数据</div>
+                    </div>
                   </div>
                 </div>
               </div>
+              </div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- 第三行：左项目执行 | 中 Workshare | 右工程软件 -->
-        <div class="execution-row">
+          <!-- Col 3: 项目执行+负荷率+预测（从第三行移来） -->
           <div class="right-col">
             <div class="notice-card">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -858,7 +1080,6 @@
                 <span> - 每月月初更新，点击在线查！</span>
               </span>
             </div>
-
             <div class="card workload-card">
               <div class="card-body">
                 <div class="workload-grid">
@@ -867,13 +1088,13 @@
                     <div class="rate-item">
                       <div class="rate-row">
                         <span class="rate-name">全年</span>
-                        <span class="rate-val">95.97%</span>
+                        <span class="rate-val">87%</span>
                       </div>
                     </div>
                     <div class="rate-item">
                       <div class="rate-row">
                         <span class="rate-name">当月</span>
-                        <span class="rate-val">100.00%</span>
+                        <span class="rate-val">96%</span>
                       </div>
                     </div>
                   </div>
@@ -887,12 +1108,16 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- 第三行：Workshare | 项目交付保障明细 | 工程软件+快捷入口 -->
+        <div class="execution-row">
 
           <!-- 中间：Workshare 协同总览 -->
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="height:100%;display:flex;flex-direction:column;">
               <div class="ws-overview-header">
-                <span class="ws-overview-title">Workshare 协同总览</span>
+                <span class="section-title">Workshare 协同总览</span>
                 <div class="ws-tab-group">
                   <button class="ws-tab" :class="{ active: wsTab === 'local' }" v-if="selectedDept !== 'all'" @click="wsTab = 'local'">本板块</button>
                   <button class="ws-tab" :class="{ active: wsTab === 'company' }" v-if="selectedDept !== 'all'" @click="wsTab = 'company'">公司整体</button>
@@ -906,7 +1131,8 @@
 
               <!-- 本板块 -->
               <template v-if="wsTab === 'local' && selectedDept !== 'all'">
-                <div class="ws-inout-grid">
+                <div class="ws-body">
+                <div class="ws-inout-grid ws-top-third">
                   <div class="ws-inout-block">
                     <div class="ws-inout-label">Share-in 金额（万元）</div>
                     <div class="ws-inout-val">12,846.50</div>
@@ -918,7 +1144,7 @@
                     <div class="ws-inout-meta">涉及项目数 <em>29</em> 个</div>
                   </div>
                 </div>
-                <div class="ws-top3-row">
+                <div class="ws-top3-row ws-bottom-two-third">
                   <div class="ws-top3-block">
                     <div class="ws-top3-head">
                       <span>Share-in 金额 · Top3（万元）</span>
@@ -942,18 +1168,20 @@
                     </div>
                   </div>
                 </div>
+                </div>
               </template>
 
               <!-- 公司整体 -->
               <template v-if="wsTab === 'company' || selectedDept === 'all'">
-                <div class="ws-total-block">
-                  <div>
-                    <div style="font-size:12px;color:#6b7280;margin-bottom:4px;">公司整体 Workshare 金额（万元）</div>
+                <div class="ws-body">
+                <div class="ws-total-block ws-top-third">
+                  <div class="ws-total-main">
+                    <div class="ws-total-title">公司整体 Workshare 金额（万元）</div>
                     <div class="ws-total-val">58,432.18</div>
                   </div>
                   <div class="ws-total-meta">涉及项目数 <em>186</em> 个</div>
                 </div>
-                <div class="ws-top3-row">
+                <div class="ws-top3-row ws-bottom-two-third">
                   <div class="ws-top3-block">
                     <div class="ws-top3-head">
                       <span>Share-in 金额 · Top3（万元）</span>
@@ -977,13 +1205,79 @@
                     </div>
                   </div>
                 </div>
+                </div>
               </template>
             </div>
           </div>
 
+          <!-- 第三行中间：项目交付保障明细 -->
+          <div class="card">
+            <div class="card-body" style="height:100%;display:flex;flex-direction:column;">
+              <div class="cf-head-row" style="flex:0 0 auto;">
+                <div class="section-title">
+                  项目交付保障 Todo-List
+                </div>
+                <button class="detail-btn">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="#007069" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="delivery-panel">
+                <div class="delivery-kpi-grid">
+                  <div class="delivery-kpi danger">
+                    <div class="delivery-kpi-label">已过期（项）</div>
+                    <div class="delivery-kpi-value">{{ deliveryOverdueCount }}</div>
+                  </div>
+                  <div class="delivery-kpi warn">
+                    <div class="delivery-kpi-label">一周内到期（项）</div>
+                    <div class="delivery-kpi-value">{{ deliveryWithin7Count }}</div>
+                  </div>
+                  <div class="delivery-kpi">
+                    <div class="delivery-kpi-label">一月内到期（项）</div>
+                    <div class="delivery-kpi-value">{{ deliveryWithin30Count }}</div>
+                  </div>
+                </div>
+                <div class="delivery-top-list">
+                  <div class="delivery-top-item" v-for="item in deliveryTopRisk" :key="'risk-' + item.id">
+                    <div class="delivery-top-main">
+                      <span class="delivery-top-id">{{ item.id }}</span>
+                      <span class="delivery-top-phase" v-if="!item._placeholder">{{ item.phase }}</span>
+                      <span class="delivery-top-sep" v-if="!item._placeholder">·</span>
+                      <span class="delivery-top-name">{{ item.name }}</span>
+                    </div>
+                    <div class="delivery-top-meta">
+                      <span class="delivery-status" v-if="item.overdue > 0">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                          <line x1="12" y1="9" x2="12" y2="13"/>
+                          <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        已过期{{ item.overdue }}天
+                      </span>
+                      <span class="delivery-status" v-else-if="item.id !== '—'">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10"/>
+                          <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                        剩余{{ Math.max(0, Math.ceil((new Date(item.date).setHours(0,0,0,0) - new Date().setHours(0,0,0,0)) / 86400000)) }}天
+                      </span>
+                      <span class="delivery-status placeholder" v-else>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                          <line x1="6" y1="12" x2="18" y2="12"/>
+                        </svg>
+                        —
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="right-cards">
-            <div class="card" style="flex:1;">
-              <div class="card-body">
+            <div class="card right-half">
+              <div class="card-body" style="height:100%;display:flex;flex-direction:column;">
                 <div class="merge-title">
                   <div class="merge-title-left">
                     <strong>工程软件设计项目覆盖率</strong>
@@ -995,14 +1289,14 @@
                     </svg>
                   </button>
                 </div>
-                <div class="sw-grid">
-                  <div class="sw-item"><div class="sw-val">43.38%</div><div class="sw-lbl">S3D/E3D</div></div>
-                  <div class="sw-item"><div class="sw-val">0.4%</div><div class="sw-lbl">SPPID</div></div>
-                  <div class="sw-item"><div class="sw-val">13.32%</div><div class="sw-lbl">SPI</div></div>
+                <div class="sw-grid" style="flex:1;">
+                  <div class="sw-item"><div class="sw-lbl">S3D/E3D</div><div class="sw-val">43.38%</div></div>
+                  <div class="sw-item"><div class="sw-lbl">SPPID</div><div class="sw-val">0.4%</div></div>
+                  <div class="sw-item"><div class="sw-lbl">SPI</div><div class="sw-val">13.32%</div></div>
                 </div>
               </div>
             </div>
-            <div class="action-row">
+            <div class="action-row right-half">
               <div class="action-btn">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -1046,7 +1340,6 @@
                     <tr>
                       <th>月份</th>
                       <th>存货</th>
-                      <th>公司管理费</th>
                       <th>营业收入</th>
                     </tr>
                   </thead>
@@ -1054,7 +1347,6 @@
                     <tr v-for="row in opsMonthlyDetail" :key="'ops-' + row.month">
                       <td>{{ row.month }}</td>
                       <td>{{ fmtNum(row.inventory) }}</td>
-                      <td>{{ fmtNum(row.mgmtFee) }}</td>
                       <td>{{ fmtNum(row.revenue) }}</td>
                     </tr>
                   </tbody>
@@ -1122,9 +1414,23 @@ new Vue({
       showOpsDetail: false,
       showCfDetail: false,
       cfInflow: 312850,
-      cfOutflow: 278740,
-      cfNetCash: 34110,
+      cfOutflow: 240780,
+      cfNetCash: 72070,
       cfPrevYearNet: 2480,
+
+      cfOutItems: [
+        { name: '人力成本', amt: 96240,  pct: '40.0', tone: 'amber', iconPath: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="3"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/>' },
+        { name: '派遣成本', amt: 0,      pct: '',     tone: 'slate', iconPath: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>' },
+        { name: '项目费用', amt: 112360, pct: '46.7', tone: 'amber', iconPath: '<path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/>' },
+        { name: '部门费用', amt: 32180,  pct: '13.3', tone: 'amber', iconPath: '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="3"/>' },
+        { name: '管理费用', amt: 0,      pct: '',     tone: 'slate', iconPath: '<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>' },
+      ],
+
+      deliveryItems: [
+        { id: 'C25043', name: 'HAZOP/HAZID 审查', phase: '执行阶段', overdue: 86,  date: '2025-01-10' },
+        { id: 'C26043', name: '项目质量审查/评估',  phase: '计划阶段', overdue: 14,  date: '2026-01-24' },
+        { id: 'B23277-0064', name: '岗位质量文件/评估', phase: '执行阶段', overdue: 0,   date: '2026-01-25' },
+      ],
 
       departments: [
         { value: 'all',   label: '全部' },
@@ -1237,20 +1543,103 @@ new Vue({
         { month: '12月', inflow: 29400, outflow: 22100, netCash: 7300, cumNetCash: 34110 },
       ],
       opsMonthlyDetail: [
-        { month: '1月',  inventory: 8730.2, mgmtFee: 218.4, revenue: 3210.5 },
-        { month: '2月',  inventory: 8865.4, mgmtFee: 221.6, revenue: 3345.8 },
-        { month: '3月',  inventory: 9018.7, mgmtFee: 226.9, revenue: 3471.2 },
-        { month: '4月',  inventory: 9154.6, mgmtFee: 232.8, revenue: 3598.4 },
-        { month: '5月',  inventory: 9230.5, mgmtFee: 235.4, revenue: 3716.3 },
-        { month: '6月',  inventory: 9314.2, mgmtFee: 239.5, revenue: 3824.1 },
-        { month: '7月',  inventory: 9388.9, mgmtFee: 241.7, revenue: 3910.6 },
-        { month: '8月',  inventory: 9432.7, mgmtFee: 234.3, revenue: 3988.2 },
-        { month: '9月',  inventory: 9468.2, mgmtFee: 228.9, revenue: 4056.7 },
-        { month: '10月', inventory: 9510.4, mgmtFee: 224.7, revenue: 4172.8 },
-        { month: '11月', inventory: 9534.6, mgmtFee: 221.3, revenue: 4276.4 },
-        { month: '12月', inventory: 9468.2, mgmtFee: 223.6, revenue: 4160.6 },
+        { month: '1月',  inventory: 8730.2, revenue: 3210.5 },
+        { month: '2月',  inventory: 8865.4, revenue: 3345.8 },
+        { month: '3月',  inventory: 9018.7, revenue: 3471.2 },
+        { month: '4月',  inventory: 9154.6, revenue: 3598.4 },
+        { month: '5月',  inventory: 9230.5, revenue: 3716.3 },
+        { month: '6月',  inventory: 9314.2, revenue: 3824.1 },
+        { month: '7月',  inventory: 9388.9, revenue: 3910.6 },
+        { month: '8月',  inventory: 9432.7, revenue: 3988.2 },
+        { month: '9月',  inventory: 9468.2, revenue: 4056.7 },
+        { month: '10月', inventory: 9510.4, revenue: 4172.8 },
+        { month: '11月', inventory: 9534.6, revenue: 4276.4 },
+        { month: '12月', inventory: 9468.2, revenue: 4160.6 },
       ],
     };
+  },
+
+  computed: {
+    deliveryOverdueCount: function () {
+      return this.deliveryItems.filter(function (item) { return item.overdue > 0; }).length;
+    },
+    deliveryWithin7Count: function () {
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return this.deliveryItems.filter(function (item) {
+        if (item.overdue > 0) { return false; }
+        var d = new Date(item.date);
+        d.setHours(0, 0, 0, 0);
+        var diffDays = Math.round((d - today) / 86400000);
+        return diffDays >= 0 && diffDays <= 7;
+      }).length;
+    },
+    deliveryWithin30Count: function () {
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return this.deliveryItems.filter(function (item) {
+        if (item.overdue > 0) { return false; }
+        var d = new Date(item.date);
+        d.setHours(0, 0, 0, 0);
+        var diffDays = Math.round((d - today) / 86400000);
+        return diffDays >= 0 && diffDays <= 30;
+      }).length;
+    },
+    deliveryWithin7List: function () {
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return (this.deliveryItems || [])
+        .filter(function (item) {
+          if (item.overdue > 0) { return false; }
+          var d = new Date(item.date);
+          d.setHours(0, 0, 0, 0);
+          var diffDays = Math.round((d - today) / 86400000);
+          return diffDays >= 0 && diffDays <= 7;
+        })
+        .slice()
+        .sort(function (a, b) { return new Date(a.date) - new Date(b.date); });
+    },
+    deliveryWithin30List: function () {
+      var today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return (this.deliveryItems || [])
+        .filter(function (item) {
+          if (item.overdue > 0) { return false; }
+          var d = new Date(item.date);
+          d.setHours(0, 0, 0, 0);
+          var diffDays = Math.round((d - today) / 86400000);
+          return diffDays >= 0 && diffDays <= 30;
+        })
+        .slice()
+        .sort(function (a, b) { return new Date(a.date) - new Date(b.date); });
+    },
+    deliveryTopRisk: function () {
+      var list = (this.deliveryItems || []).slice();
+      var overdue = list
+        .filter(function (item) { return item.overdue > 0; })
+        .sort(function (a, b) { return b.overdue - a.overdue; });
+
+      var within7 = this.deliveryWithin7List || [];
+      var within30 = this.deliveryWithin30List || [];
+
+      var picked = [];
+      var used = {};
+      function pushUnique(item) {
+        if (!item || !item.id) return;
+        if (used[item.id]) return;
+        used[item.id] = true;
+        picked.push(item);
+      }
+
+      for (var i = 0; i < overdue.length && picked.length < 3; i++) pushUnique(overdue[i]);
+      for (var j = 0; j < within7.length && picked.length < 3; j++) pushUnique(within7[j]);
+      for (var k = 0; k < within30.length && picked.length < 3; k++) pushUnique(within30[k]);
+
+      while (picked.length < 3) {
+        picked.push({ id: '—', name: '—', phase: '—', overdue: 0, _placeholder: true });
+      }
+      return picked.slice(0, 3);
+    }
   },
 
   watch: {
@@ -1359,7 +1748,7 @@ new Vue({
     },
 
     renderCashFlowChart: function () {
-      if (!window.Highcharts) { return; }
+      if (!window.Highcharts || !document.getElementById('cf-mini-chart')) { return; }
       Highcharts.chart('cf-mini-chart', {
         chart: {
           type: 'column',
@@ -1457,7 +1846,6 @@ new Vue({
       var cats = this.opsMonthlyDetail.map(function (r) { return r.month; });
       var inv = this.opsMonthlyDetail.map(function (r) { return r.inventory; });
       var rev = this.opsMonthlyDetail.map(function (r) { return r.revenue; });
-      var mgmt = this.opsMonthlyDetail.map(function (r) { return r.mgmtFee; });
       Highcharts.chart('ops-detail-chart', {
         chart: { backgroundColor: 'transparent', margin: [20, 8, 28, 45], height: 220 },
         title: { text: null },
@@ -1469,19 +1857,11 @@ new Vue({
           lineColor: '#e5e7eb',
           labels: { style: { fontSize: '11px', color: '#6b7280' } }
         },
-        yAxis: [
-          {
-            title: { text: null },
-            gridLineColor: 'rgba(0,112,105,0.08)',
-            labels: { style: { color: '#6b7280', fontSize: '11px' } }
-          },
-          {
-            title: { text: null },
-            opposite: true,
-            gridLineColor: 'rgba(0,112,105,0.05)',
-            labels: { style: { color: '#9ca3af', fontSize: '11px' } }
-          }
-        ],
+        yAxis: [{
+          title: { text: null },
+          gridLineColor: 'rgba(0,112,105,0.08)',
+          labels: { style: { color: '#6b7280', fontSize: '11px' } }
+        }],
         legend: {
           itemStyle: { fontSize: '11px', color: '#4b5563' },
           symbolRadius: 2
@@ -1492,8 +1872,7 @@ new Vue({
         },
         series: [
           { name: '存货', type: 'column', color: '#0f766e', data: inv },
-          { name: '营业收入', type: 'column', color: '#38b2ac', data: rev },
-          { name: '公司管理费', type: 'column', yAxis: 1, color: '#d97706', data: mgmt }
+          { name: '营业收入', type: 'column', color: '#38b2ac', data: rev }
         ]
       });
     },
