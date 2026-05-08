@@ -198,7 +198,7 @@
     .cf-out-pointer {
       display: flex; justify-content: center; 
     }
-    .cf-out-pointer svg { width: 22px; height: 12px; color: #d97706; }
+    .cf-out-pointer svg { width: 28px; height: 12px; color: #fef3e8 }
     .cf-out-panel {
       background: #fff7ed;
       border-radius: 4px;
@@ -230,6 +230,19 @@
       font-size: 11px; color: #6b7280;
       white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0;
       flex: 1 1 84px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .cf-bd-arrow {
+      color: #d97706;
+      display: inline-flex;
+      align-items: center;
+      line-height: 1;
+    }
+    .cf-bd-arrow svg {
+      width: 10px;
+      height: 10px;
     }
     .cf-bd-row { display: flex; align-items: baseline; gap: 4px; flex: 0 0 auto; white-space: nowrap; }
     .cf-bd-amt { font-size: 13px;  color: #6b7280; }
@@ -929,7 +942,7 @@
               <div class="rx-ops-grid">
                 <div class="rx-ops-item">
                   <div class="rx-ops-label" style="display:flex;align-items:center;justify-content:space-between;gap:6px;">
-                    <span>WIP 应收</span>
+                    <span>WIP</span>
                     <button class="detail-btn" title="查看明细">
                       <svg viewBox="0 0 24 24" fill="none" stroke="#007069" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="9 18 15 12 9 6"/>
@@ -990,11 +1003,11 @@
             <div class="card-body" style="height:100%;display:flex;flex-direction:column;">
               <div class="cf-head-row">
                 <div class="section-title">现金流（万元）</div>
-                <button class="detail-btn" @click="openCfDetailModal" title="查看月度明细">
+                <!-- <button class="detail-btn" @click="openCfDetailModal" title="查看月度明细">
                   <svg viewBox="0 0 24 24" fill="none" stroke="#007069" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"/>
                   </svg>
-                </button>
+                </button> -->
               </div>
               <div class="cf-flow-area">
               <!-- 三大指标块 -->
@@ -1039,8 +1052,8 @@
                 </div>
               </div>
               <div class="cf-out-pointer">
-                <svg viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="2,2 12,10 22,2"></polyline>
+                <svg viewBox="0 0 24 12" fill="currentColor" stroke="none" aria-hidden="true">
+                  <polygon points="2,2 12,10 22,2"></polygon>
                 </svg>
               </div>
               <!-- 2列支出明细（橙色框） -->
@@ -1052,7 +1065,14 @@
                   </div>
                   <div class="cf-bd-body">
                     <div class="cf-bd-line">
-                      <div class="cf-bd-name">{{ item.name }}</div>
+                      <div class="cf-bd-name">
+                        {{ item.name }}
+                        <span class="cf-bd-arrow" v-if="item.name === '部门费用'">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"/>
+                          </svg>
+                        </span>
+                      </div>
                       <div class="cf-bd-row" v-if="item.amt">
                         <span class="cf-bd-amt">{{ fmtNum(item.amt) }}</span>
                         <span class="cf-bd-pct">{{ item.pct }}%</span>
