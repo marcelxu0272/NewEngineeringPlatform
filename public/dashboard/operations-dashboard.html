@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>运营看板 - 项目中台</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.14/lib/theme-chalk/index.css" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/element-ui@2.15.14/lib/index.js" crossorigin="anonymous"></script>
   <script src="https://code.highcharts.com/highcharts.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -395,6 +398,28 @@
     .cf-head-row {
       display: flex; align-items: center; justify-content: space-between; gap: 8px;padding-bottom:8px;
     }
+    .cf-title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex: 1;
+      min-width: 0;
+    }
+    .cf-title-row .cf-out-help-trigger { flex-shrink: 0; line-height: 1; }
+    .cf-out-tooltip-popper {
+      max-width: 420px !important;
+    }
+    .cf-out-tooltip-body {
+      white-space: pre-line;
+      line-height: 1.55;
+      font-size: 12px;
+      text-align: left;
+    }
+    /* Tailwind-like helpers（供问号图标 class 使用） */
+    .text-gray-400 { color: #9ca3af; }
+    .hover\:text-gray-600:hover { color: #4b5563; }
+    .cursor-help { cursor: help; }
+    .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
     .cf-prev-year {
       background: rgba(0,112,105,0.08);
       border: 1px solid rgba(0,112,105,0.18);
@@ -976,23 +1001,11 @@
                 </div>
                 <div class="rx-ops-item">
                   <div class="rx-ops-label">存货</div>
-                  <div class="rx-ops-val">9,468.20</div>
-                  <div class="rx-ops-sub" style="color:#14b8a6;">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <line x1="12" y1="5" x2="12" y2="19"/><polyline points="5 12 12 19 19 12"/>
-                    </svg>
-                    428.36
-                  </div>
+                  <div class="rx-ops-val" style="color:#9ca3af;">暂无数据</div>
                 </div>
                 <div class="rx-ops-item">
                   <div class="rx-ops-label">营业收入</div>
-                  <div class="rx-ops-val">45,732.16</div>
-                  <div class="rx-ops-sub" style="color:#14b8a6;">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                      <line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/>
-                    </svg>
-                    2,156.74
-                  </div>
+                  <div class="rx-ops-val" style="color:#9ca3af;">暂无数据</div>
                 </div>
               </div>
             </div>
@@ -1002,7 +1015,13 @@
           <div class="card">
             <div class="card-body" style="height:100%;display:flex;flex-direction:column;">
               <div class="cf-head-row">
-                <div class="section-title">现金流（万元）</div>
+                <div class="cf-title-row">
+                  <div class="section-title">现金流（万元）</div>
+                  <el-tooltip placement="bottom-start" effect="dark" :open-delay="200" popper-class="cf-out-tooltip-popper">
+                    <div slot="content" class="cf-out-tooltip-body">{{ cfOutBreakdownTooltip }}</div>
+                    <i class="cf-out-help-trigger fas fa-question-circle text-gray-400 hover:text-gray-600 cursor-help text-sm" aria-label="现金流出细项口径说明" style="margin-bottom: 8px;"></i>
+                  </el-tooltip>
+                </div>
                 <!-- <button class="detail-btn" @click="openCfDetailModal" title="查看月度明细">
                   <svg viewBox="0 0 24 24" fill="none" stroke="#007069" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"/>
@@ -1422,6 +1441,9 @@
 </div>
 
 <script>
+if (typeof ELEMENT !== 'undefined') {
+  Vue.use(ELEMENT);
+}
 new Vue({
   el: '#app',
   data: function () {
@@ -1659,6 +1681,15 @@ new Vue({
         picked.push({ id: '—', name: '—', phase: '—', overdue: 0, _placeholder: true });
       }
       return picked.slice(0, 3);
+    },
+    cfOutBreakdownTooltip: function () {
+      return [
+        '人力成本：由工时和人员费率计算出的结果，包含低负荷成本',
+        '派遣成本：仅只包含内部人员项目派遣成本',
+        '项目费用：项目上的差旅及报销、一般付款、涉外支付、施工/采购/服务付款以及项目转移成本',
+        '部门费用：部门项目上的差旅及报销、一般付款、涉外支付、施工/采购/服务付款以及项目转移成本',
+        '管理费用：公司管理费分摊'
+      ].join('\n\n');
     }
   },
 
