@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LayoutDashboard, Users, Wrench, Megaphone, BarChart3, FolderKanban, ChevronRight, Network, ClipboardList, UserCog, CalendarCheck, Palette, TrendingUp } from 'lucide-react';
+import { LayoutDashboard, Users, Wrench, Megaphone, BarChart3, FolderKanban, ChevronRight, Network, ClipboardList, UserCog, CalendarCheck, Palette, TrendingUp, Smartphone } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const routes = [
@@ -81,6 +81,12 @@ const routes = [
     title: '现金流仪表盘',
     description: '三级联动现金流看板，WIP / AR / Cash In / Cash Out',
     icon: TrendingUp,
+  },
+  {
+    href: '/cash-flow-dashboard-mobile',
+    title: '现金流仪表盘（移动版）',
+    description: '移动端净现金流、趋势与各板块表（不含开票/回款/WIP/应收）',
+    icon: Smartphone,
   },
   {
     href: '/design',

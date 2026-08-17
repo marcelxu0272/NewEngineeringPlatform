@@ -1058,7 +1058,7 @@
                     </div>
                     <span class="cf-metric-label in">现金流入</span>
                   </div>
-                  <div class="cf-metric-val in">{{ fmtNum(cfInflow) }}</div>
+                  <div class="cf-metric-val in">{{ fmtMoney2(cfInflow) }}</div>
                 </div>
                 <span class="cf-metric-op">-</span>
                 <!-- 现金流出 -->
@@ -1071,7 +1071,7 @@
                     </div>
                     <span class="cf-metric-label out">现金流出</span>
                   </div>
-                  <div class="cf-metric-val out">{{ fmtNum(cfOutflow) }}</div>
+                  <div class="cf-metric-val out">{{ fmtMoney2(cfOutflow) }}</div>
                 </div>
                 <span class="cf-metric-op">=</span>
                 <!-- 净现金流 -->
@@ -1084,7 +1084,7 @@
                     </div>
                     <span class="cf-metric-label net">净现金流</span>
                   </div>
-                  <div class="cf-metric-val net" :class="cfNetCash >= 0 ? 'net-pos' : 'net-neg'">{{ fmtNum(cfNetCash) }}</div>
+                  <div class="cf-metric-val net" :class="cfNetCash >= 0 ? 'net-pos' : 'net-neg'">{{ fmtMoney2(cfNetCash) }}</div>
                 </div>
               </div>
               <div class="cf-out-pointer">
@@ -1110,8 +1110,8 @@
                         </span>
                       </div>
                       <div class="cf-bd-row" v-if="item.amt">
-                        <span class="cf-bd-amt">{{ fmtNum(item.amt) }}</span>
-                        <span class="cf-bd-pct">{{ item.pct }}%</span>
+                        <span class="cf-bd-amt">{{ fmtMoney2(item.amt) }}</span>
+                        <span class="cf-bd-pct" v-if="item.pct">{{ fmtPctInt(item.pct) }}%</span>
                       </div>
                       <div class="cf-bd-null" v-else>暂无数据</div>
                     </div>
@@ -2023,6 +2023,17 @@ new Vue({
 
     fmtNum: function (n) {
       return n.toLocaleString('zh-CN');
+    },
+    fmtMoney2: function (n) {
+      var x = Number(n);
+      if (isNaN(x)) { return '—'; }
+      return x.toLocaleString('zh-CN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    },
+    fmtPctInt: function (p) {
+      if (p === '' || p == null) { return ''; }
+      var x = Number(p);
+      if (isNaN(x)) { return ''; }
+      return String(Math.round(x));
     },
   },
 });

@@ -1,0 +1,333 @@
+/* 现金流仪表盘（移动简版）— 对齐 docs/DESIGN.md：#f8faff 背景、白卡片、品牌色 #007069、8px 圆角 */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  font-family: system-ui, -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  color: #374151;
+  background: #f8faff;
+  -webkit-tap-highlight-color: transparent;
+}
+
+[v-cloak] {
+  display: none;
+}
+
+.page-wrap {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  padding: 12px 14px 24px;
+}
+
+/* 顶栏 */
+.page-header {
+  margin-bottom: 14px;
+}
+
+.header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.header-text .title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 600;
+  color: #233845;
+  letter-spacing: -0.02em;
+}
+
+.header-text .subtitle {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.bell-btn {
+  position: relative;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 4px 6px -1px rgba(0, 0, 0, 0.07);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #374151;
+}
+
+.bell-btn .badge {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  min-width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+  background: #ef4444;
+  border: 2px solid #fff;
+}
+
+/* 筛选：非实时，点查询生效 */
+.filter-row {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  align-items: center;
+}
+
+.filter-row select {
+  flex: 1;
+  min-width: 0;
+  height: 36px;
+  padding: 0 28px 0 10px;
+  font-size: 13px;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 8px center;
+  background-color: #fff;
+  appearance: none;
+  cursor: pointer;
+}
+
+.filter-actions {
+  margin-top: 10px;
+}
+
+.btn-query {
+  width: 100%;
+  height: 38px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #fff;
+  background: #007069;
+  cursor: pointer;
+}
+
+.btn-query:hover {
+  background: #005c56;
+}
+
+.btn-query:active {
+  background: #004842;
+}
+
+/* 卡片通用 */
+.card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 112, 105, 0.08);
+  padding: 14px 14px 16px;
+  margin-bottom: 12px;
+}
+
+.card-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #233845;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-title .unit {
+  font-size: 12px;
+  font-weight: 400;
+  color: #6b7280;
+}
+
+.info-ico {
+  display: inline-flex;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  cursor: default;
+}
+
+/* 净现金流主卡 */
+.net-card-inner {
+  display: flex;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.net-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.net-value {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #ef4444;
+}
+
+.net-compare {
+  margin-top: 6px;
+  font-size: 13px;
+  color: #ef4444;
+}
+
+.net-side {
+  flex: 0 0 118px;
+  background: #f9fafb;
+  border-radius: 8px;
+  padding: 10px 10px;
+  font-size: 11px;
+  color: #6b7280;
+  line-height: 1.45;
+}
+
+.net-side strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.net-side .line:first-child strong {
+  margin-top: 2px;
+}
+
+/* 趋势图 */
+.chart-host {
+  width: 100%;
+  height: 220px;
+}
+
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 16px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: #6b7280;
+}
+
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.legend-line {
+  width: 18px;
+  height: 0;
+  border-top-width: 2px;
+  border-top-style: solid;
+}
+
+.legend-line.dashed {
+  border-top-style: dashed;
+}
+
+/* 表格 */
+.table-section-title {
+  margin: 4px 0 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #233845;
+}
+
+.data-table-wrap {
+  overflow-x: auto;
+  margin: 0 -2px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.data-table th,
+.data-table td {
+  padding: 10px 6px;
+  text-align: right;
+  border-bottom: 1px solid #e5e7eb;
+  white-space: nowrap;
+}
+
+.data-table th:first-child,
+.data-table td:first-child {
+  text-align: left;
+  padding-left: 2px;
+}
+
+.data-table th {
+  font-weight: 600;
+  color: #6b7280;
+  background: rgba(0, 112, 105, 0.06);
+}
+
+.sector-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.dot-blue {
+  background: #2563eb;
+}
+
+.dot-orange {
+  background: #f59e0b;
+}
+
+.val-pos {
+  color: #166534;
+  font-weight: 600;
+}
+
+.val-neg {
+  color: #ef4444;
+  font-weight: 600;
+}
+
+.footer-note {
+  margin-top: 16px;
+  font-size: 11px;
+  color: #9ca3af;
+  text-align: center;
+  line-height: 1.5;
+}
