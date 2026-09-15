@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { LayoutDashboard, Users, Wrench, Megaphone, BarChart3, FolderKanban, ChevronRight, Network, ClipboardList, UserCog, CalendarCheck, Palette, TrendingUp, Smartphone } from 'lucide-react';
+import { LayoutDashboard, Users, Wrench, Megaphone, BarChart3, FolderKanban, ChevronRight, Network, ClipboardList, UserCog, CalendarCheck, Palette, TrendingUp, Smartphone, Coins } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const routes = [
@@ -69,6 +69,12 @@ const routes = [
     title: '派遣人员考勤',
     description: '月度考勤、采购确认、成本测算与应付单推送',
     icon: CalendarCheck,
+  },
+  {
+    href: '/yinchuan-performance-payout',
+    title: '银川绩效派发',
+    description: '专业间、专业内、评估与绩效查询，含规则配置',
+    icon: Coins,
   },
   {
     href: '/delivery-assurance-action-items-config',

@@ -6,11 +6,16 @@ import { PlusOutlined, UploadOutlined, DownloadOutlined } from '@ant-design/icon
 import {
   DEFAULT_PERSONNEL,
   DEFAULT_PROJECT_OPTIONS,
+  IMPORT_OPTIONAL_HEADERS,
+  IMPORT_REQUIRED_HEADERS,
+  IMPORT_TEMPLATE_HEADERS,
   THIRD_PARTY_STORAGE_KEY,
   type ImportPreview,
   type ImportRow,
   type ThirdPartyPerson,
   parseCSVFile,
+  resolveManagementAffiliation,
+  rowToThirdPartyPerson,
   validateImportData,
 } from '@/lib/third-party-personnel';
 import { Card, CardContent } from '@/components/ui/card';
@@ -31,12 +36,13 @@ function getTodayString(): string {
 function normalizePerson(person: ThirdPartyPerson): ThirdPartyPerson {
   return {
     ...person,
-    weeklyWorkTime: person.weeklyWorkTime || '5*8',
+    positionName: person.positionName || '',
+    weeklyWorkTime: person.weeklyWorkTime || '',
     baseRate: Number(person.baseRate) || 0,
     weekdayOvertimeRate: Number(person.weekdayOvertimeRate) || 0,
     weekendOvertimeRate: Number(person.weekendOvertimeRate) || 0,
     holidayOvertimeRate: Number(person.holidayOvertimeRate) || 0,
-    status: person.status === '离岗' ? '离岗' : '在岗',
+    status: person.status === '离职' ? '离职' : '在岗',
     leaveDate: person.leaveDate || '',
   };
 }
@@ -81,7 +87,6 @@ export function ThirdPartyPersonnelApp() {
 
   const [showAddDialog, setShowAddDialog] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
-  const [showStatusDialog, setShowStatusDialog] = useState(false);
   const [showImportDialog, setShowImportDialog] = useState(false);
   const [importStep, setImportStep] = useState(1);
   const [importFile, setImportFile] = useState<File | null>(null);
@@ -106,25 +111,15 @@ export function ThirdPartyPersonnelApp() {
     gender: '',
     age: 28,
     project: '',
+    positionName: '',
     arrivalDate: '',
     projectDuration: '',
     phone: '',
-    weeklyWorkTime: '5*8',
+    weeklyWorkTime: '',
     baseRate: 0,
     weekdayOvertimeRate: 0,
     weekendOvertimeRate: 0,
     holidayOvertimeRate: 0,
-    status: '在岗',
-    leaveDate: '',
-  });
-  const [statusFormData, setStatusFormData] = useState<{
-    id: number | null;
-    name: string;
-    status: '在岗' | '离岗';
-    leaveDate: string;
-  }>({
-    id: null,
-    name: '',
     status: '在岗',
     leaveDate: '',
   });
@@ -196,10 +191,11 @@ export function ThirdPartyPersonnelApp() {
       gender: '',
       age: 28,
       project: '',
+      positionName: '',
       arrivalDate: '',
       projectDuration: '',
       phone: '',
-      weeklyWorkTime: '5*8',
+      weeklyWorkTime: '',
       baseRate: 0,
       weekdayOvertimeRate: 0,
       weekendOvertimeRate: 0,
@@ -213,11 +209,6 @@ export function ThirdPartyPersonnelApp() {
     setShowAddDialog(false);
     setShowEditDialog(false);
     resetFormData();
-  };
-
-  const closeStatusDialog = () => {
-    setShowStatusDialog(false);
-    setStatusFormData({ id: null, name: '', status: '在岗', leaveDate: '' });
   };
 
   const validateForm = (): boolean => {
@@ -242,6 +233,10 @@ export function ThirdPartyPersonnelApp() {
       message.error('请选择所属项目');
       return false;
     }
+    if (!formData.positionName.trim()) {
+      message.error('请输入岗位名称');
+      return false;
+    }
     if (!formData.arrivalDate) {
       message.error('请选择到岗时间');
       return false;
@@ -254,24 +249,19 @@ export function ThirdPartyPersonnelApp() {
       message.error('请输入正确的11位手机号码');
       return false;
     }
-    if (!/^\d+(\.\d+)?\*\d+(\.\d+)?$/.test(formData.weeklyWorkTime.trim())) {
+    if (
+      formData.weeklyWorkTime.trim() &&
+      !/^\d+(\.\d+)?\*\d+(\.\d+)?$/.test(formData.weeklyWorkTime.trim())
+    ) {
       message.error('周工作时间格式应为“天数*小时”，如 5*8');
       return false;
     }
-    if (formData.baseRate <= 0) {
-      message.error('请输入有效的基本费率');
+    if (!formData.status) {
+      message.error('请选择人员状态');
       return false;
     }
-    if (formData.weekdayOvertimeRate <= 0) {
-      message.error('请输入有效的工作日加班费率');
-      return false;
-    }
-    if (formData.weekendOvertimeRate <= 0) {
-      message.error('请输入有效的周末加班费率');
-      return false;
-    }
-    if (formData.holidayOvertimeRate <= 0) {
-      message.error('请输入有效的法定假日加班费率');
+    if (formData.status === '离职' && !formData.leaveDate) {
+      message.error('离职状态下必须填写离职时间');
       return false;
     }
     return true;
@@ -279,16 +269,20 @@ export function ThirdPartyPersonnelApp() {
 
   const savePerson = () => {
     if (!validateForm()) return;
+    const payload = {
+      ...formData,
+      leaveDate: formData.status === '离职' ? formData.leaveDate : '',
+    };
     if (showAddDialog) {
       const newPerson: ThirdPartyPerson = {
-        ...formData,
+        ...payload,
         id: Date.now(),
       };
       setPersonnelList((prev) => [...prev, newPerson]);
       message.success('人员信息添加成功');
     } else {
       setPersonnelList((prev) =>
-        prev.map((p) => (p.id === formData.id ? { ...formData, id: formData.id! } : p)),
+        prev.map((p) => (p.id === formData.id ? { ...payload, id: formData.id! } : p)),
       );
       message.success('人员信息更新成功');
     }
@@ -298,40 +292,6 @@ export function ThirdPartyPersonnelApp() {
   const editPerson = (person: ThirdPartyPerson) => {
     setFormData({ ...person, id: person.id });
     setShowEditDialog(true);
-  };
-
-  const openStatusDialog = (person: ThirdPartyPerson) => {
-    setStatusFormData({
-      id: person.id,
-      name: person.name,
-      status: person.status,
-      leaveDate: person.leaveDate || (person.status === '离岗' ? getTodayString() : ''),
-    });
-    setShowStatusDialog(true);
-  };
-
-  const saveStatusChange = () => {
-    if (statusFormData.id === null) {
-      message.error('未找到需要更新的人员');
-      return;
-    }
-    if (statusFormData.status === '离岗' && !statusFormData.leaveDate) {
-      message.error('状态为离岗时请填写离岗时间');
-      return;
-    }
-    setPersonnelList((prev) =>
-      prev.map((person) =>
-        person.id === statusFormData.id
-          ? {
-              ...person,
-              status: statusFormData.status,
-              leaveDate: statusFormData.status === '离岗' ? statusFormData.leaveDate : '',
-            }
-          : person,
-      ),
-    );
-    message.success('状态信息更新成功');
-    closeStatusDialog();
   };
 
   const deletePerson = (id: number) => {
@@ -359,16 +319,16 @@ export function ThirdPartyPersonnelApp() {
       '性别',
       '年龄',
       '所属项目',
+      '管理归属',
+      '岗位名称',
       '到岗时间',
       '项目周期',
+      '联系电话',
       '周工作时间',
       '基本费率(元/小时)',
       '工作日加班费率(元/小时)',
       '周末加班费率(元/小时)',
       '法定假日加班费率(元/小时)',
-      '人员状态',
-      '离岗时间',
-      '联系电话',
     ];
     const csvContent = [
       headers.join(','),
@@ -380,16 +340,16 @@ export function ThirdPartyPersonnelApp() {
           person.gender,
           person.age,
           person.project,
+          resolveManagementAffiliation(person.project) || '-',
+          person.positionName,
           person.arrivalDate,
           person.projectDuration,
-          person.weeklyWorkTime,
-          person.baseRate,
-          person.weekdayOvertimeRate,
-          person.weekendOvertimeRate,
-          person.holidayOvertimeRate,
-          person.status,
-          person.leaveDate || '-',
           person.phone,
+          person.weeklyWorkTime || '-',
+          person.baseRate || '-',
+          person.weekdayOvertimeRate || '-',
+          person.weekendOvertimeRate || '-',
+          person.holidayOvertimeRate || '-',
         ].join(','),
       ),
     ].join('\n');
@@ -449,7 +409,7 @@ export function ThirdPartyPersonnelApp() {
         message.error('当前版本请先将 Excel 另存为 CSV 后上传');
         return;
       }
-      const preview = validateImportData(data, projectList);
+      const preview = validateImportData(data);
       setImportPreview(preview);
       setImportStep(2);
       message.destroy('import');
@@ -465,24 +425,10 @@ export function ThirdPartyPersonnelApp() {
       message.loading({ content: '正在导入数据...', key: 'import2', duration: 0 });
       const validData = importPreview.data.filter((row) => row.isValid);
       await new Promise((r) => setTimeout(r, 300));
-      const additions: ThirdPartyPerson[] = validData.map((row) => ({
-        id: Date.now() + Math.random(),
-        companyName: String(row.companyName ?? ''),
-        name: String(row.name ?? ''),
-        gender: String(row.gender ?? ''),
-        age: parseInt(String(row.age ?? '0'), 10),
-        project: String(row.project ?? ''),
-        arrivalDate: String(row.arrivalDate ?? ''),
-        projectDuration: String(row.projectDuration ?? ''),
-        phone: String(row.phone ?? ''),
-        weeklyWorkTime: '5*8',
-        baseRate: 0,
-        weekdayOvertimeRate: 0,
-        weekendOvertimeRate: 0,
-        holidayOvertimeRate: 0,
-        status: '在岗',
-        leaveDate: '',
-      }));
+      const base = Date.now();
+      const additions: ThirdPartyPerson[] = validData.map((row, idx) =>
+        rowToThirdPartyPerson(row, base + idx),
+      );
       setPersonnelList((prev) => [...prev, ...additions]);
       setImportResult({ success: true, imported: additions.length, message: '' });
       setImportStep(3);
@@ -498,12 +444,48 @@ export function ThirdPartyPersonnelApp() {
   };
 
   const downloadTemplate = () => {
-    const headers = ['公司名称', '姓名', '性别', '年龄', '所属项目', '实际到岗时间', '项目周期', '联系电话'];
     const exampleData = [
-      ['此条为示例数据请删除', '张三', '男', '28', 'D25999', '2024/1/15', '6个月', '13812345678'],
-      ['此条为示例数据请删除', '李四', '女', '30', 'D25999', '2024-02-20', '3个月', '13987654321'],
+      [
+        '此条为示例数据请删除',
+        '张三',
+        '男',
+        '28',
+        'B26107',
+        '管道工程师',
+        '2024/1/15',
+        '6个月',
+        '13812345678',
+        '5*8',
+        '120',
+        '160',
+        '180',
+        '240',
+        '在岗',
+        '',
+      ],
+      [
+        '此条为示例数据请删除',
+        '李四',
+        '女',
+        '30',
+        'G26039',
+        '控制经理',
+        '2024-02-20',
+        '3个月',
+        '13987654321',
+        '',
+        '',
+        '',
+        '',
+        '',
+        '在岗',
+        '',
+      ],
     ];
-    const csvContent = [headers.join(','), ...exampleData.map((row) => row.join(','))].join('\n');
+    const csvContent = [
+      IMPORT_TEMPLATE_HEADERS.join(','),
+      ...exampleData.map((row) => row.join(',')),
+    ].join('\n');
     const blob = new Blob([`\ufeff${csvContent}`], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     const url = URL.createObjectURL(blob);
@@ -620,12 +602,10 @@ export function ThirdPartyPersonnelApp() {
                     '性别',
                     '年龄',
                     '所属项目',
+                    '管理归属',
+                    '岗位名称',
                     '到岗时间',
                     '项目周期',
-                    '周工作时间',
-                    '费率(基/工作日/周末/法假)',
-                    '人员状态',
-                    '离岗时间',
                     '联系电话',
                     '操作',
                   ].map(
@@ -651,35 +631,16 @@ export function ThirdPartyPersonnelApp() {
                     <td className="whitespace-nowrap px-4 py-3 text-sm">{person.gender}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-sm">{person.age}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-sm">{person.project}</td>
+                    <td className="whitespace-nowrap px-4 py-3 text-sm">
+                      {resolveManagementAffiliation(person.project) || '—'}
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-3 text-sm">{person.positionName || '—'}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-sm">{person.arrivalDate}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-sm">{person.projectDuration}</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-sm">{person.weeklyWorkTime}</td>
-                    <td className="whitespace-nowrap px-4 py-3 text-sm">
-                      {person.baseRate}/{person.weekdayOvertimeRate}/{person.weekendOvertimeRate}/{person.holidayOvertimeRate}
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-sm">
-                      <span
-                        className={`rounded px-2 py-1 text-xs ${
-                          person.status === '在岗'
-                            ? 'bg-emerald-50 text-emerald-700'
-                            : 'bg-amber-50 text-amber-700'
-                        }`}
-                      >
-                        {person.status}
-                      </span>
-                    </td>
-                    <td className="whitespace-nowrap px-4 py-3 text-sm">{person.leaveDate || '-'}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-sm">{person.phone}</td>
                     <td className="whitespace-nowrap px-4 py-3 text-sm font-medium">
                       <button type="button" className="mr-3 text-blue-600 hover:text-blue-900" onClick={() => editPerson(person)}>
                         编辑
-                      </button>
-                      <button
-                        type="button"
-                        className="mr-3 text-blue-600 hover:text-blue-900"
-                        onClick={() => openStatusDialog(person)}
-                      >
-                        状态调整
                       </button>
                       <button type="button" className="text-red-600 hover:text-red-900" onClick={() => deletePerson(person.id)}>
                         删除
@@ -689,7 +650,7 @@ export function ThirdPartyPersonnelApp() {
                 ))}
                 {filteredPersonnel.length === 0 && (
                   <tr>
-                    <td colSpan={14} className="px-4 py-8 text-center text-gray-500">
+                    <td colSpan={12} className="px-4 py-8 text-center text-gray-500">
                       暂无人员信息
                     </td>
                   </tr>
@@ -726,226 +687,257 @@ export function ThirdPartyPersonnelApp() {
         </div>
 
         <Dialog open={formOpen} onOpenChange={(o) => !o && closeDialog()}>
-          <DialogContent className="max-h-[90vh] w-[1080px] max-w-[1080px] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>{showAddDialog ? '添加人员信息' : '编辑人员信息'}</DialogTitle>
+          <DialogContent className="max-h-[90vh] w-[720px] max-w-[720px] overflow-hidden p-0">
+            <DialogHeader className="border-b border-gray-100 px-5 py-3.5">
+              <DialogTitle className="text-base font-medium">{showAddDialog ? '添加人员信息' : '编辑人员信息'}</DialogTitle>
             </DialogHeader>
-            <div className="mb-3 rounded-md border border-[#d8ecea] bg-[#f2fbfa] px-3 py-2 text-xs text-[#007069]">
-              带 * 为必填项。费率单位统一为 元/小时，周工作时间格式为“天数*小时”，示例：5*8。
+            <div className="mb-2 px-5 pt-3 text-xs text-[#007069]">
+              带 * 为必填项。管理归属由所属项目自动带出；工时与费率为选填。
             </div>
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-              <div>
-                <label className="mb-1 block text-sm">
-                  <RequiredLabel text="公司名称" />
-                </label>
-                <Input
-                  value={formData.companyName}
-                  onChange={(e) => setFormData((f) => ({ ...f, companyName: e.target.value }))}
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">
-                  <RequiredLabel text="姓名" />
-                </label>
-                <Input value={formData.name} onChange={(e) => setFormData((f) => ({ ...f, name: e.target.value }))} />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">
-                  <RequiredLabel text="性别" />
-                </label>
-                <Select
-                  value={formData.gender || undefined}
-                  onValueChange={(v) => setFormData((f) => ({ ...f, gender: v }))}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="选择性别" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="男">男</SelectItem>
-                    <SelectItem value="女">女</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">
-                  <RequiredLabel text="年龄" />
-                </label>
-                <Input
-                  type="number"
-                  min={18}
-                  max={65}
-                  value={formData.age}
-                  onChange={(e) => setFormData((f) => ({ ...f, age: parseInt(e.target.value, 10) || 0 }))}
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">
-                  <RequiredLabel text="所属项目" />
-                </label>
-                <Select
-                  value={formData.project || undefined}
-                  onValueChange={(v) => setFormData((f) => ({ ...f, project: v }))}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="选择项目" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {projectList.map((p) => (
-                      <SelectItem key={p} value={p}>
-                        {p}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">
-                  <RequiredLabel text="实际到岗时间" />
-                </label>
-                <Input
-                  type="date"
-                  value={formData.arrivalDate}
-                  onChange={(e) => setFormData((f) => ({ ...f, arrivalDate: e.target.value }))}
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">
-                  <RequiredLabel text="项目周期" />
-                </label>
-                <Input
-                  value={formData.projectDuration}
-                  onChange={(e) => setFormData((f) => ({ ...f, projectDuration: e.target.value }))}
-                  placeholder="如：3个月、6个月等"
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">
-                  <RequiredLabel text="联系电话" />
-                </label>
-                <Input
-                  maxLength={11}
-                  value={formData.phone}
-                  onChange={(e) => setFormData((f) => ({ ...f, phone: e.target.value.replace(/\D/g, '') }))}
-                  placeholder="11位手机号码"
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">
-                  <RequiredLabel text="周工作时间（天*小时）" />
-                </label>
-                <Input
-                  value={formData.weeklyWorkTime}
-                  onChange={(e) => setFormData((f) => ({ ...f, weeklyWorkTime: e.target.value.replace(/\s+/g, '') }))}
-                  placeholder="如：5*8"
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">
-                  <RequiredLabel text="基本费率（元/小时）" />
-                </label>
-                <Input
-                  type="number"
-                  min={0}
-                  step="0.01"
-                  value={formData.baseRate}
-                  onChange={(e) => setFormData((f) => ({ ...f, baseRate: Number(e.target.value) || 0 }))}
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">
-                  <RequiredLabel text="工作日加班费率（元/小时）" />
-                </label>
-                <Input
-                  type="number"
-                  min={0}
-                  step="0.01"
-                  value={formData.weekdayOvertimeRate}
-                  onChange={(e) => setFormData((f) => ({ ...f, weekdayOvertimeRate: Number(e.target.value) || 0 }))}
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">
-                  <RequiredLabel text="周末加班费率（元/小时）" />
-                </label>
-                <Input
-                  type="number"
-                  min={0}
-                  step="0.01"
-                  value={formData.weekendOvertimeRate}
-                  onChange={(e) => setFormData((f) => ({ ...f, weekendOvertimeRate: Number(e.target.value) || 0 }))}
-                />
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">
-                  <RequiredLabel text="法定假日加班费率（元/小时）" />
-                </label>
-                <Input
-                  type="number"
-                  min={0}
-                  step="0.01"
-                  value={formData.holidayOvertimeRate}
-                  onChange={(e) => setFormData((f) => ({ ...f, holidayOvertimeRate: Number(e.target.value) || 0 }))}
-                />
-              </div>
-            </div>
-            <div className="mt-6 flex justify-end gap-2">
-              <Button onClick={closeDialog}>取消</Button>
-              <Button type="primary" onClick={savePerson}>
-                {showAddDialog ? '添加' : '保存'}
-              </Button>
-            </div>
-          </DialogContent>
-        </Dialog>
+            <div className="max-h-[62vh] space-y-6 overflow-y-auto px-5 pb-2">
+              <section>
+                <h4 className="mb-2 border-b border-gray-100 pb-1.5 text-[13px] font-semibold text-gray-800">人员状态</h4>
+                <div className="grid grid-cols-1 gap-x-4 gap-y-2.5 md:grid-cols-2">
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">
+                      <RequiredLabel text="人员状态" />
+                    </label>
+                    <Select
+                      value={formData.status}
+                      onValueChange={(v: '在岗' | '离职') =>
+                        setFormData((f) => ({
+                          ...f,
+                          status: v,
+                          leaveDate: v === '离职' ? f.leaveDate || getTodayString() : '',
+                        }))
+                      }
+                    >
+                      <SelectTrigger className="h-8 text-sm">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="在岗">在岗</SelectItem>
+                        <SelectItem value="离职">离职</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">
+                      离职时间{formData.status === '离职' ? <span className="text-red-500"> *</span> : null}
+                    </label>
+                    <Input
+                      className="h-8 text-sm"
+                      type="date"
+                      disabled={formData.status !== '离职'}
+                      value={formData.leaveDate}
+                      onChange={(e) => setFormData((f) => ({ ...f, leaveDate: e.target.value }))}
+                    />
+                  </div>
+                </div>
+              </section>
 
-        <Dialog open={showStatusDialog} onOpenChange={(o) => !o && closeStatusDialog()}>
-          <DialogContent className="max-h-[90vh] w-[560px] max-w-[560px] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>状态切换与离岗时间</DialogTitle>
-            </DialogHeader>
-            <div className="space-y-4">
-              <div className="rounded-md bg-[#f8faff] px-3 py-2 text-sm text-gray-700">
-                当前人员：<span className="font-medium text-gray-900">{statusFormData.name || '-'}</span>
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">人员状态</label>
-                <Select
-                  value={statusFormData.status}
-                  onValueChange={(v: '在岗' | '离岗') =>
-                    setStatusFormData((prev) => ({
-                      ...prev,
-                      status: v,
-                      leaveDate: v === '离岗' ? prev.leaveDate || getTodayString() : '',
-                    }))
-                  }
-                >
-                  <SelectTrigger>
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="在岗">在岗</SelectItem>
-                    <SelectItem value="离岗">离岗</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <label className="mb-1 block text-sm">离岗时间</label>
-                <Input
-                  type="date"
-                  disabled={statusFormData.status !== '离岗'}
-                  value={statusFormData.leaveDate}
-                  onChange={(e) =>
-                    setStatusFormData((prev) => ({
-                      ...prev,
-                      leaveDate: e.target.value,
-                    }))
-                  }
-                />
-              </div>
+              <section>
+                <h4 className="mb-2 border-b border-gray-100 pb-1.5 text-[13px] font-semibold text-gray-800">基本信息</h4>
+                <div className="grid grid-cols-1 gap-x-4 gap-y-2.5 md:grid-cols-2">
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">
+                      <RequiredLabel text="公司名称" />
+                    </label>
+                    <Input
+                      className="h-8 text-sm"
+                      value={formData.companyName}
+                      onChange={(e) => setFormData((f) => ({ ...f, companyName: e.target.value }))}
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">
+                      <RequiredLabel text="姓名" />
+                    </label>
+                    <Input
+                      className="h-8 text-sm"
+                      value={formData.name}
+                      onChange={(e) => setFormData((f) => ({ ...f, name: e.target.value }))}
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">
+                      <RequiredLabel text="性别" />
+                    </label>
+                    <div className="flex h-8 items-center gap-4">
+                      {(['男', '女'] as const).map((g) => (
+                        <label key={g} className="flex cursor-pointer items-center gap-1.5 text-sm text-gray-700">
+                          <input
+                            type="radio"
+                            name="gender"
+                            checked={formData.gender === g}
+                            onChange={() => setFormData((f) => ({ ...f, gender: g }))}
+                            className="h-3.5 w-3.5 accent-[#007069]"
+                          />
+                          {g}
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">
+                      <RequiredLabel text="年龄" />
+                    </label>
+                    <Input
+                      className="h-8 w-[140px] text-sm"
+                      type="number"
+                      min={18}
+                      max={65}
+                      value={formData.age}
+                      onChange={(e) => setFormData((f) => ({ ...f, age: parseInt(e.target.value, 10) || 0 }))}
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">
+                      <RequiredLabel text="联系电话" />
+                    </label>
+                    <Input
+                      className="h-8 text-sm"
+                      maxLength={11}
+                      value={formData.phone}
+                      onChange={(e) => setFormData((f) => ({ ...f, phone: e.target.value.replace(/\D/g, '') }))}
+                      placeholder="11位手机号码"
+                    />
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <h4 className="mb-2 border-b border-gray-100 pb-1.5 text-[13px] font-semibold text-gray-800">项目信息</h4>
+                <div className="grid grid-cols-1 gap-x-4 gap-y-2.5 md:grid-cols-2">
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">
+                      <RequiredLabel text="所属项目" />
+                    </label>
+                    <Select
+                      value={formData.project || undefined}
+                      onValueChange={(v) => setFormData((f) => ({ ...f, project: v }))}
+                    >
+                      <SelectTrigger className="h-8 text-sm">
+                        <SelectValue placeholder="选择项目" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {projectList.map((p) => (
+                          <SelectItem key={p} value={p}>
+                            {p}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">管理归属</label>
+                    <Input
+                      className="h-8 text-sm"
+                      value={resolveManagementAffiliation(formData.project) || '—'}
+                      disabled
+                      readOnly
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">
+                      <RequiredLabel text="岗位名称" />
+                    </label>
+                    <Input
+                      className="h-8 text-sm"
+                      value={formData.positionName}
+                      onChange={(e) => setFormData((f) => ({ ...f, positionName: e.target.value }))}
+                      placeholder="如：管道工程师"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">
+                      <RequiredLabel text="实际到岗时间" />
+                    </label>
+                    <Input
+                      className="h-8 text-sm"
+                      type="date"
+                      value={formData.arrivalDate}
+                      onChange={(e) => setFormData((f) => ({ ...f, arrivalDate: e.target.value }))}
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">
+                      <RequiredLabel text="项目周期" />
+                    </label>
+                    <Input
+                      className="h-8 text-sm"
+                      value={formData.projectDuration}
+                      onChange={(e) => setFormData((f) => ({ ...f, projectDuration: e.target.value }))}
+                      placeholder="如：6个月、24个月（暂定）"
+                    />
+                  </div>
+                </div>
+              </section>
+
+              <section>
+                <h4 className="mb-1 border-b border-gray-100 pb-1.5 text-[13px] font-semibold text-gray-800">工时与费率</h4>
+                <p className="mb-2 text-xs text-gray-500">选填；费率单位为 元/小时，周工作时间格式为“天数*小时”（如 5*8）。</p>
+                <div className="grid grid-cols-1 gap-x-4 gap-y-2.5 md:grid-cols-2">
+                  <div className="md:col-span-2">
+                    <label className="mb-1 block text-[13px] text-gray-700">周工作时间（天*小时）</label>
+                    <Input
+                      className="h-8 text-sm"
+                      value={formData.weeklyWorkTime}
+                      onChange={(e) => setFormData((f) => ({ ...f, weeklyWorkTime: e.target.value.replace(/\s+/g, '') }))}
+                      placeholder="选填，如：5*8"
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">基本费率（元/小时）</label>
+                    <Input
+                      className="h-8 text-sm"
+                      type="number"
+                      min={0}
+                      step="0.01"
+                      value={formData.baseRate}
+                      onChange={(e) => setFormData((f) => ({ ...f, baseRate: Number(e.target.value) || 0 }))}
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">工作日加班费率（元/小时）</label>
+                    <Input
+                      className="h-8 text-sm"
+                      type="number"
+                      min={0}
+                      step="0.01"
+                      value={formData.weekdayOvertimeRate}
+                      onChange={(e) => setFormData((f) => ({ ...f, weekdayOvertimeRate: Number(e.target.value) || 0 }))}
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">周末加班费率（元/小时）</label>
+                    <Input
+                      className="h-8 text-sm"
+                      type="number"
+                      min={0}
+                      step="0.01"
+                      value={formData.weekendOvertimeRate}
+                      onChange={(e) => setFormData((f) => ({ ...f, weekendOvertimeRate: Number(e.target.value) || 0 }))}
+                    />
+                  </div>
+                  <div>
+                    <label className="mb-1 block text-[13px] text-gray-700">法定假日加班费率（元/小时）</label>
+                    <Input
+                      className="h-8 text-sm"
+                      type="number"
+                      min={0}
+                      step="0.01"
+                      value={formData.holidayOvertimeRate}
+                      onChange={(e) => setFormData((f) => ({ ...f, holidayOvertimeRate: Number(e.target.value) || 0 }))}
+                    />
+                  </div>
+                </div>
+              </section>
             </div>
-            <div className="mt-6 flex justify-end gap-2">
-              <Button onClick={closeStatusDialog}>取消</Button>
-              <Button type="primary" onClick={saveStatusChange}>
-                保存
+            <div className="flex justify-end gap-2 border-t border-gray-100 px-5 py-3">
+              <Button size="small" onClick={closeDialog}>取消</Button>
+              <Button type="primary" size="small" className={topActionBtnClass} onClick={savePerson}>
+                {showAddDialog ? '添加' : '保存'}
               </Button>
             </div>
           </DialogContent>
@@ -999,57 +991,94 @@ export function ThirdPartyPersonnelApp() {
 
             {importStep === 1 && (
               <div className="space-y-4">
-                <div className="rounded-lg bg-gray-50 p-4">
-                  <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
-                    <h4 className="font-medium">必需字段</h4>
-                    <Button type="primary" size="small" onClick={downloadTemplate}>
+                <div>
+                  <h4 className="mb-1 text-sm font-semibold text-gray-800">上传Excel或CSV文件</h4>
+                  <p className="mb-3 text-sm text-gray-500">
+                    请上传包含人员信息的Excel(.xlsx)或CSV文件，文件格式要求如下：
+                  </p>
+                </div>
+                <div className="rounded-lg border border-gray-200 bg-gray-50 p-4">
+                  <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+                    <h4 className="text-sm font-medium">必需字段</h4>
+                    <Button type="primary" size="small" icon={<DownloadOutlined />} onClick={downloadTemplate}>
                       下载模板
                     </Button>
                   </div>
-                  <p className="mb-2 text-xs text-gray-500">请使用 CSV 文件导入；Excel 请先另存为 CSV。</p>
-                  <div
-                    role="button"
-                    tabIndex={0}
-                    className="cursor-pointer rounded-lg border-2 border-dashed border-gray-300 p-8 text-center hover:border-gray-400"
-                    onClick={() => fileInputRef.current?.click()}
-                    onKeyDown={(e) => e.key === 'Enter' && fileInputRef.current?.click()}
-                    onDragOver={(e) => e.preventDefault()}
-                    onDrop={(e) => {
-                      e.preventDefault();
-                      const f = e.dataTransfer.files[0];
+                  <div className="mb-3 grid grid-cols-1 gap-x-8 gap-y-1 text-sm text-gray-700 sm:grid-cols-2">
+                    <ul className="list-disc space-y-1 pl-5">
+                      {IMPORT_REQUIRED_HEADERS.filter((_, i) => i % 2 === 0).map((h) => (
+                        <li key={h}>{h}</li>
+                      ))}
+                    </ul>
+                    <ul className="list-disc space-y-1 pl-5">
+                      {IMPORT_REQUIRED_HEADERS.filter((_, i) => i % 2 === 1).map((h) => (
+                        <li key={h}>{h}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <h4 className="mb-2 text-sm font-medium">可选字段</h4>
+                  <div className="mb-3 grid grid-cols-1 gap-x-8 gap-y-1 text-sm text-gray-700 sm:grid-cols-2">
+                    <ul className="list-disc space-y-1 pl-5">
+                      {IMPORT_OPTIONAL_HEADERS.filter((_, i) => i % 2 === 0).map((h) => (
+                        <li key={h}>{h}</li>
+                      ))}
+                    </ul>
+                    <ul className="list-disc space-y-1 pl-5">
+                      {IMPORT_OPTIONAL_HEADERS.filter((_, i) => i % 2 === 1).map((h) => (
+                        <li key={h}>{h}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="space-y-1 text-xs text-gray-500">
+                    <p>提示：下载CSV模板文件，按格式填写后上传即可；Excel 请先另存为 CSV。</p>
+                    <p>日期格式支持：2024-01-15 或 2024/1/15</p>
+                  </div>
+                </div>
+                <div
+                  role="button"
+                  tabIndex={0}
+                  className="cursor-pointer rounded-lg border-2 border-dashed border-gray-300 p-8 text-center hover:border-[#007069]"
+                  onClick={() => fileInputRef.current?.click()}
+                  onKeyDown={(e) => e.key === 'Enter' && fileInputRef.current?.click()}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={(e) => {
+                    e.preventDefault();
+                    const f = e.dataTransfer.files[0];
+                    if (f) validateAndSetFile(f);
+                  }}
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".xlsx,.xls,.csv"
+                    className="hidden"
+                    onChange={(e) => {
+                      const f = e.target.files?.[0];
                       if (f) validateAndSetFile(f);
                     }}
-                  >
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      accept=".xlsx,.xls,.csv"
-                      className="hidden"
-                      onChange={(e) => {
-                        const f = e.target.files?.[0];
-                        if (f) validateAndSetFile(f);
-                      }}
-                    />
-                    {!importFile ? (
-                      <p className="text-gray-600">点击或拖拽 CSV 文件到此处</p>
-                    ) : (
-                      <div>
-                        <p className="font-medium">{importFile.name}</p>
-                        <p className="text-sm text-gray-500">{formatFileSize(importFile.size)}</p>
-                        <button
-                          type="button"
-                          className="mt-2 text-sm text-red-600"
-                          onClick={(ev) => {
-                            ev.stopPropagation();
-                            setImportFile(null);
-                            if (fileInputRef.current) fileInputRef.current.value = '';
-                          }}
-                        >
-                          移除文件
-                        </button>
-                      </div>
-                    )}
-                  </div>
+                  />
+                  {!importFile ? (
+                    <div>
+                      <p className="text-sm font-medium text-gray-700">点击或拖拽文件到此处</p>
+                      <p className="mt-1 text-xs text-gray-400">支持 .xlsx, .xls, .csv 格式（当前解析 CSV）</p>
+                    </div>
+                  ) : (
+                    <div>
+                      <p className="font-medium">{importFile.name}</p>
+                      <p className="text-sm text-gray-500">{formatFileSize(importFile.size)}</p>
+                      <button
+                        type="button"
+                        className="mt-2 text-sm text-red-600"
+                        onClick={(ev) => {
+                          ev.stopPropagation();
+                          setImportFile(null);
+                          if (fileInputRef.current) fileInputRef.current.value = '';
+                        }}
+                      >
+                        移除文件
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

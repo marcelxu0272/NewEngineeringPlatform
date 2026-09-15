@@ -5,6 +5,7 @@ export type ThirdPartyPerson = {
   gender: string;
   age: number;
   project: string;
+  positionName: string;
   arrivalDate: string;
   projectDuration: string;
   phone: string;
@@ -13,25 +14,38 @@ export type ThirdPartyPerson = {
   weekdayOvertimeRate: number;
   weekendOvertimeRate: number;
   holidayOvertimeRate: number;
-  status: '在岗' | '离岗';
+  status: '在岗' | '离职';
   leaveDate: string;
 };
 
-export const THIRD_PARTY_STORAGE_KEY = 'engineering-platform-third-party-personnel-v1';
+export const THIRD_PARTY_STORAGE_KEY = 'engineering-platform-third-party-personnel-v2';
 
-export const DEFAULT_PROJECT_OPTIONS = ['项目A', '项目B', '项目C', '项目D', 'D25999', '智慧城市项目'];
+export const PROJECT_MANAGEMENT_MAP: Record<string, string> = {
+  B26107: '惠源中心',
+  G26039: 'PMC板块',
+  G26035: '新材料板块',
+  C25061: '沈阳中心',
+  G25058: '新材料板块',
+};
+
+export const DEFAULT_PROJECT_OPTIONS = Object.keys(PROJECT_MANAGEMENT_MAP);
+
+export function resolveManagementAffiliation(project: string): string {
+  return PROJECT_MANAGEMENT_MAP[String(project || '').trim()] || '';
+}
 
 export const DEFAULT_PERSONNEL: ThirdPartyPerson[] = [
   {
     id: 1,
-    companyName: '北京科技有限公司',
-    name: '张三',
+    companyName: '上海克龙化工技术有限公司',
+    name: '刘秀波',
     gender: '男',
-    age: 28,
-    project: '项目A',
-    arrivalDate: '2024-01-15',
+    age: 42,
+    project: 'B26107',
+    positionName: '管道工程师',
+    arrivalDate: '2026-09-01',
     projectDuration: '6个月',
-    phone: '13812345678',
+    phone: '13817654321',
     weeklyWorkTime: '5*8',
     baseRate: 120,
     weekdayOvertimeRate: 160,
@@ -42,14 +56,15 @@ export const DEFAULT_PERSONNEL: ThirdPartyPerson[] = [
   },
   {
     id: 2,
-    companyName: '上海软件开发公司',
-    name: '李四',
-    gender: '女',
-    age: 32,
-    project: '项目B',
-    arrivalDate: '2024-02-01',
-    projectDuration: '3个月',
-    phone: '13987654321',
+    companyName: '上海法谊工程项目管理有限公司',
+    name: '宋扬',
+    gender: '男',
+    age: 44,
+    project: 'G26039',
+    positionName: '控制经理',
+    arrivalDate: '2026-09-01',
+    projectDuration: '24个月',
+    phone: '13918273645',
     weeklyWorkTime: '5*8',
     baseRate: 135,
     weekdayOvertimeRate: 175,
@@ -60,15 +75,16 @@ export const DEFAULT_PERSONNEL: ThirdPartyPerson[] = [
   },
   {
     id: 3,
-    companyName: '广州信息技术有限公司',
-    name: '王五',
+    companyName: '上海法谊工程项目管理有限公司',
+    name: '陈俊',
     gender: '男',
     age: 35,
-    project: '项目A',
-    arrivalDate: '2024-01-20',
-    projectDuration: '12个月',
+    project: 'G26035',
+    positionName: '施工副经理',
+    arrivalDate: '2026-09-01',
+    projectDuration: '16个月（暂定）',
     phone: '13765432198',
-    weeklyWorkTime: '6*8',
+    weeklyWorkTime: '5*8',
     baseRate: 140,
     weekdayOvertimeRate: 185,
     weekendOvertimeRate: 210,
@@ -138,15 +154,47 @@ export function parseDateString(dateStr: string): { isValid: boolean; standardDa
   return { isValid: true, standardDate, error: '' };
 }
 
+export const IMPORT_REQUIRED_HEADERS = [
+  '公司名称',
+  '姓名',
+  '性别',
+  '年龄',
+  '所属项目',
+  '岗位名称',
+  '实际到岗时间',
+  '项目周期',
+  '联系电话',
+] as const;
+
+export const IMPORT_OPTIONAL_HEADERS = [
+  '周工作时间',
+  '基本费率',
+  '工作日加班费率',
+  '周末加班费率',
+  '法定假日加班费率',
+  '人员状态',
+  '离职时间',
+] as const;
+
+export const IMPORT_TEMPLATE_HEADERS = [...IMPORT_REQUIRED_HEADERS, ...IMPORT_OPTIONAL_HEADERS];
+
 const fieldMapping: Record<string, string[]> = {
   companyName: ['公司名称', '公司', '企业名称', '单位名称'],
   name: ['姓名', '名字', '人员姓名'],
   gender: ['性别'],
   age: ['年龄'],
   project: ['所属项目', '项目', '项目名称'],
+  positionName: ['岗位名称', '岗位', '职位'],
   arrivalDate: ['实际到岗时间', '到岗时间', '入职时间'],
   projectDuration: ['项目周期', '周期'],
   phone: ['联系电话', '电话', '手机号', '联系方式', '手机', '电话号码'],
+  weeklyWorkTime: ['周工作时间', '工作时间'],
+  baseRate: ['基本费率', '基本费率(元/小时)', '基本费率（元/小时）'],
+  weekdayOvertimeRate: ['工作日加班费率', '工作日加班费率(元/小时)', '工作日加班费率（元/小时）'],
+  weekendOvertimeRate: ['周末加班费率', '周末加班费率(元/小时)', '周末加班费率（元/小时）'],
+  holidayOvertimeRate: ['法定假日加班费率', '法定假日加班费率(元/小时)', '法定假日加班费率（元/小时）'],
+  status: ['人员状态', '状态'],
+  leaveDate: ['离职时间'],
 };
 
 function normalizeFieldName(fieldName: string): string {
@@ -171,19 +219,28 @@ export type ImportPreview = {
   data: ImportRow[];
 };
 
-function validateImportRow(
-  row: ImportRow,
-  projectList: string[],
-): { isValid: boolean; errors: string[] } {
+function validateOptionalRate(value: string | number | undefined, label: string, errors: string[]) {
+  if (value === undefined || value === null || String(value).trim() === '') return;
+  const num = Number(value);
+  if (Number.isNaN(num) || num < 0) {
+    errors.push(`${label}须为不小于0的数字`);
+  }
+}
+
+function validateImportRow(row: ImportRow): { isValid: boolean; errors: string[] } {
   const errors: string[] = [];
   const companyName = row.companyName;
   const name = row.name;
   const gender = row.gender;
   const age = row.age;
   const project = row.project;
+  const positionName = row.positionName;
   let arrivalDate = row.arrivalDate;
   const projectDuration = row.projectDuration;
   const phone = row.phone;
+  const weeklyWorkTime = row.weeklyWorkTime;
+  const status = row.status;
+  let leaveDate = row.leaveDate;
 
   if (!companyName || !String(companyName).trim()) {
     errors.push('公司名称不能为空');
@@ -206,8 +263,9 @@ function validateImportRow(
   }
   if (!project || !String(project).trim()) {
     errors.push('所属项目不能为空');
-  } else if (!projectList.includes(String(project).trim())) {
-    errors.push(`项目"${project}"不在可选项目列表中`);
+  }
+  if (!positionName || !String(positionName).trim()) {
+    errors.push('岗位名称不能为空');
   }
   if (!arrivalDate || !String(arrivalDate).trim()) {
     errors.push('到岗时间不能为空');
@@ -232,10 +290,39 @@ function validateImportRow(
     }
   }
 
+  if (weeklyWorkTime && String(weeklyWorkTime).trim()) {
+    if (!/^\d+(\.\d+)?\*\d+(\.\d+)?$/.test(String(weeklyWorkTime).trim())) {
+      errors.push('周工作时间格式应为“天数*小时”，如 5*8');
+    }
+  }
+
+  validateOptionalRate(row.baseRate, '基本费率', errors);
+  validateOptionalRate(row.weekdayOvertimeRate, '工作日加班费率', errors);
+  validateOptionalRate(row.weekendOvertimeRate, '周末加班费率', errors);
+  validateOptionalRate(row.holidayOvertimeRate, '法定假日加班费率', errors);
+
+  const statusText = status ? String(status).trim() : '';
+  if (statusText && !['在岗', '离职'].includes(statusText)) {
+    errors.push('人员状态只能是“在岗”或“离职”');
+  }
+  const effectiveStatus = statusText === '离职' ? '离职' : '在岗';
+  if (leaveDate && String(leaveDate).trim()) {
+    const leaveResult = parseDateString(String(leaveDate));
+    if (!leaveResult.isValid) {
+      errors.push(`离职时间${leaveResult.error}`);
+    } else {
+      row.leaveDate = leaveResult.standardDate;
+      leaveDate = leaveResult.standardDate;
+    }
+  }
+  if (effectiveStatus === '离职' && (!leaveDate || !String(leaveDate).trim())) {
+    errors.push('离职状态下必须填写离职时间');
+  }
+
   return { isValid: errors.length === 0, errors };
 }
 
-export function validateImportData(raw: Record<string, string>[], projectList: string[]): ImportPreview {
+export function validateImportData(raw: Record<string, string>[], _projectList?: string[]): ImportPreview {
   const result: ImportPreview = {
     total: raw.length,
     valid: 0,
@@ -249,12 +336,12 @@ export function validateImportData(raw: Record<string, string>[], projectList: s
       const nk = normalizeFieldName(key);
       normalizedRow[nk] = row[key];
     });
-    const validation = validateImportRow(normalizedRow, projectList);
-    const withMeta: ImportRow = {
+    const validation = validateImportRow(normalizedRow);
+    const withMeta = {
       ...normalizedRow,
       isValid: validation.isValid,
       errors: validation.errors,
-    };
+    } as ImportRow;
     result.data.push(withMeta);
     if (validation.isValid) {
       result.valid++;
@@ -264,6 +351,29 @@ export function validateImportData(raw: Record<string, string>[], projectList: s
   });
 
   return result;
+}
+
+export function rowToThirdPartyPerson(row: ImportRow, id: number): ThirdPartyPerson {
+  const status = String(row.status || '').trim() === '离职' ? '离职' : '在岗';
+  return {
+    id,
+    companyName: String(row.companyName ?? '').trim(),
+    name: String(row.name ?? '').trim(),
+    gender: String(row.gender ?? '').trim(),
+    age: parseInt(String(row.age ?? '0'), 10) || 0,
+    project: String(row.project ?? '').trim(),
+    positionName: String(row.positionName ?? '').trim(),
+    arrivalDate: String(row.arrivalDate ?? '').trim(),
+    projectDuration: String(row.projectDuration ?? '').trim(),
+    phone: String(row.phone ?? '').trim(),
+    weeklyWorkTime: String(row.weeklyWorkTime ?? '').trim(),
+    baseRate: Number(row.baseRate) || 0,
+    weekdayOvertimeRate: Number(row.weekdayOvertimeRate) || 0,
+    weekendOvertimeRate: Number(row.weekendOvertimeRate) || 0,
+    holidayOvertimeRate: Number(row.holidayOvertimeRate) || 0,
+    status,
+    leaveDate: status === '离职' ? String(row.leaveDate ?? '').trim() : '',
+  };
 }
 
 export async function parseCSVFile(file: File): Promise<Record<string, string>[]> {

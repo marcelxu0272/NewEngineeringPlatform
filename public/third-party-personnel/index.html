@@ -28,6 +28,7 @@
       <section class="content-area">
         <div class="action-row">
           <el-button type="primary" class="action-btn" icon="el-icon-plus" @click="openAdd">添加人员</el-button>
+          <el-button type="primary" class="action-btn" icon="el-icon-upload2" @click="openImport">批量导入</el-button>
           <el-button type="primary" class="action-btn" icon="el-icon-download" @click="exportData">导出数据</el-button>
         </div>
 
@@ -68,32 +69,21 @@
         <div class="panel table-panel">
           <el-table :data="pagedData" stripe>
             <el-table-column type="index" label="序号" width="72"></el-table-column>
-            <el-table-column prop="companyName" label="公司名称" min-width="160"></el-table-column>
+            <el-table-column prop="companyName" label="公司名称" min-width="180"></el-table-column>
             <el-table-column prop="name" label="姓名" width="90"></el-table-column>
             <el-table-column prop="gender" label="性别" width="72"></el-table-column>
             <el-table-column prop="age" label="年龄" width="72"></el-table-column>
-            <el-table-column prop="project" label="所属项目" min-width="120"></el-table-column>
+            <el-table-column prop="project" label="所属项目" width="110"></el-table-column>
+            <el-table-column label="管理归属" width="110">
+              <template slot-scope="scope">{{ resolveManagement(scope.row.project) || '—' }}</template>
+            </el-table-column>
+            <el-table-column prop="positionName" label="岗位名称" min-width="120"></el-table-column>
             <el-table-column prop="arrivalDate" label="到岗时间" width="120"></el-table-column>
-            <el-table-column prop="projectDuration" label="项目周期" width="120"></el-table-column>
-            <el-table-column prop="weeklyWorkTime" label="周工作时间" width="120"></el-table-column>
-            <el-table-column label="费率(基/工作日/周末/法假)" min-width="220">
-              <template slot-scope="scope">
-                {{ scope.row.baseRate }}/{{ scope.row.weekdayOvertimeRate }}/{{ scope.row.weekendOvertimeRate }}/{{ scope.row.holidayOvertimeRate }}
-              </template>
-            </el-table-column>
-            <el-table-column label="人员状态" width="100">
-              <template slot-scope="scope">
-                <el-tag :type="scope.row.status === '在岗' ? 'success' : 'warning'" size="mini">{{ scope.row.status }}</el-tag>
-              </template>
-            </el-table-column>
-            <el-table-column label="离岗时间" width="120">
-              <template slot-scope="scope">{{ scope.row.leaveDate || '-' }}</template>
-            </el-table-column>
+            <el-table-column prop="projectDuration" label="项目周期" min-width="130"></el-table-column>
             <el-table-column prop="phone" label="联系电话" width="130"></el-table-column>
-            <el-table-column label="操作" fixed="right" width="220">
+            <el-table-column label="操作" fixed="right" width="140">
               <template slot-scope="scope">
                 <el-button type="text" @click="openEdit(scope.row)">编辑</el-button>
-                <el-button type="text" @click="openStatus(scope.row)">状态调整</el-button>
                 <el-button type="text" class="danger-op" @click="deletePerson(scope.row.id)">删除</el-button>
               </template>
             </el-table-column>
@@ -115,111 +105,293 @@
     <el-dialog
       :title="dialogMode === 'create' ? '添加人员信息' : '编辑人员信息'"
       :visible.sync="showPersonDialog"
-      width="1080px"
+      width="720px"
       :close-on-click-modal="false"
-      custom-class="fixed-dialog"
+      custom-class="fixed-dialog person-dialog"
       @open="lockBodyScroll"
       @closed="unlockBodyScroll"
     >
-      <el-form ref="personFormRef" :model="personForm" :rules="personRules" label-position="top" class="person-el-form">
-        <div class="form-grid">
-          <el-form-item label="公司名称" prop="companyName">
-            <el-autocomplete
-              v-model.trim="personForm.companyName"
-              :fetch-suggestions="queryCompanySuggestions"
-              placeholder="请输入或选择公司名称"
-              style="width:100%"
-              @select="onCompanySelect"
-            ></el-autocomplete>
-          </el-form-item>
-          <el-form-item label="姓名" prop="name">
-            <el-input v-model.trim="personForm.name" placeholder="请输入姓名"></el-input>
-          </el-form-item>
-          <el-form-item label="性别" prop="gender">
-            <el-select v-model="personForm.gender" placeholder="请选择" style="width:100%">
-              <el-option label="男" value="男"></el-option>
-              <el-option label="女" value="女"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="年龄" prop="age">
-            <el-input-number v-model="personForm.age" :min="18" :max="65" style="width:100%"></el-input-number>
-          </el-form-item>
-          <el-form-item label="所属项目" prop="project">
-            <el-select v-model="personForm.project" placeholder="请选择" style="width:100%">
-              <el-option v-for="item in projectOptions" :key="item" :label="item" :value="item"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="实际到岗时间" prop="arrivalDate">
-            <el-date-picker v-model="personForm.arrivalDate" type="date" value-format="yyyy-MM-dd" style="width:100%"></el-date-picker>
-          </el-form-item>
-          <el-form-item label="项目周期" prop="projectDuration">
-            <el-input v-model.trim="personForm.projectDuration" placeholder="如：3个月、6个月"></el-input>
-          </el-form-item>
-          <el-form-item label="联系电话" prop="phone">
-            <el-input v-model.trim="personForm.phone" maxlength="11" placeholder="请输入11位手机号"></el-input>
-          </el-form-item>
-          <el-form-item label="周工作时间（天*小时）" prop="weeklyWorkTime">
-            <el-input v-model.trim="personForm.weeklyWorkTime" placeholder="如：5*8"></el-input>
-          </el-form-item>
-          <el-form-item label="基本费率（元/小时）" prop="baseRate">
-            <el-input-number v-model="personForm.baseRate" :min="0.01" :precision="2" style="width:100%"></el-input-number>
-          </el-form-item>
-          <el-form-item label="工作日加班费率（元/小时）" prop="weekdayOvertimeRate">
-            <el-input-number v-model="personForm.weekdayOvertimeRate" :min="0.01" :precision="2" style="width:100%"></el-input-number>
-          </el-form-item>
-          <el-form-item label="周末加班费率（元/小时）" prop="weekendOvertimeRate">
-            <el-input-number v-model="personForm.weekendOvertimeRate" :min="0.01" :precision="2" style="width:100%"></el-input-number>
-          </el-form-item>
-          <el-form-item label="法定假日加班费率（元/小时）" prop="holidayOvertimeRate">
-            <el-input-number v-model="personForm.holidayOvertimeRate" :min="0.01" :precision="2" style="width:100%"></el-input-number>
-          </el-form-item>
+      <el-form ref="personFormRef" :model="personForm" :rules="personRules" label-position="top" size="small" class="person-el-form">
+        <div class="form-scroll">
+          <div class="form-section">
+            <h4 class="form-section-title">人员状态</h4>
+            <div class="form-grid">
+              <el-form-item label="人员状态" prop="status">
+                <el-select v-model="personForm.status" style="width:100%" @change="onPersonStatusChanged">
+                  <el-option label="在岗" value="在岗"></el-option>
+                  <el-option label="离职" value="离职"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="离职时间" prop="leaveDate">
+                <el-date-picker
+                  v-model="personForm.leaveDate"
+                  type="date"
+                  value-format="yyyy-MM-dd"
+                  style="width:100%"
+                  :disabled="personForm.status !== '离职'"
+                  placeholder="离职时必填"
+                ></el-date-picker>
+              </el-form-item>
+            </div>
+            <div class="status-log-section" v-if="dialogMode === 'edit'">
+              <div class="field-label">状态调整记录</div>
+              <el-table :data="statusLogsForDisplay" size="mini" stripe max-height="180" empty-text="暂无状态调整记录">
+                <el-table-column prop="operator" label="操作人" width="90"></el-table-column>
+                <el-table-column prop="operationTime" label="操作时间" width="160"></el-table-column>
+                <el-table-column prop="content" label="操作内容" min-width="200"></el-table-column>
+              </el-table>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h4 class="form-section-title">基本信息</h4>
+            <div class="form-grid">
+              <el-form-item label="公司名称" prop="companyName">
+                <el-autocomplete
+                  v-model.trim="personForm.companyName"
+                  :fetch-suggestions="queryCompanySuggestions"
+                  placeholder="请输入或选择公司名称"
+                  style="width:100%"
+                  @select="onCompanySelect"
+                ></el-autocomplete>
+              </el-form-item>
+              <el-form-item label="姓名" prop="name">
+                <el-input v-model.trim="personForm.name" placeholder="请输入姓名"></el-input>
+              </el-form-item>
+              <el-form-item label="性别" prop="gender">
+                <el-radio-group v-model="personForm.gender">
+                  <el-radio label="男">男</el-radio>
+                  <el-radio label="女">女</el-radio>
+                </el-radio-group>
+              </el-form-item>
+              <el-form-item label="年龄" prop="age">
+                <el-input-number v-model="personForm.age" :min="18" :max="65" class="age-input"></el-input-number>
+              </el-form-item>
+              <el-form-item label="联系电话" prop="phone">
+                <el-input v-model.trim="personForm.phone" maxlength="11" placeholder="请输入11位手机号"></el-input>
+              </el-form-item>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h4 class="form-section-title">项目信息</h4>
+            <div class="form-grid">
+              <el-form-item label="所属项目" prop="project">
+                <el-select v-model="personForm.project" placeholder="请选择" style="width:100%">
+                  <el-option v-for="item in projectOptions" :key="item" :label="item" :value="item"></el-option>
+                </el-select>
+              </el-form-item>
+              <el-form-item label="管理归属">
+                <el-input :value="formManagementAffiliation" disabled></el-input>
+              </el-form-item>
+              <el-form-item label="岗位名称" prop="positionName">
+                <el-input v-model.trim="personForm.positionName" placeholder="如：管道工程师"></el-input>
+              </el-form-item>
+              <el-form-item label="实际到岗时间" prop="arrivalDate">
+                <el-date-picker v-model="personForm.arrivalDate" type="date" value-format="yyyy-MM-dd" style="width:100%"></el-date-picker>
+              </el-form-item>
+              <el-form-item label="项目周期" prop="projectDuration">
+                <el-input v-model.trim="personForm.projectDuration" placeholder="如：6个月、24个月（暂定）"></el-input>
+              </el-form-item>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <h4 class="form-section-title">工时与费率</h4>
+            <p class="form-section-hint">以下字段为选填；费率单位为 元/小时，周工作时间格式为“天数*小时”（如 5*8）。</p>
+            <div class="form-grid form-grid-rates">
+              <el-form-item label="周工作时间（天*小时）" prop="weeklyWorkTime" class="form-span-2">
+                <el-input v-model.trim="personForm.weeklyWorkTime" placeholder="选填，如：5*8"></el-input>
+              </el-form-item>
+              <el-form-item label="基本费率（元/小时）" prop="baseRate">
+                <el-input-number v-model="personForm.baseRate" :min="0" :precision="2" controls-position="right" class="rate-input"></el-input-number>
+              </el-form-item>
+              <el-form-item label="工作日加班费率（元/小时）" prop="weekdayOvertimeRate">
+                <el-input-number v-model="personForm.weekdayOvertimeRate" :min="0" :precision="2" controls-position="right" class="rate-input"></el-input-number>
+              </el-form-item>
+              <el-form-item label="周末加班费率（元/小时）" prop="weekendOvertimeRate">
+                <el-input-number v-model="personForm.weekendOvertimeRate" :min="0" :precision="2" controls-position="right" class="rate-input"></el-input-number>
+              </el-form-item>
+              <el-form-item label="法定假日加班费率（元/小时）" prop="holidayOvertimeRate">
+                <el-input-number v-model="personForm.holidayOvertimeRate" :min="0" :precision="2" controls-position="right" class="rate-input"></el-input-number>
+              </el-form-item>
+            </div>
+          </div>
         </div>
       </el-form>
       <span slot="footer">
-        <el-button @click="showPersonDialog = false">取消</el-button>
-        <el-button type="primary" class="primary-btn" @click="savePerson">保存</el-button>
+        <el-button size="small" @click="showPersonDialog = false">取消</el-button>
+        <el-button type="primary" size="small" class="action-btn" @click="savePerson">保存</el-button>
       </span>
     </el-dialog>
 
     <el-dialog
-      title="状态切换与离岗时间"
-      :visible.sync="showStatusDialog"
-      width="560px"
+      title="批量导入人员信息"
+      :visible.sync="showImportDialog"
+      width="880px"
       :close-on-click-modal="false"
-      custom-class="fixed-dialog"
+      custom-class="fixed-dialog import-dialog"
       @open="lockBodyScroll"
-      @closed="unlockBodyScroll"
+      @closed="onImportDialogClosed"
     >
-      <div class="status-form">
-        <el-form ref="statusFormRef" :model="statusForm" :rules="statusRules" label-position="top">
-          <el-form-item label="人员状态" prop="status">
-            <el-select v-model="statusForm.status" style="width:100%" @change="onStatusChanged">
-              <el-option label="在岗" value="在岗"></el-option>
-              <el-option label="离岗" value="离岗"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="离岗时间" prop="leaveDate">
-            <el-date-picker
-              v-model="statusForm.leaveDate"
-              type="date"
-              value-format="yyyy-MM-dd"
-              style="width:100%"
-              :disabled="statusForm.status !== '离岗'"
-            ></el-date-picker>
-          </el-form-item>
-        </el-form>
+      <div class="import-body">
+        <div class="import-steps">
+          <div class="import-step" :class="{ active: importStep >= 1 }">
+            <span class="import-step-num">1</span>
+            <span>上传文件</span>
+          </div>
+          <div class="import-step-line" :class="{ active: importStep >= 2 }"></div>
+          <div class="import-step" :class="{ active: importStep >= 2 }">
+            <span class="import-step-num">2</span>
+            <span>预览数据</span>
+          </div>
+          <div class="import-step-line" :class="{ active: importStep >= 3 }"></div>
+          <div class="import-step" :class="{ active: importStep >= 3 }">
+            <span class="import-step-num">3</span>
+            <span>确认导入</span>
+          </div>
+        </div>
+
+        <div v-if="importStep === 1" class="import-step-content">
+          <h4 class="import-subtitle">上传Excel或CSV文件</h4>
+          <p class="import-desc">请上传包含人员信息的Excel(.xlsx)或CSV文件，文件格式要求如下：</p>
+
+          <div class="import-field-card">
+            <div class="import-field-card-head">
+              <strong>必需字段</strong>
+              <el-button type="primary" size="mini" class="primary-btn" icon="el-icon-download" @click="downloadImportTemplate">下载模板</el-button>
+            </div>
+            <div class="import-field-cols">
+              <ul>
+                <li>公司名称</li>
+                <li>性别</li>
+                <li>所属项目</li>
+                <li>实际到岗时间</li>
+                <li>联系电话</li>
+              </ul>
+              <ul>
+                <li>姓名</li>
+                <li>年龄</li>
+                <li>岗位名称</li>
+                <li>项目周期</li>
+              </ul>
+            </div>
+            <div class="import-field-card-head optional-head">
+              <strong>可选字段</strong>
+            </div>
+            <div class="import-field-cols">
+              <ul>
+                <li>周工作时间</li>
+                <li>工作日加班费率</li>
+                <li>法定假日加班费率</li>
+                <li>离职时间</li>
+              </ul>
+              <ul>
+                <li>基本费率</li>
+                <li>周末加班费率</li>
+                <li>人员状态</li>
+              </ul>
+            </div>
+            <div class="import-tips">
+              <p><i class="el-icon-info"></i> 提示：下载CSV模板文件，按格式填写后上传即可；Excel 请先另存为 CSV。</p>
+              <p><i class="el-icon-time"></i> 日期格式支持：2024-01-15 或 2024/1/15</p>
+            </div>
+          </div>
+
+          <div
+            class="import-dropzone"
+            :class="{ 'has-file': !!importFileName }"
+            @click="triggerImportFile"
+            @dragover.prevent
+            @drop.prevent="onImportDrop"
+          >
+            <input
+              ref="importFileInput"
+              type="file"
+              accept=".csv,.xlsx,.xls"
+              class="import-file-input"
+              @change="onImportFileChange"
+            />
+            <template v-if="!importFileName">
+              <i class="el-icon-upload import-drop-icon"></i>
+              <p class="import-drop-title">点击或拖拽文件到此处</p>
+              <p class="import-drop-hint">支持 .xlsx, .xls, .csv 格式（当前解析 CSV）</p>
+            </template>
+            <template v-else>
+              <p class="import-drop-title">{{ importFileName }}</p>
+              <p class="import-drop-hint">{{ importFileSizeLabel }}</p>
+              <el-button type="text" class="danger-op" @click.stop="clearImportFile">移除文件</el-button>
+            </template>
+          </div>
+        </div>
+
+        <div v-else-if="importStep === 2" class="import-step-content">
+          <div class="import-stat-grid">
+            <div class="import-stat-card">
+              <div class="import-stat-value total">{{ importPreview.total }}</div>
+              <div class="import-stat-label">总记录数</div>
+            </div>
+            <div class="import-stat-card">
+              <div class="import-stat-value valid">{{ importPreview.valid }}</div>
+              <div class="import-stat-label">有效记录</div>
+            </div>
+            <div class="import-stat-card">
+              <div class="import-stat-value invalid">{{ importPreview.invalid }}</div>
+              <div class="import-stat-label">错误记录</div>
+            </div>
+          </div>
+          <el-table :data="importPreview.data" size="mini" stripe max-height="320" empty-text="暂无预览数据">
+            <el-table-column label="状态" width="72">
+              <template slot-scope="scope">
+                <span :class="scope.row.isValid ? 'text-ok' : 'text-err'">{{ scope.row.isValid ? '有效' : '错误' }}</span>
+              </template>
+            </el-table-column>
+            <el-table-column prop="companyName" label="公司名称" min-width="140" show-overflow-tooltip></el-table-column>
+            <el-table-column prop="name" label="姓名" width="90"></el-table-column>
+            <el-table-column prop="project" label="所属项目" width="100"></el-table-column>
+            <el-table-column prop="positionName" label="岗位名称" width="110" show-overflow-tooltip></el-table-column>
+            <el-table-column label="错误信息" min-width="200" show-overflow-tooltip>
+              <template slot-scope="scope">
+                <span class="text-err">{{ (scope.row.errors || []).join('；') || '—' }}</span>
+              </template>
+            </el-table-column>
+          </el-table>
+        </div>
+
+        <div v-else class="import-step-content import-result">
+          <template v-if="importResult.success">
+            <i class="el-icon-success import-result-icon ok"></i>
+            <p class="import-result-title ok">导入成功</p>
+            <p class="import-result-count">{{ importResult.imported }}</p>
+            <p class="import-result-desc">条记录已加入列表</p>
+          </template>
+          <template v-else>
+            <i class="el-icon-error import-result-icon err"></i>
+            <p class="import-result-title err">导入失败</p>
+            <p class="import-result-desc">{{ importResult.message }}</p>
+          </template>
+        </div>
       </div>
-      <div class="status-log-section">
-        <div class="field-label">状态调整记录</div>
-        <el-table :data="statusLogsForDisplay" size="mini" stripe max-height="220" empty-text="暂无状态调整记录">
-          <el-table-column prop="operator" label="操作人" width="100"></el-table-column>
-          <el-table-column prop="operationTime" label="操作时间" width="170"></el-table-column>
-          <el-table-column prop="content" label="操作内容" min-width="240"></el-table-column>
-        </el-table>
-      </div>
-      <span slot="footer">
-        <el-button @click="showStatusDialog = false">取消</el-button>
-        <el-button type="primary" class="primary-btn" @click="saveStatus">保存</el-button>
+      <span slot="footer" class="import-footer">
+        <el-button size="small" @click="closeImport">{{ importStep === 3 ? '完成' : '取消' }}</el-button>
+        <span>
+          <el-button
+            v-if="importStep === 1"
+            type="primary"
+            size="small"
+            class="primary-btn"
+            :disabled="!importFileName"
+            @click="parseImportFile"
+          >解析文件</el-button>
+          <el-button
+            v-if="importStep === 2"
+            type="primary"
+            size="small"
+            class="primary-btn"
+            :disabled="importPreview.valid === 0"
+            @click="confirmImport"
+          >确认导入</el-button>
+        </span>
       </span>
     </el-dialog>
   </div>

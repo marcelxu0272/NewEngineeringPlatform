@@ -1,0 +1,502 @@
+[v-cloak] { display: none; }
+
+html, body { height: 100%; }
+
+body {
+    font-family: 'PingFang SC', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, sans-serif;
+    color: #233845;
+}
+
+/* 顶部栏 */
+.top-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+/* 布局与尺寸工具类
+ * 说明：Tailwind 2 CDN 为预编译产物，不支持 min-w-[220px] / !w-full 这类任意值与 important 前缀，
+ * 因此本模块用到的这几类尺寸一律走自有类，避免写了不生效。 */
+.yc-container { max-width: 1680px; margin-left: auto; margin-right: auto; }
+.yc-w-sm { flex: 1 1 0; min-width: 140px; }
+.yc-w-md { flex: 1 1 0; min-width: 200px; }
+.yc-w-lg { flex: 1 1 0; min-width: 260px; }
+.yc-w-xl { flex: 1 1 0; min-width: 320px; }
+.yc-w-120 { min-width: 120px; }
+.yc-w-80 { min-width: 80px; }
+.yc-w-full { width: 100% !important; }
+
+/* 语义文字色 */
+.yc-text-brand { color: #007069; }
+.yc-text-ok { color: #166534; }
+.yc-text-err { color: #ef4444; }
+
+/* 主按钮（品牌色） */
+.el-button--primary.yc-btn-primary {
+    background-color: #007069;
+    border-color: #007069;
+}
+.el-button--primary.yc-btn-primary:hover,
+.el-button--primary.yc-btn-primary:focus {
+    background-color: #00867e;
+    border-color: #00867e;
+}
+.el-button--primary.yc-btn-primary.is-disabled,
+.el-button--primary.yc-btn-primary.is-disabled:hover {
+    background-color: #99c5c2;
+    border-color: #99c5c2;
+}
+
+/* Element UI 主色覆盖 */
+.el-button--text { color: #007069; }
+.el-button--text:hover { color: #00a39a; }
+
+/* 列表操作列：尽量收窄 */
+.yc-ops { white-space: nowrap; }
+.yc-ops .el-button--mini { padding-left: 4px; padding-right: 4px; }
+.yc-ops .el-button + .el-button { margin-left: 4px; }
+.yc-ops .yc-op-danger,
+.yc-ops .yc-op-danger:hover,
+.yc-ops .yc-op-danger:focus {
+    color: #c53030;
+}
+.el-input__inner:focus,
+.el-textarea__inner:focus { border-color: #007069; }
+.el-select-dropdown__item.selected { color: #007069; }
+.el-checkbox__input.is-checked .el-checkbox__inner,
+.el-radio__input.is-checked .el-radio__inner { background-color: #007069; border-color: #007069; }
+.el-tabs__item.is-active { color: #007069; }
+.el-tabs__active-bar { background-color: #007069; }
+.el-tabs__item:hover { color: #007069; }
+
+/* 页签待办数字（0 不渲染） */
+.yc-tab-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    vertical-align: middle;
+}
+.yc-tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 9px;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 600;
+    color: #007069;
+    background: rgba(0, 112, 105, 0.1);
+}
+.el-radio-button__original-radio:checked + .el-radio-button__inner {
+    background-color: #007069;
+    border-color: #007069;
+    box-shadow: -1px 0 0 0 #007069;
+}
+.el-pagination.is-background .el-pager li:not(.disabled).active { background-color: #007069; }
+.el-table th.el-table__cell { background-color: #f7f9fb !important; }
+.el-tag { border-radius: 4px; }
+
+/* 斑马纹与 hover（对齐 LIST_FORM.md） */
+.el-table--striped .el-table__body tr.el-table__row--striped td.el-table__cell {
+    background: rgba(0, 112, 105, 0.03);
+}
+.el-table__body tr:hover > td.el-table__cell {
+    background: rgba(0, 112, 105, 0.05) !important;
+}
+
+/* 状态徽章：颜色仅作辅助，文字为主 */
+.yc-badge {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 20px;
+    white-space: nowrap;
+    border: 1px solid transparent;
+}
+.yc-badge-ok     { color: #166534; background: #dcfce7; border-color: #bbf7d0; }
+.yc-badge-doing  { color: #007069; background: #e6f2f1; border-color: #cce3e1; }
+.yc-badge-warn   { color: #92400e; background: #fef3c7; border-color: #fde68a; }
+.yc-badge-danger { color: #b91c1c; background: #fee2e2; border-color: #fecaca; }
+.yc-badge-mute   { color: #6b7280; background: #f3f4f6; border-color: #e5e7eb; }
+
+/* 弹窗：宽高固定，标题与按钮不滚，仅内容区滚动 */
+.yc-dialog .el-dialog {
+    display: flex;
+    flex-direction: column;
+    height: 72vh;
+    max-height: 72vh;
+    margin-top: 10vh !important;
+    margin-bottom: 0 !important;
+    overflow: hidden;
+}
+.yc-dialog .el-dialog__header {
+    flex: none;
+    padding: 16px 20px;
+    border-bottom: 1px solid #edf0f3;
+}
+.yc-dialog .el-dialog__body {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    padding: 18px 20px;
+}
+.yc-dialog .el-dialog__footer {
+    flex: none;
+    padding: 12px 20px;
+    border-top: 1px solid #edf0f3;
+    background: #fcfdfd;
+}
+.yc-dialog-sm .el-dialog { height: 48vh; max-height: 48vh; }
+.yc-dialog-lg .el-dialog { height: 78vh; max-height: 78vh; width: 960px !important; }
+
+/* 工时派发详情 */
+.yc-hour-table-wrap { overflow-x: auto; }
+.yc-hour-progress {
+    height: 10px;
+    background: rgba(0, 112, 105, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    min-width: 72px;
+}
+.yc-hour-progress-bar {
+    height: 100%;
+    background: #007069;
+    border-radius: 2px;
+}
+.el-table .yc-hour-total-row td {
+    background: #f7f9fb !important;
+    font-weight: 600;
+    color: #374151;
+}
+.el-table .yc-hour-total-row:hover > td {
+    background: #f0f3f6 !important;
+}
+
+/* 表单区块 */
+.yc-section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #edf0f3;
+}
+.yc-field-label { font-size: 12px; color: #6b7280; margin-bottom: 4px; display: block; }
+.yc-field-label .yc-req { color: #ef4444; margin-left: 2px; }
+.yc-field-label .yc-field-tip {
+    margin-left: 4px;
+    color: #9ca3af;
+    cursor: help;
+    font-size: 12px;
+}
+.yc-field-label .yc-field-tip:hover { color: #007069; }
+.yc-field-error { font-size: 12px; color: #ef4444; margin-top: 4px; }
+
+.yc-detail-meta { margin-bottom: 16px; }
+.yc-page-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 16px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+.yc-detail-text {
+    font-size: 13px;
+    color: #374151;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+.yc-detail-text.is-empty { color: #9ca3af; }
+
+/* 项目名称等长文本：单行截断，不换行（DESIGN.md / LIST_FORM.md 4.7） */
+.yc-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: normal;
+}
+.yc-detail-text.yc-ellipsis {
+    white-space: nowrap;
+    word-break: normal;
+}
+.yc-kv-v.yc-ellipsis {
+    min-width: 0;
+}
+
+/* 只读信息块 */
+.yc-readonly-box {
+    background: #f7f9fb;
+    border: 1px solid #eef1f5;
+    border-radius: 8px;
+    padding: 12px 16px;
+}
+.yc-kv { display: flex; justify-content: space-between; gap: 16px; font-size: 13px; padding: 3px 0; }
+.yc-kv-k { color: #6b7280; }
+.yc-kv-v { color: #111827; font-weight: 600; }
+
+/* 比例合计条 */
+.yc-total-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #f7f9fb;
+    border: 1px solid #eef1f5;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 13px;
+}
+.yc-total-ok   { color: #166534; font-weight: 600; }
+.yc-total-bad  { color: #ef4444; font-weight: 600; }
+
+/* 三列紧凑表：固定宽度与列合计一致，合计条与表格同宽 */
+.yc-table-narrow {
+    width: 520px;
+    max-width: 100%;
+}
+
+.el-table .yc-history-total-row td {
+    background: #ffffff !important;
+    color: #374151;
+    font-weight: 600;
+}
+.el-table--striped .el-table__body tr.yc-history-total-row td {
+    background: #ffffff !important;
+}
+.el-table .yc-history-total-row:hover > td {
+    background: #f7f9fb !important;
+}
+.yc-history-total-label {
+    color: #374151;
+}
+
+/* 0% 专业行弱样式：仍可编辑 */
+.yc-row-zero { color: #9ca3af; }
+.yc-row-zero .yc-disc-name { color: #9ca3af; }
+
+/* 查看详情：横向公式（上数字、下名称） */
+.yc-formula-bar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0;
+    padding: 16px 8px 12px;
+    background: #f8faff;
+    border: 1px solid rgba(0, 112, 105, 0.1);
+    border-radius: 8px;
+    overflow-x: auto;
+}
+.yc-formula-term {
+    flex: 1 1 0;
+    min-width: 108px;
+    text-align: center;
+}
+.yc-formula-op {
+    flex: none;
+    width: 28px;
+    line-height: 22px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #9ca3af;
+    text-align: center;
+}
+.yc-formula-val {
+    font-size: 15px;
+    font-weight: 600;
+    color: #233845;
+    line-height: 22px;
+    font-variant-numeric: tabular-nums;
+    word-break: break-all;
+}
+.yc-formula-term.is-sum .yc-formula-val { color: #007069; }
+.yc-formula-name {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #6b7280;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+.yc-formula-status {
+    margin-top: 6px;
+    min-height: 22px;
+}
+
+/* 专业间 / 专业内比例：表 + 饼图（顶对齐，避免表矮图高时上下大块留白） */
+.yc-split-block {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+.yc-split-table { flex: 1; min-width: 0; }
+.yc-split-pie {
+    width: 280px;
+    height: 168px;
+    flex: none;
+    overflow: visible;
+}
+.yc-split-body {
+    padding: 12px 16px;
+}
+
+/* 绩效查询内层页签（card，避免与外层 line tab 抢 active-bar） */
+.yc-subtabs.el-tabs--card > .el-tabs__header {
+    margin: 0 0 16px;
+    background: transparent;
+    border: none;
+}
+.yc-subtabs.el-tabs--card > .el-tabs__header .el-tabs__nav {
+    border-color: rgba(0, 112, 105, 0.2);
+}
+.yc-subtabs.el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
+    color: #007069;
+    border-bottom-color: #fff;
+}
+.yc-subtabs > .el-tabs__content { overflow: visible; }
+.yc-code { font-family: ui-monospace, Menlo, Monaco, Consolas, monospace; font-size: 12px; color: #6b7280; }
+
+/* 项目下拉：编号 + 名称 */
+.project-option-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.project-option-code {
+    font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
+    color: #374151;
+    flex-shrink: 0;
+    min-width: 96px;
+}
+.project-option-name { color: #111827; text-align: right; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* 评估选项下拉：分数为主，文案为选分说明 */
+.yc-opt-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; }
+.yc-opt-coef {
+    font-family: ui-monospace, Menlo, Monaco, Consolas, monospace;
+    font-weight: 600;
+    color: #007069;
+    flex-shrink: 0;
+}
+.yc-opt-desc { color: #6b7280; font-size: 12px; text-align: right; flex: 1; }
+.yc-eval-select-popper { min-width: 360px !important; }
+.yc-eval-coef-select .el-input__inner { text-align: right; }
+
+/* 操作日志：时间 + 一句话 */
+.yc-log-list { margin-top: 4px; }
+.yc-log-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 10px 0;
+    font-size: 13px;
+    line-height: 1.5;
+}
+.yc-log-row + .yc-log-row { border-top: 1px solid #edf0f3; }
+.yc-log-time {
+    flex: none;
+    width: 92px;
+    color: #9ca3af;
+    font-variant-numeric: tabular-nums;
+}
+.yc-log-date { font-size: 12px; }
+.yc-log-clock { font-size: 12px; margin-top: 2px; }
+.yc-log-text { flex: 1; min-width: 0; color: #374151; }
+.yc-log-empty { color: #9ca3af; font-size: 13px; padding: 12px 0; }
+
+/* 未完成专业内：评估详情内的状态说明 */
+.yc-eval-blocked {
+    padding: 16px 20px;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #6b7280;
+    background: #f9fafb;
+}
+
+/* 空态 */
+.yc-empty { padding: 48px 16px; text-align: center; color: #9ca3af; font-size: 13px; }
+.yc-empty i { font-size: 28px; display: block; margin-bottom: 12px; color: #d1d5db; }
+
+/* 数字列右对齐时的等宽 */
+.yc-num { font-variant-numeric: tabular-nums; }
+
+/* 列表工具栏：沿用现有品牌色，搜索条件与待办范围各自清晰。 */
+.yc-filter-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; }
+.yc-filter-row > .yc-w-lg { flex: 2 1 300px; min-width: 260px; }
+.yc-filter-row > .yc-w-sm { flex: 0 1 180px; min-width: 140px; }
+.yc-filter-row > .yc-w-md { flex: 1 1 240px; min-width: 200px; }
+.yc-list-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 12px; }
+.yc-list-scope { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+.yc-scope-hint { color: #6b7280; font-size: 12px; }
+.yc-demo-tools { display: flex; align-items: center; gap: 12px; padding-left: 16px; border-left: 1px solid #e5e7eb; }
+.yc-demo-label { font-size: 12px; color: #6b7280; background: #f3f4f6; padding: 3px 7px; border-radius: 4px; white-space: nowrap; }
+.yc-detail-status { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; margin-bottom: 16px; background: #f0f7f6; border-radius: 6px; font-size: 13px; line-height: 22px; color: #374151; }
+/* 已驳回与其它状态共用同一底色，仅徽章区分语义 */
+.yc-detail-status.is-danger { background: #f0f7f6; color: #374151; }
+.yc-detail-collapse { margin-top: 24px; }
+.yc-detail-collapse .el-collapse-item__header { font-weight: 600; color: #374151; }
+.yc-eval-summary { position: sticky; bottom: 0; z-index: 10; padding: 16px 20px; background: #fff; border: 1px solid #dbe8e6; border-radius: 8px; box-shadow: 0 -3px 12px rgba(35, 56, 69, .06); }
+.yc-eval-summary-main { display: flex; flex-wrap: wrap; gap: 20px 40px; }
+.yc-eval-summary-main > div { display: flex; flex-direction: column; gap: 5px; }
+.yc-eval-summary-main span { color: #6b7280; font-size: 12px; }
+.yc-eval-summary-main strong { font-size: 17px; }
+.yc-eval-summary-actions { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 12px; padding-top: 12px; border-top: 1px solid #edf0f3; }
+.yc-eval-summary-actions p { font-size: 12px; color: #6b7280; }
+.yc-rule-reviewers { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+.yc-rule-reviewers p { font-size: 12px; color: #6b7280; margin-top: 6px; }
+.yc-rule-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-bottom: 24px; }
+.yc-rule-table th, .yc-rule-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #edf0f3; font-variant-numeric: tabular-nums; }
+.yc-rule-table thead th { background: #f7f9fb; color: #6b7280; font-weight: 500; }
+.yc-rule-table tbody th { font-weight: 500; }
+.yc-rule-table td { color: #233845; }
+.yc-rule-table th:first-child, .yc-rule-table td:first-child { width: 160px; }
+.yc-rule-table th:last-child, .yc-rule-table td:last-child { width: 160px; }
+.yc-rule-heading { display: flex; align-items: center; gap: 16px; margin: 0 0 10px; font-size: 14px; }
+.yc-rule-heading span { font-size: 12px; color: #6b7280; }
+.yc-coef-field { flex: 1; min-width: 0; }
+.yc-main-tabs > .el-tabs__content { overflow: visible; }
+.yc-list-scope .el-radio-button.is-active .el-radio-button__inner { background: #007069; border-color: #007069; box-shadow: -1px 0 0 0 #007069; color: #fff; }
+.yc-container .el-table th .cell, .yc-dialog .el-table th .cell { white-space: normal; text-overflow: clip; overflow: visible; word-break: normal; line-height: 20px; }
+
+/* 绩效查询 KPI（DASHBOARD.md：少而关键、整卡可点、次要不压主值） */
+.yc-kpi-block { margin-bottom: 16px; }
+.yc-kpi-hint { font-size: 12px; color: #6b7280; margin-bottom: 10px; }
+.yc-kpi-grid { display: grid; gap: 12px; }
+.yc-kpi-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.yc-kpi-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 1100px) {
+    .yc-kpi-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+.yc-kpi-card {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: #fff;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.yc-kpi-card:hover {
+    background: rgba(0, 112, 105, 0.05);
+    border-color: rgba(0, 112, 105, 0.3);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.yc-kpi-title { font-size: 13px; color: #374151; font-weight: 500; line-height: 1.4; }
+.yc-kpi-title .yc-field-tip { margin-left: 4px; vertical-align: middle; }
+.yc-kpi-value { margin-top: 8px; font-size: 22px; font-weight: 700; color: #007069; line-height: 1.2; }
+.yc-kpi-sub { margin-top: 6px; font-size: 12px; color: #6b7280; }
+.yc-stats-summary {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #edf0f3;
+}
+.yc-stats-tip { flex: 1; min-width: 0; font-size: 12px; color: #6b7280; line-height: 1.6; }
+.yc-stats-bar { width: 100%; height: 240px; }

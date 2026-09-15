@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>银川绩效派发</title>
+
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.14/lib/theme-chalk/index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css?v=unit-view-21" />
+</head>
+<body class="bg-gray-100">
+<div id="app" v-cloak>
+
+    <!-- ================= 顶部栏 ================= -->
+    <div class="top-toolbar bg-white border-b shadow-sm">
+        <div class="flex items-center justify-between px-6 py-3">
+            <div class="flex items-center space-x-4">
+                <h1 class="text-xl font-bold text-gray-800">银川绩效派发</h1>
+                
+            </div>
+            <div class="yc-demo-tools">
+                <span class="yc-demo-label">演示工具</span>
+                <span class="text-sm text-gray-500">当前身份</span>
+                <el-select v-model="currentRole" size="small" style="width: 260px">
+                    <el-option-group v-for="g in roleGroups" :key="g.label" :label="g.label">
+                        <el-option
+                            v-for="o in g.options"
+                            :key="o.key"
+                            :label="o.key === 'K2' ? ('K2 审核人 · ' + userName(state.config.k2ReviewerId)) : (o.key === 'K3' ? ('K3 审核人 · ' + userName(state.config.k3ReviewerId)) : o.name)"
+                            :value="o.key"></el-option>
+                    </el-option-group>
+                </el-select>
+                <el-button v-if="showDemoReset" size="small" icon="el-icon-refresh-left" @click="resetDemoData">重置演示数据</el-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="px-6 py-6 yc-container">
+
+        <el-tabs ref="mainTabs" v-model="activeTab" type="card" class="yc-main-tabs" @tab-click="onMainTabClick">
+
+            <!-- ============================================================
+                 页签一：专业间
+                 ============================================================ -->
+            <el-tab-pane name="inter">
+                <span slot="label" class="yc-tab-label">
+                    专业间
+                    <span class="yc-tab-count" v-if="todoInterCount">待办 {{ todoInterCount }}</span>
+                </span>
+                <template v-if="interView === 'list'">
+                <div class="bg-white rounded-lg shadow p-4 mb-4">
+                    <div class="yc-filter-row">
+                        <div class="yc-w-lg">
+                            <label class="yc-field-label">项目</label>
+                            <el-select v-model="interFilter.projectId" clearable size="small" placeholder="全部" class="w-full">
+                                <el-option v-for="p in visibleProjects" :key="p.id" :label="formatProjectDisplay(p)" :value="p.id">
+                                    <div class="project-option-row">
+                                        <span class="project-option-code">{{ p.code }}</span>
+                                        <span class="project-option-name" :title="p.name">{{ p.name }}</span>
+                                    </div>
+                                </el-option>
+                            </el-select>
+                        </div>
+                        <div class="yc-w-sm">
+                            <label class="yc-field-label">状态</label>
+                            <el-select v-model="interFilter.status" clearable size="small" placeholder="全部" class="w-full">
+                                <el-option v-for="s in interStatusOptions()" :key="s.value" :label="s.label" :value="s.value"></el-option>
+                            </el-select>
+                        </div>
+                        <div class="yc-w-md">
+                            <label class="yc-field-label">编号 / 项目</label>
+                            <el-input v-model="interFilter.keyword" size="small" clearable placeholder="输入关键字"
+                                      @keyup.enter.native="searchInter"></el-input>
+                        </div>
+                        <div class="flex gap-2">
+                            <el-button size="small" type="primary" class="yc-btn-primary"
+                                       icon="el-icon-search" @click="searchInter">搜索</el-button>
+                            <el-button size="small" @click="resetInter">重置</el-button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="yc-list-toolbar">
+                    <div class="yc-list-scope">
+                        <el-radio-group v-model="interScope" size="small" aria-label="专业间列表范围">
+                            <el-radio-button label="all">全部 {{ matchedInterSheets.length }}</el-radio-button>
+                            <el-radio-button label="todo">待我处理 {{ todoInterCount }}</el-radio-button>
+                        </el-radio-group>
+                    </div>
+                    <el-button v-if="isPM" size="small" type="primary" class="yc-btn-primary" icon="el-icon-plus" @click="openInterCreate">新增派发</el-button>
+                </div>
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <el-table :data="pagedInterSheets" stripe style="width: 100%"
+                              :header-cell-style="tableHeaderStyle"
+                              :empty-text="emptyText(interHasFilter(), '')">
+                        <el-table-column label="操作" width="160" align="center" fixed>
+                            <template slot-scope="s">
+                                <span class="yc-ops">
+                                    <el-button v-if="canReviewK2(s.row)" type="text" size="mini"
+                                               @click="openInterReview(s.row, 'k2')">审核</el-button>
+                                    <el-button v-if="canReviewK3(s.row)" type="text" size="mini"
+                                               @click="openInterReview(s.row, 'k3')">审核</el-button>
+                                    <el-button v-if="isPM && (s.row.status === 'INTER_DRAFT' || s.row.status === 'INTER_REJECTED') && s.row.managerUserId === currentUserId"
+                                               type="text" size="mini" @click="openInterEdit(s.row)">填写</el-button>
+                                    <el-button type="text" size="mini" @click="openFormula({ kind: 'project', interId: s.row.id })">查看</el-button>
+                                    <el-button v-if="canTerminateInter(s.row)" type="text" size="mini" class="yc-op-danger"
+                                               @click="confirmTerminateInter(s.row)">终止</el-button>
+                                </span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="sheetNo" label="编号" width="150">
+                            <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
+                        </el-table-column>
+                        <el-table-column prop="projectCode" label="项目号" width="140">
+                            <template slot-scope="s"><span class="yc-code">{{ s.row.projectCode }}</span></template>
+                        </el-table-column>
+                        <el-table-column prop="projectName" label="项目名称" min-width="180" show-overflow-tooltip></el-table-column>
+                        <el-table-column label="绩效系数 K1" width="120" align="right">
+                            <template slot-scope="s"><span class="yc-num">{{ formatRatio(s.row.k1) }}</span></template>
+                        </el-table-column>
+                        <el-table-column label="绩效系数 K2" width="130" align="right">
+                            <template slot-scope="s"><span class="yc-num">{{ formatKCoef(s.row.k2Status === 'confirmed' ? s.row.k2 : null) }}</span></template>
+                        </el-table-column>
+                        <el-table-column label="绩效系数 K3" width="130" align="right">
+                            <template slot-scope="s"><span class="yc-num">{{ formatKCoef(s.row.k3Status === 'confirmed' ? s.row.k3 : null) }}</span></template>
+                        </el-table-column>
+                        <el-table-column label="预估分配金额（元）" width="160" align="right">
+                            <template slot-scope="s"><span class="yc-num font-semibold">{{ formatAmount(s.row.poolLocked ? s.row.pool : null) }}</span></template>
+                        </el-table-column>
+                        <el-table-column label="状态" width="140">
+                            <template slot-scope="s">
+                                <span class="yc-badge" :class="statusOf(interStatusDict, s.row.status).badge">
+                                    {{ statusOf(interStatusDict, s.row.status).label }}
+                                </span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="updatedAt" label="更新时间" width="140"></el-table-column>
+                    </el-table>
+
+                    <div class="flex items-center justify-end px-4 py-3 border-t">
+                        <el-pagination
+                            background
+                            layout="total, sizes, prev, pager, next, jumper"
+                            :total="filteredInterSheets.length"
+                            :page-size="interPageSize"
+                            :page-sizes="[10, 20, 50]"
+                            :current-page="interPage"
+                            @current-change="function (p) { interPage = p }"
+                            @size-change="function (s) { interPageSize = s; interPage = 1 }">
+                        </el-pagination>
+                    </div>
+                </div>
+                </template>
+
+                <template v-else-if="interView === 'edit'">
+<div class="flex items-center justify-between mb-4">
+                <el-button size="small" icon="el-icon-arrow-left" @click="closeInterEdit" :disabled="interEdit.saving">返回列表</el-button>
+                <span class="text-base font-semibold text-gray-800">{{ interEdit.isNew ? '发起派发' : '修改后重提' }}</span>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-4 mb-4">
+                <div class="px-0 pb-3 mb-4 border-b">
+                    <span class="font-semibold text-gray-800">项目信息</span>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-5">
+                    <div>
+                        <label class="yc-field-label">项目<span class="yc-req">*</span></label>
+                        <el-select v-model="interEdit.projectId" size="small" class="w-full"
+                                   :disabled="!interEdit.isNew"
+                                   placeholder="仅本人担任项目经理且已做任务书的项目"
+                                   @change="onInterProjectChange">
+                            <el-option v-for="p in selectableProjects" :key="p.id" :label="formatProjectDisplay(p)" :value="p.id">
+                                <div class="project-option-row">
+                                    <span class="project-option-code">{{ p.code }}</span>
+                                    <span class="project-option-name" :title="p.name">{{ p.name }}</span>
+                                </div>
+                            </el-option>
+                        </el-select>
+                    </div>
+                    <div>
+                        <label class="yc-field-label">
+                            可分配金额
+                            <el-tooltip content="不含税合同额 - 已分配金额" placement="top">
+                                <i class="fas fa-info-circle yc-field-tip"></i>
+                            </el-tooltip>
+                        </label>
+                        <el-input size="small" disabled :value="formatAmount(interEditAllocableAmount())"></el-input>
+                        <div class="yc-field-error" v-if="interEdit.projectId && interEditAllocableAmount() === 0">
+                            可分配金额为 0，无法发起派发
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-5">
+                    <div>
+                        <label class="yc-field-label">绩效系数 K1 提取比例（%）<span class="yc-req">*</span></label>
+                        <el-input-number v-model="interEdit.k1Pct" size="small" :precision="2" :min="0"
+                                         :max="state.config.k1.max / 100" :step="0.5"
+                                         :controls="false" class="yc-w-full" @change="function () { interEdit.dirty = true }"></el-input-number>
+                        <div class="yc-field-error" v-if="interEdit.k1Pct !== null && interEdit.k1Pct !== '' && !k1Valid">
+                            超出允许区间，{{ k1Hint }}
+                        </div>
+                        <div class="text-xs text-gray-500 mt-1" v-else>{{ k1Hint }}</div>
+                    </div>
+                    <div>
+                        <label class="yc-field-label">
+                            预估分配金额
+                            <el-tooltip content="按可分配金额 × K1 × K2默认 × K3默认试算，便于填比例对照；K2/K3 审核确认后以实际系数为准" placement="top">
+                                <i class="fas fa-info-circle yc-field-tip"></i>
+                            </el-tooltip>
+                        </label>
+                        <el-input size="small" disabled :value="formatAmount(interEditEstimatedPool)"></el-input>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="yc-field-label">派发说明</label>
+                    <el-input
+                        type="textarea"
+                        v-model="interEdit.remark"
+                        :autosize="{ minRows: 2, maxRows: 4 }"
+                        maxlength="200"
+                        show-word-limit
+                        placeholder="选填，说明本轮派发背景或范围"
+                        @input="function () { interEdit.dirty = true }">
+                    </el-input>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow mb-4 overflow-hidden">
+                <div class="px-4 py-3 border-b">
+                    <span class="font-semibold text-gray-800">专业间比例</span>
+                </div>
+                <div class="p-4">
+                <div v-if="!interEdit.rows.length" class="yc-empty">
+                    <i class="far fa-folder-open"></i>
+                    请先选择项目，系统按任务书带出全部单元
+                </div>
+                <el-table v-else :data="interEdit.rows" size="small" :header-cell-style="tableHeaderStyle" style="width:100%"
+                          :row-class-name="function (o) { return (o.row.pct > 0 ? '' : 'yc-row-zero') }">
+                    <el-table-column label="单元号" width="100">
+                        <template slot-scope="s"><span class="yc-code">{{ s.row.unitId }}</span></template>
+                    </el-table-column>
+                    <el-table-column label="单元名称" min-width="140" show-overflow-tooltip>
+                        <template slot-scope="s">{{ s.row.unitName }}</template>
+                    </el-table-column>
+                    <el-table-column label="专业" min-width="160">
+                        <template slot-scope="s"><span class="yc-disc-name">{{ s.row.name }}</span></template>
+                    </el-table-column>
+                    <el-table-column label="专业负责人" width="110">
+                        <template slot-scope="s">{{ s.row.leadName || userName(s.row.leadUserId) }}</template>
+                    </el-table-column>
+                    <el-table-column label="专业间比例（%）" width="140" align="right">
+                        <template slot-scope="s">
+                            <el-input-number v-model="s.row.pct" size="mini" :precision="2" :min="0" :max="100" :step="5"
+                                             :controls="false" class="yc-w-full"
+                                             @change="function () { interEdit.dirty = true }"></el-input-number>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="预估分配金额（元）" width="140" align="right">
+                        <template slot-scope="s">
+                            <span class="yc-num">{{ formatAmount(interEditRowEstimatedAmount(s.row)) }}</span>
+                        </template>
+                    </el-table-column>
+                </el-table>
+
+                <div class="yc-total-bar mt-4" v-if="interEdit.rows.length">
+                    <span>比例合计</span>
+                    <span :class="interEditTotalValid ? 'yc-total-ok' : 'yc-total-bad'">
+                        {{ formatRatio(interEditTotal) }}
+                        <span class="ml-2" v-if="interEditTotal === 0">合计不能为 0</span>
+                        <span class="ml-2" v-else-if="interEditTotal > 10000">超出 100%，需减少 {{ formatRatio(interEditTotal - 10000) }}</span>
+                        <span class="ml-2" v-else-if="interEditTotal < 10000">须等于 100.00%，还差 {{ formatRatio(10000 - interEditTotal) }}</span>
+                    </span>
+                </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow mb-4 overflow-hidden">
+                <div class="px-4 py-3 border-b">
+                    <span class="font-semibold text-gray-800">历史派发记录</span>
+                </div>
+                <div class="p-4">
+                <el-table class="yc-history-table" :data="pagedInterEditHistory" size="mini" stripe
+                          :header-cell-style="tableHeaderStyle" style="width:100%"
+                          :row-class-name="historyRowClassName"
+                          :span-method="historySpanMethod"
+                          :empty-text="interEdit.projectId ? '暂无历史派发记录' : '请先选择项目'">
+                    <el-table-column label="NO" width="64" align="right">
+                        <template slot-scope="s">
+                            <span v-if="s.row.isTotal" class="yc-history-total-label">合计</span>
+                            <span v-else class="yc-num">{{ s.row.no }}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="状态" width="140">
+                        <template slot-scope="s">
+                            <span class="yc-badge" :class="s.row.statusBadge">{{ s.row.statusText }}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="编号" min-width="150">
+                        <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
+                    </el-table-column>
+                    <el-table-column label="分配实发金额（元）" width="160" align="right">
+                        <template slot-scope="s">
+                            <span class="yc-num" :class="{ 'font-semibold': s.row.isTotal }">{{ formatAmount(s.row.amount) }}</span>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <div class="flex items-center justify-end px-1 py-2" v-if="interEditHistory.length > 10">
+                    <el-pagination
+                        background
+                        small
+                        layout="total, prev, pager, next"
+                        :total="interEditHistory.length"
+                        :page-size="historyPageSize"
+                        :current-page="historyEditPage"
+                        @current-change="function (p) { historyEditPage = p }">
+                    </el-pagination>
+                </div>
+                </div>
+            </div>
+
+            <div class="yc-page-actions">
+                <el-button size="small" @click="closeInterEdit" :disabled="interEdit.saving">取消</el-button>
+                <el-button size="small" type="primary" class="yc-btn-primary"
+                           :loading="interEdit.saving" :disabled="!interEditCanSubmit" @click="submitInter">
+                    提交
+                </el-button>
+            </div>
+                </template>
+
+                <template v-else-if="interView === 'review'">
+<div class="flex items-center justify-between mb-4">
+                <el-button size="small" icon="el-icon-arrow-left" @click="closeInterReview">返回列表</el-button>
+                <span class="text-base font-semibold text-gray-800">{{ interReview.field === 'k2' ? '确认绩效系数 K2' : '确认绩效系数 K3' }}</span>
+            </div>
+
+            <div v-if="interReview.sheet">
+                <div class="bg-white rounded-lg shadow mb-4 overflow-hidden">
+                    <div class="px-4 py-3 border-b">
+                        <span class="font-semibold text-gray-800">项目信息</span>
+                    </div>
+                    <div class="p-4">
+                    <div class="yc-detail-meta">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="yc-field-label">编号</label>
+                                <div class="yc-detail-text">{{ interReview.sheet.sheetNo || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">项目号</label>
+                                <div class="yc-detail-text">{{ interReview.sheet.projectCode || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">项目名称</label>
+                                <div class="yc-detail-text yc-ellipsis" :title="interReview.sheet.projectName || ''">{{ interReview.sheet.projectName || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">可分配金额</label>
+                                <div class="yc-detail-text yc-num">{{ formatAmount(interReview.sheet.C) }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">绩效系数 K1</label>
+                                <div class="yc-detail-text yc-num">{{ formatRatio(interReview.sheet.k1) }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">绩效系数 K2</label>
+                                <div class="yc-detail-text yc-num">{{ formatKCoef(interReview.sheet.k2Status === 'confirmed' ? interReview.sheet.k2 : null) }} · {{ interReview.sheet.k2Status === 'confirmed' ? '已确认' : '待确认' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">绩效系数 K3</label>
+                                <div class="yc-detail-text yc-num">{{ formatKCoef(interReview.sheet.k3Status === 'confirmed' ? interReview.sheet.k3 : null) }} · {{ interReview.sheet.k3Status === 'confirmed' ? '已确认' : '待确认' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">预估分配金额</label>
+                                <div class="yc-detail-text yc-num">{{ formatAmount(interReview.sheet.poolLocked ? interReview.sheet.pool : null) }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow mb-4 overflow-hidden">
+                    <div class="px-4 py-3 border-b">
+                        <span class="font-semibold text-gray-800">专业间比例</span>
+                    </div>
+                    <div class="p-4">
+                    <el-table :data="interReview.sheet.allDisciplineLines" size="small" :header-cell-style="tableHeaderStyle" style="width:100%"
+                              :row-class-name="function (o) { return (o.row.ratio > 0 ? '' : 'yc-row-zero') }">
+                        <el-table-column label="单元号" width="100">
+                            <template slot-scope="s"><span class="yc-code">{{ s.row.unitId }}</span></template>
+                        </el-table-column>
+                        <el-table-column label="单元名称" min-width="140" show-overflow-tooltip>
+                            <template slot-scope="s">{{ s.row.unitName }}</template>
+                        </el-table-column>
+                        <el-table-column label="专业" min-width="160">
+                            <template slot-scope="s">{{ disciplineName(s.row.disciplineId) }}</template>
+                        </el-table-column>
+                        <el-table-column label="专业负责人" width="110">
+                            <template slot-scope="s">{{ userName(s.row.leadUserId) }}</template>
+                        </el-table-column>
+                        <el-table-column label="比例" width="100" align="right">
+                            <template slot-scope="s"><span class="yc-num">{{ formatRatio(s.row.ratio) }}</span></template>
+                        </el-table-column>
+                    </el-table>
+                    <div class="text-xs text-gray-500 mt-2">
+                        比例合计必须为 100.00%；比例为 0 的单元不建专业内单
+                    </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow mb-4 overflow-hidden">
+                    <div class="px-4 py-3 border-b">
+                        <span class="font-semibold text-gray-800">确认绩效系数 {{ interReview.field === 'k2' ? 'K2' : 'K3' }}</span>
+                    </div>
+                    <div class="p-4 md:w-1/2">
+                        <label class="yc-field-label">
+                            绩效系数 {{ interReview.field === 'k2' ? 'K2' : 'K3' }}<span class="yc-req">*</span>
+                        </label>
+                        <el-input-number v-model="interReview.value" size="small" :precision="4" :step="0.0001"
+                                         :min="state.config[interReview.field].min"
+                                         :max="state.config[interReview.field].max"
+                                         :controls="false" class="yc-w-full" @change="validateReviewValue"></el-input-number>
+                        <div class="yc-field-error" v-if="interReview.error">{{ interReview.error }}</div>
+                        <div class="text-xs text-gray-500 mt-1" v-else>
+                            允许区间 {{ formatKCoef(state.config[interReview.field].min) }} ~ {{ formatKCoef(state.config[interReview.field].max) }}（按当前配置校验）
+                        </div>
+                    </div>
+                </div>
+
+                <div class="yc-page-actions flex items-center justify-between">
+                    <el-button size="small" type="danger" plain icon="el-icon-close"
+                               @click="openReject('inter', interReview.sheet.id)">驳回整单</el-button>
+                    <div>
+                        <el-button size="small" @click="closeInterReview">取消</el-button>
+                        <el-button size="small" type="primary" class="yc-btn-primary"
+                                   :loading="interReview.saving" @click="confirmCoef">确认系数</el-button>
+                    </div>
+                </div>
+            </div>
+                </template>
+
+                <yc-formula-page v-else-if="interView === 'formula'" ref="formulaPage"></yc-formula-page>
+            </el-tab-pane>
+
+            <!-- ============================================================
+                 页签二：专业内
+                 ============================================================ -->
+            <el-tab-pane name="intra">
+                <span slot="label" class="yc-tab-label">
+                    专业内
+                    <span class="yc-tab-count" v-if="todoIntraCount">待办 {{ todoIntraCount }}</span>
+                </span>
+                <template v-if="intraView === 'list'">
+                <div class="bg-white rounded-lg shadow p-4 mb-4">
+                    <div class="yc-filter-row">
+                        <div class="yc-w-lg">
+                            <label class="yc-field-label">项目</label>
+                            <el-select v-model="intraFilter.projectId" clearable size="small" placeholder="全部" class="w-full">
+                                <el-option v-for="p in visibleProjects" :key="p.id" :label="formatProjectDisplay(p)" :value="p.id"></el-option>
+                            </el-select>
+                        </div>
+                        <div class="yc-w-sm">
+                            <label class="yc-field-label">专业</label>
+                            <el-select v-model="intraFilter.disciplineId" clearable size="small" placeholder="全部" class="w-full">
+                                <el-option v-for="d in disciplines" :key="d.id" :label="d.name" :value="d.id"></el-option>
+                            </el-select>
+                        </div>
+                        <div class="yc-w-sm">
+                            <label class="yc-field-label">状态</label>
+                            <el-select v-model="intraFilter.status" clearable size="small" placeholder="全部" class="w-full">
+                                <el-option v-for="s in intraStatusOptions()" :key="s.value" :label="s.label" :value="s.value"></el-option>
+                            </el-select>
+                        </div>
+                        <div class="flex gap-2">
+                            <el-button size="small" type="primary" class="yc-btn-primary"
+                                       icon="el-icon-search" @click="searchIntra">搜索</el-button>
+                            <el-button size="small" @click="resetIntra">重置</el-button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="yc-list-toolbar">
+                    <div class="yc-list-scope">
+                        <el-radio-group v-model="intraScope" size="small" aria-label="专业内列表范围">
+                            <el-radio-button label="all">全部 {{ matchedIntraSheets.length }}</el-radio-button>
+                            <el-radio-button label="todo">待我处理 {{ todoIntraCount }}</el-radio-button>
+                        </el-radio-group>
+                    </div>
+                    
+                </div>
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                    <el-table :data="pagedIntraSheets" stripe style="width: 100%"
+                              :header-cell-style="tableHeaderStyle"
+                              :empty-text="emptyText(intraHasFilter(), (isLead || isDirector) ? '当前身份暂无待办' : '')">
+                        <el-table-column label="操作" width="104" align="center" fixed>
+                            <template slot-scope="s">
+                                <span class="yc-ops">
+                                    <el-button v-if="canEditIntra(s.row)" type="text" size="mini" @click="openIntraEdit(s.row)">填写</el-button>
+                                    <el-button v-if="canApproveIntra(s.row)" type="text" size="mini" @click="openIntraReview(s.row)">审批</el-button>
+                                    <el-button v-if="!canApproveIntra(s.row)" type="text" size="mini"
+                                               @click="openFormula({ kind: 'discipline', interId: s.row.raw.interId, unitId: s.row.unitId, disciplineId: s.row.disciplineId })">查看</el-button>
+                                </span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="sheetNo" label="编号" width="150">
+                            <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
+                        </el-table-column>
+                        <el-table-column prop="projectCode" label="项目号" width="140">
+                            <template slot-scope="s"><span class="yc-code">{{ s.row.projectCode }}</span></template>
+                        </el-table-column>
+                        <el-table-column prop="projectName" label="项目名称" min-width="160" show-overflow-tooltip></el-table-column>
+                        <el-table-column label="单元号" width="90">
+                            <template slot-scope="s"><span class="yc-code">{{ s.row.unitId || '—' }}</span></template>
+                        </el-table-column>
+                        <el-table-column label="单元名称" min-width="120" show-overflow-tooltip>
+                            <template slot-scope="s">{{ s.row.unitName || '—' }}</template>
+                        </el-table-column>
+                        <el-table-column prop="disciplineName" label="专业" min-width="160"></el-table-column>
+                        <el-table-column label="专业负责人" width="110">
+                            <template slot-scope="s">{{ s.row.leadName }}</template>
+                        </el-table-column>
+                        <el-table-column label="专业分配金额（元）" width="150" align="right">
+                            <template slot-scope="s"><span class="yc-num">{{ formatAmount(s.row.pool) }}</span></template>
+                        </el-table-column>
+                        <el-table-column label="人数" width="80" align="right">
+                            <template slot-scope="s">
+                                <span class="yc-num">{{ s.row.personCount || '—' }}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="比例合计" width="110" align="right">
+                            <template slot-scope="s">
+                                <span class="yc-num" :class="s.row.ratioTotal === 10000 ? 'yc-text-ok' : 'text-gray-400'">
+                                    {{ s.row.ratioTotal ? formatRatio(s.row.ratioTotal) : '—' }}
+                                </span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="状态" width="130">
+                            <template slot-scope="s">
+                                <span class="yc-badge" :class="statusOf(intraStatusDict, s.row.status).badge">
+                                    {{ statusOf(intraStatusDict, s.row.status).label }}
+                                </span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column prop="updatedAt" label="更新时间" width="140"></el-table-column>
+                    </el-table>
+
+                    <div class="flex items-center justify-end px-4 py-3 border-t">
+                        <el-pagination
+                            background
+                            layout="total, sizes, prev, pager, next, jumper"
+                            :total="filteredIntraSheets.length"
+                            :page-size="intraPageSize"
+                            :page-sizes="[10, 20, 50]"
+                            :current-page="intraPage"
+                            @current-change="function (p) { intraPage = p }"
+                            @size-change="function (s) { intraPageSize = s; intraPage = 1 }">
+                        </el-pagination>
+                    </div>
+                </div>
+                </template>
+
+                <template v-else-if="intraView === 'edit'">
+<div class="flex items-center justify-between mb-4">
+                <el-button size="small" icon="el-icon-arrow-left" @click="closeIntraEdit" :disabled="intraEdit.saving">返回列表</el-button>
+                <span class="text-base font-semibold text-gray-800">专业内分配比例</span>
+            </div>
+
+            <div v-if="intraEdit.id">
+                <div class="bg-white rounded-lg shadow mb-4 overflow-hidden">
+                    <div class="px-4 py-3 border-b">
+                        <span class="font-semibold text-gray-800">项目信息</span>
+                    </div>
+                    <div class="p-4">
+                    <div class="yc-detail-meta">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="yc-field-label">编号</label>
+                                <div class="yc-detail-text">{{ intraEditSheet().sheetNo || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">项目号</label>
+                                <div class="yc-detail-text">{{ intraEditSheet().projectCode || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">项目名称</label>
+                                <div class="yc-detail-text yc-ellipsis" :title="intraEditSheet().projectName || ''">{{ intraEditSheet().projectName || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">单元号</label>
+                                <div class="yc-detail-text">{{ intraEditSheet().unitId || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">单元名称</label>
+                                <div class="yc-detail-text">{{ intraEditSheet().unitName || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">专业</label>
+                                <div class="yc-detail-text">{{ intraEditSheet().disciplineName || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">专业分配金额</label>
+                                <div class="yc-detail-text yc-num">{{ formatAmount(intraEditSheet().pool) }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">可选工程师</label>
+                                <div class="yc-detail-text">{{ intraEdit.rows.length }} 人</div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow mb-4 overflow-hidden">
+                    <div class="px-4 py-3 border-b flex items-center justify-between">
+                        <span class="font-semibold text-gray-800">专业内比例</span>
+                        <el-button size="mini" @click="openHourDispatchDetail">查看工时派发详情</el-button>
+                    </div>
+                    <div class="p-4">
+                    <div v-if="!intraEdit.rows.length" class="yc-empty">
+                        <i class="far fa-user"></i>
+                        本单元本专业暂无派工的在职工程师，不能提交
+                    </div>
+                    <div v-else class="yc-table-narrow">
+                    <el-table :data="intraEdit.rows" size="small" :header-cell-style="tableHeaderStyle" style="width:100%"
+                              :row-class-name="function (o) { return (o.row.pct > 0 ? '' : 'yc-row-zero') }">
+                        <el-table-column label="姓名" width="120">
+                            <template slot-scope="s">{{ s.row.name }}</template>
+                        </el-table-column>
+                        <el-table-column label="专业内比例（%）" width="200" align="right">
+                            <template slot-scope="s">
+                                <el-input-number v-model="s.row.pct" size="mini" :precision="2" :min="0" :max="100" :step="5"
+                                                 :controls="false" class="yc-w-full"
+                                                 @change="function () { intraEdit.dirty = true }"></el-input-number>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="预估分配金额（元）" width="200" align="right">
+                            <template slot-scope="s">
+                                <span class="yc-num">{{ formatAmount(intraEditRowEstimatedAmount(s.row)) }}</span>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+
+                    <div class="yc-total-bar mt-4">
+                        <span>比例合计</span>
+                        <span :class="intraEditTotalValid ? 'yc-total-ok' : 'yc-total-bad'">
+                            {{ formatRatio(intraEditTotal) }}
+                            <span class="ml-2" v-if="intraEditTotal !== 10000">
+                                须等于 100.00%，还差 {{ formatRatio(10000 - intraEditTotal) }}
+                            </span>
+                        </span>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="yc-page-actions">
+                    <el-button size="small" @click="closeIntraEdit" :disabled="intraEdit.saving">取消</el-button>
+                    <el-button size="small" type="primary" class="yc-btn-primary"
+                               :loading="intraEdit.saving" :disabled="!intraEditTotalValid" @click="submitIntra">提交</el-button>
+                </div>
+            </div>
+                </template>
+
+                <template v-else-if="intraView === 'review'">
+<div class="flex items-center justify-between mb-4">
+                <el-button size="small" icon="el-icon-arrow-left" @click="closeIntraReview">返回列表</el-button>
+                <span class="text-base font-semibold text-gray-800">专业内审批</span>
+            </div>
+
+            <div v-if="intraReview.sheet">
+                <div class="bg-white rounded-lg shadow p-4 mb-4">
+                    <div class="yc-detail-meta">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="yc-field-label">编号</label>
+                                <div class="yc-detail-text">{{ intraReview.sheet.sheetNo || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">项目号</label>
+                                <div class="yc-detail-text">{{ intraReview.sheet.projectCode || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">项目名称</label>
+                                <div class="yc-detail-text yc-ellipsis" :title="intraReview.sheet.projectName || ''">{{ intraReview.sheet.projectName || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">单元号</label>
+                                <div class="yc-detail-text">{{ intraReview.sheet.unitId || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">单元名称</label>
+                                <div class="yc-detail-text">{{ intraReview.sheet.unitName || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">专业</label>
+                                <div class="yc-detail-text">{{ intraReview.sheet.disciplineName || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">负责人</label>
+                                <div class="yc-detail-text">{{ intraReview.sheet.leadName || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">专业分配金额</label>
+                                <div class="yc-detail-text yc-num">{{ formatAmount(intraReview.sheet.pool) }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">比例合计</label>
+                                <div class="yc-detail-text yc-num">{{ formatRatio(intraReview.sheet.ratioTotal) }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow p-4 mb-4">
+                    <div class="yc-section-title">分配名单（按姓名拼音升序）</div>
+                    <div class="yc-table-narrow">
+                    <el-table :data="intraReviewPersons()" size="small" :header-cell-style="tableHeaderStyle" style="width:100%">
+                        <el-table-column label="姓名" prop="name" width="120"></el-table-column>
+                        <el-table-column label="专业内比例" width="160" align="right">
+                            <template slot-scope="s"><span class="yc-num">{{ formatRatio(s.row.ratio) }}</span></template>
+                        </el-table-column>
+                        <el-table-column label="评估前应发（元）" width="200" align="right">
+                            <template slot-scope="s"><span class="yc-num">{{ formatAmount(s.row.amount) }}</span></template>
+                        </el-table-column>
+                    </el-table>
+                    </div>
+                    <div class="text-xs text-gray-500 mt-2">
+                        通过后生成个人行并固定展示顺序；一旦通过，室主任不能再驳回。
+                    </div>
+                </div>
+
+                <div class="yc-page-actions flex items-center justify-between">
+                    <el-button size="small" type="danger" plain icon="el-icon-close"
+                               @click="openReject('intra', intraReview.sheet.id)">驳回</el-button>
+                    <div>
+                        <el-button size="small" @click="closeIntraReview">取消</el-button>
+                        <el-button size="small" type="primary" class="yc-btn-primary"
+                                   :loading="intraReview.saving" @click="approveIntra">审批通过</el-button>
+                    </div>
+                </div>
+            </div>
+                </template>
+
+                <yc-formula-page v-else-if="intraView === 'formula'" ref="formulaPage"></yc-formula-page>
+            </el-tab-pane>
+
+            <!-- ============================================================
+                 页签三：项目经理评估（先项目列表，点进去评人）
+                 ============================================================ -->
+            <el-tab-pane name="eval">
+                <span slot="label" class="yc-tab-label">
+                    项目经理评估
+                    <span class="yc-tab-count" v-if="todoEvalCount">待办 {{ todoEvalCount }}</span>
+                </span>
+                <div v-if="!isPM" class="bg-white rounded-lg shadow">
+                    <div class="yc-empty">
+                        <i class="far fa-user-circle"></i>
+                        仅项目经理可进行评估
+                    </div>
+                </div>
+
+                <template v-else>
+                    <!-- -------- 项目列表 -------- -->
+                    <template v-if="evalView === 'list'">
+                        <div class="bg-white rounded-lg shadow p-4 mb-4">
+                            <div class="yc-filter-row">
+                                <div class="yc-w-lg">
+                                    <label class="yc-field-label">项目</label>
+                                    <el-select v-model="evalFilter.projectId" clearable size="small" placeholder="全部" class="w-full">
+                                        <el-option v-for="p in visibleProjects" :key="p.id" :label="formatProjectDisplay(p)" :value="p.id"></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="yc-w-sm">
+                                    <label class="yc-field-label">状态</label>
+                                    <el-select v-model="evalFilter.status" clearable size="small" placeholder="全部" class="w-full">
+                                        <el-option v-for="s in evalListStatusOptions" :key="s.value" :label="s.label" :value="s.value"></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="yc-w-md">
+                                    <label class="yc-field-label">编号 / 项目</label>
+                                    <el-input v-model="evalFilter.keyword" size="small" clearable placeholder="输入关键字"
+                                              @keyup.enter.native="searchEval"></el-input>
+                                </div>
+                                <div class="flex gap-2">
+                                    <el-button size="small" type="primary" class="yc-btn-primary"
+                                               icon="el-icon-search" @click="searchEval">搜索</el-button>
+                                    <el-button size="small" @click="resetEval">重置</el-button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="yc-list-toolbar">
+                    <div class="yc-list-scope">
+                        <el-radio-group v-model="evalScope" size="small" aria-label="评估列表范围">
+                            <el-radio-button label="all">全部 {{ matchedEvalProjects.length }}</el-radio-button>
+                            <el-radio-button label="todo">待我处理 {{ todoEvalCount }}</el-radio-button>
+                        </el-radio-group>
+                    </div>
+                    
+                </div>
+                <div class="bg-white rounded-lg shadow overflow-hidden">
+                            <el-table :data="pagedEvalProjects" stripe style="width: 100%"
+                                      :header-cell-style="tableHeaderStyle"
+                                      :empty-text="emptyText(evalHasFilter(), '当前身份暂无待评估项目')">
+                                <el-table-column label="操作" width="88" align="center" fixed>
+                                    <template slot-scope="s">
+                                        <span class="yc-ops">
+                                            <el-button type="text" size="mini" @click="openEvalDetail(s.row)">
+                                                {{ s.row.evalStatus === 'EVAL_PENDING' ? '评估' : '查看' }}
+                                            </el-button>
+                                        </span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column prop="sheetNo" label="编号" width="150">
+                                    <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
+                                </el-table-column>
+                                <el-table-column prop="projectCode" label="项目号" width="140">
+                                    <template slot-scope="s"><span class="yc-code">{{ s.row.projectCode }}</span></template>
+                                </el-table-column>
+                                <el-table-column prop="projectName" label="项目名称" min-width="180" show-overflow-tooltip></el-table-column>
+                                <el-table-column label="预估分配金额（元）" width="160" align="right">
+                                    <template slot-scope="s"><span class="yc-num">{{ formatAmount(s.row.pool) }}</span></template>
+                                </el-table-column>
+                                <el-table-column label="实际分配金额（元）" width="160" align="right">
+                                    <template slot-scope="s"><span class="yc-num">{{ formatAmount(actualAllocatedOf(s.row)) }}</span></template>
+                                </el-table-column>
+                                <el-table-column label="状态" width="130">
+                                    <template slot-scope="s">
+                                        <span class="yc-badge" :class="statusOf(evalStatusDict, s.row.evalStatus).badge">
+                                            {{ statusOf(evalStatusDict, s.row.evalStatus).label }}
+                                        </span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="更新时间" width="150">
+                                    <template slot-scope="s"><span class="text-gray-600">{{ s.row.updatedAt }}</span></template>
+                                </el-table-column>
+                            </el-table>
+                            <div class="flex items-center justify-end px-4 py-3 border-t">
+                                <el-pagination
+                                    background
+                                    layout="total, sizes, prev, pager, next, jumper"
+                                    :total="filteredEvalProjects.length"
+                                    :page-size="evalPageSize"
+                                    :page-sizes="[10, 20, 50]"
+                                    :current-page="evalPage"
+                                    @current-change="function (p) { evalPage = p }"
+                                    @size-change="function (s) { evalPageSize = s; evalPage = 1 }">
+                                </el-pagination>
+                            </div>
+                        </div>
+                    </template>
+
+                    <!-- -------- 项目内评估 -------- -->
+                    <template v-else>
+                        <div class="flex items-center justify-between mb-4">
+                            <el-button size="small" icon="el-icon-arrow-left" @click="backEvalList">返回项目列表</el-button>
+                        </div>
+
+                        <div v-if="!currentEvalSheet" class="bg-white rounded-lg shadow">
+                            <div class="yc-empty">未找到该项目</div>
+                        </div>
+
+                        <template v-else>
+                            <div class="bg-white rounded-lg shadow p-4 mb-4">
+                                <div class="yc-detail-meta">
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                        <div>
+                                            <label class="yc-field-label">编号</label>
+                                            <div class="yc-detail-text">{{ currentEvalSheet.sheetNo || '—' }}</div>
+                                        </div>
+                                        <div>
+                                            <label class="yc-field-label">项目号</label>
+                                            <div class="yc-detail-text">{{ currentEvalSheet.projectCode || '—' }}</div>
+                                        </div>
+                                        <div>
+                                            <label class="yc-field-label">项目名称</label>
+                                            <div class="yc-detail-text yc-ellipsis" :title="currentEvalSheet.projectName || ''">{{ currentEvalSheet.projectName || '—' }}</div>
+                                        </div>
+                                        <div>
+                                            <label class="yc-field-label">项目经理</label>
+                                            <div class="yc-detail-text">{{ userName(currentEvalSheet.managerUserId) || '—' }}</div>
+                                        </div>
+                                        <div>
+                                            <label class="yc-field-label">状态</label>
+                                            <div class="yc-detail-text">
+                                                <span class="yc-badge" :class="statusOf(evalStatusDict, currentEvalSheet.evalStatus).badge">
+                                                    {{ statusOf(evalStatusDict, currentEvalSheet.evalStatus).label }}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                                        <div>
+                                            <label class="yc-field-label">绩效系数 K1</label>
+                                            <div class="yc-detail-text yc-num">{{ formatRatio(currentEvalSheet.k1) }}</div>
+                                        </div>
+                                        <div>
+                                            <label class="yc-field-label">绩效系数 K2</label>
+                                            <div class="yc-detail-text yc-num">{{ formatKCoef(currentEvalSheet.k2) }}</div>
+                                        </div>
+                                        <div>
+                                            <label class="yc-field-label">绩效系数 K3</label>
+                                            <div class="yc-detail-text yc-num">{{ formatKCoef(currentEvalSheet.k3) }}</div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <label class="yc-field-label">派发说明</label>
+                                        <div class="yc-detail-text" :class="{ 'is-empty': !currentEvalSheet.remark }">{{ currentEvalSheet.remark || '—' }}</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div v-for="d in currentEvalSheet.disciplines" :key="d.unitId"
+                                 class="bg-white rounded-lg shadow mb-4 overflow-hidden">
+                                <div class="px-4 py-3 border-b">
+                                    <div class="font-semibold text-gray-800">{{ d.name }}</div>
+                                    <div class="text-xs text-gray-500 mt-1">
+                                        {{ d.unitId }} {{ d.unitName }}
+                                        · 专业间比例 {{ formatRatio(d.ratio) }}
+                                        · 专业分配金额 {{ formatAmount(d.pool) }}
+                                        · 负责人 {{ d.leadName }}
+                                    </div>
+                                </div>
+
+                                <div v-if="d.waitingSplit" class="yc-eval-blocked">
+                                    {{ evalIntraHint(d) }}
+                                </div>
+
+                                <el-table v-else :data="d.persons" stripe style="width: 100%" :header-cell-style="tableHeaderStyle">
+                                    <el-table-column label="姓名" min-width="80">
+                                        <template slot-scope="s">{{ s.row.name }}</template>
+                                    </el-table-column>
+                                    <el-table-column label="专业内比例" min-width="96" align="right">
+                                        <template slot-scope="s"><span class="yc-num">{{ formatRatio(s.row.ratio) }}</span></template>
+                                    </el-table-column>
+                                    <el-table-column label="分配金额（元）" min-width="110" align="right">
+                                        <template slot-scope="s"><span class="yc-num">{{ formatAmount(s.row.preEvalAmount) }}</span></template>
+                                    </el-table-column>
+                                    <el-table-column label="完成质量" min-width="108" align="right">
+                                        <template slot-scope="s">
+                                            <el-select v-if="currentEvalSheet.evalStatus === 'EVAL_PENDING' && evalDraft[d.unitId + '|' + s.row.userId]"
+                                                       v-model="evalDraft[d.unitId + '|' + s.row.userId].qualityOptionId"
+                                                       size="mini" class="w-full yc-eval-coef-select" placeholder="选分数"
+                                                       popper-class="yc-eval-select-popper">
+                                                <el-option v-for="o in state.config.quality.options" :key="o.id"
+                                                           :label="formatCoef(o.coef)" :value="o.id">
+                                                    <div class="yc-opt-row">
+                                                        <span class="yc-opt-coef">{{ formatCoef(o.coef) }}</span>
+                                                        <span class="yc-opt-desc">{{ o.label }}</span>
+                                                    </div>
+                                                </el-option>
+                                            </el-select>
+                                            <span v-else class="yc-num font-semibold">{{ s.row.evalLine ? formatCoef(s.row.evalLine.qualityCoef) : '—' }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="进度" min-width="108" align="right">
+                                        <template slot-scope="s">
+                                            <el-select v-if="currentEvalSheet.evalStatus === 'EVAL_PENDING' && evalDraft[d.unitId + '|' + s.row.userId]"
+                                                       v-model="evalDraft[d.unitId + '|' + s.row.userId].progressOptionId"
+                                                       size="mini" class="w-full yc-eval-coef-select" placeholder="选分数"
+                                                       popper-class="yc-eval-select-popper">
+                                                <el-option v-for="o in state.config.progress.options" :key="o.id"
+                                                           :label="formatCoef(o.coef)" :value="o.id">
+                                                    <div class="yc-opt-row">
+                                                        <span class="yc-opt-coef">{{ formatCoef(o.coef) }}</span>
+                                                        <span class="yc-opt-desc">{{ o.label }}</span>
+                                                    </div>
+                                                </el-option>
+                                            </el-select>
+                                            <span v-else class="yc-num font-semibold">{{ s.row.evalLine ? formatCoef(s.row.evalLine.progressCoef) : '—' }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="响应度" min-width="108" align="right">
+                                        <template slot-scope="s">
+                                            <el-select v-if="currentEvalSheet.evalStatus === 'EVAL_PENDING' && evalDraft[d.unitId + '|' + s.row.userId]"
+                                                       v-model="evalDraft[d.unitId + '|' + s.row.userId].responseOptionId"
+                                                       size="mini" class="w-full yc-eval-coef-select" placeholder="选分数"
+                                                       popper-class="yc-eval-select-popper">
+                                                <el-option v-for="o in state.config.response.options" :key="o.id"
+                                                           :label="formatCoef(o.coef)" :value="o.id">
+                                                    <div class="yc-opt-row">
+                                                        <span class="yc-opt-coef">{{ formatCoef(o.coef) }}</span>
+                                                        <span class="yc-opt-desc">{{ o.label }}</span>
+                                                    </div>
+                                                </el-option>
+                                            </el-select>
+                                            <span v-else class="yc-num font-semibold">{{ s.row.evalLine ? formatCoef(s.row.evalLine.responseCoef) : '—' }}</span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="综合评分系数" min-width="110" align="right">
+                                        <template slot-scope="s">
+                                            <span class="yc-num font-semibold">
+                                                {{ currentEvalSheet.evalStatus === 'EVAL_PENDING'
+                                                    ? formatComposite(draftComposite(d.unitId, s.row.userId))
+                                                    : formatComposite(s.row.composite) }}
+                                            </span>
+                                        </template>
+                                    </el-table-column>
+                                    <el-table-column label="实际分配金额（元）" min-width="130" align="right">
+                                        <template slot-scope="s">
+                                            <span class="yc-num">
+                                                {{ currentEvalSheet.evalStatus === 'EVAL_PENDING'
+                                                    ? formatAmount(draftAmount(d, s.row))
+                                                    : formatAmount(s.row.amount) }}
+                                            </span>
+                                        </template>
+                                    </el-table-column>
+                                </el-table>
+                            </div>
+
+                            <div class="yc-eval-summary" v-if="currentEvalSheet.evalStatus === 'EVAL_PENDING'">
+                                <div class="yc-eval-summary-main" aria-live="polite" aria-atomic="true">
+                                    <div><span>本次人数</span><strong>{{ evaluationSummary.people }} 人</strong></div>
+                                    <div><span>评估前合计（元）</span><strong class="yc-num">{{ formatAmount(evaluationSummary.before) }}</strong></div>
+                                    <div><span>评估后合计（元）</span><strong class="yc-num yc-text-brand">{{ formatAmount(evaluationSummary.after) }}</strong></div>
+                                    <div><span>差额（评估后 − 评估前，元）</span><strong class="yc-num">{{ formatAmount(evaluationSummary.difference) }}</strong></div>
+                                </div>
+                                <div class="yc-eval-summary-actions">
+                                    <el-button type="primary" class="yc-btn-primary" :loading="evalSaving" @click="submitEvaluation">提交评估并锁定</el-button>
+                                </div>
+                            </div>
+                            <div class="text-sm text-gray-500 text-right" v-else-if="currentEvalSheet.evalStatus === 'EVAL_DONE'">
+                                评估已提交，个人绩效已锁定，本期不提供撤回或重评。
+                            </div>
+                            <div class="text-sm text-gray-500 text-right" v-else>
+                                全部专业内通过后，才能对本项目工程师评分并提交。
+                            </div>
+                        </template>
+                    </template>
+                </template>
+            </el-tab-pane>
+
+            <!-- ============================================================
+                 页签四：项目绩效查询
+                 ============================================================ -->
+            <el-tab-pane name="queryProject">
+                <span slot="label" class="yc-tab-label">项目绩效查询</span>
+                <template v-if="queryProjectView === 'list'">
+                        <div class="yc-kpi-block mb-4">
+                            <div class="yc-kpi-grid yc-kpi-grid-4">
+                                <button type="button" class="yc-kpi-card" v-for="k in queryProjectKpis" :key="k.key"
+                                        @click="openQueryStats(k)">
+                                    <div class="yc-kpi-title">
+                                        {{ k.title }}
+                                        <el-tooltip :content="k.tip" placement="top">
+                                            <i class="fas fa-info-circle yc-field-tip" @click.stop></i>
+                                        </el-tooltip>
+                                    </div>
+                                    <div class="yc-kpi-value yc-num">{{ k.mainText }}</div>
+                                    <div class="yc-kpi-sub" v-if="k.secondaryText">{{ k.secondaryText }}</div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-4 mb-4">
+                            <div class="yc-filter-row">
+                                <div class="yc-w-lg">
+                                    <label class="yc-field-label">项目</label>
+                                    <el-select v-model="queryProjectFilter.projectId" clearable size="small" placeholder="全部" class="w-full">
+                                        <el-option v-for="p in visibleProjects" :key="p.id" :label="formatProjectDisplay(p)" :value="p.id"></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="yc-w-sm">
+                                    <label class="yc-field-label">状态</label>
+                                    <el-select v-model="queryProjectFilter.status" clearable size="small" placeholder="全部" class="w-full">
+                                        <el-option v-for="s in queryProjectStatusOptions" :key="s.value" :label="s.label" :value="s.value"></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="yc-w-md">
+                                    <label class="yc-field-label">编号 / 项目</label>
+                                    <el-input v-model="queryProjectFilter.keyword" size="small" clearable placeholder="输入关键字"
+                                              @keyup.enter.native="searchQueryProject"></el-input>
+                                </div>
+                                <div class="flex gap-2">
+                                    <el-button size="small" type="primary" class="yc-btn-primary"
+                                               icon="el-icon-search" @click="searchQueryProject">搜索</el-button>
+                                    <el-button size="small" @click="resetQueryProject">重置</el-button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow overflow-hidden">
+                            <el-table :data="pagedQueryProjectRows" stripe style="width: 100%"
+                                      :header-cell-style="tableHeaderStyle"
+                                      :empty-text="emptyText(queryProjectHasFilter(), '当前身份暂无可见数据')">
+                                <el-table-column label="操作" width="64" align="center" fixed>
+                                    <template slot-scope="s">
+                                        <span class="yc-ops">
+                                            <el-button type="text" size="mini" @click="openFormula(s.row.ctx)">查看</el-button>
+                                        </span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column prop="sheetNo" label="编号" width="150">
+                                    <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
+                                </el-table-column>
+                                <el-table-column prop="projectCode" label="项目号" width="140">
+                                    <template slot-scope="s"><span class="yc-code">{{ s.row.projectCode }}</span></template>
+                                </el-table-column>
+                                <el-table-column prop="projectName" label="项目名称" min-width="180" show-overflow-tooltip></el-table-column>
+                                <el-table-column label="绩效系数 K1" width="120" align="right">
+                                    <template slot-scope="s"><span class="yc-num">{{ formatRatio(s.row.k1) }}</span></template>
+                                </el-table-column>
+                                <el-table-column label="已分配实发（元）" width="140" align="right">
+                                    <template slot-scope="s"><span class="yc-num">{{ formatAmount(s.row.actualAllocated) }}</span></template>
+                                </el-table-column>
+                                <el-table-column label="状态" width="170">
+                                    <template slot-scope="s">
+                                        <span class="yc-badge" :class="s.row.statusBadge">{{ s.row.statusText }}</span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column label="更新时间" width="150">
+                                    <template slot-scope="s"><span class="text-gray-600">{{ s.row.updatedAt }}</span></template>
+                                </el-table-column>
+                            </el-table>
+                            <div class="flex items-center justify-end px-4 py-3 border-t">
+                                <el-pagination
+                                    background
+                                    layout="total, sizes, prev, pager, next, jumper"
+                                    :total="queryProjectRows.length"
+                                    :page-size="queryProjectPageSize"
+                                    :page-sizes="[10, 20, 50]"
+                                    :current-page="queryProjectPage"
+                                    @current-change="function (p) { queryProjectPage = p }"
+                                    @size-change="function (s) { queryProjectPageSize = s; queryProjectPage = 1 }">
+                                </el-pagination>
+                            </div>
+                        </div>
+                </template>
+
+                <template v-else-if="queryProjectView === 'stats'">
+<div class="flex items-center justify-between mb-4">
+                <el-button size="small" icon="el-icon-arrow-left" @click="closeStats">返回列表</el-button>
+                <span class="text-base font-semibold text-gray-800">{{ statsBox.title }}</span>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-4 mb-4">
+                <div class="yc-detail-meta">
+                    <div class="yc-stats-summary">
+                        <div>
+                            <div class="yc-kpi-title">{{ statsBox.title }}</div>
+                            <div class="yc-kpi-value yc-num">{{ statsBox.mainText }}</div>
+                            <div class="yc-kpi-sub" v-if="statsBox.secondaryText">{{ statsBox.secondaryText }}</div>
+                        </div>
+                        <div class="yc-stats-tip">{{ statsBox.tip }}</div>
+                    </div>
+                </div>
+                <template v-if="statsBox.showChart">
+                    <div class="yc-section-title mt-4">构成（按项目Top5）</div>
+                    <div ref="statsBar" class="yc-stats-bar"></div>
+                </template>
+                <div class="yc-section-title mt-4">明细</div>
+                <el-table :data="pagedStatsRows" size="mini" stripe
+                          :header-cell-style="tableHeaderStyle" style="width:100%" empty-text="暂无明细">
+                    <el-table-column label="操作" width="64" align="center">
+                        <template slot-scope="s">
+                            <span class="yc-ops">
+                                <el-button type="text" size="mini" @click="openFormula(s.row.ctx)">查看</el-button>
+                            </span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="sheetNo" label="编号" width="150">
+                        <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
+                    </el-table-column>
+                    <el-table-column prop="projectCode" label="项目号" width="140">
+                        <template slot-scope="s"><span class="yc-code">{{ s.row.projectCode }}</span></template>
+                    </el-table-column>
+                    <el-table-column prop="projectName" label="项目名称" min-width="160" show-overflow-tooltip></el-table-column>
+                    <el-table-column label="金额（元）" width="140" align="right">
+                        <template slot-scope="s"><span class="yc-num">{{ formatAmount(s.row.amount) }}</span></template>
+                    </el-table-column>
+                    <el-table-column label="状态" width="130">
+                        <template slot-scope="s">
+                            <span class="yc-badge" :class="s.row.statusBadge">{{ s.row.statusText }}</span>
+                        </template>
+                    </el-table-column>
+                </el-table>
+                <div class="flex items-center justify-end px-1 py-2" v-if="statsBox.rows.length > 10">
+                    <el-pagination
+                        background
+                        small
+                        layout="total, prev, pager, next"
+                        :total="statsBox.rows.length"
+                        :page-size="10"
+                        :current-page="statsBox.page"
+                        @current-change="function (p) { statsBox.page = p }">
+                    </el-pagination>
+                </div>
+            </div>
+
+            <div class="yc-page-actions">
+                <el-button size="small" @click="closeStats">关闭</el-button>
+            </div>
+                </template>
+
+                <yc-formula-page v-else-if="queryProjectView === 'formula'" ref="formulaPage"></yc-formula-page>
+            </el-tab-pane>
+
+            <!-- ============================================================
+                 页签五：个人绩效查询
+                 ============================================================ -->
+            <el-tab-pane name="queryPerson">
+                <span slot="label" class="yc-tab-label">个人绩效查询</span>
+                <template v-if="queryPersonView === 'list'">
+                        <div class="yc-kpi-block mb-4">
+                            <div class="yc-kpi-grid yc-kpi-grid-2">
+                                <button type="button" class="yc-kpi-card" v-for="k in queryPersonKpis" :key="k.key"
+                                        @click="openQueryStats(k)">
+                                    <div class="yc-kpi-title">
+                                        {{ k.title }}
+                                        <el-tooltip :content="k.tip" placement="top">
+                                            <i class="fas fa-info-circle yc-field-tip" @click.stop></i>
+                                        </el-tooltip>
+                                    </div>
+                                    <div class="yc-kpi-value yc-num">{{ k.mainText }}</div>
+                                    <div class="yc-kpi-sub" v-if="k.secondaryText">{{ k.secondaryText }}</div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg shadow p-4 mb-4">
+                            <div class="yc-filter-row">
+                                <div class="yc-w-lg">
+                                    <label class="yc-field-label">项目</label>
+                                    <el-select v-model="queryPersonFilter.projectId" clearable size="small" placeholder="全部" class="w-full">
+                                        <el-option v-for="p in visibleProjects" :key="p.id" :label="formatProjectDisplay(p)" :value="p.id"></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="yc-w-sm">
+                                    <label class="yc-field-label">专业</label>
+                                    <el-select v-model="queryPersonFilter.disciplineId" clearable size="small" placeholder="全部" class="w-full">
+                                        <el-option v-for="d in disciplines" :key="d.id" :label="d.name" :value="d.id"></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="yc-w-sm">
+                                    <label class="yc-field-label">状态</label>
+                                    <el-select v-model="queryPersonFilter.status" clearable size="small" placeholder="全部" class="w-full">
+                                        <el-option label="待评估" value="pending"></el-option>
+                                        <el-option label="已完成" value="locked"></el-option>
+                                    </el-select>
+                                </div>
+                                <div class="yc-w-md">
+                                    <label class="yc-field-label">姓名</label>
+                                    <el-input v-model="queryPersonFilter.keyword" size="small" clearable placeholder="输入姓名"
+                                              @keyup.enter.native="searchQueryPerson"></el-input>
+                                </div>
+                                <div class="flex gap-2">
+                                    <el-button size="small" type="primary" class="yc-btn-primary"
+                                               icon="el-icon-search" @click="searchQueryPerson">搜索</el-button>
+                                    <el-button size="small" @click="resetQueryPerson">重置</el-button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-lg shadow overflow-hidden">
+                            <el-table :data="pagedQueryPersonRows" stripe style="width: 100%"
+                                      :header-cell-style="tableHeaderStyle"
+                                      :empty-text="emptyText(queryPersonHasFilter(), '当前身份暂无可见数据')">
+                                <el-table-column label="操作" width="64" align="center" fixed>
+                                    <template slot-scope="s">
+                                        <span class="yc-ops">
+                                            <el-button type="text" size="mini" @click="openFormula(s.row.ctx)">查看</el-button>
+                                        </span>
+                                    </template>
+                                </el-table-column>
+                                <el-table-column prop="sheetNo" label="编号" width="150">
+                                    <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
+                                </el-table-column>
+                                <el-table-column prop="projectCode" label="项目号" width="140">
+                                    <template slot-scope="s"><span class="yc-code">{{ s.row.projectCode }}</span></template>
+                                </el-table-column>
+                                <el-table-column prop="projectName" label="项目名称" min-width="160" show-overflow-tooltip></el-table-column>
+                                <el-table-column prop="disciplineName" label="专业" min-width="160"></el-table-column>
+                                <el-table-column prop="name" label="姓名" width="90"></el-table-column>
+                                <el-table-column label="完成质量" width="100" align="right">
+                                    <template slot-scope="s"><span class="yc-num">{{ formatCoef(s.row.qualityCoef) }}</span></template>
+                                </el-table-column>
+                                <el-table-column label="进度" width="90" align="right">
+                                    <template slot-scope="s"><span class="yc-num">{{ formatCoef(s.row.progressCoef) }}</span></template>
+                                </el-table-column>
+                                <el-table-column label="响应度" width="90" align="right">
+                                    <template slot-scope="s"><span class="yc-num">{{ formatCoef(s.row.responseCoef) }}</span></template>
+                                </el-table-column>
+                                <el-table-column label="实际分配金额（元）" width="150" align="right">
+                                    <template slot-scope="s"><span class="yc-num">{{ formatAmount(s.row.actualAmount) }}</span></template>
+                                </el-table-column>
+                            </el-table>
+                            <div class="flex items-center justify-end px-4 py-3 border-t">
+                                <el-pagination
+                                    background
+                                    layout="total, sizes, prev, pager, next, jumper"
+                                    :total="queryPersonRows.length"
+                                    :page-size="queryPersonPageSize"
+                                    :page-sizes="[10, 20, 50]"
+                                    :current-page="queryPersonPage"
+                                    @current-change="function (p) { queryPersonPage = p }"
+                                    @size-change="function (s) { queryPersonPageSize = s; queryPersonPage = 1 }">
+                                </el-pagination>
+                            </div>
+                        </div>
+                </template>
+
+                <template v-else-if="queryPersonView === 'stats'">
+<div class="flex items-center justify-between mb-4">
+                <el-button size="small" icon="el-icon-arrow-left" @click="closeStats">返回列表</el-button>
+                <span class="text-base font-semibold text-gray-800">{{ statsBox.title }}</span>
+            </div>
+
+            <div class="bg-white rounded-lg shadow p-4 mb-4">
+                <div class="yc-detail-meta">
+                    <div class="yc-stats-summary">
+                        <div>
+                            <div class="yc-kpi-title">{{ statsBox.title }}</div>
+                            <div class="yc-kpi-value yc-num">{{ statsBox.mainText }}</div>
+                            <div class="yc-kpi-sub" v-if="statsBox.secondaryText">{{ statsBox.secondaryText }}</div>
+                        </div>
+                        <div class="yc-stats-tip">{{ statsBox.tip }}</div>
+                    </div>
+                </div>
+                <template v-if="statsBox.showChart">
+                    <div class="yc-section-title mt-4">构成（按项目Top5）</div>
+                    <div ref="statsBar" class="yc-stats-bar"></div>
+                </template>
+                <div class="yc-section-title mt-4">明细</div>
+                <el-table :data="pagedStatsRows" size="mini" stripe
+                          :header-cell-style="tableHeaderStyle" style="width:100%" empty-text="暂无明细">
+                    <el-table-column label="操作" width="64" align="center">
+                        <template slot-scope="s">
+                            <span class="yc-ops">
+                                <el-button type="text" size="mini" @click="openFormula(s.row.ctx)">查看</el-button>
+                            </span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column prop="sheetNo" label="编号" width="140">
+                        <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
+                    </el-table-column>
+                    <el-table-column prop="projectCode" label="项目号" width="130">
+                        <template slot-scope="s"><span class="yc-code">{{ s.row.projectCode }}</span></template>
+                    </el-table-column>
+                    <el-table-column prop="projectName" label="项目名称" min-width="140" show-overflow-tooltip></el-table-column>
+                    <el-table-column prop="disciplineName" label="专业" min-width="160"></el-table-column>
+                    <el-table-column prop="name" label="姓名" width="80"></el-table-column>
+                    <el-table-column label="金额（元）" width="130" align="right">
+                        <template slot-scope="s"><span class="yc-num">{{ formatAmount(s.row.amount) }}</span></template>
+                    </el-table-column>
+                </el-table>
+                <div class="flex items-center justify-end px-1 py-2" v-if="statsBox.rows.length > 10">
+                    <el-pagination
+                        background
+                        small
+                        layout="total, prev, pager, next"
+                        :total="statsBox.rows.length"
+                        :page-size="10"
+                        :current-page="statsBox.page"
+                        @current-change="function (p) { statsBox.page = p }">
+                    </el-pagination>
+                </div>
+            </div>
+
+            <div class="yc-page-actions">
+                <el-button size="small" @click="closeStats">关闭</el-button>
+            </div>
+                </template>
+
+                <yc-formula-page v-else-if="queryPersonView === 'formula'" ref="formulaPage"></yc-formula-page>
+            </el-tab-pane>
+
+            <!-- ============================================================
+                 页签六：规则配置
+                 ============================================================ -->
+            <el-tab-pane v-if="isAdmin" label="规则配置" name="config">
+                <div class="bg-white rounded-lg shadow p-6" v-if="configForm">
+                    <div class="flex items-center justify-between mb-5">
+                        <div>
+                            <div class="text-base font-semibold text-gray-800">规则配置</div>
+                            <div class="text-xs text-gray-500 mt-1">仅系统管理员可查看和编辑</div>
+                        </div>
+                        <div class="flex gap-2">
+                            <el-button v-if="showDemoReset" size="small" @click="restoreDemoConfig">恢复演示默认值</el-button>
+                            <el-button size="small" type="primary" class="yc-btn-primary"
+                                       :loading="configSaving" :disabled="!configCanSave" @click="saveConfig">保存配置</el-button>
+                        </div>
+                    </div>
+
+                    <!-- 1. 审核人 -->
+                    <div class="yc-section-title">1. 审核人</div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div>
+                            <label class="yc-field-label">K2 审核人<span class="yc-req">*</span></label>
+                            <el-select v-model="configForm.k2ReviewerId" size="small" :disabled="!isAdmin" class="w-full">
+                                <el-option v-for="u in users" :key="u.id" :label="u.name" :value="u.id"></el-option>
+                            </el-select>
+                            <div class="text-xs text-gray-500 mt-1">允许与本项目项目经理为同一人（自审）</div>
+                        </div>
+                        <div>
+                            <label class="yc-field-label">K3 审核人<span class="yc-req">*</span></label>
+                            <el-select v-model="configForm.k3ReviewerId" size="small" :disabled="!isAdmin" class="w-full">
+                                <el-option v-for="u in users" :key="u.id" :label="u.name" :value="u.id"></el-option>
+                            </el-select>
+                            <div class="text-xs text-gray-500 mt-1">允许与 K2 为同一人，仍分两次确认</div>
+                        </div>
+                    </div>
+
+                    <!-- 2. 提取与审核系数 -->
+                    <div class="yc-section-title">2. 提取与审核系数</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div>
+                            <label class="yc-field-label">绩效系数 K1 最小 / 最大（百分比）</label>
+                            <div class="flex items-center gap-2">
+                                <el-input-number size="small" :disabled="!isAdmin" :precision="2" :min="0" :max="100" :controls="false"
+                                                 :value="configForm.k1.min / 100"
+                                                 @change="function (v) { configForm.k1.min = Math.round((v || 0) * 100) }"
+                                                 class="yc-w-full"></el-input-number>
+                                <span class="text-gray-400">~</span>
+                                <el-input-number size="small" :disabled="!isAdmin" :precision="2" :min="0" :max="100" :controls="false"
+                                                 :value="configForm.k1.max / 100"
+                                                 @change="function (v) { configForm.k1.max = Math.round((v || 0) * 100) }"
+                                                 class="yc-w-full"></el-input-number>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="yc-field-label">绩效系数 K2 最小 / 最大 / 默认</label>
+                            <div class="flex items-center gap-2">
+                                <div class="yc-coef-field"><label class="yc-field-label">最小值</label><el-input-number v-model="configForm.k2.min" size="small" :disabled="!isAdmin" :precision="4" :min="0" :controls="false" class="yc-w-full"></el-input-number></div>
+                                <div class="yc-coef-field"><label class="yc-field-label">最大值</label><el-input-number v-model="configForm.k2.max" size="small" :disabled="!isAdmin" :precision="4" :min="0" :controls="false" class="yc-w-full"></el-input-number></div>
+                                <div class="yc-coef-field"><label class="yc-field-label">默认值</label><el-input-number v-model="configForm.k2.default" size="small" :disabled="!isAdmin" :precision="4" :min="0" :controls="false" class="yc-w-full"></el-input-number></div>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="yc-field-label">绩效系数 K3 最小 / 最大 / 默认</label>
+                            <div class="flex items-center gap-2">
+                                <div class="yc-coef-field"><label class="yc-field-label">最小值</label><el-input-number v-model="configForm.k3.min" size="small" :disabled="!isAdmin" :precision="4" :min="0" :controls="false" class="yc-w-full"></el-input-number></div>
+                                <div class="yc-coef-field"><label class="yc-field-label">最大值</label><el-input-number v-model="configForm.k3.max" size="small" :disabled="!isAdmin" :precision="4" :min="0" :controls="false" class="yc-w-full"></el-input-number></div>
+                                <div class="yc-coef-field"><label class="yc-field-label">默认值</label><el-input-number v-model="configForm.k3.default" size="small" :disabled="!isAdmin" :precision="4" :min="0" :controls="false" class="yc-w-full"></el-input-number></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. 评估选项与权重 -->
+                    <div class="yc-section-title">3. 评估选项与权重</div>
+                    <div class="yc-total-bar mb-4">
+                        <span>三项权重合计</span>
+                        <span :class="configWeightValid ? 'yc-total-ok' : 'yc-total-bad'">
+                            {{ configWeightTotal.toFixed(2) }}
+                            <span v-if="!configWeightValid" class="ml-2">须等于 1.00，否则不能保存</span>
+                        </span>
+                    </div>
+
+                    <div v-for="dim in [{ k: 'quality', n: '完成质量' }, { k: 'progress', n: '进度' }, { k: 'response', n: '响应度' }]"
+                         :key="dim.k" class="mb-6 border border-gray-100 rounded-lg p-4">
+                        <div class="flex flex-wrap items-end gap-6 mb-3">
+                            <div class="font-medium text-gray-800 yc-w-80">{{ dim.n }}</div>
+                            <div class="yc-w-120">
+                                <label class="yc-field-label">权重</label>
+                                <el-input-number v-model="configForm[dim.k].weight" size="small" :disabled="!isAdmin"
+                                                 :precision="2" :min="0" :max="1" :step="0.05" :controls="false" class="yc-w-full"></el-input-number>
+                            </div>
+                            <div class="yc-w-lg">
+                                <label class="yc-field-label">默认选项</label>
+                                <el-select v-model="configForm[dim.k].defaultOptionId" size="small" :disabled="!isAdmin" class="w-full">
+                                    <el-option v-for="o in configForm[dim.k].options" :key="o.id" :label="o.label" :value="o.id"></el-option>
+                                </el-select>
+                            </div>
+                        </div>
+                        <el-table :data="configForm[dim.k].options" size="mini" :header-cell-style="tableHeaderStyle" style="width:100%">
+                            <el-table-column label="系数" width="120" align="right">
+                                <template slot-scope="s">
+                                    <el-input-number v-model="s.row.coef" size="mini" :disabled="!isAdmin"
+                                                     :precision="2" :min="0" :max="2" :step="0.1" :controls="false" class="yc-w-full"></el-input-number>
+                                </template>
+                            </el-table-column>
+                            <el-table-column label="选项说明（选分时展示）">
+                                <template slot-scope="s">
+                                    <el-input v-model="s.row.label" size="mini" :disabled="!isAdmin"></el-input>
+                                </template>
+                            </el-table-column>
+                        </el-table>
+                    </div>
+
+                    <div class="text-xs text-gray-500">
+                        评估不配连续区间，可选值完全由选项列表决定。已确认、已锁定的数字不因改配置而作废或重算。
+                    </div>
+                </div>
+            </el-tab-pane>
+        </el-tabs>
+
+    </div>
+
+    <!-- ================= 弹窗：驳回（二次确认 + 原因必填） ================= -->
+    <el-dialog
+        title="确认驳回"
+        :visible.sync="rejectBox.visible"
+        class="yc-dialog yc-dialog-sm"
+        width="560px"
+        :close-on-click-modal="false">
+        <div>
+            <el-alert type="warning" :closable="false" show-icon :title="rejectWarning()"></el-alert>
+            <div class="mt-4">
+                <label class="yc-field-label">驳回原因<span class="yc-req">*</span></label>
+                <el-input type="textarea" v-model="rejectBox.reason" :rows="4" maxlength="200" show-word-limit
+                          placeholder="请说明驳回原因，退回后对方需据此修改"></el-input>
+                <div class="yc-field-error" v-if="rejectBox.error">{{ rejectBox.error }}</div>
+            </div>
+        </div>
+        <div slot="footer">
+            <el-button size="small" @click="rejectBox.visible = false" :disabled="rejectBox.saving">取消</el-button>
+            <el-button size="small" type="danger" :loading="rejectBox.saving" @click="doReject">确认驳回</el-button>
+        </div>
+    </el-dialog>
+
+    <!-- ================= 弹窗：工时派发详情 ================= -->
+    <el-dialog
+        title="工时派发详情"
+        :visible.sync="hourDispatchBox.visible"
+        class="yc-dialog yc-dialog-lg"
+        width="960px"
+        :close-on-click-modal="false"
+        :lock-scroll="true">
+        <div class="yc-hour-table-wrap" v-if="hourDispatchBox.rows.length">
+            <el-table
+                :data="hourDispatchBox.rows"
+                size="small"
+                border
+                :header-cell-style="tableHeaderStyle"
+                :row-class-name="hourDispatchRowClass"
+                style="width:100%">
+                <el-table-column label="人员" prop="personLabel" min-width="140" fixed></el-table-column>
+                <el-table-column label="资格" prop="role" width="80"></el-table-column>
+                <el-table-column
+                    v-for="m in hourDispatchBox.months"
+                    :key="m"
+                    :label="m"
+                    align="center">
+                    <el-table-column label="上报 | 派发" width="120" align="center">
+                        <template slot-scope="s">
+                            <span class="yc-num">{{ hourCellPair(s.row, m) }}</span>
+                        </template>
+                    </el-table-column>
+                </el-table-column>
+                <el-table-column label="总计" align="center">
+                    <el-table-column label="上报 | 派发" width="130" align="center">
+                        <template slot-scope="s">
+                            <span class="yc-num">{{ hourTotalPair(s.row) }}</span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="进度" width="140" align="center">
+                        <template slot-scope="s">
+                            <div class="yc-hour-progress" :title="(s.row.progressPct || 0).toFixed(0) + '%'">
+                                <div class="yc-hour-progress-bar" :style="{ width: (s.row.progressPct || 0) + '%' }"></div>
+                            </div>
+                        </template>
+                    </el-table-column>
+                </el-table-column>
+            </el-table>
+        </div>
+        <div v-else class="yc-empty">
+            <i class="far fa-clock"></i>
+            本单元本专业暂无工时派发记录
+        </div>
+        <div slot="footer">
+            <el-button size="small" type="primary" class="yc-btn-primary" @click="hourDispatchBox.visible = false">关闭</el-button>
+        </div>
+    </el-dialog>
+
+</div>
+
+<script type="text/x-template" id="yc-tpl-formula">
+<div>
+            <div class="mb-4">
+                <el-button size="small" icon="el-icon-arrow-left" @click="$root.closeFormula">{{ $root.formulaBox.fromStats ? '返回统计' : '返回列表' }}</el-button>
+            </div>
+
+            <div class="yc-detail-status" v-if="$root.formulaBox.statusMeta"
+                 :class="{ 'is-danger': $root.formulaBox.statusMeta.badge === 'yc-badge-danger' }">
+                <span class="yc-badge" :class="$root.formulaBox.statusMeta.badge">{{ $root.formulaBox.statusMeta.text }}</span>
+                <span>{{ $root.formulaBox.pendingText }}</span>
+            </div>
+
+            <div class="bg-white rounded-lg shadow mb-4 overflow-hidden">
+                <div class="px-4 py-3 border-b">
+                    <span class="font-semibold text-gray-800">项目信息</span>
+                </div>
+                <div class="p-4">
+                    <div class="yc-detail-meta">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div>
+                                <label class="yc-field-label">编号</label>
+                                <div class="yc-detail-text">{{ $root.formulaBox.sheetNo || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">项目号</label>
+                                <div class="yc-detail-text">{{ $root.formulaBox.projectCode || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">项目名称</label>
+                                <div class="yc-detail-text yc-ellipsis" :title="$root.formulaBox.projectName || ''">{{ $root.formulaBox.projectName || '—' }}</div>
+                            </div>
+                            <div>
+                                <label class="yc-field-label">项目经理</label>
+                                <div class="yc-detail-text">{{ $root.formulaBox.managerName || '—' }}</div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <label class="yc-field-label">派发说明</label>
+                            <div class="yc-detail-text" :class="{ 'is-empty': !$root.formulaBox.remark }">{{ $root.formulaBox.remark || '—' }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow mb-4 overflow-hidden" v-if="$root.formulaBox.rows.length">
+                <div class="px-4 py-3 border-b">
+                    <span class="font-semibold text-gray-800">预估分配</span>
+                </div>
+                <div class="p-4">
+                    <div class="yc-formula-bar">
+                        <template v-for="(r, i) in $root.formulaBox.rows">
+                            <div :key="'op-' + i" v-if="r.op" class="yc-formula-op">{{ r.op }}</div>
+                            <div :key="'term-' + i" class="yc-formula-term" :class="{ 'is-sum': r.sum }">
+                                <div class="yc-formula-val yc-num">{{ r.val }}</div>
+                                <div class="yc-formula-name">{{ r.name }}</div>
+                                <div class="yc-formula-status">
+                                    <span v-if="r.status" class="yc-badge" :class="r.statusBadge">{{ r.status }}</span>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow mb-4 overflow-hidden" v-if="$root.formulaBox.splits && $root.formulaBox.splits.length">
+                <div class="px-4 py-3 border-b">
+                    <span class="font-semibold text-gray-800">专业间比例</span>
+                </div>
+                <div class="yc-split-body">
+                    <div class="yc-split-block">
+                        <div class="yc-split-table">
+                            <el-table :data="$root.formulaBox.splits" size="mini" :header-cell-style="$root.tableHeaderStyle" style="width:100%">
+                                <el-table-column label="单元号" width="90">
+                                    <template slot-scope="s"><span class="yc-code">{{ s.row.unitId }}</span></template>
+                                </el-table-column>
+                                <el-table-column label="单元名称" min-width="120" show-overflow-tooltip>
+                                    <template slot-scope="s">{{ s.row.unitName }}</template>
+                                </el-table-column>
+                                <el-table-column prop="name" label="专业" min-width="160"></el-table-column>
+                                <el-table-column prop="leadName" label="专业负责人" width="100">
+                                    <template slot-scope="s">{{ s.row.leadName || '—' }}</template>
+                                </el-table-column>
+                                <el-table-column label="专业间比例" width="110" align="right">
+                                    <template slot-scope="s"><span class="yc-num">{{ $root.formatRatio(s.row.ratio) }}</span></template>
+                                </el-table-column>
+                                <el-table-column label="专业分配金额（元）" min-width="130" align="right">
+                                    <template slot-scope="s"><span class="yc-num">{{ s.row.poolText }}</span></template>
+                                </el-table-column>
+                            </el-table>
+                        </div>
+                        <div ref="splitPie" class="yc-split-pie"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="$root.formulaBox.showHistory" class="bg-white rounded-lg shadow mb-4 overflow-hidden">
+                <div class="px-4 py-3 border-b">
+                    <span class="font-semibold text-gray-800">历史派发记录</span>
+                </div>
+                <div class="p-4">
+                    <el-table class="yc-history-table" :data="$root.pagedFormulaHistory" size="mini" stripe
+                              :header-cell-style="$root.tableHeaderStyle" style="width:100%"
+                              :row-class-name="$root.historyRowClassName"
+                              :span-method="$root.historySpanMethod"
+                              empty-text="暂无历史派发记录">
+                        <el-table-column label="NO" width="64" align="right">
+                            <template slot-scope="s">
+                                <span v-if="s.row.isTotal" class="yc-history-total-label">合计</span>
+                                <span v-else class="yc-num">{{ s.row.no }}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="状态" width="140">
+                            <template slot-scope="s">
+                                <span class="yc-badge" :class="s.row.statusBadge">{{ s.row.statusText }}</span>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="编号" min-width="150">
+                            <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
+                        </el-table-column>
+                        <el-table-column label="分配实发金额（元）" width="160" align="right">
+                            <template slot-scope="s">
+                                <span class="yc-num" :class="{ 'font-semibold': s.row.isTotal }">{{ $root.formatAmount(s.row.amount) }}</span>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                    <div class="flex items-center justify-end px-1 py-2" v-if="$root.formulaHistory.length > 10">
+                        <el-pagination
+                            background
+                            small
+                            layout="total, prev, pager, next"
+                            :total="$root.formulaHistory.length"
+                            :page-size="$root.historyPageSize"
+                            :current-page="$root.historyFormulaPage"
+                            @current-change="function (p) { $root.historyFormulaPage = p }">
+                        </el-pagination>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow mb-4 overflow-hidden" v-if="$root.formulaBox.people">
+                <div class="px-4 py-3 border-b">
+                    <span class="font-semibold text-gray-800">分配名单</span>
+                </div>
+                <div class="yc-split-body">
+                    <div class="yc-split-block">
+                        <div class="yc-split-table">
+                            <el-table :data="$root.formulaBox.people" size="mini" :header-cell-style="$root.tableHeaderStyle" style="width:100%"
+                                      empty-text="尚未分配到人">
+                                <el-table-column prop="name" label="姓名" width="120"></el-table-column>
+                                <el-table-column label="专业内比例" width="140" align="right">
+                                    <template slot-scope="s"><span class="yc-num">{{ $root.formatRatio(s.row.ratio) }}</span></template>
+                                </el-table-column>
+                                <el-table-column label="分配金额（元）" min-width="140" align="right">
+                                    <template slot-scope="s"><span class="yc-num">{{ $root.formatAmount(s.row.amount) }}</span></template>
+                                </el-table-column>
+                            </el-table>
+                        </div>
+                        <div v-if="$root.formulaBox.people.length" ref="peoplePie" class="yc-split-pie"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow mb-4 overflow-hidden" v-if="$root.formulaBox.queryPeople">
+                <div class="px-4 py-3 border-b">
+                    <span class="font-semibold text-gray-800">个人明细</span>
+                </div>
+                <div class="p-4">
+                    <el-table :data="$root.pagedFormulaQueryPeople" size="mini" :header-cell-style="$root.tableHeaderStyle" style="width:100%"
+                              empty-text="专业内尚未完成，暂无个人明细">
+                        <el-table-column prop="disciplineName" label="专业" min-width="160"></el-table-column>
+                        <el-table-column prop="name" label="姓名" width="90"></el-table-column>
+                        <el-table-column label="预估分配金额（元）" min-width="140" align="right">
+                            <template slot-scope="s"><span class="yc-num">{{ $root.formatAmount(s.row.allocAmount) }}</span></template>
+                        </el-table-column>
+                        <el-table-column label="完成质量" width="100" align="right">
+                            <template slot-scope="s"><span class="yc-num">{{ $root.formatCoef(s.row.qualityCoef) }}</span></template>
+                        </el-table-column>
+                        <el-table-column label="进度" width="90" align="right">
+                            <template slot-scope="s"><span class="yc-num">{{ $root.formatCoef(s.row.progressCoef) }}</span></template>
+                        </el-table-column>
+                        <el-table-column label="响应度" width="90" align="right">
+                            <template slot-scope="s"><span class="yc-num">{{ $root.formatCoef(s.row.responseCoef) }}</span></template>
+                        </el-table-column>
+                        <el-table-column label="实际分配金额（元）" min-width="140" align="right">
+                            <template slot-scope="s"><span class="yc-num">{{ $root.formatAmount(s.row.actualAmount) }}</span></template>
+                        </el-table-column>
+                    </el-table>
+                    <div class="flex items-center justify-end px-1 py-2" v-if="$root.formulaBox.queryPeople.length > 10">
+                        <el-pagination
+                            background
+                            small
+                            layout="total, prev, pager, next"
+                            :total="$root.formulaBox.queryPeople.length"
+                            :page-size="10"
+                            :current-page="$root.formulaPeoplePage"
+                            @current-change="function (p) { $root.formulaPeoplePage = p }">
+                        </el-pagination>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow mb-4 overflow-hidden">
+                <div class="px-4 py-3 border-b">
+                    <span class="font-semibold text-gray-800">操作日志</span>
+                </div>
+                <div class="p-4">
+                    <div v-if="!$root.formulaBox.logs.length" class="yc-log-empty">暂无操作日志</div>
+                    <div v-else class="yc-log-list">
+                        <div class="yc-log-row" v-for="(l, i) in $root.formulaBox.logs" :key="'log-' + i">
+                            <div class="yc-log-time">
+                                <div class="yc-log-date">{{ l.date }}</div>
+                                <div class="yc-log-clock">{{ l.time }}</div>
+                            </div>
+                            <div class="yc-log-text">{{ l.text }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="yc-page-actions">
+                <el-button size="small" @click="$root.closeFormula">关闭</el-button>
+            </div>
+</div>
+</script>
+<script src="https://unpkg.com/vue@2.7.16/dist/vue.min.js"></script>
+<script src="https://unpkg.com/element-ui@2.15.14/lib/index.js"></script>
+<script src="https://unpkg.com/echarts@5.4.3/dist/echarts.min.js"></script>
+<script src="js/app.js?v=unit-view-21"></script>
+</body>
+</html>
