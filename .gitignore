@@ -39,4 +39,5 @@ next-env.d.ts
 # SQLite database (generated at runtime)
 /data/
 
-/docs/
+# docs/: 2026-10-28 起不再整目录忽略，以便变更账本、evidence、正式需求入库
+# （原规则：/docs/）由产品经理 Claire 授权、需求工程师 Alex 调整；先不 commit，待收口。
