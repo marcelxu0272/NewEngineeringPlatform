@@ -1,0 +1,225 @@
+[
+  {
+    "id": "platform",
+    "href": "/platform",
+    "title": "Wood 工程平台首页",
+    "description": "快速入口、文件模板、公告与待办",
+    "tags": [
+      "平台"
+    ],
+    "thumbnail": "/catalog/thumbs/platform.jpg",
+    "sort": 0,
+    "hidden": false,
+    "icon": "LayoutDashboard"
+  },
+  {
+    "id": "dashboard",
+    "href": "/dashboard",
+    "title": "项目中台",
+    "description": "项目数据与看板",
+    "tags": [
+      "项目"
+    ],
+    "thumbnail": "/catalog/thumbs/dashboard.jpg",
+    "sort": 1,
+    "hidden": false,
+    "icon": "BarChart3"
+  },
+  {
+    "id": "dashboard-org-xx",
+    "href": "/dashboard/org/xx",
+    "title": "xx项目群",
+    "description": "A/B/C 板块看板与项目动态",
+    "tags": [
+      "项目"
+    ],
+    "thumbnail": "/catalog/thumbs/dashboard-org-xx.jpg",
+    "sort": 2,
+    "hidden": false,
+    "icon": "BarChart3"
+  },
+  {
+    "id": "project-management",
+    "href": "/project-management",
+    "title": "项目经理看板",
+    "description": "项目管理相关功能",
+    "tags": [
+      "项目"
+    ],
+    "thumbnail": "/catalog/thumbs/project-management.jpg",
+    "sort": 3,
+    "hidden": false,
+    "icon": "FolderKanban"
+  },
+  {
+    "id": "expert-resources",
+    "href": "/expert-resources",
+    "title": "SME 专家资源",
+    "description": "专家资源与知识库",
+    "tags": [
+      "人力"
+    ],
+    "thumbnail": "/catalog/thumbs/expert-resources.jpg",
+    "sort": 4,
+    "hidden": true,
+    "icon": "Users"
+  },
+  {
+    "id": "engineering-skills",
+    "href": "/engineering-skills",
+    "title": "工程软件技能",
+    "description": "工程软件与技能资源",
+    "tags": [
+      "平台"
+    ],
+    "thumbnail": "/catalog/thumbs/engineering-skills.jpg",
+    "sort": 5,
+    "hidden": false,
+    "icon": "Wrench"
+  },
+  {
+    "id": "notice-board",
+    "href": "/notice-board",
+    "title": "公告板",
+    "description": "查看公告与通知",
+    "tags": [
+      "平台"
+    ],
+    "thumbnail": "/catalog/thumbs/notice-board.jpg",
+    "sort": 6,
+    "hidden": true,
+    "icon": "Megaphone"
+  },
+  {
+    "id": "org-chart",
+    "href": "/org-chart",
+    "title": "组织架构图",
+    "description": "四列布局组织架构图",
+    "tags": [
+      "组织"
+    ],
+    "thumbnail": "/catalog/thumbs/org-chart.jpg",
+    "sort": 7,
+    "hidden": false,
+    "icon": "Network"
+  },
+  {
+    "id": "project-requirements",
+    "href": "/project-requirements",
+    "title": "关键项目岗位需求",
+    "description": "报表体系 · 资源与交付保障、关键岗位人力需求",
+    "tags": [
+      "项目",
+      "人力"
+    ],
+    "thumbnail": "/catalog/thumbs/project-requirements.jpg",
+    "sort": 8,
+    "hidden": false,
+    "icon": "ClipboardList"
+  },
+  {
+    "id": "third-party-personnel",
+    "href": "/third-party-personnel",
+    "title": "第三方人员管理",
+    "description": "合作方人员信息、CSV 批量导入与导出",
+    "tags": [
+      "人力"
+    ],
+    "thumbnail": "/catalog/thumbs/third-party-personnel.jpg",
+    "sort": 9,
+    "hidden": false,
+    "icon": "UserCog"
+  },
+  {
+    "id": "dispatch-attendance",
+    "href": "/dispatch-attendance",
+    "title": "派遣人员考勤",
+    "description": "月度考勤、采购确认、成本测算与应付单推送",
+    "tags": [
+      "人力",
+      "财务"
+    ],
+    "thumbnail": "/catalog/thumbs/dispatch-attendance.jpg",
+    "sort": 10,
+    "hidden": false,
+    "icon": "CalendarCheck"
+  },
+  {
+    "id": "yinchuan-performance-payout",
+    "href": "/yinchuan-performance-payout",
+    "title": "银川绩效分配",
+    "description": "专业间、专业内、评估与绩效查询，含规则配置",
+    "tags": [
+      "财务"
+    ],
+    "thumbnail": "/catalog/thumbs/yinchuan-performance-payout.jpg",
+    "sort": 11,
+    "hidden": false,
+    "icon": "Coins"
+  },
+  {
+    "id": "delivery-assurance-action-items-config",
+    "href": "/delivery-assurance-action-items-config",
+    "title": "交付保障行动项配置",
+    "description": "交付保障行动项配置、审批与版本管理",
+    "tags": [
+      "项目"
+    ],
+    "thumbnail": "/catalog/thumbs/delivery-assurance-action-items-config.jpg",
+    "sort": 12,
+    "hidden": false,
+    "icon": "ClipboardList"
+  },
+  {
+    "id": "cash-flow-dashboard",
+    "href": "/cash-flow-dashboard",
+    "title": "现金流仪表盘",
+    "description": "三级联动现金流看板，WIP / AR / Cash In / Cash Out",
+    "tags": [
+      "财务"
+    ],
+    "thumbnail": "/catalog/thumbs/cash-flow-dashboard.jpg",
+    "sort": 13,
+    "hidden": false,
+    "icon": "TrendingUp"
+  },
+  {
+    "id": "cash-flow-dashboard-mobile",
+    "href": "/cash-flow-dashboard-mobile",
+    "title": "现金流仪表盘（移动版）",
+    "description": "移动端净现金流、趋势与各板块表（不含开票/回款/WIP/应收）",
+    "tags": [
+      "财务"
+    ],
+    "thumbnail": "/catalog/thumbs/cash-flow-dashboard-mobile.jpg",
+    "sort": 14,
+    "hidden": true,
+    "icon": "Smartphone"
+  },
+  {
+    "id": "design",
+    "href": "/design",
+    "title": "设计系统展示",
+    "description": "色彩、字体、组件与布局规范预览",
+    "tags": [
+      "设计"
+    ],
+    "thumbnail": "/catalog/thumbs/design.jpg",
+    "sort": 15,
+    "hidden": false,
+    "icon": "Palette"
+  },
+  {
+    "id": "operations-dashboard-202610",
+    "href": "/operations-dashboard-202610",
+    "title": "运营看板202610版",
+    "description": "公司经营全景单页 demo（2026-10）",
+    "tags": [
+      "运营"
+    ],
+    "thumbnail": "",
+    "sort": 16,
+    "hidden": false,
+    "icon": "BarChart3"
+  }
+]
