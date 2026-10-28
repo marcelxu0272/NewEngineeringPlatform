@@ -48,20 +48,23 @@ The application uses SQLite with a layered architecture in `lib/db/`:
 
 ### Application Structure
 
-**Entry Point**: `app/page.tsx` displays a module selector with links to:
-- `/platform` - Platform homepage with quick access and templates
-- `/dashboard` - Project data visualization and analytics
-- `/project-management` - Project management dashboard
-- `/expert-resources` - SME (Subject Matter Expert) resource directory
-- `/engineering-skills` - Engineering software skills tracking
-- `/notice-board` - Company announcements
+**Entry Point**: `app/page.tsx` is the demo catalog. Module name, description, tags, sort, visibility, and thumbnail path are stored in `config/catalog.json` and edited at `/catalog-config` (existing entries only; routes cannot be added or removed). The homepage shows a thumbnail for each visible module and filters by keyword or tag after Search is clicked. Opening a module starts a new browser tab. Results are not paginated. Thumbnails are files in `public/catalog/thumbs/`. Regenerate them while the dev server is running:
+
+```bash
+npm run catalog:capture
+```
+
+The mobile cash-flow page is captured at a phone viewport. Existing thumbnail files are skipped unless `--force` is passed.
 
 **Key Directories** (feature routes use kebab-case):
-- `app/` - Next.js App Router; feature folders: `platform`, `dashboard`, `project-management`, `expert-resources`, `engineering-skills`, `notice-board`
-- `app/api/` - REST API endpoints (dashboard, sme, esk)
+- `app/` - Next.js App Router; feature folders include `platform`, `dashboard`, `project-management`, `expert-resources`, `engineering-skills`, `notice-board`, `catalog-config`
+- `config/catalog.json` - shared catalog of homepage modules
+- `app/api/` - REST API endpoints (dashboard, sme, esk, catalog)
+- `components/catalog/` - homepage catalog, filters, and the config editor
 - `components/ui/` - shadcn/ui base components (Button, Card, Dialog, etc.)
 - `lib/types/` - Shared TypeScript type definitions
 - `public/geo/` - China map GeoJSON for marketing dashboard
+- `public/catalog/thumbs/` - captured module thumbnails
 
 ### Component Patterns
 
@@ -113,3 +116,17 @@ The `.cursor/rules/custom-rule.mdc` contains Chinese-language guidelines includi
 - Numbers should use thousand separators
 
 Note: The Cursor rules mention Vue.js stack, but the actual project uses Next.js/React.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs live as GitHub issues in this repo (gh CLI). See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Default Matt roles mapped 1:1. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Single-context: root GLOSSARY.md + docs/adr/ when present. See `docs/agents/domain.md`.
