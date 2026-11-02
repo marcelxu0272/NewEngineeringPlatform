@@ -1,0 +1,221 @@
+{
+  "at": "2026-11-02T03:35:42.120Z",
+  "results": [
+    {
+      "id": "AC1",
+      "ok": true,
+      "detail": {
+        "hasGrayShell": true,
+        "shellClass": "fixed left-0 top-0 h-screen w-16 bg-gray-800 p-2 flex flex-col items-center z-10",
+        "iframeSrc": "/operations-dashboard-202610/org-entry.html",
+        "title": "全局看板 > 运营看板",
+        "url": "/operations-dashboard-202610"
+      }
+    },
+    {
+      "id": "AC2-link",
+      "ok": true,
+      "detail": {
+        "href": "/operations-dashboard-202610/board",
+        "target": "_top",
+        "text": "Board 董事会",
+        "nav": [
+          {
+            "href": "/dashboard/org/xinyewu",
+            "target": "_top",
+            "text": "SAS850 新业务项目群 任宇"
+          },
+          {
+            "href": "/dashboard/org/nm-ls",
+            "target": "_top",
+            "text": "SAS840 NM&LS 项目群 潘建兴"
+          },
+          {
+            "href": "/dashboard/org/haiwai",
+            "target": "_top",
+            "text": "SAS830 海外项目群 李湛湘"
+          },
+          {
+            "href": "/dashboard/org/dongbu",
+            "target": "_top",
+            "text": "SAS810 东部项目群 钟富优"
+          },
+          {
+            "href": "/dashboard/org/xibu",
+            "target": "_top",
+            "text": "SAS820 西部项目群 梁栋"
+          }
+        ],
+        "allNavTop": true
+      }
+    },
+    {
+      "id": "AC4-copy-project-groups",
+      "ok": true,
+      "detail": {
+        "n": 5,
+        "sample": [
+          {
+            "href": "/dashboard/org/xinyewu",
+            "target": "_top",
+            "text": "SAS850 新业务项目群 任宇"
+          },
+          {
+            "href": "/dashboard/org/nm-ls",
+            "target": "_top",
+            "text": "SAS840 NM&LS 项目群 潘建兴"
+          }
+        ]
+      }
+    },
+    {
+      "id": "AC2-nav",
+      "ok": true,
+      "detail": {
+        "url": "/operations-dashboard-202610/board",
+        "hasGrayShell": true,
+        "iframeSrc": "/operations-dashboard-202610/index.html",
+        "title": "全局看板 > 运营看板 > Board"
+      }
+    },
+    {
+      "id": "AC2-no-dual-bar",
+      "ok": true,
+      "detail": {
+        "sidebarDisplay": "none",
+        "hasVisibleHtmlSidebar": false,
+        "tabs": [
+          {
+            "focus": "overview",
+            "text": "经营业绩",
+            "tag": "BUTTON"
+          },
+          {
+            "focus": "cash",
+            "text": "资金状况",
+            "tag": "BUTTON"
+          },
+          {
+            "focus": "risk",
+            "text": "资金风险",
+            "tag": "BUTTON"
+          },
+          {
+            "focus": "contribution",
+            "text": "板块贡献",
+            "tag": "BUTTON"
+          },
+          {
+            "focus": "delivery",
+            "text": "交付保障",
+            "tag": "BUTTON"
+          }
+        ],
+        "afterCash": [
+          "cash",
+          "cash"
+        ],
+        "cashHighlighted": true,
+        "afterRisk": [
+          "risk"
+        ],
+        "appGridColumns": "1536px"
+      }
+    },
+    {
+      "id": "AC3-header-tabs",
+      "ok": true,
+      "detail": {
+        "afterCash": [
+          "cash",
+          "cash"
+        ],
+        "afterRisk": [
+          "risk"
+        ],
+        "cashHighlighted": true
+      }
+    },
+    {
+      "id": "AC4-org-chart",
+      "ok": true,
+      "detail": {
+        "hasGrayShell": true,
+        "shellClass": "fixed left-0 top-0 h-screen w-16 bg-gray-800 p-2 flex flex-col items-center z-10",
+        "iframeSrc": "/202602/组织架构图_四列布局_base%20copy.html",
+        "boardTag": "DIV",
+        "boardClass": "box",
+        "nav": [
+          {
+            "href": "/dashboard/org/xinyewu",
+            "target": "_top"
+          },
+          {
+            "href": "/dashboard/org/nm-ls",
+            "target": "_top"
+          },
+          {
+            "href": "/dashboard/org/haiwai",
+            "target": "_top"
+          },
+          {
+            "href": "/dashboard/org/dongbu",
+            "target": "_top"
+          },
+          {
+            "href": "/dashboard/org/xibu",
+            "target": "_top"
+          }
+        ],
+        "allNavTop": true
+      }
+    },
+    {
+      "id": "AC1-shell-parity",
+      "ok": true,
+      "detail": "fixed left-0 top-0 h-screen w-16 bg-gray-800 p-2 flex flex-col items-center z-10"
+    },
+    {
+      "id": "AC5-catalog",
+      "ok": true,
+      "detail": {
+        "href": "/operations-dashboard-202610",
+        "title": "运营看板202610版"
+      }
+    },
+    {
+      "id": "AC5-home-nav",
+      "ok": true,
+      "detail": {
+        "note": "catalog/DOM href points to level-1; click path=/",
+        "homeInfo": {
+          "anchors": [
+            {
+              "tag": "A",
+              "href": "/operations-dashboard-202610",
+              "text": "运营看板202610版公司经营全景单页 demo（2026-10）运营"
+            }
+          ],
+          "hasText": true
+        },
+        "after": {
+          "path": "/",
+          "iframeSrc": null
+        }
+      }
+    },
+    {
+      "id": "AC4-original-html",
+      "ok": true,
+      "detail": "no ops board link in 202602 source"
+    },
+    {
+      "id": "AC4-hashes",
+      "ok": true,
+      "detail": {
+        "orgChartPage": "951398F5D2DF55DA6D6C910961088133750E96569EC0967AB7D5C76508489D0C",
+        "html202602": "B189CAE392EECB1DDC78D39723ADE6092A16F722FBEDAAF8C139001F4A26CE14"
+      }
+    }
+  ]
+}

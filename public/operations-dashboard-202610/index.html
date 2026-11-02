@@ -100,6 +100,22 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
 @media(max-height:780px){main{grid-template-rows:minmax(86px,.91fr) minmax(248px,2.75fr) minmax(168px,2fr) 10px}}
 @media(max-height:780px){.contribution-table td{padding-top:4px;padding-bottom:4px}.mix-item{padding-top:5px;padding-bottom:5px;gap:3px}.contribution-head{margin-bottom:6px}}
 
+
+/* === 2026-11-02 组织图一级入口：宿主 Next 灰侧栏后隐藏 HTML .sidebar，防双栏 === */
+.sidebar{display:none!important}
+.app{grid-template-columns:minmax(0,1fr)!important}
+.header,main{grid-column:1!important}
+@media (min-width:1600px){.app{grid-template-columns:minmax(0,1fr)!important}}
+@media (max-width:1400px){.app{grid-template-columns:minmax(0,1fr)!important}}
+/* 侧栏隐藏后 header-tabs 承担焦点导航，小屏也保持可见 */
+@media(max-width:1500px){.header-tabs{display:flex!important}}
+.header-tabs{align-items:center}
+.header-tabs button{
+  border:0;background:transparent;padding:0;margin:0;cursor:pointer;
+  color:inherit;font:inherit;line-height:inherit
+}
+.header-tabs button:hover{color:var(--primary)}
+.header-tabs button.active{color:var(--primary);font-weight:600}
 </style>
 </head>
 <body>
@@ -134,7 +150,7 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
   <div class="sidebar-bottom"><button class="icon-button" data-tip="单页经营全景 · 所有模块始终可见" aria-label="单页经营全景"><svg><use href="#icon-chevron"/></svg></button></div>
  </aside>
  <header class="header">
-  <div class="header-title"><h1>运营看板202610版</h1><div class="header-tabs" aria-hidden="true"><span>经营业绩</span><span>资金状况</span><span>板块贡献</span><span>交付保障</span></div></div>
+  <div class="header-title"><h1>运营看板202610版</h1><div class="header-tabs" role="navigation" aria-label="看板焦点"><button type="button" class="active" data-focus="overview">经营业绩</button><button type="button" data-focus="cash">资金状况</button><button type="button" data-focus="risk">资金风险</button><button type="button" data-focus="contribution">板块贡献</button><button type="button" data-focus="delivery">交付保障</button></div></div>
   <div class="header-controls">
    <label class="select-wrap has-icon" data-tip="选择统计年度，所有指标与图表同步更新"><svg class="select-icon"><use href="#icon-clock"/></svg><select id="yearSelect" aria-label="统计年度"><option value="2026">2026年度</option><option value="2025">2025年度</option></select></label>
    <label class="select-wrap" data-tip="按组织板块筛选，所有模块使用同一统计范围"><select id="unitSelect" aria-label="组织板块"><option value="全部板块">全部板块</option><option value="设计院">设计院</option><option value="数字化业务单元">数字化业务单元</option><option value="专业室">专业室</option></select></label>
@@ -434,7 +450,7 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
     else if(b.id==='helpButton')help();
     else if(b.id==='closeDialog')$('detailDialog').close();
     else if(b.id==='resetButton'){Object.assign(state,{year:2026,unit:'全部板块',business:'全部业务类型',dimension:'department',target:'contract'});$('yearSelect').value='2026';$('unitSelect').value=state.unit;$('businessSelect').value=state.business;render();document.querySelectorAll('.nav-button').forEach(b=>b.classList.toggle('active',b.dataset.focus==='overview'));toast('已恢复默认筛选与视图');}
-    else if(b.dataset.focus){document.querySelectorAll('.nav-button').forEach(x=>x.classList.toggle('active',x===b));const id={overview:'kpiGrid',cash:'cashPanel',risk:'riskPanel',contribution:'contributionPanel',delivery:'deliveryPanel'}[b.dataset.focus],panel=$(id);if(panel){panel.classList.remove('focus-highlight');void panel.offsetWidth;panel.classList.add('focus-highlight');setTimeout(()=>panel.classList.remove('focus-highlight'),1800);}toast(b.dataset.focus==='overview'?'当前为公司运营总览':'已定位：'+b.textContent.trim());}
+    else if(b.dataset.focus){document.querySelectorAll('.nav-button,.header-tabs [data-focus]').forEach(x=>x.classList.toggle('active',x.dataset.focus===b.dataset.focus));const id={overview:'kpiGrid',cash:'cashPanel',risk:'riskPanel',contribution:'contributionPanel',delivery:'deliveryPanel'}[b.dataset.focus],panel=$(id);if(panel){panel.classList.remove('focus-highlight');void panel.offsetWidth;panel.classList.add('focus-highlight');setTimeout(()=>panel.classList.remove('focus-highlight'),1800);}toast(b.dataset.focus==='overview'?'当前为公司运营总览':'已定位：'+b.textContent.trim());}
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape')hideTooltip();if(['Enter',' '].includes(e.key)&&e.target.matches('[data-kpi],[data-row]')){e.preventDefault();e.target.click();}});
   for(const [id,key] of [['yearSelect','year'],['unitSelect','unit'],['businessSelect','business']])$(id).addEventListener('change',e=>{state[key]=key==='year'?+e.target.value:e.target.value;render();});

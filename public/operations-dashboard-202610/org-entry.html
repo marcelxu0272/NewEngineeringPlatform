@@ -1,0 +1,1015 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>公司组织架构图 - 更新版</title>
+    <style>
+      /* ========== 颜色变量（经典主题） ========== */
+      :root {
+        /* 通用 */
+        --color-white: #ffffff;
+        --color-text-primary: #000000ee;
+        --color-border-neutral: #7f7f7f;
+        --color-bg-neutral-light: #f2f2f2;
+        --color-bg-neutral-medium: #d9d9d9;
+        --color-border-client: #7f8b98;
+        /* 滚动条 */
+        --color-scrollbar-track: #f1f1f1;
+        --color-scrollbar-thumb: #888;
+        --color-scrollbar-thumb-hover: #555;
+        /* 箭头/连接线 */
+        --color-arrow: #bebebe;
+        /* 董事会/管理团队 - #fe7138 色系 */
+        --color-board-bg: #fff0eb;
+        --color-board-border: #fe7138;
+        /* 项目交付保障 - 经典主题 */
+        --color-delivery-assurance: #00706a;
+        --color-delivery-assurance-box-bg: #b3dfdc;
+        --color-delivery-assurance-bg: #e0f2f1;
+
+        /* 项目交付 - 经典主题 */
+        --color-projects-delivery: #66386c;
+        --color-projects-delivery-item-bg: #d4b7d9;
+        --color-projects-delivery-bg: #f5ecf7;
+        /* 业务保障 - 经典主题 */
+        --color-business-assurance: #002fa7;
+        --color-business-assurance-box-bg: #b8c4eb;
+        --color-business-assurance-bg: #e8eaf5; 
+        /* 委员会 - 主色 #630507 */
+        --color-committee-header: #630507;
+        --color-committee-box-bg: #ecd4d5;
+        --color-committee-section-bg: #f9ecee;
+
+        /* --color-delivery-assurance: #00706a;
+        --color-delivery-assurance-box-bg: #b3dfdc;
+        --color-delivery-assurance-bg: #e0f2f1;
+
+        --color-business-assurance: #002fa7;
+        --color-business-assurance-box-bg: #b8c4eb;
+        --color-business-assurance-bg: #e8eaf5; */
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Microsoft YaHei", 微软雅黑, Arial, sans-serif;
+        background-color: var(--color-white);
+        padding: 20px;
+        overflow-x: auto;
+      }
+
+      .container {
+        min-width: 1200px;
+        max-width: 1600px;
+        margin: 0 auto;
+      }
+
+      .org-chart {
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* 箭头样式 */
+      .arrow-down {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 20px;
+        position: relative;
+      }
+
+      .arrow-down::before {
+        content: "";
+        width: 3px;
+        height: 15px;
+        background-color: var(--color-arrow);
+        position: absolute;
+        bottom: 0;
+      }
+
+      .arrow-down::after {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 12px solid var(--color-arrow);
+        position: absolute;
+        top: 0;
+      }
+
+      /* 顶层样式 */
+      .level {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .box {
+        padding: 4px 20px;
+        border: 1px solid;
+        text-align: center;
+        font-size: 14px;
+        border-radius: 4px;
+      }
+
+      .box-title {
+        font-weight: 700;
+        font-size: 14px;
+        margin-bottom: 4px;
+      }
+
+      .box-subtitle {
+        font-weight: 400;
+        font-size: 12px;
+      }
+
+      /* 董事会层级 */
+      .board-level .box {
+        background-color: var(--color-board-bg);
+        border-color: var(--color-board-border);
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          0 4px 16px rgba(254, 113, 56, 0.12),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        transition: all 0.3s ease;
+      }
+
+      .board-level .box:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.12),
+          0 8px 24px rgba(254, 113, 56, 0.18),
+          inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      }
+
+      /* 管理团队层级 */
+      .elt-level .box {
+        background-color: var(--color-board-bg);
+        border-color: var(--color-board-border);
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          0 4px 16px rgba(254, 113, 56, 0.12),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        transition: all 0.3s ease;
+      }
+
+      .elt-level .box:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.12),
+          0 8px 24px rgba(254, 113, 56, 0.18),
+          inset 0 1px 0 rgba(255, 255, 255, 0.7);
+      }
+
+      /* 委员会 */
+      .committee-section {
+        background-color: var(--color-committee-section-bg);
+        border: 1px solid var(--color-committee-header);
+        padding: 15px;
+        border-radius: 4px;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          0 4px 16px rgba(0, 0, 0, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .committee-section:hover {
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.1),
+          0 8px 24px rgba(0, 0, 0, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      }
+
+      .committee-header {
+        background-color: var(--color-committee-header);
+        color: var(--color-white);
+        text-align: center;
+        font-size: 14px;
+        padding: 4px 0;
+        margin: -15px -15px 15px -15px;
+        border-radius: 0;
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.15),
+          0 0 20px rgba(99, 5, 7, 0.2);
+      }
+
+      .committee-box {
+        background-color: var(--color-committee-box-bg);
+        border: 1px solid var(--color-committee-header);
+        padding: 8px 12px;
+        margin-bottom: 16px;
+        border-radius: 4px;
+        box-shadow: 
+          0 1px 3px rgba(0, 0, 0, 0.06),
+          0 0 8px rgba(99, 5, 7, 0.08);
+        transition: all 0.2s ease;
+      }
+
+      .committee-box:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.1),
+          0 0 12px rgba(99, 5, 7, 0.15);
+      }
+
+      /* 主业务区域 */
+      .main-section {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr 1fr;
+        gap: 20px;
+      }
+
+      /* 项目交付 */
+      .projects-delivery {
+        background-color: var(--color-projects-delivery-bg);
+        border: 1px solid var(--color-projects-delivery);
+        padding: 15px;
+        border-radius: 4px;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          0 4px 16px rgba(0, 0, 0, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .projects-delivery:hover {
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.1),
+          0 8px 24px rgba(0, 0, 0, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      }
+
+      .projects-delivery-header {
+        background-color: var(--color-projects-delivery);
+        color: var(--color-white);
+        text-align: center;
+        font-size: 14px;
+        padding: 4px 0;
+        margin: -15px -15px 15px -15px;
+        border-radius: 0;
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.15),
+          0 0 20px rgba(5, 54, 126, 0.2);
+      }
+
+      .project-group {
+        margin-bottom: 20px;
+        border-radius: 4px;
+      }
+
+        /* 项目群行容器 - 用于两列布局 */
+        .project-group-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .project-group-row .project-group {
+            margin-bottom: 0;
+        }
+
+        /* 西部项目群和EPC容器 - 3列布局 */
+        .west-epc-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        /* 西部项目群占2列 */
+        .west-project-group {
+            grid-column: span 2;
+        }
+
+        /* 西部项目群内的项目行，使其项目占据一半（1列）*/
+        .west-project-group .project-items-row {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        /* 公司级EPC项目占1列 */
+        .epc-project-group {
+            grid-column: span 1;
+        }
+
+      .project-group-header {
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--color-projects-delivery);
+        margin-bottom: 8px;
+        border-bottom: 2px solid var(--color-projects-delivery);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-shadow: 0 0 15px rgba(5, 54, 126, 0.15);
+        transition: text-shadow 0.3s ease;
+      }
+
+      .project-group-header:hover {
+        text-shadow: 0 0 20px rgba(5, 54, 126, 0.25);
+      }
+
+      a.project-group-header {
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      a.project-group-header:hover {
+        color: inherit;
+      }
+
+      button.project-group-header {
+        cursor: pointer;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      button.project-group-header:hover {
+        color: inherit;
+      }
+
+      .project-group-header > span:first-child {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .project-group-header > span:first-child::after {
+        content: "";
+        width: 20px;
+        height: 20px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+                /* 箭头图标 fill 与 --color-projects-delivery 一致 */
+        background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 1024 1024"%3E%3Cpath fill="%2305367e" d="M512 1024q-139 0-257-68.5T68.5 769T0 512t68.5-257T255 68.5T512 0t257 68.5T955.5 255t68.5 257t-68.5 257T769 955.5T512 1024m319-518v-4q0-3-1-5q0-1-.5-2.5t-1-2t-1-2.5t-.5-3q-5-14-13-22L623 274q-19-19-46-19t-46 19t-19 46t19 46l82 82H256q-26 0-45 19t-19 45t19 45t45 19h357l-82 82q-19 19-19 46t19 46t46 19t46-19l191-191q21-21 17-53"/%3E%3C/svg%3E');
+        background-size: 16px 16px;
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      .project-group-leader {
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--color-projects-delivery);
+      }
+
+      .project-items-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+      }
+
+      .project-items-single-column {
+        grid-template-columns: 1fr !important;
+      }
+
+      .project-item {
+        background-color: var(--color-projects-delivery-item-bg);
+        border: 1px solid var(--color-projects-delivery);
+        padding: 8px 12px;
+        border-radius: 3px;
+        box-shadow: 
+          0 1px 3px rgba(0, 0, 0, 0.06),
+          0 0 8px rgba(5, 54, 126, 0.08);
+        transition: all 0.2s ease;
+      }
+
+      .project-item:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.1),
+          0 0 12px rgba(5, 54, 126, 0.15);
+      }
+
+      .project-item-title {
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      .project-item-manager {
+        font-weight: 400;
+        font-size: 12px;
+        margin-top: 3px;
+      }
+
+      /* 公司级EPC指标弹窗 */
+      .epc-metrics-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+      }
+      .epc-metrics-overlay.is-open {
+        display: flex;
+      }
+      .epc-metrics-modal {
+        background: var(--color-white);
+        border: 1px solid var(--color-projects-delivery);
+        border-radius: 6px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        min-width: 320px;
+        padding: 0;
+        overflow: hidden;
+      }
+      .epc-metrics-modal .epc-metrics-title {
+        background: var(--color-projects-delivery);
+        color: var(--color-white);
+        font-size: 14px;
+        font-weight: 700;
+        padding: 10px 16px;
+        margin: 0;
+      }
+      .epc-metrics-modal .epc-metrics-body {
+        padding: 16px;
+      }
+      .epc-metrics-modal .epc-metrics-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--color-bg-neutral-light);
+        font-size: 14px;
+      }
+      .epc-metrics-modal .epc-metrics-row:last-child {
+        border-bottom: none;
+      }
+      .epc-metrics-modal .epc-metrics-label {
+        color: var(--color-text-primary);
+      }
+      .epc-metrics-modal .epc-metrics-value {
+        font-weight: 700;
+        color: var(--color-projects-delivery);
+      }
+      .epc-metrics-modal .epc-metrics-close {
+        display: block;
+        width: 100%;
+        margin-top: 12px;
+        padding: 8px 16px;
+        font-size: 14px;
+        color: var(--color-projects-delivery);
+        background: var(--color-projects-delivery-bg);
+        border: 1px solid var(--color-projects-delivery);
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .epc-metrics-modal .epc-metrics-close:hover {
+        background: var(--color-projects-delivery-item-bg);
+      }
+
+      /* 项目交付保障 */
+      .delivery-assurance {
+        background-color: var(--color-delivery-assurance-bg);
+        border: 1px solid var(--color-delivery-assurance);
+        padding: 15px;
+        border-radius: 4px;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          0 4px 16px rgba(0, 0, 0, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .delivery-assurance:hover {
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.1),
+          0 8px 24px rgba(0, 0, 0, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      }
+
+      .delivery-assurance-header {
+        background-color: var(--color-delivery-assurance);
+        color: var(--color-white);
+        text-align: center;
+        font-size: 14px;
+        padding: 4px 0;
+        margin: -15px -15px 15px -15px;
+        border-radius: 0;
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.15),
+          0 0 20px rgba(46, 101, 157, 0.2);
+      }
+
+      .assurance-box {
+        background-color: var(--color-delivery-assurance-box-bg);
+        border: 1px solid var(--color-delivery-assurance);
+        padding: 8px 12px;
+        margin-bottom: 16px;
+        border-radius: 3px;
+        box-shadow: 
+          0 1px 3px rgba(0, 0, 0, 0.06),
+          0 0 8px rgba(46, 101, 157, 0.08);
+        transition: all 0.2s ease;
+      }
+
+      .assurance-box:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.1),
+          0 0 12px rgba(46, 101, 157, 0.15);
+      }
+
+      /* 业务保障 */
+      .business-assurance {
+        background-color: var(--color-business-assurance-bg);
+        border: 1px solid var(--color-business-assurance);
+        padding: 15px;
+        border-radius: 4px;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.08),
+          0 4px 16px rgba(0, 0, 0, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        transition: box-shadow 0.3s ease;
+      }
+
+      .business-assurance:hover {
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.1),
+          0 8px 24px rgba(0, 0, 0, 0.06),
+          inset 0 1px 0 rgba(255, 255, 255, 0.6);
+      }
+
+      .business-assurance-header {
+        background-color: var(--color-business-assurance);
+        color: var(--color-white);
+        text-align: center;
+        font-size: 14px;
+        padding: 4px 0;
+        margin: -15px -15px 15px -15px;
+        border-radius: 0;
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.15),
+          0 0 20px rgba(183, 25, 56, 0.2);
+      }
+
+      .business-box {
+        background-color: var(--color-business-assurance-box-bg);
+        border: 1px solid var(--color-business-assurance);
+        padding: 8px 12px;
+        margin-bottom: 16px;
+        border-radius: 3px;
+        box-shadow: 
+          0 1px 3px rgba(0, 0, 0, 0.06),
+          0 0 8px rgba(183, 25, 56, 0.08);
+        transition: all 0.2s ease;
+      }
+
+      .business-box:hover {
+        transform: translateY(-3px);
+        box-shadow: 
+          0 2px 6px rgba(0, 0, 0, 0.1),
+          0 0 12px rgba(183, 25, 56, 0.15);
+      }
+
+      /* 客户层级 */
+      .client-level .box {
+        background-color: var(--color-bg-neutral-light);
+        border-color: var(--color-border-client);
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.06),
+          0 4px 16px rgba(0, 0, 0, 0.03),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        transition: all 0.3s ease;
+      }
+
+      .client-level .box:hover {
+        transform: translateY(-2px);
+        box-shadow: 
+          0 4px 12px rgba(0, 0, 0, 0.1),
+          0 8px 24px rgba(0, 0, 0, 0.05),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      }
+
+      /* 响应式设计 */
+      @media (max-width: 1400px) {
+        .container {
+          min-width: 100%;
+        }
+
+        .main-section {
+          grid-template-columns: 1fr;
+        }
+
+        .project-group {
+          break-inside: avoid;
+        }
+
+        .project-group-row {
+          grid-template-columns: 1fr;
+        }
+
+        .project-items-row {
+          grid-template-columns: 1fr;
+        }
+
+        /* 移动端下西部项目群内项目（如银川中心）占满整行 */
+        .west-project-group .project-items-row {
+          grid-template-columns: 1fr;
+        }
+
+        .west-epc-container {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (min-width: 1401px) and (max-width: 1600px) {
+        .project-items-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media print {
+        body {
+          padding: 10px;
+        }
+
+        .container {
+          max-width: 100%;
+        }
+      }
+
+      /* 滚动条样式 */
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--color-scrollbar-track);
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--color-scrollbar-thumb);
+        border-radius: 5px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-scrollbar-thumb-hover);
+      }
+
+    
+      a.box.board-entry-link {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        display: block;
+      }
+      a.box.board-entry-link:hover {
+        color: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="org-chart">
+        <!-- 客户层 -->
+        <div class="level client-level">
+          <div class="box">
+            <div class="box-title">Clients 客户</div>
+          </div>
+        </div>
+
+        <!-- 箭头 -->
+        <div class="arrow-down"></div>
+
+        <!-- 主业务区域 -->
+        <div class="main-section">
+          <!-- 项目交付保障 -->
+          <div class="delivery-assurance">
+            <div class="delivery-assurance-header">
+              <div>Projects Delivery Assurance</div>
+              <div>项目交付保障</div>
+            </div>
+            <div class="assurance-box">
+              <div class="box-title">SAS410 工艺设备室</div>
+              <div class="box-subtitle">庞潇健</div>
+            </div>
+            <div class="assurance-box">
+              <div class="box-title">SAS420 配管室</div>
+              <div class="box-subtitle">张晓东</div>
+            </div>
+            <div class="assurance-box">
+              <div class="box-title">SAS440 仪电室</div>
+              <div class="box-subtitle">夏杰</div>
+            </div>
+            <div class="assurance-box">
+              <div class="box-title">SAS450 项目管理服务部</div>
+              <div class="box-subtitle">吴爱军</div>
+            </div>
+            <div class="assurance-box">
+              <div class="box-title">SAS460 土建室</div>
+              <div class="box-subtitle">范少勇</div>
+            </div>
+          </div>
+
+          <!-- 项目交付 -->
+          <div class="projects-delivery">
+            <div class="projects-delivery-header">
+              <div>Projects Delivery</div>
+              <div>项目交付</div>
+            </div>
+            <!-- 新业务项目群 -->
+            <div class="project-group">
+              <a class="project-group-header" href="/dashboard/org/xinyewu" target="_top">
+                <span>SAS850 新业务项目群</span>
+                <span class="project-group-leader">任宇</span>
+              </a>
+              <div class="project-items-row">
+                <div class="project-item">
+                  <div class="project-item-title">SAS170 PMC板块</div>
+                  <div class="project-item-manager">颜中</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS610 咨询板块</div>
+                  <div class="project-item-manager">王建平</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS680 数字技术板块</div>
+                  <div class="project-item-manager">潘日成</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- NM&LS 项目群 -->
+            <div class="project-group">
+              <a class="project-group-header" href="/dashboard/org/nm-ls" target="_top">
+                <span>SAS840 NM&LS 项目群</span>
+                <span class="project-group-leader">潘建兴</span>
+              </a>
+              <div class="project-items-row">
+                <div class="project-item">
+                  <div class="project-item-title">SAS650 新材料板块</div>
+                  <div class="project-item-manager">陈贺明</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS710 生命科学板块</div>
+                  <div class="project-item-manager">杨润宇</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 海外项目群 -->
+            <div class="project-group">
+              <a class="project-group-header" href="/dashboard/org/haiwai" target="_top">
+                <span>SAS830 海外项目群</span>
+                <span class="project-group-leader">李湛湘</span>
+              </a>
+              <div class="project-items-row">
+                <div class="project-item">
+                  <div class="project-item-title">SAS690 COII板块</div>
+                  <div class="project-item-manager">周翔</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS720 模块化板块</div>
+                  <div class="project-item-manager">朱勇</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS670 供应链板块</div>
+                  <div class="project-item-manager">张雯</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 东部项目群 -->
+            <div class="project-group">
+              <a class="project-group-header" href="/dashboard/org/dongbu" target="_top">
+                <span>SAS810 东部项目群</span>
+                <span class="project-group-leader">钟富优</span>
+              </a>
+              <div class="project-items-row">
+                <div class="project-item">
+                  <div class="project-item-title">SAS520 金山中心</div>
+                  <div class="project-item-manager">钟富优</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS560 沈阳中心</div>
+                  <div class="project-item-manager">朱新辉</div>
+                </div>
+                <div class="project-item">
+                  <div class="project-item-title">SAS550 惠湛中心</div>
+                  <div class="project-item-manager">赵卫强</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 西部项目群和公司级EPC项目群 -->
+            <div class="west-epc-container">
+              <!-- 西部项目群 - 占2列 -->
+              <div class="west-project-group">
+                <div class="project-group" style="margin-bottom: 0px;">
+                  <a class="project-group-header" href="/dashboard/org/xibu" target="_top" style="margin-right: 8px;">
+                    <span>SAS820 西部项目群</span>
+                    <span class="project-group-leader">梁栋</span>
+                  </a>
+                  <div class="project-items-row">
+                    <div class="project-item">
+                      <div class="project-item-title">SAS530 银川中心</div>
+                      <div class="project-item-manager">杨科</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 公司级EPC项目 - 占1列 -->
+              <div class="epc-project-group">
+                <div class="project-group">
+                  <a class="project-group-header project-group-header-epc" id="epc-detail-trigger" title="查看指标">
+                    <span>公司级EPC项目</span>
+                    <span class="project-group-leader"></span>
+                  </a>
+                  <div class="project-items-row">
+                    <!-- 空着，不显示具体项目 -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 业务保障 -->
+          <div class="business-assurance">
+            <div class="business-assurance-header">
+              <div>Business Assurance</div>
+              <div>业务保障</div>
+            </div>
+            <div class="business-box">
+              <div class="box-title">SAS110 运营保障部</div>
+              <div class="box-subtitle">李永辉</div>
+            </div>
+            <div class="business-box">
+              <div class="box-title">SAS130 采购管理部</div>
+              <div class="box-subtitle">李晶</div>
+            </div>
+            <div class="business-box">
+              <div class="box-title">SAS160 市场部</div>
+              <div class="box-subtitle">钱蓓</div>
+            </div>
+            <div class="business-box">
+              <div class="box-title">SAS180 绩效与财务部</div>
+              <div class="box-subtitle">沈风华</div>
+            </div>
+            <div class="business-box">
+              <div class="box-title">SAS150 人力资源部</div>
+              <div class="box-subtitle">董晓迪</div>
+            </div>
+          </div>
+
+          <!-- 委员会 -->
+          <div class="committee-section">
+            <div class="committee-header">
+              <div>Committee</div>
+              <div>委员会</div>
+            </div>
+            <div class="committee-box">
+              <div class="box-title">SAS210 技术委员会</div>
+              <div class="box-subtitle">梁泽磊</div>
+            </div>
+            <div class="committee-box">
+              <div class="box-title">SAS230 安全委员会</div>
+              <div class="box-subtitle">李永辉</div>
+            </div>
+            <div class="committee-box">
+              <div class="box-title" style="font-size: 13px">
+                SAS260 EPC 项目管理委员会
+              </div>
+              <div class="box-subtitle">潘建兴</div>
+            </div>
+            <div class="committee-box">
+              <div class="box-title">SAS270 合规委员会</div>
+              <div class="box-subtitle">仇振军</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 箭头 -->
+        <div class="arrow-down"></div>
+
+        <!-- 管理团队层 -->
+        <div class="level elt-level">
+          <div class="box">
+            <div class="box-title">
+              General Manager & ELT 总经理及公司管理团队
+            </div>
+          </div>
+        </div>
+
+        <!-- 箭头 -->
+        <div class="arrow-down"></div>
+
+        <!-- 董事会层：副本可点 → 运营看板内容页 -->
+        <div class="level board-level">
+          <a class="box board-entry-link" href="/operations-dashboard-202610/board" target="_top" title="进入运营看板">
+            <div class="box-title">Board 董事会</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 公司级EPC指标弹窗 -->
+    <div class="epc-metrics-overlay" id="epc-metrics-overlay" role="dialog" aria-modal="true" aria-labelledby="epc-metrics-title">
+      <div class="epc-metrics-modal">
+        <h2 class="epc-metrics-title" id="epc-metrics-title">公司级EPC项目 指标</h2>
+        <div class="epc-metrics-body">
+          <div class="epc-metrics-row">
+            <span class="epc-metrics-label">新增合同额</span>
+            <span class="epc-metrics-value">80,000</span>
+          </div>
+          <div class="epc-metrics-row">
+            <span class="epc-metrics-label">完成合同额（外部产值）</span>
+            <span class="epc-metrics-value">30,000</span>
+          </div>
+          <div class="epc-metrics-row">
+            <span class="epc-metrics-label">开票额</span>
+            <span class="epc-metrics-value">30,000</span>
+          </div>
+          <div class="epc-metrics-row">
+            <span class="epc-metrics-label">回款额</span>
+            <span class="epc-metrics-value">30,000</span>
+          </div>
+          <button type="button" class="epc-metrics-close" id="epc-metrics-close">关闭</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 自适应调整
+      function adjustLayout() {
+        const container = document.querySelector(".container");
+        const windowWidth = window.innerWidth;
+
+        if (windowWidth < 1400) {
+          container.style.minWidth = "100%";
+        } else {
+          container.style.minWidth = "1200px";
+        }
+      }
+
+      // 初始化和窗口大小变化时调整
+      window.addEventListener("load", adjustLayout);
+      window.addEventListener("resize", adjustLayout);
+
+      // 打印功能
+      function printChart() {
+        window.print();
+      }
+
+      // 可以添加打印按钮
+      document.addEventListener("DOMContentLoaded", function () {
+        console.log("组织架构图已加载");
+      });
+
+      // ========== 经典主题（箭头图标颜色初始化） ==========
+      const CLASSIC_THEME_COLORS = {
+        "projects-delivery": "#66386c",
+      };
+
+      // 更新箭头图标颜色
+      function updateArrowIcon(color) {
+        const encodedColor = encodeURIComponent(color);
+        const style = document.createElement("style");
+        style.textContent = `
+          .project-group-header > span:first-child::after {
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 1024 1024"%3E%3Cpath fill="${encodedColor}" d="M512 1024q-139 0-257-68.5T68.5 769T0 512t68.5-257T255 68.5T512 0t257 68.5T955.5 255t68.5 257t-68.5 257T769 955.5T512 1024m319-518v-4q0-3-1-5q0-1-.5-2.5t-1-2t-1-2.5t-.5-3q-5-14-13-22L623 274q-19-19-46-19t-46 19t-19 46t19 46l82 82H256q-26 0-45 19t-19 45t19 45t45 19h357l-82 82q-19 19-19 46t19 46t46 19t46-19l191-191q21-21 17-53"/%3E%3C/svg%3E') !important;
+          }
+        `;
+        const oldStyle = document.getElementById("dynamic-arrow-style");
+        if (oldStyle) oldStyle.remove();
+        style.id = "dynamic-arrow-style";
+        document.head.appendChild(style);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        updateArrowIcon(CLASSIC_THEME_COLORS["projects-delivery"]);
+
+        // 公司级EPC指标弹窗
+        var overlay = document.getElementById("epc-metrics-overlay");
+        var trigger = document.getElementById("epc-detail-trigger");
+        var closeBtn = document.getElementById("epc-metrics-close");
+        if (trigger) {
+          trigger.addEventListener("click", function () {
+            if (overlay) overlay.classList.add("is-open");
+          });
+        }
+        function closeEpcModal() {
+          if (overlay) overlay.classList.remove("is-open");
+        }
+        if (closeBtn) closeBtn.addEventListener("click", closeEpcModal);
+        if (overlay) {
+          overlay.addEventListener("click", function (e) {
+            if (e.target === overlay) closeEpcModal();
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
