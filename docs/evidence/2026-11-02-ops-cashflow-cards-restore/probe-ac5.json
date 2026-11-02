@@ -1,0 +1,143 @@
+{
+  "pass": true,
+  "ac5": {
+    "rule": "inflow/outflow strong = --primary; net >0 success, <0 danger, ==0 primary",
+    "themesDiffer": true,
+    "teal": {
+      "theme": "teal",
+      "tokens": {
+        "primary": "#008b8b",
+        "success": "#06997d",
+        "danger": "#e94f68",
+        "theme": "teal"
+      },
+      "inflow": {
+        "label": "现金流入",
+        "value": "201,508.59",
+        "color": "rgb(0, 139, 139)",
+        "inline": "color:#008b8b",
+        "valuePx": 34.112,
+        "tone": "tone-primary",
+        "matchPrimary": true
+      },
+      "outflow": {
+        "label": "现金流出",
+        "value": "185,425.82",
+        "color": "rgb(0, 139, 139)",
+        "inline": "color:#008b8b",
+        "valuePx": 34.112,
+        "tone": "tone-primary",
+        "matchPrimary": true
+      },
+      "net": {
+        "label": "净现金流",
+        "value": "16,082.77",
+        "color": "rgb(6, 153, 125)",
+        "inline": "color:#06997d",
+        "valuePx": 34.112,
+        "tone": "tone-primary",
+        "netVal": 16082.77,
+        "matchSignColor": true,
+        "expect": "success/green"
+      },
+      "valuePxOk": true,
+      "series": {
+        "names": [
+          "当月流入",
+          "当月流出",
+          "当年累计净现金流"
+        ],
+        "grouping": false,
+        "hasZones": true
+      },
+      "pass": true
+    },
+    "blue": {
+      "theme": "blue",
+      "tokens": {
+        "primary": "#306da9",
+        "success": "#238b77",
+        "danger": "#df5c70",
+        "theme": "blue"
+      },
+      "inflow": {
+        "label": "现金流入",
+        "value": "201,508.59",
+        "color": "rgb(48, 109, 169)",
+        "inline": "color:#306da9",
+        "valuePx": 34.112,
+        "tone": "tone-primary",
+        "matchPrimary": true
+      },
+      "outflow": {
+        "label": "现金流出",
+        "value": "185,425.82",
+        "color": "rgb(48, 109, 169)",
+        "inline": "color:#306da9",
+        "valuePx": 34.112,
+        "tone": "tone-primary",
+        "matchPrimary": true
+      },
+      "net": {
+        "label": "净现金流",
+        "value": "16,082.77",
+        "color": "rgb(35, 139, 119)",
+        "inline": "color:#238b77",
+        "valuePx": 34.112,
+        "tone": "tone-primary",
+        "netVal": 16082.77,
+        "matchSignColor": true,
+        "expect": "success/green"
+      },
+      "valuePxOk": true,
+      "series": {
+        "names": [
+          "当月流入",
+          "当月流出",
+          "当年累计净现金流"
+        ],
+        "grouping": false,
+        "hasZones": true
+      },
+      "pass": true
+    },
+    "negativeForced": {
+      "label": "净现金流",
+      "value": "-1,234.00",
+      "color": "rgb(223, 92, 112)",
+      "dangerToken": "#df5c70",
+      "dangerComputed": "rgb(223, 92, 112)",
+      "note": "forced-negative-DOM-sample for AC5 red evidence (demo vals normally positive); code path vals[2]<0 uses colors.danger",
+      "matchDanger": true
+    }
+  },
+  "regressions": {
+    "cardsPresent": true,
+    "names": [
+      "现金流入",
+      "现金流出",
+      "净现金流"
+    ],
+    "valuePx": [
+      34.112,
+      34.112,
+      34.112
+    ],
+    "series": {
+      "names": [
+        "当月流入",
+        "当月流出",
+        "当年累计净现金流"
+      ],
+      "grouping": false,
+      "hasZones": true
+    }
+  },
+  "screenshots": [
+    "03-ac5-cash-colors-blue.png",
+    "04-ac5-cash-colors-teal.png",
+    "05-ac5-cash-cards-closeup.png",
+    "06-ac5-net-negative-forced.png"
+  ],
+  "ts": "2026-11-02T08:58:11.753Z"
+}

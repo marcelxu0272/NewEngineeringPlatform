@@ -1,0 +1,103 @@
+{
+  "pass": true,
+  "beforeAnchor": {
+    "kpi": 23,
+    "risk": 20
+  },
+  "after": {
+    "kpiPx": [
+      29.952,
+      29.952,
+      29.952,
+      29.952
+    ],
+    "riskPx": [
+      29.952,
+      29.952,
+      29.952,
+      29.952
+    ],
+    "load": {
+      "monthly": 29.952,
+      "annual": 29.952,
+      "sub": 11
+    },
+    "deltaNum": 12,
+    "deltaLabel": 11,
+    "riskSmall": [
+      11,
+      11,
+      11,
+      11
+    ]
+  },
+  "info": {
+    "kpiValues": [
+      {
+        "text": "9,234.31",
+        "px": 29.952,
+        "trunc": false
+      },
+      {
+        "text": "12,331.02",
+        "px": 29.952,
+        "trunc": false
+      },
+      {
+        "text": "9,172.22",
+        "px": 29.952,
+        "trunc": false
+      },
+      {
+        "text": "13,459.19",
+        "px": 29.952,
+        "trunc": false
+      }
+    ],
+    "riskStrongs": [
+      {
+        "label": "应收账款",
+        "text": "1,001.11",
+        "px": 29.952
+      },
+      {
+        "label": "WIP",
+        "text": "2,587.49",
+        "px": 29.952
+      },
+      {
+        "label": "存货",
+        "text": "2,200.48",
+        "px": 29.952
+      },
+      {
+        "label": "营业收入",
+        "text": "3,280.60",
+        "px": 29.952
+      }
+    ],
+    "riskSmall": [
+      11,
+      11,
+      11,
+      11
+    ],
+    "deltaNum": 12,
+    "deltaLabel": 11,
+    "load": {
+      "monthly": 29.952,
+      "annual": 29.952,
+      "sub": 11
+    },
+    "hasVisibleTongbi": false,
+    "monthlyPeriod": "较上期 4.8% ↑",
+    "ratios": {
+      "left": 0.25,
+      "mid": 0.5,
+      "right": 0.25
+    },
+    "loadH": 150,
+    "cashSub": true
+  },
+  "ts": "2026-11-02T08:47:24.705Z"
+}

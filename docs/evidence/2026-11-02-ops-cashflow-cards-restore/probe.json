@@ -1,0 +1,51 @@
+{
+  "pass": true,
+  "info": {
+    "metricsDisplay": "grid",
+    "cards": [
+      {
+        "name": "现金流入",
+        "value": "201,508.59",
+        "valuePx": 29.952,
+        "delta": "较上期 +3.2% ↑",
+        "top": 47.828125
+      },
+      {
+        "name": "现金流出",
+        "value": "185,425.82",
+        "valuePx": 29.952,
+        "delta": "较上期 -2.1% ↓",
+        "top": 47.828125
+      },
+      {
+        "name": "净现金流",
+        "value": "16,082.77",
+        "valuePx": 29.952,
+        "delta": "较上期 +4.6% ↑",
+        "top": 47.828125
+      }
+    ],
+    "cardsAboveChart": true,
+    "sub": "当年现金流趋势\n（万元）",
+    "main": "现金流与资金安全\n（万元）\n?",
+    "series": [
+      "当月流入",
+      "当月流出",
+      "当年累计净现金流"
+    ],
+    "grouping": false,
+    "outNeg": true,
+    "inPos": true,
+    "hasLine": true,
+    "lineZones": true,
+    "spacingBottom": 18,
+    "kpiPx": 29.952,
+    "loadPx": 29.952,
+    "periodLabels": [
+      "较上期 +3.2% ↑",
+      "较上期 -2.1% ↓",
+      "较上期 +4.6% ↑"
+    ]
+  },
+  "ts": "2026-11-02T08:51:39.101Z"
+}

@@ -1,0 +1,44 @@
+{
+  "pass": true,
+  "ratioOk": true,
+  "metrics": {
+    "layoutW": 1081,
+    "widths": {
+      "left": 266.3,
+      "mid": 532.5,
+      "right": 266.3,
+      "total": 1065
+    },
+    "ratios": {
+      "left": 0.25,
+      "mid": 0.5,
+      "right": 0.25
+    },
+    "kpiLabels": [
+      "当月负荷率",
+      "年度负荷率"
+    ],
+    "emptyRightPx": 0,
+    "fillRatio": 1,
+    "chartInnerDir": "column",
+    "legendBelowDonut": true,
+    "kpiDeltas": [
+      "当月新增 862.40 占目标 8.6%",
+      "上月新增 968.35 占目标 6.9%",
+      "当月新增 738.25 占目标 6.7%",
+      "当月新增 1,126.80 占目标 7.0%"
+    ],
+    "hasTongbi": false,
+    "riskLabels": [
+      "应收账款",
+      "WIP",
+      "存货",
+      "营业收入"
+    ],
+    "loadH": 180,
+    "xAxisOk": true,
+    "columnsSideBySide": true,
+    "noHorizontalOverlap": true
+  },
+  "ts": "2026-11-02T07:41:06.489Z"
+}

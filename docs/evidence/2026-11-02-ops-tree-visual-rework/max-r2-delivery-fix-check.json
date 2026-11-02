@@ -1,0 +1,152 @@
+{
+  "pass": true,
+  "detail": {
+    "panelH": 339.890625,
+    "panelBottom": 1768.171875,
+    "innerBottom": 1751.171875,
+    "padBottom": 17,
+    "gapToAlert": 10,
+    "kids": [
+      {
+        "id": "DIV",
+        "text": "近6个月负荷率趋势?Created with Highcharts 12.4.0",
+        "bottom": 1750.171875,
+        "pastInner": -1,
+        "pastBox": -18
+      },
+      {
+        "id": "loadChart",
+        "text": "Created with Highcharts 12.4.0年度负荷率当月负荷率",
+        "bottom": 1741.171875,
+        "pastInner": -10,
+        "pastBox": -27
+      },
+      {
+        "id": "text",
+        "text": "当月负荷率",
+        "bottom": 1589.171875,
+        "pastInner": -162,
+        "pastBox": -179
+      },
+      {
+        "id": "text",
+        "text": "3月",
+        "bottom": 1738.171875,
+        "pastInner": -13,
+        "pastBox": -30
+      },
+      {
+        "id": "text",
+        "text": "5月",
+        "bottom": 1738.171875,
+        "pastInner": -13,
+        "pastBox": -30
+      },
+      {
+        "id": "text",
+        "text": "7月",
+        "bottom": 1738.171875,
+        "pastInner": -13,
+        "pastBox": -30
+      }
+    ],
+    "maxPastBox": -18,
+    "maxPastInner": -1,
+    "monthLabels": [
+      {
+        "id": "DIV",
+        "text": "近6个月负荷率趋势?Created with Highcharts 12.4.0",
+        "bottom": 1750.171875,
+        "pastInner": -1,
+        "pastBox": -18
+      },
+      {
+        "id": "loadChart",
+        "text": "Created with Highcharts 12.4.0年度负荷率当月负荷率",
+        "bottom": 1741.171875,
+        "pastInner": -10,
+        "pastBox": -27
+      },
+      {
+        "id": "text",
+        "text": "当月负荷率",
+        "bottom": 1589.171875,
+        "pastInner": -162,
+        "pastBox": -179
+      },
+      {
+        "id": "text",
+        "text": "3月",
+        "bottom": 1738.171875,
+        "pastInner": -13,
+        "pastBox": -30
+      },
+      {
+        "id": "text",
+        "text": "5月",
+        "bottom": 1738.171875,
+        "pastInner": -13,
+        "pastBox": -30
+      },
+      {
+        "id": "text",
+        "text": "7月",
+        "bottom": 1738.171875,
+        "pastInner": -13,
+        "pastBox": -30
+      }
+    ],
+    "mainScroll": {
+      "scrollH": 2031,
+      "clientH": 792,
+      "can": true
+    },
+    "cashH": 382.78125,
+    "overlaps": [],
+    "boxes": [
+      {
+        "id": "kpiGrid",
+        "top": 40,
+        "bottom": 251.78125,
+        "h": 211.78125
+      },
+      {
+        "id": "cashPanel",
+        "top": 261.78125,
+        "bottom": 644.5625,
+        "h": 382.78125
+      },
+      {
+        "id": "riskPanel",
+        "top": 654.5625,
+        "bottom": 1075.5625,
+        "h": 421
+      },
+      {
+        "id": "contributionPanel",
+        "top": 1085.5625,
+        "bottom": 1418.28125,
+        "h": 332.71875
+      },
+      {
+        "id": "targetPanel",
+        "top": 1085.5625,
+        "bottom": 1352.796875,
+        "h": 267.234375
+      },
+      {
+        "id": "deliveryPanel",
+        "top": 1428.28125,
+        "bottom": 1768.171875,
+        "h": 339.890625
+      },
+      {
+        "id": "alertPanel",
+        "top": 1778.171875,
+        "bottom": 2013.546875,
+        "h": 235.375
+      }
+    ]
+  },
+  "ts": "2026-11-02T07:24:07.356Z"
+}

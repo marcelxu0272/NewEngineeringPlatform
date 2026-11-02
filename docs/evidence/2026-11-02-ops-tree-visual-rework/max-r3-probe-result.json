@@ -1,0 +1,1169 @@
+{
+  "ts": "2026-11-02T07:26:55.094Z",
+  "actor": "Max-independent-r3-final",
+  "checks": {
+    "1_main_only_scroll": {
+      "pass": true,
+      "html": {
+        "overflowY": "hidden",
+        "scrollHeight": 820,
+        "clientHeight": 820,
+        "canScroll": false
+      },
+      "body": {
+        "overflowY": "hidden",
+        "scrollHeight": 820,
+        "clientHeight": 820,
+        "canScroll": false
+      },
+      "app": {
+        "overflowY": "hidden",
+        "scrollHeight": 820,
+        "clientHeight": 820,
+        "canScroll": false
+      },
+      "main": {
+        "overflowY": "auto",
+        "scrollHeight": 2121,
+        "clientHeight": 745,
+        "canScroll": true
+      },
+      "outerAny": false,
+      "outerScrollers": []
+    },
+    "3a_three_dropdowns_first_screen": {
+      "pass": true,
+      "selects": [
+        {
+          "text": "2026年度",
+          "top": 20,
+          "bottom": 54,
+          "visible": true
+        },
+        {
+          "text": "全部板块",
+          "top": 20,
+          "bottom": 54,
+          "visible": true
+        },
+        {
+          "text": "全部业务类型",
+          "top": 20,
+          "bottom": 54,
+          "visible": true
+        }
+      ]
+    },
+    "3b_default_blue_theme": {
+      "pass": true,
+      "dataTheme": "blue",
+      "ant": [
+        "深蓝主题"
+      ]
+    },
+    "12_no_dashboard_title": {
+      "pass": true,
+      "bodyTextHasTitle": false,
+      "titleHit": [
+        {
+          "text": "运营看板202610版",
+          "display": "none",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "运营看板202610版",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "新签合同额（万元）",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 482.5,
+          "h": 17.390625,
+          "visible": true
+        },
+        {
+          "text": "完成合同额（万元）",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 482.5,
+          "h": 17.390625,
+          "visible": true
+        },
+        {
+          "text": "完成开票额（万元）",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 482.5,
+          "h": 17.390625,
+          "visible": true
+        },
+        {
+          "text": "完成回款额（万元）",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 482.5,
+          "h": 17.390625,
+          "visible": true
+        },
+        {
+          "text": "现金流与资金安全（万元）?",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 203,
+          "h": 20.296875,
+          "visible": true
+        },
+        {
+          "text": "现金流趋势（万元）?",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 1081,
+          "h": 18,
+          "visible": true
+        },
+        {
+          "text": "现金流趋势（万元）",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 109,
+          "h": 17.390625,
+          "visible": true
+        },
+        {
+          "text": "",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "应收与资金风险（万元）?",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 189,
+          "h": 20.296875,
+          "visible": true
+        },
+        {
+          "text": "应收账款账龄结构（万元）?",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 1081,
+          "h": 18,
+          "visible": true
+        },
+        {
+          "text": "应收账款账龄结构（万元）",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 145,
+          "h": 17.390625,
+          "visible": true
+        },
+        {
+          "text": "",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "经营贡献分析?",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 121,
+          "h": 20.296875,
+          "visible": true
+        },
+        {
+          "text": "合同额结构占比?",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 523.5,
+          "h": 17.390625,
+          "visible": true
+        },
+        {
+          "text": "",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "板块目标达成?",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 121,
+          "h": 20.296875,
+          "visible": true
+        },
+        {
+          "text": "",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "工作负荷与交付保障?",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 163,
+          "h": 20.296875,
+          "visible": true
+        },
+        {
+          "text": "近6个月负荷率趋势?",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 152.25,
+          "h": 18,
+          "visible": true
+        },
+        {
+          "text": "近6个月负荷率趋势",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 103.40625,
+          "h": 17.390625,
+          "visible": true
+        },
+        {
+          "text": "",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "项目交付保障活动?",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 117.90625,
+          "h": 18,
+          "visible": true
+        },
+        {
+          "text": "项目交付保障活动",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 96,
+          "h": 17.390625,
+          "visible": true
+        },
+        {
+          "text": "",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        },
+        {
+          "text": "经营异常预警?",
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 121,
+          "h": 20.296875,
+          "visible": true
+        },
+        {
+          "text": "数据详情",
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 0,
+          "h": 0,
+          "visible": false
+        }
+      ]
+    },
+    "13_dropdown_vertical_padding": {
+      "pass": true,
+      "threeVisible": true,
+      "padT": 14,
+      "padB": 14,
+      "cPadT": 6,
+      "cPadB": 6,
+      "headerPad": {
+        "padT": 14,
+        "padB": 14,
+        "h": 75,
+        "top": 0,
+        "visible": true
+      },
+      "controlsPad": {
+        "padT": 6,
+        "padB": 6,
+        "tag": "DIV",
+        "cls": "header-controls"
+      }
+    },
+    "14_content_font_larger": {
+      "pass": true,
+      "bodyFs": 13,
+      "mainFs": 13,
+      "samples": [
+        {
+          "sel": ".kpi-card .kpi-value, .kpi-value",
+          "fs": 18,
+          "text": "9,234.31"
+        },
+        {
+          "sel": ".panel-head, .panel-title",
+          "fs": 13,
+          "text": "现金流与资金安全（万元）?"
+        },
+        {
+          "sel": "table, .contrib-table, td",
+          "fs": 12,
+          "text": "板块新签合同额（万元）回款额（万元）净现"
+        },
+        {
+          "sel": "#cashChart text, .highcharts-axis-labels text",
+          "fs": 13.2,
+          "text": ""
+        },
+        {
+          "sel": "panel-head",
+          "fs": 13
+        }
+      ]
+    },
+    "2_cash_trend_visible": {
+      "pass": true,
+      "cashVisual": {
+        "wrapH": 220,
+        "hcH": 220,
+        "pathCount": 19,
+        "clipped": false,
+        "top": 448.8125,
+        "bottom": 668.8125
+      },
+      "cashPanelH": 388.0625,
+      "cashOverflow": 0
+    },
+    "6c_loadChart_xaxis_not_clipped": {
+      "pass": true,
+      "loadCheck": {
+        "deliveryOverflow": "hidden",
+        "boxH": 347.125,
+        "chartH": 180,
+        "chartPast": -27,
+        "trendPast": -18,
+        "labels": [
+          {
+            "text": "3月",
+            "top": 1832.828125,
+            "bottom": 1846.828125,
+            "h": 14,
+            "pastBottom": -30,
+            "pastTop": -303.13,
+            "inside": true
+          },
+          {
+            "text": "5月",
+            "top": 1832.828125,
+            "bottom": 1846.828125,
+            "h": 14,
+            "pastBottom": -30,
+            "pastTop": -303.13,
+            "inside": true
+          },
+          {
+            "text": "7月",
+            "top": 1832.828125,
+            "bottom": 1846.828125,
+            "h": 14,
+            "pastBottom": -30,
+            "pastTop": -303.13,
+            "inside": true
+          },
+          {
+            "text": "60%",
+            "top": 1820.828125,
+            "bottom": 1834.828125,
+            "h": 14,
+            "pastBottom": -42,
+            "pastTop": -291.13,
+            "inside": true
+          },
+          {
+            "text": "80%",
+            "top": 1750.828125,
+            "bottom": 1764.828125,
+            "h": 14,
+            "pastBottom": -112,
+            "pastTop": -221.13,
+            "inside": true
+          },
+          {
+            "text": "100%",
+            "top": 1679.828125,
+            "bottom": 1693.828125,
+            "h": 14,
+            "pastBottom": -183,
+            "pastTop": -150.13,
+            "inside": true
+          }
+        ],
+        "anyClipped": false,
+        "allInside": true,
+        "deliveryOverflowPx": 0
+      }
+    },
+    "6_geometry_no_y_overlap": {
+      "pass": true,
+      "boxOverlaps": [],
+      "overflows": [
+        {
+          "id": "kpiGrid",
+          "overflow": 0
+        },
+        {
+          "id": "cashPanel",
+          "overflow": 0
+        },
+        {
+          "id": "riskPanel",
+          "overflow": 0
+        },
+        {
+          "id": "contributionPanel",
+          "overflow": 0
+        },
+        {
+          "id": "targetPanel",
+          "overflow": 0
+        },
+        {
+          "id": "deliveryPanel",
+          "overflow": 0
+        },
+        {
+          "id": "alertPanel",
+          "overflow": 0
+        }
+      ]
+    },
+    "6b_target_not_clipped_by_scrollbar": {
+      "pass": true,
+      "targetVisual": {
+        "h": 200,
+        "clippedBySb": false
+      }
+    },
+    "4_alert_fully_visible_at_bottom": {
+      "pass": true,
+      "fully": true,
+      "mostly": true,
+      "top": 510.828125,
+      "bottom": 771.25,
+      "h": 260.421875
+    },
+    "5_tree_follows_theme": {
+      "pass": true,
+      "before": {
+        "tag": "BUTTON",
+        "bg": "rgba(48, 109, 169, 0.12)",
+        "color": "rgb(48, 109, 169)"
+      },
+      "after": {
+        "tag": "BUTTON",
+        "bg": "rgba(0, 139, 139, 0.12)",
+        "color": "rgb(0, 139, 139)"
+      }
+    },
+    "6_combined": {
+      "pass": true
+    }
+  },
+  "failures": [],
+  "scrollInfo": {
+    "html": {
+      "overflowY": "hidden",
+      "scrollHeight": 820,
+      "clientHeight": 820,
+      "canScroll": false
+    },
+    "body": {
+      "overflowY": "hidden",
+      "scrollHeight": 820,
+      "clientHeight": 820,
+      "canScroll": false
+    },
+    "app": {
+      "overflowY": "hidden",
+      "scrollHeight": 820,
+      "clientHeight": 820,
+      "canScroll": false
+    },
+    "main": {
+      "overflowY": "auto",
+      "scrollHeight": 2121,
+      "clientHeight": 745,
+      "canScroll": true
+    },
+    "outerAny": false,
+    "outerScrollers": []
+  },
+  "chrome": {
+    "selects": [
+      {
+        "text": "2026年度",
+        "top": 20,
+        "bottom": 54,
+        "visible": true
+      },
+      {
+        "text": "全部板块",
+        "top": 20,
+        "bottom": 54,
+        "visible": true
+      },
+      {
+        "text": "全部业务类型",
+        "top": 20,
+        "bottom": 54,
+        "visible": true
+      }
+    ],
+    "titleHit": [
+      {
+        "text": "运营看板202610版",
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "运营看板202610版",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "新签合同额（万元）",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 482.5,
+        "h": 17.390625,
+        "visible": true
+      },
+      {
+        "text": "完成合同额（万元）",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 482.5,
+        "h": 17.390625,
+        "visible": true
+      },
+      {
+        "text": "完成开票额（万元）",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 482.5,
+        "h": 17.390625,
+        "visible": true
+      },
+      {
+        "text": "完成回款额（万元）",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 482.5,
+        "h": 17.390625,
+        "visible": true
+      },
+      {
+        "text": "现金流与资金安全（万元）?",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 203,
+        "h": 20.296875,
+        "visible": true
+      },
+      {
+        "text": "现金流趋势（万元）?",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 1081,
+        "h": 18,
+        "visible": true
+      },
+      {
+        "text": "现金流趋势（万元）",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 109,
+        "h": 17.390625,
+        "visible": true
+      },
+      {
+        "text": "",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "应收与资金风险（万元）?",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 189,
+        "h": 20.296875,
+        "visible": true
+      },
+      {
+        "text": "应收账款账龄结构（万元）?",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 1081,
+        "h": 18,
+        "visible": true
+      },
+      {
+        "text": "应收账款账龄结构（万元）",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 145,
+        "h": 17.390625,
+        "visible": true
+      },
+      {
+        "text": "",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "经营贡献分析?",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 121,
+        "h": 20.296875,
+        "visible": true
+      },
+      {
+        "text": "合同额结构占比?",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 523.5,
+        "h": 17.390625,
+        "visible": true
+      },
+      {
+        "text": "",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "板块目标达成?",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 121,
+        "h": 20.296875,
+        "visible": true
+      },
+      {
+        "text": "",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "工作负荷与交付保障?",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 163,
+        "h": 20.296875,
+        "visible": true
+      },
+      {
+        "text": "近6个月负荷率趋势?",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 152.25,
+        "h": 18,
+        "visible": true
+      },
+      {
+        "text": "近6个月负荷率趋势",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 103.40625,
+        "h": 17.390625,
+        "visible": true
+      },
+      {
+        "text": "",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "项目交付保障活动?",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 117.90625,
+        "h": 18,
+        "visible": true
+      },
+      {
+        "text": "项目交付保障活动",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 96,
+        "h": 17.390625,
+        "visible": true
+      },
+      {
+        "text": "",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      },
+      {
+        "text": "经营异常预警?",
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 121,
+        "h": 20.296875,
+        "visible": true
+      },
+      {
+        "text": "数据详情",
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "visible": false
+      }
+    ],
+    "bodyTextHasTitle": false,
+    "dataTheme": "blue",
+    "headerPad": {
+      "padT": 14,
+      "padB": 14,
+      "h": 75,
+      "top": 0,
+      "visible": true
+    },
+    "controlsPad": {
+      "padT": 6,
+      "padB": 6,
+      "tag": "DIV",
+      "cls": "header-controls"
+    },
+    "bodyFs": 13,
+    "mainFs": 13,
+    "samples": [
+      {
+        "sel": ".kpi-card .kpi-value, .kpi-value",
+        "fs": 18,
+        "text": "9,234.31"
+      },
+      {
+        "sel": ".panel-head, .panel-title",
+        "fs": 13,
+        "text": "现金流与资金安全（万元）?"
+      },
+      {
+        "sel": "table, .contrib-table, td",
+        "fs": 12,
+        "text": "板块新签合同额（万元）回款额（万元）净现"
+      },
+      {
+        "sel": "#cashChart text, .highcharts-axis-labels text",
+        "fs": 13.2,
+        "text": ""
+      },
+      {
+        "sel": "panel-head",
+        "fs": 13
+      }
+    ],
+    "headerHTML": "<header class=\"header\">\n  <div class=\"header-title\" hidden=\"\" aria-hidden=\"true\"><h1>运营看板202610版</h1></div>\n  <div class=\"header-controls\">\n   <label class=\"select-wrap has-icon\" data-tip=\"选择统计年度，所有指标与图表同步更新\"><svg class=\"select-icon\"><use href=\"#icon-clock\"></use></svg><select id=\"yearSelect\" aria-label=\"统计年度\"><option value=\"2026\">2026年度</option><option value=\"2025\">2025年度</option></select></label>\n   <label class=\"select-wrap\" data-tip=\"按组织板块筛选，所有模块使用同一统计范围\"><select id=\"unitSelect\" aria-label=\"组织板块\"><option value=\"全部板块\">全部板块</option><option value=\"设计院\">设计院</option><option value=\"数字化业务单元\">数字化业",
+    "vh": 820
+  },
+  "geometry": [
+    {
+      "id": "kpiGrid",
+      "missing": false,
+      "boxTop": 87,
+      "boxBottom": 296.4375,
+      "boxH": 209.4375,
+      "contentTop": 87,
+      "contentBottom": 296.4375,
+      "contentH": 209.4375,
+      "overflow": 0
+    },
+    {
+      "id": "cashPanel",
+      "missing": false,
+      "boxTop": 306.4375,
+      "boxBottom": 694.5,
+      "boxH": 388.0625,
+      "contentTop": 306.4375,
+      "contentBottom": 694.5,
+      "contentH": 388.0625,
+      "overflow": 0
+    },
+    {
+      "id": "riskPanel",
+      "missing": false,
+      "boxTop": 704.5,
+      "boxBottom": 1133.859375,
+      "boxH": 429.359375,
+      "contentTop": 704.5,
+      "contentBottom": 1133.859375,
+      "contentH": 429.359375,
+      "overflow": 0
+    },
+    {
+      "id": "contributionPanel",
+      "missing": false,
+      "boxTop": 1143.859375,
+      "boxBottom": 1519.703125,
+      "boxH": 375.84375,
+      "contentTop": 1143.859375,
+      "contentBottom": 1519.703125,
+      "contentH": 375.84375,
+      "overflow": 0
+    },
+    {
+      "id": "targetPanel",
+      "missing": false,
+      "boxTop": 1143.859375,
+      "boxBottom": 1425.4375,
+      "boxH": 281.578125,
+      "contentTop": 1143.859375,
+      "contentBottom": 1425.4375,
+      "contentH": 281.578125,
+      "overflow": 0
+    },
+    {
+      "id": "deliveryPanel",
+      "missing": false,
+      "boxTop": 1529.703125,
+      "boxBottom": 1876.828125,
+      "boxH": 347.125,
+      "contentTop": 1529.703125,
+      "contentBottom": 1876.828125,
+      "contentH": 347.125,
+      "overflow": 0
+    },
+    {
+      "id": "alertPanel",
+      "missing": false,
+      "boxTop": 1886.828125,
+      "boxBottom": 2147.25,
+      "boxH": 260.421875,
+      "contentTop": 1886.828125,
+      "contentBottom": 2147.25,
+      "contentH": 260.421875,
+      "overflow": 0
+    }
+  ],
+  "cashVisual": {
+    "wrapH": 220,
+    "hcH": 220,
+    "pathCount": 19,
+    "clipped": false,
+    "top": 448.8125,
+    "bottom": 668.8125
+  },
+  "targetVisual": {
+    "h": 200,
+    "clippedBySb": false
+  },
+  "loadCheck": {
+    "deliveryOverflow": "hidden",
+    "boxH": 347.125,
+    "chartH": 180,
+    "chartPast": -27,
+    "trendPast": -18,
+    "labels": [
+      {
+        "text": "3月",
+        "top": 1832.828125,
+        "bottom": 1846.828125,
+        "h": 14,
+        "pastBottom": -30,
+        "pastTop": -303.13,
+        "inside": true
+      },
+      {
+        "text": "5月",
+        "top": 1832.828125,
+        "bottom": 1846.828125,
+        "h": 14,
+        "pastBottom": -30,
+        "pastTop": -303.13,
+        "inside": true
+      },
+      {
+        "text": "7月",
+        "top": 1832.828125,
+        "bottom": 1846.828125,
+        "h": 14,
+        "pastBottom": -30,
+        "pastTop": -303.13,
+        "inside": true
+      },
+      {
+        "text": "60%",
+        "top": 1820.828125,
+        "bottom": 1834.828125,
+        "h": 14,
+        "pastBottom": -42,
+        "pastTop": -291.13,
+        "inside": true
+      },
+      {
+        "text": "80%",
+        "top": 1750.828125,
+        "bottom": 1764.828125,
+        "h": 14,
+        "pastBottom": -112,
+        "pastTop": -221.13,
+        "inside": true
+      },
+      {
+        "text": "100%",
+        "top": 1679.828125,
+        "bottom": 1693.828125,
+        "h": 14,
+        "pastBottom": -183,
+        "pastTop": -150.13,
+        "inside": true
+      }
+    ],
+    "anyClipped": false,
+    "allInside": true,
+    "deliveryOverflowPx": 0
+  },
+  "overallPass": true,
+  "vsLeo": {
+    "leo": {
+      "overallPass": true,
+      "loadChartFixed": true,
+      "t80u": true
+    },
+    "max": {
+      "overallPass": true,
+      "failures": [],
+      "cashPanelH": 388.0625,
+      "main": {
+        "scrollH": 2121,
+        "clientH": 745,
+        "display": "flex",
+        "overflowY": "auto"
+      },
+      "loadCheck": {
+        "allInside": true,
+        "chartPast": -27,
+        "overflowPx": 0,
+        "labels": [
+          "3月",
+          "5月",
+          "7月",
+          "60%",
+          "80%",
+          "100%"
+        ]
+      }
+    }
+  }
+}

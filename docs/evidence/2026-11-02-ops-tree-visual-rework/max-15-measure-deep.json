@@ -1,0 +1,204 @@
+{
+  "ts": "2026-11-02T07:34:51.781Z",
+  "overallPass": false,
+  "deep": {
+    "leftW": 652.21875,
+    "rightW": 420.78125,
+    "layoutW": 1081,
+    "rightCss": {
+      "display": "flex",
+      "flex": "1 1 0px",
+      "justify": "normal",
+      "align": "normal",
+      "width": "420.781px"
+    },
+    "layoutCss": {
+      "display": "flex",
+      "flex": "row",
+      "justify": "normal",
+      "align": "stretch"
+    },
+    "childInfo": [
+      {
+        "cls": "delivery-status",
+        "display": "flex",
+        "flex": "1 1 auto",
+        "width": "420.781px",
+        "justify": "normal",
+        "align": "normal",
+        "w": 420.78125,
+        "h": 288.828125,
+        "left": 688.21875,
+        "right": 1109,
+        "html": "<div class=\"delivery-status\"><div class=\"chart-section-title\"><span class=\"sub-title\">项目交付保障活动</span><button class=\"info-button\" data-tip=\"正常、风险、逾期项目互斥。中心显示在管项目总数；点击扇区或图例查看清单。\" aria-label=\"交付状态说明\">?</"
+      }
+    ],
+    "contentSpan": {
+      "contentLeft": 695.21875,
+      "contentRight": 1102,
+      "contentW": 406.78125,
+      "emptyRight": 7,
+      "fillRatio": 0.9667285555142964
+    },
+    "primaryCount": 17,
+    "primarySample": [
+      {
+        "tag": "SPAN",
+        "id": "",
+        "cls": "sub-title",
+        "left": 695.21875,
+        "right": 791.21875,
+        "w": 96,
+        "h": 17.390625,
+        "text": "项目交付保障活动"
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "info-button",
+        "left": 1090,
+        "right": 1102,
+        "w": 12,
+        "h": 12,
+        "text": "?"
+      },
+      {
+        "tag": "DIV",
+        "id": "deliveryChart",
+        "cls": "chart",
+        "left": 695.21875,
+        "right": 910.8125,
+        "w": 215.59375,
+        "h": 140,
+        "text": "Created with Highcharts 12.4.0"
+      },
+      {
+        "tag": "DIV",
+        "id": "highcharts-7kdfkut-278",
+        "cls": "highcharts-container ",
+        "left": 695.21875,
+        "right": 910.21875,
+        "w": 215,
+        "h": 140,
+        "text": "Created with Highcharts 12.4.0"
+      },
+      {
+        "tag": "svg",
+        "id": "",
+        "cls": "[object SVGAnimatedString]",
+        "left": 695.21875,
+        "right": 910.21875,
+        "w": 215,
+        "h": 140,
+        "text": "Created with Highcharts 12.4.0"
+      },
+      {
+        "tag": "STRONG",
+        "id": "",
+        "cls": "",
+        "left": 787.015625,
+        "right": 819.015625,
+        "w": 32,
+        "h": 22.5,
+        "text": "14"
+      },
+      {
+        "tag": "SPAN",
+        "id": "",
+        "cls": "",
+        "left": 787.015625,
+        "right": 819.015625,
+        "w": 32,
+        "h": 11.59375,
+        "text": "在管项目"
+      },
+      {
+        "tag": "DIV",
+        "id": "deliveryLegend",
+        "cls": "legend-list",
+        "left": 914.8125,
+        "right": 1102,
+        "w": 187.1875,
+        "h": 160,
+        "text": "正常12风险2逾期0"
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "legend-row",
+        "left": 914.8125,
+        "right": 1102,
+        "w": 187.1875,
+        "h": 14.84375,
+        "text": "正常12"
+      },
+      {
+        "tag": "SPAN",
+        "id": "",
+        "cls": "",
+        "left": 926.8125,
+        "right": 1083.09375,
+        "w": 156.28125,
+        "h": 14.84375,
+        "text": "正常"
+      },
+      {
+        "tag": "B",
+        "id": "",
+        "cls": "",
+        "left": 1089.09375,
+        "right": 1102,
+        "w": 12.90625,
+        "h": 14.84375,
+        "text": "12"
+      },
+      {
+        "tag": "BUTTON",
+        "id": "",
+        "cls": "legend-row",
+        "left": 914.8125,
+        "right": 1102,
+        "w": 187.1875,
+        "h": 14.84375,
+        "text": "风险2"
+      }
+    ],
+    "emptyFromRightPx_midY": 2,
+    "rowEmpties": [
+      {
+        "y": 386.20703125,
+        "emptyFromRight": 8,
+        "found": {
+          "x": 1101,
+          "tag": "B",
+          "cls": ""
+        }
+      },
+      {
+        "y": 443.97265625,
+        "emptyFromRight": 200,
+        "found": {
+          "x": 909,
+          "tag": "rect",
+          "cls": "[object SVGAnimatedString]"
+        }
+      },
+      {
+        "y": 501.73828125,
+        "emptyFromRight": 420.78125,
+        "found": null
+      },
+      {
+        "y": 545.0625,
+        "emptyFromRight": 420.78125,
+        "found": null
+      }
+    ],
+    "maxEmptyFromRight": 420.78125,
+    "avgEmptyFromRight": 262.390625,
+    "emptyRatio": 1
+  },
+  "pass": false,
+  "passStrict": false,
+  "criteria": "右侧内容填满可用宽：对 .delivery-right 多行 elementFromPoint 自右向左扫描，最大空白条 maxEmptyFromRight ≤100px 且 emptyRatio≤0.25；气泡不计"
+}

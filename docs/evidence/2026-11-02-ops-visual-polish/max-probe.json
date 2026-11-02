@@ -1,0 +1,178 @@
+{
+  "ac": {
+    "ac1": true,
+    "ac2": true,
+    "ac3": true,
+    "ac4": true,
+    "ac5": true,
+    "ac6": true
+  },
+  "blockers": [],
+  "metrics": {
+    "cash": {
+      "groupingFalse": true,
+      "inPos": true,
+      "outNeg": true,
+      "pointGeom": {
+        "inY": 67,
+        "inH": 35,
+        "inX": 52,
+        "outY": 102,
+        "outH": 30,
+        "outX": 52,
+        "sameXish": true,
+        "inAboveOut": true
+      },
+      "spacingBottom": 18,
+      "cashPadBottom": "28px",
+      "wrapBottomGap": -40,
+      "chartBottomPad": 48,
+      "seriesNames": [
+        "当月流入",
+        "当月流出",
+        "当年累计净现金流"
+      ],
+      "pass": true
+    },
+    "risk": {
+      "receivables": {
+        "ok": true,
+        "expectColor": "rgb(35, 139, 119)",
+        "actual": "rgb(35, 139, 119)",
+        "delta": -2.1,
+        "good": true,
+        "text": "较上期 -2.1% ↓"
+      },
+      "wip": {
+        "ok": true,
+        "expectColor": "rgb(223, 92, 112)",
+        "actual": "rgb(223, 92, 112)",
+        "delta": 6.3,
+        "good": false,
+        "text": "较上期 +6.3% ↑"
+      },
+      "inventory": {
+        "ok": true,
+        "expectColor": "rgb(35, 139, 119)",
+        "actual": "rgb(35, 139, 119)",
+        "delta": -1.8,
+        "good": true,
+        "text": "较上期 -1.8% ↓"
+      },
+      "revenue": {
+        "ok": true,
+        "expectColor": "rgb(35, 139, 119)",
+        "actual": "rgb(35, 139, 119)",
+        "delta": 4.5,
+        "good": true,
+        "text": "较上期 +4.5% ↑"
+      },
+      "green": "rgb(35, 139, 119)",
+      "red": "rgb(223, 92, 112)",
+      "cards": [
+        {
+          "label": "应收账款",
+          "text": "较上期 -2.1% ↓",
+          "color": "rgb(35, 139, 119)",
+          "delta": -2.1,
+          "up": false,
+          "down": true
+        },
+        {
+          "label": "WIP",
+          "text": "较上期 +6.3% ↑",
+          "color": "rgb(223, 92, 112)",
+          "delta": 6.3,
+          "up": true,
+          "down": false
+        },
+        {
+          "label": "存货",
+          "text": "较上期 -1.8% ↓",
+          "color": "rgb(35, 139, 119)",
+          "delta": -1.8,
+          "up": false,
+          "down": true
+        },
+        {
+          "label": "营业收入",
+          "text": "较上期 +4.5% ↑",
+          "color": "rgb(35, 139, 119)",
+          "delta": 4.5,
+          "up": true,
+          "down": false
+        }
+      ],
+      "pass": true
+    },
+    "aging": {
+      "type": "bar",
+      "stacking": "normal",
+      "seriesCount": 4,
+      "seriesNames": [
+        "1年以内",
+        "1–2年",
+        "2–3年",
+        "3年以上"
+      ],
+      "hasDonutVisible": false,
+      "agingIsPie": false,
+      "legendItems": 4,
+      "legendCols": 4,
+      "legendGrid": "305.75px 305.75px 305.75px 305.75px",
+      "mixType": "bar",
+      "agingH": 24,
+      "pass": true
+    },
+    "delivery": {
+      "panelH": 268.296875,
+      "layoutH": 210,
+      "loadH": 150,
+      "baselineLoadH": 180,
+      "baselineColH": 260,
+      "loadLower": true,
+      "layoutLower": true,
+      "ratios": {
+        "left": 0.25,
+        "mid": 0.5,
+        "right": 0.25
+      },
+      "ratioOk": true,
+      "colW": [
+        306.25,
+        612.5,
+        306.25
+      ],
+      "pass": true
+    },
+    "pair": {
+      "contribH": 375.84375,
+      "targetH": 375.84375,
+      "heightDiff": 0,
+      "topDiff": 0,
+      "pairAlign": "stretch",
+      "pass": true
+    },
+    "regress": {
+      "hasTongbiPrimary": false,
+      "sample": [
+        "当月新增 862.40占目标 8.6%",
+        "上月新增 968.35占目标 6.9%",
+        "当月新增 738.25占目标 6.7%",
+        "当月新增 1,126.80占目标 7.0%"
+      ],
+      "hasDangyueOrShangyue": true
+    }
+  },
+  "ts": "2026-11-02T08:32:47.004Z",
+  "shots": [
+    "max-01-cashflow-stack.png",
+    "max-02-risk-period-colors.png",
+    "max-03-aging-bar.png",
+    "max-04-delivery-height.png",
+    "max-05-pair-equal-height.png",
+    "max-01b-cash-wrap.png"
+  ],
+  "url": "http://127.0.0.1:3000/operations-dashboard-202610/board",
+  "overallPass": true
+}

@@ -1,0 +1,78 @@
+{
+  "pass": true,
+  "kpi": {
+    "labels": [
+      {
+        "text": "当月新增",
+        "color": "rgb(110, 131, 156)"
+      },
+      {
+        "text": "占目标",
+        "color": "rgb(110, 131, 156)"
+      }
+    ],
+    "nums": [
+      {
+        "text": "862.40",
+        "color": "rgb(48, 109, 169)"
+      },
+      {
+        "text": "8.6%",
+        "color": "rgb(48, 109, 169)"
+      }
+    ],
+    "valueColor": "rgb(48, 109, 169)",
+    "primaryRgb": "rgb(48, 109, 169)",
+    "mutedRgb": "rgb(110, 131, 156)",
+    "labelsSame": true,
+    "labelsMatchMuted": true,
+    "numsMatchPrimary": true,
+    "valueMatchPrimary": true,
+    "hasMetrics": false,
+    "metricsVisible": false
+  },
+  "cash": {
+    "h2": "现金流与资金安全 （万元） ?",
+    "sub": "当年现金流趋势 （万元）",
+    "seriesNames": [
+      "当月流入",
+      "当月流出",
+      "当年累计净现金流"
+    ],
+    "series": [
+      {
+        "name": "当月流入",
+        "type": "column",
+        "color": "#306da9",
+        "pointColors": [
+          "#306da9",
+          "#306da9",
+          "#306da9"
+        ]
+      },
+      {
+        "name": "当月流出",
+        "type": "column",
+        "color": "#52a7cb",
+        "pointColors": [
+          "#52a7cb",
+          "#52a7cb",
+          "#52a7cb"
+        ]
+      },
+      {
+        "name": "当年累计净现金流",
+        "type": "line",
+        "color": "#238b77",
+        "pointColors": [
+          "#238b77",
+          "#238b77",
+          "#238b77"
+        ]
+      }
+    ],
+    "hasOldSubOnly": false,
+    "lineHasZones": true
+  },
+  "ts": "2026-11-02T07:55:07.191Z"
+}

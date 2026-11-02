@@ -1,0 +1,156 @@
+{
+  "deliveryOverflow": "hidden",
+  "deliveryOverflowY": "hidden",
+  "deliveryOverflowX": "hidden",
+  "boxH": 272,
+  "boxTop": 257.28125,
+  "boxBottom": 529.28125,
+  "alertTop": 539.28125,
+  "gapBoxToAlert": 10,
+  "overflowKids": [
+    {
+      "tag": "DIV",
+      "id": "",
+      "cls": "delivery-trend",
+      "top": 366.171875,
+      "bottom": 552.171875,
+      "h": 186,
+      "pastBottom": 22.9,
+      "text": "近6个月负荷率趋势?Created with Highcharts 12.4.0"
+    },
+    {
+      "tag": "DIV",
+      "id": "loadChart",
+      "cls": "chart",
+      "top": 390.171875,
+      "bottom": 550.171875,
+      "h": 160,
+      "pastBottom": 20.9,
+      "text": "Created with Highcharts 12.4.0年度负荷率当月负荷率"
+    },
+    {
+      "tag": "DIV",
+      "id": "highcharts-o0br6ed-257",
+      "cls": "highcharts-container ",
+      "top": 390.171875,
+      "bottom": 550.171875,
+      "h": 160,
+      "pastBottom": 20.9,
+      "text": "Created with Highcharts 12.4.0年度负荷率当月负荷率"
+    },
+    {
+      "tag": "svg",
+      "id": "",
+      "cls": "[object SVGAnimatedString]",
+      "top": 390.171875,
+      "bottom": 550.171875,
+      "h": 160,
+      "pastBottom": 20.9,
+      "text": "Created with Highcharts 12.4.0年度负荷率当月负荷率"
+    },
+    {
+      "tag": "rect",
+      "id": "",
+      "cls": "[object SVGAnimatedString]",
+      "top": 390.171875,
+      "bottom": 550.171875,
+      "h": 160,
+      "pastBottom": 20.9,
+      "text": ""
+    },
+    {
+      "tag": "g",
+      "id": "",
+      "cls": "[object SVGAnimatedString]",
+      "top": 533.171875,
+      "bottom": 547.171875,
+      "h": 14,
+      "pastBottom": 17.9,
+      "text": "3月5月7月"
+    },
+    {
+      "tag": "text",
+      "id": "",
+      "cls": "[object SVGAnimatedString]",
+      "top": 533.171875,
+      "bottom": 547.171875,
+      "h": 14,
+      "pastBottom": 17.9,
+      "text": "3月"
+    },
+    {
+      "tag": "text",
+      "id": "",
+      "cls": "[object SVGAnimatedString]",
+      "top": 533.171875,
+      "bottom": 547.171875,
+      "h": 14,
+      "pastBottom": 17.9,
+      "text": "5月"
+    },
+    {
+      "tag": "text",
+      "id": "",
+      "cls": "[object SVGAnimatedString]",
+      "top": 533.171875,
+      "bottom": 547.171875,
+      "h": 14,
+      "pastBottom": 17.9,
+      "text": "7月"
+    },
+    {
+      "tag": "g",
+      "id": "",
+      "cls": "[object SVGAnimatedString]",
+      "top": 400.171875,
+      "bottom": 535.171875,
+      "h": 135,
+      "pastBottom": 5.9,
+      "text": "60%80%100%"
+    },
+    {
+      "tag": "text",
+      "id": "",
+      "cls": "[object SVGAnimatedString]",
+      "top": 521.171875,
+      "bottom": 535.171875,
+      "h": 14,
+      "pastBottom": 5.9,
+      "text": "60%"
+    }
+  ],
+  "charts": [
+    {
+      "id": "loadChart",
+      "cls": "chart",
+      "h": 160,
+      "bottom": 550.171875,
+      "past": 20.9,
+      "overflow": "hidden"
+    },
+    {
+      "id": "highcharts-o0br6ed-257",
+      "cls": "highcharts-container ",
+      "h": 160,
+      "bottom": 550.171875,
+      "past": 20.9,
+      "overflow": "hidden"
+    },
+    {
+      "id": "deliveryChart",
+      "cls": "chart",
+      "h": 140,
+      "bottom": 471.28125,
+      "past": -58,
+      "overflow": "hidden"
+    },
+    {
+      "id": "highcharts-o0br6ed-278",
+      "cls": "highcharts-container ",
+      "h": 140,
+      "bottom": 471.28125,
+      "past": -58,
+      "overflow": "hidden"
+    }
+  ]
+}

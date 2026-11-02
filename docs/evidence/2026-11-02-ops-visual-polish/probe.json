@@ -1,0 +1,72 @@
+{
+  "pass": true,
+  "riskOk": true,
+  "metrics": {
+    "cash": {
+      "outNeg": true,
+      "inPos": true,
+      "grouping": false,
+      "spacingBottom": 18,
+      "cashPad": "28px",
+      "sub": "当年现金流趋势\n（万元）",
+      "main": "现金流与资金安全\n（万元）\n?",
+      "series": [
+        "当月流入",
+        "当月流出",
+        "当年累计净现金流"
+      ]
+    },
+    "risk": {
+      "cards": [
+        {
+          "label": "应收账款",
+          "text": "较上期 2.1% ↓",
+          "color": "rgb(35, 139, 119)"
+        },
+        {
+          "label": "WIP",
+          "text": "较上期 +6.3% ↑",
+          "color": "rgb(223, 92, 112)"
+        },
+        {
+          "label": "存货",
+          "text": "较上期 1.8% ↓",
+          "color": "rgb(35, 139, 119)"
+        },
+        {
+          "label": "营业收入",
+          "text": "较上期 +4.5% ↑",
+          "color": "rgb(35, 139, 119)"
+        }
+      ],
+      "green": "rgb(35, 139, 119)",
+      "red": "rgb(223, 92, 112)"
+    },
+    "aging": {
+      "type": "bar",
+      "legendCols": "265.75px 265.75px 265.75px 265.75px",
+      "legendItems": 4,
+      "hasDonut": false,
+      "seriesCount": 4
+    },
+    "delivery": {
+      "h": 268.3,
+      "ratios": {
+        "left": 0.25,
+        "mid": 0.5,
+        "right": 0.25
+      },
+      "loadH": 150
+    },
+    "pair": {
+      "contribH": 375.8,
+      "targetH": 375.8,
+      "diff": 0
+    },
+    "regress": {
+      "kpiDelta": "当月新增",
+      "hasTongbi": false
+    }
+  },
+  "ts": "2026-11-02T08:29:58.236Z"
+}

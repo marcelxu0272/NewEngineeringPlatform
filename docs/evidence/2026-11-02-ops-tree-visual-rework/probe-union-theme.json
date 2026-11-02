@@ -1,0 +1,364 @@
+{
+  "before": [
+    {
+      "tag": "DIV",
+      "cls": "",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "NAV",
+      "cls": "flex-1 overflow-auto p-2",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "ASIDE",
+      "cls": "flex w-56 shrink-0 flex-col border-r border-slate-200 bg-white",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "DIV",
+      "cls": "flex h-full flex-1 overflow-hidden pt-20",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "DIV",
+      "cls": "ml-16 flex h-screen w-full flex-col overflow-hidden bg-[#f8faff]",
+      "bg": "rgb(248, 250, 255)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "DIV",
+      "cls": "flex h-screen overflow-hidden bg-[#f8faff]",
+      "bg": "rgb(248, 250, 255)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "BODY",
+      "cls": "__variable_1e4310 __variable_c3aa02 antialiased",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "HTML",
+      "cls": "",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(0, 0, 0)"
+    }
+  ],
+  "after": [
+    {
+      "tag": "DIV",
+      "cls": "",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "NAV",
+      "cls": "flex-1 overflow-auto p-2",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "ASIDE",
+      "cls": "flex w-56 shrink-0 flex-col border-r border-slate-200 bg-white",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "DIV",
+      "cls": "flex h-full flex-1 overflow-hidden pt-20",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "DIV",
+      "cls": "ml-16 flex h-screen w-full flex-col overflow-hidden bg-[#f8faff]",
+      "bg": "rgb(248, 250, 255)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "DIV",
+      "cls": "flex h-screen overflow-hidden bg-[#f8faff]",
+      "bg": "rgb(248, 250, 255)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "BODY",
+      "cls": "__variable_1e4310 __variable_c3aa02 antialiased",
+      "bg": "rgb(255, 255, 255)",
+      "color": "rgb(10, 10, 10)"
+    },
+    {
+      "tag": "HTML",
+      "cls": "",
+      "bg": "rgba(0, 0, 0, 0)",
+      "color": "rgb(0, 0, 0)"
+    }
+  ],
+  "pick": "青绿主题",
+  "themeNow": [
+    "青绿主题"
+  ],
+  "unionGeom": [
+    {
+      "id": "kpiGrid",
+      "top": 65,
+      "bottom": 276.78125,
+      "height": 211.78125,
+      "width": 1113,
+      "boxH": 211.78125,
+      "boxTop": 65,
+      "boxBottom": 276.78125
+    },
+    {
+      "id": "cashPanel",
+      "top": 142.328125,
+      "bottom": 513.109375,
+      "height": 370.78125,
+      "width": 1113,
+      "boxH": 91.34375,
+      "boxTop": 142.328125,
+      "boxBottom": 233.671875
+    },
+    {
+      "id": "riskPanel",
+      "top": 243.671875,
+      "bottom": 652.671875,
+      "height": 409,
+      "width": 1113,
+      "boxH": 91.34375,
+      "boxTop": 243.671875,
+      "boxBottom": 335.015625
+    },
+    {
+      "id": "contributionPanel",
+      "top": 345.015625,
+      "bottom": 637.734375,
+      "height": 292.71875,
+      "width": 551.5,
+      "boxH": 91.328125,
+      "boxTop": 345.015625,
+      "boxBottom": 436.34375
+    },
+    {
+      "id": "targetPanel",
+      "top": 345.015625,
+      "bottom": 600.25,
+      "height": 255.234375,
+      "width": 551.5,
+      "boxH": 91.328125,
+      "boxTop": 345.015625,
+      "boxBottom": 436.34375
+    },
+    {
+      "id": "deliveryPanel",
+      "top": 446.34375,
+      "bottom": 741.234375,
+      "height": 294.890625,
+      "width": 1113,
+      "boxH": 91.328125,
+      "boxTop": 446.34375,
+      "boxBottom": 537.671875
+    },
+    {
+      "id": "alertPanel",
+      "top": 547.671875,
+      "bottom": 775,
+      "height": 227.328125,
+      "width": 1113,
+      "boxH": 227.328125,
+      "boxTop": 547.671875,
+      "boxBottom": 775
+    }
+  ],
+  "overlaps": [
+    {
+      "a": "kpiGrid",
+      "b": "cashPanel",
+      "aY": [
+        65,
+        276.78125
+      ],
+      "bY": [
+        142.328125,
+        513.109375
+      ],
+      "aBoxH": 211.78125,
+      "bBoxH": 91.34375
+    },
+    {
+      "a": "cashPanel",
+      "b": "riskPanel",
+      "aY": [
+        142.328125,
+        513.109375
+      ],
+      "bY": [
+        243.671875,
+        652.671875
+      ],
+      "aBoxH": 91.34375,
+      "bBoxH": 91.34375
+    },
+    {
+      "a": "riskPanel",
+      "b": "contributionPanel",
+      "aY": [
+        243.671875,
+        652.671875
+      ],
+      "bY": [
+        345.015625,
+        637.734375
+      ],
+      "aBoxH": 91.34375,
+      "bBoxH": 91.328125
+    },
+    {
+      "a": "riskPanel",
+      "b": "targetPanel",
+      "aY": [
+        243.671875,
+        652.671875
+      ],
+      "bY": [
+        345.015625,
+        600.25
+      ],
+      "aBoxH": 91.34375,
+      "bBoxH": 91.328125
+    },
+    {
+      "a": "contributionPanel",
+      "b": "deliveryPanel",
+      "aY": [
+        345.015625,
+        637.734375
+      ],
+      "bY": [
+        446.34375,
+        741.234375
+      ],
+      "aBoxH": 91.328125,
+      "bBoxH": 91.328125
+    },
+    {
+      "a": "targetPanel",
+      "b": "deliveryPanel",
+      "aY": [
+        345.015625,
+        600.25
+      ],
+      "bY": [
+        446.34375,
+        741.234375
+      ],
+      "aBoxH": 91.328125,
+      "bBoxH": 91.328125
+    },
+    {
+      "a": "deliveryPanel",
+      "b": "alertPanel",
+      "aY": [
+        446.34375,
+        741.234375
+      ],
+      "bY": [
+        547.671875,
+        775
+      ],
+      "aBoxH": 91.328125,
+      "bBoxH": 227.328125
+    },
+    {
+      "a": "cashPanel",
+      "b": "deliveryPanel",
+      "aY": [
+        142.328125,
+        513.109375
+      ],
+      "bY": [
+        446.34375,
+        741.234375
+      ],
+      "aBoxH": 91.34375,
+      "bBoxH": 91.328125
+    },
+    {
+      "a": "cashPanel",
+      "b": "contributionPanel",
+      "aY": [
+        142.328125,
+        513.109375
+      ],
+      "bY": [
+        345.015625,
+        637.734375
+      ],
+      "aBoxH": 91.34375,
+      "bBoxH": 91.328125
+    },
+    {
+      "a": "kpiGrid",
+      "b": "riskPanel",
+      "aY": [
+        65,
+        276.78125
+      ],
+      "bY": [
+        243.671875,
+        652.671875
+      ],
+      "aBoxH": 211.78125,
+      "bBoxH": 91.34375
+    }
+  ],
+  "overflow": [
+    {
+      "id": "kpiGrid",
+      "boxH": 211.78125,
+      "contentH": 211.78125,
+      "overflowPx": 0
+    },
+    {
+      "id": "cashPanel",
+      "boxH": 91.34375,
+      "contentH": 370.78125,
+      "overflowPx": 279.4
+    },
+    {
+      "id": "riskPanel",
+      "boxH": 91.34375,
+      "contentH": 409,
+      "overflowPx": 317.7
+    },
+    {
+      "id": "contributionPanel",
+      "boxH": 91.328125,
+      "contentH": 292.71875,
+      "overflowPx": 201.4
+    },
+    {
+      "id": "targetPanel",
+      "boxH": 91.328125,
+      "contentH": 255.234375,
+      "overflowPx": 163.9
+    },
+    {
+      "id": "deliveryPanel",
+      "boxH": 91.328125,
+      "contentH": 294.890625,
+      "overflowPx": 203.6
+    },
+    {
+      "id": "alertPanel",
+      "boxH": 227.328125,
+      "contentH": 227.328125,
+      "overflowPx": 0
+    }
+  ]
+}

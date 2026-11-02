@@ -16,7 +16,7 @@ window.DASHBOARD_THEMES = {
     blue: {primary:'#306da9',primaryDark:'#234f80',primarySoft:'#eaf2fc',accent:'#52a7cb',secondary:'#7789d3',warning:'#d79a39',warningSoft:'#fff6e8',danger:'#df5c70',dangerSoft:'#fff0f3',success:'#238b77',successSoft:'#eaf7f0',ink:'#253d58',muted:'#6e839c',faint:'#a0b1c5',border:'#e2eaf5',grid:'#eaf0f7',surface:'#ffffff',surfaceAlt:'#f6f9fd',canvas:'#edf2f9',sidebar:'#203a5c',sidebarTop:'#386b9a',sidebarText:'#d1e1f3',shadow:'#c2d2e5',tooltip:'#233e60',tooltipText:'#ffffff',mask:'#213a5a',track:'#e7eef8',white:'#ffffff'},
     wood: {primary:'#897044',primaryDark:'#695334',primarySoft:'#f5f0e6',accent:'#b39769',secondary:'#729594',warning:'#cf8e43',warningSoft:'#fff5e7',danger:'#c7605b',dangerSoft:'#fcf0ee',success:'#508566',successSoft:'#eff6ed',ink:'#4d473b',muted:'#918879',faint:'#b1a895',border:'#e9e2d6',grid:'#eee8df',surface:'#fffefb',surfaceAlt:'#faf7f1',canvas:'#f2eee6',sidebar:'#454538',sidebarTop:'#807552',sidebarText:'#e4ddca',shadow:'#d9cdb6',tooltip:'#504836',tooltipText:'#fffefb',mask:'#514838',track:'#eee8dd',white:'#fffefb'}
   };
-Object.entries(window.DASHBOARD_THEMES.teal).forEach(([key,value])=>{
+Object.entries(window.DASHBOARD_THEMES.blue).forEach(([key,value])=>{
  const token=key.replace(/[A-Z]/g,m=>'-'+m.toLowerCase());
  document.documentElement.style.setProperty('--'+token,value);
  document.documentElement.style.setProperty('--'+token+'-rgb',value.slice(1).match(/.{2}/g).map(x=>parseInt(x,16)).join(','));
@@ -32,14 +32,14 @@ Object.entries(window.DASHBOARD_THEMES.teal).forEach(([key,value])=>{
 .sidebar{grid-column:1;grid-row:1 / -1;min-height:0;background:linear-gradient(180deg,var(--nav),var(--nav-deep));color:var(--white);display:flex;flex-direction:column;align-items:stretch;z-index:3}.brand{height:60px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:29px;letter-spacing:-2px;border-bottom:1px solid rgba(var(--primary-rgb),.32);background:linear-gradient(140deg,rgba(var(--primary-rgb),.52),rgba(var(--primary-rgb),.1));color:var(--white)}.nav{display:flex;flex:1;flex-direction:column;gap:5px;padding-top:6px}.nav-button{position:relative;border:0;background:transparent;color:rgba(var(--primary-rgb),0);height:68px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:var(--white);opacity:.82;font-size:10px;transition:background .16s,opacity .16s}.nav-button svg{width:21px;height:21px}.nav-button.active,.nav-button:hover{background:rgba(var(--primary-rgb),.45);opacity:1}.nav-button.active:before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;background:var(--primary-light);border-radius:0 3px 3px 0}.sidebar-bottom{height:45px;display:flex;align-items:center;justify-content:center;color:var(--white);opacity:.8}.sidebar-bottom button{border:0;background:transparent;color:inherit}
 .header{grid-column:2;grid-row:1;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:18px;padding:0 18px;min-width:0}.header-title{display:flex;align-items:center;gap:18px;white-space:nowrap;min-width:0}.header-title h1{font-size:22px;letter-spacing:.5px;color:var(--ink);margin:0;font-weight:700}.header-tabs{display:flex;gap:20px;border-left:1px solid var(--line);padding-left:18px;color:var(--muted);font-size:11px;white-space:nowrap}.header-tabs span:first-child{color:var(--primary);font-weight:600}.header-controls{display:flex;gap:8px;align-items:center;white-space:nowrap}.select-wrap{display:flex;align-items:center;position:relative;min-width:0}.select-wrap .select-icon{width:14px;height:14px;position:absolute;left:9px;pointer-events:none;color:var(--muted)}select{appearance:none;background:var(--surface);border:1px solid var(--line);border-radius:5px;height:29px;padding:0 25px 0 10px;color:var(--text);font-size:10px;cursor:pointer;max-width:125px;box-shadow:0 1px 3px rgba(var(--shadow-rgb),.02)}.select-wrap.has-icon select{padding-left:28px}.select-wrap:after{content:"";position:absolute;right:10px;top:11px;width:5px;height:5px;border:1px solid var(--faint);border-top:0;border-left:0;transform:rotate(45deg);pointer-events:none}.asof{background:rgba(var(--primary-rgb),.06);border-radius:5px;padding:8px 10px;font-size:10px;color:var(--primary-deep);letter-spacing:.1px}.asof strong{font-weight:600;margin-right:3px}.header-tools{display:flex;align-items:center;gap:5px;border-left:1px solid var(--line);padding-left:8px}.icon-button{display:inline-flex;align-items:center;justify-content:center;border:0;background:transparent;border-radius:5px;width:28px;height:28px;color:var(--muted)}.icon-button:hover{background:rgba(var(--primary-rgb),.07);color:var(--primary)}.avatar{height:28px;width:28px;border-radius:50%;background:var(--track);color:var(--muted);display:flex;align-items:center;justify-content:center;margin-left:3px}.avatar svg{width:19px;height:19px}
 main{grid-column:2;grid-row:2;min-height:0;min-width:0;padding:12px 16px 10px;display:grid;grid-template-rows:minmax(92px,.94fr) minmax(272px,2.92fr) minmax(176px,1.8fr) 12px;gap:var(--gap);overflow:hidden}.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap);min-height:0}.middle-grid{display:grid;grid-template-columns:minmax(0,1.94fr) minmax(0,1fr) minmax(0,1.14fr);gap:var(--gap);min-height:0}.bottom-grid{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,2fr) minmax(0,1.23fr);gap:var(--gap);min-height:0}.panel,.kpi-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 2px 8px rgba(var(--shadow-rgb),.035);overflow:hidden;min-width:0;min-height:0}.panel{padding:var(--panel-pad);display:flex;flex-direction:column;position:relative;transition:box-shadow .2s,border-color .2s}.panel.panel-focused{border-color:rgba(var(--primary-rgb),.55);box-shadow:0 0 0 2px rgba(var(--primary-rgb),.08)}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0;min-width:0;margin-bottom:10px;min-height:20px}.panel-title{margin:0;display:flex;align-items:center;gap:6px;color:var(--ink);font-size:12px;font-weight:700;white-space:nowrap;min-width:0}.panel-title>svg{width:17px;height:17px;color:var(--primary);background:rgba(var(--primary-rgb),.08);border-radius:4px;padding:1px}.panel-title .unit{font-weight:400;font-size:9px;color:var(--muted);margin-left:1px}.info-button{width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;padding:0;margin:0;border:1px solid var(--faint);border-radius:50%;color:var(--muted);font-size:9px;font-family:Georgia,serif;font-weight:500;line-height:1;background:transparent;vertical-align:middle;flex-shrink:0}.info-button:hover{border-color:var(--primary);color:var(--primary);background:rgba(var(--primary-rgb),.06)}.segment{display:flex;background:var(--surface-soft);border:1px solid var(--line);border-radius:5px;padding:2px;flex-shrink:0;gap:1px;min-width:0}.segment button{border:0;background:transparent;color:var(--muted);padding:3px 11px;border-radius:3px;font-size:9px;white-space:nowrap;line-height:1.35}.segment button.active{color:var(--white);background:linear-gradient(100deg,var(--primary),var(--primary-light));box-shadow:0 1px 4px rgba(var(--primary-rgb),.18)}.segment button:hover:not(.active){background:rgba(var(--primary-rgb),.06);color:var(--primary)}
-.kpi-card{display:flex;position:relative;padding:14px;gap:12px}.kpi-icon{width:39px;height:39px;flex:0 0 39px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(140deg,rgba(var(--primary-rgb),.17),rgba(var(--primary-rgb),.055));color:var(--primary-deep);margin-top:1px}.kpi-icon svg{width:24px;height:24px}.kpi-main{flex:1;min-width:0;display:flex;flex-direction:column}.kpi-label{font-size:12px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;white-space:nowrap}.kpi-label .unit{font-size:9px;font-weight:400;color:var(--muted)}.kpi-value{font-size:clamp(21px,1.9vw,30px);font-weight:700;line-height:1.3;color:var(--primary-deep);letter-spacing:.2px;margin:3px 0 4px;font-variant-numeric:tabular-nums}.kpi-meta{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:9px;white-space:nowrap}.kpi-meta strong{font-weight:500;color:var(--primary)}.kpi-meta .meta-label{margin-right:4px}.kpi-compare{position:absolute;right:13px;top:27px;background:rgba(var(--primary-rgb),.05);border-radius:5px;padding:6px 8px;color:var(--primary);font-size:9px}.kpi-compare .compare-label{display:block;color:var(--muted);margin-bottom:4px}.kpi-compare strong{font-size:10px;font-weight:600}.kpi-progress{margin-top:auto;padding-top:7px}.progress-track{height:5px;background:var(--track);border-radius:4px;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary-light));border-radius:4px;transition:width .35s}.up{color:var(--primary)}.down{color:var(--danger)}.positive{color:var(--primary)}.negative{color:var(--danger)}.warning{color:var(--warning)}
+.kpi-card{display:flex;position:relative;padding:14px;gap:12px}.kpi-icon{width:39px;height:39px;flex:0 0 39px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(140deg,rgba(var(--primary-rgb),.17),rgba(var(--primary-rgb),.055));color:var(--primary-deep);margin-top:1px}.kpi-icon svg{width:24px;height:24px}.kpi-main{flex:1;min-width:0;display:flex;flex-direction:column}.kpi-label{font-size:12px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;white-space:nowrap}.kpi-label .unit{font-size:9px;font-weight:400;color:var(--muted)}.kpi-value{font-size:clamp(28px,2.6vw,36px);font-weight:700;line-height:1.2;color:var(--primary-deep);letter-spacing:.2px;margin:3px 0 4px;font-variant-numeric:tabular-nums;white-space:nowrap}.kpi-meta{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:9px;white-space:nowrap}.kpi-meta strong{font-weight:500;color:var(--primary)}.kpi-meta .meta-label{margin-right:4px}.kpi-compare{position:absolute;right:13px;top:27px;background:rgba(var(--primary-rgb),.05);border-radius:5px;padding:6px 8px;color:var(--primary);font-size:9px}.kpi-compare .compare-label{display:block;color:var(--muted);margin-bottom:4px}.kpi-compare strong{font-size:10px;font-weight:600}.kpi-progress{margin-top:auto;padding-top:7px}.progress-track{height:5px;background:var(--track);border-radius:4px;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary-light));border-radius:4px;transition:width .35s}.up{color:var(--primary)}.down{color:var(--danger)}.positive{color:var(--primary)}.negative{color:var(--danger)}.warning{color:var(--warning)}
 .cash-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;flex-shrink:0;margin-bottom:9px}.metric-card{min-width:0;background:var(--surface-soft);border:1px solid var(--line);border-radius:6px;padding:9px 10px}.cash-metrics .metric-card{display:flex;gap:9px;align-items:flex-start}.metric-icon{height:29px;width:29px;flex:0 0 29px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:var(--primary);background:rgba(var(--primary-rgb),.09)}.metric-icon svg{width:17px;height:17px}.metric-card.warning .metric-icon{color:var(--warning);background:rgba(var(--warning-rgb),.11)}.metric-card.negative .metric-icon{color:var(--danger);background:rgba(var(--danger-rgb),.08)}.metric-card.warning{background:rgba(var(--warning-rgb),.025);border-color:rgba(var(--warning-rgb),.2)}.metric-card.negative{background:rgba(var(--danger-rgb),.025);border-color:rgba(var(--danger-rgb),.18)}.metric-label{font-size:10px;color:var(--text);display:flex;align-items:center;gap:4px;white-space:nowrap}.metric-value{font-size:20px;font-weight:700;color:var(--primary-deep);line-height:1.45;font-variant-numeric:tabular-nums;white-space:nowrap}.metric-card.warning .metric-value{color:var(--warning)}.metric-card.negative .metric-value{color:var(--danger)}.metric-change{color:var(--muted);font-size:9px;display:flex;gap:7px;align-items:center;line-height:1.7;white-space:nowrap}.metric-change strong{font-weight:500}.metric-change svg{width:10px;height:10px}.chart-section-title{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-shrink:0;min-height:18px}.sub-title{font-size:10px;font-weight:700;color:var(--primary-deep);display:flex;align-items:center;gap:5px;white-space:nowrap}.sub-title:before{content:"";width:3px;height:11px;background:var(--primary);border-radius:1px}.sub-title .unit{color:var(--muted);font-size:9px;font-weight:400}.chart{width:100%;min-width:0;min-height:0;position:relative;flex:1}.cash-chart-wrap{position:relative;flex:1;display:flex;min-height:0;min-width:0;margin-top:4px}.cash-warning{position:absolute;right:4px;top:2px;display:flex;gap:4px;align-items:center;border:1px solid rgba(var(--danger-rgb),.28);color:var(--danger);background:var(--surface);border-radius:5px;font-size:9px;padding:5px 7px;box-shadow:0 2px 6px rgba(var(--danger-rgb),.04);z-index:2;pointer-events:none}.cash-warning svg{width:12px;height:12px}.cash-caption{color:var(--muted);font-size:9px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0;margin-top:2px}
 .risk-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;flex-shrink:0;margin-bottom:10px}.risk-metrics .metric-card{padding:9px 10px;min-height:74px}.risk-metrics .metric-value{font-size:20px;color:var(--ink)}.risk-metrics .metric-change{font-size:8px;white-space:normal;line-height:1.65;min-height:15px}.risk-metrics .metric-label{font-size:10px}.risk-metrics .metric-sub{font-size:8px;color:var(--muted);line-height:1.55;min-height:17px}.aging-layout{min-height:0;display:flex;align-items:center;gap:9px;flex:1;padding-top:3px}.donut-wrap{position:relative;width:43%;height:100%;min-height:88px;flex-shrink:0;display:flex;align-items:center;justify-content:center}.donut-wrap .chart{height:100%;width:100%;flex:1}.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;white-space:nowrap;display:flex;flex-direction:column;gap:2px;color:var(--primary-deep)}.donut-center strong{font-size:15px;font-variant-numeric:tabular-nums;line-height:1.25}.donut-center span{font-size:8px;color:var(--muted)}.legend-list{display:flex;flex:1;min-width:0;flex-direction:column;gap:10px;padding:0}.legend-item{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:9px;color:var(--muted);white-space:nowrap;min-width:0}.legend-name{display:flex;align-items:center;gap:5px;min-width:0}.legend-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);display:inline-block;flex-shrink:0}.legend-item strong{font-weight:500;font-variant-numeric:tabular-nums;color:var(--text)}.legend-item .legend-amount{font-size:8px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:34px;text-align:right}.legend-item .legend-percent{margin-left:auto}
 .contribution-head{flex-wrap:wrap;gap:7px;margin-bottom:8px}.contribution-head .segment{margin-left:auto}.contribution-head .segment button{padding:3px 8px}.table-wrap{flex:1;min-height:0;display:flex;align-items:flex-start;overflow:hidden}.contribution-table{width:100%;border-collapse:collapse;font-size:9px;table-layout:fixed;color:var(--text)}.contribution-table thead{background:var(--surface-soft);color:var(--muted)}.contribution-table th{font-weight:500;padding:8px 3px;line-height:1.55;text-align:right;border-bottom:1px solid var(--line)}.contribution-table th:first-child{width:25%;text-align:left;padding-left:8px}.contribution-table th .th-unit{display:block;font-size:8px}.contribution-table td{padding:9px 3px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums;cursor:pointer}.contribution-table td:first-child{text-align:left;padding-left:8px}.contribution-table tbody tr:last-child td{border-bottom:0}.contribution-table tbody tr:hover{background:rgba(var(--primary-rgb),.05)}.contribution-table td:nth-child(4){color:var(--primary-deep)}.rank{display:inline-flex;width:15px;height:15px;align-items:center;justify-content:center;border-radius:4px;background:var(--surface-soft);color:var(--muted);font-size:9px;margin-right:5px}.rank.top{background:rgba(var(--warning-rgb),.13);color:var(--warning)}.mix-section{flex-shrink:0;padding-top:7px}.mix-section .sub-title{font-size:10px}.mix-section .sub-title:before{display:none}.mix-chart{height:24px;width:100%;min-height:24px;margin:3px 0 5px}.mix-legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.mix-legend .legend-item{display:block;background:var(--surface-soft);border-radius:5px;padding:6px 8px;font-size:8px}.mix-legend .legend-name{margin-bottom:4px}.mix-legend strong{display:block;margin-left:11px;font-size:9px;color:var(--primary-deep)}
-.target-head{flex-wrap:wrap;row-gap:6px;margin-bottom:4px}.target-head .segment{margin-left:auto}.target-head .segment button{padding:3px 7px;font-size:8px}.target-chart{flex:1;min-height:0}.panel-note{font-size:8px;color:var(--muted);line-height:1.4;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:4px 0 0}.delivery-layout{display:flex;gap:8px;flex:1;min-height:0}.delivery-left{flex:1.55;display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0}.delivery-right{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column}.delivery-kpi-row{display:grid;grid-template-columns:1fr 1fr;gap:7px;flex-shrink:0}.delivery-kpi-card{background:var(--surface-alt);border:1px solid var(--line);border-radius:5px;padding:9px 10px;display:flex;flex-direction:column;gap:3px}.delivery-kpi-card .metric-label{font-size:9px;color:var(--text)}.delivery-kpi-card strong{font-size:clamp(18px,1.3vw,24px);color:var(--primary-dark);font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.3}.delivery-kpi-card small{font-size:8px;color:var(--muted);line-height:1.4}.delivery-trend,.delivery-status{border:1px solid var(--line);border-radius:5px;min-width:0;min-height:0;display:flex;flex-direction:column;padding:7px 8px 2px;flex:1}.delivery-trend .sub-title:before,.delivery-status .sub-title:before{display:none}.delivery-trend .sub-title,.delivery-status .sub-title{font-size:9px}.delivery-chart-inner{display:flex;min-height:0;min-width:0;flex:1;align-items:stretch;gap:4px}.delivery-chart-inner .donut-wrap{width:58%;min-height:62px;height:100%}.delivery-chart-inner .donut-center strong{font-size:16px}.delivery-chart-inner .donut-center span{font-size:7px}.delivery-chart-inner .legend-list{gap:9px}.delivery-chart-inner .legend-item{font-size:8px}.delivery-chart-inner .legend-name{gap:4px}.alert-head{margin-bottom:7px}.text-button{background:transparent;border:0;color:var(--muted);font-size:9px;display:flex;align-items:center;gap:2px;padding:0}.text-button:hover{color:var(--primary)}.text-button svg{height:10px;width:10px}.alert-list{flex:1;min-height:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:5px;padding:0 9px}.alert-item{display:flex;gap:8px;align-items:flex-start;min-height:0;flex:1;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer;position:relative}.alert-item:last-child{border-bottom:0}.alert-item:hover .alert-title{filter:brightness(.9)}.alert-icon{flex-shrink:0;width:14px;height:14px;background:var(--danger);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);margin-top:1px}.alert-icon svg{width:9px;height:9px}.alert-item.warning .alert-icon{background:var(--warning)}.alert-item.info .alert-icon{background:var(--blue)}.alert-copy{min-width:0;flex:1;display:flex;flex-direction:column;gap:4px}.alert-title{font-size:9px;line-height:1.3;font-weight:600;color:var(--danger);display:flex;justify-content:space-between;gap:5px;white-space:nowrap}.alert-item.warning .alert-title{color:var(--warning)}.alert-item.info .alert-title{color:var(--blue)}.alert-detail{font-size:8px;color:var(--muted);line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.alert-date{font-size:7px;font-weight:400;color:var(--faint);white-space:nowrap;margin-left:auto;padding-top:1px}.footer{display:flex;justify-content:space-between;align-items:center;gap:12px;min-width:0;font-size:8px;color:var(--faint);line-height:1;white-space:nowrap}.footer span{overflow:hidden;text-overflow:ellipsis}.footer .status-dot{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--primary);margin-right:4px;vertical-align:middle}
+.target-head{flex-wrap:wrap;row-gap:6px;margin-bottom:4px}.target-head .segment{margin-left:auto}.target-head .segment button{padding:3px 7px;font-size:8px}.target-chart{flex:1;min-height:0}.panel-note{font-size:8px;color:var(--muted);line-height:1.4;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:4px 0 0}.delivery-layout{display:flex;gap:8px;flex:1;min-height:0;align-items:stretch}.delivery-left{flex:1 1 0;display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0}.delivery-mid{flex:2 1 0;display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0}.delivery-right{flex:1 1 0;min-width:0;min-height:0;display:flex;flex-direction:column}.delivery-kpi-row{display:flex;flex-direction:column;gap:7px;flex:1;min-height:0}.delivery-kpi-card{background:var(--surface-alt);border:1px solid var(--line);border-radius:5px;padding:9px 10px;display:flex;flex-direction:column;gap:3px}.delivery-kpi-card .metric-label{font-size:9px;color:var(--text)}.delivery-kpi-card strong{font-size:clamp(28px,2.6vw,36px);color:var(--primary-dark);font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.2}.delivery-kpi-card small{font-size:10px;color:var(--muted);line-height:1.35}.delivery-trend,.delivery-status{border:1px solid var(--line);border-radius:5px;min-width:0;min-height:0;display:flex;flex-direction:column;padding:7px 8px 2px;flex:1}.delivery-trend .sub-title:before,.delivery-status .sub-title:before{display:none}.delivery-trend .sub-title,.delivery-status .sub-title{font-size:9px}.delivery-chart-inner{display:flex;flex-direction:column;min-height:0;min-width:0;flex:1;align-items:stretch;gap:6px}.delivery-chart-inner .donut-wrap{width:100%;min-height:90px;flex:1 1 auto;height:auto}.delivery-chart-inner .donut-center strong{font-size:16px}.delivery-chart-inner .donut-center span{font-size:7px}.delivery-chart-inner .legend-list{gap:9px}.delivery-chart-inner .legend-item{font-size:8px}.delivery-chart-inner .legend-name{gap:4px}.alert-head{margin-bottom:7px}.text-button{background:transparent;border:0;color:var(--muted);font-size:9px;display:flex;align-items:center;gap:2px;padding:0}.text-button:hover{color:var(--primary)}.text-button svg{height:10px;width:10px}.alert-list{flex:1;min-height:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:5px;padding:0 9px}.alert-item{display:flex;gap:8px;align-items:flex-start;min-height:0;flex:1;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer;position:relative}.alert-item:last-child{border-bottom:0}.alert-item:hover .alert-title{filter:brightness(.9)}.alert-icon{flex-shrink:0;width:14px;height:14px;background:var(--danger);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);margin-top:1px}.alert-icon svg{width:9px;height:9px}.alert-item.warning .alert-icon{background:var(--warning)}.alert-item.info .alert-icon{background:var(--blue)}.alert-copy{min-width:0;flex:1;display:flex;flex-direction:column;gap:4px}.alert-title{font-size:9px;line-height:1.3;font-weight:600;color:var(--danger);display:flex;justify-content:space-between;gap:5px;white-space:nowrap}.alert-item.warning .alert-title{color:var(--warning)}.alert-item.info .alert-title{color:var(--blue)}.alert-detail{font-size:8px;color:var(--muted);line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.alert-date{font-size:7px;font-weight:400;color:var(--faint);white-space:nowrap;margin-left:auto;padding-top:1px}.footer{display:flex;justify-content:space-between;align-items:center;gap:12px;min-width:0;font-size:8px;color:var(--faint);line-height:1;white-space:nowrap}.footer span{overflow:hidden;text-overflow:ellipsis}.footer .status-dot{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--primary);margin-right:4px;vertical-align:middle}
 .global-tooltip{display:none;position:fixed;z-index:10000;max-width:290px;padding:10px 12px;background:var(--tooltip-bg);color:var(--tooltip-text);border:1px solid rgba(var(--primary-rgb),.14);border-radius:6px;font-size:11px;line-height:1.65;box-shadow:0 6px 22px rgba(var(--overlay-rgb),.2);pointer-events:none;white-space:normal}.global-tooltip.visible{display:block}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(15px);z-index:10001;color:var(--tooltip-text);background:var(--tooltip-bg);box-shadow:0 6px 25px rgba(var(--overlay-rgb),.15);padding:11px 18px;border-radius:7px;font-size:11px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}.toast.visible{opacity:1;transform:translateX(-50%) translateY(0)}dialog{width:min(740px,80vw);max-height:83vh;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);box-shadow:0 20px 70px rgba(var(--overlay-rgb),.22)}dialog::backdrop{background:rgba(var(--overlay-rgb),.35);backdrop-filter:blur(3px)}.dialog-head{display:flex;align-items:center;justify-content:space-between;padding:17px 22px;border-bottom:1px solid var(--line)}.dialog-head h2{font-size:17px;color:var(--ink);margin:0}.dialog-content{padding:20px 22px;max-height:60vh;overflow:auto;font-size:12px;line-height:1.8}.dialog-content h3{color:var(--primary-deep);font-size:14px;margin:0 0 10px}.dialog-content p{margin:0 0 12px}.dialog-content table{width:100%;border-collapse:collapse;font-size:11px}.dialog-content th,.dialog-content td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left}.dialog-content th{background:var(--surface-soft);color:var(--muted);font-weight:500}.dialog-content .detail-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:17px}.dialog-footer{padding:12px 22px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;background:var(--surface-soft)}.dialog-content .legend-dot{margin-right:5px}.highcharts-container{font-family:var(--font)!important}.highcharts-tooltip text{font-family:var(--font)!important}.highcharts-point{cursor:pointer}.data-empty{font-size:11px;color:var(--muted);padding:20px;text-align:center}
-@media (min-width:1600px){:root{--gap:14px;--panel-pad:16px}.app{grid-template-rows:66px minmax(0,1fr);grid-template-columns:82px minmax(0,1fr)}.brand{height:66px;font-size:31px}.header{padding:0 23px}.header-title h1{font-size:25px}.header-tabs{font-size:12px}.header-controls{gap:10px}select{height:32px;font-size:11px;max-width:136px}.select-wrap:after{top:12px}.asof{font-size:11px}main{padding:14px 18px 11px;grid-template-rows:minmax(110px,1fr) minmax(330px,3fr) minmax(228px,1.9fr) 13px}.nav-button{height:77px;font-size:11px}.nav-button svg{width:23px;height:23px}.panel-title{font-size:14px}.panel-title .unit{font-size:10px}.kpi-card{padding:17px;gap:14px}.kpi-icon{width:45px;height:45px;flex-basis:45px}.kpi-label{font-size:14px}.kpi-value{font-size:32px;margin:5px 0 7px}.kpi-meta{font-size:11px}.kpi-compare{top:34px;right:17px;font-size:11px;padding:8px 10px}.kpi-compare strong{font-size:12px}.progress-track{height:6px}.metric-label{font-size:12px}.metric-value{font-size:25px}.metric-change{font-size:11px}.cash-metrics{gap:11px;margin-bottom:13px}.metric-card{padding:12px}.cash-metrics .metric-card{gap:11px}.metric-icon{width:34px;height:34px;flex-basis:34px}.risk-metrics{gap:10px;margin-bottom:13px}.risk-metrics .metric-card{min-height:93px;padding:12px}.risk-metrics .metric-label{font-size:12px}.risk-metrics .metric-value{font-size:25px}.risk-metrics .metric-change,.risk-metrics .metric-sub{font-size:10px}.sub-title{font-size:12px}.sub-title .unit{font-size:10px}.legend-item{font-size:11px}.legend-list{gap:14px}.legend-item .legend-amount{font-size:10px}.donut-center strong{font-size:19px}.donut-center span{font-size:10px}.cash-warning{font-size:11px;padding:7px 9px}.cash-caption{font-size:10px}.segment button{font-size:11px;padding:4px 14px}.contribution-head .segment button{padding:4px 10px}.contribution-table{font-size:11px}.contribution-table th{padding:10px 5px}.contribution-table td{padding:13px 5px}.contribution-table th .th-unit{font-size:10px}.mix-section .sub-title{font-size:12px}.mix-chart{height:29px;min-height:29px}.mix-legend .legend-item{font-size:10px;padding:8px 10px}.mix-legend strong{font-size:11px}.target-head .segment button{font-size:10px;padding:3px 8px}.delivery-kpi-card .metric-label{font-size:10px}.delivery-kpi-card strong{font-size:23px}.delivery-kpi-card small{font-size:10px}.delivery-kpi-row{gap:10px}.delivery-layout{gap:10px}.delivery-trend,.delivery-status{padding:9px 10px 3px}.delivery-trend .sub-title,.delivery-status .sub-title{font-size:11px}.delivery-chart-inner .legend-item{font-size:10px}.delivery-chart-inner .donut-center strong{font-size:20px}.delivery-chart-inner .donut-center span{font-size:9px}.alert-title{font-size:11px}.alert-detail{font-size:10px}.alert-date{font-size:9px}.alert-icon{width:16px;height:16px}.alert-item{padding:12px 0}.panel-note{font-size:10px}.footer{font-size:9px}.text-button{font-size:11px}}
-@media (max-width:1400px){:root{--gap:10px;--panel-pad:11px}.app{grid-template-rows:55px minmax(0,1fr);grid-template-columns:70px minmax(0,1fr)}.brand{height:55px;font-size:27px}.header{padding:0 14px;gap:10px}.header-title h1{font-size:20px}.header-title{gap:12px}.header-tabs{gap:12px;padding-left:12px;font-size:10px}.header-controls{gap:6px}select{font-size:9px;height:27px;max-width:111px;padding-right:22px}.select-wrap:after{top:10px}.asof{font-size:9px;padding:7px 8px}.avatar{display:none}.header-tools{gap:1px;padding-left:5px}.icon-button{width:23px;height:25px}main{padding:10px 12px 8px;grid-template-rows:minmax(88px,.95fr) minmax(265px,2.92fr) minmax(165px,1.8fr) 10px}.nav-button{height:62px;font-size:9px}.nav-button svg{width:20px;height:20px}.kpi-card{padding:11px;gap:9px}.kpi-icon{width:32px;height:32px;flex-basis:32px}.kpi-icon svg{width:20px;height:20px}.kpi-label{font-size:11px;gap:4px}.kpi-label .unit{font-size:8px}.kpi-value{font-size:23px;margin:3px 0 4px}.kpi-compare{right:9px;top:26px;font-size:8px;padding:5px 6px}.kpi-compare strong{font-size:9px}.kpi-meta{gap:8px;font-size:8px}.kpi-progress{padding-top:6px}.panel-title{font-size:11px;gap:5px}.panel-title>svg{width:15px;height:15px}.panel-title .unit{font-size:8px}.panel-head{margin-bottom:8px;gap:5px}.info-button{width:12px;height:12px;font-size:8px}.segment button{font-size:8px;padding:3px 9px}.cash-metrics{gap:7px;margin-bottom:7px}.metric-card{padding:7px 8px}.cash-metrics .metric-card{gap:7px}.metric-icon{width:25px;height:25px;flex-basis:25px}.metric-icon svg{width:14px;height:14px}.metric-label{font-size:9px}.metric-value{font-size:18px}.metric-change{font-size:8px;gap:5px}.risk-metrics .metric-card{min-height:66px;padding:7px 8px}.risk-metrics .metric-label{font-size:9px}.risk-metrics .metric-value{font-size:18px}.risk-metrics .metric-change,.risk-metrics .metric-sub{font-size:7px}.risk-metrics{gap:7px;margin-bottom:8px}.legend-list{gap:8px}.legend-item{font-size:8px}.legend-item .legend-amount{font-size:7px;min-width:27px}.donut-center strong{font-size:13px}.donut-center span{font-size:7px}.contribution-head .segment button{padding:3px 6px;font-size:7px}.contribution-table{font-size:8px}.contribution-table th{padding:6px 2px}.contribution-table td{padding:8px 2px}.contribution-table th .th-unit{font-size:7px}.rank{width:13px;height:13px;font-size:8px;margin-right:3px}.mix-legend .legend-item{padding:5px 6px;font-size:7px}.mix-legend strong{font-size:8px}.mix-section{padding-top:4px}.mix-section .sub-title{font-size:9px}.mix-chart{height:20px;min-height:20px;margin:2px 0 4px}.target-head .segment button{padding:3px 5px;font-size:7px}.delivery-kpi-row{gap:5px}.delivery-kpi-card{padding:6px 8px}.delivery-kpi-card .metric-label{font-size:7px}.delivery-kpi-card strong{font-size:17px}.delivery-kpi-card small{font-size:7px}.delivery-layout{gap:6px}.delivery-trend,.delivery-status{padding:5px 6px 1px}.delivery-trend .sub-title,.delivery-status .sub-title{font-size:8px}.delivery-chart-inner .legend-item{font-size:7px}.delivery-chart-inner .legend-list{gap:8px}.delivery-chart-inner .donut-center strong{font-size:14px}.delivery-chart-inner .donut-center span{font-size:6px}.alert-list{padding:0 7px}.alert-item{gap:6px;padding:7px 0}.alert-title{font-size:8px}.alert-detail{font-size:7px}.alert-date{font-size:6px}.alert-copy{gap:3px}.alert-icon{width:12px;height:12px}.alert-icon svg{width:8px;height:8px}.panel-note{font-size:7px}.footer{font-size:7px}}
+@media (min-width:1600px){:root{--gap:14px;--panel-pad:16px}.app{grid-template-rows:66px minmax(0,1fr);grid-template-columns:82px minmax(0,1fr)}.brand{height:66px;font-size:31px}.header{padding:0 23px}.header-title h1{font-size:25px}.header-tabs{font-size:12px}.header-controls{gap:10px}select{height:32px;font-size:11px;max-width:136px}.select-wrap:after{top:12px}.asof{font-size:11px}main{padding:14px 18px 11px;grid-template-rows:minmax(110px,1fr) minmax(330px,3fr) minmax(228px,1.9fr) 13px}.nav-button{height:77px;font-size:11px}.nav-button svg{width:23px;height:23px}.panel-title{font-size:14px}.panel-title .unit{font-size:10px}.kpi-card{padding:17px;gap:14px}.kpi-icon{width:45px;height:45px;flex-basis:45px}.kpi-label{font-size:14px}.kpi-value{font-size:32px;margin:5px 0 7px}.kpi-meta{font-size:11px}.kpi-compare{top:34px;right:17px;font-size:11px;padding:8px 10px}.kpi-compare strong{font-size:12px}.progress-track{height:6px}.metric-label{font-size:12px}.metric-value{font-size:25px}.metric-change{font-size:11px}.cash-metrics{gap:11px;margin-bottom:13px}.metric-card{padding:12px}.cash-metrics .metric-card{gap:11px}.metric-icon{width:34px;height:34px;flex-basis:34px}.risk-metrics{gap:10px;margin-bottom:13px}.risk-metrics .metric-card{min-height:93px;padding:12px}.risk-metrics .metric-label{font-size:12px}.risk-metrics .metric-value{font-size:25px}.risk-metrics .metric-change,.risk-metrics .metric-sub{font-size:10px}.sub-title{font-size:12px}.sub-title .unit{font-size:10px}.legend-item{font-size:11px}.legend-list{gap:14px}.legend-item .legend-amount{font-size:10px}.donut-center strong{font-size:19px}.donut-center span{font-size:10px}.cash-warning{font-size:11px;padding:7px 9px}.cash-caption{font-size:10px}.segment button{font-size:11px;padding:4px 14px}.contribution-head .segment button{padding:4px 10px}.contribution-table{font-size:11px}.contribution-table th{padding:10px 5px}.contribution-table td{padding:13px 5px}.contribution-table th .th-unit{font-size:10px}.mix-section .sub-title{font-size:12px}.mix-chart{height:29px;min-height:29px}.mix-legend .legend-item{font-size:10px;padding:8px 10px}.mix-legend strong{font-size:11px}.target-head .segment button{font-size:10px;padding:3px 8px}.delivery-kpi-card .metric-label{font-size:10px}.delivery-kpi-card strong{font-size:34px}.delivery-kpi-card small{font-size:11px}.delivery-kpi-row{gap:10px}.delivery-layout{gap:10px}.delivery-trend,.delivery-status{padding:9px 10px 3px}.delivery-trend .sub-title,.delivery-status .sub-title{font-size:11px}.delivery-chart-inner .legend-item{font-size:10px}.delivery-chart-inner .donut-center strong{font-size:20px}.delivery-chart-inner .donut-center span{font-size:9px}.alert-title{font-size:11px}.alert-detail{font-size:10px}.alert-date{font-size:9px}.alert-icon{width:16px;height:16px}.alert-item{padding:12px 0}.panel-note{font-size:10px}.footer{font-size:9px}.text-button{font-size:11px}}
+@media (max-width:1400px){:root{--gap:10px;--panel-pad:11px}.app{grid-template-rows:55px minmax(0,1fr);grid-template-columns:70px minmax(0,1fr)}.brand{height:55px;font-size:27px}.header{padding:0 14px;gap:10px}.header-title h1{font-size:20px}.header-title{gap:12px}.header-tabs{gap:12px;padding-left:12px;font-size:10px}.header-controls{gap:6px}select{font-size:9px;height:27px;max-width:111px;padding-right:22px}.select-wrap:after{top:10px}.asof{font-size:9px;padding:7px 8px}.avatar{display:none}.header-tools{gap:1px;padding-left:5px}.icon-button{width:23px;height:25px}main{padding:10px 12px 8px;grid-template-rows:minmax(88px,.95fr) minmax(265px,2.92fr) minmax(165px,1.8fr) 10px}.nav-button{height:62px;font-size:9px}.nav-button svg{width:20px;height:20px}.kpi-card{padding:11px;gap:9px}.kpi-icon{width:32px;height:32px;flex-basis:32px}.kpi-icon svg{width:20px;height:20px}.kpi-label{font-size:11px;gap:4px}.kpi-label .unit{font-size:8px}.kpi-value{font-size:28px;margin:3px 0 4px}.kpi-compare{right:9px;top:26px;font-size:8px;padding:5px 6px}.kpi-compare strong{font-size:9px}.kpi-meta{gap:8px;font-size:8px}.kpi-progress{padding-top:6px}.panel-title{font-size:11px;gap:5px}.panel-title>svg{width:15px;height:15px}.panel-title .unit{font-size:8px}.panel-head{margin-bottom:8px;gap:5px}.info-button{width:12px;height:12px;font-size:8px}.segment button{font-size:8px;padding:3px 9px}.cash-metrics{gap:7px;margin-bottom:7px}.metric-card{padding:7px 8px}.cash-metrics .metric-card{gap:7px}.metric-icon{width:25px;height:25px;flex-basis:25px}.metric-icon svg{width:14px;height:14px}.metric-label{font-size:9px}.metric-value{font-size:18px}.metric-change{font-size:8px;gap:5px}.risk-metrics .metric-card{min-height:66px;padding:7px 8px}.risk-metrics .metric-label{font-size:9px}.risk-metrics .metric-value{font-size:18px}.risk-metrics .metric-change,.risk-metrics .metric-sub{font-size:7px}.risk-metrics{gap:7px;margin-bottom:8px}.legend-list{gap:8px}.legend-item{font-size:8px}.legend-item .legend-amount{font-size:7px;min-width:27px}.donut-center strong{font-size:13px}.donut-center span{font-size:7px}.contribution-head .segment button{padding:3px 6px;font-size:7px}.contribution-table{font-size:8px}.contribution-table th{padding:6px 2px}.contribution-table td{padding:8px 2px}.contribution-table th .th-unit{font-size:7px}.rank{width:13px;height:13px;font-size:8px;margin-right:3px}.mix-legend .legend-item{padding:5px 6px;font-size:7px}.mix-legend strong{font-size:8px}.mix-section{padding-top:4px}.mix-section .sub-title{font-size:9px}.mix-chart{height:20px;min-height:20px;margin:2px 0 4px}.target-head .segment button{padding:3px 5px;font-size:7px}.delivery-kpi-row{gap:5px}.delivery-kpi-card{padding:7px 8px}.delivery-kpi-card .metric-label{font-size:9px}.delivery-kpi-card strong{font-size:28px}.delivery-kpi-card small{font-size:10px}.delivery-layout{gap:6px}.delivery-trend,.delivery-status{padding:5px 6px 1px}.delivery-trend .sub-title,.delivery-status .sub-title{font-size:8px}.delivery-chart-inner .legend-item{font-size:7px}.delivery-chart-inner .legend-list{gap:8px}.delivery-chart-inner .donut-center strong{font-size:14px}.delivery-chart-inner .donut-center span{font-size:6px}.alert-list{padding:0 7px}.alert-item{gap:6px;padding:7px 0}.alert-title{font-size:8px}.alert-detail{font-size:7px}.alert-date{font-size:6px}.alert-copy{gap:3px}.alert-icon{width:12px;height:12px}.alert-icon svg{width:8px;height:8px}.panel-note{font-size:7px}.footer{font-size:7px}}
 @media (max-height:770px){main{grid-template-rows:minmax(86px,.91fr) minmax(248px,2.9fr) minmax(168px,1.85fr) 10px}.panel-head{margin-bottom:7px}.risk-metrics .metric-card{min-height:64px}.risk-metrics{margin-bottom:6px}.cash-metrics .metric-card{padding-top:6px;padding-bottom:6px}.delivery-kpi-card{padding-top:6px;padding-bottom:6px}.contribution-table td{padding-top:7px;padding-bottom:7px}.alert-item{padding-top:6px;padding-bottom:6px}.donut-wrap{min-height:78px}.delivery-chart-inner .donut-wrap{min-height:55px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 /* Dynamic view styles; all color values inherit theme tokens. */
@@ -60,7 +60,7 @@ svg.highcharts-root{display:block;width:100%;height:100%;fill:initial;stroke:non
 .cash-metric.tone-warning{color:var(--warning);background:var(--warning-soft);border-color:color-mix(in srgb,var(--warning) 18%,var(--surface))}.tone-warning .mini-icon{background:color-mix(in srgb,var(--warning) 12%,var(--surface))}
 .cash-metric.tone-danger{color:var(--danger);background:var(--danger-soft);border-color:color-mix(in srgb,var(--danger) 16%,var(--surface))}.tone-danger .mini-icon{background:color-mix(in srgb,var(--danger) 12%,var(--surface))}
 .risk-metric{padding:12px;text-align:left;border:1px solid var(--border);background:var(--surface-alt);border-radius:6px;min-width:0;display:flex;flex-direction:column;gap:5px;min-height:76px}
-.risk-metric strong{font-size:clamp(19px,1.4vw,25px);color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}.risk-metric small{font-size:9px;color:var(--muted);line-height:1.5;white-space:normal}
+.risk-metric strong{font-size:clamp(28px,2.6vw,36px);color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.2}.risk-metric small{font-size:11px;color:var(--muted);line-height:1.4;white-space:normal}
 .cash-metric:hover,.risk-metric:hover,.delivery-kpi-card:hover{border-color:var(--primary);filter:brightness(.99)}
 .legend-row{display:flex;align-items:center;gap:6px;padding:0;border:0;background:transparent;min-width:0;white-space:nowrap;color:var(--muted);font-size:10px;text-align:left;line-height:1.35}
 .legend-row>i,.mix-item i{display:inline-block;width:6px;height:6px;flex:0 0 6px;border-radius:50%}.legend-row>span{flex:1}.legend-row>b{font-weight:500;margin-left:auto}.legend-row>em{font-style:normal;min-width:40px;text-align:right;font-size:9px}.legend-row:hover{color:var(--primary)}
@@ -82,8 +82,8 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
 .help-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}.help-grid h3{font-size:15px;color:var(--primary-dark);margin:0 0 7px}.help-grid p{font-size:13px;color:var(--muted);line-height:1.8;margin:0}.dialog-action{border:0;border-radius:5px;padding:9px 15px;display:inline-flex;gap:10px;align-items:center;background:var(--primary);color:var(--white)}
 /* Tighter desktop windows retain the same three-row information hierarchy. */
 @media(max-width:1500px){.header-tabs{display:none}.kpi-yoy{top:28px;right:9px;padding:5px 6px;font-size:9px}.kpi-yoy b{font-size:10px}.risk-metric{padding:9px;gap:4px}.cash-metric{padding:9px;gap:7px}.legend-row{font-size:9px}.legend-row>em{font-size:8px;min-width:30px}.mix-item{font-size:9px}.alert-item strong{font-size:10px}.alert-item p{font-size:9px}.target-head,.contribution-head{flex-wrap:wrap;row-gap:5px}.target-head .segment,.contribution-head .segment{margin-left:auto}}
-@media(max-width:1320px){.kpi-title{font-size:12px}.kpi-title .unit{font-size:8px}.kpi-yoy{top:42px;right:9px;font-size:8px;padding:4px}.kpi-yoy b{font-size:9px}.kpi-meta{font-size:9px;gap:8px}.kpi-content .progress-track{margin-top:7px}.cash-metric{gap:6px;padding:8px}.mini-icon{width:25px;height:25px;flex-basis:25px}.metric-delta{font-size:9px}.risk-metric strong{font-size:20px}.risk-metric small{font-size:9px}.legend-row{font-size:9px}.legend-list{gap:10px}.alert-item{gap:6px}.alert-item time{font-size:8px}.mix-item{padding:6px}.alert-item p{font-size:9px}.panel-title{font-size:12px}.contribution-table{font-size:9px}.contribution-table td{padding-top:9px;padding-bottom:9px}}
-@media(max-height:780px){.risk-metric{min-height:68px;padding:8px;gap:3px}.cash-metric{padding-top:8px;padding-bottom:8px}.cash-metrics{margin-bottom:6px}.risk-metrics{margin-bottom:6px}.panel-head{margin-bottom:7px}.kpi-card{padding-top:10px;padding-bottom:10px}.kpi-value{margin:2px 0;font-size:24px}.kpi-yoy{top:37px}.delivery-kpi-card{padding-top:5px;padding-bottom:5px}.alert-item{padding:7px 0}}
+@media(max-width:1320px){.kpi-title{font-size:12px}.kpi-title .unit{font-size:8px}.kpi-yoy{top:42px;right:9px;font-size:8px;padding:4px}.kpi-yoy b{font-size:9px}.kpi-meta{font-size:9px;gap:8px}.kpi-content .progress-track{margin-top:7px}.cash-metric{gap:6px;padding:8px}.mini-icon{width:25px;height:25px;flex-basis:25px}.metric-delta{font-size:9px}.risk-metric strong{font-size:30px}.risk-metric small{font-size:11px}.legend-row{font-size:9px}.legend-list{gap:10px}.alert-item{gap:6px}.alert-item time{font-size:8px}.mix-item{padding:6px}.alert-item p{font-size:9px}.panel-title{font-size:12px}.contribution-table{font-size:9px}.contribution-table td{padding-top:9px;padding-bottom:9px}}
+@media(max-height:780px){.risk-metric{min-height:68px;padding:8px;gap:3px}.cash-metric{padding-top:8px;padding-bottom:8px}.cash-metrics{margin-bottom:6px}.risk-metrics{margin-bottom:6px}.panel-head{margin-bottom:7px}.kpi-card{padding-top:10px;padding-bottom:10px}.kpi-value{margin:2px 0;font-size:30px}.kpi-yoy{top:37px}.delivery-kpi-card{padding-top:5px;padding-bottom:5px}.alert-item{padding:7px 0}}
 @media(min-width:1600px){.risk-metric{min-height:96px;padding:13px}.risk-metric small{font-size:10px}.risk-metric .metric-label{font-size:12px}.cash-metric{padding:13px;gap:11px}.mini-icon{width:33px;height:33px;flex-basis:33px}.metric-delta{font-size:11px}.kpi-yoy{top:36px;right:16px;font-size:11px;padding:8px 9px}.kpi-yoy b{font-size:12px}.legend-row{font-size:11px}.legend-row>em{font-size:10px}.mix-item{font-size:11px;padding:9px}.mix-item strong{font-size:12px}.alert-item strong{font-size:12px}.alert-item p{font-size:11px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 .contribution-table td:first-child{display:table-cell}.contribution-table td{padding:9px 3px}.contribution-table th{padding:7px 3px}.contribution-table .rank{margin-right:4px}
@@ -107,8 +107,7 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
 .header,main{grid-column:1!important}
 @media (min-width:1600px){.app{grid-template-columns:minmax(0,1fr)!important}}
 @media (max-width:1400px){.app{grid-template-columns:minmax(0,1fr)!important}}
-/* 侧栏隐藏后 header-tabs 承担焦点导航，小屏也保持可见 */
-@media(max-width:1500px){.header-tabs{display:flex!important}}
+/* 2026-11-02：焦点条已移除；不再强制显示 header-tabs */
 .header-tabs{align-items:center}
 .header-tabs button{
   border:0;background:transparent;padding:0;margin:0;cursor:pointer;
@@ -116,6 +115,442 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
 }
 .header-tabs button:hover{color:var(--primary)}
 .header-tabs button.active{color:var(--primary);font-weight:600}
+
+/* === 2026-11-02 树菜单+双列：内容顶栏精简 + 统一双列栅格 === */
+
+
+/* Board KPI 口径：.kpi-delta 承接原 .kpi-yoy 位置样式，语义改为当月/上月新增 */
+.kpi-delta{position:absolute;right:12px;top:30px;display:flex;flex-direction:column;gap:4px;padding:7px 8px;border-radius:5px;background:var(--primary-soft);font-size:10px;color:var(--muted);text-align:right;max-width:46%;line-height:1.35}
+.kpi-delta-row{display:block}
+.kpi-delta-label{color:var(--muted);font-weight:400} /* 「当月新增/上月新增」与「占目标」同色 */
+.kpi-delta-num,.kpi-delta b.kpi-delta-num{color:var(--primary)!important;font-size:11px;font-weight:600;white-space:nowrap} /* 金额与百分比用主题色 */
+.kpi-value{color:var(--primary)!important} /* 主金额数字跟主题色 */
+.kpi-yoy{display:none!important} /* 去同比：旧块不再展示 */
+
+/* === 2026-11-02 t80u：去标题 + 顶栏留白 + 正文字号加大 === */
+.header-title{display:none!important}
+.header{
+  justify-content:flex-start!important;
+  align-items:center!important;
+  min-height:64px!important;
+  padding:14px 18px!important; /* 三下拉上下留白 */
+  gap:14px!important;
+}
+.header-controls{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  align-items:center!important;
+  gap:12px!important;
+  padding:6px 0!important;
+  margin:0!important;
+  width:100%!important;
+}
+.header-controls .select-wrap,
+.header-controls select{
+  font-size:13px!important;
+  min-height:34px!important;
+}
+body,main{
+  font-size:13px!important; /* 原 12 → 13，可读性；避免大幅撑破高度链 */
+  line-height:1.45!important;
+}
+.panel-title{
+  font-size:14px!important;
+}
+.panel-title .unit,
+.sub-title,
+.chart-section-title .sub-title{
+  font-size:12px!important;
+}
+.kpi-title{
+  font-size:clamp(12px,.9vw,16px)!important;
+}
+.kpi-meta,
+.metric-label,
+.legend-row,
+.mix-item,
+.alert-item p,
+.panel-note,
+.footer{
+  font-size:11px!important;
+}
+.kpi-value,
+.cash-metric strong,
+.risk-metric strong,
+.metric-value{
+  font-size:clamp(28px,2.6vw,36px)!important; /* 对齐负荷率主百分比 ~30px 级 */
+  line-height:1.2!important;
+  white-space:nowrap!important;
+}
+/* 副文案略放大（KPI 新增/占目标、应收较上期） */
+.kpi-delta-num{font-size:12px!important}
+.kpi-delta-label{font-size:11px!important}
+.kpi-meta{font-size:11px!important}
+.risk-metric small,
+.risk-metric .risk-period{font-size:11px!important}
+.contribution-table{
+  font-size:12px!important;
+}
+.contribution-table th,
+.contribution-table td{
+  font-size:12px!important;
+}
+.alert-item strong{
+  font-size:12px!important;
+}
+.segment button{
+  font-size:12px!important;
+  padding:4px 10px!important;
+}
+
+.header-tabs{display:none!important}
+
+/* 壳不滚；唯一纵滚 = main */
+html,body{overflow:hidden!important;height:100%!important;margin:0!important}
+.app{
+  height:100%!important;
+  max-height:100dvh!important;
+  overflow:hidden!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-rows:auto minmax(0,1fr)!important;
+}
+.sidebar{display:none!important}
+.header,main{grid-column:1!important}
+.header{grid-row:1!important}
+main{
+  grid-row:2!important;
+  display:flex!important;
+  flex-direction:column!important;
+  flex-wrap:nowrap!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  gap:var(--gap)!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  grid-template-rows:none!important;
+  grid-template-columns:none!important;
+  scrollbar-gutter:stable;
+  padding:12px 16px 28px!important;
+}
+
+/* 废除 display:contents：中间/底部分组改为普通文档流块 */
+.middle-grid,.bottom-grid{display:block!important} /* DOM 已扁平；若残留仅作兜底 */
+
+/* KPI 2×2 */
+.kpi-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  grid-template-rows:auto auto!important;
+  gap:var(--gap)!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+  min-height:0!important;
+  height:auto!important;
+}
+
+/* 贡献 | 目标 同行 */
+.pair-row{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  gap:var(--gap)!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+  align-items:stretch!important; /* 贡献/目标同高 */
+}
+.pair-row > .panel{
+  height:100%!important;
+  min-height:0!important;
+  max-height:none!important;
+  align-self:stretch!important;
+  overflow:hidden!important;
+}
+.pair-row .table-wrap{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  overflow:auto!important;
+  height:auto!important;
+}
+.pair-row #targetPanel .chart,
+.pair-row #targetChart,
+.pair-row #targetChart.chart{
+  max-height:220px!important;
+}
+
+/* 面板：高度必须吃进子项（含图表），禁止靠 overflow 叠画撑视觉 */
+.panel{
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  flex:0 0 auto!important;
+  align-self:auto!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  min-height:min-content!important;
+  overflow:hidden!important; /* 溢出不再画到下一卡；盒高必须包住内容 */
+  box-sizing:border-box!important;
+}
+
+/* 彻底拆掉旧一页 flex 高度链 */
+.cash-chart-wrap,
+.aging-layout,
+.delivery-layout,
+.table-wrap,
+.mix-section,
+.target-chart,
+.delivery-trend,
+.delivery-chart-inner,
+.donut-wrap,
+.chart{
+  flex:0 0 auto!important;
+  flex-grow:0!important;
+  flex-shrink:0!important;
+  min-height:auto!important;
+}
+
+.cash-chart-wrap{
+  display:block!important;
+  width:100%!important;
+  height:220px!important;
+  min-height:220px!important;
+  max-height:220px!important;
+  position:relative!important;
+  margin-top:4px!important;
+}
+/* 恢复三指标卡：不再隐藏 #cashMetrics */
+.cash-caption{display:none!important;height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;}
+#cashMetrics,
+.cash-metrics{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  gap:9px!important;
+  flex-shrink:0!important;
+  margin-bottom:10px!important;
+  height:auto!important;
+  padding:0!important;
+  overflow:visible!important;
+}
+.cash-metric strong{
+  font-size:clamp(28px,2.6vw,36px)!important;
+  line-height:1.2!important;
+  white-space:nowrap!important;
+}
+.cash-metric .metric-delta,
+.cash-metric .metric-delta em{
+  font-size:11px!important;
+}
+.cash-chart-wrap{
+  padding-bottom:28px!important;
+  margin-bottom:10px!important;
+}
+#cashPanel{
+  padding-bottom:calc(var(--panel-pad) + 22px)!important;
+}
+#cashChart,
+#cashChart.chart{
+  display:block!important;
+  width:100%!important;
+  height:260px!important; /* 去指标卡后给趋势图更多高度 */
+  min-height:260px!important;
+  position:relative!important;
+  margin-bottom:12px!important;
+}
+
+.aging-layout{display:none!important} /* 旧环图布局废弃 */
+.aging-section.mix-section{
+  display:block!important;
+  width:100%!important;
+  flex-shrink:0!important;
+  padding-top:4px!important;
+}
+#agingChart.mix-chart,
+.aging-section .mix-chart{
+  display:block!important;
+  width:100%!important;
+  height:24px!important;
+  min-height:24px!important;
+  max-height:32px!important;
+  margin:3px 0 8px!important;
+}
+.aging-legend-4,
+#agingLegend.aging-legend-4{
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  gap:6px!important;
+}
+.aging-legend-4 .mix-item{
+  display:block!important;
+  width:100%!important;
+}
+
+#targetChart,
+#targetChart.chart,
+.target-chart{
+  display:block!important;
+  width:100%!important;
+  height:200px!important;
+  min-height:200px!important;
+  max-height:200px!important;
+  position:relative!important;
+}
+
+.delivery-layout{
+  display:flex!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:210px!important; /* 视觉微调：整块再压低 */
+  max-height:none!important;
+  gap:8px!important;
+  align-items:stretch!important;
+  overflow:visible!important;
+}
+.delivery-left{
+  flex:1 1 0!important; /* 左 1/4：当月/年度负荷上下 */
+  min-width:0!important;
+  min-height:190px!important;
+  height:auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  overflow:visible!important;
+}
+.delivery-mid{
+  flex:2 1 0!important; /* 中 1/2：近6月负荷趋势 */
+  min-width:0!important;
+  min-height:190px!important;
+  height:auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  overflow:visible!important;
+}
+.delivery-right{
+  flex:1 1 0!important; /* 右 1/4：交付图+图例上下，吃满该栏宽 */
+  min-width:0!important;
+  min-height:190px!important;
+  height:auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  overflow:visible!important;
+}
+.delivery-kpi-row{
+  display:flex!important;
+  flex-direction:column!important;
+  flex:1 1 auto!important;
+  gap:8px!important;
+  min-height:0!important;
+}
+.delivery-kpi-card{
+  flex:1 1 0!important;
+  justify-content:center!important;
+}
+/* 工作负荷左右卡主百分比字号放大（验收：相对改前 ~17px 明显抬高） */
+.delivery-kpi-card strong,
+#monthlyLoadVal,
+#annualLoadVal{
+  font-size:clamp(28px,2.6vw,36px)!important;
+  line-height:1.2!important;
+  white-space:nowrap!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+}
+.delivery-kpi-card small,
+#monthlyLoadSub,
+#annualLoadSub{
+  font-size:11px!important;
+  line-height:1.35!important;
+}
+.delivery-status{
+  flex:1 1 auto!important;
+  width:100%!important;
+  min-width:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+.delivery-trend{
+  flex:1 1 auto!important;
+  min-height:0!important;
+  height:auto!important;
+  overflow:visible!important;
+  padding-bottom:8px!important; /* 给 X 轴标签留底 */
+  width:100%!important;
+}
+#loadChart,
+#loadChart.chart{
+  display:block!important;
+  width:100%!important;
+  height:150px!important; /* 视觉微调压高，仍留 X 轴 */
+  min-height:150px!important;
+  max-height:150px!important;
+  overflow:visible!important;
+}
+.delivery-chart-inner{
+  display:flex!important;
+  flex-direction:column!important; /* 图上、图例下 */
+  width:100%!important;
+  flex:1 1 auto!important;
+  min-height:150px!important;
+  height:auto!important;
+  align-items:stretch!important;
+  gap:6px!important;
+}
+.delivery-chart-inner .donut-wrap{
+  width:100%!important;
+  flex:1 1 auto!important;
+  min-height:110px!important;
+  height:auto!important;
+}
+.delivery-chart-inner .legend-list{
+  width:100%!important;
+  flex:0 0 auto!important;
+}
+#deliveryChart,
+#deliveryChart.chart{
+  height:100px!important;
+  min-height:100px!important;
+  width:100%!important;
+}
+#deliveryPanel{
+  overflow:hidden!important; /* 仍限制叠画；盒高随内容增高后不再裁 X 轴 */
+  padding-bottom:calc(var(--panel-pad) + 6px)!important;
+}
+
+.table-wrap{
+  display:block!important;
+  height:auto!important;
+  overflow:visible!important;
+  width:100%!important;
+}
+.mix-section{width:100%!important}
+.mix-chart{min-height:48px!important;height:auto!important}
+
+#alertPanel{flex:0 0 auto!important}
+#alertList,
+.alert-list{
+  flex:0 0 auto!important;
+  height:auto!important;
+  overflow:visible!important;
+}
+
+.footer{
+  flex:0 0 auto!important;
+  width:100%!important;
+}
+
+/* 清掉旧 main 的 fr 行模板（含媒体查询） */
+@media (min-width:1600px){
+  .app{grid-template-columns:minmax(0,1fr)!important}
+  main{grid-template-rows:none!important;display:flex!important;flex-direction:column!important}
+}
+@media (max-width:1400px){
+  .app{grid-template-columns:minmax(0,1fr)!important}
+  main{grid-template-rows:none!important;display:flex!important;flex-direction:column!important}
+}
+@media (max-height:770px), (max-height:780px){
+  main{grid-template-rows:none!important;display:flex!important;flex-direction:column!important}
+}
 </style>
 </head>
 <body>
@@ -150,51 +585,50 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
   <div class="sidebar-bottom"><button class="icon-button" data-tip="单页经营全景 · 所有模块始终可见" aria-label="单页经营全景"><svg><use href="#icon-chevron"/></svg></button></div>
  </aside>
  <header class="header">
-  <div class="header-title"><h1>运营看板202610版</h1><div class="header-tabs" role="navigation" aria-label="看板焦点"><button type="button" class="active" data-focus="overview">经营业绩</button><button type="button" data-focus="cash">资金状况</button><button type="button" data-focus="risk">资金风险</button><button type="button" data-focus="contribution">板块贡献</button><button type="button" data-focus="delivery">交付保障</button></div></div>
+  <div class="header-title" hidden aria-hidden="true"><h1>运营看板202610版</h1></div>
   <div class="header-controls">
    <label class="select-wrap has-icon" data-tip="选择统计年度，所有指标与图表同步更新"><svg class="select-icon"><use href="#icon-clock"/></svg><select id="yearSelect" aria-label="统计年度"><option value="2026">2026年度</option><option value="2025">2025年度</option></select></label>
    <label class="select-wrap" data-tip="按组织板块筛选，所有模块使用同一统计范围"><select id="unitSelect" aria-label="组织板块"><option value="全部板块">全部板块</option><option value="设计院">设计院</option><option value="数字化业务单元">数字化业务单元</option><option value="专业室">专业室</option></select></label>
    <label class="select-wrap" data-tip="按业务类型筛选经营数据"><select id="businessSelect" aria-label="业务类型"><option value="全部业务类型">全部业务类型</option><option value="设计咨询">设计咨询</option><option value="项目管理">项目管理</option><option value="工程服务">工程服务</option></select></label>
-   <label class="select-wrap has-icon" data-tip="主题颜色统一配置；切换后图表、指标与界面同步更新"><svg class="select-icon"><use href="#icon-palette"/></svg><select id="themeSelect" aria-label="主题颜色"><option value="teal">青绿主题</option><option value="blue">深蓝主题</option><option value="wood">暖棕主题</option></select></label>
-   <div class="asof" data-tip="统计截止日期；示例数据均按该日期累计"><strong>截至</strong><span id="asofDate">2026-08-31</span></div>
-   <div class="header-tools"><button id="resetButton" class="icon-button" aria-label="重置筛选" data-tip="重置全部筛选及图表视图，保留当前主题"><svg><use href="#icon-refresh"/></svg></button><button id="helpButton" class="icon-button" aria-label="看板说明" data-tip="查看指标口径、图表交互及原型说明"><svg><use href="#icon-info"/></svg></button><div class="avatar" data-tip="演示账号 · admin"><svg><use href="#icon-users"/></svg></div></div>
+   
+   
   </div>
  </header>
  <main id="main">
   <section id="kpiGrid" class="kpi-grid" aria-label="年度经营关键指标"></section>
-  <div class="middle-grid">
-   <section id="cashPanel" class="panel">
-    <div class="panel-head"><h2 class="panel-title"><svg><use href="#icon-money"/></svg>现金流与资金安全<span class="unit">（万元）</span><button class="info-button" aria-label="现金流说明" data-tip="现金流入为实际到账；现金流出为实际支付；净现金流＝流入－流出。累计口径，年初至截止日。">?</button></h2></div>
-    <div id="cashMetrics" class="cash-metrics"></div>
-    <div class="chart-section-title"><span class="sub-title">现金流趋势<span class="unit">（万元）</span></span><button class="info-button" data-tip="悬停查看各月收支；点击图例显示或隐藏系列；点击柱形或折线节点查看当月明细。" aria-label="现金流图表交互">?</button></div>
-    <div class="cash-chart-wrap"><div id="cashChart" class="chart" aria-label="现金流趋势图"></div></div>
-    <div id="cashCaption" class="cash-caption"></div>
+  <section id="cashPanel" class="panel">
+    <div class="panel-head"><h2 class="panel-title"><svg><use href="#icon-money"/></svg>现金流与资金安全<span class="unit">（万元）</span><button class="info-button" aria-label="现金流说明" data-tip="现金流入为实际到账；现金流出为实际支付；净现金流＝流入－流出。柱为当月流入/流出；折线为当年累计净现金流。">?</button></h2></div>
+    <div id="cashMetrics" class="cash-metrics" aria-label="现金流三项指标"></div>
+    <div class="chart-section-title"><span class="sub-title">当年现金流趋势<span class="unit">（万元）</span></span><button class="info-button" data-tip="柱：当月流入/当月流出；折线：当年累计净现金流（正绿负红）。悬停查看数值；点击图例显隐系列；点击柱或折线节点查看当月明细。" aria-label="现金流图表交互">?</button></div>
+    <div class="cash-chart-wrap"><div id="cashChart" class="chart" aria-label="当年现金流趋势图"></div></div>
    </section>
-   <section id="riskPanel" class="panel">
-    <div class="panel-head"><h2 class="panel-title"><svg><use href="#icon-shield"/></svg>应收与资金风险<span class="unit">（万元）</span><button class="info-button" aria-label="资金风险口径" data-tip="应收账款为客户应收余额；WIP为已开展尚未结算确认的工作量；1年以上应收由账龄分档计算。">?</button></h2></div>
+  <section id="riskPanel" class="panel">
+    <div class="panel-head"><h2 class="panel-title"><svg><use href="#icon-shield"/></svg>应收与资金风险<span class="unit">（万元）</span><button class="info-button" aria-label="资金风险口径" data-tip="应收账款为客户应收余额；WIP为已开展尚未结算确认的工作量；营业收入为当期经营收入（demo 占位，较上期对比）。">?</button></h2></div>
     <div id="riskMetrics" class="risk-metrics"></div>
-    <div class="chart-section-title"><span class="sub-title">应收账款账龄结构<span class="unit">（万元）</span></span><button class="info-button" data-tip="账龄以应收形成日计算。悬停查看金额和占比；点击扇区或图例查看该账龄段明细。" aria-label="账龄图表交互">?</button></div>
-    <div class="aging-layout"><div class="donut-wrap"><div id="agingChart" class="chart" aria-label="应收账款账龄环图"></div><div id="agingTotal" class="donut-center"></div></div><div id="agingLegend" class="legend-list"></div></div>
+    <div class="chart-section-title"><span class="sub-title">应收账款账龄结构<span class="unit">（万元）</span></span><button class="info-button" data-tip="账龄以应收形成日计算。悬停或点击色块/图例查看该账龄段明细。" aria-label="账龄图表交互">?</button></div>
+    <div class="aging-section mix-section"><div id="agingChart" class="mix-chart" aria-label="应收账款账龄分布条"></div><div id="agingLegend" class="mix-legend aging-legend-4"></div></div>
    </section>
+  <div class="pair-row" role="group" aria-label="贡献与目标">
    <section id="contributionPanel" class="panel">
     <div class="panel-head contribution-head"><h2 class="panel-title"><svg><use href="#icon-briefcase"/></svg>经营贡献分析<button class="info-button" data-tip="按不同维度比较合同额、回款额与净现金贡献。净现金贡献为该维度同期净现金流。板块显示TOP5，完整明细可点击查看。" aria-label="经营贡献说明">?</button></h2><div class="segment"><button class="active" data-contribution-dim="department">板块贡献</button><button data-contribution-dim="business">业务类型</button><button data-contribution-dim="customer">客户类型</button></div></div>
     <div class="table-wrap"><table id="contributionTable" class="contribution-table"><thead><tr><th>名称</th><th>新签合同额<span class="th-unit">（万元）</span></th><th>回款额<span class="th-unit">（万元）</span></th><th>净现金贡献<span class="th-unit">（万元）</span></th></tr></thead><tbody id="contributionBody"></tbody></table></div>
     <div class="mix-section"><span class="sub-title">合同额结构占比<button class="info-button" data-tip="展示当前筛选范围内的合同额结构；悬停或点击色块查看详细占比。" aria-label="结构占比说明">?</button></span><div id="mixChart" class="mix-chart" aria-label="合同额结构占比图"></div><div id="mixLegend" class="mix-legend"></div></div>
    </section>
-  </div>
-  <div class="bottom-grid">
    <section id="targetPanel" class="panel">
     <div class="panel-head target-head"><h2 class="panel-title"><svg><use href="#icon-chart"/></svg>板块目标达成<button class="info-button" data-tip="比较各板块实际值与对应年度目标。此模块强调目标进度，与上方经营贡献金额排名形成互补。" aria-label="板块目标达成说明">?</button></h2><div class="segment"><button class="active" data-target-metric="contract">合同额</button><button data-target-metric="invoice">开票额</button><button data-target-metric="receipt">回款额</button><button data-target-metric="net">净现金贡献</button></div></div>
     <div id="targetChart" class="chart target-chart" aria-label="板块目标达成图"></div><p id="targetNote" class="panel-note"></p>
    </section>
-   <section id="deliveryPanel" class="panel">
+  </div>
+  <section id="deliveryPanel" class="panel">
     <div class="panel-head"><h2 class="panel-title"><svg><use href="#icon-shield"/></svg>工作负荷与交付保障<button class="info-button" data-tip="年度和当月负荷率按排产工时／可用工时计算；项目交付保障活动展示正常、风险、逾期项目的分布。" aria-label="交付保障说明">?</button></h2></div>
     <div class="delivery-layout">
       <div class="delivery-left">
         <div class="delivery-kpi-row">
-          <div class="delivery-kpi-card"><span class="metric-label">年度负荷率</span><strong id="annualLoadVal"></strong><small id="annualLoadSub"></small></div>
           <div class="delivery-kpi-card"><span class="metric-label">当月负荷率</span><strong id="monthlyLoadVal"></strong><small id="monthlyLoadSub"></small></div>
+          <div class="delivery-kpi-card"><span class="metric-label">年度负荷率</span><strong id="annualLoadVal"></strong><small id="annualLoadSub"></small></div>
         </div>
+      </div>
+      <div class="delivery-mid">
         <div class="delivery-trend"><div class="chart-section-title"><span class="sub-title">近6个月负荷率趋势</span><button class="info-button" data-tip="悬停查看负荷率；点击图例切换系列；点击节点查看当月产能数据。" aria-label="负荷趋势交互">?</button></div><div id="loadChart" class="chart" aria-label="负荷率趋势图"></div></div>
       </div>
       <div class="delivery-right">
@@ -202,10 +636,9 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
       </div>
     </div>
    </section>
-   <section id="alertPanel" class="panel">
+  <section id="alertPanel" class="panel">
     <div class="panel-head alert-head"><h2 class="panel-title"><svg><use href="#icon-warning"/></svg>经营异常预警<button class="info-button" data-tip="根据回款进度、应收账龄、现金流波动和项目延期触发预警。点击预警查看触发原因及处置建议。" aria-label="预警说明">?</button></h2><button id="moreAlerts" class="text-button" data-tip="查看当前筛选范围的全部演示预警">更多<svg><use href="#icon-chevron"/></svg></button></div><div id="alertList" class="alert-list"></div>
    </section>
-  </div>
   <footer class="footer"><span><i class="status-dot"></i>演示原型 · 数据为模拟数据 · 金额单位：万元</span><span>统一统计口径 · 全局筛选联动 · 点击数据查看详情</span></footer>
  </main>
 </div>
@@ -232,14 +665,19 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
   'use strict';
   const THEMES = window.DASHBOARD_THEMES;
   const METRICS = {
-    contract:{name:'新签合同额',target:10000,icon:'document',definition:'所选年度截至数据日已签订的新增合同金额。达成率 = 新签合同额 ÷ 年度目标；同比比较上一年度相同截止月份。'},
-    completed:{name:'完成合同额',target:14000,icon:'document',definition:'所选年度截至数据日已完成并经确认的合同工作量金额；与新签合同额为不同统计口径。达成率 = 完成合同额 ÷ 年度目标。'},
-    invoice:{name:'完成开票额',target:11000,icon:'invoice',definition:'所选年度截至数据日累计已开具发票的金额。达成率 = 完成开票额 ÷ 年度目标。开票与回款存在时间差。'},
-    receipt:{name:'完成回款额',target:16000,icon:'money',definition:'所选年度截至数据日客户业务回款累计金额，不含投资与筹资现金流入。达成率 = 完成回款额 ÷ 年度目标。'}
+    contract:{name:'新签合同额',target:10000,icon:'document',definition:'所选年度截至数据日已签订的新增合同金额。达成率 = 累计金额 ÷ 年度目标；右上角展示当月新增及其占总目标百分比（演示假数）。'},
+    completed:{name:'完成合同额',target:14000,icon:'document',definition:'所选年度截至数据日已完成并经确认的合同工作量金额；与新签合同额为不同统计口径。达成率 = 累计金额 ÷ 年度目标；右上角展示上月新增及其占总目标百分比（演示假数）。'},
+    invoice:{name:'完成开票额',target:11000,icon:'invoice',definition:'所选年度截至数据日累计已开具发票的金额。达成率 = 累计金额 ÷ 年度目标；右上角展示当月新增及其占总目标百分比（演示假数）。'},
+    receipt:{name:'完成回款额',target:16000,icon:'money',definition:'所选年度截至数据日客户业务回款累计金额，不含投资与筹资现金流入。达成率 = 累计金额 ÷ 年度目标；右上角展示当月新增及其占总目标百分比（演示假数）。'}
   };
   const DEMO_DATA = {
     current:{contract:9234.31,completed:12331.02,invoice:9172.22,receipt:13459.19},
-    yoy:{contract:11.2,completed:4.6,invoice:2.7,receipt:9.3},
+    /* Board KPI 口径：当月/上月新增（万元，演示假数）；占比 = 新增 ÷ 该卡年度目标 */
+    monthAdd:{contract:862.40,completed:1015.60,invoice:738.25,receipt:1126.80},
+    prevMonthAdd:{contract:790.10,completed:968.35,invoice:701.40,receipt:1042.50},
+    /* 应收区「较上期」演示假数 */
+    riskPeriod:{receivables:-2.1,wip:6.3,inventory:-1.8,revenue:4.5}, /* 较上期%：前三项降绿升红，营业收入升绿降红 */
+    revenue:3280.60,
     receivables:1001.11,wip:2587.49,inventory:2200.48,
     departments:[['设计一院','设计院',.18,.962],['设计二院','设计院',.156,.915],['设计三院','设计院',.133,.887],['设计四院','设计院',.114,.853],['设计五院','设计院',.10,.826],['智能工程部','数字化业务单元',.098,.906],['智能咨询部','数字化业务单元',.069,.873],['工艺专业室','专业室',.062,.925],['结构专业室','专业室',.05,.894],['电气专业室','专业室',.038,.862]],
     businesses:[['设计咨询',.64],['项目管理',.22],['工程服务',.14]],
@@ -259,7 +697,7 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
     const yearFactor=state.year===2026?1:.88, budgetFactor=state.year===2026?1:.94;
     const bizFactor=DEMO_DATA.businesses.find(x=>x[0]===state.business)?.[1]||1;
     const departments=DEMO_DATA.departments.filter(d=>state.unit==='全部板块'||d[1]===state.unit),unitFactor=sum(departments.map(d=>d[2])),factor=yearFactor*unitFactor*bizFactor;
-    const totals=Object.fromEntries(Object.entries(DEMO_DATA.current).map(([k,v])=>[k,Math.round(v*(state.year===2026?1:1/(1+DEMO_DATA.yoy[k]/100))*unitFactor*bizFactor*100)/100]));
+    const totals=Object.fromEntries(Object.entries(DEMO_DATA.current).map(([k,v])=>[k,Math.round(v*(state.year===2026?1:0.92)*unitFactor*bizFactor*100)/100]));
     const targets=Object.fromEntries(Object.entries(METRICS).map(([k,v])=>[k,v.target*budgetFactor*unitFactor*bizFactor]));
     const n=8,inflow=DEMO_DATA.inflow.slice(0,n).map(v=>Math.round(v*factor*100)/100),outflow=DEMO_DATA.outflow.slice(0,n).map(v=>Math.round(v*factor*100)/100),net=inflow.map((v,i)=>Math.round((v-outflow[i])*100)/100);
     const totalNet=Math.round(sum(net)*100)/100;
@@ -293,41 +731,114 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
   }
   function info(text){return `<button type="button" class="info-button" data-tip="${safe(text)}" aria-label="查看指标口径">${icon('info')}</button>`;}
   function renderKpis(){
-    $('kpiGrid').innerHTML=Object.entries(METRICS).map(([key,m])=>{const val=model.totals[key],target=model.targets[key],rate=val/target*100,yoy=DEMO_DATA.yoy[key];return `<article class="kpi-card" data-kpi="${key}" tabindex="0" role="button" aria-label="${m.name} ${money(val)}万元，查看明细" data-tip="${m.definition} 点击查看明细。"><div class="kpi-icon">${icon(m.icon)}</div><div class="kpi-content"><div class="kpi-title">${m.name}<span class="unit">（万元）</span></div><strong class="kpi-value">${money(val)}</strong><div class="kpi-meta"><span>目标 <b>${money(target)}</b></span><span>达成率 <em>${pct(rate)}</em></span></div><div class="progress-track"><i style="width:${Math.min(100,rate)}%"></i></div></div><div class="kpi-yoy"><span>同比</span><b>${state.year===2026 ? "↑ +"+pct(yoy) : "—"}</b></div></article>`;}).join('');
+    const unitFactor=state.unit==='全部板块'?1:state.unit==='设计院'?0.62:state.unit==='数字化业务单元'?0.24:0.14;
+    const bizFactor=state.business==='全部业务类型'?1:state.business==='设计咨询'?0.64:state.business==='项目管理'?0.22:0.14;
+    const yearFactor=state.year===2026?1:0.92;
+    $('kpiGrid').innerHTML=Object.entries(METRICS).map(([key,m])=>{
+      const val=model.totals[key],target=model.targets[key],rate=val/target*100;
+      const isCompleted=key==='completed';
+      const addRaw=(isCompleted?DEMO_DATA.prevMonthAdd[key]:DEMO_DATA.monthAdd[key])*unitFactor*bizFactor*yearFactor;
+      const addShare=addRaw/target*100;
+      const addLabel=isCompleted?'上月新增':'当月新增';
+      return `<article class="kpi-card" data-kpi="${key}" tabindex="0" role="button" aria-label="${m.name} ${money(val)}万元，查看明细" data-tip="${m.definition} 点击查看明细。"><div class="kpi-icon">${icon(m.icon)}</div><div class="kpi-content"><div class="kpi-title">${m.name}<span class="unit">（万元）</span></div><strong class="kpi-value">${money(val)}</strong><div class="kpi-meta"><span>目标 <b>${money(target)}</b></span><span>占总目标 <em>${pct(rate)}</em></span></div><div class="progress-track"><i style="width:${Math.min(100,rate)}%"></i></div></div><div class="kpi-delta" data-kpi-delta="${key}"><span class="kpi-delta-row"><span class="kpi-delta-label">${addLabel}</span> <b class="kpi-delta-num">${money(addRaw)}</b></span><span class="kpi-delta-row"><span class="kpi-delta-label">占目标</span> <b class="kpi-delta-num">${pct(addShare)}</b></span></div></article>`;
+    }).join('');
   }
   function cashValues(){return [sum(model.inflow),sum(model.outflow),model.totalNet];}
   function renderCash(){
-    const vals=cashValues(),names=['现金流入','现金流出','净现金流'],types=['primary','warning',vals[2]<0?'danger':'primary'];
-    const prev=vals.map(v=>v*.88);
-    $('cashMetrics').innerHTML=names.map((name,i)=>{const change=prev[i]?(vals[i]-prev[i])/Math.abs(prev[i])*100:0;return `<button class="cash-metric tone-${types[i]}" data-cash-detail="${i}" data-tip="${i===0?'银行现金流入总额，含经营、投资、筹资流入；与客户业务回款额口径不同。':i===1?'银行现金流出总额，图中以负柱表示，提示中显示支出绝对值。':'净现金流 = 现金流入 − 现金流出。累计口径，年初至截止日。'}"><span class="mini-icon">${icon(i===2?'money':i===1?'briefcase':'shield')}</span><div><span class="metric-label">${name}</span><strong>${money(vals[i])}</strong><span class="metric-delta">同比 <em>${state.year===2025 ? '—' : (change>=0?'+':'')+pct(change)}</em></span></div></button>`;}).join('');
-    $('cashCaption').textContent='累计现金流趋势';
-    const inflow=cum(model.inflow),outflow=cum(model.outflow),net=cum(model.net);
+    const vals=cashValues();
+    const names=['现金流入','现金流出','净现金流'];
+    // demo 较上期%：流入/净额升好降坏；流出升坏降好
+    const periodDeltas=[3.2,-2.1,4.6];
+    const tones=['primary','primary',vals[2]<0?'danger':'primary']; // AC5: 流出卡亦用 primary tone，主金额见 amountColor
+    const tips=[
+      '银行现金流入总额，含经营、投资、筹资流入；与客户业务回款额口径不同。',
+      '银行现金流出总额；副文案为较上期对比。',
+      '净现金流 = 现金流入 − 现金流出。累计口径，年初至截止日。'
+    ];
+    $('cashMetrics').innerHTML=names.map((name,i)=>{
+      const delta=periodDeltas[i];
+      const up=delta>=0;
+      const good = i===1 ? !up : up;
+      const col = good ? colors.success : colors.danger;
+      const arrow = up ? '↑' : '↓';
+      const signed = (up?'+':'-') + pct(Math.abs(delta));
+      let amountColor = colors.primary;
+      if(i===2){
+        if(vals[2]>0) amountColor = colors.success;
+        else if(vals[2]<0) amountColor = colors.danger;
+        else amountColor = colors.primary; /* AC5 零值=主题色 */
+      }
+      return `<button class="cash-metric tone-${tones[i]}" data-cash-detail="${i}" data-tip="${tips[i]} 点击查看明细。"><span class="mini-icon">${icon(i===2?'money':i===1?'briefcase':'shield')}</span><div><span class="metric-label">${name}</span><strong style="color:${amountColor}">${money(vals[i])}</strong><span class="metric-delta">较上期 <em style="color:${col}">${signed} ${arrow}</em></span></div></button>`;
+    }).join('');
+    const monthlyIn = model.inflow.slice();
+    const monthlyOut = model.outflow.slice();
+    const ytdNet = cum(model.net);
+    // theme-tied column colors (follow active DASHBOARD theme)
+    const inColor = colors.primary;
+    const outColor = colors.accent || colors.primaryDark;
     chart('cashChart',{
-      chart:{type:'column',spacing:[6,8,4,0]},
+      chart:{type:'column',spacing:[6,8,18,0]}, /* bottom spacing 留白 */
       legend:{enabled:true,align:'center',verticalAlign:'top',margin:7,symbolRadius:4,symbolHeight:8,symbolWidth:13,itemDistance:16},
       xAxis:{categories:Array.from({length:model.n},(_,i)=>(i+1)+'月'),crosshair:{color:colors.primarySoft,width:25},tickLength:0},
       yAxis:{labels:{formatter(){return Math.abs(this.value)>=10000?money(this.value/10000,1)+'万':money(this.value,0);}},plotLines:[{value:0,color:colors.faint,width:1}],tickAmount:6},
       tooltip:{shared:true,formatter(){
-        const ps=this.points||[this],index=this.x,netAmount=net[index];
-        const netLabel=`${index+1}月累计${netAmount<0?'净流出':'净流入'}`;
-        let s=`<b>${state.year}年 ${index+1}月 · 累计</b><br/>`;
-        ps.forEach(p=>s+=`<span style="color:${p.color}">●</span> ${p.series.name} <b>${money(p.series.index===1?Math.abs(p.y):p.y)}</b> 万元<br/>`);
-        s+=`<div style="margin:5px 0;color:${netAmount<0?colors.danger:colors.success}"><b>${netLabel} ${money(Math.abs(netAmount))} 万元</b></div>`;
+        const ps=this.points||[this],index=this.points?this.points[0].point.index:this.x;
+        const ytd=ytdNet[index];
+        let s=`<b>${state.year}年 ${index+1}月</b><br/>`;
+        ps.forEach(p=>{
+          const isLine=p.series.type==='line';
+          const label=isLine?(ytd<0?'累计净流出':'累计净流入'):p.series.name;
+          s+=`<span style="color:${p.color}">●</span> ${isLine?('当年累计净现金流'):p.series.name} <b>${money(Math.abs(p.y))}</b> 万元<br/>`;
+        });
+        s+=`<div style="margin:5px 0;color:${ytd<0?colors.danger:colors.success}"><b>当年累计 ${ytd<0?'净流出':'净流入'} ${money(Math.abs(ytd))} 万元</b></div>`;
         return s+`<span style="color:${colors.muted}">点击数据点查看收支明细</span>`;
       }},
-      // Both column series share the month center; outflow extends below zero.
-      plotOptions:{column:{grouping:false,borderWidth:0,borderRadius:2,groupPadding:.32,pointPadding:.08},series:{cursor:'pointer',point:{events:{click(){openCash(this.index);}}}}},
-      series:[{name:'现金流入',color:colors.accent,data:inflow},{name:'现金流出',color:colors.warning,data:outflow.map(v=>-v)},{name:'净现金流',type:'line',kdNow:true,color:colors.primaryDark,lineWidth:2,marker:{radius:3},data:net.map(v=>({y:v,color:v<0?colors.danger:colors.primaryDark}))}]
+      plotOptions:{
+        column:{grouping:false,borderWidth:0,borderRadius:2,groupPadding:.32,pointPadding:.08},
+        series:{cursor:'pointer',point:{events:{click(){openCash(this.index);}}}}
+      },
+      series:[
+        {name:'当月流入',color:inColor,data:monthlyIn},
+        {name:'当月流出',color:outColor,data:monthlyOut.map(v=>-v)},
+        {
+          name:'当年累计净现金流',
+          type:'line',
+          kdNow:true,
+          color:colors.success,
+          lineWidth:2.5,
+          marker:{radius:3.5,lineWidth:0},
+          zoneAxis:'y',
+          zones:[{value:0,color:colors.danger},{color:colors.success}],
+          data:ytdNet.map(v=>({y:v,color:v<0?colors.danger:colors.success,marker:{fillColor:v<0?colors.danger:colors.success}}))
+        }
+      ]
     });
   }
+
   function renderRisk(){
-    const overOneYear=sum(splitExact(model.receivables,[.68,.22,.07,.03]).slice(1));
-    const risk=[['应收账款',model.receivables,'1年以内 68% / 1年以上 32%','客户应收账款余额；账龄从账款形成日起计算。'],['WIP',model.wip,'较上期 +6.3% ↑','Work In Progress，已开展但尚未结算确认的工作量金额。'],['存货',model.inventory,'较上期 +1.8% ↑','所选板块截至数据日的存货账面余额。'],['1年以上应收',overOneYear,'占应收总额 32.0%','1–2年、2–3年、3年以上账款金额合计；账龄不等于合同逾期。']];
-    $('riskMetrics').innerHTML=risk.map((r,i)=>`<button class="risk-metric" data-risk="${i}" data-tip="${r[3]} 点击查看说明。"><span class="metric-label">${r[0]}</span><strong>${money(r[1])}</strong><small>${r[2]}</small></button>`).join('');
+    const period=DEMO_DATA.riskPeriod;
+    const revenue=(DEMO_DATA.revenue||3280.6)*(state.year===2026?1:0.94)*(state.unit==='全部板块'?1:state.unit==='设计院'?0.62:state.unit==='数字化业务单元'?0.24:0.14);
+    const fmtPeriod=(key,delta)=>{
+      const up=delta>=0;
+      // 前三项（应收/WIP/存货）降绿升红；营业收入升绿降红
+      const good = key==='revenue' ? up : !up;
+      const col = good ? colors.success : colors.danger;
+      const arrow = up ? '↑' : '↓';
+      const signed = (up?'+':'-') + pct(Math.abs(delta));
+      return `<small class="risk-period" style="color:${col}">较上期 ${signed} ${arrow}</small>`;
+    };
+    const risk=[
+      ['应收账款','receivables',model.receivables,period.receivables,'客户应收账款余额；账龄从账款形成日起计算。副文案为较上期对比（非同比）。'],
+      ['WIP','wip',model.wip,period.wip,'Work In Progress，已开展但尚未结算确认的工作量金额。'],
+      ['存货','inventory',model.inventory,period.inventory,'所选板块截至数据日的存货账面余额。'],
+      ['营业收入','revenue',revenue,period.revenue,'营业收入演示指标；副文案为较上期对比（非同比、非占应收总额）。']
+    ];
+    $('riskMetrics').innerHTML=risk.map((r,i)=>`<button class="risk-metric" data-risk="${i}" data-tip="${r[4]} 点击查看说明。"><span class="metric-label">${r[0]}</span><strong>${money(r[2])}</strong>${fmtPeriod(r[1],r[3])}</button>`).join('');
     const labels=['1年以内','1–2年','2–3年','3年以上'],weights=[.68,.22,.07,.03],values=splitExact(model.receivables,weights),palette=[colors.primary,colors.accent,colors.warning,colors.danger];
-    $('agingTotal').innerHTML=`<strong>${money(model.receivables)}</strong><span>应收账款总额</span>`;
-    $('agingLegend').innerHTML=labels.map((n,i)=>`<button class="legend-row" data-aging="${i}" data-tip="${n}：${money(values[i])}万元，占比${pct(weights[i]*100,0)}；点击查看账龄说明。"><i style="background:${palette[i]}"></i><span>${n}</span><b>${pct(weights[i]*100,0)}</b><em>${money(values[i])}</em></button>`).join('');
-    chart('agingChart',{chart:{type:'pie',spacing:[0,0,0,0]},legend:{enabled:false},tooltip:{pointFormat:'<b>{point.y:,.2f}</b> 万元<br/>占应收账款 <b>{point.percentage:.0f}%</b>'},plotOptions:{pie:{innerSize:'76%',borderWidth:0,dataLabels:{enabled:false},size:'100%',slicedOffset:0,cursor:'pointer',point:{events:{click(){openAging(this.index);}}}}},series:[{name:'应收账款',data:labels.map((name,i)=>({name,y:values[i],color:palette[i]}))}]});
+    const agingTotal=sum(values)||1;
+    $('agingLegend').innerHTML=labels.map((n,i)=>`<button class="mix-item" data-aging="${i}" data-tip="${n}：${money(values[i])}万元，占比${pct(weights[i]*100,0)}；点击查看账龄说明。"><span><i style="background:${palette[i]}"></i>${n}</span><strong>${pct(weights[i]*100,0)}</strong></button>`).join('');
+    // 与合同额结构占比同款水平分布条
+    chart('agingChart',{chart:{type:'bar',spacing:[0,0,0,0],margin:[0,0,0,0]},xAxis:{visible:false,categories:['账龄']},yAxis:{visible:false,max:100,reversedStacks:false},legend:{enabled:false},tooltip:{formatter(){return `<b>${this.series.name}</b><br/>${money(agingTotal*this.y/100)} 万元<br/>占比 ${pct(this.y)}`;}},plotOptions:{series:{stacking:'normal',borderWidth:0,pointWidth:14,cursor:'pointer',point:{events:{click(){openAging(this.series.index);}}}}},series:labels.map((n,i)=>({name:n,color:palette[i],data:[weights[i]*100]}))});
   }
   function renderContribution(){
     const rows=dimensionRows().sort((a,b)=>b.contract-a.contract),top=rows.slice(0,5);
@@ -383,9 +894,9 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
     const annual=DEMO_DATA.annualLoad.map(v=>Math.min(100,v+shift)),monthly=DEMO_DATA.monthlyLoad.map(v=>Math.min(100,v+shift));
     model.loadAnnual=annual;model.loadMonthly=monthly;
     $('annualLoadVal').textContent=pct(annual.at(-1),2);
-    $('annualLoadSub').textContent=state.year===2026?'同比 +2.5% ↑':'同比 —';
+    $('annualLoadSub').textContent=state.year===2026?'较上期 +2.5% ↑':'较上期 —';
     $('monthlyLoadVal').textContent=pct(monthly.at(-1),2);
-    $('monthlyLoadSub').textContent='环比 '+pct((monthly.at(-1)-monthly.at(-2))/monthly.at(-2)*100)+' ↑';
+    $('monthlyLoadSub').textContent='较上期 '+pct((monthly.at(-1)-monthly.at(-2))/monthly.at(-2)*100)+' ↑';
     chart('loadChart',{chart:{type:'line',spacing:[0,3,0,0],margin:[18,6,21,43]},legend:{enabled:true,floating:true,align:'right',verticalAlign:'top',y:-7,margin:0,itemStyle:{fontSize:'9px'},symbolWidth:14,itemDistance:10},xAxis:{categories:Array.from({length:6},(_,i)=>(model.n-5+i)+'月'),tickLength:0,labels:{y:15,style:{fontSize:'10px'}}},yAxis:{min:60,max:100,tickPositions:[60,80,100],labels:{format:'{value}%',x:-5,style:{textOverflow:'none'}}},responsive:{rules:[{condition:{maxHeight:85},chartOptions:{yAxis:{min:70,startOnTick:false,endOnTick:false,tickPositions:[80,100]}}}]},tooltip:{shared:true,formatter(){return `<b>${this.x+model.n-5}月负荷率</b><br/>`+(this.points||[this]).map(p=>`<span style="color:${p.color}">●</span> ${p.series.name} <b>${pct(p.y,2)}</b>`).join('<br/>');}},plotOptions:{series:{marker:{radius:2.5},lineWidth:2,cursor:'pointer',point:{events:{click(){openLoad(this.index,annual,monthly);}}}}},series:[{name:'年度负荷率',color:colors.primary,data:annual},{name:'当月负荷率',color:colors.accent,data:monthly}]});
     const counts=[projects.length-risks-overdue,risks,overdue],labels=['正常','风险','逾期'],palette=[colors.primary,colors.warning,colors.danger];
     $('deliveryCenter').innerHTML=`<strong>${projects.length}</strong><span>在管项目</span>`;
@@ -397,14 +908,14 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
     return [
       {level:'danger',title:'回款进度预警',detail:`年度回款目标达成 ${pct(model.totals.receipt/model.targets.receipt*100)}`,date:`${state.year}-${String(last).padStart(2,'0')}-28`,explain:'演示规则：年度回款目标达成率低于90%时提醒。仅用于原型展示，实际阈值可配置。',action:'receipt'},
       {level:'warning',title:'应收账款账龄提醒',detail:`1年以上占32% · ${money(sum(splitExact(model.receivables,[.68,.22,.07,.03]).slice(1)))} 万元`,date:`${state.year}-${String(last).padStart(2,'0')}-26`,explain:'1–2年占22%，2–3年占7%，3年以上占3%，合计32%。建议跟进回款计划，账龄较长不等同于已逾期。',action:'aging'},
-      {level:net<0?'warning':'success',title:net<0?'现金净流出提醒':'现金流入增长',detail:`${last}月${net<0?'净流出':'净流入'} ${money(Math.abs(net))} 万元`,date:`${state.year}-${String(last).padStart(2,'0')}-31`,explain:`${last}月现金流入${money(model.inflow.at(-1))}万元，流出${money(model.outflow.at(-1))}万元，净额${money(net)}万元。现金流出环比${outDelta>=0?'+':''}${pct(outDelta)}。`,action:'cash'},
+      {level:net<0?'warning':'success',title:net<0?'现金净流出提醒':'现金流入增长',detail:`${last}月${net<0?'净流出':'净流入'} ${money(Math.abs(net))} 万元`,date:`${state.year}-${String(last).padStart(2,'0')}-31`,explain:`${last}月现金流入${money(model.inflow.at(-1))}万元，流出${money(model.outflow.at(-1))}万元，净额${money(net)}万元。现金流出较上期${outDelta>=0?'+':''}${pct(outDelta)}。`,action:'cash'},
       {level:'secondary',title:'项目交付风险',detail:`${model.projects.filter(p=>p.status==='风险').length} 项待跟进 · 0 项逾期`,date:`${state.year}-${String(last).padStart(2,'0')}-24`,explain:'演示清单中的风险项目尚未逾期，当前风险为设计校审待完成。点击可查看相关项目。',action:'projects'}
     ];
   }
   function renderAlerts(){ $('alertList').innerHTML=alerts().map((a,i)=>`<button class="alert-item tone-${a.level}" data-alert="${i}" data-tip="${safe(a.explain)}"><span class="alert-dot">${icon(a.level==='secondary'?'info':'warning')}</span><div><strong>${a.title}</strong><p>${a.detail}</p></div><time>${a.date.slice(5)}</time>${icon('chevron')}</button>`).join('');}
   function chart(id,options){if(charts[id])charts[id].destroy();charts[id]=Highcharts.chart(id,options);}
   function render(){
-    hideTooltip();model=buildModel();$('asofDate').textContent=`${state.year}-08-31`;
+    hideTooltip();model=buildModel();const asofEl=$('asofDate');if(asofEl)asofEl.textContent=`${state.year}-08-31`;
     renderKpis();renderCash();renderRisk();renderContribution();renderTargets();renderDelivery();renderAlerts();
     
     document.querySelectorAll('[data-contribution-dim]').forEach(b=>b.classList.toggle('active',b.dataset.contributionDim===state.dimension));
@@ -423,7 +934,7 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
   function openProjects(status=null){let rows=model.projects.filter(p=>!status||p.status===status);showDialog((status?status+'项目':'项目交付')+' · 清单',table(['项目名称','负责板块','状态','交付节点','计划日期'],rows.map(p=>[safe(p.name),p.department,p.status,p.milestone,p.due.replace('2026',String(state.year))])),'演示项目状态与环图、图例数量一致；风险项目与逾期项目分别统计，风险不等于逾期。');}
   function openLoad(i,annual,monthly){showDialog(`${state.year}年${model.n-5+i}月 · 生产负荷率`,`<p class="dialog-description">年度负荷率 = 已排定年度工时 ÷ 年度可用工时；当月负荷率 = 当月已排定工时 ÷ 当月可用工时。两条曲线采用不同时间口径。</p>`+table(['月份','年度负荷率','当月负荷率'],annual.map((v,j)=>[`${model.n-5+j}月`,pct(v,2),pct(monthly[j],2)])));}
   function setUnit(name){state.unit=name;$('unitSelect').value=name;render();toast('已筛选：'+name);}
-  function help(){showDialog('看板使用说明',`<div class="help-grid"><div><h3>筛选与联动</h3><p>切换年度、板块和业务类型，经营金额、现金流、贡献表、账龄及项目清单同步更新。重置按钮恢复默认范围。</p></div><div><h3>图表探索</h3><p>悬停查看精确数值；点击现金流、账龄、目标达成和交付环图查看明细。现金流与负荷图的图例支持显隐。</p></div><div><h3>模块区分</h3><p>经营贡献分析展示金额与贡献来源；板块目标达成展示年度计划完成进度。两个模块分别支持归因和目标管理。</p></div><div><h3>统一主题</h3><p>右上角可即时切换青绿、深蓝、暖棕主题。界面、图表、提示和弹窗同步换色。</p></div></div><p class="dialog-description">原图为AI生成，原型已重建中文文字，并统一金额、百分比、账龄、项目状态和累计口径。所有业务数据均为演示样例，未连接真实系统。</p>`,'数据时间：2026年样例截至8月31日；2025年对比样例截至8月31日。');}
+  function help(){showDialog('看板使用说明',`<div class="help-grid"><div><h3>筛选与联动</h3><p>切换年度、板块和业务类型，经营金额、现金流、贡献表、账龄及项目清单同步更新。</p></div><div><h3>图表探索</h3><p>悬停查看精确数值；点击现金流、账龄、目标达成和交付环图查看明细。现金流与负荷图的图例支持显隐。</p></div><div><h3>模块区分</h3><p>经营贡献分析展示金额与贡献来源；板块目标达成展示年度计划完成进度。两个模块分别支持归因和目标管理。</p></div><div><h3>统一主题</h3><p>页面顶部（宿主标题栏）可切换青绿、深蓝、暖棕主题；整树看板同步换色。</p></div></div><p class="dialog-description">原图为AI生成，原型已重建中文文字，并统一金额、百分比、账龄、项目状态和累计口径。所有业务数据均为演示样例，未连接真实系统。</p>`,'数据时间：2026年样例截至8月31日；2025年对比样例截至8月31日。');}
   function showTooltip(el){if($('detailDialog').open)return;tooltipOwner=el;const tip=$('globalTooltip');tip.textContent=el.dataset.tip;tip.classList.add('show');tip.setAttribute('aria-hidden','false');el.setAttribute('aria-describedby','globalTooltip');positionTooltip(el);}
   function positionTooltip(el){const tip=$('globalTooltip'),r=el.getBoundingClientRect(),w=tip.offsetWidth,h=tip.offsetHeight;let x=Math.max(8,Math.min(innerWidth-w-8,r.left+r.width/2-w/2)),y=r.bottom+8;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-8);tip.style.left=x+'px';tip.style.top=y+'px';}
   function hideTooltip(){if(tooltipOwner)tooltipOwner.removeAttribute('aria-describedby');tooltipOwner=null;$('globalTooltip').classList.remove('show');$('globalTooltip').setAttribute('aria-hidden','true');}
@@ -438,7 +949,7 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
     else if(b.dataset.contributionDim){state.dimension=b.dataset.contributionDim;render();}
     else if(b.dataset.targetMetric){state.target=b.dataset.targetMetric;render();}
     else if(b.dataset.cashDetail!==undefined)openCash();
-    else if(b.dataset.risk!==undefined){const i=+b.dataset.risk;if(i===0||i===3)openAging();else showDialog(['应收账款','WIP','存货'][i]+' · 指标说明',`<p class="dialog-description">${b.dataset.tip}</p><div class="dialog-stats"><div><span>当前金额</span><strong>${money([model.receivables,model.wip,model.inventory][i])}</strong></div></div>`);}
+    else if(b.dataset.risk!==undefined){const i=+b.dataset.risk;if(i===0)openAging();else showDialog(['应收账款','WIP','存货','营业收入'][i]+' · 指标说明',`<p class="dialog-description">${b.dataset.tip}</p><div class="dialog-stats"><div><span>当前金额</span><strong>${money([model.receivables,model.wip,model.inventory][i])}</strong></div></div>`);}
     else if(b.dataset.aging!==undefined)openAging(+b.dataset.aging);
     else if(b.dataset.row)openDepartment(b.dataset.row);
     else if(b.dataset.unit)setUnit(b.dataset.unit);
@@ -454,11 +965,26 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape')hideTooltip();if(['Enter',' '].includes(e.key)&&e.target.matches('[data-kpi],[data-row]')){e.preventDefault();e.target.click();}});
   for(const [id,key] of [['yearSelect','year'],['unitSelect','unit'],['businessSelect','business']])$(id).addEventListener('change',e=>{state[key]=key==='year'?+e.target.value:e.target.value;render();});
-  $('themeSelect').addEventListener('change',e=>{setTheme(e.target.value);toast('主题已切换');});
+  const themeSel=$('themeSelect');
+  if(themeSel){
+    themeSel.innerHTML=Object.keys(THEMES).map(k=>`<option value="${safe(k)}">${({teal:'青绿',blue:'深蓝',wood:'暖棕'})[k]||safe(k)}主题</option>`).join('');
+    themeSel.addEventListener('change',e=>{setTheme(e.target.value);toast('主题已切换');});
+  }
+  function applyHostTheme(name){
+    if(!name||!THEMES[name])return;
+    setTheme(name);
+    if(themeSel)themeSel.value=name;
+  }
+  window.addEventListener('message',e=>{
+    if(e.origin!==window.location.origin)return;
+    const d=e.data;
+    if(d&&d.type==='ops-dashboard-theme'&&d.theme)applyHostTheme(d.theme);
+  });
   $('detailDialog').addEventListener('click',e=>{if(e.target===$('detailDialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
   window.addEventListener('resize',()=>{hideTooltip();clearTimeout(window.resizeTimer);window.resizeTimer=setTimeout(()=>Object.values(charts).forEach(c=>c.reflow()),80);});
-  $('themeSelect').innerHTML=Object.keys(THEMES).map(k=>`<option value="${safe(k)}">${({teal:'青绿',blue:'深蓝',wood:'暖棕'})[k]||safe(k)}主题</option>`).join('');
-  setTheme('teal');render();
+  const themeFromQuery=new URLSearchParams(location.search).get('theme');
+  setTheme(themeFromQuery&&THEMES[themeFromQuery]?themeFromQuery:'blue');
+  render();
 })();
 
 </script>

@@ -1,0 +1,66 @@
+{
+  "deliveryOverflow": "hidden",
+  "boxH": 347.125,
+  "chartH": 180,
+  "chartPast": -27,
+  "trendPast": -18,
+  "labels": [
+    {
+      "text": "3月",
+      "top": 1832.828125,
+      "bottom": 1846.828125,
+      "h": 14,
+      "pastBottom": -30,
+      "pastTop": -303.13,
+      "inside": true
+    },
+    {
+      "text": "5月",
+      "top": 1832.828125,
+      "bottom": 1846.828125,
+      "h": 14,
+      "pastBottom": -30,
+      "pastTop": -303.13,
+      "inside": true
+    },
+    {
+      "text": "7月",
+      "top": 1832.828125,
+      "bottom": 1846.828125,
+      "h": 14,
+      "pastBottom": -30,
+      "pastTop": -303.13,
+      "inside": true
+    },
+    {
+      "text": "60%",
+      "top": 1820.828125,
+      "bottom": 1834.828125,
+      "h": 14,
+      "pastBottom": -42,
+      "pastTop": -291.13,
+      "inside": true
+    },
+    {
+      "text": "80%",
+      "top": 1750.828125,
+      "bottom": 1764.828125,
+      "h": 14,
+      "pastBottom": -112,
+      "pastTop": -221.13,
+      "inside": true
+    },
+    {
+      "text": "100%",
+      "top": 1679.828125,
+      "bottom": 1693.828125,
+      "h": 14,
+      "pastBottom": -183,
+      "pastTop": -150.13,
+      "inside": true
+    }
+  ],
+  "anyClipped": false,
+  "allInside": true,
+  "deliveryOverflowPx": 0
+}

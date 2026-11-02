@@ -1,0 +1,134 @@
+{
+  "pass": true,
+  "ac": {
+    "ac1_title_catalog": true,
+    "ac2_tree_top_ops": true,
+    "ac3_l1_remix": true,
+    "ac4_leaves_no_icon_required": true,
+    "ac5_no_old_copy": true,
+    "ac6_evidence": true
+  },
+  "blockers": [],
+  "info": {
+    "sidebarFound": true,
+    "titleText": "看板目录",
+    "catalogVisible": 1,
+    "oldTreeTitleVisible": 0,
+    "items": [
+      {
+        "text": "运营看板",
+        "hasIcon": true,
+        "iconClass": "ri-dashboard-2-line shrink-0 text-[15px] leading-none",
+        "pad": "8px"
+      },
+      {
+        "text": "市场看板",
+        "hasIcon": true,
+        "iconClass": "ri-store-2-line shrink-0 text-[15px] leading-none",
+        "pad": "8px"
+      },
+      {
+        "text": "机会清单 占位",
+        "hasIcon": false,
+        "iconClass": "",
+        "pad": "22px"
+      },
+      {
+        "text": "市场数据 占位",
+        "hasIcon": false,
+        "iconClass": "",
+        "pad": "22px"
+      },
+      {
+        "text": "合同看板 占位",
+        "hasIcon": false,
+        "iconClass": "",
+        "pad": "22px"
+      },
+      {
+        "text": "人力资源看板 占位",
+        "hasIcon": true,
+        "iconClass": "ri-team-line shrink-0 text-[15px] leading-none",
+        "pad": "8px"
+      },
+      {
+        "text": "完成合同额看板 占位",
+        "hasIcon": true,
+        "iconClass": "ri-money-cny-circle-line shrink-0 text-[15px] leading-none",
+        "pad": "8px"
+      }
+    ],
+    "hasOps": true,
+    "hasOldCurrentInItems": false,
+    "oldCurrentAnywhere": 0,
+    "selected": null,
+    "l1": [
+      {
+        "name": "运营看板",
+        "found": true,
+        "hasIcon": true,
+        "iconClass": "ri-dashboard-2-line shrink-0 text-[15px] leading-none",
+        "text": "运营看板"
+      },
+      {
+        "name": "市场看板",
+        "found": true,
+        "hasIcon": true,
+        "iconClass": "ri-store-2-line shrink-0 text-[15px] leading-none",
+        "text": "市场看板"
+      },
+      {
+        "name": "人力资源看板",
+        "found": true,
+        "hasIcon": true,
+        "iconClass": "ri-team-line shrink-0 text-[15px] leading-none",
+        "text": "人力资源看板 占位"
+      },
+      {
+        "name": "完成合同额看板",
+        "found": true,
+        "hasIcon": true,
+        "iconClass": "ri-money-cny-circle-line shrink-0 text-[15px] leading-none",
+        "text": "完成合同额看板 占位"
+      }
+    ],
+    "leaves": [
+      {
+        "name": "机会清单",
+        "found": true,
+        "hasIcon": false,
+        "iconClass": "",
+        "text": "机会清单 占位"
+      },
+      {
+        "name": "市场数据",
+        "found": true,
+        "hasIcon": false,
+        "iconClass": "",
+        "text": "市场数据 占位"
+      },
+      {
+        "name": "合同看板",
+        "found": true,
+        "hasIcon": false,
+        "iconClass": "",
+        "text": "合同看板 占位"
+      }
+    ],
+    "ac4_note": "二级叶子本期不要求图标；当前 hasIcon=机会清单:false,市场数据:false,合同看板:false",
+    "hasOldTreeAsTitle": false,
+    "hasOldCurrentAsNode": false,
+    "remixCss": {
+      "hasLink": false,
+      "fontOk": true,
+      "linksSample": [
+        "http://127.0.0.1:3000/_next/static/css/app/layout.css?v=1793605796557",
+        "http://127.0.0.1:3000/_next/static/css/app/operations-dashboard-202610/board/page.css?v=1793605796557"
+      ]
+    },
+    "fullShot": "C:\\Users\\Public\\Documents\\max-sidebar-probe\\max-sidebar-01-full.png",
+    "clipShot": "C:\\Users\\Public\\Documents\\max-sidebar-probe\\max-sidebar-02-clip.png"
+  },
+  "ts": "2026-11-02T07:49:56.527Z",
+  "url": "http://127.0.0.1:3000/operations-dashboard-202610/board"
+}

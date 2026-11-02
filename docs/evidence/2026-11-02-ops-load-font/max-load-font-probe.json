@@ -1,0 +1,53 @@
+{
+  "pass": true,
+  "ac": {
+    "ac1": true,
+    "ac2": true,
+    "ac3_ratio": true,
+    "ac3_height": true,
+    "ac4": true,
+    "ac5_evidence": true
+  },
+  "metrics": {
+    "beforeAnchorPx": 17,
+    "monthlyPx": 34.112,
+    "annualPx": 34.112,
+    "mSubPx": 11,
+    "aSubPx": 11,
+    "deltaMonthly": 17.112000000000002,
+    "deltaAnnual": 17.112000000000002,
+    "monthlyText": "92.51%",
+    "annualText": "96.33%",
+    "monthlySubText": "较上期 4.8% ↑",
+    "annualSubText": "较上期 +2.5% ↑",
+    "whiteSpaceM": "nowrap",
+    "whiteSpaceA": "nowrap",
+    "overflowM": "clip",
+    "overflowA": "clip",
+    "truncated": false,
+    "mBroken": false,
+    "aBroken": false,
+    "ratios": {
+      "left": 0.25,
+      "mid": 0.5,
+      "right": 0.25
+    },
+    "colW": [
+      306.25,
+      612.5,
+      306.25
+    ],
+    "panelH": 268.296875,
+    "layoutH": 210,
+    "loadH": 150,
+    "baselinePanelH": 268.3,
+    "baselineLoadH": 150
+  },
+  "blockers": [],
+  "shots": [
+    "max-01-load-kpi-fonts.png",
+    "max-02-delivery-panel.png"
+  ],
+  "url": "http://127.0.0.1:3000/operations-dashboard-202610/board",
+  "ts": "2026-11-02T08:40:51.972Z"
+}

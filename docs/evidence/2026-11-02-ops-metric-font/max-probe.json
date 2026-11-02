@@ -1,0 +1,426 @@
+{
+  "pass": true,
+  "ac": {
+    "ac1_kpi30px": true,
+    "ac2_risk30px": true,
+    "ac3_subOk": true,
+    "ac4_layout": true,
+    "ac5_noRegression": true,
+    "ac6_evidence": true
+  },
+  "blockers": [],
+  "load": {
+    "monthlyPx": 34.112,
+    "annualPx": 34.112,
+    "mSubPx": 11,
+    "aSubPx": 11,
+    "monthlyText": "92.51%",
+    "annualText": "96.33%",
+    "monthlySub": "较上期 4.8% ↑",
+    "annualSub": "较上期 +2.5% ↑",
+    "whiteSpaceM": "nowrap",
+    "overflowM": "clip"
+  },
+  "kpiInfo": [
+    {
+      "i": 0,
+      "title": "新签合同额（万元）",
+      "text": "9,234.31",
+      "px": 34.112,
+      "whiteSpace": "nowrap",
+      "textOverflow": "clip",
+      "truncated": false,
+      "broken": false,
+      "color": "rgb(48, 109, 169)",
+      "rect": {
+        "x": 69,
+        "y": 119.390625,
+        "w": 562.5,
+        "h": 40.921875,
+        "top": 119.390625,
+        "bottom": 160.3125,
+        "left": 69,
+        "right": 631.5
+      }
+    },
+    {
+      "i": 1,
+      "title": "完成合同额（万元）",
+      "text": "12,331.02",
+      "px": 34.112,
+      "whiteSpace": "nowrap",
+      "textOverflow": "clip",
+      "truncated": false,
+      "broken": false,
+      "color": "rgb(48, 109, 169)",
+      "rect": {
+        "x": 706.5,
+        "y": 119.390625,
+        "w": 562.5,
+        "h": 40.921875,
+        "top": 119.390625,
+        "bottom": 160.3125,
+        "left": 706.5,
+        "right": 1269
+      }
+    },
+    {
+      "i": 2,
+      "title": "完成开票额（万元）",
+      "text": "9,172.22",
+      "px": 34.112,
+      "whiteSpace": "nowrap",
+      "textOverflow": "clip",
+      "truncated": false,
+      "broken": false,
+      "color": "rgb(48, 109, 169)",
+      "rect": {
+        "x": 69,
+        "y": 246.640625,
+        "w": 562.5,
+        "h": 40.921875,
+        "top": 246.640625,
+        "bottom": 287.5625,
+        "left": 69,
+        "right": 631.5
+      }
+    },
+    {
+      "i": 3,
+      "title": "完成回款额（万元）",
+      "text": "13,459.19",
+      "px": 34.112,
+      "whiteSpace": "nowrap",
+      "textOverflow": "clip",
+      "truncated": false,
+      "broken": false,
+      "color": "rgb(48, 109, 169)",
+      "rect": {
+        "x": 706.5,
+        "y": 246.640625,
+        "w": 562.5,
+        "h": 40.921875,
+        "top": 246.640625,
+        "bottom": 287.5625,
+        "left": 706.5,
+        "right": 1269
+      }
+    }
+  ],
+  "riskInfo": [
+    {
+      "i": 0,
+      "label": "应收账款",
+      "text": "1,001.11",
+      "px": 34.112,
+      "smallText": "较上期 -2.1% ↓",
+      "smallPx": 11,
+      "whiteSpace": "nowrap",
+      "truncated": false,
+      "broken": false,
+      "color": "rgb(37, 61, 88)",
+      "smallColor": "rgb(35, 139, 119)",
+      "rect": {
+        "x": 38,
+        "y": 748.03125,
+        "w": 597,
+        "h": 40.921875,
+        "top": 748.03125,
+        "bottom": 788.953125,
+        "left": 38,
+        "right": 635
+      }
+    },
+    {
+      "i": 1,
+      "label": "WIP",
+      "text": "2,587.49",
+      "px": 34.112,
+      "smallText": "较上期 +6.3% ↑",
+      "smallPx": 11,
+      "whiteSpace": "nowrap",
+      "truncated": false,
+      "broken": false,
+      "color": "rgb(37, 61, 88)",
+      "smallColor": "rgb(223, 92, 112)",
+      "rect": {
+        "x": 662,
+        "y": 748.03125,
+        "w": 597,
+        "h": 40.921875,
+        "top": 748.03125,
+        "bottom": 788.953125,
+        "left": 662,
+        "right": 1259
+      }
+    },
+    {
+      "i": 2,
+      "label": "存货",
+      "text": "2,200.48",
+      "px": 34.112,
+      "smallText": "较上期 -1.8% ↓",
+      "smallPx": 11,
+      "whiteSpace": "nowrap",
+      "truncated": false,
+      "broken": false,
+      "color": "rgb(37, 61, 88)",
+      "smallColor": "rgb(35, 139, 119)",
+      "rect": {
+        "x": 38,
+        "y": 855.28125,
+        "w": 597,
+        "h": 40.921875,
+        "top": 855.28125,
+        "bottom": 896.203125,
+        "left": 38,
+        "right": 635
+      }
+    },
+    {
+      "i": 3,
+      "label": "营业收入",
+      "text": "3,280.60",
+      "px": 34.112,
+      "smallText": "较上期 +4.5% ↑",
+      "smallPx": 11,
+      "whiteSpace": "nowrap",
+      "truncated": false,
+      "broken": false,
+      "color": "rgb(37, 61, 88)",
+      "smallColor": "rgb(35, 139, 119)",
+      "rect": {
+        "x": 662,
+        "y": 855.28125,
+        "w": 597,
+        "h": 40.921875,
+        "top": 855.28125,
+        "bottom": 896.203125,
+        "left": 662,
+        "right": 1259
+      }
+    }
+  ],
+  "kpiDeltaLabels": [
+    {
+      "text": "目标 10,000.00占总目标 92.3%",
+      "px": 11
+    },
+    {
+      "text": "当月新增",
+      "px": 11
+    },
+    {
+      "text": "占目标",
+      "px": 11
+    },
+    {
+      "text": "目标 14,000.00占总目标 88.1%",
+      "px": 11
+    },
+    {
+      "text": "上月新增",
+      "px": 11
+    },
+    {
+      "text": "占目标",
+      "px": 11
+    },
+    {
+      "text": "目标 11,000.00占总目标 83.4%",
+      "px": 11
+    },
+    {
+      "text": "当月新增",
+      "px": 11
+    },
+    {
+      "text": "占目标",
+      "px": 11
+    },
+    {
+      "text": "目标 16,000.00占总目标 84.1%",
+      "px": 11
+    },
+    {
+      "text": "当月新增",
+      "px": 11
+    },
+    {
+      "text": "占目标",
+      "px": 11
+    }
+  ],
+  "kpiDeltaNums": [
+    {
+      "text": "862.40",
+      "px": 12
+    },
+    {
+      "text": "8.6%",
+      "px": 12
+    },
+    {
+      "text": "968.35",
+      "px": 12
+    },
+    {
+      "text": "6.9%",
+      "px": 12
+    },
+    {
+      "text": "738.25",
+      "px": 12
+    },
+    {
+      "text": "6.7%",
+      "px": 12
+    },
+    {
+      "text": "1,126.80",
+      "px": 12
+    },
+    {
+      "text": "7.0%",
+      "px": 12
+    }
+  ],
+  "geometry": {
+    "kpiOverlap": false,
+    "riskOverlap": false,
+    "ratios": {
+      "left": 0.25,
+      "mid": 0.5,
+      "right": 0.25
+    },
+    "colW": [
+      306.25,
+      612.5,
+      306.25
+    ],
+    "panelH": 268.296875,
+    "layoutH": 210,
+    "loadH": 150,
+    "baselinePanelH": 268.3,
+    "baselineLoadH": 150,
+    "heightNotRegressed": true,
+    "kpiRects": [
+      {
+        "x": 16,
+        "y": 87,
+        "w": 627.5,
+        "h": 117.25,
+        "top": 87,
+        "bottom": 204.25,
+        "left": 16,
+        "right": 643.5
+      },
+      {
+        "x": 653.5,
+        "y": 87,
+        "w": 627.5,
+        "h": 117.25,
+        "top": 87,
+        "bottom": 204.25,
+        "left": 653.5,
+        "right": 1281
+      },
+      {
+        "x": 16,
+        "y": 214.25,
+        "w": 627.5,
+        "h": 117.25,
+        "top": 214.25,
+        "bottom": 331.5,
+        "left": 16,
+        "right": 643.5
+      },
+      {
+        "x": 653.5,
+        "y": 214.25,
+        "w": 627.5,
+        "h": 117.25,
+        "top": 214.25,
+        "bottom": 331.5,
+        "left": 653.5,
+        "right": 1281
+      }
+    ],
+    "riskRects": [
+      {
+        "x": 28,
+        "y": 718.09375,
+        "w": 617,
+        "h": 100.25,
+        "top": 718.09375,
+        "bottom": 818.34375,
+        "left": 28,
+        "right": 645
+      },
+      {
+        "x": 652,
+        "y": 718.09375,
+        "w": 617,
+        "h": 100.25,
+        "top": 718.09375,
+        "bottom": 818.34375,
+        "left": 652,
+        "right": 1269
+      },
+      {
+        "x": 28,
+        "y": 825.34375,
+        "w": 617,
+        "h": 100.25,
+        "top": 825.34375,
+        "bottom": 925.59375,
+        "left": 28,
+        "right": 645
+      },
+      {
+        "x": 652,
+        "y": 825.34375,
+        "w": 617,
+        "h": 100.25,
+        "top": 825.34375,
+        "bottom": 925.59375,
+        "left": 652,
+        "right": 1269
+      }
+    ]
+  },
+  "period": {
+    "hasJiaoshangqi": true,
+    "loadSubsPeriod": true,
+    "residualTongbiHuanbi": [],
+    "periodHits": [
+      "较上期 -2.1% ↓",
+      "较上期 +6.3% ↑",
+      "较上期 -1.8% ↓",
+      "较上期 +4.5% ↑",
+      "较上期 4.8% ↑",
+      "较上期 +2.5% ↑"
+    ]
+  },
+  "viewportHint": {
+    "innerWidth": 1312,
+    "innerHeight": 920
+  },
+  "beforeAnchor": {
+    "kpi": "23–32px(压缩)",
+    "risk": "18–26px/常见~20px",
+    "loadRefPrevMax": "~34px@1600"
+  },
+  "shots": [
+    "max-01-kpi-values.png",
+    "max-02-risk-values.png",
+    "max-03-load-compare.png",
+    "max-04-delivery-panel.png"
+  ],
+  "url": "http://127.0.0.1:3000/operations-dashboard-202610/board",
+  "viewport": {
+    "width": 1600,
+    "height": 1000
+  },
+  "ts": "2026-11-02T08:49:33.689Z"
+}

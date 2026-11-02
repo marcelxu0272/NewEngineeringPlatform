@@ -1,0 +1,187 @@
+{
+  "ts": "2026-11-02T07:42:27.381Z",
+  "actor": "Max-independent-3col",
+  "checks": {
+    "1_ratio_quarter_half_quarter": {
+      "pass": true,
+      "ratios": {
+        "left": 0.25,
+        "mid": 0.5,
+        "right": 0.25
+      },
+      "widths": {
+        "left": 266.25,
+        "mid": 532.5,
+        "right": 266.25
+      },
+      "tolerance": "±0.04 on share of (left+mid+right) width sum",
+      "sumW": 1065,
+      "layoutW": 1081
+    },
+    "2_left_month_above_year": {
+      "pass": true,
+      "hasMonth": true,
+      "hasYear": true,
+      "monthAboveYear": true,
+      "monthTop": 365.078125,
+      "yearTop": 499.078125
+    },
+    "3_mid_trend_chart": {
+      "pass": true,
+      "midHasTrendTitle": true,
+      "loadChart": {
+        "w": 518.5,
+        "h": 180,
+        "fillOfMid": 0.9737089201877934
+      },
+      "xLabels": [
+        "3月",
+        "4月",
+        "5月",
+        "6月",
+        "7月",
+        "8月"
+      ],
+      "midOverflow": -56
+    },
+    "4_right_chart_above_legend": {
+      "pass": true,
+      "rightHasDeliveryTitle": true,
+      "donut": {
+        "w": 252.25,
+        "h": 167.46875,
+        "top": 353
+      },
+      "legend": {
+        "w": 252.25,
+        "h": 60.53125,
+        "top": 526.46875,
+        "text": "正常 12 风险 2 逾期 0"
+      },
+      "chartAboveLegend": true,
+      "rightInnerFlexDir": "column"
+    },
+    "5_no_regression_ac15_right_fill": {
+      "pass": true,
+      "emptyRight": 7,
+      "fillRatio": 0.9474178403755869,
+      "rightW": 266.25
+    },
+    "6_evidence_saved": {
+      "pass": true,
+      "shots": [
+        "max-3col-01-context.png",
+        "max-3col-02-panel.png",
+        "max-3col-03-left.png",
+        "max-3col-03-mid.png",
+        "max-3col-03-right.png"
+      ]
+    }
+  },
+  "failures": [],
+  "measure": {
+    "layoutW": 1081,
+    "gap": 8,
+    "layoutDisplay": "flex",
+    "cols": [
+      {
+        "name": "left",
+        "missing": false,
+        "w": 266.25,
+        "h": 260,
+        "left": 28,
+        "right": 294.25,
+        "top": 329,
+        "bottom": 589,
+        "flex": "1 1 0px",
+        "flexGrow": "1",
+        "display": "flex",
+        "flexDir": "column",
+        "text": "当月负荷率 92.51% 环比 4.8% ↑ 年度负荷率 96.33% 同比 +2.5% ↑"
+      },
+      {
+        "name": "mid",
+        "missing": false,
+        "w": 532.5,
+        "h": 260,
+        "left": 302.25,
+        "right": 834.75,
+        "top": 329,
+        "bottom": 589,
+        "flex": "2 1 0px",
+        "flexGrow": "2",
+        "display": "flex",
+        "flexDir": "column",
+        "text": "近6个月负荷率趋势 ? 年度负荷率 当月负荷率 3月 4月 5月 6月 7月 8月 60% 80% 100%"
+      },
+      {
+        "name": "right",
+        "missing": false,
+        "w": 266.25,
+        "h": 260,
+        "left": 842.75,
+        "right": 1109,
+        "top": 329,
+        "bottom": 589,
+        "flex": "1 1 0px",
+        "flexGrow": "1",
+        "display": "flex",
+        "flexDir": "column",
+        "text": "项目交付保障活动 ? 14 在管项目 正常 12 风险 2 逾期 0"
+      }
+    ],
+    "ratios": {
+      "left": 0.25,
+      "mid": 0.5,
+      "right": 0.25
+    },
+    "sumW": 1065,
+    "leftKids": [
+      {
+        "cls": "delivery-kpi-row",
+        "top": 329,
+        "bottom": 589,
+        "h": 260,
+        "text": "当月负荷率 92.51% 环比 4.8% ↑ 年度负荷率 96.33% 同比 +2.5% ↑"
+      }
+    ],
+    "hasMonth": true,
+    "hasYear": true,
+    "monthTop": 365.078125,
+    "yearTop": 499.078125,
+    "monthAboveYear": true,
+    "midHasTrendTitle": true,
+    "loadChart": {
+      "w": 518.5,
+      "h": 180,
+      "fillOfMid": 0.9737089201877934
+    },
+    "xLabels": [
+      "3月",
+      "4月",
+      "5月",
+      "6月",
+      "7月",
+      "8月"
+    ],
+    "midOverflow": -56,
+    "rightHasDeliveryTitle": true,
+    "donut": {
+      "w": 252.25,
+      "h": 167.46875,
+      "top": 353
+    },
+    "legend": {
+      "w": 252.25,
+      "h": 60.53125,
+      "top": 526.46875,
+      "text": "正常 12 风险 2 逾期 0"
+    },
+    "chartAboveLegend": true,
+    "rightInnerFlexDir": "column",
+    "emptyRight": 7,
+    "fillRatio": 0.9474178403755869,
+    "rightW": 266.25
+  },
+  "overallPass": true
+}

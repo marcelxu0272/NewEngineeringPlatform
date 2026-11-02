@@ -1,0 +1,599 @@
+{
+  "passA": true,
+  "passB": true,
+  "acA": {
+    "ac1_no_metric_cards": true,
+    "ac2_subtitle": true,
+    "ac3_series": true,
+    "ac4_colors": true,
+    "ac5_main_title": true,
+    "ac6_evidence": true
+  },
+  "acB": {
+    "ac1_label_same_color": true,
+    "ac2_numbers_theme": true,
+    "ac3_no_koujing_regress": true,
+    "ac4_evidence": true
+  },
+  "blockersA": [],
+  "blockersB": [],
+  "info": {
+    "cashMetricsExists": false,
+    "cashMetricsVisible": false,
+    "anyCashMetricVisible": false,
+    "panelTitle": "现金流与资金安全 （万元） ?",
+    "subTitle": "当年现金流趋势 （万元）",
+    "oldSubCount": 0,
+    "chartInfo": {
+      "seriesNames": [
+        "当月流入",
+        "当月流出",
+        "当年累计净现金流"
+      ],
+      "series": [
+        {
+          "name": "当月流入",
+          "type": "column",
+          "color": "#306da9",
+          "zones": [],
+          "pointColors": [
+            {
+              "y": 20350,
+              "color": "#306da9"
+            },
+            {
+              "y": 21310,
+              "color": "#306da9"
+            },
+            {
+              "y": 25970,
+              "color": "#306da9"
+            },
+            {
+              "y": 24300,
+              "color": "#306da9"
+            },
+            {
+              "y": 26700,
+              "color": "#306da9"
+            },
+            {
+              "y": 29300,
+              "color": "#306da9"
+            },
+            {
+              "y": 25908.41,
+              "color": "#306da9"
+            },
+            {
+              "y": 27670.18,
+              "color": "#306da9"
+            }
+          ],
+          "dataSample": []
+        },
+        {
+          "name": "当月流出",
+          "type": "column",
+          "color": "#52a7cb",
+          "zones": [],
+          "pointColors": [
+            {
+              "y": 17700,
+              "color": "#52a7cb"
+            },
+            {
+              "y": 18610,
+              "color": "#52a7cb"
+            },
+            {
+              "y": 19400,
+              "color": "#52a7cb"
+            },
+            {
+              "y": 20300,
+              "color": "#52a7cb"
+            },
+            {
+              "y": 23500,
+              "color": "#52a7cb"
+            },
+            {
+              "y": 26200,
+              "color": "#52a7cb"
+            },
+            {
+              "y": 28681.95,
+              "color": "#52a7cb"
+            },
+            {
+              "y": 31033.87,
+              "color": "#52a7cb"
+            }
+          ],
+          "dataSample": []
+        },
+        {
+          "name": "当年累计净现金流",
+          "type": "line",
+          "color": "#238b77",
+          "zones": [
+            {
+              "value": 0,
+              "color": "#df5c70"
+            },
+            {
+              "color": "#238b77"
+            }
+          ],
+          "pointColors": [
+            {
+              "y": 2650,
+              "color": "#238b77"
+            },
+            {
+              "y": 5350,
+              "color": "#238b77"
+            },
+            {
+              "y": 11920,
+              "color": "#238b77"
+            },
+            {
+              "y": 15920,
+              "color": "#238b77"
+            },
+            {
+              "y": 19120,
+              "color": "#238b77"
+            },
+            {
+              "y": 22220,
+              "color": "#238b77"
+            },
+            {
+              "y": 19446.46,
+              "color": "#238b77"
+            },
+            {
+              "y": 16082.769999999999,
+              "color": "#238b77"
+            }
+          ],
+          "dataSample": []
+        }
+      ],
+      "linePointColors": [
+        {
+          "y": 2650,
+          "optColor": "#238b77",
+          "markerFill": "#238b77",
+          "graphicFill": "#238b77",
+          "color": "#238b77"
+        },
+        {
+          "y": 5350,
+          "optColor": "#238b77",
+          "markerFill": "#238b77",
+          "graphicFill": "#238b77",
+          "color": "#238b77"
+        },
+        {
+          "y": 11920,
+          "optColor": "#238b77",
+          "markerFill": "#238b77",
+          "graphicFill": "#238b77",
+          "color": "#238b77"
+        },
+        {
+          "y": 15920,
+          "optColor": "#238b77",
+          "markerFill": "#238b77",
+          "graphicFill": "#238b77",
+          "color": "#238b77"
+        },
+        {
+          "y": 19120,
+          "optColor": "#238b77",
+          "markerFill": "#238b77",
+          "graphicFill": "#238b77",
+          "color": "#238b77"
+        },
+        {
+          "y": 22220,
+          "optColor": "#238b77",
+          "markerFill": "#238b77",
+          "graphicFill": "#238b77",
+          "color": "#238b77"
+        },
+        {
+          "y": 19446.46,
+          "optColor": "#238b77",
+          "markerFill": "#238b77",
+          "graphicFill": "#238b77",
+          "color": "#238b77"
+        },
+        {
+          "y": 16082.769999999999,
+          "optColor": "#238b77",
+          "markerFill": "#238b77",
+          "graphicFill": "#238b77",
+          "color": "#238b77"
+        }
+      ],
+      "themeName": "blue",
+      "themePrimary": "#306da9",
+      "themeAccent": "#52a7cb",
+      "themeSuccess": "#238b77",
+      "themeDanger": "#df5c70"
+    },
+    "kpiCards": [
+      {
+        "key": "contract",
+        "labels": [
+          {
+            "text": "当月新增",
+            "color": "rgb(110, 131, 156)"
+          },
+          {
+            "text": "占目标",
+            "color": "rgb(110, 131, 156)"
+          }
+        ],
+        "nums": [
+          {
+            "text": "862.40",
+            "color": "rgb(48, 109, 169)"
+          },
+          {
+            "text": "8.6%",
+            "color": "rgb(48, 109, 169)"
+          }
+        ],
+        "valueColor": "rgb(48, 109, 169)",
+        "valueText": "9,234.31",
+        "yoyVisible": false,
+        "deltaText": "当月新增 862.40 占目标 8.6%",
+        "hasTongbi": false,
+        "hasDangyue": true,
+        "hasShangyue": false,
+        "hasZhannubiao": true
+      },
+      {
+        "key": "completed",
+        "labels": [
+          {
+            "text": "上月新增",
+            "color": "rgb(110, 131, 156)"
+          },
+          {
+            "text": "占目标",
+            "color": "rgb(110, 131, 156)"
+          }
+        ],
+        "nums": [
+          {
+            "text": "968.35",
+            "color": "rgb(48, 109, 169)"
+          },
+          {
+            "text": "6.9%",
+            "color": "rgb(48, 109, 169)"
+          }
+        ],
+        "valueColor": "rgb(48, 109, 169)",
+        "valueText": "12,331.02",
+        "yoyVisible": false,
+        "deltaText": "上月新增 968.35 占目标 6.9%",
+        "hasTongbi": false,
+        "hasDangyue": false,
+        "hasShangyue": true,
+        "hasZhannubiao": true
+      },
+      {
+        "key": "invoice",
+        "labels": [
+          {
+            "text": "当月新增",
+            "color": "rgb(110, 131, 156)"
+          },
+          {
+            "text": "占目标",
+            "color": "rgb(110, 131, 156)"
+          }
+        ],
+        "nums": [
+          {
+            "text": "738.25",
+            "color": "rgb(48, 109, 169)"
+          },
+          {
+            "text": "6.7%",
+            "color": "rgb(48, 109, 169)"
+          }
+        ],
+        "valueColor": "rgb(48, 109, 169)",
+        "valueText": "9,172.22",
+        "yoyVisible": false,
+        "deltaText": "当月新增 738.25 占目标 6.7%",
+        "hasTongbi": false,
+        "hasDangyue": true,
+        "hasShangyue": false,
+        "hasZhannubiao": true
+      },
+      {
+        "key": "receipt",
+        "labels": [
+          {
+            "text": "当月新增",
+            "color": "rgb(110, 131, 156)"
+          },
+          {
+            "text": "占目标",
+            "color": "rgb(110, 131, 156)"
+          }
+        ],
+        "nums": [
+          {
+            "text": "1,126.80",
+            "color": "rgb(48, 109, 169)"
+          },
+          {
+            "text": "7.0%",
+            "color": "rgb(48, 109, 169)"
+          }
+        ],
+        "valueColor": "rgb(48, 109, 169)",
+        "valueText": "13,459.19",
+        "yoyVisible": false,
+        "deltaText": "当月新增 1,126.80 占目标 7.0%",
+        "hasTongbi": false,
+        "hasDangyue": true,
+        "hasShangyue": false,
+        "hasZhannubiao": true
+      }
+    ],
+    "resolvedPrimary": "rgb(48, 109, 169)",
+    "resolvedMuted": "rgb(110, 131, 156)",
+    "cssPrimary": "#306da9",
+    "cssMuted": "#6e839c",
+    "themeName": "blue",
+    "theme": {
+      "primary": "#306da9",
+      "primaryDark": "#234f80",
+      "primarySoft": "#eaf2fc",
+      "accent": "#52a7cb",
+      "secondary": "#7789d3",
+      "warning": "#d79a39",
+      "warningSoft": "#fff6e8",
+      "danger": "#df5c70",
+      "dangerSoft": "#fff0f3",
+      "success": "#238b77",
+      "successSoft": "#eaf7f0",
+      "ink": "#253d58",
+      "muted": "#6e839c",
+      "faint": "#a0b1c5",
+      "border": "#e2eaf5",
+      "grid": "#eaf0f7",
+      "surface": "#ffffff",
+      "surfaceAlt": "#f6f9fd",
+      "canvas": "#edf2f9",
+      "sidebar": "#203a5c",
+      "sidebarTop": "#386b9a",
+      "sidebarText": "#d1e1f3",
+      "shadow": "#c2d2e5",
+      "tooltip": "#233e60",
+      "tooltipText": "#ffffff",
+      "mask": "#213a5a",
+      "track": "#e7eef8",
+      "white": "#ffffff"
+    },
+    "bodyHasOldCashTrendAsOnly": false,
+    "subCheck": {
+      "hasNewSub": true,
+      "hasOldSubAlone": false,
+      "subTitle": "当年现金流趋势 （万元）"
+    },
+    "seriesTypes": [
+      {
+        "name": "当月流入",
+        "type": "column"
+      },
+      {
+        "name": "当月流出",
+        "type": "column"
+      },
+      {
+        "name": "当年累计净现金流",
+        "type": "line"
+      }
+    ],
+    "colorCheck": {
+      "inColor": "#306da9",
+      "outColor": "#52a7cb",
+      "lineColor": "#238b77",
+      "zones": [
+        {
+          "value": 0,
+          "color": "#df5c70"
+        },
+        {
+          "color": "#238b77"
+        }
+      ],
+      "inOk": true,
+      "outOk": true,
+      "zoneOk": true,
+      "posOk": true,
+      "negOk": true,
+      "sawPos": true,
+      "sawNeg": false,
+      "themePrimary": "#306da9",
+      "themeAccent": "#52a7cb",
+      "themeSuccess": "#238b77",
+      "themeDanger": "#df5c70"
+    },
+    "labelColorPairs": [
+      {
+        "key": "contract",
+        "addLabel": {
+          "text": "当月新增",
+          "color": "rgb(110, 131, 156)"
+        },
+        "targetLabel": {
+          "text": "占目标",
+          "color": "rgb(110, 131, 156)"
+        },
+        "same": true,
+        "completedExpectShangyue": true
+      },
+      {
+        "key": "completed",
+        "addLabel": {
+          "text": "上月新增",
+          "color": "rgb(110, 131, 156)"
+        },
+        "targetLabel": {
+          "text": "占目标",
+          "color": "rgb(110, 131, 156)"
+        },
+        "same": true,
+        "completedExpectShangyue": true
+      },
+      {
+        "key": "invoice",
+        "addLabel": {
+          "text": "当月新增",
+          "color": "rgb(110, 131, 156)"
+        },
+        "targetLabel": {
+          "text": "占目标",
+          "color": "rgb(110, 131, 156)"
+        },
+        "same": true,
+        "completedExpectShangyue": true
+      },
+      {
+        "key": "receipt",
+        "addLabel": {
+          "text": "当月新增",
+          "color": "rgb(110, 131, 156)"
+        },
+        "targetLabel": {
+          "text": "占目标",
+          "color": "rgb(110, 131, 156)"
+        },
+        "same": true,
+        "completedExpectShangyue": true
+      }
+    ],
+    "numChecks": [
+      {
+        "key": "contract",
+        "valueColor": "rgb(48, 109, 169)",
+        "nums": [
+          "rgb(48, 109, 169)",
+          "rgb(48, 109, 169)"
+        ],
+        "valueOk": true,
+        "numsOk": true,
+        "primary": "rgb(48, 109, 169)"
+      },
+      {
+        "key": "completed",
+        "valueColor": "rgb(48, 109, 169)",
+        "nums": [
+          "rgb(48, 109, 169)",
+          "rgb(48, 109, 169)"
+        ],
+        "valueOk": true,
+        "numsOk": true,
+        "primary": "rgb(48, 109, 169)"
+      },
+      {
+        "key": "invoice",
+        "valueColor": "rgb(48, 109, 169)",
+        "nums": [
+          "rgb(48, 109, 169)",
+          "rgb(48, 109, 169)"
+        ],
+        "valueOk": true,
+        "numsOk": true,
+        "primary": "rgb(48, 109, 169)"
+      },
+      {
+        "key": "receipt",
+        "valueColor": "rgb(48, 109, 169)",
+        "nums": [
+          "rgb(48, 109, 169)",
+          "rgb(48, 109, 169)"
+        ],
+        "valueOk": true,
+        "numsOk": true,
+        "primary": "rgb(48, 109, 169)"
+      }
+    ],
+    "koujing": {
+      "noTongbi": true,
+      "structureOk": true,
+      "cards": [
+        {
+          "key": "contract",
+          "hasTongbi": false,
+          "yoyVisible": false,
+          "hasDangyue": true,
+          "hasShangyue": false,
+          "hasZhannubiao": true
+        },
+        {
+          "key": "completed",
+          "hasTongbi": false,
+          "yoyVisible": false,
+          "hasDangyue": false,
+          "hasShangyue": true,
+          "hasZhannubiao": true
+        },
+        {
+          "key": "invoice",
+          "hasTongbi": false,
+          "yoyVisible": false,
+          "hasDangyue": true,
+          "hasShangyue": false,
+          "hasZhannubiao": true
+        },
+        {
+          "key": "receipt",
+          "hasTongbi": false,
+          "yoyVisible": false,
+          "hasDangyue": true,
+          "hasShangyue": false,
+          "hasZhannubiao": true
+        }
+      ]
+    },
+    "themeFollow": {
+      "themeName": "blue",
+      "themePrimary": "#306da9",
+      "valueColor": "rgb(48, 109, 169)",
+      "seriesColors": [
+        {
+          "name": "当月流入",
+          "color": "#306da9",
+          "type": "column"
+        },
+        {
+          "name": "当月流出",
+          "color": "#52a7cb",
+          "type": "column"
+        },
+        {
+          "name": "当年累计净现金流",
+          "color": "#238b77",
+          "type": "line"
+        }
+      ]
+    }
+  },
+  "ts": "2026-11-02T07:57:02.988Z",
+  "url": "http://127.0.0.1:3000/operations-dashboard-202610/board"
+}

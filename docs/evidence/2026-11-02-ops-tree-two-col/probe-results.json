@@ -1,0 +1,299 @@
+{
+  "at": "2026-11-02T06:58:21.820Z",
+  "results": [
+    {
+      "id": "AC1-board-link",
+      "ok": true,
+      "detail": {
+        "url": "/operations-dashboard-202610",
+        "boardHref": "/operations-dashboard-202610/board",
+        "boardTarget": "_top",
+        "boardText": "Board 董事会"
+      }
+    },
+    {
+      "id": "AC1-board-layout-default",
+      "ok": true,
+      "detail": {
+        "url": "/operations-dashboard-202610/board",
+        "hasGrayShell": true,
+        "treeLabels": [
+          "当前运营看板",
+          "市场看板",
+          "机会清单占位",
+          "市场数据占位",
+          "合同看板占位",
+          "人力资源看板占位",
+          "完成合同额看板占位"
+        ],
+        "iframeSrc": "/operations-dashboard-202610/index.html",
+        "iframeVisible": true,
+        "iframeOpacity": "1",
+        "title": "全局看板 > 运营看板 > Board",
+        "bodyHasPlaceholderTitle": false
+      }
+    },
+    {
+      "id": "AC1-protected-hashes",
+      "ok": true,
+      "detail": {
+        "orgSha": "951398F5D2DF55DA6D6C910961088133750E96569EC0967AB7D5C76508489D0C",
+        "readmeSha": "1F5BB11CC655BB5C224D0AE41D24BC1FD4122AD2F5786F168B123C6BBD7A1B47",
+        "htmlSha": "B189CAE392EECB1DDC78D39723ADE6092A16F722FBEDAAF8C139001F4A26CE14"
+      }
+    },
+    {
+      "id": "AC1-org-chart-route",
+      "ok": true,
+      "detail": {
+        "url": "/org-chart",
+        "iframeSrc": "/202602/组织架构图_四列布局_base%20copy.html",
+        "hasGray": true
+      }
+    },
+    {
+      "id": "AC2-market-parent-toggle",
+      "ok": true,
+      "detail": {
+        "afterMarketCollapse": {
+          "kidsVisible": [],
+          "iframeOpacity": "1",
+          "active": [
+            "当前运营看板"
+          ],
+          "pathname": "/operations-dashboard-202610/board"
+        },
+        "afterMarketExpand": {
+          "kidsVisible": [
+            "机会清单",
+            "市场数据",
+            "合同看板"
+          ],
+          "active": [
+            "当前运营看板"
+          ],
+          "iframeOpacity": "1",
+          "h3": null,
+          "pathname": "/operations-dashboard-202610/board"
+        }
+      }
+    },
+    {
+      "id": "AC2-leaf-switch-placeholder",
+      "ok": true,
+      "detail": {
+        "h3": "机会清单",
+        "placeholderCount": 4,
+        "dashedCount": 4,
+        "iframeOpacity": "0",
+        "pathname": "/operations-dashboard-202610/board",
+        "active": [
+          "机会清单占位"
+        ],
+        "hasYearInShell": false
+      }
+    },
+    {
+      "id": "AC3-toolbar-and-theme-control",
+      "ok": true,
+      "detail": {
+        "toolbar": {
+          "selects": [
+            {
+              "id": "yearSelect",
+              "aria": "统计年度",
+              "options": [
+                "2026年度",
+                "2025年度"
+              ]
+            },
+            {
+              "id": "unitSelect",
+              "aria": "组织板块",
+              "options": [
+                "全部板块",
+                "设计院",
+                "数字化业务单元",
+                "专业室"
+              ]
+            },
+            {
+              "id": "businessSelect",
+              "aria": "业务类型",
+              "options": [
+                "全部业务类型",
+                "设计咨询",
+                "项目管理",
+                "工程服务"
+              ]
+            }
+          ],
+          "selectIds": [
+            "yearSelect",
+            "unitSelect",
+            "businessSelect"
+          ],
+          "focusBar": false,
+          "headerTabsDisplay": null,
+          "themeSelectInIframe": false,
+          "resetBtn": false,
+          "roleEl": false,
+          "asOf": false,
+          "helpBtn": false,
+          "antSelects": [
+            {
+              "text": "青绿主题",
+              "nearHeader": false
+            }
+          ],
+          "iframeDataTheme": "teal",
+          "htmlClass": "",
+          "bodyClass": ""
+        },
+        "themeSync": {
+          "tried": true,
+          "dataTheme": "blue",
+          "bodyDataset": null,
+          "cssVars": "#306da9",
+          "htmlAttr": [
+            "lang=zh-CN",
+            "data-theme=blue",
+            "style=--primary: #306da9; --primary-rgb: 48,109,169; --primary-dark: #234f80; --primary-dark-rgb: 35,79,128; --primary-soft: #eaf2fc; --primary-soft-rgb: 234,242,252; --accent: #52a7cb; --accent-rgb: 82,167,203; --secondary: #7789d3; --secondary-rgb: 119,137,211; --warning: #d79a39; --warning-rgb: 215,154,57; --warning-soft: #fff6e8; --warning-soft-rgb: 255,246,232; --danger: #df5c70; --danger-rgb: 223,92,112; --danger-soft: #fff0f3; --danger-soft-rgb: 255,240,243; --success: #238b77; --success-rgb: 35,139,119; --success-soft: #eaf7f0; --success-soft-rgb: 234,247,240; --ink: #253d58; --ink-rgb: 37,61,88; --muted: #6e839c; --muted-rgb: 110,131,156; --faint: #a0b1c5; --faint-rgb: 160,177,197; --border: #e2eaf5; --border-rgb: 226,234,245; --grid: #eaf0f7; --grid-rgb: 234,240,247; --surface: #ffffff; --surface-rgb: 255,255,255; --surface-alt: #f6f9fd; --surface-alt-rgb: 246,249,253; --canvas: #edf2f9; --canvas-rgb: 237,242,249; --sidebar: #203a5c; --sidebar-rgb: 32,58,92; --sidebar-top: #386b9a; --sidebar-top-rgb: 56,107,154; --sidebar-text: #d1e1f3; --sidebar-text-rgb: 209,225,243; --shadow: #c2d2e5; --shadow-rgb: 194,210,229; --tooltip: #233e60; --tooltip-rgb: 35,62,96; --tooltip-text: #ffffff; --tooltip-text-rgb: 255,255,255; --mask: #213a5a; --mask-rgb: 33,58,90; --track: #e7eef8; --track-rgb: 231,238,248; --white: #ffffff; --white-rgb: 255,255,255;"
+          ]
+        }
+      }
+    },
+    {
+      "id": "AC3-theme-iframe-sync",
+      "ok": true,
+      "detail": {
+        "tried": true,
+        "dataTheme": "blue",
+        "bodyDataset": null,
+        "cssVars": "#306da9",
+        "htmlAttr": [
+          "lang=zh-CN",
+          "data-theme=blue",
+          "style=--primary: #306da9; --primary-rgb: 48,109,169; --primary-dark: #234f80; --primary-dark-rgb: 35,79,128; --primary-soft: #eaf2fc; --primary-soft-rgb: 234,242,252; --accent: #52a7cb; --accent-rgb: 82,167,203; --secondary: #7789d3; --secondary-rgb: 119,137,211; --warning: #d79a39; --warning-rgb: 215,154,57; --warning-soft: #fff6e8; --warning-soft-rgb: 255,246,232; --danger: #df5c70; --danger-rgb: 223,92,112; --danger-soft: #fff0f3; --danger-soft-rgb: 255,240,243; --success: #238b77; --success-rgb: 35,139,119; --success-soft: #eaf7f0; --success-soft-rgb: 234,247,240; --ink: #253d58; --ink-rgb: 37,61,88; --muted: #6e839c; --muted-rgb: 110,131,156; --faint: #a0b1c5; --faint-rgb: 160,177,197; --border: #e2eaf5; --border-rgb: 226,234,245; --grid: #eaf0f7; --grid-rgb: 234,240,247; --surface: #ffffff; --surface-rgb: 255,255,255; --surface-alt: #f6f9fd; --surface-alt-rgb: 246,249,253; --canvas: #edf2f9; --canvas-rgb: 237,242,249; --sidebar: #203a5c; --sidebar-rgb: 32,58,92; --sidebar-top: #386b9a; --sidebar-top-rgb: 56,107,154; --sidebar-text: #d1e1f3; --sidebar-text-rgb: 209,225,243; --shadow: #c2d2e5; --shadow-rgb: 194,210,229; --tooltip: #233e60; --tooltip-rgb: 35,62,96; --tooltip-text: #ffffff; --tooltip-text-rgb: 255,255,255; --mask: #213a5a; --mask-rgb: 33,58,90; --track: #e7eef8; --track-rgb: 231,238,248; --white: #ffffff; --white-rgb: 255,255,255;"
+        ]
+      }
+    },
+    {
+      "id": "AC4-layout-and-meaning",
+      "ok": true,
+      "detail": {
+        "mainCols": "639px 639px",
+        "kpiCols": "639px 639px",
+        "kpiCardCount": 4,
+        "kpi2x2": true,
+        "cash": {
+          "x": 12,
+          "y": 225,
+          "w": 1288,
+          "h": 300,
+          "right": 1300,
+          "bottom": 525
+        },
+        "risk": {
+          "x": 12,
+          "y": 385,
+          "w": 1288,
+          "h": 300,
+          "right": 1300,
+          "bottom": 685
+        },
+        "contrib": {
+          "x": 12,
+          "y": 545,
+          "w": 639,
+          "h": 280,
+          "right": 651,
+          "bottom": 825
+        },
+        "target": {
+          "x": 661,
+          "y": 545,
+          "w": 639,
+          "h": 280,
+          "right": 1300,
+          "bottom": 825
+        },
+        "delivery": {
+          "x": 12,
+          "y": 705,
+          "w": 1288,
+          "h": 260,
+          "right": 1300,
+          "bottom": 965
+        },
+        "alert": {
+          "x": 12,
+          "y": 865,
+          "w": 1288,
+          "h": 180,
+          "right": 1300,
+          "bottom": 1045
+        },
+        "mainRect": {
+          "x": 0,
+          "y": 55,
+          "w": 1312,
+          "h": 865,
+          "right": 1312,
+          "bottom": 920
+        },
+        "cashFull": true,
+        "riskFull": true,
+        "deliveryFull": true,
+        "alertFull": true,
+        "contribTargetSameRow": true,
+        "titles": [
+          "现金流与资金安全（万元）?",
+          "应收与资金风险（万元）?",
+          "经营贡献分析?",
+          "板块目标达成?",
+          "工作负荷与交付保障?",
+          "经营异常预警?"
+        ],
+        "middleDisplay": "contents",
+        "bottomDisplay": "contents"
+      }
+    },
+    {
+      "id": "AC5-placeholders",
+      "ok": true,
+      "detail": {
+        "phHr": {
+          "h3": "人力资源看板",
+          "cards": 4,
+          "shellSelects": 0,
+          "yearInDom": false
+        },
+        "phDone": {
+          "h3": "完成合同额看板",
+          "cards": 4
+        }
+      }
+    },
+    {
+      "id": "AC6-evidence-dir",
+      "ok": true,
+      "detail": {
+        "out": "docs\\evidence\\2026-11-02-ops-tree-two-col",
+        "files": [
+          "01-board-default-current.png",
+          "02-org-chart-unchanged.png",
+          "03-tree-market-parent.png",
+          "04-placeholder-opportunity.png",
+          "05-current-toolbar-theme.png",
+          "06-dual-column-layout.png",
+          "07-dual-column-lower.png",
+          "08-placeholder-hr.png",
+          "09-placeholder-completed.png",
+          "probe-results.json",
+          "probe.cjs"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "ts": "2026-11-02T07:35:37.773Z",
+  "overallPass": true,
+  "criteria": "以 .delivery-right 内 delivery-chart-inner 子项（环图/图例等）右缘相对列右缘的空白 emptyRight≤56px 为填满；满宽空壳容器不算；气泡非阻断",
+  "numbers": {
+    "rightW": 420.78125,
+    "inner": {
+      "w": 406.78125,
+      "h": 160,
+      "left": 695.21875,
+      "right": 1102,
+      "display": "flex",
+      "flexDir": "row",
+      "justify": "normal",
+      "align": "stretch",
+      "gap": "4px",
+      "width": "406.781px"
+    },
+    "donut": {
+      "w": 215.59375,
+      "h": 160,
+      "left": 695.21875,
+      "right": 910.8125
+    },
+    "chart": {
+      "w": 215.59375,
+      "h": 140,
+      "left": 695.21875,
+      "right": 910.8125
+    },
+    "innerKids": [
+      {
+        "cls": "donut-wrap",
+        "tag": "DIV",
+        "w": 215.59375,
+        "h": 160,
+        "left": 695.21875,
+        "right": 910.8125,
+        "flex": "0 0 auto",
+        "display": "flex",
+        "justify": "center",
+        "text": "14\n在管项目"
+      },
+      {
+        "cls": "legend-list",
+        "tag": "DIV",
+        "w": 187.1875,
+        "h": 160,
+        "left": 914.8125,
+        "right": 1102,
+        "flex": "1 1 0%",
+        "display": "flex",
+        "justify": "normal",
+        "text": "正常\n12\n风险\n2\n逾期\n0"
+      }
+    ],
+    "parts": [
+      {
+        "cls": "donut-wrap",
+        "w": 215.59375,
+        "left": 695.21875,
+        "right": 910.8125,
+        "h": 160
+      },
+      {
+        "cls": "chart",
+        "w": 215.59375,
+        "left": 695.21875,
+        "right": 910.8125,
+        "h": 140
+      },
+      {
+        "cls": "donut-wrap",
+        "w": 215.59375,
+        "left": 695.21875,
+        "right": 910.8125,
+        "h": 160
+      },
+      {
+        "cls": "legend-list",
+        "w": 187.1875,
+        "left": 914.8125,
+        "right": 1102,
+        "h": 160
+      }
+    ],
+    "emptyRight": 7,
+    "fillByChildren": 0.9667285555142964,
+    "gapDonutToColRight": 198.1875,
+    "gapInnerKidsToColRight": 7
+  },
+  "vsLeoRef": "Leo 15-delivery-right-fill.png 仅参考，未采信其结论"
+}

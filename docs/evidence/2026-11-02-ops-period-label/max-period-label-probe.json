@@ -1,0 +1,69 @@
+{
+  "pass": true,
+  "ac": {
+    "ac1": true,
+    "ac2": true,
+    "ac3_tipNonBlocking": true,
+    "ac4_noOrgChart": true,
+    "ac5_evidence": true
+  },
+  "detail": {
+    "loadSubsAreJiaoshangqi": true,
+    "monthlySubText": "较上期 4.8% ↑",
+    "annualSubText": "较上期 +2.5% ↑",
+    "riskSmalls": [
+      {
+        "text": "较上期 -2.1% ↓",
+        "color": "rgb(35, 139, 119)",
+        "visible": true
+      },
+      {
+        "text": "较上期 +6.3% ↑",
+        "color": "rgb(223, 92, 112)",
+        "visible": true
+      },
+      {
+        "text": "较上期 -1.8% ↓",
+        "color": "rgb(35, 139, 119)",
+        "visible": true
+      },
+      {
+        "text": "较上期 +4.5% ↑",
+        "color": "rgb(35, 139, 119)",
+        "visible": true
+      }
+    ],
+    "residualCompareLabels": [],
+    "hitsTongbi": [],
+    "hitsHuanbi": [],
+    "alertExplainSample": [
+      "回款进度预警年度回款目标达成 84.1%08-28",
+      "应收账款账龄提醒1年以上占32% · 320.36 万元08-26",
+      "现金净流出提醒8月净流出 3,363.69 万元08-31",
+      "项目交付风险2 项待跟进 · 0 项逾期08-24"
+    ],
+    "tipSamples": [
+      "客户应收账款余额；账龄从账款形成日起计算。副文案为较上期对比（非同比）。 点击查看说明。",
+      "营业收入演示指标；副文案为较上期对比（非同比、非占应收总额）。 点击查看说明。"
+    ],
+    "visibleSampleWithPeriod": [
+      "较上期 -2.1% ↓",
+      "较上期 +6.3% ↑",
+      "较上期 -1.8% ↓",
+      "较上期 +4.5% ↑",
+      "较上期 4.8% ↑",
+      "较上期 +2.5% ↑"
+    ],
+    "monthlyPx": 34.112,
+    "subPx": 11
+  },
+  "blockers": [],
+  "shots": [
+    "max-01-load-period-labels.png",
+    "max-02-alerts-period.png",
+    "max-03-risk-period.png",
+    "max-02b-alert-list.png"
+  ],
+  "url": "http://127.0.0.1:3000/operations-dashboard-202610/board",
+  "ts": "2026-11-02T08:40:51.972Z"
+}

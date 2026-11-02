@@ -1,0 +1,122 @@
+{
+  "pass": true,
+  "before": {
+    "label": "default",
+    "cards": [
+      {
+        "title": "新签合同额（万元）",
+        "delta": "当月新增 862.40 占目标 8.6%",
+        "meta": "目标 10,000.00 占总目标 92.3%",
+        "hasYoyClassVisible": false,
+        "text": "新签合同额（万元）\n9,234.31\n目标 10,000.00\n占总目标 92.3%\n当月新增 862.40\n占目标 8.6%"
+      },
+      {
+        "title": "完成合同额（万元）",
+        "delta": "上月新增 968.35 占目标 6.9%",
+        "meta": "目标 14,000.00 占总目标 88.1%",
+        "hasYoyClassVisible": false,
+        "text": "完成合同额（万元）\n12,331.02\n目标 14,000.00\n占总目标 88.1%\n上月新增 968.35\n占目标 6.9%"
+      },
+      {
+        "title": "完成开票额（万元）",
+        "delta": "当月新增 738.25 占目标 6.7%",
+        "meta": "目标 11,000.00 占总目标 83.4%",
+        "hasYoyClassVisible": false,
+        "text": "完成开票额（万元）\n9,172.22\n目标 11,000.00\n占总目标 83.4%\n当月新增 738.25\n占目标 6.7%"
+      },
+      {
+        "title": "完成回款额（万元）",
+        "delta": "当月新增 1,126.80 占目标 7.0%",
+        "meta": "目标 16,000.00 占总目标 84.1%",
+        "hasYoyClassVisible": false,
+        "text": "完成回款额（万元）\n13,459.19\n目标 16,000.00\n占总目标 84.1%\n当月新增 1,126.80\n占目标 7.0%"
+      }
+    ],
+    "risk": [
+      {
+        "label": "应收账款",
+        "small": "较上期 +3.2% ↑"
+      },
+      {
+        "label": "WIP",
+        "small": "较上期 +6.3% ↑"
+      },
+      {
+        "label": "存货",
+        "small": "较上期 +1.8% ↑"
+      },
+      {
+        "label": "营业收入",
+        "small": "较上期 +4.5% ↑"
+      }
+    ],
+    "hasTongbi": false,
+    "hasMonthAdd": 3,
+    "hasPrevMonth": true,
+    "hasRevenue": true,
+    "receivablePeriod": "较上期 +3.2% ↑",
+    "revenuePeriod": "较上期 +4.5% ↑",
+    "noOldAgingOnRecv": true,
+    "noOldName": true
+  },
+  "after": {
+    "label": "filtered",
+    "cards": [
+      {
+        "title": "新签合同额（万元）",
+        "delta": "当月新增 491.91 占目标 7.7%",
+        "meta": "目标 6,420.20 占总目标 90.4%",
+        "hasYoyClassVisible": false,
+        "text": "新签合同额（万元）\n5,802.47\n目标 6,420.20\n占总目标 90.4%\n当月新增 491.91\n占目标 7.7%"
+      },
+      {
+        "title": "完成合同额（万元）",
+        "delta": "上月新增 552.35 占目标 6.1%",
+        "meta": "目标 8,988.28 占总目标 86.2%",
+        "hasYoyClassVisible": false,
+        "text": "完成合同额（万元）\n7,748.32\n目标 8,988.28\n占总目标 86.2%\n上月新增 552.35\n占目标 6.1%"
+      },
+      {
+        "title": "完成开票额（万元）",
+        "delta": "当月新增 421.10 占目标 6.0%",
+        "meta": "目标 7,062.22 占总目标 81.6%",
+        "hasYoyClassVisible": false,
+        "text": "完成开票额（万元）\n5,763.46\n目标 7,062.22\n占总目标 81.6%\n当月新增 421.10\n占目标 6.0%"
+      },
+      {
+        "title": "完成回款额（万元）",
+        "delta": "当月新增 642.73 占目标 6.3%",
+        "meta": "目标 10,272.32 占总目标 82.3%",
+        "hasYoyClassVisible": false,
+        "text": "完成回款额（万元）\n8,457.22\n目标 10,272.32\n占总目标 82.3%\n当月新增 642.73\n占目标 6.3%"
+      }
+    ],
+    "risk": [
+      {
+        "label": "应收账款",
+        "small": "较上期 +3.2% ↑"
+      },
+      {
+        "label": "WIP",
+        "small": "较上期 +6.3% ↑"
+      },
+      {
+        "label": "存货",
+        "small": "较上期 +1.8% ↑"
+      },
+      {
+        "label": "营业收入",
+        "small": "较上期 +4.5% ↑"
+      }
+    ],
+    "hasTongbi": false,
+    "hasMonthAdd": 3,
+    "hasPrevMonth": true,
+    "hasRevenue": true,
+    "receivablePeriod": "较上期 +3.2% ↑",
+    "revenuePeriod": "较上期 +4.5% ↑",
+    "noOldAgingOnRecv": true,
+    "noOldName": true
+  },
+  "ts": "2026-11-02T07:38:38.686Z"
+}

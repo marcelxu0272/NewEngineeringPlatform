@@ -1,0 +1,79 @@
+[
+  {
+    "id": "kpiGrid",
+    "missing": false,
+    "boxTop": 87,
+    "boxBottom": 296.4375,
+    "boxH": 209.4375,
+    "contentTop": 87,
+    "contentBottom": 296.4375,
+    "contentH": 209.4375,
+    "overflow": 0
+  },
+  {
+    "id": "cashPanel",
+    "missing": false,
+    "boxTop": 306.4375,
+    "boxBottom": 694.5,
+    "boxH": 388.0625,
+    "contentTop": 306.4375,
+    "contentBottom": 694.5,
+    "contentH": 388.0625,
+    "overflow": 0
+  },
+  {
+    "id": "riskPanel",
+    "missing": false,
+    "boxTop": 704.5,
+    "boxBottom": 1133.859375,
+    "boxH": 429.359375,
+    "contentTop": 704.5,
+    "contentBottom": 1133.859375,
+    "contentH": 429.359375,
+    "overflow": 0
+  },
+  {
+    "id": "contributionPanel",
+    "missing": false,
+    "boxTop": 1143.859375,
+    "boxBottom": 1519.703125,
+    "boxH": 375.84375,
+    "contentTop": 1143.859375,
+    "contentBottom": 1519.703125,
+    "contentH": 375.84375,
+    "overflow": 0
+  },
+  {
+    "id": "targetPanel",
+    "missing": false,
+    "boxTop": 1143.859375,
+    "boxBottom": 1425.4375,
+    "boxH": 281.578125,
+    "contentTop": 1143.859375,
+    "contentBottom": 1425.4375,
+    "contentH": 281.578125,
+    "overflow": 0
+  },
+  {
+    "id": "deliveryPanel",
+    "missing": false,
+    "boxTop": 1529.703125,
+    "boxBottom": 1876.828125,
+    "boxH": 347.125,
+    "contentTop": 1529.703125,
+    "contentBottom": 1876.828125,
+    "contentH": 347.125,
+    "overflow": 0
+  },
+  {
+    "id": "alertPanel",
+    "missing": false,
+    "boxTop": 1886.828125,
+    "boxBottom": 2147.25,
+    "boxH": 260.421875,
+    "contentTop": 1886.828125,
+    "contentBottom": 2147.25,
+    "contentH": 260.421875,
+    "overflow": 0
+  }
+]

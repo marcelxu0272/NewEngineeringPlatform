@@ -1,0 +1,72 @@
+[
+  {
+    "id": "kpiGrid",
+    "boxTop": 40,
+    "boxBottom": 251.8,
+    "boxH": 211.8,
+    "contentTop": 40,
+    "contentBottom": 251.8,
+    "contentH": 211.8,
+    "overflow": 0
+  },
+  {
+    "id": "cashPanel",
+    "boxTop": 261.8,
+    "boxBottom": 644.6,
+    "boxH": 382.8,
+    "contentTop": 261.8,
+    "contentBottom": 644.6,
+    "contentH": 382.8,
+    "overflow": 0
+  },
+  {
+    "id": "riskPanel",
+    "boxTop": 654.6,
+    "boxBottom": 1075.6,
+    "boxH": 421,
+    "contentTop": 654.6,
+    "contentBottom": 1075.6,
+    "contentH": 421,
+    "overflow": 0
+  },
+  {
+    "id": "contributionPanel",
+    "boxTop": 1085.6,
+    "boxBottom": 1418.3,
+    "boxH": 332.7,
+    "contentTop": 1085.6,
+    "contentBottom": 1418.3,
+    "contentH": 332.7,
+    "overflow": 0
+  },
+  {
+    "id": "targetPanel",
+    "boxTop": 1085.6,
+    "boxBottom": 1352.8,
+    "boxH": 267.2,
+    "contentTop": 1085.6,
+    "contentBottom": 1352.8,
+    "contentH": 267.2,
+    "overflow": 0
+  },
+  {
+    "id": "deliveryPanel",
+    "boxTop": 1428.3,
+    "boxBottom": 1700.3,
+    "boxH": 272,
+    "contentTop": 1428.3,
+    "contentBottom": 1700.3,
+    "contentH": 272,
+    "overflow": 0
+  },
+  {
+    "id": "alertPanel",
+    "boxTop": 1710.3,
+    "boxBottom": 1945.7,
+    "boxH": 235.4,
+    "contentTop": 1710.3,
+    "contentBottom": 1945.7,
+    "contentH": 235.4,
+    "overflow": 0
+  }
+]

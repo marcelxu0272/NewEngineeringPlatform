@@ -1,0 +1,111 @@
+{
+  "pass": true,
+  "detail": {
+    "titleHidden": true,
+    "titleText": "运营看板202610版",
+    "bodyFont": "13px",
+    "selects": [
+      {
+        "id": "yearSelect",
+        "top": 20,
+        "bottom": 54,
+        "padTop": 20,
+        "padBottom": 21,
+        "visible": true
+      },
+      {
+        "id": "unitSelect",
+        "top": 20,
+        "bottom": 54,
+        "padTop": 20,
+        "padBottom": 21,
+        "visible": true
+      },
+      {
+        "id": "businessSelect",
+        "top": 20,
+        "bottom": 54,
+        "padTop": 20,
+        "padBottom": 21,
+        "visible": true
+      }
+    ],
+    "panelH": 347.125,
+    "gapToAlert": 10,
+    "months": [
+      {
+        "text": "当月负荷率",
+        "pastBox": -179,
+        "pastInner": -162
+      },
+      {
+        "text": "3月",
+        "pastBox": -30,
+        "pastInner": -13
+      },
+      {
+        "text": "5月",
+        "pastBox": -30,
+        "pastInner": -13
+      },
+      {
+        "text": "7月",
+        "pastBox": -30,
+        "pastInner": -13
+      }
+    ],
+    "maxMonthPastBox": -30,
+    "mainScroll": {
+      "scrollH": 2121,
+      "clientH": 745,
+      "can": true
+    },
+    "cashH": 388.0625,
+    "overlaps": [],
+    "boxes": [
+      {
+        "id": "kpiGrid",
+        "top": 87,
+        "bottom": 296.4375,
+        "h": 209.4375
+      },
+      {
+        "id": "cashPanel",
+        "top": 306.4375,
+        "bottom": 694.5,
+        "h": 388.0625
+      },
+      {
+        "id": "riskPanel",
+        "top": 704.5,
+        "bottom": 1133.859375,
+        "h": 429.359375
+      },
+      {
+        "id": "contributionPanel",
+        "top": 1143.859375,
+        "bottom": 1519.703125,
+        "h": 375.84375
+      },
+      {
+        "id": "targetPanel",
+        "top": 1143.859375,
+        "bottom": 1425.4375,
+        "h": 281.578125
+      },
+      {
+        "id": "deliveryPanel",
+        "top": 1529.703125,
+        "bottom": 1876.828125,
+        "h": 347.125
+      },
+      {
+        "id": "alertPanel",
+        "top": 1886.828125,
+        "bottom": 2147.25,
+        "h": 260.421875
+      }
+    ]
+  },
+  "ts": "2026-11-02T07:25:21.099Z"
+}

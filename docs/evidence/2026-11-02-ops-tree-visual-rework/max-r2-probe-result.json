@@ -1,0 +1,373 @@
+{
+  "ts": "2026-11-02T07:20:44.164Z",
+  "actor": "Max-independent-r2",
+  "checks": {
+    "1_main_only_scroll": {
+      "pass": true,
+      "mainScrolls": true,
+      "htmlScrolls": false,
+      "bodyScrolls": false,
+      "appScrolls": false,
+      "outerAny": false,
+      "main": {
+        "tag": "MAIN",
+        "id": "main",
+        "overflowY": "auto",
+        "scrollHeight": 1963,
+        "clientHeight": 792,
+        "canScroll": true
+      }
+    },
+    "3a_three_dropdowns_first_screen": {
+      "pass": true,
+      "selects": [
+        {
+          "id": "yearSelect",
+          "name": "",
+          "value": "2026",
+          "text": "2026年度",
+          "top": 0,
+          "visible": true
+        },
+        {
+          "id": "unitSelect",
+          "name": "",
+          "value": "全部板块",
+          "text": "全部板块",
+          "top": 0,
+          "visible": true
+        },
+        {
+          "id": "businessSelect",
+          "name": "",
+          "value": "全部业务类型",
+          "text": "全部业务类型",
+          "top": 0,
+          "visible": true
+        }
+      ]
+    },
+    "3b_default_blue_theme": {
+      "pass": true,
+      "dataTheme": "blue",
+      "ant": [
+        "深蓝主题"
+      ]
+    },
+    "2_cash_trend_visible": {
+      "pass": false,
+      "cashVisual": {
+        "wrapH": 220,
+        "wrapW": 1081,
+        "hcH": 220,
+        "hcW": 1081,
+        "pathCount": 19,
+        "clipped": false,
+        "top": 398.875,
+        "bottom": 618.875
+      },
+      "cashPanelH": 382.78125,
+      "cashContainsChart": true,
+      "anyOverflow": true
+    },
+    "6_geometry_no_y_overlap": {
+      "pass": false,
+      "boxOverlaps": [],
+      "contentOverlaps": [
+        {
+          "a": "deliveryPanel",
+          "b": "alertPanel"
+        }
+      ],
+      "contribTargetSameRow": true,
+      "anyOverflow": true
+    },
+    "6b_target_not_clipped_by_scrollbar": {
+      "pass": true,
+      "targetVisual": {
+        "h": 200,
+        "w": 523.5,
+        "right": 1109,
+        "clientRight": 1137,
+        "clippedBySb": false,
+        "sb": 15
+      }
+    },
+    "4_alert_fully_visible_at_bottom": {
+      "pass": true,
+      "fully": true,
+      "mostly": true,
+      "top": 539.28125,
+      "bottom": 774.65625,
+      "height": 235.375,
+      "mainTop": 28,
+      "mainBottom": 820,
+      "scrollTop": 1171,
+      "scrollHeight": 1963
+    },
+    "5_tree_follows_theme": {
+      "pass": true,
+      "before": {
+        "tag": "BUTTON",
+        "bg": "rgba(48, 109, 169, 0.12)",
+        "color": "rgb(48, 109, 169)",
+        "cls": "board-tree-item flex w-full items-center gap-1 rounded-md px-2 py-1.5 text-left text-[13px] transiti"
+      },
+      "after": {
+        "tag": "BUTTON",
+        "bg": "rgba(0, 139, 139, 0.12)",
+        "color": "rgb(0, 139, 139)",
+        "cls": "board-tree-item flex w-full items-center gap-1 rounded-md px-2 py-1.5 text-left text-[13px] transiti"
+      },
+      "changed": true,
+      "tealFixed": false
+    }
+  },
+  "failures": [
+    "2_cash_trend_visible",
+    "6_geometry_no_y_overlap"
+  ],
+  "scrollInfo": {
+    "iframe": {
+      "html": {
+        "tag": "HTML",
+        "id": "",
+        "overflowY": "hidden",
+        "scrollHeight": 820,
+        "clientHeight": 820,
+        "canScroll": false
+      },
+      "body": {
+        "tag": "BODY",
+        "id": "",
+        "overflowY": "hidden",
+        "scrollHeight": 820,
+        "clientHeight": 820,
+        "canScroll": false
+      },
+      "app": {
+        "tag": "DIV",
+        "id": "",
+        "overflowY": "hidden",
+        "scrollHeight": 820,
+        "clientHeight": 820,
+        "canScroll": false
+      },
+      "main": {
+        "tag": "MAIN",
+        "id": "main",
+        "overflowY": "auto",
+        "scrollHeight": 1963,
+        "clientHeight": 792,
+        "canScroll": true
+      }
+    },
+    "outerScrollers": [],
+    "mainDisplay": "flex",
+    "mainFlexDir": "column"
+  },
+  "geometry": [
+    {
+      "id": "kpiGrid",
+      "missing": false,
+      "boxTop": 40,
+      "boxBottom": 251.78125,
+      "boxH": 211.78125,
+      "contentTop": 40,
+      "contentBottom": 251.78125,
+      "contentH": 211.78125,
+      "overflow": 0,
+      "width": 1105,
+      "left": 16,
+      "right": 1121
+    },
+    {
+      "id": "cashPanel",
+      "missing": false,
+      "boxTop": 261.78125,
+      "boxBottom": 644.5625,
+      "boxH": 382.78125,
+      "contentTop": 261.78125,
+      "contentBottom": 644.5625,
+      "contentH": 382.78125,
+      "overflow": 0,
+      "width": 1105,
+      "left": 16,
+      "right": 1121
+    },
+    {
+      "id": "riskPanel",
+      "missing": false,
+      "boxTop": 654.5625,
+      "boxBottom": 1075.5625,
+      "boxH": 421,
+      "contentTop": 654.5625,
+      "contentBottom": 1075.5625,
+      "contentH": 421,
+      "overflow": 0,
+      "width": 1105,
+      "left": 16,
+      "right": 1121
+    },
+    {
+      "id": "contributionPanel",
+      "missing": false,
+      "boxTop": 1085.5625,
+      "boxBottom": 1418.28125,
+      "boxH": 332.71875,
+      "contentTop": 1085.5625,
+      "contentBottom": 1418.28125,
+      "contentH": 332.71875,
+      "overflow": 0,
+      "width": 547.5,
+      "left": 16,
+      "right": 563.5
+    },
+    {
+      "id": "targetPanel",
+      "missing": false,
+      "boxTop": 1085.5625,
+      "boxBottom": 1352.796875,
+      "boxH": 267.234375,
+      "contentTop": 1085.5625,
+      "contentBottom": 1352.796875,
+      "contentH": 267.234375,
+      "overflow": 0,
+      "width": 547.5,
+      "left": 573.5,
+      "right": 1121
+    },
+    {
+      "id": "deliveryPanel",
+      "missing": false,
+      "boxTop": 1428.28125,
+      "boxBottom": 1700.28125,
+      "boxH": 272,
+      "contentTop": 1428.28125,
+      "contentBottom": 1723.171875,
+      "contentH": 294.890625,
+      "overflow": 22.890625,
+      "width": 1105,
+      "left": 16,
+      "right": 1121
+    },
+    {
+      "id": "alertPanel",
+      "missing": false,
+      "boxTop": 1710.28125,
+      "boxBottom": 1945.65625,
+      "boxH": 235.375,
+      "contentTop": 1710.28125,
+      "contentBottom": 1945.65625,
+      "contentH": 235.375,
+      "overflow": 0,
+      "width": 1105,
+      "left": 16,
+      "right": 1121
+    }
+  ],
+  "cashVisual": {
+    "wrapH": 220,
+    "wrapW": 1081,
+    "hcH": 220,
+    "hcW": 1081,
+    "pathCount": 19,
+    "clipped": false,
+    "top": 398.875,
+    "bottom": 618.875
+  },
+  "targetVisual": {
+    "h": 200,
+    "w": 523.5,
+    "right": 1109,
+    "clientRight": 1137,
+    "clippedBySb": false,
+    "sb": 15
+  },
+  "mainMeta": {
+    "scrollH": 1963,
+    "clientH": 792,
+    "display": "flex",
+    "flexDir": "column",
+    "overflowY": "auto"
+  },
+  "mainChildren": [
+    {
+      "id": "kpiGrid",
+      "cls": "kpi-grid",
+      "tag": "SECTION",
+      "display": "grid",
+      "h": 211.78125
+    },
+    {
+      "id": "cashPanel",
+      "cls": "panel",
+      "tag": "SECTION",
+      "display": "flex",
+      "h": 382.78125
+    },
+    {
+      "id": "riskPanel",
+      "cls": "panel",
+      "tag": "SECTION",
+      "display": "flex",
+      "h": 421
+    },
+    {
+      "id": "",
+      "cls": "pair-row",
+      "tag": "DIV",
+      "display": "grid",
+      "h": 332.71875
+    },
+    {
+      "id": "deliveryPanel",
+      "cls": "panel",
+      "tag": "SECTION",
+      "display": "flex",
+      "h": 272
+    },
+    {
+      "id": "alertPanel",
+      "cls": "panel",
+      "tag": "SECTION",
+      "display": "flex",
+      "h": 235.375
+    },
+    {
+      "id": "",
+      "cls": "footer",
+      "tag": "FOOTER",
+      "display": "flex",
+      "h": 7
+    }
+  ],
+  "vsLeo": {
+    "leoClaimed": {
+      "overallPass": true,
+      "cashPanelH": 382.8,
+      "mainScrollH": 1963,
+      "mainClientH": 792,
+      "overlaps": []
+    },
+    "maxMeasured": {
+      "cashPanelH": 382.78125,
+      "mainScrollH": 1963,
+      "mainClientH": 792,
+      "boxOverlaps": 0,
+      "contentOverlaps": 1,
+      "cashOverflow": 0
+    }
+  },
+  "overallPass": false,
+  "screenshots": [
+    "max-r2-01-board-first-screen.png",
+    "max-r2-02-iframe-first-screen.png",
+    "max-r2-03-cash-trend.png",
+    "max-r2-04-target-bars.png",
+    "max-r2-05-alert-bottom.png",
+    "max-r2-06-tree-theme.png",
+    "max-r2-07-mid-scroll.png",
+    "max-r2-09-delivery.png"
+  ]
+}

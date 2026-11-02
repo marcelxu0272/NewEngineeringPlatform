@@ -1,0 +1,16 @@
+{
+  "pass": true,
+  "geo": {
+    "panelW": 1105,
+    "layoutW": 1081,
+    "leftW": 652.21875,
+    "rightW": 420.78125,
+    "statusW": 420.78125,
+    "gapAfterRight": 0,
+    "rightFillRatio": 0.389,
+    "flexLeft": "1.55 1 0px",
+    "flexRight": "1 1 0px",
+    "flexGrowR": "1"
+  },
+  "ts": "2026-11-02T07:31:12.112Z"
+}

@@ -1,0 +1,917 @@
+{
+  "ts": "2026-11-02T07:31:21.445Z",
+  "checks": {
+    "1_main_only_scroll": {
+      "pass": true,
+      "mainScrolls": true,
+      "htmlScrolls": false,
+      "bodyScrolls": false,
+      "appScrolls": false,
+      "outerAny": false
+    },
+    "3a_three_dropdowns_first_screen": {
+      "pass": true,
+      "visibleSelects": [
+        {
+          "id": "yearSelect",
+          "name": "",
+          "value": "2026",
+          "text": "2026年度",
+          "top": 20,
+          "bottom": 54,
+          "visible": true
+        },
+        {
+          "id": "unitSelect",
+          "name": "",
+          "value": "全部板块",
+          "text": "全部板块",
+          "top": 20,
+          "bottom": 54,
+          "visible": true
+        },
+        {
+          "id": "businessSelect",
+          "name": "",
+          "value": "全部业务类型",
+          "text": "全部业务类型",
+          "top": 20,
+          "bottom": 54,
+          "visible": true
+        }
+      ],
+      "allSelects": [
+        {
+          "id": "yearSelect",
+          "name": "",
+          "value": "2026",
+          "text": "2026年度",
+          "top": 20,
+          "bottom": 54,
+          "visible": true
+        },
+        {
+          "id": "unitSelect",
+          "name": "",
+          "value": "全部板块",
+          "text": "全部板块",
+          "top": 20,
+          "bottom": 54,
+          "visible": true
+        },
+        {
+          "id": "businessSelect",
+          "name": "",
+          "value": "全部业务类型",
+          "text": "全部业务类型",
+          "top": 20,
+          "bottom": 54,
+          "visible": true
+        }
+      ]
+    },
+    "6_geometry_no_y_overlap": {
+      "pass": true,
+      "overlaps": [],
+      "contribTargetSameRow": true,
+      "boxes": [
+        {
+          "id": "kpiGrid",
+          "top": 87,
+          "bottom": 296.4375,
+          "left": 16,
+          "right": 1121,
+          "height": 209.4375,
+          "width": 1105,
+          "missing": false
+        },
+        {
+          "id": "cashPanel",
+          "top": 306.4375,
+          "bottom": 694.5,
+          "left": 16,
+          "right": 1121,
+          "height": 388.0625,
+          "width": 1105,
+          "missing": false
+        },
+        {
+          "id": "riskPanel",
+          "top": 704.5,
+          "bottom": 1133.859375,
+          "left": 16,
+          "right": 1121,
+          "height": 429.359375,
+          "width": 1105,
+          "missing": false
+        },
+        {
+          "id": "contributionPanel",
+          "top": 1143.859375,
+          "bottom": 1519.703125,
+          "left": 16,
+          "right": 563.5,
+          "height": 375.84375,
+          "width": 547.5,
+          "missing": false
+        },
+        {
+          "id": "targetPanel",
+          "top": 1143.859375,
+          "bottom": 1425.4375,
+          "left": 573.5,
+          "right": 1121,
+          "height": 281.578125,
+          "width": 547.5,
+          "missing": false
+        },
+        {
+          "id": "deliveryPanel",
+          "top": 1529.703125,
+          "bottom": 1876.828125,
+          "left": 16,
+          "right": 1121,
+          "height": 347.125,
+          "width": 1105,
+          "missing": false
+        },
+        {
+          "id": "alertPanel",
+          "top": 1886.828125,
+          "bottom": 2147.25,
+          "left": 16,
+          "right": 1121,
+          "height": 260.421875,
+          "width": 1105,
+          "missing": false
+        }
+      ]
+    },
+    "2_cash_trend_visible": {
+      "pass": true,
+      "cashVisual": {
+        "wrapH": 220,
+        "wrapW": 1081,
+        "hcH": 220,
+        "hcW": 1081,
+        "pathCount": 19,
+        "clipped": false
+      }
+    },
+    "6b_target_not_clipped_by_scrollbar": {
+      "pass": true,
+      "targetVisual": {
+        "h": 200,
+        "w": 523.5,
+        "right": 1109,
+        "mainRight": 1152,
+        "clientRight": 1137,
+        "sb": 15,
+        "clippedBySb": false,
+        "labels": [
+          {
+            "t": "目标",
+            "right": 1071.5,
+            "visible": true
+          },
+          {
+            "t": "99.2%",
+            "right": 1098.857421875,
+            "visible": true
+          },
+          {
+            "t": "99.2%",
+            "right": 1098.857421875,
+            "visible": true
+          },
+          {
+            "t": "94.3%",
+            "right": 1077.857421875,
+            "visible": true
+          },
+          {
+            "t": "94.3%",
+            "right": 1077.857421875,
+            "visible": true
+          },
+          {
+            "t": "91.5%",
+            "right": 1065.857421875,
+            "visible": true
+          },
+          {
+            "t": "91.5%",
+            "right": 1065.857421875,
+            "visible": true
+          },
+          {
+            "t": "87.9%",
+            "right": 1050.857421875,
+            "visible": true
+          },
+          {
+            "t": "87.9%",
+            "right": 1050.857421875,
+            "visible": true
+          },
+          {
+            "t": "85.2%",
+            "right": 1039.857421875,
+            "visible": true
+          }
+        ]
+      }
+    },
+    "4_alert_fully_visible_at_bottom": {
+      "pass": true,
+      "fully": true,
+      "mostly": true,
+      "top": 510.828125,
+      "bottom": 771.25,
+      "height": 260.421875,
+      "mainTop": 75,
+      "mainBottom": 820,
+      "scrollTop": 1376,
+      "scrollHeight": 2121
+    },
+    "3b_default_blue_theme": {
+      "pass": true,
+      "themeProbe": {
+        "ant": [
+          "深蓝主题"
+        ],
+        "selects": []
+      },
+      "iframeTheme": {
+        "dataTheme": "blue",
+        "className": "|app",
+        "bg": "#edf2f9",
+        "primary": "#306da9",
+        "styleTheme": "--primary: #306da9; --primary-rgb: 48,109,169; --primary-dark: #234f80; --primary-dark-rgb: 35,79,128; --primary-soft: #eaf2fc; --primary-soft-rgb: 234,242,252; --accent: #52a7cb; --accent-rgb: 82,167,203; --secondary: #7789d3; --secondary-rgb: 119,137,211; --warning: #d79a39; --warning-rgb: 215,154,57; --warning-soft: #fff6e8; --warning-soft-rgb: 255,246,232; --danger: #df5c70; --danger-rgb: 223,92,112; --danger-soft: #fff0f3; --danger-soft-rgb: 255,240,243; --success: #238b77; --success-rgb: 35,139,119; --success-soft: #eaf7f0; --success-soft-rgb: 234,247,240; --ink: #253d58; --ink-rgb: 37,61,88; --muted: #6e839c; --muted-rgb: 110,131,156; --faint: #a0b1c5; --faint-rgb: 160,177,197; --border: #e2eaf5; --border-rgb: 226,234,245; --grid: #eaf0f7; --grid-rgb: 234,240,247; --surface: #ffffff; --surface-rgb: 255,255,255; --surface-alt: #f6f9fd; --surface-alt-rgb: 246,249,253; --canvas: #edf2f9; --canvas-rgb: 237,242,249; --sidebar: #203a5c; --sidebar-rgb: 32,58,92; --sidebar-top: #386b9a; --sidebar-top-rgb: 56,107,154; --sidebar-text: #d1e1f3; --sidebar-text-rgb: 209,225,243; --shadow: #c2d2e5; --shadow-rgb: 194,210,229; --tooltip: #233e60; --tooltip-rgb: 35,62,96; --tooltip-text: #ffffff; --tooltip-text-rgb: 255,255,255; --mask: #213a5a; --mask-rgb: 33,58,90; --track: #e7eef8; --track-rgb: 231,238,248; --white: #ffffff; --white-rgb: 255,255,255;"
+      },
+      "themeInfo": {
+        "antSelects": [
+          "深蓝主题"
+        ],
+        "nativeSelects": [],
+        "htmlTheme": null,
+        "headerSnippet": "W\n全局看板 > 运营看板 > Board\n主题\n深蓝主题\n看板树\n当前运营看板\n市场看板\n机会清单\n占位\n市场数据\n占位\n合同看板\n占位\n人力资源看板\n占位\n完成合同额看板\n占位"
+      }
+    },
+    "5_tree_follows_theme": {
+      "pass": true,
+      "currentBg": "rgba(48, 109, 169, 0.12)",
+      "isFixedTeal": false,
+      "afterSwitch": null,
+      "changed": null
+    }
+  },
+  "geometry": [
+    {
+      "id": "kpiGrid",
+      "top": 87,
+      "bottom": 296.4375,
+      "left": 16,
+      "right": 1121,
+      "height": 209.4375,
+      "width": 1105,
+      "missing": false
+    },
+    {
+      "id": "cashPanel",
+      "top": 306.4375,
+      "bottom": 694.5,
+      "left": 16,
+      "right": 1121,
+      "height": 388.0625,
+      "width": 1105,
+      "missing": false
+    },
+    {
+      "id": "riskPanel",
+      "top": 704.5,
+      "bottom": 1133.859375,
+      "left": 16,
+      "right": 1121,
+      "height": 429.359375,
+      "width": 1105,
+      "missing": false
+    },
+    {
+      "id": "contributionPanel",
+      "top": 1143.859375,
+      "bottom": 1519.703125,
+      "left": 16,
+      "right": 563.5,
+      "height": 375.84375,
+      "width": 547.5,
+      "missing": false
+    },
+    {
+      "id": "targetPanel",
+      "top": 1143.859375,
+      "bottom": 1425.4375,
+      "left": 573.5,
+      "right": 1121,
+      "height": 281.578125,
+      "width": 547.5,
+      "missing": false
+    },
+    {
+      "id": "deliveryPanel",
+      "top": 1529.703125,
+      "bottom": 1876.828125,
+      "left": 16,
+      "right": 1121,
+      "height": 347.125,
+      "width": 1105,
+      "missing": false
+    },
+    {
+      "id": "alertPanel",
+      "top": 1886.828125,
+      "bottom": 2147.25,
+      "left": 16,
+      "right": 1121,
+      "height": 260.421875,
+      "width": 1105,
+      "missing": false
+    }
+  ],
+  "failures": [],
+  "themeInfo": {
+    "antSelects": [
+      "深蓝主题"
+    ],
+    "nativeSelects": [],
+    "htmlTheme": null,
+    "headerSnippet": "W\n全局看板 > 运营看板 > Board\n主题\n深蓝主题\n看板树\n当前运营看板\n市场看板\n机会清单\n占位\n市场数据\n占位\n合同看板\n占位\n人力资源看板\n占位\n完成合同额看板\n占位"
+  },
+  "scrollInfo": {
+    "outer": {
+      "docEl": {
+        "scrollH": 900,
+        "clientH": 900,
+        "overflowY": "visible"
+      },
+      "body": {
+        "scrollH": 900,
+        "clientH": 900,
+        "overflowY": "visible"
+      }
+    },
+    "outerScrollers": [
+      {
+        "tag": "DIV",
+        "className": "relative min-w-0 flex-1 overflow-hidden bg-white",
+        "overflowY": "hidden",
+        "scrollH": 820,
+        "clientH": 820,
+        "canScroll": false
+      },
+      {
+        "tag": "DIV",
+        "className": "flex h-full flex-1 overflow-hidden pt-20",
+        "overflowY": "hidden",
+        "scrollH": 900,
+        "clientH": 900,
+        "canScroll": false
+      },
+      {
+        "tag": "DIV",
+        "className": "ml-16 flex h-screen w-full flex-col overflow-hidden bg-[#f8faff]",
+        "overflowY": "hidden",
+        "scrollH": 900,
+        "clientH": 900,
+        "canScroll": false
+      },
+      {
+        "tag": "DIV",
+        "className": "flex h-screen overflow-hidden bg-[#f8faff]",
+        "overflowY": "hidden",
+        "scrollH": 900,
+        "clientH": 900,
+        "canScroll": false
+      },
+      {
+        "tag": "BODY",
+        "className": "__variable_1e4310 __variable_c3aa02 antialiased",
+        "overflowY": "visible",
+        "scrollH": 900,
+        "clientH": 900,
+        "canScroll": false
+      },
+      {
+        "tag": "HTML",
+        "className": "",
+        "overflowY": "visible",
+        "scrollH": 900,
+        "clientH": 900,
+        "canScroll": false
+      }
+    ],
+    "iframe": {
+      "html": {
+        "tag": "HTML",
+        "id": "",
+        "className": "",
+        "overflowY": "hidden",
+        "scrollHeight": 820,
+        "clientHeight": 820,
+        "canScroll": false,
+        "scrollTop": 0
+      },
+      "body": {
+        "tag": "BODY",
+        "id": "",
+        "className": "",
+        "overflowY": "hidden",
+        "scrollHeight": 820,
+        "clientHeight": 820,
+        "canScroll": false,
+        "scrollTop": 0
+      },
+      "app": {
+        "tag": "DIV",
+        "id": "",
+        "className": "app",
+        "overflowY": "hidden",
+        "scrollHeight": 820,
+        "clientHeight": 820,
+        "canScroll": false,
+        "scrollTop": 0
+      },
+      "main": {
+        "tag": "MAIN",
+        "id": "main",
+        "className": "",
+        "overflowY": "auto",
+        "scrollHeight": 2121,
+        "clientHeight": 745,
+        "canScroll": true,
+        "scrollTop": 0
+      }
+    }
+  },
+  "topbar": {
+    "selects": [
+      {
+        "id": "yearSelect",
+        "name": "",
+        "value": "2026",
+        "text": "2026年度",
+        "top": 20,
+        "bottom": 54,
+        "visible": true
+      },
+      {
+        "id": "unitSelect",
+        "name": "",
+        "value": "全部板块",
+        "text": "全部板块",
+        "top": 20,
+        "bottom": 54,
+        "visible": true
+      },
+      {
+        "id": "businessSelect",
+        "name": "",
+        "value": "全部业务类型",
+        "text": "全部业务类型",
+        "top": 20,
+        "bottom": 54,
+        "visible": true
+      }
+    ],
+    "themeAttr": "blue",
+    "appTheme": "blue",
+    "vh": 820,
+    "toolbarHTML": "<header class=\"header\">\n  <div class=\"header-title\" hidden=\"\" aria-hidden=\"true\"><h1>运营看板202610版</h1></div>\n  <div class=\"header-controls\">\n   <label class=\"select-wrap has-icon\" data-tip=\"选择统计年度，所有指标与图表同步更新\"><svg class=\"select-icon\"><use href=\"#icon-clock\"></use></svg><select id=\"yearSelect\" aria-label=\"统计年度\"><option value=\"2026\">2026年度</option><option value=\"2025\">2025年度</option></select></label>\n   <label class=\"select-wrap\" data-tip=\"按组织板块筛选，所有模块使用同一统计范围\"><select id=\"unitSelect\" aria-label=\""
+  },
+  "themeProbe": {
+    "themeProbe": {
+      "ant": [
+        "深蓝主题"
+      ],
+      "selects": []
+    },
+    "iframeTheme": {
+      "dataTheme": "blue",
+      "className": "|app",
+      "bg": "#edf2f9",
+      "primary": "#306da9",
+      "styleTheme": "--primary: #306da9; --primary-rgb: 48,109,169; --primary-dark: #234f80; --primary-dark-rgb: 35,79,128; --primary-soft: #eaf2fc; --primary-soft-rgb: 234,242,252; --accent: #52a7cb; --accent-rgb: 82,167,203; --secondary: #7789d3; --secondary-rgb: 119,137,211; --warning: #d79a39; --warning-rgb: 215,154,57; --warning-soft: #fff6e8; --warning-soft-rgb: 255,246,232; --danger: #df5c70; --danger-rgb: 223,92,112; --danger-soft: #fff0f3; --danger-soft-rgb: 255,240,243; --success: #238b77; --success-rgb: 35,139,119; --success-soft: #eaf7f0; --success-soft-rgb: 234,247,240; --ink: #253d58; --ink-rgb: 37,61,88; --muted: #6e839c; --muted-rgb: 110,131,156; --faint: #a0b1c5; --faint-rgb: 160,177,197; --border: #e2eaf5; --border-rgb: 226,234,245; --grid: #eaf0f7; --grid-rgb: 234,240,247; --surface: #ffffff; --surface-rgb: 255,255,255; --surface-alt: #f6f9fd; --surface-alt-rgb: 246,249,253; --canvas: #edf2f9; --canvas-rgb: 237,242,249; --sidebar: #203a5c; --sidebar-rgb: 32,58,92; --sidebar-top: #386b9a; --sidebar-top-rgb: 56,107,154; --sidebar-text: #d1e1f3; --sidebar-text-rgb: 209,225,243; --shadow: #c2d2e5; --shadow-rgb: 194,210,229; --tooltip: #233e60; --tooltip-rgb: 35,62,96; --tooltip-text: #ffffff; --tooltip-text-rgb: 255,255,255; --mask: #213a5a; --mask-rgb: 33,58,90; --track: #e7eef8; --track-rgb: 231,238,248; --white: #ffffff; --white-rgb: 255,255,255;"
+    }
+  },
+  "treeTheme": {
+    "samples": [
+      {
+        "text": "当前运营看板",
+        "bg": "rgba(48, 109, 169, 0.12)",
+        "color": "rgb(48, 109, 169)",
+        "fw": "400",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-li list-none rounded-md selected active"
+      },
+      {
+        "text": "当前运营看板",
+        "bg": "rgba(48, 109, 169, 0.12)",
+        "color": "rgb(48, 109, 169)",
+        "fw": "600",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-item flex w-full items-center gap-1 rounded-md px-2 py-1.5 text-left "
+      },
+      {
+        "text": "市场看板机会清单占位市场数据占位合同看板占位",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "fw": "400",
+        "w": 207,
+        "h": 126,
+        "cls": "board-tree-li list-none rounded-md "
+      },
+      {
+        "text": "市场看板",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(51, 65, 85)",
+        "fw": "400",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-item flex w-full items-center gap-1 rounded-md px-2 py-1.5 text-left "
+      },
+      {
+        "text": "机会清单占位",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "fw": "400",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-li list-none rounded-md "
+      },
+      {
+        "text": "机会清单占位",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(51, 65, 85)",
+        "fw": "400",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-item flex w-full items-center gap-1 rounded-md px-2 py-1.5 text-left "
+      },
+      {
+        "text": "市场数据占位",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "fw": "400",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-li list-none rounded-md "
+      },
+      {
+        "text": "市场数据占位",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(51, 65, 85)",
+        "fw": "400",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-item flex w-full items-center gap-1 rounded-md px-2 py-1.5 text-left "
+      },
+      {
+        "text": "合同看板占位",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "fw": "400",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-li list-none rounded-md "
+      },
+      {
+        "text": "合同看板占位",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(51, 65, 85)",
+        "fw": "400",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-item flex w-full items-center gap-1 rounded-md px-2 py-1.5 text-left "
+      },
+      {
+        "text": "人力资源看板占位",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "fw": "400",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-li list-none rounded-md "
+      },
+      {
+        "text": "人力资源看板占位",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(51, 65, 85)",
+        "fw": "400",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-item flex w-full items-center gap-1 rounded-md px-2 py-1.5 text-left "
+      },
+      {
+        "text": "完成合同额看板占位",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(10, 10, 10)",
+        "fw": "400",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-li list-none rounded-md "
+      },
+      {
+        "text": "完成合同额看板占位",
+        "bg": "rgba(0, 0, 0, 0)",
+        "color": "rgb(51, 65, 85)",
+        "fw": "400",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-item flex w-full items-center gap-1 rounded-md px-2 py-1.5 text-left "
+      }
+    ],
+    "selected": [
+      {
+        "text": "当前运营看板",
+        "bg": "rgba(48, 109, 169, 0.12)",
+        "color": "rgb(48, 109, 169)",
+        "fw": "400",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-li list-none rounded-md selected active"
+      },
+      {
+        "text": "当前运营看板",
+        "bg": "rgba(48, 109, 169, 0.12)",
+        "color": "rgb(48, 109, 169)",
+        "fw": "600",
+        "w": 207,
+        "h": 31.5,
+        "cls": "board-tree-item flex w-full items-center gap-1 rounded-md px-2 py-1.5 text-left "
+      }
+    ],
+    "currentStyle": {
+      "text": "当前运营看板",
+      "bg": "rgba(48, 109, 169, 0.12)",
+      "color": "rgb(48, 109, 169)",
+      "cls": "board-tree-li list-none rounded-md selected active",
+      "level": 0
+    },
+    "antSelected": []
+  },
+  "geometryRaw": {
+    "result": [
+      {
+        "id": "kpiGrid",
+        "missing": false,
+        "top": 87,
+        "bottom": 296.4375,
+        "left": 16,
+        "right": 1121,
+        "height": 209.4375,
+        "width": 1105,
+        "chartBox": {
+          "top": 106,
+          "bottom": 126,
+          "height": 20,
+          "width": 20
+        }
+      },
+      {
+        "id": "cashPanel",
+        "missing": false,
+        "top": 306.4375,
+        "bottom": 694.5,
+        "left": 16,
+        "right": 1121,
+        "height": 388.0625,
+        "width": 1105,
+        "chartBox": {
+          "top": 321.078125,
+          "bottom": 336.078125,
+          "height": 15,
+          "width": 15
+        }
+      },
+      {
+        "id": "riskPanel",
+        "missing": false,
+        "top": 704.5,
+        "bottom": 1133.859375,
+        "left": 16,
+        "right": 1121,
+        "height": 429.359375,
+        "width": 1105,
+        "chartBox": {
+          "top": 719.140625,
+          "bottom": 734.140625,
+          "height": 15,
+          "width": 15
+        }
+      },
+      {
+        "id": "contributionPanel",
+        "missing": false,
+        "top": 1143.859375,
+        "bottom": 1519.703125,
+        "left": 16,
+        "right": 563.5,
+        "height": 375.84375,
+        "width": 547.5,
+        "chartBox": {
+          "top": 1163.4375,
+          "bottom": 1178.4375,
+          "height": 15,
+          "width": 15
+        }
+      },
+      {
+        "id": "targetPanel",
+        "missing": false,
+        "top": 1143.859375,
+        "bottom": 1425.4375,
+        "left": 573.5,
+        "right": 1121,
+        "height": 281.578125,
+        "width": 547.5,
+        "chartBox": {
+          "top": 1163.4375,
+          "bottom": 1178.4375,
+          "height": 15,
+          "width": 15
+        }
+      },
+      {
+        "id": "deliveryPanel",
+        "missing": false,
+        "top": 1529.703125,
+        "bottom": 1876.828125,
+        "left": 16,
+        "right": 1121,
+        "height": 347.125,
+        "width": 1105,
+        "chartBox": {
+          "top": 1544.34375,
+          "bottom": 1559.34375,
+          "height": 15,
+          "width": 15
+        }
+      },
+      {
+        "id": "alertPanel",
+        "missing": false,
+        "top": 1886.828125,
+        "bottom": 2147.25,
+        "left": 16,
+        "right": 1121,
+        "height": 260.421875,
+        "width": 1105,
+        "chartBox": {
+          "top": 1901.46875,
+          "bottom": 1916.46875,
+          "height": 15,
+          "width": 15
+        }
+      }
+    ],
+    "cashChartRect": {
+      "top": 448.8125,
+      "bottom": 668.8125,
+      "height": 220,
+      "width": 1081,
+      "scrollHeight": 220,
+      "clientHeight": 220
+    },
+    "targetChartRect": {
+      "top": 1194.046875,
+      "bottom": 1394.046875,
+      "height": 200,
+      "width": 523.5
+    },
+    "mainRect": {
+      "x": 0,
+      "y": 75,
+      "width": 1152,
+      "height": 745,
+      "top": 75,
+      "right": 1152,
+      "bottom": 820,
+      "left": 0
+    },
+    "mainScroll": {
+      "scrollHeight": 2121,
+      "clientHeight": 745,
+      "scrollWidth": 1137,
+      "clientWidth": 1137
+    },
+    "vh": 820
+  },
+  "cashVisual": {
+    "wrapH": 220,
+    "wrapW": 1081,
+    "hcH": 220,
+    "hcW": 1081,
+    "pathCount": 19,
+    "clipped": false
+  },
+  "targetVisual": {
+    "h": 200,
+    "w": 523.5,
+    "right": 1109,
+    "mainRight": 1152,
+    "clientRight": 1137,
+    "sb": 15,
+    "clippedBySb": false,
+    "labels": [
+      {
+        "t": "目标",
+        "right": 1071.5,
+        "visible": true
+      },
+      {
+        "t": "99.2%",
+        "right": 1098.857421875,
+        "visible": true
+      },
+      {
+        "t": "99.2%",
+        "right": 1098.857421875,
+        "visible": true
+      },
+      {
+        "t": "94.3%",
+        "right": 1077.857421875,
+        "visible": true
+      },
+      {
+        "t": "94.3%",
+        "right": 1077.857421875,
+        "visible": true
+      },
+      {
+        "t": "91.5%",
+        "right": 1065.857421875,
+        "visible": true
+      },
+      {
+        "t": "91.5%",
+        "right": 1065.857421875,
+        "visible": true
+      },
+      {
+        "t": "87.9%",
+        "right": 1050.857421875,
+        "visible": true
+      },
+      {
+        "t": "87.9%",
+        "right": 1050.857421875,
+        "visible": true
+      },
+      {
+        "t": "85.2%",
+        "right": 1039.857421875,
+        "visible": true
+      }
+    ]
+  },
+  "themeControlCount": 1,
+  "afterThemeSwitch": null,
+  "overallPass": true,
+  "screenshots": [
+    "01-board-first-screen.png",
+    "02-iframe-first-screen.png",
+    "03-cash-trend.png",
+    "04-target-bars.png",
+    "05-alert-bottom.png",
+    "05b-scrolled-bottom.png",
+    "06-tree-theme-default.png",
+    "07-mid-scroll-layout.png",
+    "08-theme-switched-tree.png",
+    "09-delivery-clipped.png",
+    "10-cash-chart-only.png",
+    "15-delivery-right-fill.png",
+    "max-r2-01-board-first-screen.png",
+    "max-r2-02-iframe-first-screen.png",
+    "max-r2-03-cash-trend.png",
+    "max-r2-04-target-bars.png",
+    "max-r2-05-alert-bottom.png",
+    "max-r2-06-tree-theme.png",
+    "max-r2-07-mid-scroll.png",
+    "max-r2-09-delivery.png",
+    "max-r2-10-delivery-alert-junction.png",
+    "max-r2-11-delivery-with-overflow-zone.png",
+    "max-r2-delivery-xaxis-fixed.png",
+    "max-r3-01-board-first-screen.png",
+    "max-r3-02-iframe-first-screen.png",
+    "max-r3-03-cash-trend.png",
+    "max-r3-04-target-bars.png",
+    "max-r3-05-alert-bottom.png",
+    "max-r3-06-tree-theme.png",
+    "max-r3-07-top-header-padding.png",
+    "max-r3-09-delivery-loadchart.png",
+    "max-r3-10-loadchart-xaxis.png"
+  ]
+}
