@@ -1,0 +1,169 @@
+{
+  "pass": true,
+  "checks": [
+    {
+      "name": "base.fill",
+      "ok": true,
+      "detail": {
+        "boxW": 642,
+        "boxH": 226,
+        "canvasW": 642,
+        "canvasH": 226,
+        "instW": 642,
+        "instH": 226,
+        "fill": 1
+      }
+    },
+    {
+      "name": "wide.fill",
+      "ok": true,
+      "detail": {
+        "base": {
+          "boxW": 642,
+          "boxH": 226,
+          "canvasW": 642,
+          "canvasH": 226,
+          "instW": 642,
+          "instH": 226,
+          "fill": 1
+        },
+        "wide": {
+          "boxW": 866,
+          "boxH": 226,
+          "canvasW": 866,
+          "canvasH": 226,
+          "instW": 866,
+          "instH": 226,
+          "fill": 1
+        }
+      }
+    },
+    {
+      "name": "narrow.fill",
+      "ok": true,
+      "detail": {
+        "base": {
+          "boxW": 642,
+          "boxH": 226,
+          "canvasW": 642,
+          "canvasH": 226,
+          "instW": 642,
+          "instH": 226,
+          "fill": 1
+        },
+        "narrow": {
+          "boxW": 474,
+          "boxH": 226,
+          "canvasW": 474,
+          "canvasH": 226,
+          "instW": 474,
+          "instH": 226,
+          "fill": 1
+        }
+      }
+    },
+    {
+      "name": "modal.tree",
+      "ok": true,
+      "detail": {
+        "open": true,
+        "title": "本月完成合同额情况（12）",
+        "hasView": false
+      }
+    },
+    {
+      "name": "modal.alert",
+      "ok": true,
+      "detail": {
+        "open": true,
+        "title": "项目预警一览（10）",
+        "hasView": false
+      }
+    },
+    {
+      "name": "tooltip.found",
+      "ok": true,
+      "detail": {
+        "found": true,
+        "w": 320,
+        "h": 320,
+        "text": "4月\n完成合同额·当月\n820.00 万\n完成开票额·当月\n610.00 万\n完成回款额·当月\n520.00 万\n完成合同额·累计\n2,830.00 万\n完成开票额·累计\n2,110.00 万\n完成回款额·累计\n1,810.00 万",
+        "hasAllNames": true,
+        "nameCount": 6,
+        "hasWan": true,
+        "reasonableWidth": true
+      }
+    },
+    {
+      "name": "guards",
+      "ok": true,
+      "detail": {
+        "drawer": false,
+        "jiaoShangQi": 3,
+        "jiaoShangYiQi": false,
+        "emptyDisplay": "none",
+        "viewBtns": 0,
+        "detailBtns": 2,
+        "hasResize": true,
+        "tipConfined": true
+      }
+    }
+  ],
+  "base": {
+    "boxW": 642,
+    "boxH": 226,
+    "canvasW": 642,
+    "canvasH": 226,
+    "instW": 642,
+    "instH": 226,
+    "fill": 1
+  },
+  "wide": {
+    "boxW": 866,
+    "boxH": 226,
+    "canvasW": 866,
+    "canvasH": 226,
+    "instW": 866,
+    "instH": 226,
+    "fill": 1
+  },
+  "narrow": {
+    "boxW": 474,
+    "boxH": 226,
+    "canvasW": 474,
+    "canvasH": 226,
+    "instW": 474,
+    "instH": 226,
+    "fill": 1
+  },
+  "modalTree": {
+    "open": true,
+    "title": "本月完成合同额情况（12）",
+    "hasView": false
+  },
+  "modalAlert": {
+    "open": true,
+    "title": "项目预警一览（10）",
+    "hasView": false
+  },
+  "tip": {
+    "found": true,
+    "w": 320,
+    "h": 320,
+    "text": "4月\n完成合同额·当月\n820.00 万\n完成开票额·当月\n610.00 万\n完成回款额·当月\n520.00 万\n完成合同额·累计\n2,830.00 万\n完成开票额·累计\n2,110.00 万\n完成回款额·累计\n1,810.00 万",
+    "hasAllNames": true,
+    "nameCount": 6,
+    "hasWan": true,
+    "reasonableWidth": true
+  },
+  "guards": {
+    "drawer": false,
+    "jiaoShangQi": 3,
+    "jiaoShangYiQi": false,
+    "emptyDisplay": "none",
+    "viewBtns": 0,
+    "detailBtns": 2,
+    "hasResize": true,
+    "tipConfined": true
+  }
+}

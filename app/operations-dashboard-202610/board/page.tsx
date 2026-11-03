@@ -14,8 +14,8 @@ import 'remixicon/fonts/remixicon.css';
 
 /**
  * 运营看板202610 · Board 内容区
- * 左：看板目录；右：运营看板 iframe / 占位节点
- * 主题在 Next 全局 header（iframe 外），postMessage 同步整树
+ * 左：看板目录；右：运营看板 / 完成合同额 iframe / 占位
+ * 壳级筛选（锁 2026 + 组织板块）在 header 下、目录与内容上；主题在全局 header
  */
 
 type NodeId =
@@ -55,7 +55,6 @@ const TREE: TreeNode[] = [
     id: 'completed-contract',
     label: '完成合同额看板',
     leaf: true,
-    placeholder: true,
     icon: 'ri-money-cny-circle-line',
   },
 ];
@@ -72,7 +71,16 @@ const THEME_COLORS: Record<string, { primary: string; soft: string }> = {
   wood: { primary: '#897044', soft: 'rgba(137, 112, 68, 0.12)' },
 };
 
-const IFRAME_SRC = '/operations-dashboard-202610/index.html';
+/** 与 public/.../index.html 原 unitSelect 选项一致 */
+const UNIT_OPTIONS = [
+  { value: '全部板块', label: '全部板块' },
+  { value: '设计院', label: '设计院' },
+  { value: '数字化业务单元', label: '数字化业务单元' },
+  { value: '专业室', label: '专业室' },
+];
+
+const OPS_IFRAME_SRC = '/operations-dashboard-202610/index.html';
+const COMPLETED_IFRAME_SRC = '/operations-dashboard-202610/completed-contract.html';
 
 function findNode(nodes: TreeNode[], id: NodeId): TreeNode | undefined {
   for (const n of nodes) {
@@ -109,24 +117,68 @@ export default function OperationsDashboard202610BoardPage() {
     market: true,
   });
   const [theme, setTheme] = useState('blue');
-  const iframeRef = useRef<HTMLIFrameElement>(null);
+  const [unit, setUnit] = useState('全部板块');
+  const opsIframeRef = useRef<HTMLIFrameElement>(null);
+  const completedIframeRef = useRef<HTMLIFrameElement>(null);
 
   const selectedMeta = useMemo(() => findNode(TREE, selected), [selected]);
+  const themeColor = THEME_COLORS[theme] ?? THEME_COLORS.blue;
 
-  const postTheme = useCallback((name: string) => {
-    const win = iframeRef.current?.contentWindow;
+  const activeIframeRef = useCallback(() => {
+    if (selected === 'current') return opsIframeRef.current;
+    if (selected === 'completed-contract') return completedIframeRef.current;
+    return null;
+  }, [selected]);
+
+  const postTo = useCallback((win: Window | null | undefined, data: object) => {
     if (!win) return;
-    win.postMessage(
-      { type: 'ops-dashboard-theme', theme: name },
-      window.location.origin,
-    );
+    win.postMessage(data, window.location.origin);
   }, []);
 
-  useEffect(() => {
-    if (selected === 'current') postTheme(theme);
-  }, [theme, selected, postTheme]);
+  const postTheme = useCallback(
+    (name: string, win?: Window | null) => {
+      postTo(win ?? activeIframeRef()?.contentWindow, {
+        type: 'ops-dashboard-theme',
+        theme: name,
+      });
+    },
+    [activeIframeRef, postTo],
+  );
 
-  const onIframeLoad = () => postTheme(theme);
+  const postFilter = useCallback(
+    (nextUnit: string, win?: Window | null) => {
+      postTo(win ?? activeIframeRef()?.contentWindow, {
+        type: 'ops-dashboard-filter',
+        year: 2026,
+        unit: nextUnit,
+      });
+    },
+    [activeIframeRef, postTo],
+  );
+
+  const syncActiveIframe = useCallback(
+    (win?: Window | null) => {
+      const target = win ?? activeIframeRef()?.contentWindow;
+      postTheme(theme, target);
+      postFilter(unit, target);
+    },
+    [activeIframeRef, postFilter, postTheme, theme, unit],
+  );
+
+  useEffect(() => {
+    if (selected === 'current' || selected === 'completed-contract') {
+      syncActiveIframe();
+    }
+  }, [selected, theme, unit, syncActiveIframe]);
+
+  const onOpsIframeLoad = () => {
+    if (selected === 'current') syncActiveIframe(opsIframeRef.current?.contentWindow);
+  };
+  const onCompletedIframeLoad = () => {
+    if (selected === 'completed-contract') {
+      syncActiveIframe(completedIframeRef.current?.contentWindow);
+    }
+  };
 
   const onTreeClick = (node: TreeNode) => {
     if (!node.leaf) {
@@ -212,9 +264,9 @@ export default function OperationsDashboard202610BoardPage() {
       );
     });
 
-  const showCurrent = selected === 'current';
+  const showOps = selected === 'current';
+  const showCompleted = selected === 'completed-contract';
   const showPlaceholder = !!selectedMeta?.placeholder;
-  const themeColor = THEME_COLORS[theme] ?? THEME_COLORS.blue;
 
   return (
     <ConfigProvider
@@ -271,7 +323,33 @@ export default function OperationsDashboard202610BoardPage() {
             </div>
           </div>
 
-          <div className="flex h-full flex-1 overflow-hidden pt-20">
+          {/* 壳级筛选条：header 下、目录与内容上；整树（含占位）始终可见 */}
+          <div
+            className="fixed left-16 right-0 top-20 z-20 flex h-12 items-center gap-4 border-b border-slate-200 bg-white px-6"
+            data-testid="board-shell-filters"
+            aria-label="壳级筛选"
+          >
+            <span
+              className="inline-flex h-8 items-center rounded-md border border-slate-200 bg-slate-50 px-3 text-sm font-medium text-slate-700"
+              data-testid="shell-year-lock"
+              title="统计年度固定为 2026，不可更改"
+            >
+              2026年度
+            </span>
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-slate-500">组织板块</span>
+              <Select
+                value={unit}
+                onChange={setUnit}
+                options={UNIT_OPTIONS}
+                style={{ width: 180 }}
+                aria-label="组织板块"
+                data-testid="shell-unit-select"
+              />
+            </div>
+          </div>
+
+          <div className="flex h-full flex-1 overflow-hidden pt-[128px]">
             <aside
               className="board-tree flex w-56 shrink-0 flex-col border-r border-slate-200 bg-white"
               aria-label="看板目录"
@@ -286,12 +364,20 @@ export default function OperationsDashboard202610BoardPage() {
 
             <div className="relative min-w-0 flex-1 overflow-hidden bg-white">
               <iframe
-                ref={iframeRef}
+                ref={opsIframeRef}
                 title="运营看板202610 · 运营看板"
-                src={IFRAME_SRC}
-                className={`absolute inset-0 block h-full w-full border-0 ${showCurrent ? 'z-10 opacity-100' : 'pointer-events-none z-0 opacity-0'}`}
+                src={OPS_IFRAME_SRC}
+                className={`absolute inset-0 block h-full w-full border-0 ${showOps ? 'z-10 opacity-100' : 'pointer-events-none z-0 opacity-0'}`}
                 allow="same-origin"
-                onLoad={onIframeLoad}
+                onLoad={onOpsIframeLoad}
+              />
+              <iframe
+                ref={completedIframeRef}
+                title="运营看板202610 · 完成合同额看板"
+                src={COMPLETED_IFRAME_SRC}
+                className={`absolute inset-0 block h-full w-full border-0 ${showCompleted ? 'z-10 opacity-100' : 'pointer-events-none z-0 opacity-0'}`}
+                allow="same-origin"
+                onLoad={onCompletedIframeLoad}
               />
               {showPlaceholder && selectedMeta ? (
                 <div className="absolute inset-0 z-20">

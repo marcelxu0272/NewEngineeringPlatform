@@ -1,0 +1,180 @@
+﻿{
+    "checkedAt":  "2026-11-03 09:14:26 +08:00",
+    "timezoneLabel":  "Asia/Shanghai (UTC+8)",
+    "machineId":  "c33fffad-dd2b-42e4-90d8-2f7633a391a3",
+    "project":  "26_engineering-platform",
+    "filesChecked":  [
+                         "AGENTS.md",
+                         "README.md",
+                         "docs/agents/domain.md"
+                     ],
+    "claudeOrClaudeMdMentions":  0,
+    "claudeHits":  [
+
+                   ],
+    "claudeMdFileExists":  false,
+    "noteOnMissingClaudeMd":  "仓内无 CLAUDE.md（用户自删）属预期；不因缺 CLAUDE.md 判阻断。协作入口三文件亦无 Claude/CLAUDE.md 提及。",
+    "linkCount":  25,
+    "missingLinks":  [
+
+                     ],
+    "links":  [
+                  {
+                      "from":  "AGENTS.md",
+                      "link":  "docs/变更账本.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "AGENTS.md",
+                      "link":  "docs/evidence/",
+                      "exists":  true,
+                      "isDir":  true
+                  },
+                  {
+                      "from":  "AGENTS.md",
+                      "link":  "GLOSSARY.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "AGENTS.md",
+                      "link":  "docs/adr/",
+                      "exists":  true,
+                      "isDir":  true
+                  },
+                  {
+                      "from":  "AGENTS.md",
+                      "link":  "docs/需求文档/",
+                      "exists":  true,
+                      "isDir":  true
+                  },
+                  {
+                      "from":  "AGENTS.md",
+                      "link":  "docs/plans/",
+                      "exists":  true,
+                      "isDir":  true
+                  },
+                  {
+                      "from":  "AGENTS.md",
+                      "link":  "docs/agents/domain.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "AGENTS.md",
+                      "link":  "docs/agents/issue-tracker.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "AGENTS.md",
+                      "link":  "docs/agents/triage-labels.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "AGENTS.md",
+                      "link":  "README.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "AGENTS.md",
+                      "link":  "docs/变更账本.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "README.md",
+                      "link":  "AGENTS.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "README.md",
+                      "link":  "docs/变更账本.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "README.md",
+                      "link":  "GLOSSARY.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "README.md",
+                      "link":  "docs/adr/",
+                      "exists":  true,
+                      "isDir":  true
+                  },
+                  {
+                      "from":  "README.md",
+                      "link":  "docs/evidence/",
+                      "exists":  true,
+                      "isDir":  true
+                  },
+                  {
+                      "from":  "README.md",
+                      "link":  "docs/需求文档/",
+                      "exists":  true,
+                      "isDir":  true
+                  },
+                  {
+                      "from":  "docs\\agents\\domain.md",
+                      "link":  "../../AGENTS.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "docs\\agents\\domain.md",
+                      "link":  "../变更账本.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "docs\\agents\\domain.md",
+                      "link":  "../evidence/",
+                      "exists":  true,
+                      "isDir":  true
+                  },
+                  {
+                      "from":  "AGENTS.md (bare path mention)",
+                      "link":  "docs/DESIGN.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "AGENTS.md (bare path mention)",
+                      "link":  "docs/DASHBOARD.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "AGENTS.md (bare path mention)",
+                      "link":  "docs/LIST_FORM.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "AGENTS.md (bare path mention)",
+                      "link":  "docs/evidence/README.md",
+                      "exists":  true,
+                      "isDir":  false
+                  },
+                  {
+                      "from":  "AGENTS.md (bare path mention)",
+                      "link":  "GLOSSARY.md",
+                      "exists":  true,
+                      "isDir":  false
+                  }
+              ],
+    "acSummary":  {
+                      "AC1_AGENTS":  "PASS",
+                      "AC2_README":  "PASS",
+                      "AC3_domain":  "PASS",
+                      "AC4_orthogonal_no_biz_UI":  "PASS (本验未扩验业务 UI / 完成合同额)"
+                  },
+    "overall":  "PASS"
+}

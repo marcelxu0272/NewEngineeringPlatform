@@ -1,0 +1,111 @@
+{
+  "echarts": true,
+  "seriesTrend": 6,
+  "alertTypes": [
+    "累计开票超总合同额",
+    "累计回款超总合同额",
+    "累计回款超累计开票",
+    "存量合同额为负",
+    "有完成额无工时",
+    "有工时无完成额"
+  ],
+  "treemapTiles": [
+    {
+      "kind": "project",
+      "name": "P-2026-011",
+      "monthCompletion": 4205000
+    },
+    {
+      "kind": "project",
+      "name": "P-2026-018",
+      "monthCompletion": 3102000
+    },
+    {
+      "kind": "project",
+      "name": "P-2026-022",
+      "monthCompletion": 1880000
+    },
+    {
+      "kind": "project",
+      "name": "P-2026-031",
+      "monthCompletion": 1568000
+    },
+    {
+      "kind": "project",
+      "name": "P-2026-040",
+      "monthCompletion": 984000
+    },
+    {
+      "kind": "project",
+      "name": "P-2026-045",
+      "monthCompletion": -900000
+    },
+    {
+      "kind": "project",
+      "name": "P-2026-052",
+      "monthCompletion": 763000
+    },
+    {
+      "kind": "project",
+      "name": "P-2026-061",
+      "monthCompletion": 641000
+    },
+    {
+      "kind": "other",
+      "name": "其他项目",
+      "monthCompletion": 573000
+    }
+  ],
+  "emptyTreeKind": null,
+  "emptyAlerts": false,
+  "kpiDeltaWan": true,
+  "pmShareSplit": true,
+  "hasModal": true,
+  "hasTrendNote": true,
+  "hasTreeCanvas": true,
+  "hasAlertCanvas": true,
+  "hasTrendCanvas": true,
+  "trendNote": "柱=各月，线=累计；右侧为预测月。单位：万元",
+  "kpiDelta": "较上一期 +102.50 万",
+  "stockDelta": "较上一期 −120.00 万",
+  "pmHeads": [
+    "项目经理",
+    "项目数",
+    "当月开票额",
+    "当月回款额",
+    "当月完成合同额",
+    "本年累计完成合同额",
+    "完成合同额占比",
+    "当月",
+    "本年累计"
+  ],
+  "modalOpen": true,
+  "modalTitle": "本月完成合同额情况（12）",
+  "emptyNone": {
+    "text": "本次填报没有项目",
+    "hidden": false,
+    "probe": {
+      "echarts": true,
+      "seriesTrend": 6,
+      "alertTypes": [
+        "累计开票超总合同额",
+        "累计回款超总合同额",
+        "累计回款超累计开票",
+        "存量合同额为负",
+        "有完成额无工时",
+        "有工时无完成额"
+      ],
+      "treemapTiles": [],
+      "emptyTreeKind": "none",
+      "emptyAlerts": false,
+      "kpiDeltaWan": true,
+      "pmShareSplit": true,
+      "hasModal": true,
+      "hasTrendNote": true
+    }
+  },
+  "emptyZero": {
+    "text": "本月完成合同额均为 0",
+    "hidden": false
+  }
+}

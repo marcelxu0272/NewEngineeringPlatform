@@ -1,0 +1,409 @@
+{
+  "role": "Max",
+  "date": "2026-11-03",
+  "zone": "Asia/Shanghai",
+  "target": "public/operations-dashboard-202610/completed-contract.html",
+  "ledger": "2026-11-03 —— 完成合同额看板 treemap 自适应 + 全页图表 tooltip",
+  "pass": true,
+  "checks": [
+    {
+      "ac": "B1",
+      "name": "base.fill",
+      "ok": true,
+      "detail": {
+        "boxW": 642,
+        "boxH": 226,
+        "canvasW": 642,
+        "canvasH": 226,
+        "instW": 642,
+        "instH": 226,
+        "fillW": 1,
+        "fillH": 1,
+        "panelW": 672
+      }
+    },
+    {
+      "ac": "B2",
+      "name": "wide.resizeFill",
+      "ok": true,
+      "detail": {
+        "base": {
+          "boxW": 642,
+          "boxH": 226,
+          "canvasW": 642,
+          "canvasH": 226,
+          "instW": 642,
+          "instH": 226,
+          "fillW": 1,
+          "fillH": 1,
+          "panelW": 672
+        },
+        "wide": {
+          "boxW": 922,
+          "boxH": 226,
+          "canvasW": 922,
+          "canvasH": 226,
+          "instW": 922,
+          "instH": 226,
+          "fillW": 1,
+          "fillH": 1,
+          "panelW": 952
+        }
+      }
+    },
+    {
+      "ac": "B2",
+      "name": "narrow.resizeFill",
+      "ok": true,
+      "detail": {
+        "base": {
+          "boxW": 642,
+          "boxH": 226,
+          "canvasW": 642,
+          "canvasH": 226,
+          "instW": 642,
+          "instH": 226,
+          "fillW": 1,
+          "fillH": 1,
+          "panelW": 672
+        },
+        "narrow": {
+          "boxW": 446,
+          "boxH": 226,
+          "canvasW": 446,
+          "canvasH": 226,
+          "instW": 446,
+          "instH": 226,
+          "fillW": 1,
+          "fillH": 1,
+          "panelW": 476
+        }
+      }
+    },
+    {
+      "ac": "B3",
+      "name": "vp.wide.fill",
+      "ok": true,
+      "detail": {
+        "base": {
+          "boxW": 642,
+          "boxH": 226,
+          "canvasW": 642,
+          "canvasH": 226,
+          "instW": 642,
+          "instH": 226,
+          "fillW": 1,
+          "fillH": 1,
+          "panelW": 672
+        },
+        "vpWide": {
+          "boxW": 707,
+          "boxH": 226,
+          "canvasW": 707,
+          "canvasH": 226,
+          "instW": 707,
+          "instH": 226,
+          "fillW": 0.999359498199969,
+          "fillH": 1,
+          "panelW": 737
+        }
+      }
+    },
+    {
+      "ac": "B3",
+      "name": "vp.narrow.fill",
+      "ok": true,
+      "detail": {
+        "base": {
+          "boxW": 642,
+          "boxH": 226,
+          "canvasW": 642,
+          "canvasH": 226,
+          "instW": 642,
+          "instH": 226,
+          "fillW": 1,
+          "fillH": 1,
+          "panelW": 672
+        },
+        "vpNarrow": {
+          "boxW": 1034,
+          "boxH": 226,
+          "canvasW": 1034,
+          "canvasH": 226,
+          "instW": 1034,
+          "instH": 226,
+          "fillW": 1,
+          "fillH": 1,
+          "panelW": 1064
+        }
+      }
+    },
+    {
+      "ac": "B3",
+      "name": "resize.hook",
+      "ok": true,
+      "detail": {
+        "hasResizeHook": true
+      }
+    },
+    {
+      "ac": "B4",
+      "name": "emptyTree.vacuumShows",
+      "ok": true,
+      "detail": {
+        "display": "flex",
+        "hidden": false,
+        "text": "本次填报没有项目",
+        "h": 226
+      }
+    },
+    {
+      "ac": "B4",
+      "name": "emptyAlerts.vacuumShows",
+      "ok": true,
+      "detail": {
+        "display": "flex",
+        "hidden": false,
+        "text": "未发现异常",
+        "h": 247
+      }
+    },
+    {
+      "ac": "B5",
+      "name": "treeChart.tooltip.meta",
+      "ok": true,
+      "detail": {
+        "id": "treeChart",
+        "confine": true,
+        "hasFormatter": true,
+        "extra": "border-radius:8px;box-shadow:0 4px 16px rgba(15,23,42,0.10);max-width:360px;width:auto;white-space:normal;;max-width:300px;",
+        "hasMaxWidth": true
+      }
+    },
+    {
+      "ac": "B5",
+      "name": "alertChart.tooltip.meta",
+      "ok": true,
+      "detail": {
+        "id": "alertChart",
+        "confine": true,
+        "hasFormatter": true,
+        "extra": "border-radius:8px;box-shadow:0 4px 16px rgba(15,23,42,0.10);max-width:360px;width:auto;white-space:normal;;max-width:320px;",
+        "hasMaxWidth": true
+      }
+    },
+    {
+      "ac": "B5",
+      "name": "trendChart.tooltip.meta",
+      "ok": true,
+      "detail": {
+        "id": "trendChart",
+        "confine": true,
+        "hasFormatter": true,
+        "extra": "border-radius:8px;box-shadow:0 4px 16px rgba(15,23,42,0.10);max-width:360px;width:auto;white-space:normal;;max-width:320px;",
+        "hasMaxWidth": true
+      }
+    },
+    {
+      "ac": "B5",
+      "name": "tree.fmt.names",
+      "ok": true,
+      "detail": "<div style=\"font-weight:650;margin-bottom:4px;\">滨江科创园设计</div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"display:inline-flex;align-items:center;gap:4p"
+    },
+    {
+      "ac": "B5",
+      "name": "alert.fmt.names",
+      "ok": true,
+      "detail": "<div style=\"font-weight:650;margin-bottom:4px;\">有工时无完成额</div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"display:inline-flex;align-items:center;gap:4p"
+    },
+    {
+      "ac": "B5",
+      "name": "trend.fmt.names",
+      "ok": true,
+      "detail": {
+        "namesHit": 6,
+        "html": "<div style=\"font-weight:650;margin-bottom:4px;\">4月</div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"display:inline-flex;align-items:center;gap:4px;min-width:0;\">●<span>完成合同额·当月</span></span><span style=\"font-va"
+      }
+    },
+    {
+      "ac": "B5",
+      "name": "tree.tip.dom",
+      "ok": true,
+      "detail": {
+        "found": true,
+        "w": 300,
+        "h": 226,
+        "text": "项目数\n0\n合计\n— 万",
+        "hasFlexRow": true,
+        "reasonableWidth": true,
+        "density": 0.02666666666666667,
+        "notSparse": true
+      }
+    },
+    {
+      "ac": "B5",
+      "name": "alert.tip.dom",
+      "ok": true,
+      "detail": {
+        "found": true,
+        "w": 320,
+        "h": 247,
+        "text": "有工时无完成额\n数量\n1 条",
+        "hasFlexRow": true,
+        "reasonableWidth": true,
+        "density": 0.034375,
+        "notSparse": true
+      }
+    },
+    {
+      "ac": "B5",
+      "name": "trend.tip.dom",
+      "ok": true,
+      "detail": {
+        "found": true,
+        "w": 320,
+        "h": 320,
+        "text": "4月\n完成合同额·当月\n820.00 万\n完成开票额·当月\n610.00 万\n完成回款额·当月\n520.00 万\n完成合同额·累计\n2,830.00 万\n完成开票额·累计\n2,110.00 万\n完成回款额·累计\n1,810.00 万",
+        "hasFlexRow": true,
+        "reasonableWidth": true,
+        "density": 0.30625,
+        "notSparse": true
+      }
+    }
+  ],
+  "base": {
+    "boxW": 642,
+    "boxH": 226,
+    "canvasW": 642,
+    "canvasH": 226,
+    "instW": 642,
+    "instH": 226,
+    "fillW": 1,
+    "fillH": 1,
+    "panelW": 672
+  },
+  "wide": {
+    "boxW": 922,
+    "boxH": 226,
+    "canvasW": 922,
+    "canvasH": 226,
+    "instW": 922,
+    "instH": 226,
+    "fillW": 1,
+    "fillH": 1,
+    "panelW": 952
+  },
+  "narrow": {
+    "boxW": 446,
+    "boxH": 226,
+    "canvasW": 446,
+    "canvasH": 226,
+    "instW": 446,
+    "instH": 226,
+    "fillW": 1,
+    "fillH": 1,
+    "panelW": 476
+  },
+  "vpWide": {
+    "boxW": 707,
+    "boxH": 226,
+    "canvasW": 707,
+    "canvasH": 226,
+    "instW": 707,
+    "instH": 226,
+    "fillW": 0.999359498199969,
+    "fillH": 1,
+    "panelW": 737
+  },
+  "vpNarrow": {
+    "boxW": 1034,
+    "boxH": 226,
+    "canvasW": 1034,
+    "canvasH": 226,
+    "instW": 1034,
+    "instH": 226,
+    "fillW": 1,
+    "fillH": 1,
+    "panelW": 1064
+  },
+  "tipMeta": {
+    "meta": [
+      {
+        "id": "treeChart",
+        "confine": true,
+        "hasFormatter": true,
+        "extra": "border-radius:8px;box-shadow:0 4px 16px rgba(15,23,42,0.10);max-width:360px;width:auto;white-space:normal;;max-width:300px;",
+        "hasMaxWidth": true
+      },
+      {
+        "id": "alertChart",
+        "confine": true,
+        "hasFormatter": true,
+        "extra": "border-radius:8px;box-shadow:0 4px 16px rgba(15,23,42,0.10);max-width:360px;width:auto;white-space:normal;;max-width:320px;",
+        "hasMaxWidth": true
+      },
+      {
+        "id": "trendChart",
+        "confine": true,
+        "hasFormatter": true,
+        "extra": "border-radius:8px;box-shadow:0 4px 16px rgba(15,23,42,0.10);max-width:360px;width:auto;white-space:normal;;max-width:320px;",
+        "hasMaxWidth": true
+      }
+    ],
+    "treeHtml": "<div style=\"font-weight:650;margin-bottom:4px;\">滨江科创园设计</div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"display:inline-flex;align-items:center;gap:4px;min-width:0;\"><span>项目号</span></span><span style=\"font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;\">P-2026-011</span></div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"display:inline-flex;align-items:center;gap:4px;min-width:0;\"><span>项目经理</span></span><span style=\"font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;\">王磊</span></div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"display:inline-flex;align-items:center;gap:4px;min-width:0;\"><span>本月完成合同额</span></span><span style=\"font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;\">420.50 万</span></div>",
+    "alertHtml": "<div style=\"font-weight:650;margin-bottom:4px;\">有工时无完成额</div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"display:inline-flex;align-items:center;gap:4px;min-width:0;\">●<span>数量</span></span><span style=\"font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;\">1 条</span></div>",
+    "trendHtml": "<div style=\"font-weight:650;margin-bottom:4px;\">4月</div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"display:inline-flex;align-items:center;gap:4px;min-width:0;\">●<span>完成合同额·当月</span></span><span style=\"font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;\">10.00 万</span></div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"display:inline-flex;align-items:center;gap:4px;min-width:0;\">●<span>完成开票额·当月</span></span><span style=\"font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;\">11.00 万</span></div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"display:inline-flex;align-items:center;gap:4px;min-width:0;\">●<span>完成回款额·当月</span></span><span style=\"font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;\">12.00 万</span></div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"display:inline-flex;align-items:center;gap:4px;min-width:0;\">●<span>完成合同额·累计</span></span><span style=\"font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;\">13.00 万</span></div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"display:inline-flex;align-items:center;gap:4px;min-width:0;\">●<span>完成开票额·累计</span></span><span style=\"font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;\">14.00 万</span></div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"display:inline-flex;align-items:center;gap:4px;min-width:0;\">●<span>完成回款额·累计</span></span><span style=\"font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600;\">15.00 万</span></div>",
+    "treeOk": true,
+    "alertOk": true,
+    "trendOk": true,
+    "namesHit": 6,
+    "hasResizeHook": true,
+    "chartIds": [
+      "treeChart",
+      "alertChart",
+      "trendChart"
+    ]
+  },
+  "tipTreeDom": {
+    "found": true,
+    "w": 300,
+    "h": 226,
+    "text": "项目数\n0\n合计\n— 万",
+    "hasFlexRow": true,
+    "reasonableWidth": true,
+    "density": 0.02666666666666667,
+    "notSparse": true
+  },
+  "tipAlertDom": {
+    "found": true,
+    "w": 320,
+    "h": 247,
+    "text": "有工时无完成额\n数量\n1 条",
+    "hasFlexRow": true,
+    "reasonableWidth": true,
+    "density": 0.034375,
+    "notSparse": true
+  },
+  "tipTrendDom": {
+    "found": true,
+    "w": 320,
+    "h": 320,
+    "text": "4月\n完成合同额·当月\n820.00 万\n完成开票额·当月\n610.00 万\n完成回款额·当月\n520.00 万\n完成合同额·累计\n2,830.00 万\n完成开票额·累计\n2,110.00 万\n完成回款额·累计\n1,810.00 万",
+    "hasFlexRow": true,
+    "reasonableWidth": true,
+    "density": 0.30625,
+    "notSparse": true
+  },
+  "emptyTreeState": {
+    "display": "flex",
+    "hidden": false,
+    "text": "本次填报没有项目",
+    "h": 226
+  },
+  "emptyAlertState": {
+    "display": "flex",
+    "hidden": false,
+    "text": "未发现异常",
+    "h": 247
+  }
+}

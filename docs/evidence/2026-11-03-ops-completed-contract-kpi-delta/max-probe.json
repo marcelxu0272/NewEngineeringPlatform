@@ -1,0 +1,373 @@
+{
+  "role": "Max",
+  "date": "2026-11-03",
+  "zone": "Asia/Shanghai",
+  "target": "public/operations-dashboard-202610/completed-contract.html",
+  "ledger": "2026-11-03 —— 完成合同额看板 KPI「较上期」布局 + 去不当抽屉",
+  "pass": true,
+  "checks": [
+    {
+      "ac": "A1",
+      "name": "completion.sameRowRight",
+      "ok": true,
+      "detail": {
+        "text": "较上期 +102.50 万",
+        "top": 87,
+        "left": 194,
+        "mainTop": 79,
+        "mainRight": 182,
+        "sameRow": true,
+        "toRight": true,
+        "inMainRow": true,
+        "display": "block"
+      }
+    },
+    {
+      "ac": "A1",
+      "name": "stockContract.sameRowRight",
+      "ok": true,
+      "detail": {
+        "text": "较上期 −120.00 万",
+        "top": 81,
+        "left": 1214,
+        "mainTop": 77,
+        "mainRight": 1202,
+        "sameRow": true,
+        "toRight": true,
+        "inMainRow": true,
+        "display": "block"
+      }
+    },
+    {
+      "ac": "A1",
+      "name": "stockInvoice.sameRowRight",
+      "ok": true,
+      "detail": {
+        "text": "较上期 +35.20 万",
+        "top": 155,
+        "left": 1214,
+        "mainTop": 151,
+        "mainRight": 1202,
+        "sameRow": true,
+        "toRight": true,
+        "inMainRow": true,
+        "display": "block"
+      }
+    },
+    {
+      "ac": "A2",
+      "name": "label.较上期",
+      "ok": true,
+      "detail": {
+        "count": 3,
+        "hasYiQi": false,
+        "texts": [
+          "较上期 +102.50 万",
+          "较上期 −120.00 万",
+          "较上期 +35.20 万"
+        ]
+      }
+    },
+    {
+      "ac": "A3",
+      "name": "detail.btns",
+      "ok": true,
+      "detail": [
+        {
+          "id": "btnTreeMore",
+          "text": "查看明细",
+          "exists": true
+        },
+        {
+          "id": "btnAlertMore",
+          "text": "查看明细",
+          "exists": true
+        }
+      ]
+    },
+    {
+      "ac": "A3",
+      "name": "modal.tree.openClose",
+      "ok": true,
+      "detail": {
+        "open": true,
+        "maskOpen": true,
+        "title": "本月完成合同额情况（12）",
+        "ths": [
+          "项目号",
+          "项目名称",
+          "项目经理",
+          "本月完成合同额（万元）",
+          "总合同额（万元）",
+          "当月开票（万元）",
+          "当月回款（万元）"
+        ],
+        "rows": 10,
+        "hasViewCol": false,
+        "sample": "项目号\t项目名称\t项目经理\t本月完成合同额（万元）\t总合同额（万元）\t当月开票（万元）\t当月回款（万元）\nP-2026-011\t滨江科创园设计\t王磊\t420.50\t1,800.00\t210.00\t180.00\nP-2026-018\t轨道 TOD 综合体\t李倩\t310.20\t2,200.00\t150.00\t120.00\nP-2026-022\t市政管网改造\t陈晨\t188.00\t900.00\t90.00"
+      }
+    },
+    {
+      "ac": "A3",
+      "name": "modal.alert.openClose",
+      "ok": true,
+      "detail": {
+        "open": true,
+        "maskOpen": true,
+        "title": "项目预警一览（10）",
+        "ths": [
+          "项目号",
+          "项目名称",
+          "项目经理",
+          "异常类型"
+        ],
+        "rows": 10,
+        "hasViewCol": false,
+        "sample": "项目号\t项目名称\t项目经理\t异常类型\nP-2026-011\t滨江科创园设计\t王磊\t累计开票超总合同额\nP-2026-018\t轨道 TOD 综合体\t李倩\t累计开票超总合同额\nP-2026-022\t市政管网改造\t陈晨\t累计回款超总合同额\nP-2026-031\t智慧园区运维\t赵敏\t累计回款超累计开票\nP-2026-040\t产业园二期\t王磊\t存量合同额为负\nP-2026-045\t数据中心机电\t周宁\t有完成"
+      }
+    },
+    {
+      "ac": "A4",
+      "name": "no.drawer",
+      "ok": true,
+      "detail": {
+        "hasDrawer": false
+      }
+    },
+    {
+      "ac": "A4",
+      "name": "no.viewOnlyBtn",
+      "ok": true,
+      "detail": {
+        "count": 0
+      }
+    },
+    {
+      "ac": "A5",
+      "name": "modal.noViewCol",
+      "ok": true,
+      "detail": {
+        "tree": [
+          "项目号",
+          "项目名称",
+          "项目经理",
+          "本月完成合同额（万元）",
+          "总合同额（万元）",
+          "当月开票（万元）",
+          "当月回款（万元）"
+        ],
+        "alert": [
+          "项目号",
+          "项目名称",
+          "项目经理",
+          "异常类型"
+        ]
+      }
+    },
+    {
+      "ac": "A5",
+      "name": "pm.noView",
+      "ok": true,
+      "detail": {
+        "exists": true,
+        "ths": [
+          "项目经理",
+          "项目数",
+          "当月开票额",
+          "当月回款额",
+          "当月完成合同额",
+          "本年累计完成合同额",
+          "完成合同额占比",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "当月",
+          "本年累计"
+        ],
+        "viewCellCount": 0,
+        "textHasChakan": false
+      }
+    },
+    {
+      "ac": "A6",
+      "name": "blank.defaultNoFakeEmpty",
+      "ok": true,
+      "detail": {
+        "treeEmpty": {
+          "hidden": true,
+          "display": "none",
+          "h": 0,
+          "text": ""
+        },
+        "alertEmpty": {
+          "hidden": true,
+          "display": "none",
+          "h": 0,
+          "text": "未发现异常"
+        }
+      }
+    },
+    {
+      "ac": "A6",
+      "name": "charts.alive",
+      "ok": true,
+      "detail": {
+        "canvasCount": 3,
+        "charts": [
+          {
+            "id": "treeChart",
+            "hasInst": true
+          },
+          {
+            "id": "alertChart",
+            "hasInst": true
+          },
+          {
+            "id": "trendChart",
+            "hasInst": true
+          }
+        ]
+      }
+    }
+  ],
+  "aInfo": {
+    "completion": {
+      "text": "较上期 +102.50 万",
+      "top": 87,
+      "left": 194,
+      "mainTop": 79,
+      "mainRight": 182,
+      "sameRow": true,
+      "toRight": true,
+      "inMainRow": true,
+      "display": "block"
+    },
+    "stockContract": {
+      "text": "较上期 −120.00 万",
+      "top": 81,
+      "left": 1214,
+      "mainTop": 77,
+      "mainRight": 1202,
+      "sameRow": true,
+      "toRight": true,
+      "inMainRow": true,
+      "display": "block"
+    },
+    "stockInvoice": {
+      "text": "较上期 +35.20 万",
+      "top": 155,
+      "left": 1214,
+      "mainTop": 151,
+      "mainRight": 1202,
+      "sameRow": true,
+      "toRight": true,
+      "inMainRow": true,
+      "display": "block"
+    },
+    "hasJiaoShangYiQi": false,
+    "jiaoShangQiCount": 3,
+    "detailBtnCount": 2,
+    "detailBtnIds": [
+      {
+        "id": "btnTreeMore",
+        "text": "查看明细",
+        "exists": true
+      },
+      {
+        "id": "btnAlertMore",
+        "text": "查看明细",
+        "exists": true
+      }
+    ],
+    "viewOnlyBtnCount": 0,
+    "hasDrawer": false,
+    "hasModal": true,
+    "hasModalMask": true,
+    "hasModalClose": true,
+    "hasModalTable": true,
+    "treeEmpty": {
+      "hidden": true,
+      "display": "none",
+      "h": 0,
+      "text": ""
+    },
+    "alertEmpty": {
+      "hidden": true,
+      "display": "none",
+      "h": 0,
+      "text": "未发现异常"
+    },
+    "canvasCount": 3,
+    "echarts": true,
+    "charts": [
+      {
+        "id": "treeChart",
+        "hasInst": true
+      },
+      {
+        "id": "alertChart",
+        "hasInst": true
+      },
+      {
+        "id": "trendChart",
+        "hasInst": true
+      }
+    ]
+  },
+  "modalTree": {
+    "open": true,
+    "maskOpen": true,
+    "title": "本月完成合同额情况（12）",
+    "ths": [
+      "项目号",
+      "项目名称",
+      "项目经理",
+      "本月完成合同额（万元）",
+      "总合同额（万元）",
+      "当月开票（万元）",
+      "当月回款（万元）"
+    ],
+    "rows": 10,
+    "hasViewCol": false,
+    "sample": "项目号\t项目名称\t项目经理\t本月完成合同额（万元）\t总合同额（万元）\t当月开票（万元）\t当月回款（万元）\nP-2026-011\t滨江科创园设计\t王磊\t420.50\t1,800.00\t210.00\t180.00\nP-2026-018\t轨道 TOD 综合体\t李倩\t310.20\t2,200.00\t150.00\t120.00\nP-2026-022\t市政管网改造\t陈晨\t188.00\t900.00\t90.00"
+  },
+  "modalAlert": {
+    "open": true,
+    "maskOpen": true,
+    "title": "项目预警一览（10）",
+    "ths": [
+      "项目号",
+      "项目名称",
+      "项目经理",
+      "异常类型"
+    ],
+    "rows": 10,
+    "hasViewCol": false,
+    "sample": "项目号\t项目名称\t项目经理\t异常类型\nP-2026-011\t滨江科创园设计\t王磊\t累计开票超总合同额\nP-2026-018\t轨道 TOD 综合体\t李倩\t累计开票超总合同额\nP-2026-022\t市政管网改造\t陈晨\t累计回款超总合同额\nP-2026-031\t智慧园区运维\t赵敏\t累计回款超累计开票\nP-2026-040\t产业园二期\t王磊\t存量合同额为负\nP-2026-045\t数据中心机电\t周宁\t有完成"
+  },
+  "pmInfo": {
+    "exists": true,
+    "ths": [
+      "项目经理",
+      "项目数",
+      "当月开票额",
+      "当月回款额",
+      "当月完成合同额",
+      "本年累计完成合同额",
+      "完成合同额占比",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "当月",
+      "本年累计"
+    ],
+    "viewCellCount": 0,
+    "textHasChakan": false
+  }
+}

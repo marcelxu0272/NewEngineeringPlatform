@@ -1,0 +1,31 @@
+{
+  "pass": true,
+  "ac": {
+    "A1_filterVisible": true,
+    "A1_yearLock2026": true,
+    "A1_noBusinessType": true,
+    "A1_unitSelect": true,
+    "A1b_filterOnPlaceholder": true,
+    "A1b_placeholderShown": true,
+    "A3_noYearSelect": true,
+    "A3_noUnitSelectInIframe": true,
+    "A3_noBizSelect": true,
+    "A3_headerHidden": true,
+    "A4_opsAliveAfterUnit": true,
+    "A4_filterOnCompleted": true,
+    "B1_noPlaceholder": true,
+    "B2_blocks": {
+      "kpi": true,
+      "delta": true,
+      "tree": true,
+      "alerts": true,
+      "trend": true,
+      "pm": true,
+      "emptyReady": true,
+      "drawer": true,
+      "drawerOpen": true
+    },
+    "B3_emptyAlerts": true
+  },
+  "notes": []
+}

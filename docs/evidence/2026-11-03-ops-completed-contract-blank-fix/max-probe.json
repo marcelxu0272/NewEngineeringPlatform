@@ -1,0 +1,955 @@
+{
+  "overall": "PASS",
+  "verifier": "Max",
+  "verifiedAt": "2026-11-03T01:43:52.895Z",
+  "base": "http://127.0.0.1:3001/operations-dashboard-202610/completed-contract.html",
+  "ledgerEntry": "2026-11-03 —— 完成合同额看板树图/预警区空白块",
+  "claireVsLedger": {
+    "note": "Claire 派验强调假「未发现异常」与 ?emptyTree/?emptyAlerts；账本正式 AC 以树图假空态「本次填报没有项目/本月完成合同额均为 0」+ 预警假空态及真空态保留为准。本探针两边都测；冲突以账本为准。",
+    "evidenceDirClaire": "docs/evidence/2026-11-03-ops-completed-contract-blank-fix/",
+    "evidenceDirLedgerSuggested": "docs/evidence/2026-11-03-ops-completed-contract-blank-block/ (不存在，证据写入 Claire 目录)"
+  },
+  "checks": [
+    {
+      "ac": "AC1",
+      "name": "default.treeEmpty.hidden_zero",
+      "ok": true,
+      "detail": {
+        "id": "treeEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "offsetParentNull": true,
+        "text": ""
+      }
+    },
+    {
+      "ac": "AC1",
+      "name": "default.no_fake_tree_empty_text",
+      "ok": true,
+      "detail": {
+        "hasWeifa": false,
+        "hasNoProject": false,
+        "hasAllZero": false
+      }
+    },
+    {
+      "ac": "AC1",
+      "name": "default.treeChart.visible_with_tiles",
+      "ok": true,
+      "detail": {
+        "treeChart": {
+          "id": "treeChart",
+          "hiddenAttr": false,
+          "hiddenProp": false,
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 707,
+          "h": 226,
+          "top": 263,
+          "offsetParentNull": false,
+          "text": ""
+        },
+        "treemapTileCount": 9
+      }
+    },
+    {
+      "ac": "AC1",
+      "name": "default.panelTree_not_double_height",
+      "ok": true,
+      "detail": {
+        "h": 300,
+        "w": 737
+      }
+    },
+    {
+      "ac": "AC2",
+      "name": "default.alertEmpty.hidden_zero",
+      "ok": true,
+      "detail": {
+        "id": "alertEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "offsetParentNull": true,
+        "text": "未发现异常"
+      }
+    },
+    {
+      "ac": "AC2",
+      "name": "default.no_fake_未发现异常",
+      "ok": true,
+      "detail": {
+        "hasWeifa": false,
+        "hasNoProject": false,
+        "hasAllZero": false
+      }
+    },
+    {
+      "ac": "AC2",
+      "name": "default.alertChart.visible_with_bars",
+      "ok": true,
+      "detail": {
+        "alertChart": {
+          "id": "alertChart",
+          "hiddenAttr": false,
+          "hiddenProp": false,
+          "display": "block",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 585,
+          "h": 247,
+          "top": 242,
+          "offsetParentNull": false,
+          "text": ""
+        },
+        "alertBarCount": 6
+      }
+    },
+    {
+      "ac": "AC2",
+      "name": "default.panelAlert_not_double_height",
+      "ok": true,
+      "detail": {
+        "h": 300,
+        "w": 615
+      }
+    },
+    {
+      "ac": "AC3",
+      "name": "emptyTree.none.shows_文案",
+      "ok": true,
+      "detail": {
+        "treeEmpty": {
+          "id": "treeEmpty",
+          "hiddenAttr": false,
+          "hiddenProp": false,
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 707,
+          "h": 226,
+          "top": 263,
+          "offsetParentNull": false,
+          "text": "本次填报没有项目"
+        },
+        "visible": {
+          "hasWeifa": false,
+          "hasNoProject": true,
+          "hasAllZero": false
+        }
+      }
+    },
+    {
+      "ac": "AC3",
+      "name": "emptyTree.none.chart_hidden",
+      "ok": true,
+      "detail": {
+        "id": "treeChart",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "offsetParentNull": true,
+        "text": ""
+      }
+    },
+    {
+      "ac": "AC3",
+      "name": "emptyTree.allzero.shows_文案",
+      "ok": true,
+      "detail": {
+        "treeEmpty": {
+          "id": "treeEmpty",
+          "hiddenAttr": false,
+          "hiddenProp": false,
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 707,
+          "h": 226,
+          "top": 263,
+          "offsetParentNull": false,
+          "text": "本月完成合同额均为 0"
+        },
+        "visible": {
+          "hasWeifa": false,
+          "hasNoProject": false,
+          "hasAllZero": true
+        }
+      }
+    },
+    {
+      "ac": "AC3",
+      "name": "emptyAlerts.shows_未发现异常",
+      "ok": true,
+      "detail": {
+        "alertEmpty": {
+          "id": "alertEmpty",
+          "hiddenAttr": false,
+          "hiddenProp": false,
+          "display": "flex",
+          "visibility": "visible",
+          "opacity": "1",
+          "w": 585,
+          "h": 247,
+          "top": 242,
+          "offsetParentNull": false,
+          "text": "未发现异常"
+        },
+        "visible": {
+          "hasWeifa": true,
+          "hasNoProject": false,
+          "hasAllZero": false
+        }
+      }
+    },
+    {
+      "ac": "AC3",
+      "name": "emptyAlerts.chart_hidden",
+      "ok": true,
+      "detail": {
+        "id": "alertChart",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "offsetParentNull": true,
+        "text": ""
+      }
+    },
+    {
+      "ac": "AC4",
+      "name": "regression.trend_series_ge_6",
+      "ok": true,
+      "detail": {
+        "trendSeries": 6,
+        "trendNames": [
+          "完成合同额·当月",
+          "完成开票额·当月",
+          "完成回款额·当月",
+          "完成合同额·累计",
+          "完成开票额·累计",
+          "完成回款额·累计"
+        ],
+        "probe": {
+          "echarts": true,
+          "seriesTrend": 6,
+          "alertTypes": [
+            "累计开票超总合同额",
+            "累计回款超总合同额",
+            "累计回款超累计开票",
+            "存量合同额为负",
+            "有完成额无工时",
+            "有工时无完成额"
+          ],
+          "treemapTiles": [
+            {
+              "kind": "project",
+              "name": "P-2026-011",
+              "monthCompletion": 4205000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-018",
+              "monthCompletion": 3102000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-022",
+              "monthCompletion": 1880000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-031",
+              "monthCompletion": 1568000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-040",
+              "monthCompletion": 984000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-045",
+              "monthCompletion": -900000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-052",
+              "monthCompletion": 763000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-061",
+              "monthCompletion": 641000
+            },
+            {
+              "kind": "other",
+              "name": "其他项目",
+              "monthCompletion": 573000
+            }
+          ],
+          "emptyTreeKind": null,
+          "emptyAlerts": false,
+          "kpiDeltaWan": true,
+          "pmShareSplit": true,
+          "hasModal": false,
+          "hasTrendNote": true
+        }
+      }
+    },
+    {
+      "ac": "AC4",
+      "name": "regression.echarts_local_ok",
+      "ok": true,
+      "detail": {
+        "echarts": true,
+        "canvasCount": 3
+      }
+    },
+    {
+      "ac": "AC4",
+      "name": "regression.shell_filter_message_path_alive",
+      "ok": true,
+      "detail": {
+        "echarts": true,
+        "canvasCount": 3,
+        "probe": {
+          "echarts": true,
+          "seriesTrend": 6,
+          "alertTypes": [
+            "累计开票超总合同额",
+            "累计回款超总合同额",
+            "累计回款超累计开票",
+            "存量合同额为负",
+            "有完成额无工时",
+            "有工时无完成额"
+          ],
+          "treemapTiles": [
+            {
+              "kind": "project",
+              "name": "P-2026-011",
+              "monthCompletion": 4205000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-018",
+              "monthCompletion": 3102000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-022",
+              "monthCompletion": 1880000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-031",
+              "monthCompletion": 1568000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-040",
+              "monthCompletion": 984000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-045",
+              "monthCompletion": -900000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-052",
+              "monthCompletion": 763000
+            },
+            {
+              "kind": "project",
+              "name": "P-2026-061",
+              "monthCompletion": 641000
+            },
+            {
+              "kind": "other",
+              "name": "其他项目",
+              "monthCompletion": 573000
+            }
+          ],
+          "emptyTreeKind": null,
+          "emptyAlerts": false,
+          "kpiDeltaWan": true,
+          "pmShareSplit": true,
+          "hasModal": false,
+          "hasTrendNote": true
+        }
+      }
+    },
+    {
+      "ac": "AC4",
+      "name": "css.empty_hidden_rule_present",
+      "ok": true,
+      "detail": {
+        "cssRulePresent": true
+      }
+    }
+  ],
+  "samples": {
+    "default": {
+      "treeEmpty": {
+        "id": "treeEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "offsetParentNull": true,
+        "text": ""
+      },
+      "treeChart": {
+        "id": "treeChart",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 707,
+        "h": 226,
+        "top": 263,
+        "offsetParentNull": false,
+        "text": ""
+      },
+      "alertEmpty": {
+        "id": "alertEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "offsetParentNull": true,
+        "text": "未发现异常"
+      },
+      "alertChart": {
+        "id": "alertChart",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 585,
+        "h": 247,
+        "top": 242,
+        "offsetParentNull": false,
+        "text": ""
+      },
+      "panelTree": {
+        "h": 300,
+        "w": 737
+      },
+      "panelAlert": {
+        "h": 300,
+        "w": 615
+      },
+      "visibleTexts": {
+        "hasWeifa": false,
+        "hasNoProject": false,
+        "hasAllZero": false
+      },
+      "echarts": true,
+      "canvasCount": 3,
+      "treemapTileCount": 9,
+      "alertBarCount": 6,
+      "trendSeries": 6,
+      "probe": {
+        "echarts": true,
+        "seriesTrend": 6,
+        "alertTypes": [
+          "累计开票超总合同额",
+          "累计回款超总合同额",
+          "累计回款超累计开票",
+          "存量合同额为负",
+          "有完成额无工时",
+          "有工时无完成额"
+        ],
+        "treemapTiles": [
+          {
+            "kind": "project",
+            "name": "P-2026-011",
+            "monthCompletion": 4205000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-018",
+            "monthCompletion": 3102000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-022",
+            "monthCompletion": 1880000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-031",
+            "monthCompletion": 1568000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-040",
+            "monthCompletion": 984000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-045",
+            "monthCompletion": -900000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-052",
+            "monthCompletion": 763000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-061",
+            "monthCompletion": 641000
+          },
+          {
+            "kind": "other",
+            "name": "其他项目",
+            "monthCompletion": 573000
+          }
+        ],
+        "emptyTreeKind": null,
+        "emptyAlerts": false,
+        "kpiDeltaWan": true,
+        "pmShareSplit": true,
+        "hasModal": false,
+        "hasTrendNote": true
+      },
+      "cssRulePresent": true
+    },
+    "emptyTreeNone": {
+      "treeEmpty": {
+        "id": "treeEmpty",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 707,
+        "h": 226,
+        "top": 263,
+        "offsetParentNull": false,
+        "text": "本次填报没有项目"
+      },
+      "treeChart": {
+        "id": "treeChart",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "offsetParentNull": true,
+        "text": ""
+      },
+      "alertEmpty": {
+        "id": "alertEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "offsetParentNull": true,
+        "text": "未发现异常"
+      },
+      "alertChart": {
+        "id": "alertChart",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 585,
+        "h": 247,
+        "top": 242,
+        "offsetParentNull": false,
+        "text": ""
+      },
+      "panelTree": {
+        "h": 300,
+        "w": 737
+      },
+      "panelAlert": {
+        "h": 300,
+        "w": 615
+      },
+      "visibleTexts": {
+        "hasWeifa": false,
+        "hasNoProject": true,
+        "hasAllZero": false
+      },
+      "echarts": true,
+      "canvasCount": 2,
+      "treemapTileCount": null,
+      "alertBarCount": 6,
+      "trendSeries": 6,
+      "probe": {
+        "echarts": true,
+        "seriesTrend": 6,
+        "alertTypes": [
+          "累计开票超总合同额",
+          "累计回款超总合同额",
+          "累计回款超累计开票",
+          "存量合同额为负",
+          "有完成额无工时",
+          "有工时无完成额"
+        ],
+        "treemapTiles": [],
+        "emptyTreeKind": "none",
+        "emptyAlerts": false,
+        "kpiDeltaWan": true,
+        "pmShareSplit": true,
+        "hasModal": false,
+        "hasTrendNote": true
+      },
+      "cssRulePresent": true
+    },
+    "emptyTreeAllZero": {
+      "treeEmpty": {
+        "id": "treeEmpty",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 707,
+        "h": 226,
+        "top": 263,
+        "offsetParentNull": false,
+        "text": "本月完成合同额均为 0"
+      },
+      "treeChart": {
+        "id": "treeChart",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "offsetParentNull": true,
+        "text": ""
+      },
+      "alertEmpty": {
+        "id": "alertEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "offsetParentNull": true,
+        "text": "未发现异常"
+      },
+      "alertChart": {
+        "id": "alertChart",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 585,
+        "h": 247,
+        "top": 242,
+        "offsetParentNull": false,
+        "text": ""
+      },
+      "panelTree": {
+        "h": 300,
+        "w": 737
+      },
+      "panelAlert": {
+        "h": 300,
+        "w": 615
+      },
+      "visibleTexts": {
+        "hasWeifa": false,
+        "hasNoProject": false,
+        "hasAllZero": true
+      },
+      "echarts": true,
+      "canvasCount": 2,
+      "treemapTileCount": null,
+      "alertBarCount": 6,
+      "trendSeries": 6,
+      "probe": {
+        "echarts": true,
+        "seriesTrend": 6,
+        "alertTypes": [
+          "累计开票超总合同额",
+          "累计回款超总合同额",
+          "累计回款超累计开票",
+          "存量合同额为负",
+          "有完成额无工时",
+          "有工时无完成额"
+        ],
+        "treemapTiles": [],
+        "emptyTreeKind": "all-zero",
+        "emptyAlerts": false,
+        "kpiDeltaWan": true,
+        "pmShareSplit": true,
+        "hasModal": false,
+        "hasTrendNote": true
+      },
+      "cssRulePresent": true
+    },
+    "emptyAlerts": {
+      "treeEmpty": {
+        "id": "treeEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "offsetParentNull": true,
+        "text": ""
+      },
+      "treeChart": {
+        "id": "treeChart",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "block",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 707,
+        "h": 226,
+        "top": 263,
+        "offsetParentNull": false,
+        "text": ""
+      },
+      "alertEmpty": {
+        "id": "alertEmpty",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "flex",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 585,
+        "h": 247,
+        "top": 242,
+        "offsetParentNull": false,
+        "text": "未发现异常"
+      },
+      "alertChart": {
+        "id": "alertChart",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "offsetParentNull": true,
+        "text": ""
+      },
+      "panelTree": {
+        "h": 300,
+        "w": 737
+      },
+      "panelAlert": {
+        "h": 300,
+        "w": 615
+      },
+      "visibleTexts": {
+        "hasWeifa": true,
+        "hasNoProject": false,
+        "hasAllZero": false
+      },
+      "echarts": true,
+      "canvasCount": 2,
+      "treemapTileCount": 9,
+      "alertBarCount": null,
+      "trendSeries": 6,
+      "probe": {
+        "echarts": true,
+        "seriesTrend": 6,
+        "alertTypes": [
+          "累计开票超总合同额",
+          "累计回款超总合同额",
+          "累计回款超累计开票",
+          "存量合同额为负",
+          "有完成额无工时",
+          "有工时无完成额"
+        ],
+        "treemapTiles": [
+          {
+            "kind": "project",
+            "name": "P-2026-011",
+            "monthCompletion": 4205000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-018",
+            "monthCompletion": 3102000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-022",
+            "monthCompletion": 1880000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-031",
+            "monthCompletion": 1568000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-040",
+            "monthCompletion": 984000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-045",
+            "monthCompletion": -900000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-052",
+            "monthCompletion": 763000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-061",
+            "monthCompletion": 641000
+          },
+          {
+            "kind": "other",
+            "name": "其他项目",
+            "monthCompletion": 573000
+          }
+        ],
+        "emptyTreeKind": null,
+        "emptyAlerts": true,
+        "kpiDeltaWan": true,
+        "pmShareSplit": true,
+        "hasModal": false,
+        "hasTrendNote": true
+      },
+      "cssRulePresent": true
+    },
+    "regression": {
+      "probe": {
+        "echarts": true,
+        "seriesTrend": 6,
+        "alertTypes": [
+          "累计开票超总合同额",
+          "累计回款超总合同额",
+          "累计回款超累计开票",
+          "存量合同额为负",
+          "有完成额无工时",
+          "有工时无完成额"
+        ],
+        "treemapTiles": [
+          {
+            "kind": "project",
+            "name": "P-2026-011",
+            "monthCompletion": 4205000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-018",
+            "monthCompletion": 3102000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-022",
+            "monthCompletion": 1880000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-031",
+            "monthCompletion": 1568000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-040",
+            "monthCompletion": 984000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-045",
+            "monthCompletion": -900000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-052",
+            "monthCompletion": 763000
+          },
+          {
+            "kind": "project",
+            "name": "P-2026-061",
+            "monthCompletion": 641000
+          },
+          {
+            "kind": "other",
+            "name": "其他项目",
+            "monthCompletion": 573000
+          }
+        ],
+        "emptyTreeKind": null,
+        "emptyAlerts": false,
+        "kpiDeltaWan": true,
+        "pmShareSplit": true,
+        "hasModal": false,
+        "hasTrendNote": true
+      },
+      "trendSeries": 6,
+      "trendNames": [
+        "完成合同额·当月",
+        "完成开票额·当月",
+        "完成回款额·当月",
+        "完成合同额·累计",
+        "完成开票额·累计",
+        "完成回款额·累计"
+      ],
+      "filterApplied": false,
+      "filterEcho": true,
+      "echarts": true,
+      "canvasCount": 3
+    }
+  }
+}

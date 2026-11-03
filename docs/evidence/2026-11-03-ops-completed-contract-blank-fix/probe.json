@@ -1,0 +1,384 @@
+{
+  "pass": true,
+  "checks": [
+    {
+      "name": "default.treeEmpty.hidden",
+      "ok": true,
+      "detail": {
+        "id": "treeEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "text": ""
+      }
+    },
+    {
+      "name": "default.alertEmpty.hidden",
+      "ok": true,
+      "detail": {
+        "id": "alertEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "text": "未发现异常"
+      }
+    },
+    {
+      "name": "default.no_未发现异常",
+      "ok": true,
+      "detail": {
+        "hasWeifa": false
+      }
+    },
+    {
+      "name": "default.treeChart.visible",
+      "ok": true,
+      "detail": {
+        "id": "treeChart",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "block",
+        "visibility": "visible",
+        "w": 707,
+        "h": 226,
+        "top": 302,
+        "text": ""
+      }
+    },
+    {
+      "name": "default.alertChart.visible",
+      "ok": true,
+      "detail": {
+        "id": "alertChart",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "block",
+        "visibility": "visible",
+        "w": 585,
+        "h": 247,
+        "top": 281,
+        "text": ""
+      }
+    },
+    {
+      "name": "default.canvases",
+      "ok": true,
+      "detail": {
+        "canvasCount": 3
+      }
+    },
+    {
+      "name": "emptyTree.none.shows",
+      "ok": true,
+      "detail": {
+        "id": "treeEmpty",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "flex",
+        "visibility": "visible",
+        "w": 707,
+        "h": 226,
+        "top": 302,
+        "text": "本次填报没有项目"
+      }
+    },
+    {
+      "name": "emptyTree.none.chartHidden",
+      "ok": true,
+      "detail": {
+        "id": "treeChart",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "text": ""
+      }
+    },
+    {
+      "name": "emptyTree.allzero.shows",
+      "ok": true,
+      "detail": {
+        "id": "treeEmpty",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "flex",
+        "visibility": "visible",
+        "w": 707,
+        "h": 226,
+        "top": 302,
+        "text": "本月完成合同额均为 0"
+      }
+    },
+    {
+      "name": "emptyAlerts.shows",
+      "ok": true,
+      "detail": {
+        "id": "alertEmpty",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "flex",
+        "visibility": "visible",
+        "w": 585,
+        "h": 247,
+        "top": 281,
+        "text": "未发现异常"
+      }
+    },
+    {
+      "name": "emptyAlerts.chartHidden",
+      "ok": true,
+      "detail": {
+        "id": "alertChart",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "text": ""
+      }
+    }
+  ],
+  "results": {
+    "default": {
+      "treeEmpty": {
+        "id": "treeEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "text": ""
+      },
+      "treeChart": {
+        "id": "treeChart",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "block",
+        "visibility": "visible",
+        "w": 707,
+        "h": 226,
+        "top": 302,
+        "text": ""
+      },
+      "alertEmpty": {
+        "id": "alertEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "text": "未发现异常"
+      },
+      "alertChart": {
+        "id": "alertChart",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "block",
+        "visibility": "visible",
+        "w": 585,
+        "h": 247,
+        "top": 281,
+        "text": ""
+      },
+      "panelTree": {
+        "h": 300,
+        "w": 737
+      },
+      "panelAlert": {
+        "h": 300,
+        "w": 615
+      },
+      "hasWeifa": false,
+      "echarts": true,
+      "canvasCount": 3
+    },
+    "emptyTreeNone": {
+      "treeEmpty": {
+        "id": "treeEmpty",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "flex",
+        "visibility": "visible",
+        "w": 707,
+        "h": 226,
+        "top": 302,
+        "text": "本次填报没有项目"
+      },
+      "treeChart": {
+        "id": "treeChart",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "text": ""
+      },
+      "alertEmpty": {
+        "id": "alertEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "text": "未发现异常"
+      },
+      "alertChart": {
+        "id": "alertChart",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "block",
+        "visibility": "visible",
+        "w": 585,
+        "h": 247,
+        "top": 281,
+        "text": ""
+      },
+      "panelTree": {
+        "h": 300,
+        "w": 737
+      },
+      "panelAlert": {
+        "h": 300,
+        "w": 615
+      },
+      "hasWeifa": false,
+      "echarts": true,
+      "canvasCount": 2
+    },
+    "emptyTreeAllZero": {
+      "treeEmpty": {
+        "id": "treeEmpty",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "flex",
+        "visibility": "visible",
+        "w": 707,
+        "h": 226,
+        "top": 302,
+        "text": "本月完成合同额均为 0"
+      },
+      "treeChart": {
+        "id": "treeChart",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "text": ""
+      },
+      "alertEmpty": {
+        "id": "alertEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "text": "未发现异常"
+      },
+      "alertChart": {
+        "id": "alertChart",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "block",
+        "visibility": "visible",
+        "w": 585,
+        "h": 247,
+        "top": 281,
+        "text": ""
+      },
+      "panelTree": {
+        "h": 300,
+        "w": 737
+      },
+      "panelAlert": {
+        "h": 300,
+        "w": 615
+      },
+      "hasWeifa": false,
+      "echarts": true,
+      "canvasCount": 2
+    },
+    "emptyAlerts": {
+      "treeEmpty": {
+        "id": "treeEmpty",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "text": ""
+      },
+      "treeChart": {
+        "id": "treeChart",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "block",
+        "visibility": "visible",
+        "w": 707,
+        "h": 226,
+        "top": 302,
+        "text": ""
+      },
+      "alertEmpty": {
+        "id": "alertEmpty",
+        "hiddenAttr": false,
+        "hiddenProp": false,
+        "display": "flex",
+        "visibility": "visible",
+        "w": 585,
+        "h": 247,
+        "top": 281,
+        "text": "未发现异常"
+      },
+      "alertChart": {
+        "id": "alertChart",
+        "hiddenAttr": true,
+        "hiddenProp": true,
+        "display": "none",
+        "visibility": "visible",
+        "w": 0,
+        "h": 0,
+        "top": 0,
+        "text": ""
+      },
+      "panelTree": {
+        "h": 300,
+        "w": 737
+      },
+      "panelAlert": {
+        "h": 300,
+        "w": 615
+      },
+      "hasWeifa": true,
+      "echarts": true,
+      "canvasCount": 2
+    }
+  }
+}

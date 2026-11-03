@@ -1,0 +1,560 @@
+{
+  "ts": "2026-11-03T01:28:25.615Z",
+  "zone": "Asia/Shanghai",
+  "base": "http://127.0.0.1:3001",
+  "overall": "PASS",
+  "blockers": [],
+  "notes": [
+    "PASS AC1: local vendor echarts, no CDN, no Element",
+    "PASS AC2: trend 6 series dual-axis legend markArea cum=prefix",
+    "PASS AC3: treemap with other + neg + tiles",
+    "PASS AC4: alert horizontal bar six types count>0",
+    "PASS AC5: modal table opened from 更多",
+    "PASS AC6: KPI delta ±万; stock U+2212 minus",
+    "PASS AC7: emptyTree none + all-zero",
+    "PASS AC8: 柱=各月，线=累计；右侧为预测月。单位：万元",
+    "PASS AC9: PM share split 当月|本年累计",
+    "PASS AC10: shell filter intact; ops KPI module present",
+    "SUPPLEMENT: cumCheck 开票/回款 前缀和补核通过；treemap P-2026-045 monthCompletion=-900000 value=900000"
+  ],
+  "ac": {
+    "AC1": {
+      "scripts": [
+        "./vendor/echarts.min.js"
+      ],
+      "localEcharts": true,
+      "cdnHit": false,
+      "echartsOk": true,
+      "hasElement": false,
+      "pass": true
+    },
+    "AC2": {
+      "seriesCount": 6,
+      "barNames": [
+        "完成合同额·当月",
+        "完成开票额·当月",
+        "完成回款额·当月"
+      ],
+      "lineNames": [
+        "完成合同额·累计",
+        "完成开票额·累计",
+        "完成回款额·累计"
+      ],
+      "dualAxis": true,
+      "legendOk": true,
+      "hasMarkArea": true,
+      "tooltipAxis": true,
+      "cumCheck": {
+        "ok": true,
+        "seriesNames": [
+          "完成合同额·当月:bar",
+          "完成开票额·当月:bar",
+          "完成回款额·当月:bar",
+          "完成合同额·累计:line",
+          "完成开票额·累计:line",
+          "完成回款额·累计:line"
+        ],
+        "results": {
+          "完成": {
+            "ok": true,
+            "expected": [
+              410,
+              860,
+              1290
+            ],
+            "actual": [
+              410,
+              860,
+              1290
+            ],
+            "len": 12
+          }
+        },
+        "markArea": true,
+        "yAxis": 2,
+        "legend": true,
+        "tooltip": "axis"
+      },
+      "pass": true,
+      "cumCheckFull": {
+        "完成": {
+          "ok": true,
+          "last": 11060
+        },
+        "开票": {
+          "ok": true,
+          "last": 8170
+        },
+        "回款": {
+          "ok": true,
+          "last": 7020
+        },
+        "note": "补核：按系列全名匹配，三项累计=月值前缀和均通过"
+      }
+    },
+    "AC3": {
+      "treeDump": {
+        "tileCount": 9,
+        "names": [
+          "P-2026-011",
+          "P-2026-018",
+          "P-2026-022",
+          "P-2026-031",
+          "P-2026-040",
+          "P-2026-045",
+          "P-2026-052",
+          "P-2026-061",
+          "其他项目"
+        ],
+        "values": [
+          4205000,
+          3102000,
+          1880000,
+          1568000,
+          984000,
+          900000,
+          763000,
+          641000,
+          573000
+        ],
+        "hasOther": true,
+        "hasNegNameOrValue": true,
+        "seriesType": "treemap",
+        "roam": false,
+        "nodeClick": false
+      },
+      "treeClick": {
+        "ok": true,
+        "w": 707,
+        "h": 220,
+        "firstName": "P-2026-011"
+      },
+      "treeOpenedSomething": true,
+      "pass": true,
+      "treemapSigned": {
+        "P-2026-045": {
+          "valueAbs": 900000,
+          "monthCompletion": -900000,
+          "color": "#f8d4d4"
+        },
+        "other": {
+          "name": "其他项目",
+          "kind": "other",
+          "value": 573000
+        },
+        "note": "面积用|额|；负值以 monthCompletion 保留符号 + 红色块"
+      }
+    },
+    "AC4": {
+      "alertDump": {
+        "categories": [
+          "有工时无完成额",
+          "存量合同额为负",
+          "累计回款超累计开票",
+          "有完成额无工时",
+          "累计回款超总合同额",
+          "累计开票超总合同额"
+        ],
+        "data": [
+          {
+            "value": 1,
+            "label": "有工时无完成额",
+            "itemStyle": {
+              "color": "#d79a39",
+              "borderRadius": [
+                0,
+                4,
+                4,
+                0
+              ]
+            },
+            "emphasis": {
+              "label": {}
+            }
+          },
+          {
+            "value": 1,
+            "label": "存量合同额为负",
+            "itemStyle": {
+              "color": "#d79a39",
+              "borderRadius": [
+                0,
+                4,
+                4,
+                0
+              ]
+            },
+            "emphasis": {
+              "label": {}
+            }
+          },
+          {
+            "value": 1,
+            "label": "累计回款超累计开票",
+            "itemStyle": {
+              "color": "#d79a39",
+              "borderRadius": [
+                0,
+                4,
+                4,
+                0
+              ]
+            },
+            "emphasis": {
+              "label": {}
+            }
+          },
+          {
+            "value": 2,
+            "label": "有完成额无工时",
+            "itemStyle": {
+              "color": "#d79a39",
+              "borderRadius": [
+                0,
+                4,
+                4,
+                0
+              ]
+            },
+            "emphasis": {
+              "label": {}
+            }
+          },
+          {
+            "value": 2,
+            "label": "累计回款超总合同额",
+            "itemStyle": {
+              "color": "#d79a39",
+              "borderRadius": [
+                0,
+                4,
+                4,
+                0
+              ]
+            },
+            "emphasis": {
+              "label": {}
+            }
+          },
+          {
+            "value": 3,
+            "label": "累计开票超总合同额",
+            "itemStyle": {
+              "color": "#d79a39",
+              "borderRadius": [
+                0,
+                4,
+                4,
+                0
+              ]
+            },
+            "emphasis": {
+              "label": {}
+            }
+          }
+        ],
+        "count": 6,
+        "horizontal": true
+      },
+      "alertLabelsOk": true,
+      "positiveOnly": true,
+      "alertFilterOk": true,
+      "pass": true
+    },
+    "AC5": {
+      "moreClicked": true,
+      "modalState": {
+        "open": true,
+        "hasTable": true,
+        "hasPager": true,
+        "title": "",
+        "snippet": "完成合同额看板 · 样例数据（demo，不连报告线 API） · 筛选由 Board 壳注入\n完成合同额\n1,286.40万\n较上一期 +102.50 万\n本年累计 9,842.15 万\n未来预测 12,600.00 万\n本期填报申报值\n完成开票额\n964.20万\n本年累计 7,512.80 万\n未来预测 10,200.00 万\n本月金额 · 实时同步\n完成回款额\n812.55万\n本年累计 6,4"
+      },
+      "drawerOk": true,
+      "pass": true
+    },
+    "AC6": {
+      "kpi": {
+        "completion": "较上一期 +102.50 万",
+        "stock": "较上一期 −120.00 万",
+        "stockInv": "较上一期 +35.20 万",
+        "hasPct": false,
+        "hasWan": true,
+        "plusMinus": true,
+        "stockMinus": true,
+        "stockCodepoints": [
+          "8f83",
+          "4e0a",
+          "4e00",
+          "671f",
+          "20",
+          "2212",
+          "31",
+          "32",
+          "30",
+          "2e",
+          "30",
+          "30",
+          "20",
+          "4e07"
+        ],
+        "tags": [
+          "本年累计 9,842.15 万未来预测 12,600.00 万",
+          "本期填报申报值",
+          "本年累计 7,512.80 万未来预测 10,200.00 万",
+          "本月金额 · 实时同步",
+          "本年累计 6,408.30 万未来预测 9,100.00 万",
+          "本月金额 · 实时同步"
+        ],
+        "bodyHasSync": true
+      },
+      "pass": true
+    },
+    "AC7": {
+      "emptyNone": {
+        "textHasNone": true,
+        "textHasZero": false,
+        "treemapTiles": 0,
+        "emptyVisible": true,
+        "emptyText": "本次填报没有项目",
+        "probe": null
+      },
+      "emptyZero": {
+        "textHasNone": false,
+        "textHasZero": true,
+        "treemapTiles": 0,
+        "emptyVisible": true,
+        "emptyText": "本月完成合同额均为 0",
+        "probe": null
+      },
+      "pass": true
+    },
+    "AC8": {
+      "noteText": "柱=各月，线=累计；右侧为预测月。单位：万元",
+      "pass": true
+    },
+    "AC9": {
+      "pm": {
+        "found": true,
+        "heads": [
+          "项目经理",
+          "项目数",
+          "当月开票额",
+          "当月回款额",
+          "当月完成合同额",
+          "本年累计完成合同额",
+          "完成合同额占比",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "当月",
+          "本年累计"
+        ],
+        "theadText": "项目经理\t项目数\t当月开票额\t当月回款额\t当月完成合同额\t本年累计完成合同额\t完成合同额占比\n\t\t\t\t\t\t当月\t本年累计\n",
+        "hasMonth": true,
+        "hasYtd": true,
+        "hasShare": true
+      },
+      "pass": true
+    },
+    "AC10": {
+      "shell": {
+        "filterVisible": true,
+        "yearText": "2026年度",
+        "noBizType": true,
+        "hasUnit": true
+      },
+      "opsKpiOk": true,
+      "pass": true
+    }
+  },
+  "chartsSummary": {
+    "trendSeries": [
+      "完成合同额·当月:bar",
+      "完成开票额·当月:bar",
+      "完成回款额·当月:bar",
+      "完成合同额·累计:line",
+      "完成开票额·累计:line",
+      "完成回款额·累计:line"
+    ],
+    "cumCheck": {
+      "ok": true,
+      "seriesNames": [
+        "完成合同额·当月:bar",
+        "完成开票额·当月:bar",
+        "完成回款额·当月:bar",
+        "完成合同额·累计:line",
+        "完成开票额·累计:line",
+        "完成回款额·累计:line"
+      ],
+      "results": {
+        "完成": {
+          "ok": true,
+          "expected": [
+            410,
+            860,
+            1290
+          ],
+          "actual": [
+            410,
+            860,
+            1290
+          ],
+          "len": 12
+        }
+      },
+      "markArea": true,
+      "yAxis": 2,
+      "legend": true,
+      "tooltip": "axis"
+    },
+    "treeDump": {
+      "tileCount": 9,
+      "names": [
+        "P-2026-011",
+        "P-2026-018",
+        "P-2026-022",
+        "P-2026-031",
+        "P-2026-040",
+        "P-2026-045",
+        "P-2026-052",
+        "P-2026-061",
+        "其他项目"
+      ],
+      "values": [
+        4205000,
+        3102000,
+        1880000,
+        1568000,
+        984000,
+        900000,
+        763000,
+        641000,
+        573000
+      ],
+      "hasOther": true,
+      "hasNegNameOrValue": true,
+      "seriesType": "treemap",
+      "roam": false,
+      "nodeClick": false
+    },
+    "alertDump": {
+      "categories": [
+        "有工时无完成额",
+        "存量合同额为负",
+        "累计回款超累计开票",
+        "有完成额无工时",
+        "累计回款超总合同额",
+        "累计开票超总合同额"
+      ],
+      "data": [
+        {
+          "value": 1,
+          "label": "有工时无完成额",
+          "itemStyle": {
+            "color": "#d79a39",
+            "borderRadius": [
+              0,
+              4,
+              4,
+              0
+            ]
+          },
+          "emphasis": {
+            "label": {}
+          }
+        },
+        {
+          "value": 1,
+          "label": "存量合同额为负",
+          "itemStyle": {
+            "color": "#d79a39",
+            "borderRadius": [
+              0,
+              4,
+              4,
+              0
+            ]
+          },
+          "emphasis": {
+            "label": {}
+          }
+        },
+        {
+          "value": 1,
+          "label": "累计回款超累计开票",
+          "itemStyle": {
+            "color": "#d79a39",
+            "borderRadius": [
+              0,
+              4,
+              4,
+              0
+            ]
+          },
+          "emphasis": {
+            "label": {}
+          }
+        },
+        {
+          "value": 2,
+          "label": "有完成额无工时",
+          "itemStyle": {
+            "color": "#d79a39",
+            "borderRadius": [
+              0,
+              4,
+              4,
+              0
+            ]
+          },
+          "emphasis": {
+            "label": {}
+          }
+        },
+        {
+          "value": 2,
+          "label": "累计回款超总合同额",
+          "itemStyle": {
+            "color": "#d79a39",
+            "borderRadius": [
+              0,
+              4,
+              4,
+              0
+            ]
+          },
+          "emphasis": {
+            "label": {}
+          }
+        },
+        {
+          "value": 3,
+          "label": "累计开票超总合同额",
+          "itemStyle": {
+            "color": "#d79a39",
+            "borderRadius": [
+              0,
+              4,
+              4,
+              0
+            ]
+          },
+          "emphasis": {
+            "label": {}
+          }
+        }
+      ],
+      "count": 6,
+      "horizontal": true
+    }
+  },
+  "iframeSrcCheck": {
+    "src": "http://127.0.0.1:3001/operations-dashboard-202610/completed-contract.html",
+    "title": "运营看板202610 · 完成合同额看板"
+  },
+  "probe": null
+}

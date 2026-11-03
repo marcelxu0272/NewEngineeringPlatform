@@ -1,0 +1,163 @@
+{
+  "pass": true,
+  "checks": [
+    {
+      "name": "completion.较上期",
+      "ok": true,
+      "detail": {
+        "text": "较上期 +102.50 万",
+        "top": 87,
+        "left": 194,
+        "mainTop": 79,
+        "mainRight": 182,
+        "sameRow": true,
+        "toRight": true
+      }
+    },
+    {
+      "name": "completion.sameRowRight",
+      "ok": true,
+      "detail": {
+        "text": "较上期 +102.50 万",
+        "top": 87,
+        "left": 194,
+        "mainTop": 79,
+        "mainRight": 182,
+        "sameRow": true,
+        "toRight": true
+      }
+    },
+    {
+      "name": "stockContract.较上期",
+      "ok": true,
+      "detail": {
+        "text": "较上期 −120.00 万",
+        "top": 81,
+        "left": 1214,
+        "mainTop": 77,
+        "mainRight": 1202,
+        "sameRow": true,
+        "toRight": true
+      }
+    },
+    {
+      "name": "stockContract.sameRowRight",
+      "ok": true,
+      "detail": {
+        "text": "较上期 −120.00 万",
+        "top": 81,
+        "left": 1214,
+        "mainTop": 77,
+        "mainRight": 1202,
+        "sameRow": true,
+        "toRight": true
+      }
+    },
+    {
+      "name": "stockInvoice.较上期",
+      "ok": true,
+      "detail": {
+        "text": "较上期 +35.20 万",
+        "top": 155,
+        "left": 1214,
+        "mainTop": 151,
+        "mainRight": 1202,
+        "sameRow": true,
+        "toRight": true
+      }
+    },
+    {
+      "name": "stockInvoice.sameRowRight",
+      "ok": true,
+      "detail": {
+        "text": "较上期 +35.20 万",
+        "top": 155,
+        "left": 1214,
+        "mainTop": 151,
+        "mainRight": 1202,
+        "sameRow": true,
+        "toRight": true
+      }
+    },
+    {
+      "name": "no.较上一期",
+      "ok": true,
+      "detail": false
+    },
+    {
+      "name": "no.drawer",
+      "ok": true,
+      "detail": false
+    },
+    {
+      "name": "no.modal",
+      "ok": true,
+      "detail": false
+    },
+    {
+      "name": "no.更多",
+      "ok": true,
+      "detail": false
+    },
+    {
+      "name": "no.查看",
+      "ok": true,
+      "detail": false
+    },
+    {
+      "name": "blankFix.still",
+      "ok": true,
+      "detail": {
+        "treeEmptyH": 0,
+        "alertEmptyDisplay": "none"
+      }
+    },
+    {
+      "name": "charts.alive",
+      "ok": true,
+      "detail": {
+        "canvasCount": 3
+      }
+    }
+  ],
+  "info": {
+    "completion": {
+      "text": "较上期 +102.50 万",
+      "top": 87,
+      "left": 194,
+      "mainTop": 79,
+      "mainRight": 182,
+      "sameRow": true,
+      "toRight": true
+    },
+    "stockContract": {
+      "text": "较上期 −120.00 万",
+      "top": 81,
+      "left": 1214,
+      "mainTop": 77,
+      "mainRight": 1202,
+      "sameRow": true,
+      "toRight": true
+    },
+    "stockInvoice": {
+      "text": "较上期 +35.20 万",
+      "top": 155,
+      "left": 1214,
+      "mainTop": 151,
+      "mainRight": 1202,
+      "sameRow": true,
+      "toRight": true
+    },
+    "hasJiaoShangYiQi": false,
+    "hasJiaoShangQi": 3,
+    "hasDrawer": false,
+    "hasModal": false,
+    "hasMore": false,
+    "hasChakan": false,
+    "treeEmptyH": 0,
+    "alertEmptyH": 0,
+    "alertEmptyDisplay": "none",
+    "canvasCount": 3,
+    "echarts": true
+  }
+}

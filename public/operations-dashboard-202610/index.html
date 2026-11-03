@@ -551,6 +551,11 @@ main{
 @media (max-height:770px), (max-height:780px){
   main{grid-template-rows:none!important;display:flex!important;flex-direction:column!important}
 }
+
+/* === 2026-11-03 壳级筛选：iframe 内不再展示内容顶栏三下拉 === */
+.header{display:none!important}
+.app{grid-template-rows:minmax(0,1fr)!important}
+main{grid-row:1!important;grid-column:1!important}
 </style>
 </head>
 <body>
@@ -586,13 +591,7 @@ main{
  </aside>
  <header class="header">
   <div class="header-title" hidden aria-hidden="true"><h1>运营看板202610版</h1></div>
-  <div class="header-controls">
-   <label class="select-wrap has-icon" data-tip="选择统计年度，所有指标与图表同步更新"><svg class="select-icon"><use href="#icon-clock"/></svg><select id="yearSelect" aria-label="统计年度"><option value="2026">2026年度</option><option value="2025">2025年度</option></select></label>
-   <label class="select-wrap" data-tip="按组织板块筛选，所有模块使用同一统计范围"><select id="unitSelect" aria-label="组织板块"><option value="全部板块">全部板块</option><option value="设计院">设计院</option><option value="数字化业务单元">数字化业务单元</option><option value="专业室">专业室</option></select></label>
-   <label class="select-wrap" data-tip="按业务类型筛选经营数据"><select id="businessSelect" aria-label="业务类型"><option value="全部业务类型">全部业务类型</option><option value="设计咨询">设计咨询</option><option value="项目管理">项目管理</option><option value="工程服务">工程服务</option></select></label>
-   
-   
-  </div>
+  <div class="header-controls" hidden aria-hidden="true"><!-- 壳级筛选上提：年度/板块由 Board 注入；业务类型废除 --></div>
  </header>
  <main id="main">
   <section id="kpiGrid" class="kpi-grid" aria-label="年度经营关键指标"></section>
@@ -933,7 +932,7 @@ main{
   function openDepartment(name){let row=dimensionRows().find(r=>r.name===name)||model.depRows.find(r=>r.name===name);if(!row)return;showDialog(name+' · 经营贡献',`<p class="dialog-description">合同额、回款额为年初至截止日累计；净现金贡献为同期现金流入减流出分配至该维度的演示金额。</p>`+table(['指标','金额 / 比例'],[['新签合同额',money(row.contract)+' 万元'],['完成回款额',money(row.receipt)+' 万元'],['完成开票额',money(row.invoice)+' 万元'],['净现金贡献',money(row.net)+' 万元'],['合同额占比',pct(row.contract/model.totals.contract*100)],['合同目标达成率',pct(row.rate)]]));}
   function openProjects(status=null){let rows=model.projects.filter(p=>!status||p.status===status);showDialog((status?status+'项目':'项目交付')+' · 清单',table(['项目名称','负责板块','状态','交付节点','计划日期'],rows.map(p=>[safe(p.name),p.department,p.status,p.milestone,p.due.replace('2026',String(state.year))])),'演示项目状态与环图、图例数量一致；风险项目与逾期项目分别统计，风险不等于逾期。');}
   function openLoad(i,annual,monthly){showDialog(`${state.year}年${model.n-5+i}月 · 生产负荷率`,`<p class="dialog-description">年度负荷率 = 已排定年度工时 ÷ 年度可用工时；当月负荷率 = 当月已排定工时 ÷ 当月可用工时。两条曲线采用不同时间口径。</p>`+table(['月份','年度负荷率','当月负荷率'],annual.map((v,j)=>[`${model.n-5+j}月`,pct(v,2),pct(monthly[j],2)])));}
-  function setUnit(name){state.unit=name;$('unitSelect').value=name;render();toast('已筛选：'+name);}
+  function setUnit(name){state.unit=name;render();toast('已筛选：'+name);}
   function help(){showDialog('看板使用说明',`<div class="help-grid"><div><h3>筛选与联动</h3><p>切换年度、板块和业务类型，经营金额、现金流、贡献表、账龄及项目清单同步更新。</p></div><div><h3>图表探索</h3><p>悬停查看精确数值；点击现金流、账龄、目标达成和交付环图查看明细。现金流与负荷图的图例支持显隐。</p></div><div><h3>模块区分</h3><p>经营贡献分析展示金额与贡献来源；板块目标达成展示年度计划完成进度。两个模块分别支持归因和目标管理。</p></div><div><h3>统一主题</h3><p>页面顶部（宿主标题栏）可切换青绿、深蓝、暖棕主题；整树看板同步换色。</p></div></div><p class="dialog-description">原图为AI生成，原型已重建中文文字，并统一金额、百分比、账龄、项目状态和累计口径。所有业务数据均为演示样例，未连接真实系统。</p>`,'数据时间：2026年样例截至8月31日；2025年对比样例截至8月31日。');}
   function showTooltip(el){if($('detailDialog').open)return;tooltipOwner=el;const tip=$('globalTooltip');tip.textContent=el.dataset.tip;tip.classList.add('show');tip.setAttribute('aria-hidden','false');el.setAttribute('aria-describedby','globalTooltip');positionTooltip(el);}
   function positionTooltip(el){const tip=$('globalTooltip'),r=el.getBoundingClientRect(),w=tip.offsetWidth,h=tip.offsetHeight;let x=Math.max(8,Math.min(innerWidth-w-8,r.left+r.width/2-w/2)),y=r.bottom+8;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-8);tip.style.left=x+'px';tip.style.top=y+'px';}
@@ -960,11 +959,11 @@ main{
     else if(b.id==='moreAlerts')showDialog('经营异常预警 · 当前范围',table(['预警','说明','日期'],alerts().map(a=>[a.title,a.detail,a.date])));
     else if(b.id==='helpButton')help();
     else if(b.id==='closeDialog')$('detailDialog').close();
-    else if(b.id==='resetButton'){Object.assign(state,{year:2026,unit:'全部板块',business:'全部业务类型',dimension:'department',target:'contract'});$('yearSelect').value='2026';$('unitSelect').value=state.unit;$('businessSelect').value=state.business;render();document.querySelectorAll('.nav-button').forEach(b=>b.classList.toggle('active',b.dataset.focus==='overview'));toast('已恢复默认筛选与视图');}
+    else if(b.id==='resetButton'){Object.assign(state,{year:2026,unit:'全部板块',business:'全部业务类型',dimension:'department',target:'contract'});/* 壳级筛选：不再写 year/unit/business 下拉 */ state.year=2026;state.business='全部业务类型';render();document.querySelectorAll('.nav-button').forEach(b=>b.classList.toggle('active',b.dataset.focus==='overview'));toast('已恢复默认筛选与视图');}
     else if(b.dataset.focus){document.querySelectorAll('.nav-button,.header-tabs [data-focus]').forEach(x=>x.classList.toggle('active',x.dataset.focus===b.dataset.focus));const id={overview:'kpiGrid',cash:'cashPanel',risk:'riskPanel',contribution:'contributionPanel',delivery:'deliveryPanel'}[b.dataset.focus],panel=$(id);if(panel){panel.classList.remove('focus-highlight');void panel.offsetWidth;panel.classList.add('focus-highlight');setTimeout(()=>panel.classList.remove('focus-highlight'),1800);}toast(b.dataset.focus==='overview'?'当前为公司运营总览':'已定位：'+b.textContent.trim());}
   });
   document.addEventListener('keydown',e=>{if(e.key==='Escape')hideTooltip();if(['Enter',' '].includes(e.key)&&e.target.matches('[data-kpi],[data-row]')){e.preventDefault();e.target.click();}});
-  for(const [id,key] of [['yearSelect','year'],['unitSelect','unit'],['businessSelect','business']])$(id).addEventListener('change',e=>{state[key]=key==='year'?+e.target.value:e.target.value;render();});
+  /* 壳级筛选：年度/板块由 postMessage 注入；business 固定全部 */
   const themeSel=$('themeSelect');
   if(themeSel){
     themeSel.innerHTML=Object.keys(THEMES).map(k=>`<option value="${safe(k)}">${({teal:'青绿',blue:'深蓝',wood:'暖棕'})[k]||safe(k)}主题</option>`).join('');
@@ -975,10 +974,19 @@ main{
     setTheme(name);
     if(themeSel)themeSel.value=name;
   }
+  function applyHostFilter(payload){
+    if(!payload||typeof payload!=='object')return;
+    state.year=2026; /* 锁 2026 */
+    state.business='全部业务类型'; /* 业务类型废除 */
+    if(typeof payload.unit==='string'&&payload.unit) state.unit=payload.unit;
+    if(model) render();
+  }
   window.addEventListener('message',e=>{
     if(e.origin!==window.location.origin)return;
     const d=e.data;
-    if(d&&d.type==='ops-dashboard-theme'&&d.theme)applyHostTheme(d.theme);
+    if(!d||typeof d!=='object')return;
+    if(d.type==='ops-dashboard-theme'&&d.theme)applyHostTheme(d.theme);
+    if(d.type==='ops-dashboard-filter')applyHostFilter(d);
   });
   $('detailDialog').addEventListener('click',e=>{if(e.target===$('detailDialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
   window.addEventListener('resize',()=>{hideTooltip();clearTimeout(window.resizeTimer);window.resizeTimer=setTimeout(()=>Object.values(charts).forEach(c=>c.reflow()),80);});

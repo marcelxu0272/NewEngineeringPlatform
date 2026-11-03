@@ -1,0 +1,258 @@
+{
+  "overall": true,
+  "A_pass": true,
+  "B_pass": true,
+  "A": {
+    "1_filterBelowHeaderAboveCatalog": true,
+    "1b_visibleOnPlaceholder": true,
+    "2_yearLockAndUnitOnly": true,
+    "3_indexNoOldSelectsReceivesFilter": true,
+    "4_persistAndPostToVisibleIframe": true
+  },
+  "B": {
+    "1_iframeNoPlaceholder": true,
+    "2_blocksMatchOverviewIA": true,
+    "3_readonlyDrawerAndEmpty": true,
+    "4_demoNoOpsRegressionNoContractBoard": true
+  },
+  "blockers": [],
+  "notes": [],
+  "details": {
+    "A1": {
+      "filterVisible": true,
+      "yearText": "2026年度",
+      "filterText": "2026年度 组织板块 全部板块",
+      "geometry": {
+        "header": {
+          "x": 64,
+          "y": 0,
+          "w": 1536,
+          "h": 80,
+          "top": 0,
+          "bottom": 80,
+          "left": 64,
+          "right": 1600
+        },
+        "filter": {
+          "x": 64,
+          "y": 80,
+          "w": 1536,
+          "h": 48,
+          "top": 80,
+          "bottom": 128,
+          "left": 64,
+          "right": 1600
+        },
+        "catalog": {
+          "x": 64,
+          "y": 128,
+          "w": 224,
+          "h": 972,
+          "top": 128,
+          "bottom": 1100,
+          "left": 64,
+          "right": 288
+        }
+      },
+      "belowHeader": true,
+      "aboveCatalog": true,
+      "yearLock2026": true,
+      "hasYearDropdown": false,
+      "shellSelectCount": 1,
+      "noBusinessType": true,
+      "hasUnitLabel": true,
+      "unitOptions": [
+        "全部板块",
+        "设计院",
+        "数字化业务单元",
+        "专业室"
+      ],
+      "unitOptionsOk": true
+    },
+    "A1b": {
+      "filterVisible": true,
+      "placeholderCards": 8,
+      "bodyHasPlaceholderTitle": true,
+      "placeholderShown": true,
+      "shellStillAbove": true
+    },
+    "A3": {
+      "opsPresent": true,
+      "dom": {
+        "yearSelect": 0,
+        "unitSelect": 0,
+        "bizSelect": 0,
+        "selectCount": 0,
+        "selects": [],
+        "hasOldIds": false,
+        "headerControlsHidden": true,
+        "visibleOldLabels": false,
+        "hasListenerSnippet": true
+      }
+    },
+    "A4": {
+      "afterUnit": {
+        "alive": true,
+        "msgs": [
+          {
+            "type": "ops-dashboard-filter",
+            "year": 2026,
+            "unit": "设计院"
+          }
+        ],
+        "last": {
+          "type": "ops-dashboard-filter",
+          "year": 2026,
+          "unit": "设计院"
+        },
+        "pageErrors": []
+      },
+      "forced": {
+        "ok": true
+      },
+      "forcedRecv": {
+        "last": {
+          "type": "ops-dashboard-filter",
+          "year": 2026,
+          "unit": "数字化业务单元"
+        },
+        "count": 2,
+        "alive": true
+      },
+      "onCompleted": {
+        "filterVisible": true,
+        "recv": {
+          "msgs": [
+            {
+              "type": "ops-dashboard-filter",
+              "year": 2026,
+              "unit": "专业室"
+            }
+          ],
+          "last": {
+            "type": "ops-dashboard-filter",
+            "year": 2026,
+            "unit": "专业室"
+          },
+          "bodyOk": true
+        },
+        "pageErrors": []
+      }
+    },
+    "B1": {
+      "filterStillVisible": true,
+      "completedIframePresent": true,
+      "completedSrc": "/operations-dashboard-202610/completed-contract.html",
+      "completedVisible": true,
+      "placeholderOverlayVisible": false,
+      "noNewCatalogUrl": true,
+      "url": "http://127.0.0.1:3001/operations-dashboard-202610/board"
+    },
+    "B2": {
+      "present": true,
+      "demoNote": true,
+      "kpi": true,
+      "deltaPrev": true,
+      "deltas": [
+        {
+          "text": "较上一期 +8.6% ↑",
+          "className": "kpi-delta up",
+          "color": "rgb(35, 139, 119)"
+        },
+        {
+          "text": "较上一期 −120.00 万 ↓",
+          "className": "kpi-delta down invert",
+          "color": "rgb(35, 139, 119)"
+        },
+        {
+          "text": "较上一期 +35.20 万 ↑",
+          "className": "kpi-delta up invert",
+          "color": "rgb(223, 92, 112)"
+        }
+      ],
+      "tree": true,
+      "alerts": true,
+      "trend": true,
+      "pm": true,
+      "emptyReady": true,
+      "drawer": true,
+      "forbidden": {
+        "reportLinePicker": false,
+        "roleSplit": false,
+        "jumpTrack": false,
+        "lastMonthNew": false,
+        "contractBoardImpl": false
+      },
+      "titles": {
+        "h2": [
+          "本月完成合同额情况",
+          "项目预警一览",
+          "月度走势",
+          "按项目经理汇总"
+        ]
+      },
+      "drawerOpen": true,
+      "drawerReadonly": true
+    },
+    "B3": {
+      "emptyExists": true,
+      "emptyVisible": true,
+      "emptyText": "未发现异常",
+      "alertRows": 0
+    },
+    "B4": {
+      "opsKpiCompleted": {
+        "hasCompletedContractKpiLabel": true,
+        "alive": true
+      },
+      "contractBoardStillPlaceholder": {
+        "filterVisible": true,
+        "placeholderCards": 4,
+        "titleOk": true
+      }
+    },
+    "iframes": [
+      {
+        "i": 0,
+        "title": "运营看板202610 · 运营看板",
+        "src": "/operations-dashboard-202610/index.html",
+        "opacity": 1,
+        "pointerEvents": "auto",
+        "box": {
+          "x": 288,
+          "y": 128,
+          "width": 1312,
+          "height": 972
+        }
+      },
+      {
+        "i": 1,
+        "title": "运营看板202610 · 完成合同额看板",
+        "src": "/operations-dashboard-202610/completed-contract.html",
+        "opacity": 0,
+        "pointerEvents": "none",
+        "box": {
+          "x": 288,
+          "y": 128,
+          "width": 1312,
+          "height": 972
+        }
+      }
+    ],
+    "pageErrors": []
+  },
+  "screenshots": [
+    "max-A1-shell-filter-default.png",
+    "max-A1b-filter-on-placeholder.png",
+    "max-A4-unit-design-institute.png",
+    "max-B1-completed-contract-board.png",
+    "max-B2-completed-content.png",
+    "max-B3-alerts-empty-state.png",
+    "max-B4-contract-board-still-placeholder.png"
+  ],
+  "boardUrl": "http://127.0.0.1:3001/operations-dashboard-202610/board",
+  "ledger": "2026-11-03 —— Board 壳级筛选上提（锁 2026、去业务类型）+ 完成合同额看板 iframe 接入概览同构内容",
+  "orthogonalOpen": "协作入口文档（AGENTS / README / 账本指针）—— 本验不关",
+  "ts": "2026-11-03T01:16:05.884Z",
+  "tzNote": "Asia/Shanghai"
+}

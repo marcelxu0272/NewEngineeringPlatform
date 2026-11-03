@@ -1,0 +1,69 @@
+{
+  "pass": true,
+  "checks": [
+    {
+      "name": "tree.meta",
+      "ok": true
+    },
+    {
+      "name": "alert.meta",
+      "ok": true
+    },
+    {
+      "name": "trend.meta",
+      "ok": true
+    },
+    {
+      "name": "tree.fmt",
+      "ok": true
+    },
+    {
+      "name": "alert.fmt",
+      "ok": true
+    },
+    {
+      "name": "trend.fmt",
+      "ok": true
+    },
+    {
+      "name": "guards",
+      "ok": true
+    }
+  ],
+  "report": {
+    "tree": {
+      "confine": true,
+      "hasFormatter": true,
+      "extra": "border-radius:8px;box-shadow:0 4px 16px rgba(15,23,42,0.10);max-width:360px;width:auto;white-space:normal;;max-width:300px;",
+      "hasMax": true,
+      "hasRadius": true
+    },
+    "alert": {
+      "confine": true,
+      "hasFormatter": true,
+      "extra": "border-radius:8px;box-shadow:0 4px 16px rgba(15,23,42,0.10);max-width:360px;width:auto;white-space:normal;;max-width:320px;",
+      "hasMax": true,
+      "hasRadius": true
+    },
+    "trend": {
+      "confine": true,
+      "hasFormatter": true,
+      "extra": "border-radius:8px;box-shadow:0 4px 16px rgba(15,23,42,0.10);max-width:360px;width:auto;white-space:normal;;max-width:320px;",
+      "hasMax": true,
+      "hasRadius": true
+    },
+    "treeOk": true,
+    "alertOk": true,
+    "trendOk": true,
+    "treeHtml": "<div style=\"font-weight:650;margin-bottom:4px;\">滨江科创园设计</div><div style=\"display:flex;justify-content:space-between;align-items:center;gap:16px;line-height:1.7;\"><span style=\"displ",
+    "trendNames": 6,
+    "guards": {
+      "detail": 2,
+      "drawer": false,
+      "jiao": 3,
+      "empty": "none",
+      "resize": true,
+      "noValueFormatter": true
+    }
+  }
+}

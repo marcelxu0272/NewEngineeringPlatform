@@ -1,6 +1,19 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 工程平台（26_engineering-platform）
+
+Wood 内部工程平台零星功能 / Demo 汇总仓（Next.js）。协作与口径以账本为准，不要只看本 README 的脚手架说明。
+
+## 协作与文档
+
+最短地图见 **[`AGENTS.md`](AGENTS.md)**。常用入口：
+
+- 变更账本：[`docs/变更账本.md`](docs/变更账本.md)（正式需求 / 验收改动须先记账本）
+- 用语与决策：[`GLOSSARY.md`](GLOSSARY.md)、[`docs/adr/`](docs/adr/)
+- 验收证据：[`docs/evidence/`](docs/evidence/)
+- 正式/设计稿：[`docs/需求文档/`](docs/需求文档/) 等（改口径须先记账本）
 
 ## Getting Started
+
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 First, run the development server:
 
@@ -16,9 +29,12 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
+首次克隆若需 SQLite：`npm install` 后执行 `npm run db:init`、`npm run db:seed`，再 `npm run dev`。
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
 
 ## Learn More
 
