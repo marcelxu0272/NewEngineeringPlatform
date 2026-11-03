@@ -1,0 +1,104 @@
+{
+  "base": "http://localhost:3001",
+  "at": "2026-11-03T03:04:34.030Z",
+  "pass": true,
+  "checks": [
+    {
+      "name": "ops-iframe",
+      "ok": true,
+      "detail": "found"
+    },
+    {
+      "name": "all:computed-not-none",
+      "ok": true,
+      "detail": "{\"hidden\":false,\"dataVisible\":\"true\",\"styleDisplay\":\"\",\"computedDisplay\":\"grid\",\"offsetHeight\":402,\"clientHeight\":402}"
+    },
+    {
+      "name": "all:data-visible-true",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "name": "all:not-hidden",
+      "ok": true,
+      "detail": "false"
+    },
+    {
+      "name": "all:height>0",
+      "ok": true,
+      "detail": "402"
+    },
+    {
+      "name": "pick-SAS170",
+      "ok": true,
+      "detail": "{\"ok\":true}"
+    },
+    {
+      "name": "leaf:computed-none",
+      "ok": true,
+      "detail": "{\"hidden\":true,\"dataVisible\":\"false\",\"styleDisplay\":\"none\",\"computedDisplay\":\"none\",\"offsetHeight\":0,\"clientHeight\":0}"
+    },
+    {
+      "name": "leaf:data-visible-false",
+      "ok": true,
+      "detail": "false"
+    },
+    {
+      "name": "leaf:hidden",
+      "ok": true,
+      "detail": "true"
+    },
+    {
+      "name": "leaf:height≈0",
+      "ok": true,
+      "detail": "0"
+    },
+    {
+      "name": "leaf2:computed-none",
+      "ok": true,
+      "detail": "{\"hidden\":true,\"dataVisible\":\"false\",\"styleDisplay\":\"none\",\"computedDisplay\":\"none\",\"offsetHeight\":0,\"clientHeight\":0}"
+    },
+    {
+      "name": "back:computed-not-none",
+      "ok": true,
+      "detail": "{\"hidden\":false,\"dataVisible\":\"true\",\"styleDisplay\":\"\",\"computedDisplay\":\"grid\",\"offsetHeight\":402,\"clientHeight\":402}"
+    },
+    {
+      "name": "back:height>0",
+      "ok": true,
+      "detail": "402"
+    }
+  ],
+  "all": {
+    "hidden": false,
+    "dataVisible": "true",
+    "styleDisplay": "",
+    "computedDisplay": "grid",
+    "offsetHeight": 402,
+    "clientHeight": 402
+  },
+  "leaf": {
+    "hidden": true,
+    "dataVisible": "false",
+    "styleDisplay": "none",
+    "computedDisplay": "none",
+    "offsetHeight": 0,
+    "clientHeight": 0
+  },
+  "leaf2": {
+    "hidden": true,
+    "dataVisible": "false",
+    "styleDisplay": "none",
+    "computedDisplay": "none",
+    "offsetHeight": 0,
+    "clientHeight": 0
+  },
+  "back": {
+    "hidden": false,
+    "dataVisible": "true",
+    "styleDisplay": "",
+    "computedDisplay": "grid",
+    "offsetHeight": 402,
+    "clientHeight": 402
+  }
+}

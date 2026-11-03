@@ -1,0 +1,153 @@
+{
+  "item": "条B · UNIT_OPTIONS = 全部 + 12 SAS 叶子",
+  "verdict": "PASS",
+  "checkedAt": "2026-11-03T03:01:40.487Z",
+  "timezoneNote": "machine local Asia/Shanghai; ISO is UTC",
+  "url": "http://localhost:3001/operations-dashboard-202610/board",
+  "expected": [
+    "全部板块",
+    "SAS170 PMC板块",
+    "SAS610 咨询板块",
+    "SAS680 数字技术板块",
+    "SAS650 新材料板块",
+    "SAS710 生命科学板块",
+    "SAS690 COII板块",
+    "SAS720 模块化板块",
+    "SAS670 供应链板块",
+    "SAS520 金山中心",
+    "SAS560 沈阳中心",
+    "SAS550 惠湛中心",
+    "SAS530 银川中心"
+  ],
+  "actualOptions": [
+    "全部板块",
+    "SAS170 PMC板块",
+    "SAS610 咨询板块",
+    "SAS680 数字技术板块",
+    "SAS650 新材料板块",
+    "SAS710 生命科学板块",
+    "SAS690 COII板块",
+    "SAS720 模块化板块",
+    "SAS670 供应链板块",
+    "SAS520 金山中心",
+    "SAS560 沈阳中心",
+    "SAS550 惠湛中心",
+    "SAS530 银川中心"
+  ],
+  "checks": [
+    {
+      "ac": 1,
+      "name": "壳级下拉选项恰好按序：全部板块 + 12 SAS 叶子",
+      "ok": true,
+      "detail": "{\"expected\":[\"全部板块\",\"SAS170 PMC板块\",\"SAS610 咨询板块\",\"SAS680 数字技术板块\",\"SAS650 新材料板块\",\"SAS710 生命科学板块\",\"SAS690 COII板块\",\"SAS720 模块化板块\",\"SAS670 供应链板块\",\"SAS520 金山中心\",\"SAS560 沈阳中心\",\"SAS550 惠湛中心\",\"SAS530 银川中心\"],\"actual\":[\"全部板块\",\"SAS170 PMC板块\",\"SAS610 咨询板块\",\"SAS680 数字技术板块\",\"SAS650 新材料板块\",\"SAS710 生命科学板块\",\"SAS690 COII板块\",\"SAS720 模块化板块\",\"SAS670 供应链板块\",\"SAS520 金山中心\",\"SAS560 沈阳中心\",\"SAS550 惠湛中心\",\"SAS530 银川中心\"],\"len\":13}"
+    },
+    {
+      "ac": 2,
+      "name": "不含公司级 EPC；不再出现设计院 / 数字化业务单元 / 专业室",
+      "ok": true,
+      "detail": "{\"forbiddenHits\":[],\"options\":[\"全部板块\",\"SAS170 PMC板块\",\"SAS610 咨询板块\",\"SAS680 数字技术板块\",\"SAS650 新材料板块\",\"SAS710 生命科学板块\",\"SAS690 COII板块\",\"SAS720 模块化板块\",\"SAS670 供应链板块\",\"SAS520 金山中心\",\"SAS560 沈阳中心\",\"SAS550 惠湛中心\",\"SAS530 银川中心\"]}"
+    },
+    {
+      "ac": 3,
+      "name": "选中项经壳 postMessage 把 unit 传给可见 iframe；运营看板接收不报错",
+      "ok": true,
+      "detail": "{\"ok\":true,\"msgsCount\":1,\"last\":{\"type\":\"ops-dashboard-filter\",\"year\":2026,\"unit\":\"SAS170 PMC板块\",\"t\":1793674898177},\"stateUnit\":\"SAS170 PMC板块\",\"matches\":true,\"alive\":true}"
+    },
+    {
+      "ac": 4,
+      "name": "iframe demo 映射对齐叶子（静态核对 DEMO_DATA / unitFactor；假数不要求真实金额）",
+      "ok": true,
+      "detail": "{\"demoHits\":[{\"name\":\"SAS170 PMC板块\",\"inDemo\":true},{\"name\":\"SAS610 咨询板块\",\"inDemo\":true},{\"name\":\"SAS680 数字技术板块\",\"inDemo\":true},{\"name\":\"SAS650 新材料板块\",\"inDemo\":true},{\"name\":\"SAS710 生命科学板块\",\"inDemo\":true},{\"name\":\"SAS690 COII板块\",\"inDemo\":true},{\"name\":\"SAS720 模块化板块\",\"inDemo\":true},{\"name\":\"SAS670 供应链板块\",\"inDemo\":true},{\"name\":\"SAS520 金山中心\",\"inDemo\":true},{\"name\":\"SAS560 沈阳中心\",\"inDemo\":true},{\"name\":\"SAS550 惠湛中心\",\"inDemo\":true},{\"name\":\"SAS530 银川中心\",\"inDemo\":true}],\"hasUnitFactor\":true,\"note\":\"已静态核对 index.html DEMO_DATA.departments / projects.department 含 12 叶子名；金额为演示假数未验真值\"}"
+    },
+    {
+      "ac": 5,
+      "name": "「全部板块」仍驱动条A逻辑（本条不替代条A关账；交叉引用）",
+      "ok": true,
+      "detail": "{\"pairCross\":{\"unit\":\"全部板块\",\"hidden\":false,\"display\":\"grid\",\"h\":401.58,\"visible\":true},\"note\":\"仅交叉观察；结论见条A证据目录\"}"
+    },
+    {
+      "ac": 6,
+      "name": "不与 sidebar/pair 混关（本记录只写本条）",
+      "ok": true,
+      "detail": "declared"
+    },
+    {
+      "ac": 7,
+      "name": "证据落盘",
+      "ok": true,
+      "detail": "C:\\Work\\2_Development\\21_Platform\\26_engineering-platform\\docs\\evidence\\2026-11-03-ops-board-unit-leaf-options"
+    }
+  ],
+  "recv": {
+    "ok": true,
+    "msgsCount": 1,
+    "last": {
+      "type": "ops-dashboard-filter",
+      "year": 2026,
+      "unit": "SAS170 PMC板块",
+      "t": 1793674898177
+    },
+    "stateUnit": "SAS170 PMC板块",
+    "matches": true,
+    "alive": true
+  },
+  "demoHits": [
+    {
+      "name": "SAS170 PMC板块",
+      "inDemo": true
+    },
+    {
+      "name": "SAS610 咨询板块",
+      "inDemo": true
+    },
+    {
+      "name": "SAS680 数字技术板块",
+      "inDemo": true
+    },
+    {
+      "name": "SAS650 新材料板块",
+      "inDemo": true
+    },
+    {
+      "name": "SAS710 生命科学板块",
+      "inDemo": true
+    },
+    {
+      "name": "SAS690 COII板块",
+      "inDemo": true
+    },
+    {
+      "name": "SAS720 模块化板块",
+      "inDemo": true
+    },
+    {
+      "name": "SAS670 供应链板块",
+      "inDemo": true
+    },
+    {
+      "name": "SAS520 金山中心",
+      "inDemo": true
+    },
+    {
+      "name": "SAS560 沈阳中心",
+      "inDemo": true
+    },
+    {
+      "name": "SAS550 惠湛中心",
+      "inDemo": true
+    },
+    {
+      "name": "SAS530 银川中心",
+      "inDemo": true
+    }
+  ],
+  "pairCross": {
+    "unit": "全部板块",
+    "hidden": false,
+    "display": "grid",
+    "h": 401.58,
+    "visible": true
+  },
+  "pageErrors": [],
+  "note": "独立 Playwright 实机；不采信 Leo 静态 probe-pair-units.cjs；选项经 rc-virtual-list 滚动采集"
+}

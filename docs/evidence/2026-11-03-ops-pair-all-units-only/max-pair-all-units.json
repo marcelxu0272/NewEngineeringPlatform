@@ -1,0 +1,176 @@
+{
+  "item": "条A · #pairRow 仅全部板块显示",
+  "verdict": "FAIL",
+  "checkedAt": "2026-11-03T03:01:21.179Z",
+  "timezoneNote": "machine local Asia/Shanghai; ISO is UTC",
+  "url": "http://localhost:3001/operations-dashboard-202610/board",
+  "checks": [
+    {
+      "ac": 1,
+      "name": "组织板块=全部板块：板块现金流贡献 + 板块目标达成均可见（标题/图/tab 齐全）",
+      "ok": true,
+      "detail": "{\"allState\":{\"found\":true,\"hiddenAttr\":false,\"display\":\"grid\",\"visibility\":\"visible\",\"opacity\":\"1\",\"dataVisible\":\"true\",\"width\":1105,\"height\":401.58,\"visibleByGeom\":true,\"shellVisible\":true,\"contribTitle\":\"板块现金流贡献 （万元） ?\",\"targetTitle\":\"板块目标达成 ?\",\"tabs\":4,\"hasContribChart\":true,\"hasTargetChart\":true,\"unit\":\"全部板块\"},\"allMods\":{\"kpi\":true,\"cash\":true,\"risk\":true,\"load\":true,\"pairVisible\":true,\"sample\":\"新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% 当月新增 862.40 占目标 8.7% 完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1% 上月新增 968.35 占\"}}"
+    },
+    {
+      "ac": 2,
+      "name": "任一具体板块：#pairRow 整块隐藏（display/hidden/几何无空壳）",
+      "ok": false,
+      "detail": "{\"leafState\":{\"found\":true,\"hiddenAttr\":true,\"display\":\"grid\",\"visibility\":\"visible\",\"opacity\":\"1\",\"dataVisible\":\"false\",\"width\":1105,\"height\":401.58,\"visibleByGeom\":true,\"shellVisible\":false,\"contribTitle\":\"板块现金流贡献 （万元） ?\",\"targetTitle\":\"板块目标达成 ?\",\"tabs\":4,\"hasContribChart\":true,\"hasTargetChart\":true,\"unit\":\"SAS170 PMC板块\"},\"leafMods\":{\"kpi\":true,\"cash\":true,\"risk\":true,\"load\":true,\"pairVisible\":false,\"sample\":\"新签合同额（万元） 1,108.12 目标 1,200.00 占总目标 92.3% 当月新增 103.49 占目标 8.6% 完成合同额（万元） 1,479.72 目标 1,680.00 占总目标 88.1% 上月新增 116.20 占目标\"}}"
+    },
+    {
+      "ac": 3,
+      "name": "全部↔具体来回切换，显隐正确、无残留半截",
+      "ok": false,
+      "detail": "{\"leaf2\":{\"found\":true,\"hiddenAttr\":true,\"display\":\"grid\",\"visibility\":\"visible\",\"opacity\":\"1\",\"dataVisible\":\"false\",\"width\":1105,\"height\":401.58,\"visibleByGeom\":true,\"shellVisible\":false,\"contribTitle\":\"板块现金流贡献 （万元） ?\",\"targetTitle\":\"板块目标达成 ?\",\"tabs\":4,\"hasContribChart\":true,\"hasTargetChart\":true,\"unit\":\"SAS520 金山中心\"},\"backAll\":{\"found\":true,\"hiddenAttr\":false,\"display\":\"grid\",\"visibility\":\"visible\",\"opacity\":\"1\",\"dataVisible\":\"true\",\"width\":1105,\"height\":401.58,\"visibleByGeom\":true,\"shellVisible\":true,\"contribTitle\":\"板块现金流贡献 （万元） ?\",\"targetTitle\":\"板块目标达成 ?\",\"tabs\":4,\"hasContribChart\":true,\"hasTargetChart\":true,\"unit\":\"全部板块\"},\"againLeaf\":{\"found\":true,\"hiddenAttr\":true,\"display\":\"grid\",\"visibility\":\"visible\",\"opacity\":\"1\",\"dataVisible\":\"false\",\"width\":1105,\"height\":401.58,\"visibleByGeom\":true,\"shellVisible\":false,\"contribTitle\":\"板块现金流贡献 （万元） ?\",\"targetTitle\":\"板块目标达成 ?\",\"tabs\":4,\"hasContribChart\":true,\"hasTargetChart\":true,\"unit\":\"SAS680 数字技术板块\"}}"
+    },
+    {
+      "ac": 4,
+      "name": "不误伤其它模块（KPI/现金流/应收风险/负荷交付仍可见）",
+      "ok": true,
+      "detail": "{\"kpi\":true,\"cash\":true,\"risk\":true,\"load\":true,\"pairVisible\":false,\"sample\":\"新签合同额（万元） 923.43 目标 1,000.00 占总目标 92.3% 当月新增 86.24 占目标 8.6% 完成合同额（万元） 1,233.10 目标 1,400.00 占总目标 88.1% 上月新增 96.84 占目标 6.9\"}"
+    },
+    {
+      "ac": 5,
+      "name": "本记录只写本条结论（未混关 sidebar/UNIT）",
+      "ok": true,
+      "detail": "declared"
+    },
+    {
+      "ac": 6,
+      "name": "证据落盘；pageerror 记录",
+      "ok": true,
+      "detail": "{\"pageErrors\":[],\"finalAll\":{\"found\":true,\"hiddenAttr\":false,\"display\":\"grid\",\"visibility\":\"visible\",\"opacity\":\"1\",\"dataVisible\":\"true\",\"width\":1105,\"height\":401.58,\"visibleByGeom\":true,\"shellVisible\":true,\"contribTitle\":\"板块现金流贡献 （万元） ?\",\"targetTitle\":\"板块目标达成 ?\",\"tabs\":4,\"hasContribChart\":true,\"hasTargetChart\":true,\"unit\":\"全部板块\"}}"
+    }
+  ],
+  "samples": {
+    "allState": {
+      "found": true,
+      "hiddenAttr": false,
+      "display": "grid",
+      "visibility": "visible",
+      "opacity": "1",
+      "dataVisible": "true",
+      "width": 1105,
+      "height": 401.58,
+      "visibleByGeom": true,
+      "shellVisible": true,
+      "contribTitle": "板块现金流贡献 （万元） ?",
+      "targetTitle": "板块目标达成 ?",
+      "tabs": 4,
+      "hasContribChart": true,
+      "hasTargetChart": true,
+      "unit": "全部板块"
+    },
+    "leafState": {
+      "found": true,
+      "hiddenAttr": true,
+      "display": "grid",
+      "visibility": "visible",
+      "opacity": "1",
+      "dataVisible": "false",
+      "width": 1105,
+      "height": 401.58,
+      "visibleByGeom": true,
+      "shellVisible": false,
+      "contribTitle": "板块现金流贡献 （万元） ?",
+      "targetTitle": "板块目标达成 ?",
+      "tabs": 4,
+      "hasContribChart": true,
+      "hasTargetChart": true,
+      "unit": "SAS170 PMC板块"
+    },
+    "leaf2": {
+      "found": true,
+      "hiddenAttr": true,
+      "display": "grid",
+      "visibility": "visible",
+      "opacity": "1",
+      "dataVisible": "false",
+      "width": 1105,
+      "height": 401.58,
+      "visibleByGeom": true,
+      "shellVisible": false,
+      "contribTitle": "板块现金流贡献 （万元） ?",
+      "targetTitle": "板块目标达成 ?",
+      "tabs": 4,
+      "hasContribChart": true,
+      "hasTargetChart": true,
+      "unit": "SAS520 金山中心"
+    },
+    "backAll": {
+      "found": true,
+      "hiddenAttr": false,
+      "display": "grid",
+      "visibility": "visible",
+      "opacity": "1",
+      "dataVisible": "true",
+      "width": 1105,
+      "height": 401.58,
+      "visibleByGeom": true,
+      "shellVisible": true,
+      "contribTitle": "板块现金流贡献 （万元） ?",
+      "targetTitle": "板块目标达成 ?",
+      "tabs": 4,
+      "hasContribChart": true,
+      "hasTargetChart": true,
+      "unit": "全部板块"
+    },
+    "againLeaf": {
+      "found": true,
+      "hiddenAttr": true,
+      "display": "grid",
+      "visibility": "visible",
+      "opacity": "1",
+      "dataVisible": "false",
+      "width": 1105,
+      "height": 401.58,
+      "visibleByGeom": true,
+      "shellVisible": false,
+      "contribTitle": "板块现金流贡献 （万元） ?",
+      "targetTitle": "板块目标达成 ?",
+      "tabs": 4,
+      "hasContribChart": true,
+      "hasTargetChart": true,
+      "unit": "SAS680 数字技术板块"
+    },
+    "finalAll": {
+      "found": true,
+      "hiddenAttr": false,
+      "display": "grid",
+      "visibility": "visible",
+      "opacity": "1",
+      "dataVisible": "true",
+      "width": 1105,
+      "height": 401.58,
+      "visibleByGeom": true,
+      "shellVisible": true,
+      "contribTitle": "板块现金流贡献 （万元） ?",
+      "targetTitle": "板块目标达成 ?",
+      "tabs": 4,
+      "hasContribChart": true,
+      "hasTargetChart": true,
+      "unit": "全部板块"
+    },
+    "modsLeaf": {
+      "kpi": true,
+      "cash": true,
+      "risk": true,
+      "load": true,
+      "pairVisible": false,
+      "sample": "新签合同额（万元） 923.43 目标 1,000.00 占总目标 92.3% 当月新增 86.24 占目标 8.6% 完成合同额（万元） 1,233.10 目标 1,400.00 占总目标 88.1% 上月新增 96.84 占目标 6.9"
+    }
+  },
+  "pageErrors": [],
+  "note": "独立 Playwright 实机；不采信 Leo 静态 probe-pair-units.cjs",
+  "blockers": [
+    {
+      "acs": [
+        2,
+        3
+      ],
+      "summary": "pair-row display:grid!important overrides hidden/display:none; leaf still ~401px tall with titles/charts",
+      "css": ".pair-row{display:grid!important}",
+      "fix": "syncPairRowVisibility sets hidden+style.display none without important"
+    }
+  ]
+}

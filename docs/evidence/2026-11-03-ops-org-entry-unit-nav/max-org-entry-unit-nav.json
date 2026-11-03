@@ -1,0 +1,400 @@
+{
+  "item": "ep79 · 组织图板块/中心点击跳转 Board 并带组织筛选 + header",
+  "verdict": "PASS",
+  "verdictDetail": "专属 AC1–6/8 全过；回归 AC7 本轮实机亦过（深链+下拉叶子态 display:none/h=0）。不替代条①关账；条①此前曾 FAIL，本条仅回归观察。",
+  "exclusivePass": true,
+  "ac7RegressionPass": true,
+  "checkedAt": "2026-11-03T03:05:39.232Z",
+  "timezoneNote": "machine local Asia/Shanghai; ISO is UTC",
+  "urls": {
+    "org": "http://localhost:3001/operations-dashboard-202610",
+    "board": "http://localhost:3001/operations-dashboard-202610/board"
+  },
+  "checks": [
+    {
+      "ac": 1,
+      "name": "12 叶子均可点：href=/board?unit=正确编码 + target=_top + 负责人 wood-groupname",
+      "ok": true,
+      "detail": "{\"mode\":\"iframe\",\"count\":12,\"leafHrefResults\":[{\"unit\":\"SAS170 PMC板块\",\"ok\":true,\"hit\":{\"href\":\"/operations-dashboard-202610/board?unit=SAS170%20PMC%E6%9D%BF%E5%9D%97\",\"target\":\"_top\",\"title\":\"SAS170 PMC板块\",\"manager\":\"姚佳辉\"}},{\"unit\":\"SAS610 咨询板块\",\"ok\":true,\"hit\":{\"href\":\"/operations-dashboard-202610/board?unit=SAS610%20%E5%92%A8%E8%AF%A2%E6%9D%BF%E5%9D%97\",\"target\":\"_top\",\"title\":\"SAS610 咨询板块\",\"manager\":\"王建平\"}},{\"unit\":\"SAS680 数字技术板块\",\"ok\":true,\"hit\":{\"href\":\"/operations-dashboard-202610/board?unit=SAS680%20%E6%95%B0%E5%AD%97%E6%8A%80%E6%9C%AF%E6%9D%BF%E5%9D%97\",\"target\":\"_top\",\"title\":\"SAS680 数字技术板块\",\"manager\":\"潘颖\"}},{\"unit\":\"SAS650 新材料板块\",\"ok\":true,\"hit\":{\"href\":\"/operations-dashboard-202610/board?unit=SAS650%20%E6%96%B0%E6%9D%90%E6%96%99%E6%9D%BF%E5%9D%97\",\"target\":\"_top\",\"title\":\"SAS650 新材料板块\",\"manager\":\"陈贺明\"}},{\"unit\":\"SAS710 生命科学板块\",\"ok\":true,\"hit\":{\"href\":\"/operations-dashboard-202610/board?unit=SAS710%20%E7%94%9F%E5%91%BD%E7%A7%91%E5%AD%A6%E6%9D%BF%E5%9D%97\",\"target\":\"_top\",\"title\":\"SAS710 生命科学板块\",\"manager\":\"王培波\"}},{\"unit\":\"SAS690 COII板块\",\"ok\":true,\"hit\":{\"href\":\"/operations-dashboard-202610/board?unit=SAS690%20COII%E6%9D%BF%E5%9D%97\",\"target\":\"_top\",\"title\":\"SAS690 COII板块\",\"manager\":\"周翔\"}},{\"unit\":\"SAS720 模块化板块\",\"ok\":true,\"hit\":{\"href\":\"/operations-dashboard-202610/board?unit=SAS720%20%E6%A8%A1%E5%9D%97%E5%8C%96%E6%9D%BF%E5%9D%97\",\"target\":\"_top\",\"title\":\"SAS720 模块化板块\",\"manager\":\"朱勇\"}},{\"unit\":\"SAS670 供应链板块\",\"ok\":true,\"hit\":{\"href\":\"/operations-dashboard-202610/board?unit=SAS670%20%E4%BE%9B%E5%BA%94%E9%93%BE%E6%9D%BF%E5%9D%97\",\"target\":\"_top\",\"title\":\"SAS670 供应链板块\",\"manager\":\"张雯\"}},{\"unit\":\"SAS520 金山中心\",\"ok\":true,\"hit\":{\"href\":\"/operations-dashboard-202610/board?unit=SAS520%20%E9%87%91%E5%B1%B1%E4%B8%AD%E5%BF%83\",\"target\":\"_top\",\"title\":\"SAS520 金山中心\",\"manager\":\"赵宏海\"}},{\"unit\":\"SAS560 沈阳中心\",\"ok\":true,\"hit\":{\"href\":\"/operations-dashboard-202610/board?unit=SAS560%20%E6%B2%88%E9%98%B3%E4%B8%AD%E5%BF%83\",\"target\":\"_top\",\"title\":\"SAS560 沈阳中心\",\"manager\":\"朱新辉\"}},{\"unit\":\"SAS550 惠湛中心\",\"ok\":true,\"hit\":{\"href\":\"/operations-dashboard-202610/board?unit=SAS550%20%E6%83%A0%E6%B9%9B%E4%B8%AD%E5%BF%83\",\"target\":\"_top\",\"title\":\"SAS550 惠湛中心\",\"manager\":\"赵卫强\"}},{\"unit\":\"SAS530 银川中心\",\"ok\":true,\"hit\":{\"href\":\"/operations-dashboard-202610/board?unit=SAS530%20%E9%93%B6%E5%B7%9D%E4%B8%AD%E5%BF%83\",\"target\":\"_top\",\"title\":\"SAS530 银川中心\",\"manager\":\"杨科\"}}]}"
+    },
+    {
+      "ac": 1,
+      "name": "实机点击叶子（惠湛中心）跳转 Board 并带 unit（target=_top 等价）",
+      "ok": true,
+      "detail": "{\"ok\":true,\"before\":\"http://localhost:3001/operations-dashboard-202610\",\"url\":\"http://localhost:3001/operations-dashboard-202610/board?unit=SAS550%20%E6%83%A0%E6%B9%9B%E4%B8%AD%E5%BF%83\",\"unitParam\":\"SAS550 惠湛中心\",\"shown\":\"SAS550 惠湛中心\",\"header\":\"全局看板 > 运营看板 > SAS550 惠湛中心\",\"headerEndsWithLeaf\":true}"
+    },
+    {
+      "ac": 5,
+      "name": "公司级 EPC 不跳 / 不带 unit",
+      "ok": true,
+      "detail": "{\"epcHref\":null,\"epcTag\":\"A\"}"
+    },
+    {
+      "ac": 5,
+      "name": "项目群等非叶子不误带 board?unit",
+      "ok": true,
+      "detail": "{\"groups\":[{\"tag\":\"A\",\"href\":\"/dashboard/org/xinyewu\",\"text\":\"SAS850 新业务项目群 任宇\"},{\"tag\":\"A\",\"href\":\"/dashboard/org/nm-ls\",\"text\":\"SAS840 NM&LS 项目群 潘建兴\"},{\"tag\":\"A\",\"href\":\"/dashboard/org/haiwai\",\"text\":\"SAS830 海外项目群 李湛湘\"},{\"tag\":\"A\",\"href\":\"/dashboard/org/dongbu\",\"text\":\"SAS810 东部项目群 钟富优\"},{\"tag\":\"A\",\"href\":\"/dashboard/org/xibu\",\"text\":\"SAS820 西部项目群 梁栋\"},{\"tag\":\"A\",\"href\":null,\"text\":\"公司级EPC项目\"}],\"groupBad\":[]}"
+    },
+    {
+      "ac": 2,
+      "name": "12 叶子深链进入后壳「组织板块」选中 = 该叶子",
+      "ok": true,
+      "detail": "{\"fails\":[],\"sample\":{\"unit\":\"SAS170 PMC板块\",\"shown\":\"SAS170 PMC板块\",\"header\":\"全局看板 > 运营看板 > SAS170 PMC板块\",\"frameUnit\":\"SAS170 PMC板块\",\"selectOk\":true,\"headerOk\":true,\"frameOk\":true}}"
+    },
+    {
+      "ac": 4,
+      "name": "12 叶子深链 header 末段 = SASxxx 标准名",
+      "ok": true,
+      "detail": "{\"fails\":[],\"sample\":{\"unit\":\"SAS170 PMC板块\",\"shown\":\"SAS170 PMC板块\",\"header\":\"全局看板 > 运营看板 > SAS170 PMC板块\",\"frameUnit\":\"SAS170 PMC板块\",\"selectOk\":true,\"headerOk\":true,\"frameOk\":true}}"
+    },
+    {
+      "ac": 3,
+      "name": "iframe dashboard.state.unit 与壳选中一致（深链路径）",
+      "ok": true,
+      "detail": "{\"frameMatched\":12,\"total\":12,\"fails\":[]}"
+    },
+    {
+      "ac": 3,
+      "name": "iframe unit / 行为 ≡ 下拉手选同一叶子（与深链对照）",
+      "ok": true,
+      "detail": "{\"handShown\":\"SAS680 数字技术板块\",\"handHeader\":\"全局看板 > 运营看板 > SAS680 数字技术板块\",\"handFrame\":{\"unit\":\"SAS680 数字技术板块\",\"lastMsg\":{\"type\":\"ops-dashboard-filter\",\"year\":2026,\"unit\":\"SAS680 数字技术板块\",\"t\":1793675128268}},\"deepSame\":{\"unit\":\"SAS680 数字技术板块\",\"shown\":\"SAS680 数字技术板块\",\"header\":\"全局看板 > 运营看板 > SAS680 数字技术板块\",\"frameUnit\":\"SAS680 数字技术板块\",\"selectOk\":true,\"headerOk\":true,\"frameOk\":true}}"
+    },
+    {
+      "ac": 4,
+      "name": "Board 内改下拉 header 同步；全部板块 header=`Board`",
+      "ok": true,
+      "detail": "{\"syncShown1\":\"SAS520 金山中心\",\"syncHeader1\":\"全局看板 > 运营看板 > SAS520 金山中心\",\"syncShown2\":\"全部板块\",\"syncHeader2\":\"全局看板 > 运营看板 > Board\"}"
+    },
+    {
+      "ac": 6,
+      "name": "董事会进 Board 默认（header=Board，无叶子 unit）",
+      "ok": true,
+      "detail": "{\"boardClick\":{\"ok\":true,\"url\":\"http://localhost:3001/operations-dashboard-202610/board\",\"unitParam\":null,\"shown\":\"全部板块\",\"header\":\"全局看板 > 运营看板 > Board\",\"orgMode\":\"iframe\"},\"boardHref\":\"/operations-dashboard-202610/board\",\"boardTarget\":\"_top\",\"boardDefaultOk\":true}"
+    },
+    {
+      "ac": 7,
+      "name": "（回归）叶子态 pairRow 隐藏 — 依赖条①；单独记录，不阻断本条专属 AC",
+      "ok": true,
+      "detail": "{\"ac\":7,\"name\":\"叶子态 pairRow 应隐藏（回归，依赖条①）\",\"visuallyHidden\":true,\"attrHidden\":true,\"pairLeaf\":{\"found\":true,\"unit\":\"SAS170 PMC板块\",\"hiddenAttr\":true,\"dataVisible\":\"false\",\"display\":\"none\",\"visibility\":\"visible\",\"opacity\":\"1\",\"width\":0,\"height\":0,\"visibleByGeom\":false},\"note\":\"回归 PASS：叶子态 pairRow 视觉隐藏\"}"
+    },
+    {
+      "ac": 8,
+      "name": "无「惠滋」等错写；标准名符合 wood-groupname",
+      "ok": true,
+      "detail": "{\"orgHasHuizi\":false,\"orgHtmlHuizi\":false,\"boardHasHuizi\":false}"
+    },
+    {
+      "ac": 8,
+      "name": "pageerror 记录；截图+json+验收记录+cjs 落盘",
+      "ok": true,
+      "detail": "{\"pageErrors\":[],\"out\":\"C:\\\\Work\\\\2_Development\\\\21_Platform\\\\26_engineering-platform\\\\docs\\\\evidence\\\\2026-11-03-ops-org-entry-unit-nav\"}"
+    }
+  ],
+  "regression": [
+    {
+      "ac": 7,
+      "name": "叶子态 pairRow 应隐藏（回归，依赖条①）",
+      "visuallyHidden": true,
+      "attrHidden": true,
+      "pairLeaf": {
+        "found": true,
+        "unit": "SAS170 PMC板块",
+        "hiddenAttr": true,
+        "dataVisible": "false",
+        "display": "none",
+        "visibility": "visible",
+        "opacity": "1",
+        "width": 0,
+        "height": 0,
+        "visibleByGeom": false
+      },
+      "note": "回归 PASS：叶子态 pairRow 视觉隐藏"
+    }
+  ],
+  "deepLinkResults": [
+    {
+      "unit": "SAS170 PMC板块",
+      "shown": "SAS170 PMC板块",
+      "header": "全局看板 > 运营看板 > SAS170 PMC板块",
+      "frameUnit": "SAS170 PMC板块",
+      "selectOk": true,
+      "headerOk": true,
+      "frameOk": true
+    },
+    {
+      "unit": "SAS610 咨询板块",
+      "shown": "SAS610 咨询板块",
+      "header": "全局看板 > 运营看板 > SAS610 咨询板块",
+      "frameUnit": "SAS610 咨询板块",
+      "selectOk": true,
+      "headerOk": true,
+      "frameOk": true
+    },
+    {
+      "unit": "SAS680 数字技术板块",
+      "shown": "SAS680 数字技术板块",
+      "header": "全局看板 > 运营看板 > SAS680 数字技术板块",
+      "frameUnit": "SAS680 数字技术板块",
+      "selectOk": true,
+      "headerOk": true,
+      "frameOk": true
+    },
+    {
+      "unit": "SAS650 新材料板块",
+      "shown": "SAS650 新材料板块",
+      "header": "全局看板 > 运营看板 > SAS650 新材料板块",
+      "frameUnit": "SAS650 新材料板块",
+      "selectOk": true,
+      "headerOk": true,
+      "frameOk": true
+    },
+    {
+      "unit": "SAS710 生命科学板块",
+      "shown": "SAS710 生命科学板块",
+      "header": "全局看板 > 运营看板 > SAS710 生命科学板块",
+      "frameUnit": "SAS710 生命科学板块",
+      "selectOk": true,
+      "headerOk": true,
+      "frameOk": true
+    },
+    {
+      "unit": "SAS690 COII板块",
+      "shown": "SAS690 COII板块",
+      "header": "全局看板 > 运营看板 > SAS690 COII板块",
+      "frameUnit": "SAS690 COII板块",
+      "selectOk": true,
+      "headerOk": true,
+      "frameOk": true
+    },
+    {
+      "unit": "SAS720 模块化板块",
+      "shown": "SAS720 模块化板块",
+      "header": "全局看板 > 运营看板 > SAS720 模块化板块",
+      "frameUnit": "SAS720 模块化板块",
+      "selectOk": true,
+      "headerOk": true,
+      "frameOk": true
+    },
+    {
+      "unit": "SAS670 供应链板块",
+      "shown": "SAS670 供应链板块",
+      "header": "全局看板 > 运营看板 > SAS670 供应链板块",
+      "frameUnit": "SAS670 供应链板块",
+      "selectOk": true,
+      "headerOk": true,
+      "frameOk": true
+    },
+    {
+      "unit": "SAS520 金山中心",
+      "shown": "SAS520 金山中心",
+      "header": "全局看板 > 运营看板 > SAS520 金山中心",
+      "frameUnit": "SAS520 金山中心",
+      "selectOk": true,
+      "headerOk": true,
+      "frameOk": true
+    },
+    {
+      "unit": "SAS560 沈阳中心",
+      "shown": "SAS560 沈阳中心",
+      "header": "全局看板 > 运营看板 > SAS560 沈阳中心",
+      "frameUnit": "SAS560 沈阳中心",
+      "selectOk": true,
+      "headerOk": true,
+      "frameOk": true
+    },
+    {
+      "unit": "SAS550 惠湛中心",
+      "shown": "SAS550 惠湛中心",
+      "header": "全局看板 > 运营看板 > SAS550 惠湛中心",
+      "frameUnit": "SAS550 惠湛中心",
+      "selectOk": true,
+      "headerOk": true,
+      "frameOk": true
+    },
+    {
+      "unit": "SAS530 银川中心",
+      "shown": "SAS530 银川中心",
+      "header": "全局看板 > 运营看板 > SAS530 银川中心",
+      "frameUnit": "SAS530 银川中心",
+      "selectOk": true,
+      "headerOk": true,
+      "frameOk": true
+    }
+  ],
+  "leafHrefResults": [
+    {
+      "unit": "SAS170 PMC板块",
+      "ok": true,
+      "hit": {
+        "href": "/operations-dashboard-202610/board?unit=SAS170%20PMC%E6%9D%BF%E5%9D%97",
+        "target": "_top",
+        "title": "SAS170 PMC板块",
+        "manager": "姚佳辉"
+      }
+    },
+    {
+      "unit": "SAS610 咨询板块",
+      "ok": true,
+      "hit": {
+        "href": "/operations-dashboard-202610/board?unit=SAS610%20%E5%92%A8%E8%AF%A2%E6%9D%BF%E5%9D%97",
+        "target": "_top",
+        "title": "SAS610 咨询板块",
+        "manager": "王建平"
+      }
+    },
+    {
+      "unit": "SAS680 数字技术板块",
+      "ok": true,
+      "hit": {
+        "href": "/operations-dashboard-202610/board?unit=SAS680%20%E6%95%B0%E5%AD%97%E6%8A%80%E6%9C%AF%E6%9D%BF%E5%9D%97",
+        "target": "_top",
+        "title": "SAS680 数字技术板块",
+        "manager": "潘颖"
+      }
+    },
+    {
+      "unit": "SAS650 新材料板块",
+      "ok": true,
+      "hit": {
+        "href": "/operations-dashboard-202610/board?unit=SAS650%20%E6%96%B0%E6%9D%90%E6%96%99%E6%9D%BF%E5%9D%97",
+        "target": "_top",
+        "title": "SAS650 新材料板块",
+        "manager": "陈贺明"
+      }
+    },
+    {
+      "unit": "SAS710 生命科学板块",
+      "ok": true,
+      "hit": {
+        "href": "/operations-dashboard-202610/board?unit=SAS710%20%E7%94%9F%E5%91%BD%E7%A7%91%E5%AD%A6%E6%9D%BF%E5%9D%97",
+        "target": "_top",
+        "title": "SAS710 生命科学板块",
+        "manager": "王培波"
+      }
+    },
+    {
+      "unit": "SAS690 COII板块",
+      "ok": true,
+      "hit": {
+        "href": "/operations-dashboard-202610/board?unit=SAS690%20COII%E6%9D%BF%E5%9D%97",
+        "target": "_top",
+        "title": "SAS690 COII板块",
+        "manager": "周翔"
+      }
+    },
+    {
+      "unit": "SAS720 模块化板块",
+      "ok": true,
+      "hit": {
+        "href": "/operations-dashboard-202610/board?unit=SAS720%20%E6%A8%A1%E5%9D%97%E5%8C%96%E6%9D%BF%E5%9D%97",
+        "target": "_top",
+        "title": "SAS720 模块化板块",
+        "manager": "朱勇"
+      }
+    },
+    {
+      "unit": "SAS670 供应链板块",
+      "ok": true,
+      "hit": {
+        "href": "/operations-dashboard-202610/board?unit=SAS670%20%E4%BE%9B%E5%BA%94%E9%93%BE%E6%9D%BF%E5%9D%97",
+        "target": "_top",
+        "title": "SAS670 供应链板块",
+        "manager": "张雯"
+      }
+    },
+    {
+      "unit": "SAS520 金山中心",
+      "ok": true,
+      "hit": {
+        "href": "/operations-dashboard-202610/board?unit=SAS520%20%E9%87%91%E5%B1%B1%E4%B8%AD%E5%BF%83",
+        "target": "_top",
+        "title": "SAS520 金山中心",
+        "manager": "赵宏海"
+      }
+    },
+    {
+      "unit": "SAS560 沈阳中心",
+      "ok": true,
+      "hit": {
+        "href": "/operations-dashboard-202610/board?unit=SAS560%20%E6%B2%88%E9%98%B3%E4%B8%AD%E5%BF%83",
+        "target": "_top",
+        "title": "SAS560 沈阳中心",
+        "manager": "朱新辉"
+      }
+    },
+    {
+      "unit": "SAS550 惠湛中心",
+      "ok": true,
+      "hit": {
+        "href": "/operations-dashboard-202610/board?unit=SAS550%20%E6%83%A0%E6%B9%9B%E4%B8%AD%E5%BF%83",
+        "target": "_top",
+        "title": "SAS550 惠湛中心",
+        "manager": "赵卫强"
+      }
+    },
+    {
+      "unit": "SAS530 银川中心",
+      "ok": true,
+      "hit": {
+        "href": "/operations-dashboard-202610/board?unit=SAS530%20%E9%93%B6%E5%B7%9D%E4%B8%AD%E5%BF%83",
+        "target": "_top",
+        "title": "SAS530 银川中心",
+        "manager": "杨科"
+      }
+    }
+  ],
+  "clickNav": {
+    "ok": true,
+    "before": "http://localhost:3001/operations-dashboard-202610",
+    "url": "http://localhost:3001/operations-dashboard-202610/board?unit=SAS550%20%E6%83%A0%E6%B9%9B%E4%B8%AD%E5%BF%83",
+    "unitParam": "SAS550 惠湛中心",
+    "shown": "SAS550 惠湛中心",
+    "header": "全局看板 > 运营看板 > SAS550 惠湛中心",
+    "headerEndsWithLeaf": true
+  },
+  "boardClick": {
+    "ok": true,
+    "url": "http://localhost:3001/operations-dashboard-202610/board",
+    "unitParam": null,
+    "shown": "全部板块",
+    "header": "全局看板 > 运营看板 > Board",
+    "orgMode": "iframe"
+  },
+  "orgProbeSummary": {
+    "mode": "iframe",
+    "leafCount": 12,
+    "boardHref": "/operations-dashboard-202610/board",
+    "epcHref": null,
+    "groupCount": 6,
+    "hasHuizi": false
+  },
+  "pageErrors": [],
+  "note": "独立 Playwright 实机；不采信 Leo probe；未混验 sidebar / pairRow条① / UNIT_OPTIONS；未改业务代码/账本/未 commit",
+  "ac7Recheck": {
+    "deep": {
+      "display": "none",
+      "h": 0,
+      "hidden": true,
+      "unit": "SAS170 PMC板块"
+    },
+    "dropdownLeaf": {
+      "display": "none",
+      "h": 0,
+      "hidden": true,
+      "unit": "SAS170 PMC板块"
+    },
+    "dropdownLeaf2": {
+      "display": "none",
+      "h": 0,
+      "hidden": true,
+      "unit": "SAS520 金山中心"
+    },
+    "allUnits": {
+      "display": "grid",
+      "h": 401.58,
+      "hidden": false,
+      "unit": "全部板块"
+    },
+    "note": "max-org-entry-unit-nav-pair-recheck.cjs；条①历史 FAIL（grid!important）对照：本轮叶子态已视觉隐藏，仍不替代①关账"
+  }
+}

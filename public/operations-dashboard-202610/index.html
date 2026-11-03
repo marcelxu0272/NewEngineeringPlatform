@@ -34,8 +34,8 @@ Object.entries(window.DASHBOARD_THEMES.blue).forEach(([key,value])=>{
 main{grid-column:2;grid-row:2;min-height:0;min-width:0;padding:12px 16px 10px;display:grid;grid-template-rows:minmax(92px,.94fr) minmax(272px,2.92fr) minmax(176px,1.8fr) 12px;gap:var(--gap);overflow:hidden}.kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--gap);min-height:0}.middle-grid{display:grid;grid-template-columns:minmax(0,1.94fr) minmax(0,1fr) minmax(0,1.14fr);gap:var(--gap);min-height:0}.bottom-grid{display:grid;grid-template-columns:minmax(0,1.32fr) minmax(0,2fr) minmax(0,1.23fr);gap:var(--gap);min-height:0}.panel,.kpi-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 2px 8px rgba(var(--shadow-rgb),.035);overflow:hidden;min-width:0;min-height:0}.panel{padding:var(--panel-pad);display:flex;flex-direction:column;position:relative;transition:box-shadow .2s,border-color .2s}.panel.panel-focused{border-color:rgba(var(--primary-rgb),.55);box-shadow:0 0 0 2px rgba(var(--primary-rgb),.08)}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-shrink:0;min-width:0;margin-bottom:10px;min-height:20px}.panel-title{margin:0;display:flex;align-items:center;gap:6px;color:var(--ink);font-size:12px;font-weight:700;white-space:nowrap;min-width:0}.panel-title>svg{width:17px;height:17px;color:var(--primary);background:rgba(var(--primary-rgb),.08);border-radius:4px;padding:1px}.panel-title .unit{font-weight:400;font-size:9px;color:var(--muted);margin-left:1px}.info-button{width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;padding:0;margin:0;border:1px solid var(--faint);border-radius:50%;color:var(--muted);font-size:9px;font-family:Georgia,serif;font-weight:500;line-height:1;background:transparent;vertical-align:middle;flex-shrink:0}.info-button:hover{border-color:var(--primary);color:var(--primary);background:rgba(var(--primary-rgb),.06)}.segment{display:flex;background:var(--surface-soft);border:1px solid var(--line);border-radius:5px;padding:2px;flex-shrink:0;gap:1px;min-width:0}.segment button{border:0;background:transparent;color:var(--muted);padding:3px 11px;border-radius:3px;font-size:9px;white-space:nowrap;line-height:1.35}.segment button.active{color:var(--white);background:linear-gradient(100deg,var(--primary),var(--primary-light));box-shadow:0 1px 4px rgba(var(--primary-rgb),.18)}.segment button:hover:not(.active){background:rgba(var(--primary-rgb),.06);color:var(--primary)}
 .kpi-card{display:flex;position:relative;padding:14px;gap:12px}.kpi-icon{width:39px;height:39px;flex:0 0 39px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:linear-gradient(140deg,rgba(var(--primary-rgb),.17),rgba(var(--primary-rgb),.055));color:var(--primary-deep);margin-top:1px}.kpi-icon svg{width:24px;height:24px}.kpi-main{flex:1;min-width:0;display:flex;flex-direction:column}.kpi-label{font-size:12px;font-weight:700;color:var(--ink);display:flex;align-items:center;gap:6px;white-space:nowrap}.kpi-label .unit{font-size:9px;font-weight:400;color:var(--muted)}.kpi-value{font-size:clamp(28px,2.6vw,36px);font-weight:700;line-height:1.2;color:var(--primary-deep);letter-spacing:.2px;margin:3px 0 4px;font-variant-numeric:tabular-nums;white-space:nowrap}.kpi-meta{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:9px;white-space:nowrap}.kpi-meta strong{font-weight:500;color:var(--primary)}.kpi-meta .meta-label{margin-right:4px}.kpi-compare{position:absolute;right:13px;top:27px;background:rgba(var(--primary-rgb),.05);border-radius:5px;padding:6px 8px;color:var(--primary);font-size:9px}.kpi-compare .compare-label{display:block;color:var(--muted);margin-bottom:4px}.kpi-compare strong{font-size:10px;font-weight:600}.kpi-progress{margin-top:auto;padding-top:7px}.progress-track{height:5px;background:var(--track);border-radius:4px;overflow:hidden}.progress-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary-light));border-radius:4px;transition:width .35s}.up{color:var(--primary)}.down{color:var(--danger)}.positive{color:var(--primary)}.negative{color:var(--danger)}.warning{color:var(--warning)}
 .cash-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;flex-shrink:0;margin-bottom:9px}.metric-card{min-width:0;background:var(--surface-soft);border:1px solid var(--line);border-radius:6px;padding:9px 10px}.cash-metrics .metric-card{display:flex;gap:9px;align-items:flex-start}.metric-icon{height:29px;width:29px;flex:0 0 29px;display:flex;align-items:center;justify-content:center;border-radius:50%;color:var(--primary);background:rgba(var(--primary-rgb),.09)}.metric-icon svg{width:17px;height:17px}.metric-card.warning .metric-icon{color:var(--warning);background:rgba(var(--warning-rgb),.11)}.metric-card.negative .metric-icon{color:var(--danger);background:rgba(var(--danger-rgb),.08)}.metric-card.warning{background:rgba(var(--warning-rgb),.025);border-color:rgba(var(--warning-rgb),.2)}.metric-card.negative{background:rgba(var(--danger-rgb),.025);border-color:rgba(var(--danger-rgb),.18)}.metric-label{font-size:10px;color:var(--text);display:flex;align-items:center;gap:4px;white-space:nowrap}.metric-value{font-size:20px;font-weight:700;color:var(--primary-deep);line-height:1.45;font-variant-numeric:tabular-nums;white-space:nowrap}.metric-card.warning .metric-value{color:var(--warning)}.metric-card.negative .metric-value{color:var(--danger)}.metric-change{color:var(--muted);font-size:9px;display:flex;gap:7px;align-items:center;line-height:1.7;white-space:nowrap}.metric-change strong{font-weight:500}.metric-change svg{width:10px;height:10px}.chart-section-title{display:flex;align-items:center;justify-content:space-between;gap:6px;flex-shrink:0;min-height:18px}.sub-title{font-size:10px;font-weight:700;color:var(--primary-deep);display:flex;align-items:center;gap:5px;white-space:nowrap}.sub-title:before{content:"";width:3px;height:11px;background:var(--primary);border-radius:1px}.sub-title .unit{color:var(--muted);font-size:9px;font-weight:400}.chart{width:100%;min-width:0;min-height:0;position:relative;flex:1}.cash-chart-wrap{position:relative;flex:1;display:flex;min-height:0;min-width:0;margin-top:4px}.cash-warning{position:absolute;right:4px;top:2px;display:flex;gap:4px;align-items:center;border:1px solid rgba(var(--danger-rgb),.28);color:var(--danger);background:var(--surface);border-radius:5px;font-size:9px;padding:5px 7px;box-shadow:0 2px 6px rgba(var(--danger-rgb),.04);z-index:2;pointer-events:none}.cash-warning svg{width:12px;height:12px}.cash-caption{color:var(--muted);font-size:9px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0;margin-top:2px}
-.risk-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;flex-shrink:0;margin-bottom:10px}.risk-metrics .metric-card{padding:9px 10px;min-height:74px}.risk-metrics .metric-value{font-size:20px;color:var(--ink)}.risk-metrics .metric-change{font-size:8px;white-space:normal;line-height:1.65;min-height:15px}.risk-metrics .metric-label{font-size:10px}.risk-metrics .metric-sub{font-size:8px;color:var(--muted);line-height:1.55;min-height:17px}.aging-layout{min-height:0;display:flex;align-items:center;gap:9px;flex:1;padding-top:3px}.donut-wrap{position:relative;width:43%;height:100%;min-height:88px;flex-shrink:0;display:flex;align-items:center;justify-content:center}.donut-wrap .chart{height:100%;width:100%;flex:1}.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;white-space:nowrap;display:flex;flex-direction:column;gap:2px;color:var(--primary-deep)}.donut-center strong{font-size:15px;font-variant-numeric:tabular-nums;line-height:1.25}.donut-center span{font-size:8px;color:var(--muted)}.legend-list{display:flex;flex:1;min-width:0;flex-direction:column;gap:10px;padding:0}.legend-item{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:9px;color:var(--muted);white-space:nowrap;min-width:0}.legend-name{display:flex;align-items:center;gap:5px;min-width:0}.legend-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);display:inline-block;flex-shrink:0}.legend-item strong{font-weight:500;font-variant-numeric:tabular-nums;color:var(--text)}.legend-item .legend-amount{font-size:8px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:34px;text-align:right}.legend-item .legend-percent{margin-left:auto}
-.contribution-head{flex-wrap:wrap;gap:7px;margin-bottom:8px}.contribution-head .segment{margin-left:auto}.contribution-head .segment button{padding:3px 8px}.table-wrap{flex:1;min-height:0;display:flex;align-items:flex-start;overflow:hidden}.contribution-table{width:100%;border-collapse:collapse;font-size:9px;table-layout:fixed;color:var(--text)}.contribution-table thead{background:var(--surface-soft);color:var(--muted)}.contribution-table th{font-weight:500;padding:8px 3px;line-height:1.55;text-align:right;border-bottom:1px solid var(--line)}.contribution-table th:first-child{width:25%;text-align:left;padding-left:8px}.contribution-table th .th-unit{display:block;font-size:8px}.contribution-table td{padding:9px 3px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums;cursor:pointer}.contribution-table td:first-child{text-align:left;padding-left:8px}.contribution-table tbody tr:last-child td{border-bottom:0}.contribution-table tbody tr:hover{background:rgba(var(--primary-rgb),.05)}.contribution-table td:nth-child(4){color:var(--primary-deep)}.rank{display:inline-flex;width:15px;height:15px;align-items:center;justify-content:center;border-radius:4px;background:var(--surface-soft);color:var(--muted);font-size:9px;margin-right:5px}.rank.top{background:rgba(var(--warning-rgb),.13);color:var(--warning)}.mix-section{flex-shrink:0;padding-top:7px}.mix-section .sub-title{font-size:10px}.mix-section .sub-title:before{display:none}.mix-chart{height:24px;width:100%;min-height:24px;margin:3px 0 5px}.mix-legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.mix-legend .legend-item{display:block;background:var(--surface-soft);border-radius:5px;padding:6px 8px;font-size:8px}.mix-legend .legend-name{margin-bottom:4px}.mix-legend strong{display:block;margin-left:11px;font-size:9px;color:var(--primary-deep)}
+.risk-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;flex-shrink:0;margin-bottom:10px}.risk-metrics .metric-card{padding:9px 10px;min-height:74px}.risk-metrics .metric-value{font-size:20px;color:var(--ink)}.risk-metrics .metric-change{font-size:8px;white-space:normal;line-height:1.65;min-height:15px}.risk-metrics .metric-label{font-size:10px}.risk-metrics .metric-sub{font-size:8px;color:var(--muted);line-height:1.55;min-height:17px}.donut-wrap{position:relative;width:43%;height:100%;min-height:88px;flex-shrink:0;display:flex;align-items:center;justify-content:center}.donut-wrap .chart{height:100%;width:100%;flex:1}.donut-center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;white-space:nowrap;display:flex;flex-direction:column;gap:2px;color:var(--primary-deep)}.donut-center strong{font-size:15px;font-variant-numeric:tabular-nums;line-height:1.25}.donut-center span{font-size:8px;color:var(--muted)}.legend-list{display:flex;flex:1;min-width:0;flex-direction:column;gap:10px;padding:0}.legend-item{display:flex;align-items:center;justify-content:space-between;gap:5px;font-size:9px;color:var(--muted);white-space:nowrap;min-width:0}.legend-name{display:flex;align-items:center;gap:5px;min-width:0}.legend-dot{width:6px;height:6px;border-radius:50%;background:var(--primary);display:inline-block;flex-shrink:0}.legend-item strong{font-weight:500;font-variant-numeric:tabular-nums;color:var(--text)}.legend-item .legend-amount{font-size:8px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:34px;text-align:right}.legend-item .legend-percent{margin-left:auto}
+.contribution-head{flex-wrap:wrap;gap:7px;margin-bottom:8px}.contribution-head .segment{margin-left:auto}.contribution-head .segment button{padding:3px 8px}.contribution-chart{flex:0 0 auto;min-height:0;width:100%;min-width:0}.table-wrap{flex:1;min-height:0;display:flex;align-items:flex-start;overflow:hidden}.contribution-table{width:100%;border-collapse:collapse;font-size:9px;table-layout:fixed;color:var(--text)}.contribution-table thead{background:var(--surface-soft);color:var(--muted)}.contribution-table th{font-weight:500;padding:8px 3px;line-height:1.55;text-align:right;border-bottom:1px solid var(--line)}.contribution-table th:first-child{width:25%;text-align:left;padding-left:8px}.contribution-table th .th-unit{display:block;font-size:8px}.contribution-table td{padding:9px 3px;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-variant-numeric:tabular-nums;cursor:pointer}.contribution-table td:first-child{text-align:left;padding-left:8px}.contribution-table tbody tr:last-child td{border-bottom:0}.contribution-table tbody tr:hover{background:rgba(var(--primary-rgb),.05)}.contribution-table td:nth-child(4){color:var(--primary-deep)}.rank{display:inline-flex;width:15px;height:15px;align-items:center;justify-content:center;border-radius:4px;background:var(--surface-soft);color:var(--muted);font-size:9px;margin-right:5px}.rank.top{background:rgba(var(--warning-rgb),.13);color:var(--warning)}.mix-section{flex-shrink:0;padding-top:7px}.mix-section .sub-title{font-size:10px}.mix-section .sub-title:before{display:none}.mix-chart{height:24px;width:100%;min-height:24px;margin:3px 0 5px}.mix-legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.mix-legend .legend-item{display:block;background:var(--surface-soft);border-radius:5px;padding:6px 8px;font-size:8px}.mix-legend .legend-name{margin-bottom:4px}.mix-legend strong{display:block;margin-left:11px;font-size:9px;color:var(--primary-deep)}
 .target-head{flex-wrap:wrap;row-gap:6px;margin-bottom:4px}.target-head .segment{margin-left:auto}.target-head .segment button{padding:3px 7px;font-size:8px}.target-chart{flex:1;min-height:0}.panel-note{font-size:8px;color:var(--muted);line-height:1.4;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:4px 0 0}.delivery-layout{display:flex;gap:8px;flex:1;min-height:0;align-items:stretch}.delivery-left{flex:1 1 0;display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0}.delivery-mid{flex:2 1 0;display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0}.delivery-right{flex:1 1 0;min-width:0;min-height:0;display:flex;flex-direction:column}.delivery-kpi-row{display:flex;flex-direction:column;gap:7px;flex:1;min-height:0}.delivery-kpi-card{background:var(--surface-alt);border:1px solid var(--line);border-radius:5px;padding:9px 10px;display:flex;flex-direction:column;gap:3px}.delivery-kpi-card .metric-label{font-size:9px;color:var(--text)}.delivery-kpi-card strong{font-size:clamp(28px,2.6vw,36px);color:var(--primary-dark);font-variant-numeric:tabular-nums;white-space:nowrap;line-height:1.2}.delivery-kpi-card small{font-size:10px;color:var(--muted);line-height:1.35}.delivery-trend,.delivery-status{border:1px solid var(--line);border-radius:5px;min-width:0;min-height:0;display:flex;flex-direction:column;padding:7px 8px 2px;flex:1}.delivery-trend .sub-title:before,.delivery-status .sub-title:before{display:none}.delivery-trend .sub-title,.delivery-status .sub-title{font-size:9px}.delivery-chart-inner{display:flex;flex-direction:column;min-height:0;min-width:0;flex:1;align-items:stretch;gap:6px}.delivery-chart-inner .donut-wrap{width:100%;min-height:90px;flex:1 1 auto;height:auto}.delivery-chart-inner .donut-center strong{font-size:16px}.delivery-chart-inner .donut-center span{font-size:7px}.delivery-chart-inner .legend-list{gap:9px}.delivery-chart-inner .legend-item{font-size:8px}.delivery-chart-inner .legend-name{gap:4px}.alert-head{margin-bottom:7px}.text-button{background:transparent;border:0;color:var(--muted);font-size:9px;display:flex;align-items:center;gap:2px;padding:0}.text-button:hover{color:var(--primary)}.text-button svg{height:10px;width:10px}.alert-list{flex:1;min-height:0;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:5px;padding:0 9px}.alert-item{display:flex;gap:8px;align-items:flex-start;min-height:0;flex:1;padding:9px 0;border-bottom:1px solid var(--line);cursor:pointer;position:relative}.alert-item:last-child{border-bottom:0}.alert-item:hover .alert-title{filter:brightness(.9)}.alert-icon{flex-shrink:0;width:14px;height:14px;background:var(--danger);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--white);margin-top:1px}.alert-icon svg{width:9px;height:9px}.alert-item.warning .alert-icon{background:var(--warning)}.alert-item.info .alert-icon{background:var(--blue)}.alert-copy{min-width:0;flex:1;display:flex;flex-direction:column;gap:4px}.alert-title{font-size:9px;line-height:1.3;font-weight:600;color:var(--danger);display:flex;justify-content:space-between;gap:5px;white-space:nowrap}.alert-item.warning .alert-title{color:var(--warning)}.alert-item.info .alert-title{color:var(--blue)}.alert-detail{font-size:8px;color:var(--muted);line-height:1.45;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.alert-date{font-size:7px;font-weight:400;color:var(--faint);white-space:nowrap;margin-left:auto;padding-top:1px}.footer{display:flex;justify-content:space-between;align-items:center;gap:12px;min-width:0;font-size:8px;color:var(--faint);line-height:1;white-space:nowrap}.footer span{overflow:hidden;text-overflow:ellipsis}.footer .status-dot{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--primary);margin-right:4px;vertical-align:middle}
 .global-tooltip{display:none;position:fixed;z-index:10000;max-width:290px;padding:10px 12px;background:var(--tooltip-bg);color:var(--tooltip-text);border:1px solid rgba(var(--primary-rgb),.14);border-radius:6px;font-size:11px;line-height:1.65;box-shadow:0 6px 22px rgba(var(--overlay-rgb),.2);pointer-events:none;white-space:normal}.global-tooltip.visible{display:block}.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(15px);z-index:10001;color:var(--tooltip-text);background:var(--tooltip-bg);box-shadow:0 6px 25px rgba(var(--overlay-rgb),.15);padding:11px 18px;border-radius:7px;font-size:11px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}.toast.visible{opacity:1;transform:translateX(-50%) translateY(0)}dialog{width:min(740px,80vw);max-height:83vh;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--text);box-shadow:0 20px 70px rgba(var(--overlay-rgb),.22)}dialog::backdrop{background:rgba(var(--overlay-rgb),.35);backdrop-filter:blur(3px)}.dialog-head{display:flex;align-items:center;justify-content:space-between;padding:17px 22px;border-bottom:1px solid var(--line)}.dialog-head h2{font-size:17px;color:var(--ink);margin:0}.dialog-content{padding:20px 22px;max-height:60vh;overflow:auto;font-size:12px;line-height:1.8}.dialog-content h3{color:var(--primary-deep);font-size:14px;margin:0 0 10px}.dialog-content p{margin:0 0 12px}.dialog-content table{width:100%;border-collapse:collapse;font-size:11px}.dialog-content th,.dialog-content td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left}.dialog-content th{background:var(--surface-soft);color:var(--muted);font-weight:500}.dialog-content .detail-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:17px}.dialog-footer{padding:12px 22px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;background:var(--surface-soft)}.dialog-content .legend-dot{margin-right:5px}.highcharts-container{font-family:var(--font)!important}.highcharts-tooltip text{font-family:var(--font)!important}.highcharts-point{cursor:pointer}.data-empty{font-size:11px;color:var(--muted);padding:20px;text-align:center}
 @media (min-width:1600px){:root{--gap:14px;--panel-pad:16px}.app{grid-template-rows:66px minmax(0,1fr);grid-template-columns:82px minmax(0,1fr)}.brand{height:66px;font-size:31px}.header{padding:0 23px}.header-title h1{font-size:25px}.header-tabs{font-size:12px}.header-controls{gap:10px}select{height:32px;font-size:11px;max-width:136px}.select-wrap:after{top:12px}.asof{font-size:11px}main{padding:14px 18px 11px;grid-template-rows:minmax(110px,1fr) minmax(330px,3fr) minmax(228px,1.9fr) 13px}.nav-button{height:77px;font-size:11px}.nav-button svg{width:23px;height:23px}.panel-title{font-size:14px}.panel-title .unit{font-size:10px}.kpi-card{padding:17px;gap:14px}.kpi-icon{width:45px;height:45px;flex-basis:45px}.kpi-label{font-size:14px}.kpi-value{font-size:32px;margin:5px 0 7px}.kpi-meta{font-size:11px}.kpi-compare{top:34px;right:17px;font-size:11px;padding:8px 10px}.kpi-compare strong{font-size:12px}.progress-track{height:6px}.metric-label{font-size:12px}.metric-value{font-size:25px}.metric-change{font-size:11px}.cash-metrics{gap:11px;margin-bottom:13px}.metric-card{padding:12px}.cash-metrics .metric-card{gap:11px}.metric-icon{width:34px;height:34px;flex-basis:34px}.risk-metrics{gap:10px;margin-bottom:13px}.risk-metrics .metric-card{min-height:93px;padding:12px}.risk-metrics .metric-label{font-size:12px}.risk-metrics .metric-value{font-size:25px}.risk-metrics .metric-change,.risk-metrics .metric-sub{font-size:10px}.sub-title{font-size:12px}.sub-title .unit{font-size:10px}.legend-item{font-size:11px}.legend-list{gap:14px}.legend-item .legend-amount{font-size:10px}.donut-center strong{font-size:19px}.donut-center span{font-size:10px}.cash-warning{font-size:11px;padding:7px 9px}.cash-caption{font-size:10px}.segment button{font-size:11px;padding:4px 14px}.contribution-head .segment button{padding:4px 10px}.contribution-table{font-size:11px}.contribution-table th{padding:10px 5px}.contribution-table td{padding:13px 5px}.contribution-table th .th-unit{font-size:10px}.mix-section .sub-title{font-size:12px}.mix-chart{height:29px;min-height:29px}.mix-legend .legend-item{font-size:10px;padding:8px 10px}.mix-legend strong{font-size:11px}.target-head .segment button{font-size:10px;padding:3px 8px}.delivery-kpi-card .metric-label{font-size:10px}.delivery-kpi-card strong{font-size:34px}.delivery-kpi-card small{font-size:11px}.delivery-kpi-row{gap:10px}.delivery-layout{gap:10px}.delivery-trend,.delivery-status{padding:9px 10px 3px}.delivery-trend .sub-title,.delivery-status .sub-title{font-size:11px}.delivery-chart-inner .legend-item{font-size:10px}.delivery-chart-inner .donut-center strong{font-size:20px}.delivery-chart-inner .donut-center span{font-size:9px}.alert-title{font-size:11px}.alert-detail{font-size:10px}.alert-date{font-size:9px}.alert-icon{width:16px;height:16px}.alert-item{padding:12px 0}.panel-note{font-size:10px}.footer{font-size:9px}.text-button{font-size:11px}}
@@ -91,9 +91,9 @@ dialog{width:min(900px,85vw);max-height:85vh;background:var(--surface);color:var
 @media(max-height:780px){.contribution-table td{padding:7px 2px}.contribution-table th{padding:5px 2px}}
 
 .delivery-trend,.delivery-status{padding-top:5px}.delivery-chart-inner .donut-center strong{font-size:18px}.delivery-chart-inner .donut-center span{font-size:8px}
-.aging-layout .donut-center strong{font-size:14px}.aging-layout .donut-center span{font-size:8px}
-@media(min-width:1600px){.risk-metric{min-height:88px}.aging-layout .donut-center strong{font-size:15px}.delivery-chart-inner .donut-wrap{min-height:90px}}
-@media(max-width:1400px){.contribution-table td{padding-top:6px;padding-bottom:6px}.contribution-table th{padding-top:4px;padding-bottom:4px}.risk-metric small{font-size:8px}.aging-layout .donut-center strong{font-size:12px}.aging-layout .donut-center span{font-size:7px}}
+
+@media(min-width:1600px){.risk-metric{min-height:88px}.delivery-chart-inner .donut-wrap{min-height:90px}}
+@media(max-width:1400px){.contribution-table td{padding-top:6px;padding-bottom:6px}.contribution-table th{padding-top:4px;padding-bottom:4px}.risk-metric small{font-size:8px}}
 @media(min-width:1600px){.contribution-table td{padding-top:7px;padding-bottom:7px}}
 .delivery-chart-inner .donut-wrap{width:53%;height:100%}
 
@@ -252,21 +252,35 @@ main{
   height:auto!important;
 }
 
-/* 贡献 | 目标 同行 */
+/* 贡献 | 目标 同行：两卡网格等分、同宽同高 */
 .pair-row{
   display:grid!important;
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
   gap:var(--gap)!important;
   flex:0 0 auto!important;
   width:100%!important;
+  max-width:100%!important;
+  box-sizing:border-box!important;
   align-items:stretch!important; /* 贡献/目标同高 */
 }
+/* ep76 返工：对抗 .pair-row{display:grid!important}，叶子态真正隐藏 */
+#pairRow[hidden], #pairRow[data-visible="false"]{
+  display:none!important;
+}
 .pair-row > .panel{
+  min-width:0!important;
+  width:auto!important; /* 列宽由等分网格决定，避免内容撑破 */
+  max-width:100%!important;
   height:100%!important;
   min-height:0!important;
   max-height:none!important;
   align-self:stretch!important;
   overflow:hidden!important;
+  box-sizing:border-box!important;
+}
+.pair-row .panel-head{
+  min-width:0!important;
+  max-width:100%!important;
 }
 .pair-row .table-wrap{
   flex:1 1 auto!important;
@@ -274,10 +288,27 @@ main{
   overflow:auto!important;
   height:auto!important;
 }
+/* 两卡图区同宽同高：锁死 320px，禁止 flex 撑开（贡献侧无 tab/note，目标侧有，等高 panel 下 flex:1 会把贡献图撑高） */
+.pair-row #contributionChart,
+.pair-row #contributionChart.chart,
+.pair-row #contributionPanel .contribution-chart,
+.pair-row #contributionPanel .chart,
 .pair-row #targetPanel .chart,
 .pair-row #targetChart,
-.pair-row #targetChart.chart{
-  max-height:220px!important;
+.pair-row #targetChart.chart,
+.pair-row #targetPanel .target-chart{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  flex:0 0 320px!important;
+  flex-grow:0!important;
+  flex-shrink:0!important;
+  flex-basis:320px!important;
+  height:320px!important;
+  min-height:320px!important;
+  max-height:320px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
 }
 
 /* 面板：高度必须吃进子项（含图表），禁止靠 overflow 叠画撑视觉 */
@@ -297,7 +328,6 @@ main{
 
 /* 彻底拆掉旧一页 flex 高度链 */
 .cash-chart-wrap,
-.aging-layout,
 .delivery-layout,
 .table-wrap,
 .mix-section,
@@ -358,33 +388,6 @@ main{
   min-height:260px!important;
   position:relative!important;
   margin-bottom:12px!important;
-}
-
-.aging-layout{display:none!important} /* 旧环图布局废弃 */
-.aging-section.mix-section{
-  display:block!important;
-  width:100%!important;
-  flex-shrink:0!important;
-  padding-top:4px!important;
-}
-#agingChart.mix-chart,
-.aging-section .mix-chart{
-  display:block!important;
-  width:100%!important;
-  height:24px!important;
-  min-height:24px!important;
-  max-height:32px!important;
-  margin:3px 0 8px!important;
-}
-.aging-legend-4,
-#agingLegend.aging-legend-4{
-  display:grid!important;
-  grid-template-columns:repeat(4,minmax(0,1fr))!important;
-  gap:6px!important;
-}
-.aging-legend-4 .mix-item{
-  display:block!important;
-  width:100%!important;
 }
 
 #targetChart,
@@ -583,8 +586,8 @@ main{grid-row:1!important;grid-column:1!important}
   <nav class="nav">
    <button class="nav-button active" data-focus="overview" data-tip="运营看板：查看公司经营全景" aria-label="运营看板"><svg><use href="#icon-chart"/></svg><span>运营看板</span></button>
    <button class="nav-button" data-focus="cash" data-tip="资金状况：聚焦现金流与资金安全" aria-label="资金状况"><svg><use href="#icon-money"/></svg><span>资金状况</span></button>
-   <button class="nav-button" data-focus="risk" data-tip="资金风险：查看应收账款、账龄与经营风险" aria-label="资金风险"><svg><use href="#icon-shield"/></svg><span>资金风险</span></button>
-   <button class="nav-button" data-focus="contribution" data-tip="贡献分析：按板块、业务类型或客户类型查看经营贡献" aria-label="贡献分析"><svg><use href="#icon-briefcase"/></svg><span>贡献分析</span></button>
+   <button class="nav-button" data-focus="risk" data-tip="资金风险：查看应收账款、WIP、存货与营业收入" aria-label="资金风险"><svg><use href="#icon-shield"/></svg><span>资金风险</span></button>
+   <button class="nav-button" data-focus="contribution" data-tip="板块现金流贡献：按板块查看净现金流贡献（正绿负红）" aria-label="板块现金流贡献"><svg><use href="#icon-briefcase"/></svg><span>现金流贡献</span></button>
    <button class="nav-button" data-focus="delivery" data-tip="工作负荷与交付保障：查看负荷率趋势和项目交付保障活动" aria-label="工作负荷与交付保障"><svg><use href="#icon-users"/></svg><span>交付保障</span></button>
   </nav>
   <div class="sidebar-bottom"><button class="icon-button" data-tip="单页经营全景 · 所有模块始终可见" aria-label="单页经营全景"><svg><use href="#icon-chevron"/></svg></button></div>
@@ -604,17 +607,14 @@ main{grid-row:1!important;grid-column:1!important}
   <section id="riskPanel" class="panel">
     <div class="panel-head"><h2 class="panel-title"><svg><use href="#icon-shield"/></svg>应收与资金风险<span class="unit">（万元）</span><button class="info-button" aria-label="资金风险口径" data-tip="应收账款为客户应收余额；WIP为已开展尚未结算确认的工作量；营业收入为当期经营收入（demo 占位，较上期对比）。">?</button></h2></div>
     <div id="riskMetrics" class="risk-metrics"></div>
-    <div class="chart-section-title"><span class="sub-title">应收账款账龄结构<span class="unit">（万元）</span></span><button class="info-button" data-tip="账龄以应收形成日计算。悬停或点击色块/图例查看该账龄段明细。" aria-label="账龄图表交互">?</button></div>
-    <div class="aging-section mix-section"><div id="agingChart" class="mix-chart" aria-label="应收账款账龄分布条"></div><div id="agingLegend" class="mix-legend aging-legend-4"></div></div>
    </section>
-  <div class="pair-row" role="group" aria-label="贡献与目标">
+  <div id="pairRow" class="pair-row" role="group" aria-label="贡献与目标" data-testid="pair-row">
    <section id="contributionPanel" class="panel">
-    <div class="panel-head contribution-head"><h2 class="panel-title"><svg><use href="#icon-briefcase"/></svg>经营贡献分析<button class="info-button" data-tip="按不同维度比较合同额、回款额与净现金贡献。净现金贡献为该维度同期净现金流。板块显示TOP5，完整明细可点击查看。" aria-label="经营贡献说明">?</button></h2><div class="segment"><button class="active" data-contribution-dim="department">板块贡献</button><button data-contribution-dim="business">业务类型</button><button data-contribution-dim="customer">客户类型</button></div></div>
-    <div class="table-wrap"><table id="contributionTable" class="contribution-table"><thead><tr><th>名称</th><th>新签合同额<span class="th-unit">（万元）</span></th><th>回款额<span class="th-unit">（万元）</span></th><th>净现金贡献<span class="th-unit">（万元）</span></th></tr></thead><tbody id="contributionBody"></tbody></table></div>
-    <div class="mix-section"><span class="sub-title">合同额结构占比<button class="info-button" data-tip="展示当前筛选范围内的合同额结构；悬停或点击色块查看详细占比。" aria-label="结构占比说明">?</button></span><div id="mixChart" class="mix-chart" aria-label="合同额结构占比图"></div><div id="mixLegend" class="mix-legend"></div></div>
+    <div class="panel-head contribution-head"><h2 class="panel-title"><svg><use href="#icon-briefcase"/></svg>板块现金流贡献<span class="unit">（万元）</span><button class="info-button" data-tip="按板块展示净现金流贡献：正值绿色、负值红色，按贡献值排序。仅展示现金流单一指标。点击柱条可查看板块明细。" aria-label="板块现金流贡献说明">?</button></h2></div>
+    <div id="contributionChart" class="chart contribution-chart" aria-label="板块现金流贡献横向柱图"></div>
    </section>
    <section id="targetPanel" class="panel">
-    <div class="panel-head target-head"><h2 class="panel-title"><svg><use href="#icon-chart"/></svg>板块目标达成<button class="info-button" data-tip="比较各板块实际值与对应年度目标。此模块强调目标进度，与上方经营贡献金额排名形成互补。" aria-label="板块目标达成说明">?</button></h2><div class="segment"><button class="active" data-target-metric="contract">合同额</button><button data-target-metric="invoice">开票额</button><button data-target-metric="receipt">回款额</button><button data-target-metric="net">净现金贡献</button></div></div>
+    <div class="panel-head target-head"><h2 class="panel-title"><svg><use href="#icon-chart"/></svg>板块目标达成<button class="info-button" data-tip="比较各板块实际值与对应年度目标。四个页签对齐顶部 KPI（新签合同额 / 完成合同额 / 完成开票额 / 完成回款额）；切换仅影响本区图表。" aria-label="板块目标达成说明">?</button></h2><div class="segment"><button class="active" data-target-metric="contract">新签合同额</button><button data-target-metric="completed">完成合同额</button><button data-target-metric="invoice">完成开票额</button><button data-target-metric="receipt">完成回款额</button></div></div>
     <div id="targetChart" class="chart target-chart" aria-label="板块目标达成图"></div><p id="targetNote" class="panel-note"></p>
    </section>
   </div>
@@ -636,7 +636,7 @@ main{grid-row:1!important;grid-column:1!important}
     </div>
    </section>
   <section id="alertPanel" class="panel">
-    <div class="panel-head alert-head"><h2 class="panel-title"><svg><use href="#icon-warning"/></svg>经营异常预警<button class="info-button" data-tip="根据回款进度、应收账龄、现金流波动和项目延期触发预警。点击预警查看触发原因及处置建议。" aria-label="预警说明">?</button></h2><button id="moreAlerts" class="text-button" data-tip="查看当前筛选范围的全部演示预警">更多<svg><use href="#icon-chevron"/></svg></button></div><div id="alertList" class="alert-list"></div>
+    <div class="panel-head alert-head"><h2 class="panel-title"><svg><use href="#icon-warning"/></svg>经营异常预警<button class="info-button" data-tip="根据回款进度、现金流波动和项目延期触发预警。点击预警查看触发原因及处置建议。" aria-label="预警说明">?</button></h2><button id="moreAlerts" class="text-button" data-tip="查看当前筛选范围的全部演示预警">更多<svg><use href="#icon-chevron"/></svg></button></div><div id="alertList" class="alert-list"></div>
    </section>
   <footer class="footer"><span><i class="status-dot"></i>演示原型 · 数据为模拟数据 · 金额单位：万元</span><span>统一统计口径 · 全局筛选联动 · 点击数据查看详情</span></footer>
  </main>
@@ -678,13 +678,13 @@ main{grid-row:1!important;grid-column:1!important}
     riskPeriod:{receivables:-2.1,wip:6.3,inventory:-1.8,revenue:4.5}, /* 较上期%：前三项降绿升红，营业收入升绿降红 */
     revenue:3280.60,
     receivables:1001.11,wip:2587.49,inventory:2200.48,
-    departments:[['设计一院','设计院',.18,.962],['设计二院','设计院',.156,.915],['设计三院','设计院',.133,.887],['设计四院','设计院',.114,.853],['设计五院','设计院',.10,.826],['智能工程部','数字化业务单元',.098,.906],['智能咨询部','数字化业务单元',.069,.873],['工艺专业室','专业室',.062,.925],['结构专业室','专业室',.05,.894],['电气专业室','专业室',.038,.862]],
+    departments:[['SAS170 PMC板块','SAS170 PMC板块',.12,.94],['SAS610 咨询板块','SAS610 咨询板块',.11,.91],['SAS680 数字技术板块','SAS680 数字技术板块',.10,.88],['SAS650 新材料板块','SAS650 新材料板块',.09,.90],['SAS710 生命科学板块','SAS710 生命科学板块',.085,.87],['SAS690 COII板块','SAS690 COII板块',.08,.86],['SAS720 模块化板块','SAS720 模块化板块',.075,.89],['SAS670 供应链板块','SAS670 供应链板块',.07,.85],['SAS520 金山中心','SAS520 金山中心',.075,.92],['SAS560 沈阳中心','SAS560 沈阳中心',.065,.84],['SAS550 惠湛中心','SAS550 惠湛中心',.065,.83],['SAS530 银川中心','SAS530 银川中心',.06,.82]],
     businesses:[['设计咨询',.64],['项目管理',.22],['工程服务',.14]],
     customers:[['央国企',.52],['民营企业',.26],['政府事业单位',.15],['海外客户',.07]],
     inflow:[20350,21310,25970,24300,26700,29300,25908.41,27670.18,28400,30100,32200,35400],
     outflow:[17700,18610,19400,20300,23500,26200,28681.95,31033.87,26300,27100,29300,31600],
     annualLoad:[90.5,92.8,94.6,95.2,95.9,96.33],monthlyLoad:[78.2,84.5,85.7,86.1,88.3,92.51],
-    projects:Array.from({length:14},(_,i)=>({name:['华东产业园设计项目','西北能源工程咨询','绿色化工园区项目','数字工厂升级项目','区域供热工程项目','市政基础设施项目','新材料厂房设计','公用工程改造项目','低碳园区咨询项目','污水处理设计项目','储能配套工程','产线技术改造项目','研发中心设计项目','综合管廊工程项目'][i],department:['设计一院','设计二院','设计三院','设计四院','设计五院','智能工程部','智能咨询部','工艺专业室','结构专业室','电气专业室','设计一院','设计二院','设计三院','设计四院'][i],business:['设计咨询','项目管理','工程服务'][i%3],status:i>=12?'风险':'正常',milestone:i>=12?'设计校审待完成':'按计划推进',due:`2026-09-${String(5+i).padStart(2,'0')}`}))
+    projects:Array.from({length:14},(_,i)=>({name:['华东产业园设计项目','西北能源工程咨询','绿色化工园区项目','数字工厂升级项目','区域供热工程项目','市政基础设施项目','新材料厂房设计','公用工程改造项目','低碳园区咨询项目','污水处理设计项目','储能配套工程','产线技术改造项目','研发中心设计项目','综合管廊工程项目'][i],department:['SAS170 PMC板块','SAS610 咨询板块','SAS680 数字技术板块','SAS650 新材料板块','SAS710 生命科学板块','SAS690 COII板块','SAS720 模块化板块','SAS670 供应链板块','SAS520 金山中心','SAS560 沈阳中心','SAS550 惠湛中心','SAS530 银川中心','SAS170 PMC板块','SAS610 咨询板块'][i],business:['设计咨询','项目管理','工程服务'][i%3],status:i>=12?'风险':'正常',milestone:i>=12?'设计校审待完成':'按计划推进',due:`2026-09-${String(5+i).padStart(2,'0')}`}))
   };
   const state={year:2026,unit:'全部板块',business:'全部业务类型',theme:'teal',dimension:'department',target:'contract'};
   let colors=THEMES.teal, charts={}, model, tooltipOwner=null;
@@ -701,9 +701,17 @@ main{grid-row:1!important;grid-column:1!important}
     const n=8,inflow=DEMO_DATA.inflow.slice(0,n).map(v=>Math.round(v*factor*100)/100),outflow=DEMO_DATA.outflow.slice(0,n).map(v=>Math.round(v*factor*100)/100),net=inflow.map((v,i)=>Math.round((v-outflow[i])*100)/100);
     const totalNet=Math.round(sum(net)*100)/100;
     const weights=departments.map(d=>d[2]/unitFactor),allocated={};
-    for(const key of ['contract','receipt','invoice']) allocated[key]=splitExact(totals[key],weights);
-    allocated.net=splitExact(totalNet,weights);
-    const depRows=departments.map((d,i)=>({name:d[0],group:d[1],contract:allocated.contract[i],receipt:allocated.receipt[i],invoice:allocated.invoice[i],net:allocated.net[i],target:allocated.contract[i]/d[3],rate:d[3]*100}));
+    for(const key of ['contract','completed','receipt','invoice']) allocated[key]=splitExact(totals[key],weights);
+    /* 板块现金流贡献演示：多数为正、少数为负，便于正绿负红 */
+    const cashW=departments.map(d=>{
+      if(d[0]==='SAS560 沈阳中心') return -0.035;
+      if(d[0]==='SAS690 COII板块') return -0.055;
+      if(d[0]==='SAS550 惠湛中心') return -0.025;
+      return Math.max(0.02, d[2]);
+    });
+    const cashAbs=sum(cashW.map(Math.abs))||1;
+    allocated.net=cashW.map(w=>Math.round(totalNet*(w/cashAbs)*100)/100);
+    const depRows=departments.map((d,i)=>({name:d[0],group:d[1],contract:allocated.contract[i],completed:allocated.completed[i],receipt:allocated.receipt[i],invoice:allocated.invoice[i],net:allocated.net[i],target:allocated.contract[i]/d[3],rate:d[3]*100}));
     const rawBudget=sum(depRows.map(r=>r.target));
     depRows.forEach(r=>{r.target=targets.contract*r.target/rawBudget;r.rate=r.contract/r.target*100;});
     const projects=DEMO_DATA.projects.filter(p=>(state.unit==='全部板块'||DEMO_DATA.departments.find(d=>d[0]===p.department)[1]===state.unit)&&(state.business==='全部业务类型'||p.business===state.business));
@@ -712,8 +720,8 @@ main{grid-row:1!important;grid-column:1!important}
   function dimensionRows(){
     if(state.dimension==='department') return model.depRows;
     const list=state.dimension==='business'?(state.business==='全部业务类型'?DEMO_DATA.businesses:[[state.business,1]]):DEMO_DATA.customers;
-    const allocated=Object.fromEntries(['contract','receipt','invoice','net'].map(k=>[k,splitExact(k==='net'?model.totalNet:model.totals[k],list.map(d=>d[1]))]));
-    const rows=list.map((d,i)=>({name:d[0],contract:allocated.contract[i],receipt:allocated.receipt[i],invoice:allocated.invoice[i],net:allocated.net[i],target:allocated.contract[i]/(.94-i*.027),rate:(.94-i*.027)*100}));
+    const allocated=Object.fromEntries(['contract','completed','receipt','invoice','net'].map(k=>[k,splitExact(k==='net'?model.totalNet:model.totals[k],list.map(d=>d[1]))]));
+    const rows=list.map((d,i)=>({name:d[0],contract:allocated.contract[i],completed:allocated.completed[i],receipt:allocated.receipt[i],invoice:allocated.invoice[i],net:allocated.net[i],target:allocated.contract[i]/(.94-i*.027),rate:(.94-i*.027)*100}));
     const raw=sum(rows.map(r=>r.target));rows.forEach(r=>{r.target=model.targets.contract*r.target/raw;r.rate=r.contract/r.target*100;});return rows;
   }
   function setTheme(name){
@@ -730,7 +738,7 @@ main{grid-row:1!important;grid-column:1!important}
   }
   function info(text){return `<button type="button" class="info-button" data-tip="${safe(text)}" aria-label="查看指标口径">${icon('info')}</button>`;}
   function renderKpis(){
-    const unitFactor=state.unit==='全部板块'?1:state.unit==='设计院'?0.62:state.unit==='数字化业务单元'?0.24:0.14;
+    const unitFactor=state.unit==='全部板块'?1:(DEMO_DATA.departments.find(d=>d[1]===state.unit)?.[2]||0.08);
     const bizFactor=state.business==='全部业务类型'?1:state.business==='设计咨询'?0.64:state.business==='项目管理'?0.22:0.14;
     const yearFactor=state.year===2026?1:0.92;
     $('kpiGrid').innerHTML=Object.entries(METRICS).map(([key,m])=>{
@@ -816,10 +824,9 @@ main{grid-row:1!important;grid-column:1!important}
 
   function renderRisk(){
     const period=DEMO_DATA.riskPeriod;
-    const revenue=(DEMO_DATA.revenue||3280.6)*(state.year===2026?1:0.94)*(state.unit==='全部板块'?1:state.unit==='设计院'?0.62:state.unit==='数字化业务单元'?0.24:0.14);
+    const revenue=(DEMO_DATA.revenue||3280.6)*(state.year===2026?1:0.94)*(state.unit==='全部板块'?1:(DEMO_DATA.departments.find(d=>d[1]===state.unit)?.[2]||0.08));
     const fmtPeriod=(key,delta)=>{
       const up=delta>=0;
-      // 前三项（应收/WIP/存货）降绿升红；营业收入升绿降红
       const good = key==='revenue' ? up : !up;
       const col = good ? colors.success : colors.danger;
       const arrow = up ? '↑' : '↓';
@@ -827,69 +834,42 @@ main{grid-row:1!important;grid-column:1!important}
       return `<small class="risk-period" style="color:${col}">较上期 ${signed} ${arrow}</small>`;
     };
     const risk=[
-      ['应收账款','receivables',model.receivables,period.receivables,'客户应收账款余额；账龄从账款形成日起计算。副文案为较上期对比（非同比）。'],
+      ['应收账款','receivables',model.receivables,period.receivables,'客户应收账款余额。副文案为较上期对比（非同比）。'],
       ['WIP','wip',model.wip,period.wip,'Work In Progress，已开展但尚未结算确认的工作量金额。'],
       ['存货','inventory',model.inventory,period.inventory,'所选板块截至数据日的存货账面余额。'],
       ['营业收入','revenue',revenue,period.revenue,'营业收入演示指标；副文案为较上期对比（非同比、非占应收总额）。']
     ];
     $('riskMetrics').innerHTML=risk.map((r,i)=>`<button class="risk-metric" data-risk="${i}" data-tip="${r[4]} 点击查看说明。"><span class="metric-label">${r[0]}</span><strong>${money(r[2])}</strong>${fmtPeriod(r[1],r[3])}</button>`).join('');
-    const labels=['1年以内','1–2年','2–3年','3年以上'],weights=[.68,.22,.07,.03],values=splitExact(model.receivables,weights),palette=[colors.primary,colors.accent,colors.warning,colors.danger];
-    const agingTotal=sum(values)||1;
-    $('agingLegend').innerHTML=labels.map((n,i)=>`<button class="mix-item" data-aging="${i}" data-tip="${n}：${money(values[i])}万元，占比${pct(weights[i]*100,0)}；点击查看账龄说明。"><span><i style="background:${palette[i]}"></i>${n}</span><strong>${pct(weights[i]*100,0)}</strong></button>`).join('');
-    // 与合同额结构占比同款水平分布条
-    chart('agingChart',{chart:{type:'bar',spacing:[0,0,0,0],margin:[0,0,0,0]},xAxis:{visible:false,categories:['账龄']},yAxis:{visible:false,max:100,reversedStacks:false},legend:{enabled:false},tooltip:{formatter(){return `<b>${this.series.name}</b><br/>${money(agingTotal*this.y/100)} 万元<br/>占比 ${pct(this.y)}`;}},plotOptions:{series:{stacking:'normal',borderWidth:0,pointWidth:14,cursor:'pointer',point:{events:{click(){openAging(this.series.index);}}}}},series:labels.map((n,i)=>({name:n,color:palette[i],data:[weights[i]*100]}))});
   }
   function renderContribution(){
-    const rows=dimensionRows().sort((a,b)=>b.contract-a.contract),top=rows.slice(0,5);
-    const head=$('contributionTable').querySelector('thead th');if(head)head.textContent={department:'板块',business:'业务类型',customer:'客户类型'}[state.dimension];
-    $('contributionBody').innerHTML=top.map((r,i)=>`<tr tabindex="0" role="button" data-row="${safe(r.name)}" aria-label="查看${safe(r.name)}贡献明细" data-tip="${safe(r.name)}：合同额${money(r.contract)}万元，占所选范围${pct(r.contract/model.totals.contract*100)}。点击查看完整明细。"><td><span class="rank ${i<3?'top':''}">${i+1}</span><span>${r.name}</span></td><td>${money(r.contract)}</td><td>${money(r.receipt)}</td><td class="primary-text">${money(r.net)}</td></tr>`).join('');
-    let mixGroups,mixValues;
-    if(state.dimension==='department'){
-      const allGroups=['设计院','数字化业务单元','专业室'];
-      const raw=allGroups.map(g=>({name:g,val:sum(model.depRows.filter(r=>r.group===g).map(r=>r.contract))}));
-      const total=sum(raw.map(r=>r.val))||1;
-      const threshold=total*0.05;
-      const main=raw.filter(r=>r.val>=threshold);
-      const otherVal=sum(raw.filter(r=>r.val<threshold).map(r=>r.val));
-      mixGroups=main.map(r=>r.name);mixValues=main.map(r=>r.val);
-      if(otherVal>0){mixGroups.push('其他');mixValues.push(otherVal);}
-    }else if(state.dimension==='business'){
-      const allBiz=['设计咨询','项目管理','工程服务','PMC/EPC','技术服务','可行性研究'];
-      const bizWeights=[.35,.22,.18,.12,.08,.05];
-      const total=model.totals.contract||1;
-      const raw=allBiz.map((n,i)=>({name:n,val:total*bizWeights[i]}));
-      const threshold=total*0.05;
-      const main=raw.filter(r=>r.val>=threshold);
-      const otherVal=sum(raw.filter(r=>r.val<threshold).map(r=>r.val));
-      mixGroups=main.map(r=>r.name);mixValues=main.map(r=>r.val);
-      if(otherVal>0){mixGroups.push('其他');mixValues.push(otherVal);}
-    }else{
-      const custList=DEMO_DATA.customers;
-      const total=model.totals.contract||1;
-      const raw=custList.map(c=>({name:c[0],val:total*c[1]}));
-      const threshold=total*0.05;
-      const main=raw.filter(r=>r.val>=threshold);
-      const otherVal=sum(raw.filter(r=>r.val<threshold).map(r=>r.val));
-      mixGroups=main.map(r=>r.name);mixValues=main.map(r=>r.val);
-      if(otherVal>0){mixGroups.push('其他');mixValues.push(otherVal);}
-    }
-    const mixTotal=sum(mixValues)||1;
-    const mixPalette=[colors.primary,colors.secondary,colors.warning,colors.accent,colors.success,'#9bb0c3','#d568fb'];
-    $('mixLegend').innerHTML=mixGroups.map((g,i)=>`<button class="mix-item" data-unit="${g}" data-tip="${g}合同额占所选范围${pct(mixValues[i]/mixTotal*100)}，点击按此维度筛选。"><span><i style="background:${mixPalette[i%mixPalette.length]}"></i>${g}</span><strong>${pct(mixValues[i]/mixTotal*100)}</strong></button>`).join('');
-    chart('mixChart',{chart:{type:'bar',spacing:[0,0,0,0],margin:[0,0,0,0]},xAxis:{visible:false,categories:['结构']},yAxis:{visible:false,max:100,reversedStacks:false},legend:{enabled:false},tooltip:{formatter(){return `<b>${this.series.name}</b><br/>合同额 ${money(mixTotal*this.y/100)} 万元<br/>占比 ${pct(this.y)}`;}},plotOptions:{series:{stacking:'normal',borderWidth:0,pointWidth:14,cursor:'pointer',point:{events:{click(){if(state.dimension==='department')setUnit(this.series.name);}}}}},series:mixGroups.map((g,i)=>({name:g,color:mixPalette[i%mixPalette.length],data:[mixValues[i]/mixTotal*100]}))});
+    const rows=[...model.depRows].sort((a,b)=>b.net-a.net);
+    const cats=rows.map(r=>r.name);
+    const data=rows.map(r=>({y:r.net,color:r.net>=0?colors.success:colors.danger,name:r.name}));
+    chart('contributionChart',{
+      chart:{type:'bar',spacing:[4,8,4,4],marginLeft:88,marginRight:52},
+      xAxis:{categories:cats,reversed:true,tickLength:0,lineWidth:0,labels:{style:{fontSize:'11px',color:colors.muted}}},
+      yAxis:{title:{text:null},gridLineColor:colors.grid,labels:{style:{fontSize:'10px',color:colors.muted}},plotLines:[{value:0,color:colors.faint,width:1}]},
+      legend:{enabled:false},
+      tooltip:{formatter(){const v=this.y;return `<b>${this.point.name||this.x}</b><br/>净现金流贡献 <b style="color:${v>=0?colors.success:colors.danger}">${money(v)}</b> 万元<br/>点击查看板块明细`;}},
+      plotOptions:{bar:{borderRadius:3,borderWidth:0,pointPadding:0.12,groupPadding:0.08,dataLabels:{enabled:true,formatter(){return money(this.y,1);},style:{fontSize:'10px',color:colors.ink,textOutline:'none'},crop:false,overflow:'allow'}},series:{cursor:'pointer',point:{events:{click(){openDepartment(rows[this.index].name);}}}}},
+      series:[{name:'净现金流贡献',data}]
+    });
   }
   function renderTargets(){
-    const key=state.target,label={contract:'合同额',invoice:'开票额',receipt:'回款额',net:'净现金流'}[key];
-    const rows=[...model.depRows].sort((a,b)=>b.contract-a.contract).slice(0,5);
-    const totalValue=key==='net'?model.totalNet:model.totals[key],totalTarget=key==='net'?30000*model.factor:model.targets[key];
-    const budgetShares=rows.map(r=>r.target/model.targets.contract),targets=rows.map((r,i)=>totalTarget*budgetShares[i]),actual=rows.map(r=>r[key]);
-    const rates=actual.map((v,i)=>v/targets[i]*100);
-    $('targetNote').textContent=`${label}年度目标达成率 · 显示合同额排名前${rows.length}的板块`;
-    chart('targetChart',{chart:{type:'bar',spacing:[5,10,2,0],marginRight:43},xAxis:{categories:rows.map(r=>r.name),tickLength:0,lineWidth:0,labels:{style:{fontSize:'11px',color:colors.muted}}},yAxis:{min:Math.min(0,...rates),max:Math.max(112,...rates.map(v=>v+8)),tickPositions:[0,50,100],labels:{format:'{value}%'},plotLines:[{value:100,color:colors.warning,width:1,dashStyle:'Dash',label:{text:'目标',style:{color:colors.warning,fontSize:'9px'},rotation:0,align:'right',y:10}}]},legend:{enabled:false},tooltip:{formatter(){const i=this.index;return `<b>${rows[i].name} · ${label}</b><br/>实际 ${money(actual[i])} 万元<br/>年度目标 ${money(targets[i])} 万元<br/>达成率 <b>${pct(this.y)}</b><br/>点击查看板块明细`;}},plotOptions:{bar:{borderRadius:3,borderWidth:0,pointPadding:.2,groupPadding:.05,dataLabels:{enabled:true,format:'{y:.1f}%',style:{fontSize:'10px',color:colors.primaryDark},crop:false,overflow:'allow'}},series:{cursor:'pointer',point:{events:{click(){openDepartment(rows[this.index].name);}}}}},series:[{name:'年度目标达成率',color:colors.primary,data:rates}]});
+    const key=state.target,label=(METRICS[key]&&METRICS[key].name)||{contract:'新签合同额',completed:'完成合同额',invoice:'完成开票额',receipt:'完成回款额'}[key]||key;
+    const totalValue=model.totals[key],totalTarget=model.targets[key],contractBudget=model.targets.contract||1;
+    /* 各 tab 按该指标完成率（实际/年度目标）降序，互不影响 */
+    const rows=[...model.depRows].map(r=>{
+      const tgt=totalTarget*(r.target/contractBudget),act=r[key]||0,rate=tgt?act/tgt*100:0;
+      return Object.assign({},r,{_tgt:tgt,_act:act,_rate:rate});
+    }).sort((a,b)=>b._rate-a._rate);
+    const targets=rows.map(r=>r._tgt),actual=rows.map(r=>r._act),rates=rows.map(r=>r._rate);
+    $('targetNote').textContent=`${label}年度目标达成率 · 全部板块（${rows.length}）· 按完成率降序`;
+    chart('targetChart',{chart:{type:'bar',spacing:[4,8,4,4],marginLeft:88,marginRight:52},xAxis:{categories:rows.map(r=>r.name),tickLength:0,lineWidth:0,labels:{style:{fontSize:'11px',color:colors.muted}}},yAxis:{min:Math.min(0,...rates),max:Math.max(112,...rates.map(v=>v+8)),tickPositions:[0,50,100],labels:{format:'{value}%'},plotLines:[{value:100,color:colors.warning,width:1,dashStyle:'Dash',label:{text:'目标',style:{color:colors.warning,fontSize:'9px'},rotation:0,align:'right',y:10}}]},legend:{enabled:false},tooltip:{formatter(){const i=this.index;return `<b>${rows[i].name} · ${label}</b><br/>实际 ${money(actual[i])} 万元<br/>年度目标 ${money(targets[i])} 万元<br/>达成率 <b>${pct(this.y)}</b><br/>点击查看板块明细`;}},plotOptions:{bar:{borderRadius:3,borderWidth:0,pointPadding:.15,groupPadding:.04,dataLabels:{enabled:true,format:'{y:.1f}%',style:{fontSize:'9px',color:colors.primaryDark},crop:false,overflow:'allow'}},series:{cursor:'pointer',point:{events:{click(){openDepartment(rows[this.index].name);}}}}},series:[{name:'年度目标达成率',color:colors.primary,data:rates}]});
   }
   function renderDelivery(){
     const projects=model.projects,risks=projects.filter(p=>p.status==='风险').length,overdue=projects.filter(p=>p.status==='逾期').length;
-    const shift=(state.unit==='全部板块'?0:state.unit==='设计院'?-.8:state.unit==='数字化业务单元'?1.1:-1.4)+(state.year===2026?0:-2.35);
+    const shift=(state.unit==='全部板块'?0:((DEMO_DATA.departments.findIndex(d=>d[1]===state.unit)%5)-2)*0.4)+(state.year===2026?0:-2.35);
     const annual=DEMO_DATA.annualLoad.map(v=>Math.min(100,v+shift)),monthly=DEMO_DATA.monthlyLoad.map(v=>Math.min(100,v+shift));
     model.loadAnnual=annual;model.loadMonthly=monthly;
     $('annualLoadVal').textContent=pct(annual.at(-1),2);
@@ -906,16 +886,27 @@ main{grid-row:1!important;grid-column:1!important}
     const last=model.n,net=model.net.at(-1),outDelta=(model.outflow.at(-1)-model.outflow.at(-2))/model.outflow.at(-2)*100;
     return [
       {level:'danger',title:'回款进度预警',detail:`年度回款目标达成 ${pct(model.totals.receipt/model.targets.receipt*100)}`,date:`${state.year}-${String(last).padStart(2,'0')}-28`,explain:'演示规则：年度回款目标达成率低于90%时提醒。仅用于原型展示，实际阈值可配置。',action:'receipt'},
-      {level:'warning',title:'应收账款账龄提醒',detail:`1年以上占32% · ${money(sum(splitExact(model.receivables,[.68,.22,.07,.03]).slice(1)))} 万元`,date:`${state.year}-${String(last).padStart(2,'0')}-26`,explain:'1–2年占22%，2–3年占7%，3年以上占3%，合计32%。建议跟进回款计划，账龄较长不等同于已逾期。',action:'aging'},
       {level:net<0?'warning':'success',title:net<0?'现金净流出提醒':'现金流入增长',detail:`${last}月${net<0?'净流出':'净流入'} ${money(Math.abs(net))} 万元`,date:`${state.year}-${String(last).padStart(2,'0')}-31`,explain:`${last}月现金流入${money(model.inflow.at(-1))}万元，流出${money(model.outflow.at(-1))}万元，净额${money(net)}万元。现金流出较上期${outDelta>=0?'+':''}${pct(outDelta)}。`,action:'cash'},
       {level:'secondary',title:'项目交付风险',detail:`${model.projects.filter(p=>p.status==='风险').length} 项待跟进 · 0 项逾期`,date:`${state.year}-${String(last).padStart(2,'0')}-24`,explain:'演示清单中的风险项目尚未逾期，当前风险为设计校审待完成。点击可查看相关项目。',action:'projects'}
     ];
   }
   function renderAlerts(){ $('alertList').innerHTML=alerts().map((a,i)=>`<button class="alert-item tone-${a.level}" data-alert="${i}" data-tip="${safe(a.explain)}"><span class="alert-dot">${icon(a.level==='secondary'?'info':'warning')}</span><div><strong>${a.title}</strong><p>${a.detail}</p></div><time>${a.date.slice(5)}</time>${icon('chevron')}</button>`).join('');}
   function chart(id,options){if(charts[id])charts[id].destroy();charts[id]=Highcharts.chart(id,options);}
+  function syncPairRowVisibility(){
+    const row=$('pairRow')||document.querySelector('.pair-row');
+    if(!row)return;
+    const show=state.unit==='全部板块';
+    row.hidden=!show;
+    if(show){
+      row.style.removeProperty('display');
+    }else{
+      row.style.setProperty('display','none','important');
+    }
+    row.setAttribute('data-visible', show?'true':'false');
+  }
   function render(){
     hideTooltip();model=buildModel();const asofEl=$('asofDate');if(asofEl)asofEl.textContent=`${state.year}-08-31`;
-    renderKpis();renderCash();renderRisk();renderContribution();renderTargets();renderDelivery();renderAlerts();
+    syncPairRowVisibility();renderKpis();renderCash();renderRisk();if(state.unit==='全部板块'){renderContribution();renderTargets();}renderDelivery();renderAlerts();
     
     document.querySelectorAll('[data-contribution-dim]').forEach(b=>b.classList.toggle('active',b.dataset.contributionDim===state.dimension));
     document.querySelectorAll('[data-target-metric]').forEach(b=>b.classList.toggle('active',b.dataset.targetMetric===state.target));
@@ -928,12 +919,11 @@ main{grid-row:1!important;grid-column:1!important}
   function table(headers,rows){return `<table class="detail-table"><thead><tr>${headers.map(x=>`<th>${x}</th>`).join('')}</tr></thead><tbody>${rows.length?rows.map(r=>`<tr>${r.map(x=>`<td>${x}</td>`).join('')}</tr>`).join(''):`<tr><td colspan="${headers.length}" class="empty-state">当前筛选范围内暂无记录</td></tr>`}</tbody></table>`;}
   function openKpi(key){const m=METRICS[key],v=model.totals[key],t=model.targets[key];showDialog(m.name+' · 指标明细',`<p class="dialog-description">${m.definition}</p><div class="dialog-stats"><div><span>累计完成</span><strong>${money(v)}</strong></div><div><span>年度目标</span><strong>${money(t)}</strong></div><div><span>目标达成率</span><strong>${pct(v/t*100)}</strong></div></div>`+table(['板块','完成金额','所选范围占比'],model.depRows.map(r=>[safe(r.name),money(v*r.contract/model.totals.contract),pct(r.contract/model.totals.contract*100)])));}
   function openCash(index=model.n-1){const i=index,prev=i?model.net[i-1]:null;showDialog(`${state.year}年${i+1}月 · 现金流明细`,`<p class="dialog-description">银行现金口径，包含经营、投资及筹资收支。流出以正数展示，净额按流入减流出计算。</p><div class="dialog-stats"><div><span>现金流入</span><strong>${money(model.inflow[i])}</strong></div><div><span>现金流出</span><strong>${money(model.outflow[i])}</strong></div><div><span>净现金流</span><strong>${money(model.net[i])}</strong></div></div>`+table(['月份','流入','流出','净额','年初至当月累计净额'],model.inflow.map((v,j)=>[`${j+1}月`,money(v),money(model.outflow[j]),money(model.net[j]),money(sum(model.net.slice(0,j+1)))])),`所选范围：${state.unit} / ${state.business}。点击图例可显隐系列；累计净额 = 各月净额之和。`);}
-  function openAging(i=null){const names=['1年以内','1–2年','2–3年','3年以上'],weights=[.68,.22,.07,.03],values=splitExact(model.receivables,weights);showDialog(i===null?'应收账款 · 账龄结构':names[i]+' · 账龄明细',`<p class="dialog-description">账龄从应收账款形成之日计算。2年以上占比为10%，3年以上占比为3%。账龄较长不等同于合同已逾期。</p>`+table(['账龄','金额','占比'],names.map((n,j)=>[n,money(values[j]),pct(weights[j]*100,0)]))+`<p class="dialog-total">合计 <strong>${money(model.receivables)}</strong> 万元 / 100%</p>`);}
-  function openDepartment(name){let row=dimensionRows().find(r=>r.name===name)||model.depRows.find(r=>r.name===name);if(!row)return;showDialog(name+' · 经营贡献',`<p class="dialog-description">合同额、回款额为年初至截止日累计；净现金贡献为同期现金流入减流出分配至该维度的演示金额。</p>`+table(['指标','金额 / 比例'],[['新签合同额',money(row.contract)+' 万元'],['完成回款额',money(row.receipt)+' 万元'],['完成开票额',money(row.invoice)+' 万元'],['净现金贡献',money(row.net)+' 万元'],['合同额占比',pct(row.contract/model.totals.contract*100)],['合同目标达成率',pct(row.rate)]]));}
+  function openDepartment(name){let row=dimensionRows().find(r=>r.name===name)||model.depRows.find(r=>r.name===name);if(!row)return;showDialog(name+' · 板块明细',`<p class="dialog-description">净现金流贡献为该板块同期现金流贡献（演示拆分）。合同/开票/回款为所选年累计口径。</p>`+table(['指标','金额 / 比率'],[['净现金流贡献',money(row.net)+' 万元'],['新签合同额',money(row.contract)+' 万元'],['完成合同额',money(row.completed||0)+' 万元'],['完成开票额',money(row.invoice)+' 万元'],['完成回款额',money(row.receipt)+' 万元'],['合同额占比',pct(row.contract/model.totals.contract*100)],['合同目标达成',pct(row.rate)]]));}
   function openProjects(status=null){let rows=model.projects.filter(p=>!status||p.status===status);showDialog((status?status+'项目':'项目交付')+' · 清单',table(['项目名称','负责板块','状态','交付节点','计划日期'],rows.map(p=>[safe(p.name),p.department,p.status,p.milestone,p.due.replace('2026',String(state.year))])),'演示项目状态与环图、图例数量一致；风险项目与逾期项目分别统计，风险不等于逾期。');}
   function openLoad(i,annual,monthly){showDialog(`${state.year}年${model.n-5+i}月 · 生产负荷率`,`<p class="dialog-description">年度负荷率 = 已排定年度工时 ÷ 年度可用工时；当月负荷率 = 当月已排定工时 ÷ 当月可用工时。两条曲线采用不同时间口径。</p>`+table(['月份','年度负荷率','当月负荷率'],annual.map((v,j)=>[`${model.n-5+j}月`,pct(v,2),pct(monthly[j],2)])));}
   function setUnit(name){state.unit=name;render();toast('已筛选：'+name);}
-  function help(){showDialog('看板使用说明',`<div class="help-grid"><div><h3>筛选与联动</h3><p>切换年度、板块和业务类型，经营金额、现金流、贡献表、账龄及项目清单同步更新。</p></div><div><h3>图表探索</h3><p>悬停查看精确数值；点击现金流、账龄、目标达成和交付环图查看明细。现金流与负荷图的图例支持显隐。</p></div><div><h3>模块区分</h3><p>经营贡献分析展示金额与贡献来源；板块目标达成展示年度计划完成进度。两个模块分别支持归因和目标管理。</p></div><div><h3>统一主题</h3><p>页面顶部（宿主标题栏）可切换青绿、深蓝、暖棕主题；整树看板同步换色。</p></div></div><p class="dialog-description">原图为AI生成，原型已重建中文文字，并统一金额、百分比、账龄、项目状态和累计口径。所有业务数据均为演示样例，未连接真实系统。</p>`,'数据时间：2026年样例截至8月31日；2025年对比样例截至8月31日。');}
+  function help(){showDialog('看板使用说明',`<div class="help-grid"><div><h3>筛选与联动</h3><p>切换年度、板块，经营金额、现金流、板块现金流贡献及项目清单同步更新；板块目标达成页签仅切换本区。</p></div><div><h3>图表探索</h3><p>悬停查看精确数值；点击现金流、目标达成和交付环图查看明细。现金流与负荷图的图例支持显隐。</p></div><div><h3>模块区分</h3><p>板块现金流贡献仅展示各板块净现金流（正绿负红、按值排序）；板块目标达成四个页签对齐顶部 KPI，切换只影响本区进度图。</p></div><div><h3>统一主题</h3><p>页面顶部（宿主标题栏）可切换青绿、深蓝、暖棕主题；整树看板同步换色。</p></div></div><p class="dialog-description">原图为AI生成，原型已重建中文文字，并统一金额、百分比、项目状态和累计口径。所有业务数据均为演示样例，未连接真实系统。</p>`,'数据时间：2026年样例截至8月31日；2025年对比样例截至8月31日。');}
   function showTooltip(el){if($('detailDialog').open)return;tooltipOwner=el;const tip=$('globalTooltip');tip.textContent=el.dataset.tip;tip.classList.add('show');tip.setAttribute('aria-hidden','false');el.setAttribute('aria-describedby','globalTooltip');positionTooltip(el);}
   function positionTooltip(el){const tip=$('globalTooltip'),r=el.getBoundingClientRect(),w=tip.offsetWidth,h=tip.offsetHeight;let x=Math.max(8,Math.min(innerWidth-w-8,r.left+r.width/2-w/2)),y=r.bottom+8;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-8);tip.style.left=x+'px';tip.style.top=y+'px';}
   function hideTooltip(){if(tooltipOwner)tooltipOwner.removeAttribute('aria-describedby');tooltipOwner=null;$('globalTooltip').classList.remove('show');$('globalTooltip').setAttribute('aria-hidden','true');}
@@ -946,16 +936,15 @@ main{grid-row:1!important;grid-column:1!important}
     if(b.dataset.kpi)openKpi(b.dataset.kpi);
     
     else if(b.dataset.contributionDim){state.dimension=b.dataset.contributionDim;render();}
-    else if(b.dataset.targetMetric){state.target=b.dataset.targetMetric;render();}
+    else if(b.dataset.targetMetric){state.target=b.dataset.targetMetric;document.querySelectorAll('[data-target-metric]').forEach(x=>x.classList.toggle('active',x.dataset.targetMetric===state.target));renderTargets();return;}
     else if(b.dataset.cashDetail!==undefined)openCash();
-    else if(b.dataset.risk!==undefined){const i=+b.dataset.risk;if(i===0)openAging();else showDialog(['应收账款','WIP','存货','营业收入'][i]+' · 指标说明',`<p class="dialog-description">${b.dataset.tip}</p><div class="dialog-stats"><div><span>当前金额</span><strong>${money([model.receivables,model.wip,model.inventory][i])}</strong></div></div>`);}
-    else if(b.dataset.aging!==undefined)openAging(+b.dataset.aging);
+    else if(b.dataset.risk!==undefined){const i=+b.dataset.risk;const amts=[model.receivables,model.wip,model.inventory,null];const labels=['应收账款','WIP','存货','营业收入'];const body=`<p class="dialog-description">${b.dataset.tip}</p>`+(i<3?`<div class="dialog-stats"><div><span>当前金额</span><strong>${money(amts[i])}</strong></div></div>`:'');showDialog(labels[i]+' · 指标说明',body);}
     else if(b.dataset.row)openDepartment(b.dataset.row);
     else if(b.dataset.unit)setUnit(b.dataset.unit);
     else if(b.dataset.projectStatus)openProjects(b.dataset.projectStatus);
     else if(b.dataset.delivery!==undefined){const i=+b.dataset.delivery;if(i<2)openLoad(5,model.loadAnnual,model.loadMonthly);else openProjects(i===2?'逾期':'风险');}
     else if(b.dataset.alert!==undefined){const a=alerts()[+b.dataset.alert];showDialog(a.title,`<p class="dialog-description">${a.explain}</p><p>当前范围：${state.unit} / ${state.business}</p><button class="dialog-action" data-alert-action="${a.action}">查看相关明细 ${icon('chevron')}</button>`);}
-    else if(b.dataset.alertAction){$('detailDialog').close();const a=b.dataset.alertAction;if(a==='receipt')openKpi('receipt');else if(a==='aging')openAging();else if(a==='cash')openCash();else openProjects('风险');}
+    else if(b.dataset.alertAction){$('detailDialog').close();const a=b.dataset.alertAction;if(a==='receipt')openKpi('receipt');else if(a==='cash')openCash();else openProjects('风险');}
     else if(b.id==='moreAlerts')showDialog('经营异常预警 · 当前范围',table(['预警','说明','日期'],alerts().map(a=>[a.title,a.detail,a.date])));
     else if(b.id==='helpButton')help();
     else if(b.id==='closeDialog')$('detailDialog').close();

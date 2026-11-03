@@ -1,0 +1,78 @@
+{
+  "verdict": "PASS",
+  "url": "http://localhost:3001/operations-dashboard-202610/board",
+  "timestamp": "2026-11-03T02:54:35.205Z",
+  "pageErrors": [],
+  "checks": [
+    {
+      "ac": 1,
+      "name": "深色侧栏 + wood. Projects Zone + 项目数据中台",
+      "ok": true,
+      "detail": "{\"hasWood\":true,\"hasSubtitle\":true,\"darkish\":true,\"bg\":\"rgb(47, 54, 64)\",\"width\":224,\"textSample\":\"wood.Projects Zone 项目数据中台 待办提醒 全局看板 运营看板 交付保障看板 人力资源看板 项目管理 报告体系 平台设置 操作日志 人员评分体\"}"
+    },
+    {
+      "ac": 2,
+      "name": "待办提醒入口可见（铃铛图标）",
+      "ok": true,
+      "detail": "{\"hasLabel\":true,\"bell\":true,\"nearIcon\":true,\"iconClasses\":[\"ri-notification-3-line shrink-0 text-[16px] leading-none\",\"ri-dashboard-line shrink-0 text-[16px] leading-none\",\"ri-bar-chart-box-line shrink-0 text-[16px] leading-none\",\"ri-file-chart-line shrink-0 text-[16px] leading-none\",\"ri-settings-3-line shrink-0 text-[16px] leading-none\",\"ri-file-list-3-line shrink-0 text-[16px] leading-none\",\"ri-user-star-line shrink-0 text-[16px] leading-none\",\"ri-crosshair-2-line shrink-0 text-[16px] leading-none\"]}"
+    },
+    {
+      "ac": 3,
+      "name": "全局看板展开组：运营/交付保障/人力 + 选中浅底 + 展开指示",
+      "ok": true,
+      "detail": "{\"hasGlobal\":true,\"hasOps\":true,\"hasDelivery\":true,\"hasHr\":true,\"childrenVisible\":true,\"opsHighlight\":true,\"arrowHint\":false,\"anyArrow\":false,\"groupTextSample\":\"全局看板 运营看板 交付保障看板 人力资源看板\"}"
+    },
+    {
+      "ac": 4,
+      "name": "一级六项可见且带图标；可折叠项有下箭头（或等价）",
+      "ok": true,
+      "detail": "{\"found\":{\"项目管理\":true,\"报告体系\":true,\"平台设置\":true,\"操作日志\":true,\"人员评分体系\":true,\"项目执行跟踪\":true},\"allFound\":true,\"iconCount\":8,\"downArrows\":0}"
+    },
+    {
+      "ac": 5,
+      "name": "侧栏底右折叠控制 «（或等价）",
+      "ok": true,
+      "detail": "{\"label\":\"折叠侧栏\",\"text\":\"«\",\"nearBottom\":true,\"nearRight\":true,\"codePoints\":[\"ab\"]}"
+    },
+    {
+      "ac": 6,
+      "name": "全局看板默认展开；进入 Board 时运营看板选中",
+      "ok": true,
+      "detail": "{\"collapsed\":\"false\",\"globalExpanded\":true,\"currentish\":true,\"clues\":[\"flex w-full items-center rounded-md py-1.5 pl-9 pr-2.5 text-left text-[13px] tra\",\"mt-0.5 space-y-0.5 rounded-lg bg-white/5 py-1  \",\"px-2  \",\"flex flex-1 flex-col gap-1 overflow-y-auto py-3   \"]}"
+    },
+    {
+      "ac": 7,
+      "name": "一级组可展开/收起（全局看板）",
+      "ok": true,
+      "detail": "{\"ok\":true,\"beforeExpanded\":\"true\",\"midExpanded\":\"false\",\"afterExpanded\":\"true\",\"beforeKids\":true,\"midKids\":false,\"afterKids\":true,\"reportToggle\":{\"r0\":\"false\",\"r1\":\"true\",\"r2\":\"false\",\"flipped\":true}}"
+    },
+    {
+      "ac": 8,
+      "name": "已有入口挂上；无独立页项可点不报错/占位",
+      "ok": true,
+      "detail": "{\"hrClicked\":true,\"ratingClicked\":true,\"opsLinkPresent\":true}"
+    },
+    {
+      "ac": 9,
+      "name": "白底「看板目录」仍在且未被深色侧栏吃掉",
+      "ok": true,
+      "detail": "{\"found\":true,\"insideAside\":false,\"light\":true,\"bg\":\"rgb(255, 255, 255)\",\"w\":224,\"h\":872,\"visible\":true,\"title\":\"看板目录\\n运营看板\\n市场看板\\n机会清单\\n占位\\n市场数据\\n占位\\n合同看板\\n占位\\n人\"}"
+    },
+    {
+      "ac": "W",
+      "name": "侧栏宽展开224/折叠64；主区 marginLeft 联动并可恢复",
+      "ok": true,
+      "detail": "{\"geom1\":{\"sidebarW\":224,\"marginLeft\":\"224px\",\"collapsedAttr\":\"false\"},\"geom2\":{\"sidebarW\":64,\"marginLeft\":\"64px\",\"collapsedAttr\":\"true\",\"headerLeft\":\"64px\",\"collapseText\":\"»\"},\"geom3\":{\"sidebarW\":224,\"marginLeft\":\"224px\",\"collapsedAttr\":\"false\"}}"
+    }
+  ],
+  "notes": [
+    "独立 Playwright 实机；不采信 Leo probe-sidebar.cjs 静态字符串自报",
+    "并列未结条「板块现金流/目标达成仅全部板块时展示」本探针未验",
+    "Remix 图标近似 / 无子路由组展开为占位或同名 — Claire 已知差异，非阻断除非完全缺失"
+  ],
+  "screenshots": [
+    "max-sidebar-real-01-expanded.png",
+    "max-sidebar-real-02-collapsed.png",
+    "max-sidebar-real-03-sidebar-clip.png"
+  ]
+}

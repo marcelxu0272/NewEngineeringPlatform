@@ -1,0 +1,14 @@
+PASS  ops-iframe  found
+PASS  all:computed-not-none  {"hidden":false,"dataVisible":"true","styleDisplay":"","computedDisplay":"grid","offsetHeight":402,"clientHeight":402}
+PASS  all:data-visible-true  true
+PASS  all:not-hidden  false
+PASS  all:height>0  402
+PASS  pick-SAS170  {"ok":true}
+PASS  leaf:computed-none  {"hidden":true,"dataVisible":"false","styleDisplay":"none","computedDisplay":"none","offsetHeight":0,"clientHeight":0}
+PASS  leaf:data-visible-false  false
+PASS  leaf:hidden  true
+PASS  leaf:height≈0  0
+PASS  leaf2:computed-none  {"hidden":true,"dataVisible":"false","styleDisplay":"none","computedDisplay":"none","offsetHeight":0,"clientHeight":0}
+PASS  back:computed-not-none  {"hidden":false,"dataVisible":"true","styleDisplay":"","computedDisplay":"grid","offsetHeight":402,"clientHeight":402}
+PASS  back:height>0  402
+pass=true

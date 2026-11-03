@@ -1,0 +1,78 @@
+PASS  leaf-href SAS170 PMC板块  SAS170%20PMC%E6%9D%BF%E5%9D%97
+PASS  leaf-manager SAS170 PMC板块  姚佳辉
+PASS  leaf-href SAS610 咨询板块  SAS610%20%E5%92%A8%E8%AF%A2%E6%9D%BF%E5%9D%97
+PASS  leaf-manager SAS610 咨询板块  王建平
+PASS  leaf-href SAS680 数字技术板块  SAS680%20%E6%95%B0%E5%AD%97%E6%8A%80%E6%9C%AF%E6%9D%BF%E5%9D%97
+PASS  leaf-manager SAS680 数字技术板块  潘颖
+PASS  leaf-href SAS650 新材料板块  SAS650%20%E6%96%B0%E6%9D%90%E6%96%99%E6%9D%BF%E5%9D%97
+PASS  leaf-manager SAS650 新材料板块  陈贺明
+PASS  leaf-href SAS710 生命科学板块  SAS710%20%E7%94%9F%E5%91%BD%E7%A7%91%E5%AD%A6%E6%9D%BF%E5%9D%97
+PASS  leaf-manager SAS710 生命科学板块  王培波
+PASS  leaf-href SAS690 COII板块  SAS690%20COII%E6%9D%BF%E5%9D%97
+PASS  leaf-manager SAS690 COII板块  周翔
+PASS  leaf-href SAS720 模块化板块  SAS720%20%E6%A8%A1%E5%9D%97%E5%8C%96%E6%9D%BF%E5%9D%97
+PASS  leaf-manager SAS720 模块化板块  朱勇
+PASS  leaf-href SAS670 供应链板块  SAS670%20%E4%BE%9B%E5%BA%94%E9%93%BE%E6%9D%BF%E5%9D%97
+PASS  leaf-manager SAS670 供应链板块  张雯
+PASS  leaf-href SAS520 金山中心  SAS520%20%E9%87%91%E5%B1%B1%E4%B8%AD%E5%BF%83
+PASS  leaf-manager SAS520 金山中心  赵宏海
+PASS  leaf-href SAS560 沈阳中心  SAS560%20%E6%B2%88%E9%98%B3%E4%B8%AD%E5%BF%83
+PASS  leaf-manager SAS560 沈阳中心  朱新辉
+PASS  leaf-href SAS550 惠湛中心  SAS550%20%E6%83%A0%E6%B9%9B%E4%B8%AD%E5%BF%83
+PASS  leaf-manager SAS550 惠湛中心  赵卫强
+PASS  leaf-href SAS530 银川中心  SAS530%20%E9%93%B6%E5%B7%9D%E4%B8%AD%E5%BF%83
+PASS  leaf-manager SAS530 银川中心  杨科
+PASS  no-huizi-typo
+PASS  board-entry-default-no-unit
+PASS  epc-no-board-unit
+PASS  leaf-anchor-count  12
+PASS  project-group-no-leaf-unit
+PASS  board-reads-search-unit
+PASS  board-header-leaf-or-Board
+PASS  board-header-testid
+PASS  UNIT_OPTIONS SAS170 PMC板块
+PASS  UNIT_OPTIONS SAS610 咨询板块
+PASS  UNIT_OPTIONS SAS680 数字技术板块
+PASS  UNIT_OPTIONS SAS650 新材料板块
+PASS  UNIT_OPTIONS SAS710 生命科学板块
+PASS  UNIT_OPTIONS SAS690 COII板块
+PASS  UNIT_OPTIONS SAS720 模块化板块
+PASS  UNIT_OPTIONS SAS670 供应链板块
+PASS  UNIT_OPTIONS SAS520 金山中心
+PASS  UNIT_OPTIONS SAS560 沈阳中心
+PASS  UNIT_OPTIONS SAS550 惠湛中心
+PASS  UNIT_OPTIONS SAS530 银川中心
+PASS  live-leaf-count  {"n":12}
+PASS  live-href SAS170 PMC板块  /operations-dashboard-202610/board?unit=SAS170%20PMC%E6%9D%BF%E5%9D%97
+PASS  live-mgr SAS170 PMC板块  姚佳辉
+PASS  live-href SAS610 咨询板块  /operations-dashboard-202610/board?unit=SAS610%20%E5%92%A8%E8%AF%A2%E6%9D%BF%E5%9D%97
+PASS  live-mgr SAS610 咨询板块  王建平
+PASS  live-href SAS680 数字技术板块  /operations-dashboard-202610/board?unit=SAS680%20%E6%95%B0%E5%AD%97%E6%8A%80%E6%9C%AF%E6%9D%BF%E5%9D%97
+PASS  live-mgr SAS680 数字技术板块  潘颖
+PASS  live-href SAS650 新材料板块  /operations-dashboard-202610/board?unit=SAS650%20%E6%96%B0%E6%9D%90%E6%96%99%E6%9D%BF%E5%9D%97
+PASS  live-mgr SAS650 新材料板块  陈贺明
+PASS  live-href SAS710 生命科学板块  /operations-dashboard-202610/board?unit=SAS710%20%E7%94%9F%E5%91%BD%E7%A7%91%E5%AD%A6%E6%9D%BF%E5%9D%97
+PASS  live-mgr SAS710 生命科学板块  王培波
+PASS  live-href SAS690 COII板块  /operations-dashboard-202610/board?unit=SAS690%20COII%E6%9D%BF%E5%9D%97
+PASS  live-mgr SAS690 COII板块  周翔
+PASS  live-href SAS720 模块化板块  /operations-dashboard-202610/board?unit=SAS720%20%E6%A8%A1%E5%9D%97%E5%8C%96%E6%9D%BF%E5%9D%97
+PASS  live-mgr SAS720 模块化板块  朱勇
+PASS  live-href SAS670 供应链板块  /operations-dashboard-202610/board?unit=SAS670%20%E4%BE%9B%E5%BA%94%E9%93%BE%E6%9D%BF%E5%9D%97
+PASS  live-mgr SAS670 供应链板块  张雯
+PASS  live-href SAS520 金山中心  /operations-dashboard-202610/board?unit=SAS520%20%E9%87%91%E5%B1%B1%E4%B8%AD%E5%BF%83
+PASS  live-mgr SAS520 金山中心  赵宏海
+PASS  live-href SAS560 沈阳中心  /operations-dashboard-202610/board?unit=SAS560%20%E6%B2%88%E9%98%B3%E4%B8%AD%E5%BF%83
+PASS  live-mgr SAS560 沈阳中心  朱新辉
+PASS  live-href SAS550 惠湛中心  /operations-dashboard-202610/board?unit=SAS550%20%E6%83%A0%E6%B9%9B%E4%B8%AD%E5%BF%83
+PASS  live-mgr SAS550 惠湛中心  赵卫强
+PASS  live-href SAS530 银川中心  /operations-dashboard-202610/board?unit=SAS530%20%E9%93%B6%E5%B7%9D%E4%B8%AD%E5%BF%83
+PASS  live-mgr SAS530 银川中心  杨科
+PASS  live-board-default  /operations-dashboard-202610/board
+PASS  live-epc-no-unit  null
+PASS  live-header-leaf  全局看板 > 运营看板 > SAS170 PMC板块
+PASS  live-shell-unit-selected  SAS170 PMC板块
+PASS  live-pairRow-hidden-on-leaf  {"display":"grid","hidden":true,"iframeUnit":null}
+PASS  live-header-default-Board  全局看板 > 运营看板 > Board
+PASS  live-shell-default-all  全部板块
+
+fail=0
