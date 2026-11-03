@@ -3,48 +3,86 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>银川绩效派发</title>
+    <title>银川绩效分配</title>
 
     <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.14/lib/theme-chalk/index.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-    <link rel="stylesheet" href="css/style.css?v=unit-view-21" />
+    <link rel="stylesheet" href="css/style.css?v=unit-view-32" />
 </head>
-<body class="bg-gray-100">
-<div id="app" v-cloak>
+<body class="yc-app-body">
+<div id="app" v-cloak class="yc-app-shell">
 
-    <!-- ================= 顶部栏 ================= -->
-    <div class="top-toolbar bg-white border-b shadow-sm">
-        <div class="flex items-center justify-between px-6 py-3">
-            <div class="flex items-center space-x-4">
-                <h1 class="text-xl font-bold text-gray-800">银川绩效派发</h1>
-                
-            </div>
-            <div class="yc-demo-tools">
-                <span class="yc-demo-label">演示工具</span>
-                <span class="text-sm text-gray-500">当前身份</span>
-                <el-select v-model="currentRole" size="small" style="width: 260px">
-                    <el-option-group v-for="g in roleGroups" :key="g.label" :label="g.label">
-                        <el-option
-                            v-for="o in g.options"
-                            :key="o.key"
-                            :label="o.key === 'K2' ? ('K2 审核人 · ' + userName(state.config.k2ReviewerId)) : (o.key === 'K3' ? ('K3 审核人 · ' + userName(state.config.k3ReviewerId)) : o.name)"
-                            :value="o.key"></el-option>
-                    </el-option-group>
-                </el-select>
-                <el-button v-if="showDemoReset" size="small" icon="el-icon-refresh-left" @click="resetDemoData">重置演示数据</el-button>
+    <!-- ================= 顶部导航（Wood 平台占位，与主系统位置一致） ================= -->
+    <header class="yc-global-nav">
+        <div class="yc-global-nav-inner">
+            <div class="yc-global-nav-brand">Wood 工程平台首页</div>
+            <nav class="yc-global-nav-menu" aria-label="一级模块">
+                <span class="yc-global-nav-item">数据中台</span>
+                <span class="yc-global-nav-item">OA管理</span>
+                <span class="yc-global-nav-item">工程资源</span>
+                <span class="yc-global-nav-item">AI&amp;Tools</span>
+                <span class="yc-global-nav-item is-active">设计管理</span>
+                <span class="yc-global-nav-item">流程再造</span>
+                <span class="yc-global-nav-item">安全管理</span>
+                <span class="yc-global-nav-item">质量管理</span>
+                <span class="yc-global-nav-item">费用管理</span>
+                <span class="yc-global-nav-item">文档管理</span>
+                <span class="yc-global-nav-item">查看更多</span>
+            </nav>
+            <div class="yc-global-nav-user">
+                <span class="yc-global-nav-user-name">admin</span>
             </div>
         </div>
-    </div>
+    </header>
 
-    <div class="px-6 py-6 yc-container">
+    <div class="yc-app-body-row">
+        <!-- ================= 左侧菜单（占位：仅银川绩效分配） ================= -->
+        <aside class="yc-sidebar">
+            <div class="yc-sidebar-search">
+                <el-input size="small" placeholder="菜单搜索（支持拼音）" prefix-icon="el-icon-search" disabled></el-input>
+            </div>
+            <nav class="yc-sidebar-menu" aria-label="侧边菜单">
+                <div class="yc-sidebar-group is-open">
+                    <div class="yc-sidebar-group-title">
+                        <i class="el-icon-arrow-down yc-sidebar-group-icon"></i>
+                        <span>绩效管理</span>
+                    </div>
+                    <div class="yc-sidebar-group-items">
+                        <div class="yc-sidebar-item is-active">银川绩效分配</div>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- ================= 主内容区 ================= -->
+        <main class="yc-main">
+            <div class="yc-main-head">
+                <div class="yc-breadcrumb">绩效管理 &gt; 银川绩效分配</div>
+                <div class="yc-demo-tools">
+                    <span class="yc-demo-label">演示工具</span>
+                    <span class="text-sm text-gray-500">当前身份</span>
+                    <el-select v-model="currentRole" size="small" style="width: 260px">
+                        <el-option-group v-for="g in roleGroups" :key="g.label" :label="g.label">
+                            <el-option
+                                v-for="o in g.options"
+                                :key="o.key"
+                                :label="o.key === 'K2' ? ('K2 审核人 · ' + userName(state.config.k2ReviewerId)) : (o.key === 'K3' ? ('K3 审核人 · ' + userName(state.config.k3ReviewerId)) : o.name)"
+                                :value="o.key"></el-option>
+                        </el-option-group>
+                    </el-select>
+                    <el-button v-if="showDemoReset" size="small" icon="el-icon-refresh-left" @click="resetDemoData">重置演示数据</el-button>
+                </div>
+            </div>
+
+            <div class="yc-container yc-main-content">
 
         <el-tabs ref="mainTabs" v-model="activeTab" type="card" class="yc-main-tabs" @tab-click="onMainTabClick">
 
             <!-- ============================================================
                  页签一：专业间
                  ============================================================ -->
-            <el-tab-pane name="inter">
+            <el-tab-pane v-if="canSeeMainTab('inter')" name="inter">
                 <span slot="label" class="yc-tab-label">
                     专业间
                     <span class="yc-tab-count" v-if="todoInterCount">待办 {{ todoInterCount }}</span>
@@ -110,7 +148,7 @@
                                 </span>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="sheetNo" label="编号" width="150">
+                        <el-table-column prop="sheetNo" label="编号" width="176">
                             <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
                         </el-table-column>
                         <el-table-column prop="projectCode" label="项目号" width="140">
@@ -136,7 +174,7 @@
                                 </span>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="updatedAt" label="更新时间" width="140"></el-table-column>
+                        <el-table-column prop="updatedAt" label="最后更新时间" width="140"></el-table-column>
                     </el-table>
 
                     <div class="flex items-center justify-end px-4 py-3 border-t">
@@ -206,7 +244,7 @@
                     </div>
                     <div>
                         <label class="yc-field-label">
-                            预估分配金额
+                            本次预估分配金额
                             <el-tooltip content="按可分配金额 × K1 × K2默认 × K3默认试算，便于填比例对照；K2/K3 审核确认后以实际系数为准" placement="top">
                                 <i class="fas fa-info-circle yc-field-tip"></i>
                             </el-tooltip>
@@ -299,7 +337,7 @@
                             <span class="yc-badge" :class="s.row.statusBadge">{{ s.row.statusText }}</span>
                         </template>
                     </el-table-column>
-                    <el-table-column label="编号" min-width="150">
+                    <el-table-column label="编号" min-width="176">
                         <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
                     </el-table-column>
                     <el-table-column label="分配实发金额（元）" width="160" align="right">
@@ -374,7 +412,7 @@
                                 <div class="yc-detail-text yc-num">{{ formatKCoef(interReview.sheet.k3Status === 'confirmed' ? interReview.sheet.k3 : null) }} · {{ interReview.sheet.k3Status === 'confirmed' ? '已确认' : '待确认' }}</div>
                             </div>
                             <div>
-                                <label class="yc-field-label">预估分配金额</label>
+                                <label class="yc-field-label">本次预估分配金额</label>
                                 <div class="yc-detail-text yc-num">{{ formatAmount(interReview.sheet.poolLocked ? interReview.sheet.pool : null) }}</div>
                             </div>
                         </div>
@@ -448,7 +486,7 @@
             <!-- ============================================================
                  页签二：专业内
                  ============================================================ -->
-            <el-tab-pane name="intra">
+            <el-tab-pane v-if="canSeeMainTab('intra')" name="intra">
                 <span slot="label" class="yc-tab-label">
                     专业内
                     <span class="yc-tab-count" v-if="todoIntraCount">待办 {{ todoIntraCount }}</span>
@@ -505,7 +543,7 @@
                                 </span>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="sheetNo" label="编号" width="150">
+                        <el-table-column prop="sheetNo" label="编号" width="176">
                             <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
                         </el-table-column>
                         <el-table-column prop="projectCode" label="项目号" width="140">
@@ -544,7 +582,7 @@
                                 </span>
                             </template>
                         </el-table-column>
-                        <el-table-column prop="updatedAt" label="更新时间" width="140"></el-table-column>
+                        <el-table-column prop="updatedAt" label="最后更新时间" width="140"></el-table-column>
                     </el-table>
 
                     <div class="flex items-center justify-end px-4 py-3 border-t">
@@ -722,7 +760,7 @@
                         <el-table-column label="专业内比例" width="160" align="right">
                             <template slot-scope="s"><span class="yc-num">{{ formatRatio(s.row.ratio) }}</span></template>
                         </el-table-column>
-                        <el-table-column label="评估前应发（元）" width="200" align="right">
+                        <el-table-column label="预估分配金额（元）" width="200" align="right">
                             <template slot-scope="s"><span class="yc-num">{{ formatAmount(s.row.amount) }}</span></template>
                         </el-table-column>
                     </el-table>
@@ -750,7 +788,7 @@
             <!-- ============================================================
                  页签三：项目经理评估（先项目列表，点进去评人）
                  ============================================================ -->
-            <el-tab-pane name="eval">
+            <el-tab-pane v-if="canSeeMainTab('eval')" name="eval">
                 <span slot="label" class="yc-tab-label">
                     项目经理评估
                     <span class="yc-tab-count" v-if="todoEvalCount">待办 {{ todoEvalCount }}</span>
@@ -814,7 +852,7 @@
                                         </span>
                                     </template>
                                 </el-table-column>
-                                <el-table-column prop="sheetNo" label="编号" width="150">
+                                <el-table-column prop="sheetNo" label="编号" width="176">
                                     <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
                                 </el-table-column>
                                 <el-table-column prop="projectCode" label="项目号" width="140">
@@ -834,7 +872,7 @@
                                         </span>
                                     </template>
                                 </el-table-column>
-                                <el-table-column label="更新时间" width="150">
+                                <el-table-column label="最后更新时间" width="150">
                                     <template slot-scope="s"><span class="text-gray-600">{{ s.row.updatedAt }}</span></template>
                                 </el-table-column>
                             </el-table>
@@ -936,7 +974,7 @@
                                     <el-table-column label="专业内比例" min-width="96" align="right">
                                         <template slot-scope="s"><span class="yc-num">{{ formatRatio(s.row.ratio) }}</span></template>
                                     </el-table-column>
-                                    <el-table-column label="分配金额（元）" min-width="110" align="right">
+                                    <el-table-column label="预估分配金额（元）" min-width="110" align="right">
                                         <template slot-scope="s"><span class="yc-num">{{ formatAmount(s.row.preEvalAmount) }}</span></template>
                                     </el-table-column>
                                     <el-table-column label="完成质量" min-width="108" align="right">
@@ -1036,12 +1074,15 @@
             <!-- ============================================================
                  页签四：项目绩效查询
                  ============================================================ -->
-            <el-tab-pane name="queryProject">
+            <el-tab-pane v-if="canSeeMainTab('queryProject')" name="queryProject">
                 <span slot="label" class="yc-tab-label">项目绩效查询</span>
                 <template v-if="queryProjectView === 'list'">
                         <div class="yc-kpi-block mb-4">
                             <div class="yc-kpi-grid yc-kpi-grid-4">
-                                <button type="button" class="yc-kpi-card" v-for="k in queryProjectKpis" :key="k.key"
+                                <button type="button" class="yc-kpi-card"
+                                        v-for="k in queryProjectKpis" :key="k.key"
+                                        :class="{ 'is-active': k.listToggle && queryProjectKpiKey === k.key }"
+                                        :aria-pressed="k.listToggle ? (queryProjectKpiKey === k.key ? 'true' : 'false') : undefined"
                                         @click="openQueryStats(k)">
                                     <div class="yc-kpi-title">
                                         {{ k.title }}
@@ -1092,7 +1133,7 @@
                                         </span>
                                     </template>
                                 </el-table-column>
-                                <el-table-column prop="sheetNo" label="编号" width="150">
+                                <el-table-column prop="sheetNo" label="编号" width="176">
                                     <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
                                 </el-table-column>
                                 <el-table-column prop="projectCode" label="项目号" width="140">
@@ -1110,7 +1151,7 @@
                                         <span class="yc-badge" :class="s.row.statusBadge">{{ s.row.statusText }}</span>
                                     </template>
                                 </el-table-column>
-                                <el-table-column label="更新时间" width="150">
+                                <el-table-column label="最后更新时间" width="150">
                                     <template slot-scope="s"><span class="text-gray-600">{{ s.row.updatedAt }}</span></template>
                                 </el-table-column>
                             </el-table>
@@ -1160,7 +1201,7 @@
                             </span>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="sheetNo" label="编号" width="150">
+                                <el-table-column prop="sheetNo" label="编号" width="176">
                         <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
                     </el-table-column>
                     <el-table-column prop="projectCode" label="项目号" width="140">
@@ -1200,7 +1241,7 @@
             <!-- ============================================================
                  页签五：个人绩效查询
                  ============================================================ -->
-            <el-tab-pane name="queryPerson">
+            <el-tab-pane v-if="canSeeMainTab('queryPerson')" name="queryPerson">
                 <span slot="label" class="yc-tab-label">个人绩效查询</span>
                 <template v-if="queryPersonView === 'list'">
                         <div class="yc-kpi-block mb-4">
@@ -1263,7 +1304,7 @@
                                         </span>
                                     </template>
                                 </el-table-column>
-                                <el-table-column prop="sheetNo" label="编号" width="150">
+                                <el-table-column prop="sheetNo" label="编号" width="176">
                                     <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
                                 </el-table-column>
                                 <el-table-column prop="projectCode" label="项目号" width="140">
@@ -1331,7 +1372,7 @@
                             </span>
                         </template>
                     </el-table-column>
-                    <el-table-column prop="sheetNo" label="编号" width="140">
+                    <el-table-column prop="sheetNo" label="编号" width="176">
                         <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
                     </el-table-column>
                     <el-table-column prop="projectCode" label="项目号" width="130">
@@ -1368,7 +1409,7 @@
             <!-- ============================================================
                  页签六：规则配置
                  ============================================================ -->
-            <el-tab-pane v-if="isAdmin" label="规则配置" name="config">
+            <el-tab-pane v-if="canSeeMainTab('config')" label="规则配置" name="config">
                 <div class="bg-white rounded-lg shadow p-6" v-if="configForm">
                     <div class="flex items-center justify-between mb-5">
                         <div>
@@ -1484,6 +1525,8 @@
             </el-tab-pane>
         </el-tabs>
 
+            </div>
+        </main>
     </div>
 
     <!-- ================= 弹窗：驳回（二次确认 + 原因必填） ================= -->
@@ -1570,10 +1613,73 @@
                 <el-button size="small" icon="el-icon-arrow-left" @click="$root.closeFormula">{{ $root.formulaBox.fromStats ? '返回统计' : '返回列表' }}</el-button>
             </div>
 
+            <div class="yc-progress-card bg-white rounded-lg shadow mb-4"
+                 v-if="$root.formulaBox.progressSteps && $root.formulaBox.progressSteps.length">
+                <div class="px-4 py-3 border-b">
+                    <span class="font-semibold text-gray-800">流程进度</span>
+                </div>
+                <div class="p-4">
+                    <div class="yc-progress-track">
+                        <div v-for="s in $root.formulaBox.progressSteps"
+                             :key="'step-' + s.key"
+                             class="yc-progress-step"
+                             :class="'is-' + s.state">
+                            <el-tooltip v-if="s.tipItems && s.tipItems.length"
+                                        placement="top"
+                                        effect="light"
+                                        popper-class="yc-progress-tip">
+                                <div slot="content" class="yc-progress-tip-body">
+                                    <div class="yc-progress-tip-head">专业内明细（{{ s.tipItems.length }}）</div>
+                                    <div class="yc-progress-tip-row" v-for="t in s.tipItems" :key="t.key">
+                                        <div class="yc-progress-tip-main">
+                                            <span class="yc-progress-tip-name">{{ t.label }}</span>
+                                            <span class="yc-progress-tip-lead" v-if="t.leadName">负责人 {{ t.leadName }}</span>
+                                        </div>
+                                        <span class="yc-progress-tip-status" :class="'is-' + t.state">{{ t.stateLabel }}</span>
+                                    </div>
+                                </div>
+                                <div class="yc-progress-step-hit is-tip">
+                                    <div class="yc-progress-bar" aria-hidden="true"></div>
+                                    <div class="yc-progress-meta">
+                                        <span class="yc-progress-icon" aria-hidden="true">
+                                            <i v-if="s.state === 'done'" class="fas fa-check"></i>
+                                            <i v-else-if="s.state === 'rejected' || s.state === 'terminated'" class="fas fa-times"></i>
+                                        </span>
+                                        <span class="yc-progress-title">{{ s.title }}</span>
+                                        <span class="yc-progress-state">{{ s.stateLabel }}</span>
+                                    </div>
+                                </div>
+                            </el-tooltip>
+                            <div v-else class="yc-progress-step-hit">
+                                <div class="yc-progress-bar" aria-hidden="true"></div>
+                                <div class="yc-progress-meta">
+                                    <span class="yc-progress-icon" aria-hidden="true">
+                                        <i v-if="s.state === 'done'" class="fas fa-check"></i>
+                                        <i v-else-if="s.state === 'rejected' || s.state === 'terminated'" class="fas fa-times"></i>
+                                    </span>
+                                    <span class="yc-progress-title">{{ s.title }}</span>
+                                    <span class="yc-progress-state">{{ s.stateLabel }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yc-progress-legend" aria-label="状态图例">
+                        <span class="yc-progress-legend-item is-done"><i></i>已完成</span>
+                        <span class="yc-progress-legend-item is-doing"><i></i>进行中</span>
+                        <span class="yc-progress-legend-item is-rejected"><i></i>驳回</span>
+                        <span class="yc-progress-legend-item is-terminated"><i></i>终止</span>
+                        <span class="yc-progress-legend-item is-pending"><i></i>未开始</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="yc-detail-status" v-if="$root.formulaBox.statusMeta"
-                 :class="{ 'is-danger': $root.formulaBox.statusMeta.badge === 'yc-badge-danger' }">
+                 :class="{
+                   'is-terminated': $root.formulaBox.statusMeta.terminated,
+                   'is-danger': !$root.formulaBox.statusMeta.terminated && $root.formulaBox.statusMeta.badge === 'yc-badge-danger'
+                 }">
                 <span class="yc-badge" :class="$root.formulaBox.statusMeta.badge">{{ $root.formulaBox.statusMeta.text }}</span>
-                <span>{{ $root.formulaBox.pendingText }}</span>
+                <span v-if="$root.formulaBox.pendingText">{{ $root.formulaBox.pendingText }}</span>
             </div>
 
             <div class="bg-white rounded-lg shadow mb-4 overflow-hidden">
@@ -1680,7 +1786,7 @@
                                 <span class="yc-badge" :class="s.row.statusBadge">{{ s.row.statusText }}</span>
                             </template>
                         </el-table-column>
-                        <el-table-column label="编号" min-width="150">
+                        <el-table-column label="编号" min-width="176">
                             <template slot-scope="s"><span class="yc-code">{{ s.row.sheetNo }}</span></template>
                         </el-table-column>
                         <el-table-column label="分配实发金额（元）" width="160" align="right">
@@ -1716,7 +1822,7 @@
                                 <el-table-column label="专业内比例" width="140" align="right">
                                     <template slot-scope="s"><span class="yc-num">{{ $root.formatRatio(s.row.ratio) }}</span></template>
                                 </el-table-column>
-                                <el-table-column label="分配金额（元）" min-width="140" align="right">
+                                <el-table-column label="预估分配金额（元）" min-width="140" align="right">
                                     <template slot-scope="s"><span class="yc-num">{{ $root.formatAmount(s.row.amount) }}</span></template>
                                 </el-table-column>
                             </el-table>
@@ -1791,6 +1897,6 @@
 <script src="https://unpkg.com/vue@2.7.16/dist/vue.min.js"></script>
 <script src="https://unpkg.com/element-ui@2.15.14/lib/index.js"></script>
 <script src="https://unpkg.com/echarts@5.4.3/dist/echarts.min.js"></script>
-<script src="js/app.js?v=unit-view-21"></script>
+<script src="js/app.js?v=unit-view-32"></script>
 </body>
 </html>

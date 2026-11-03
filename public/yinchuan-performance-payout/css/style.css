@@ -7,7 +7,174 @@ body {
     color: #233845;
 }
 
-/* 顶部栏 */
+.yc-app-body {
+    margin: 0;
+    background: #f3f4f6;
+    overflow: hidden;
+}
+
+.yc-app-shell {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Wood 平台一级导航（占位） */
+.yc-global-nav {
+    flex: none;
+    height: 48px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    z-index: 30;
+}
+.yc-global-nav-inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 16px;
+    gap: 12px;
+    min-width: 0;
+}
+.yc-global-nav-brand {
+    flex: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: #233845;
+    white-space: nowrap;
+}
+.yc-global-nav-menu {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 0;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.yc-global-nav-menu::-webkit-scrollbar { display: none; }
+.yc-global-nav-item {
+    flex: none;
+    padding: 6px 12px;
+    font-size: 13px;
+    color: #4b5563;
+    border-radius: 4px;
+    cursor: default;
+    white-space: nowrap;
+}
+.yc-global-nav-item.is-active {
+    color: #007069;
+    background: rgba(0, 112, 105, 0.08);
+    font-weight: 600;
+}
+.yc-global-nav-user {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-left: 12px;
+    border-left: 1px solid #e5e7eb;
+}
+.yc-global-nav-user-name {
+    font-size: 13px;
+    color: #374151;
+}
+
+.yc-app-body-row {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+}
+
+/* 左侧菜单（占位） */
+.yc-sidebar {
+    flex: none;
+    width: 220px;
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+.yc-sidebar-search {
+    flex: none;
+    padding: 12px 12px 8px;
+    border-bottom: 1px solid #f0f2f5;
+}
+.yc-sidebar-menu {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 0 16px;
+    font-size: 13px;
+}
+.yc-sidebar-group-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    color: #374151;
+    font-weight: 600;
+}
+.yc-sidebar-group-icon {
+    font-size: 12px;
+    color: #9ca3af;
+}
+.yc-sidebar-group-items {
+    padding: 2px 0 4px;
+}
+.yc-sidebar-item {
+    padding: 8px 16px 8px 36px;
+    color: #4b5563;
+    cursor: default;
+    border-left: 3px solid transparent;
+}
+.yc-sidebar-item.is-active {
+    color: #007069;
+    background: rgba(0, 112, 105, 0.06);
+    border-left-color: #007069;
+    font-weight: 600;
+}
+
+.yc-main {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: #f3f4f6;
+}
+.yc-main-head {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 20px;
+    background: #ffffff;
+    border-bottom: 1px solid #eef1f5;
+}
+.yc-breadcrumb {
+    font-size: 13px;
+    color: #6b7280;
+    white-space: nowrap;
+}
+.yc-main-content {
+    flex: 1;
+    min-height: 0;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+    padding: 16px 20px 24px;
+    max-width: none;
+    margin: 0;
+}
+
+/* 顶部栏（旧模块内顶栏，保留类名兼容） */
 .top-toolbar {
     position: sticky;
     top: 0;
@@ -18,6 +185,12 @@ body {
  * 说明：Tailwind 2 CDN 为预编译产物，不支持 min-w-[220px] / !w-full 这类任意值与 important 前缀，
  * 因此本模块用到的这几类尺寸一律走自有类，避免写了不生效。 */
 .yc-container { max-width: 1680px; margin-left: auto; margin-right: auto; }
+/* 嵌入 Wood 壳层后：主内容区始终铺满，避免 tab 切换时宽度跳动 */
+.yc-app-shell .yc-main-content.yc-container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
 .yc-w-sm { flex: 1 1 0; min-width: 140px; }
 .yc-w-md { flex: 1 1 0; min-width: 200px; }
 .yc-w-lg { flex: 1 1 0; min-width: 260px; }
@@ -433,8 +606,14 @@ body {
 .yc-demo-tools { display: flex; align-items: center; gap: 12px; padding-left: 16px; border-left: 1px solid #e5e7eb; }
 .yc-demo-label { font-size: 12px; color: #6b7280; background: #f3f4f6; padding: 3px 7px; border-radius: 4px; white-space: nowrap; }
 .yc-detail-status { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; margin-bottom: 16px; background: #f0f7f6; border-radius: 6px; font-size: 13px; line-height: 22px; color: #374151; }
-/* 已驳回与其它状态共用同一底色，仅徽章区分语义 */
+/* 已驳回：与进行中共用浅绿底，仅徽章区分 */
 .yc-detail-status.is-danger { background: #f0f7f6; color: #374151; }
+/* 已终止：红色系底，与驳回区分 */
+.yc-detail-status.is-terminated {
+    background: #fef2f2;
+    color: #374151;
+    border: 1px solid #fecaca;
+}
 .yc-detail-collapse { margin-top: 24px; }
 .yc-detail-collapse .el-collapse-item__header { font-weight: 600; color: #374151; }
 .yc-eval-summary { position: sticky; bottom: 0; z-index: 10; padding: 16px 20px; background: #fff; border: 1px solid #dbe8e6; border-radius: 8px; box-shadow: 0 -3px 12px rgba(35, 56, 69, .06); }
@@ -456,7 +635,32 @@ body {
 .yc-rule-heading { display: flex; align-items: center; gap: 16px; margin: 0 0 10px; font-size: 14px; }
 .yc-rule-heading span { font-size: 12px; color: #6b7280; }
 .yc-coef-field { flex: 1; min-width: 0; }
-.yc-main-tabs > .el-tabs__content { overflow: visible; }
+/* 页签区宽度与主内容区一致，避免切换 tab 时整体宽度变化 */
+.yc-main-tabs {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+.yc-main-tabs > .el-tabs__header {
+    width: 100%;
+    margin: 0 0 12px;
+    box-sizing: border-box;
+}
+.yc-main-tabs > .el-tabs__content {
+    width: 100%;
+    min-width: 0;
+    overflow: visible;
+}
+.yc-main-tabs > .el-tabs__content > .el-tab-pane {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+}
+/* 宽表格在卡片内横向滚动，不把整页撑宽 */
+.yc-main-tabs .bg-white.rounded-lg.shadow.overflow-hidden {
+    max-width: 100%;
+    overflow-x: auto;
+}
 .yc-list-scope .el-radio-button.is-active .el-radio-button__inner { background: #007069; border-color: #007069; box-shadow: -1px 0 0 0 #007069; color: #fff; }
 .yc-container .el-table th .cell, .yc-dialog .el-table th .cell { white-space: normal; text-overflow: clip; overflow: visible; word-break: normal; line-height: 20px; }
 
@@ -486,6 +690,11 @@ body {
     border-color: rgba(0, 112, 105, 0.3);
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
+.yc-kpi-card.is-active {
+    background: rgba(0, 112, 105, 0.08);
+    border-color: #007069;
+    box-shadow: 0 0 0 1px rgba(0, 112, 105, 0.25), 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
 .yc-kpi-title { font-size: 13px; color: #374151; font-weight: 500; line-height: 1.4; }
 .yc-kpi-title .yc-field-tip { margin-left: 4px; vertical-align: middle; }
 .yc-kpi-value { margin-top: 8px; font-size: 22px; font-weight: 700; color: #007069; line-height: 1.2; }
@@ -500,3 +709,220 @@ body {
 }
 .yc-stats-tip { flex: 1; min-width: 0; font-size: 12px; color: #6b7280; line-height: 1.6; }
 .yc-stats-bar { width: 100%; height: 240px; }
+
+/* 项目绩效查询详情 · 流程进度（分段条样式） */
+.yc-progress-card { overflow: hidden; }
+.yc-progress-track {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+    min-width: 0;
+}
+.yc-progress-step {
+    flex: 1 1 0;
+    min-width: 0;
+}
+.yc-progress-step .el-tooltip { display: block; width: 100%; }
+.yc-progress-step-hit { width: 100%; }
+.yc-progress-step-hit.is-tip { cursor: pointer; }
+.yc-progress-bar {
+    height: 10px;
+    border-radius: 999px;
+    background: #e5e7eb;
+    position: relative;
+    overflow: hidden;
+}
+.yc-progress-step.is-done .yc-progress-bar {
+    background: #007069;
+}
+.yc-progress-step.is-doing .yc-progress-bar {
+    background: #e5e7eb;
+}
+.yc-progress-step.is-doing .yc-progress-bar::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 48%;
+    background: #007069;
+    border-radius: 999px 0 0 999px;
+}
+.yc-progress-step.is-doing .yc-progress-bar::after {
+    content: '';
+    position: absolute;
+    left: 48%;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        -45deg,
+        #007069 0,
+        #007069 5px,
+        #d7ebe9 5px,
+        #d7ebe9 10px
+    );
+}
+.yc-progress-step.is-rejected .yc-progress-bar {
+    background: #d97706;
+}
+.yc-progress-step.is-terminated .yc-progress-bar {
+    background: #dc2626;
+}
+.yc-progress-step.is-pending .yc-progress-bar {
+    background: #e5e7eb;
+}
+.yc-progress-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+    margin-top: 10px;
+    min-width: 0;
+}
+.yc-progress-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid #d1d5db;
+    background: #fff;
+    color: transparent;
+    font-size: 10px;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+}
+.yc-progress-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #6b7280;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+.yc-progress-state {
+    font-size: 12px;
+    color: #9ca3af;
+    line-height: 1.3;
+    white-space: nowrap;
+}
+.yc-progress-step.is-done .yc-progress-icon {
+    border-color: #007069;
+    background: #007069;
+    color: #fff;
+}
+.yc-progress-step.is-done .yc-progress-title { color: #111827; }
+.yc-progress-step.is-done .yc-progress-state { color: #007069; }
+.yc-progress-step.is-doing .yc-progress-icon {
+    border-color: #007069;
+    background: #fff;
+}
+.yc-progress-step.is-doing .yc-progress-title { color: #111827; font-weight: 600; }
+.yc-progress-step.is-doing .yc-progress-state { color: #007069; }
+.yc-progress-step.is-rejected .yc-progress-icon {
+    border-color: #d97706;
+    background: #d97706;
+    color: #fff;
+}
+.yc-progress-step.is-rejected .yc-progress-title { color: #111827; }
+.yc-progress-step.is-rejected .yc-progress-state { color: #92400e; }
+.yc-progress-step.is-terminated .yc-progress-icon {
+    border-color: #dc2626;
+    background: #dc2626;
+    color: #fff;
+}
+.yc-progress-step.is-terminated .yc-progress-title { color: #111827; }
+.yc-progress-step.is-terminated .yc-progress-state { color: #b91c1c; }
+.yc-progress-step.is-pending .yc-progress-icon {
+    border-color: #d1d5db;
+    background: #fff;
+}
+.yc-progress-step.is-pending .yc-progress-title,
+.yc-progress-step.is-pending .yc-progress-state { color: #9ca3af; }
+.yc-progress-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #edf0f3;
+    font-size: 12px;
+    color: #6b7280;
+}
+.yc-progress-legend-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+.yc-progress-legend-item i {
+    display: inline-block;
+    width: 18px;
+    height: 6px;
+    border-radius: 999px;
+    box-sizing: border-box;
+}
+.yc-progress-legend-item.is-done i { background: #007069; }
+.yc-progress-legend-item.is-doing i {
+    background: repeating-linear-gradient(
+        -45deg,
+        #007069 0,
+        #007069 3px,
+        #d7ebe9 3px,
+        #d7ebe9 6px
+    );
+}
+.yc-progress-legend-item.is-rejected i { background: #d97706; }
+.yc-progress-legend-item.is-terminated i { background: #dc2626; }
+.yc-progress-legend-item.is-pending i { background: #e5e7eb; }
+
+/* 专业内并行明细悬浮层 */
+.yc-progress-tip {
+    max-width: 420px !important;
+    padding: 10px 12px !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08) !important;
+}
+.yc-progress-tip-body { min-width: 260px; max-width: 400px; }
+.yc-progress-tip-head {
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 8px;
+}
+.yc-progress-tip-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 0;
+    border-top: 1px solid #f3f4f6;
+}
+.yc-progress-tip-row:first-of-type { border-top: none; padding-top: 0; }
+.yc-progress-tip-main { min-width: 0; flex: 1; }
+.yc-progress-tip-name {
+    display: block;
+    font-size: 12px;
+    color: #111827;
+    line-height: 1.4;
+    word-break: break-all;
+}
+.yc-progress-tip-lead {
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    color: #6b7280;
+}
+.yc-progress-tip-status {
+    flex: 0 0 auto;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #6b7280;
+}
+.yc-progress-tip-status.is-done { color: #007069; }
+.yc-progress-tip-status.is-doing { color: #007069; }
+.yc-progress-tip-status.is-rejected { color: #92400e; }
+.yc-progress-tip-status.is-terminated { color: #b91c1c; }
+.yc-progress-tip-status.is-pending { color: #6b7280; }

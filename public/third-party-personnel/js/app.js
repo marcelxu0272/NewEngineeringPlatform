@@ -538,6 +538,15 @@
       unlockBodyScroll: function () {
         document.body.classList.remove('modal-open');
       },
+      resetFormScroll: function () {
+        var el = this.$refs.formScroll;
+        if (el) el.scrollTop = 0;
+        var dialog = document.querySelector('.person-dialog');
+        if (!dialog) return;
+        var body = dialog.querySelector('.el-dialog__body');
+        if (body) body.scrollTop = 0;
+        if (dialog.parentElement) dialog.parentElement.scrollTop = 0;
+      },
       applyFilter: function () {
         this.appliedFilter = {
           keyword: this.draftFilter.keyword || '',

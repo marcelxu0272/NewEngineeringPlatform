@@ -3,7 +3,7 @@ export default function YinchuanPerformancePayoutPage() {
     <div className="h-screen w-full bg-white">
       <iframe
         src="/yinchuan-performance-payout/index.html"
-        title="银川绩效派发"
+        title="银川绩效分配"
         className="h-full w-full border-0"
       />
     </div>

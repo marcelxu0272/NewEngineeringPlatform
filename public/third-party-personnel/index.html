@@ -109,10 +109,11 @@
       :close-on-click-modal="false"
       custom-class="fixed-dialog person-dialog"
       @open="lockBodyScroll"
+      @opened="resetFormScroll"
       @closed="unlockBodyScroll"
     >
       <el-form ref="personFormRef" :model="personForm" :rules="personRules" label-position="top" size="small" class="person-el-form">
-        <div class="form-scroll">
+        <div class="form-scroll" ref="formScroll">
           <div class="form-section">
             <h4 class="form-section-title">人员状态</h4>
             <div class="form-grid">

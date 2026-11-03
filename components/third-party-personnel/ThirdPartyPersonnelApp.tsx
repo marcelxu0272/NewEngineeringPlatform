@@ -103,6 +103,7 @@ export function ThirdPartyPersonnelApp() {
   });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const formScrollRef = useRef<HTMLDivElement>(null);
 
   const [formData, setFormData] = useState<PersonFormData>({
     id: null,
@@ -500,6 +501,16 @@ export function ThirdPartyPersonnelApp() {
 
   const formOpen = showAddDialog || showEditDialog;
 
+  useEffect(() => {
+    if (!formOpen) return;
+    const reset = () => {
+      if (formScrollRef.current) formScrollRef.current.scrollTop = 0;
+    };
+    reset();
+    const id = requestAnimationFrame(reset);
+    return () => cancelAnimationFrame(id);
+  }, [formOpen]);
+
   return (
     <ConfigProvider
       theme={{
@@ -694,7 +705,7 @@ export function ThirdPartyPersonnelApp() {
             <div className="mb-2 px-5 pt-3 text-xs text-[#007069]">
               带 * 为必填项。管理归属由所属项目自动带出；工时与费率为选填。
             </div>
-            <div className="max-h-[62vh] space-y-6 overflow-y-auto px-5 pb-2">
+            <div ref={formScrollRef} className="max-h-[62vh] space-y-6 overflow-y-auto px-5 pb-2">
               <section>
                 <h4 className="mb-2 border-b border-gray-100 pb-1.5 text-[13px] font-semibold text-gray-800">人员状态</h4>
                 <div className="grid grid-cols-1 gap-x-4 gap-y-2.5 md:grid-cols-2">

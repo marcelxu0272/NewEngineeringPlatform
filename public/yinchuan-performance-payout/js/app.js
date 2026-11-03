@@ -15,7 +15,7 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'engineering-platform-yinchuan-performance-payout-v6';
+  var STORAGE_KEY = 'engineering-platform-yinchuan-performance-payout-v7';
 
   /* ==========================================================================
    * 一、主数据（只读 mock）
@@ -315,10 +315,47 @@
     return round4(n).toFixed(4);
   }
 
-  /** 从单据编号解析年份，如 YCJX-2026-001 */
-  function sheetYear(sheetNo) {
-    var m = String(sheetNo || '').match(/-(\d{4})-/);
-    return m ? Number(m[1]) : null;
+  /**
+   * 编号规则：
+   * - 专业间 YCJX-0001（四位流水）
+   * - 专业内 YCJX-0001-001（同一专业间下三位流水）
+   * - 评估   YCJX-0001-PG
+   */
+  function nextInterSheetNo(interSheets) {
+    var max = 0;
+    (interSheets || []).forEach(function (s) {
+      var m = String(s.sheetNo || '').match(/^YCJX-(\d{4})$/);
+      if (m) max = Math.max(max, Number(m[1]));
+    });
+    return 'YCJX-' + String(max + 1).padStart(4, '0');
+  }
+
+  function nextIntraSheetNo(interSheetNo, intraSheets, interId) {
+    var max = 0;
+    var re = new RegExp('^' + String(interSheetNo).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '-(\\d{3})$');
+    (intraSheets || []).forEach(function (s) {
+      if (interId && s.interId !== interId) return;
+      var m = String(s.sheetNo || '').match(re);
+      if (m) max = Math.max(max, Number(m[1]));
+    });
+    return interSheetNo + '-' + String(max + 1).padStart(3, '0');
+  }
+
+  function evalSheetNo(interSheetNo) {
+    return String(interSheetNo) + '-PG';
+  }
+
+  /** KPI 年份：旧号含 -YYYY-；新号无年则取 updatedAt 前四位 */
+  function sheetYearOf(v) {
+    if (!v) return null;
+    var m = String(v.sheetNo || '').match(/-(\d{4})-/);
+    if (m) return Number(m[1]);
+    var u = String(v.updatedAt || '');
+    if (u.length >= 4) {
+      var y = Number(u.slice(0, 4));
+      if (!isNaN(y) && y > 1900) return y;
+    }
+    return null;
   }
 
   function uniqueProjectCount(rows) {
@@ -572,15 +609,12 @@
     var inter = [];
     var intra = [];
     var evals = [];
-    var seq = 1;
-
-    function sheetNo(prefix) { return prefix + '-2026-' + String(seq++).padStart(3, '0'); }
 
     function makeInter(projectId, k1, lines, status, extra) {
       var p = PROJECT_MAP[projectId];
       var s = {
         id: uid('inter'),
-        sheetNo: sheetNo('YCJX'),
+        sheetNo: nextInterSheetNo(inter),
         projectId: projectId,
         contractAmountExclTax: p.contractAmountExclTax,
         k1: k1,
@@ -611,7 +645,7 @@
       if (!line) throw new Error('inter line missing unit ' + unitId);
       var s = {
         id: uid('intra'),
-        sheetNo: sheetNo('YCZN'),
+        sheetNo: nextIntraSheetNo(interSheet.sheetNo, intra, interSheet.id),
         projectId: interSheet.projectId,
         disciplineId: line.disciplineId,
         unitId: line.unitId,
@@ -659,7 +693,7 @@
       });
       var ev = {
         id: uid('eval'),
-        sheetNo: sheetNo('YCPG'),
+        sheetNo: evalSheetNo(interSheet.sheetNo),
         projectId: interSheet.projectId,
         interId: interSheet.id,
         status: 'EVAL_DONE',
@@ -904,6 +938,8 @@
         queryProjectQuery: { projectId: '', status: '', keyword: '' },
         queryProjectPage: 1,
         queryProjectPageSize: 10,
+        /** 项目绩效查询：计数类 KPI 点选筛选（空=未选） */
+        queryProjectKpiKey: '',
         queryPersonFilter: { projectId: '', disciplineId: '', status: '', keyword: '' },
         queryPersonQuery: { projectId: '', disciplineId: '', status: '', keyword: '' },
         queryPersonPage: 1,
@@ -922,7 +958,7 @@
         // 专业内审批弹窗
         intraReview: { visible: false, saving: false, sheet: null },
         // 查看详情弹窗
-        formulaBox: { visible: false, title: '', rows: [], logs: [], splits: [], people: null, queryPeople: null, interId: '', projectId: '', projectCode: '', projectName: '', managerName: '', remark: '', showHistory: false },
+        formulaBox: { visible: false, title: '', rows: [], logs: [], splits: [], people: null, queryPeople: null, interId: '', projectId: '', projectCode: '', projectName: '', managerName: '', remark: '', showHistory: false, progressSteps: null },
         historyEditPage: 1,
         historyFormulaPage: 1,
         historyPageSize: 10,
@@ -974,6 +1010,30 @@
       isLead: function () { return this.roleKind === 'LEAD'; },
       isDirector: function () { return this.roleKind === 'DIRECTOR'; },
       isEngineer: function () { return this.roleKind === 'ENGINEER'; },
+      isReviewer: function () { return this.roleKind === 'K2' || this.roleKind === 'K3'; },
+
+      /**
+       * 主页签可见性（按角色）：
+       * - 项目经理 / K2·K3 审核人：专业间、专业内、评估、项目查询、个人查询（无配置）
+       * - 专业室主任 / 专业负责人：专业内、个人查询
+       * - 工程师：仅个人查询
+       * - 系统配置：全部 + 规则配置
+       */
+      visibleMainTabs: function () {
+        if (this.isAdmin) {
+          return ['inter', 'intra', 'eval', 'queryProject', 'queryPerson', 'config'];
+        }
+        if (this.isPM || this.isReviewer) {
+          return ['inter', 'intra', 'eval', 'queryProject', 'queryPerson'];
+        }
+        if (this.isLead || this.isDirector) {
+          return ['intra', 'queryPerson'];
+        }
+        if (this.isEngineer) {
+          return ['queryPerson'];
+        }
+        return ['inter', 'intra', 'eval', 'queryProject', 'queryPerson'];
+      },
 
       currentRoleLabel: function () {
         var r = this.currentRole;
@@ -1128,6 +1188,8 @@
       queryProjectRows: function () {
         var self = this;
         var q = this.queryProjectQuery;
+        var kpiKey = this.queryProjectKpiKey;
+        var year = this.queryStatsYear;
         var rows = [];
         this.computedInterSheets.forEach(function (v) {
           if (v.status === 'INTER_DRAFT') return;
@@ -1138,6 +1200,13 @@
           if (q.keyword) {
             var k = q.keyword.trim().toLowerCase();
             if ((v.sheetNo + ' ' + v.projectCode + ' ' + v.projectName).toLowerCase().indexOf(k) === -1) return;
+          }
+          if (kpiKey === 'projDoneCount') {
+            if (sheetYearOf(v) !== year) return;
+            if (v.terminated || v.evalStatus !== 'EVAL_DONE') return;
+          } else if (kpiKey === 'projPendingCount') {
+            if (sheetYearOf(v) !== year) return;
+            if (v.terminated || v.evalStatus === 'EVAL_DONE') return;
           }
           rows.push(self.buildQueryProjectRow(v));
         });
@@ -1214,7 +1283,7 @@
         var rows = [];
           this.computedInterSheets.forEach(function (v) {
           if (v.status === 'INTER_DRAFT') return;
-          if (sheetYear(v.sheetNo) !== year) return;
+          if (sheetYearOf(v) !== year) return;
           var scope = self.queryScope(v);
           if (!scope.seeProject) return;
           var row = self.buildQueryProjectRow(v);
@@ -1231,7 +1300,7 @@
         var rows = [];
         this.computedInterSheets.forEach(function (v) {
           if (v.status === 'INTER_DRAFT') return;
-          if (sheetYear(v.sheetNo) !== year) return;
+          if (sheetYearOf(v) !== year) return;
           var scope = self.queryScope(v);
           if (!scope.ok) return;
           v.disciplines.forEach(function (d) {
@@ -1264,10 +1333,34 @@
         var tipExclude = '已终止单据不计入本统计。';
         var rows = this.queryProjectBaseRows.filter(function (r) { return !r.terminated; });
         var done = rows.filter(function (r) { return r.evalStatus === 'EVAL_DONE'; });
-        var pending = rows.filter(function (r) { return r.evalStatus === 'EVAL_PENDING'; });
+        /* 进行中：除已完成、已终止外的全部状态（待审核/已驳回/专业内未完成/待评估等） */
+        var inProgress = rows.filter(function (r) { return r.evalStatus !== 'EVAL_DONE'; });
+        var pendingAmtRows = rows.filter(function (r) { return r.evalStatus === 'EVAL_PENDING'; });
         var doneAmt = done.reduce(function (a, r) { return a + (r.amountDone || 0); }, 0);
-        var pendingAmt = pending.reduce(function (a, r) { return a + (r.amountPending || 0); }, 0);
+        var pendingAmt = pendingAmtRows.reduce(function (a, r) { return a + (r.amountPending || 0); }, 0);
         return [
+          {
+            key: 'projPendingCount',
+            kind: 'project',
+            title: '进行中绩效评估',
+            tip: '当年除已完成、已终止外的全部单据数量（含待审核、已驳回、专业内未完成、待评估等）。' + tipExclude,
+            mainText: String(inProgress.length),
+            secondaryText: '项目数 ' + uniqueProjectCount(inProgress),
+            listToggle: true,
+            showChart: false,
+            rows: inProgress
+          },
+          {
+            key: 'projDoneCount',
+            kind: 'project',
+            title: '当年已完成绩效评估',
+            tip: '当年已完成评估的数量。' + tipExclude,
+            mainText: String(done.length),
+            secondaryText: '项目数 ' + uniqueProjectCount(done),
+            listToggle: true,
+            showChart: false,
+            rows: done
+          },
           {
             key: 'projDoneAmt',
             kind: 'project',
@@ -1286,39 +1379,15 @@
             key: 'projPendingAmt',
             kind: 'project',
             title: '当年进行中预估合计（元）',
-            tip: '状态为待评估、待审核、已驳回的预估分配金额合计。' + tipExclude,
+            tip: '状态为待评估的预估分配金额合计。' + tipExclude,
             mainText: formatAmount(pendingAmt),
             secondaryText: '',
             showChart: true,
-            rows: pending.map(function (r) {
+            rows: pendingAmtRows.map(function (r) {
               return Object.assign({}, r, { amount: r.amountPending });
             }),
-            chartRows: pending,
+            chartRows: pendingAmtRows,
             chartAmountKey: 'amountPending'
-          },
-          {
-            key: 'projDoneCount',
-            kind: 'project',
-            title: '当年已完成绩效评估',
-            tip: '当年已完成评估的数量。' + tipExclude,
-            mainText: String(done.length),
-            secondaryText: '项目数 ' + uniqueProjectCount(done),
-            showChart: false,
-            rows: done.map(function (r) {
-              return Object.assign({}, r, { amount: r.amountDone });
-            })
-          },
-          {
-            key: 'projPendingCount',
-            kind: 'project',
-            title: '进行中绩效评估',
-            tip: '状态为待评估、待审核、已驳回的数量。' + tipExclude,
-            mainText: String(pending.length),
-            secondaryText: '项目数 ' + uniqueProjectCount(pending),
-            showChart: false,
-            rows: pending.map(function (r) {
-              return Object.assign({}, r, { amount: r.amountPending });
-            })
           }
         ];
       },
@@ -1540,7 +1609,11 @@
       detailStatusMeta: function (v) {
         // 专业间详情只展示专业间状态，与列表一致；不串评估页的「专业内未完成」
         var meta = this.statusOf(INTER_STATUS, v.status);
-        return { text: meta.label, badge: meta.badge };
+        return {
+          text: meta.label,
+          badge: meta.badge,
+          terminated: v.status === 'INTER_TERMINATED' || !!v.terminated
+        };
       },
       detailPendingText: function (v, ctx) {
         if (ctx.kind === 'discipline') {
@@ -1550,6 +1623,9 @@
           return d && d.waitingSplit ? this.evalIntraHint(d) : '本单元分配已通过';
         }
         // 以下仅专业间（项目）详情
+        if (v.status === 'INTER_TERMINATED' || v.terminated) {
+          return '本派发链已终止，关联专业内与评估流程已结束；已产生的分配实发已释放。';
+        }
         if (v.status === 'INTER_PENDING') {
           var names = [];
           if (v.k2Status === 'pending') names.push('K2 审核人 ' + userName(v.k2ReviewerId));
@@ -1953,6 +2029,124 @@
         };
       },
 
+      /**
+       * 项目绩效查询详情顶部流程进度：专业间 → 专业内 → 项目经理评估 → 完成分配
+       * state: done | doing | rejected | terminated | pending
+       * 专业内节点带 tipItems：各并行单元专业内明细（悬浮展示）
+       */
+      buildProjectProgressSteps: function (v) {
+        var LABEL = {
+          done: '已完成',
+          doing: '进行中',
+          rejected: '驳回',
+          terminated: '终止',
+          pending: '未开始'
+        };
+        function step(key, title, state, tipItems) {
+          return {
+            key: key,
+            title: title,
+            state: state,
+            stateLabel: LABEL[state] || state,
+            tipItems: tipItems || null
+          };
+        }
+
+        var chainTerminated = !!(v.terminated || v.status === 'INTER_TERMINATED');
+        var interDone = v.status === 'INTER_APPROVED' || !!v.poolLocked;
+        var activeUnits = (v.disciplines || []).filter(function (d) {
+          return (d.ratio || 0) > 0;
+        });
+
+        function buildIntraTips() {
+          if (!activeUnits.length) return null;
+          return activeUnits.map(function (d) {
+            var st = d.intraStatus || (d.intra && d.intra.status) || null;
+            var state;
+            var stateLabel;
+            if (chainTerminated || st === 'INTRA_TERMINATED') {
+              state = 'terminated';
+              stateLabel = '已终止';
+            } else if (!interDone || !st) {
+              state = 'pending';
+              stateLabel = '未开始';
+            } else if (st === 'INTRA_APPROVED') {
+              state = 'done';
+              stateLabel = '已通过';
+            } else if (st === 'INTRA_REJECTED') {
+              state = 'rejected';
+              stateLabel = '已驳回';
+            } else if (st === 'INTRA_DRAFT') {
+              state = 'doing';
+              stateLabel = '待完成';
+            } else if (st === 'INTRA_PENDING') {
+              state = 'doing';
+              stateLabel = '待审批';
+            } else {
+              state = 'doing';
+              stateLabel = '进行中';
+            }
+            return {
+              key: d.unitId + '_' + d.disciplineId,
+              label: (d.unitId || '') + ' ' + (d.unitName || '') + ' · ' + (d.name || ''),
+              leadName: d.leadName || '',
+              state: state,
+              stateLabel: stateLabel
+            };
+          });
+        }
+
+        var intraTips = buildIntraTips();
+
+        if (chainTerminated) {
+          return [
+            step('inter', '专业间', 'terminated'),
+            step('intra', '专业内', 'terminated', intraTips),
+            step('eval', '项目经理评估', 'terminated'),
+            step('done', '完成分配', 'terminated')
+          ];
+        }
+
+        var interState;
+        if (v.status === 'INTER_REJECTED') interState = 'rejected';
+        else if (v.status === 'INTER_PENDING' || v.status === 'INTER_DRAFT') interState = 'doing';
+        else if (interDone) interState = 'done';
+        else interState = 'pending';
+
+        var intraState = 'pending';
+        if (interState === 'rejected' || interState !== 'done') {
+          intraState = 'pending';
+        } else if (!activeUnits.length) {
+          intraState = 'done';
+        } else {
+          var anyRejected = activeUnits.some(function (d) {
+            return d.intraStatus === 'INTRA_REJECTED' || (d.intra && d.intra.status === 'INTRA_REJECTED');
+          });
+          var allApproved = activeUnits.every(function (d) {
+            var st = d.intraStatus || (d.intra && d.intra.status);
+            return st === 'INTRA_APPROVED';
+          });
+          if (anyRejected) intraState = 'rejected';
+          else if (allApproved) intraState = 'done';
+          else intraState = 'doing';
+        }
+
+        var evalState = 'pending';
+        if (v.evalStatus === 'EVAL_DONE') evalState = 'done';
+        else if (v.evalStatus === 'EVAL_PENDING') evalState = 'doing';
+        else if (intraState === 'done') evalState = 'doing';
+        else evalState = 'pending';
+
+        var doneState = v.evalStatus === 'EVAL_DONE' ? 'done' : 'pending';
+
+        return [
+          step('inter', '专业间', interState),
+          step('intra', '专业内', intraState, intraTips),
+          step('eval', '项目经理评估', evalState),
+          step('done', '完成分配', doneState)
+        ];
+      },
+
       /* ================= 查看详情弹窗（§4.2） ================= */
 
       openFormula: function (ctx) {
@@ -2004,6 +2198,23 @@
         var fromQuery = !!ctx.fromQuery;
         if (ctx.kind === 'project' && fromQuery) {
           title = '查看详情';
+          term('', '可分配金额', formatAmount(v.C));
+          term('×', '绩效系数 K1', formatRatio(v.k1));
+          term('×', '绩效系数 K2', v.k2Status === 'confirmed' ? formatKCoef(v.k2) : '—', k2s.status, k2s.statusBadge);
+          term('×', '绩效系数 K3', v.k3Status === 'confirmed' ? formatKCoef(v.k3) : '—', k3s.status, k3s.statusBadge);
+          term('=', '预估分配金额', v.poolLocked ? formatAmount(v.pool) : '—', poolStatus.status, poolStatus.statusBadge, true);
+          splits = (v.allDisciplineLines || []).map(function (l) {
+            var d = v.disciplines.filter(function (x) { return x.unitId === l.unitId; })[0];
+            return {
+              unitId: l.unitId,
+              unitName: l.unitName,
+              disciplineId: l.disciplineId,
+              name: disciplineName(l.disciplineId),
+              leadName: userName(l.leadUserId),
+              ratio: l.ratio,
+              poolText: (v.poolLocked && d) ? formatAmount(d.pool) : '—'
+            };
+          });
           queryPeople = [];
           v.disciplines.forEach(function (d) {
             (d.persons || []).forEach(function (p) {
@@ -2060,10 +2271,10 @@
         this.formulaBox = {
           visible: true,
           title: (ctx.kind === 'project' ? '派发详情' : ctx.kind === 'discipline' ? '专业分配详情' : '个人绩效详情') + ' · ' + (intraSheet ? intraSheet.sheetNo : v.sheetNo),
-          statusMeta: fromQuery ? null : (ctx.kind === 'discipline' && intraSheet
-            ? { text: this.statusOf(INTRA_STATUS, intraSheet.status).label, badge: this.statusOf(INTRA_STATUS, intraSheet.status).badge }
-            : this.detailStatusMeta(v)),
-          pendingText: fromQuery ? '' : this.detailPendingText(v, ctx),
+          statusMeta: (ctx.kind === 'discipline' && intraSheet
+            ? { text: this.statusOf(INTRA_STATUS, intraSheet.status).label, badge: this.statusOf(INTRA_STATUS, intraSheet.status).badge, terminated: intraSheet.status === 'INTRA_TERMINATED' }
+            : (ctx.kind === 'project' ? this.detailStatusMeta(v) : null)),
+          pendingText: (ctx.kind === 'project' || ctx.kind === 'discipline') ? this.detailPendingText(v, ctx) : '',
           rows: rows,
           logs: this.collectLogs(v, ctx),
           splits: splits,
@@ -2077,7 +2288,8 @@
           managerName: userName(v.managerUserId),
           remark: v.remark || '',
           showHistory: !ctx.fromQuery && ctx.kind === 'project',
-          fromStats: fromStats
+          fromStats: fromStats,
+          progressSteps: (fromQuery && ctx.kind === 'project') ? this.buildProjectProgressSteps(v) : null
         };
         this.historyFormulaPage = 1;
         this.formulaPeoplePage = 1;
@@ -2275,6 +2487,11 @@
 
       openQueryStats: function (kpi) {
         if (!kpi) return;
+        /* 计数类 KPI：点选筛选列表，不进下探页 */
+        if (kpi.listToggle && kpi.kind === 'project') {
+          this.toggleQueryProjectKpi(kpi.key);
+          return;
+        }
         var chartData = [];
         if (kpi.showChart) {
           chartData = amountComposeByProject(kpi.chartRows || kpi.rows, kpi.chartAmountKey || 'amount');
@@ -2305,6 +2522,12 @@
         this.$nextTick(function () {
           setTimeout(function () { self.renderStatsBar(); }, 80);
         });
+      },
+
+      /** 项目绩效查询计数 KPI：再点取消；点另一张则切换选中 */
+      toggleQueryProjectKpi: function (key) {
+        this.queryProjectKpiKey = this.queryProjectKpiKey === key ? '' : key;
+        this.queryProjectPage = 1;
       },
 
       closeStats: function () {
@@ -2495,6 +2718,7 @@
       searchQueryProject: function () { this.queryProjectQuery = deepClone(this.queryProjectFilter); this.queryProjectPage = 1; },
       resetQueryProject: function () {
         this.queryProjectFilter = { projectId: '', status: '', keyword: '' };
+        this.queryProjectKpiKey = '';
         this.searchQueryProject();
       },
       searchQueryPerson: function () { this.queryPersonQuery = deepClone(this.queryPersonFilter); this.queryPersonPage = 1; },
@@ -2663,7 +2887,7 @@
           if (self.interEdit.isNew) {
             var s = {
               id: uid('inter'),
-              sheetNo: 'YCJX-2026-' + String(self.state.interSheets.length + 101).slice(-3),
+              sheetNo: nextInterSheetNo(self.state.interSheets),
               projectId: self.interEdit.projectId,
               contractAmountExclTax: allocable,
               k1: k1,
@@ -2844,7 +3068,7 @@
           if (exists) return;
           self.state.intraSheets.push({
             id: uid('intra'),
-            sheetNo: 'YCZN-2026-' + String(self.state.intraSheets.length + 101).slice(-3),
+            sheetNo: nextIntraSheetNo(s.sheetNo, self.state.intraSheets, s.id),
             projectId: s.projectId,
             disciplineId: l.disciplineId,
             unitId: l.unitId,
@@ -3164,7 +3388,7 @@
           });
           var ev = {
             id: uid('eval'),
-            sheetNo: 'YCPG-2026-' + String(self.state.evaluations.length + 101).slice(-3),
+            sheetNo: evalSheetNo(v.sheetNo),
             projectId: v.projectId,
             interId: v.id,
             status: 'EVAL_DONE',
@@ -3251,7 +3475,7 @@
       },
       queryProjectHasFilter: function () {
         var q = this.queryProjectQuery;
-        return !!(q.projectId || q.status || q.keyword);
+        return !!(q.projectId || q.status || q.keyword || this.queryProjectKpiKey);
       },
       queryPersonHasFilter: function () {
         var q = this.queryPersonQuery;
@@ -3277,6 +3501,20 @@
       onMainTabClick: function () {
         this.resetAllTabViewsToList();
       },
+
+      canSeeMainTab: function (name) {
+        return this.visibleMainTabs.indexOf(name) !== -1;
+      },
+
+      /** 当前页签对身份不可见时，切到该身份第一个可见页签 */
+      ensureActiveTabVisible: function () {
+        var tabs = this.visibleMainTabs;
+        if (!tabs.length) return;
+        if (tabs.indexOf(this.activeTab) === -1) {
+          this.activeTab = tabs[0];
+        }
+      },
+
       resetAllTabViewsToList: function () {
         this.interView = 'list';
         this.intraView = 'list';
@@ -3284,6 +3522,7 @@
         this.queryPersonView = 'list';
         this.queryProjectReturnView = 'list';
         this.queryPersonReturnView = 'list';
+        this.queryProjectKpiKey = '';
         this.evalView = 'list';
         this.evalProjectId = '';
         this.evalDraft = {};
@@ -3309,11 +3548,7 @@
         this.queryPersonPage = 1;
         this.resetAllTabViewsToList();
         this.evalPage = 1;
-        if (this.activeTab === 'config' && !this.isAdmin) this.activeTab = 'inter';
-        // 工程师默认落在「个人绩效查询」；若当前在项目查询则切过去
-        if (this.isEngineer && this.activeTab === 'queryProject') {
-          this.activeTab = 'queryPerson';
-        }
+        this.ensureActiveTabVisible();
         var self = this;
         this.$nextTick(function () {
           if (self.$refs.mainTabs && self.$refs.mainTabs.calcPaneInstances) {
@@ -3331,6 +3566,7 @@
       this.searchQueryProject();
       this.searchQueryPerson();
       this.searchEval();
+      this.ensureActiveTabVisible();
       try {
         var params = new URLSearchParams(window.location.search);
         if (params.get('demoReset') === '0') this.showDemoReset = false;
