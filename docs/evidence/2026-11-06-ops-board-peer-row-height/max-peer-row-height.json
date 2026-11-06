@@ -1,0 +1,4181 @@
+{
+  "probe": "max-peer-row-height",
+  "commit": "69bbce5db6b5cf8029e68ff5f6c5d01a8b8ef272",
+  "baseline": "09e4bec3a98582f75a286364bc527aad53852ca9",
+  "url": "http://127.0.0.1:3456/operations-dashboard-202610/index.html",
+  "measuredAt": "2026-11-06T09:02:55.951Z",
+  "noisePx": 1,
+  "noiseNote": "1px 只用于丢掉 getBoundingClientRect 的亚像素和边框取整，不是新的业务通过阈值。",
+  "verdict": "PASS",
+  "issueCount": 0,
+  "issues": [],
+  "deliveryStory": {
+    "h": 276.3,
+    "cashPanelH": 439.4,
+    "pairH": 403.6,
+    "flexGrow": "0",
+    "widthShare": 1,
+    "widthRatio": [
+      1,
+      2,
+      1
+    ],
+    "columnHeightSpread": 0,
+    "inkSlack": 4.8,
+    "mainClientHeight": 1000
+  },
+  "reflowWidths": {
+    "cash2": 560,
+    "cash1": 440,
+    "kpi1": 560,
+    "pair1": null
+  },
+  "desktop": {
+    "main": {
+      "display": "flex",
+      "flexDirection": "column",
+      "gap": 12,
+      "clientHeight": 1000,
+      "scrollHeight": 2021,
+      "width": 1440
+    },
+    "grids": {
+      "kpi": {
+        "display": "grid",
+        "alignItems": "normal",
+        "gridTemplateColumns": "690.5px 690.5px",
+        "gridTemplateRows": "128.906px 128.906px",
+        "flexGrow": "0",
+        "height": 269.8,
+        "width": 1393,
+        "peerCols": "2",
+        "hidden": false
+      },
+      "cash": {
+        "display": "grid",
+        "alignItems": "normal",
+        "gridTemplateColumns": "448.328px 448.328px 448.344px",
+        "gridTemplateRows": "95.0625px",
+        "flexGrow": "0",
+        "height": 95.1,
+        "width": 1363,
+        "peerCols": "3",
+        "hidden": false
+      },
+      "risk": {
+        "display": "grid",
+        "alignItems": "normal",
+        "gridTemplateColumns": "677.5px 677.5px",
+        "gridTemplateRows": "102.516px 102.516px",
+        "flexGrow": "0",
+        "height": 213,
+        "width": 1363,
+        "peerCols": "2",
+        "hidden": false
+      },
+      "pair": {
+        "display": "grid",
+        "alignItems": "stretch",
+        "gridTemplateColumns": "690.5px 690.5px",
+        "gridTemplateRows": "403.578px",
+        "flexGrow": "0",
+        "height": 403.6,
+        "width": 1393,
+        "peerCols": "2",
+        "hidden": false
+      }
+    },
+    "rows": [
+      {
+        "zone": "kpi",
+        "row": 1,
+        "n": 2,
+        "heights": [
+          128.9,
+          128.9
+        ],
+        "spread": 0,
+        "minInkSlack": 16.9,
+        "maxInkSlack": 16.9,
+        "minHeightBound": false,
+        "labels": [
+          "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% ",
+          "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% ",
+            "top": 12,
+            "left": 16,
+            "h": 128.9,
+            "w": 690.5,
+            "inkSlack": 16.9,
+            "minHeight": 0,
+            "padBottom": 14,
+            "alignSelf": "auto",
+            "overflowY": "hidden"
+          },
+          {
+            "label": "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1",
+            "top": 12,
+            "left": 718.5,
+            "h": 128.9,
+            "w": 690.5,
+            "inkSlack": 16.9,
+            "minHeight": 0,
+            "padBottom": 14,
+            "alignSelf": "auto",
+            "overflowY": "hidden"
+          }
+        ]
+      },
+      {
+        "zone": "kpi",
+        "row": 2,
+        "n": 2,
+        "heights": [
+          128.9,
+          128.9
+        ],
+        "spread": 0,
+        "minInkSlack": 16.9,
+        "maxInkSlack": 16.9,
+        "minHeightBound": false,
+        "labels": [
+          "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%",
+          "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%",
+            "top": 152.9,
+            "left": 16,
+            "h": 128.9,
+            "w": 690.5,
+            "inkSlack": 16.9,
+            "minHeight": 0,
+            "padBottom": 14,
+            "alignSelf": "auto",
+            "overflowY": "hidden"
+          },
+          {
+            "label": "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1",
+            "top": 152.9,
+            "left": 718.5,
+            "h": 128.9,
+            "w": 690.5,
+            "inkSlack": 16.9,
+            "minHeight": 0,
+            "padBottom": 14,
+            "alignSelf": "auto",
+            "overflowY": "hidden"
+          }
+        ]
+      },
+      {
+        "zone": "cash",
+        "row": 1,
+        "n": 3,
+        "heights": [
+          95.1,
+          95.1,
+          95.1
+        ],
+        "spread": 0,
+        "minInkSlack": 2.9,
+        "maxInkSlack": 2.9,
+        "minHeightBound": false,
+        "labels": [
+          "现金流入 200,501.05 较上期 +3.2% ↑",
+          "现金流出 184,498.69 较上期 -2.1% ↓",
+          "净现金流 16,002.36 较上期 +4.6% ↑"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "现金流入 200,501.05 较上期 +3.2% ↑",
+            "top": 339.1,
+            "left": 31,
+            "h": 95.1,
+            "w": 448.3,
+            "inkSlack": 2.9,
+            "minHeight": 0,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          },
+          {
+            "label": "现金流出 184,498.69 较上期 -2.1% ↓",
+            "top": 339.1,
+            "left": 488.3,
+            "h": 95.1,
+            "w": 448.3,
+            "inkSlack": 2.9,
+            "minHeight": 0,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          },
+          {
+            "label": "净现金流 16,002.36 较上期 +4.6% ↑",
+            "top": 339.1,
+            "left": 945.7,
+            "h": 95.1,
+            "w": 448.3,
+            "inkSlack": 2.9,
+            "minHeight": 0,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          }
+        ]
+      },
+      {
+        "zone": "risk",
+        "row": 1,
+        "n": 2,
+        "heights": [
+          102.5,
+          102.5
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 2.4,
+        "minHeightBound": false,
+        "labels": [
+          "应收账款 996.10 较上期 -2.1% ↓",
+          "WIP 2,574.55 较上期 +6.3% ↑"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "应收账款 996.10 较上期 -2.1% ↓",
+            "top": 790.5,
+            "left": 31,
+            "h": 102.5,
+            "w": 677.5,
+            "inkSlack": 2.4,
+            "minHeight": 76,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          },
+          {
+            "label": "WIP 2,574.55 较上期 +6.3% ↑",
+            "top": 790.5,
+            "left": 716.5,
+            "h": 102.5,
+            "w": 677.5,
+            "inkSlack": 2.4,
+            "minHeight": 76,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          }
+        ]
+      },
+      {
+        "zone": "risk",
+        "row": 2,
+        "n": 2,
+        "heights": [
+          102.5,
+          102.5
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 2.4,
+        "minHeightBound": false,
+        "labels": [
+          "存货 2,189.48 较上期 -1.8% ↓",
+          "营业收入 3,280.60 较上期 +4.5% ↑"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "存货 2,189.48 较上期 -1.8% ↓",
+            "top": 901,
+            "left": 31,
+            "h": 102.5,
+            "w": 677.5,
+            "inkSlack": 2.4,
+            "minHeight": 76,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          },
+          {
+            "label": "营业收入 3,280.60 较上期 +4.5% ↑",
+            "top": 901,
+            "left": 716.5,
+            "h": 102.5,
+            "w": 677.5,
+            "inkSlack": 2.4,
+            "minHeight": 76,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          }
+        ]
+      },
+      {
+        "zone": "pair",
+        "row": 1,
+        "n": 2,
+        "heights": [
+          403.6,
+          403.6
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 25.3,
+        "minHeightBound": false,
+        "labels": [
+          "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+          "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+            "top": 1040.5,
+            "left": 16,
+            "h": 403.6,
+            "w": 690.5,
+            "inkSlack": 25.3,
+            "minHeight": 0,
+            "padBottom": 14,
+            "alignSelf": "stretch",
+            "overflowY": "hidden"
+          },
+          {
+            "label": "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% ",
+            "top": 1040.5,
+            "left": 718.5,
+            "h": 403.6,
+            "w": 690.5,
+            "inkSlack": 2.4,
+            "minHeight": 0,
+            "padBottom": 14,
+            "alignSelf": "stretch",
+            "overflowY": "hidden"
+          }
+        ]
+      }
+    ],
+    "gaps": [
+      {
+        "from": "kpiGrid",
+        "to": "cashPanel",
+        "px": 12
+      },
+      {
+        "from": "cashPanel",
+        "to": "riskPanel",
+        "px": 12
+      },
+      {
+        "from": "riskPanel",
+        "to": "pairRow",
+        "px": 12
+      },
+      {
+        "from": "pairRow",
+        "to": "deliveryPanel",
+        "px": 12
+      },
+      {
+        "from": "deliveryPanel",
+        "to": "alertPanel",
+        "px": 12
+      },
+      {
+        "from": "alertPanel",
+        "to": "footer",
+        "px": 12
+      }
+    ],
+    "blanks": [],
+    "pair": {
+      "display": "grid",
+      "dataVisible": "true",
+      "hidden": false,
+      "height": 403.6
+    },
+    "note": {
+      "text": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+      "whiteSpace": "normal",
+      "overflow": "visible",
+      "textOverflow": "clip",
+      "lineRects": 1,
+      "scrollWidth": 661,
+      "clientWidth": 661,
+      "clippedX": false
+    },
+    "delivery": {
+      "h": 276.3,
+      "w": 1393,
+      "widthShare": 1,
+      "flexGrow": "0",
+      "columns": [
+        {
+          "cls": "delivery-left",
+          "h": 210,
+          "w": 336.8,
+          "top": 1501.4
+        },
+        {
+          "cls": "delivery-mid",
+          "h": 210,
+          "w": 673.5,
+          "top": 1501.4
+        },
+        {
+          "cls": "delivery-right",
+          "h": 210,
+          "w": 336.8,
+          "top": 1501.4
+        }
+      ],
+      "widthRatio": [
+        1,
+        2,
+        1
+      ],
+      "heightSpread": 0,
+      "inkSlack": 4.8
+    },
+    "sectionInk": {
+      "cash": -30,
+      "risk": 22.4,
+      "alert": 12.4
+    },
+    "chartLabelClips": []
+  },
+  "sweep": [
+    {
+      "width": 1680,
+      "cols": {
+        "kpi": "2",
+        "cash": "3",
+        "risk": "2",
+        "pair": "2"
+      },
+      "rows": [
+        {
+          "zone": "kpi",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            144,
+            144
+          ],
+          "spread": 0,
+          "minInkSlack": 17.9,
+          "maxInkSlack": 17.9,
+          "labels": [
+            "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% ",
+            "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1"
+          ]
+        },
+        {
+          "zone": "kpi",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            144,
+            144
+          ],
+          "spread": 0,
+          "minInkSlack": 17.9,
+          "maxInkSlack": 17.9,
+          "labels": [
+            "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%",
+            "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1"
+          ]
+        },
+        {
+          "zone": "cash",
+          "row": 1,
+          "n": 3,
+          "heights": [
+            103.1,
+            103.1,
+            103.1
+          ],
+          "spread": 0,
+          "minInkSlack": 2.9,
+          "maxInkSlack": 2.9,
+          "labels": [
+            "现金流入 200,501.05 较上期 +3.2% ↑",
+            "现金流出 184,498.69 较上期 -2.1% ↓",
+            "净现金流 16,002.36 较上期 +4.6% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            112.5,
+            112.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "应收账款 996.10 较上期 -2.1% ↓",
+            "WIP 2,574.55 较上期 +6.3% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            112.5,
+            112.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "存货 2,189.48 较上期 -1.8% ↓",
+            "营业收入 3,280.60 较上期 +4.5% ↑"
+          ]
+        },
+        {
+          "zone": "pair",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            407.6,
+            407.6
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 25.3,
+          "labels": [
+            "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+            "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+          ]
+        }
+      ],
+      "note": {
+        "text": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+        "whiteSpace": "normal",
+        "overflow": "visible",
+        "textOverflow": "clip",
+        "lineRects": 1,
+        "scrollWidth": 776,
+        "clientWidth": 776,
+        "clippedX": false
+      },
+      "targetButtonRows": 1,
+      "delivery": {
+        "h": 280.3,
+        "widthShare": 1,
+        "widthRatio": [
+          1,
+          2,
+          1
+        ],
+        "heightSpread": 0,
+        "flexGrow": "0",
+        "inkSlack": 5.8
+      },
+      "gaps": [
+        {
+          "from": "kpiGrid",
+          "to": "cashPanel",
+          "px": 14
+        },
+        {
+          "from": "cashPanel",
+          "to": "riskPanel",
+          "px": 14
+        },
+        {
+          "from": "riskPanel",
+          "to": "pairRow",
+          "px": 14
+        },
+        {
+          "from": "pairRow",
+          "to": "deliveryPanel",
+          "px": 14
+        },
+        {
+          "from": "deliveryPanel",
+          "to": "alertPanel",
+          "px": 14
+        },
+        {
+          "from": "alertPanel",
+          "to": "footer",
+          "px": 14
+        }
+      ],
+      "blanks": []
+    },
+    {
+      "width": 1440,
+      "cols": {
+        "kpi": "2",
+        "cash": "3",
+        "risk": "2",
+        "pair": "2"
+      },
+      "rows": [
+        {
+          "zone": "kpi",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            128.9,
+            128.9
+          ],
+          "spread": 0,
+          "minInkSlack": 16.9,
+          "maxInkSlack": 16.9,
+          "labels": [
+            "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% ",
+            "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1"
+          ]
+        },
+        {
+          "zone": "kpi",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            128.9,
+            128.9
+          ],
+          "spread": 0,
+          "minInkSlack": 16.9,
+          "maxInkSlack": 16.9,
+          "labels": [
+            "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%",
+            "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1"
+          ]
+        },
+        {
+          "zone": "cash",
+          "row": 1,
+          "n": 3,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ],
+          "spread": 0,
+          "minInkSlack": 2.9,
+          "maxInkSlack": 2.9,
+          "labels": [
+            "现金流入 200,501.05 较上期 +3.2% ↑",
+            "现金流出 184,498.69 较上期 -2.1% ↓",
+            "净现金流 16,002.36 较上期 +4.6% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            102.5,
+            102.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "应收账款 996.10 较上期 -2.1% ↓",
+            "WIP 2,574.55 较上期 +6.3% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            102.5,
+            102.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "存货 2,189.48 较上期 -1.8% ↓",
+            "营业收入 3,280.60 较上期 +4.5% ↑"
+          ]
+        },
+        {
+          "zone": "pair",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            403.6,
+            403.6
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 25.3,
+          "labels": [
+            "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+            "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+          ]
+        }
+      ],
+      "note": {
+        "text": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+        "whiteSpace": "normal",
+        "overflow": "visible",
+        "textOverflow": "clip",
+        "lineRects": 1,
+        "scrollWidth": 661,
+        "clientWidth": 661,
+        "clippedX": false
+      },
+      "targetButtonRows": 1,
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "widthRatio": [
+          1,
+          2,
+          1
+        ],
+        "heightSpread": 0,
+        "flexGrow": "0",
+        "inkSlack": 4.8
+      },
+      "gaps": [
+        {
+          "from": "kpiGrid",
+          "to": "cashPanel",
+          "px": 12
+        },
+        {
+          "from": "cashPanel",
+          "to": "riskPanel",
+          "px": 12
+        },
+        {
+          "from": "riskPanel",
+          "to": "pairRow",
+          "px": 12
+        },
+        {
+          "from": "pairRow",
+          "to": "deliveryPanel",
+          "px": 12
+        },
+        {
+          "from": "deliveryPanel",
+          "to": "alertPanel",
+          "px": 12
+        },
+        {
+          "from": "alertPanel",
+          "to": "footer",
+          "px": 12
+        }
+      ],
+      "blanks": []
+    },
+    {
+      "width": 1200,
+      "cols": {
+        "kpi": "2",
+        "cash": "3",
+        "risk": "2",
+        "pair": "2"
+      },
+      "rows": [
+        {
+          "zone": "kpi",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            113.8,
+            113.8
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% ",
+            "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1"
+          ]
+        },
+        {
+          "zone": "kpi",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            113.8,
+            113.8
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%",
+            "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1"
+          ]
+        },
+        {
+          "zone": "cash",
+          "row": 1,
+          "n": 3,
+          "heights": [
+            87.3,
+            87.3,
+            87.3
+          ],
+          "spread": 0,
+          "minInkSlack": 2.9,
+          "maxInkSlack": 2.9,
+          "labels": [
+            "现金流入 200,501.05 较上期 +3.2% ↑",
+            "现金流出 184,498.69 较上期 -2.1% ↓",
+            "净现金流 16,002.36 较上期 +4.6% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            96.8,
+            96.8
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "应收账款 996.10 较上期 -2.1% ↓",
+            "WIP 2,574.55 较上期 +6.3% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            96.8,
+            96.8
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "存货 2,189.48 较上期 -1.8% ↓",
+            "营业收入 3,280.60 较上期 +4.5% ↑"
+          ]
+        },
+        {
+          "zone": "pair",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            401.6,
+            401.6
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 29.3,
+          "labels": [
+            "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+            "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+          ]
+        }
+      ],
+      "note": {
+        "text": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+        "whiteSpace": "normal",
+        "overflow": "visible",
+        "textOverflow": "clip",
+        "lineRects": 1,
+        "scrollWidth": 548,
+        "clientWidth": 548,
+        "clippedX": false
+      },
+      "targetButtonRows": 1,
+      "delivery": {
+        "h": 268.3,
+        "widthShare": 1,
+        "widthRatio": [
+          1,
+          2,
+          1
+        ],
+        "heightSpread": 0,
+        "flexGrow": "0",
+        "inkSlack": 3.8
+      },
+      "gaps": [
+        {
+          "from": "kpiGrid",
+          "to": "cashPanel",
+          "px": 10
+        },
+        {
+          "from": "cashPanel",
+          "to": "riskPanel",
+          "px": 10
+        },
+        {
+          "from": "riskPanel",
+          "to": "pairRow",
+          "px": 10.1
+        },
+        {
+          "from": "pairRow",
+          "to": "deliveryPanel",
+          "px": 9.9
+        },
+        {
+          "from": "deliveryPanel",
+          "to": "alertPanel",
+          "px": 10
+        },
+        {
+          "from": "alertPanel",
+          "to": "footer",
+          "px": 10.1
+        }
+      ],
+      "blanks": []
+    },
+    {
+      "width": 1040,
+      "cols": {
+        "kpi": "2",
+        "cash": "3",
+        "risk": "2",
+        "pair": "2"
+      },
+      "rows": [
+        {
+          "zone": "kpi",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            109.9,
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% ",
+            "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1"
+          ]
+        },
+        {
+          "zone": "kpi",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            109.9,
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%",
+            "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1"
+          ]
+        },
+        {
+          "zone": "cash",
+          "row": 1,
+          "n": 3,
+          "heights": [
+            83.5,
+            83.5,
+            83.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.9,
+          "maxInkSlack": 2.9,
+          "labels": [
+            "现金流入 200,501.05 较上期 +3.2% ↑",
+            "现金流出 184,498.69 较上期 -2.1% ↓",
+            "净现金流 16,002.36 较上期 +4.6% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "应收账款 996.10 较上期 -2.1% ↓",
+            "WIP 2,574.55 较上期 +6.3% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "存货 2,189.48 较上期 -1.8% ↓",
+            "营业收入 3,280.60 较上期 +4.5% ↑"
+          ]
+        },
+        {
+          "zone": "pair",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            401.6,
+            401.6
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 29.3,
+          "labels": [
+            "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+            "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+          ]
+        }
+      ],
+      "note": {
+        "text": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+        "whiteSpace": "normal",
+        "overflow": "visible",
+        "textOverflow": "clip",
+        "lineRects": 1,
+        "scrollWidth": 468,
+        "clientWidth": 468,
+        "clippedX": false
+      },
+      "targetButtonRows": 1,
+      "delivery": {
+        "h": 268.3,
+        "widthShare": 1,
+        "widthRatio": [
+          1,
+          2,
+          1
+        ],
+        "heightSpread": 0,
+        "flexGrow": "0",
+        "inkSlack": 3.8
+      },
+      "gaps": [
+        {
+          "from": "kpiGrid",
+          "to": "cashPanel",
+          "px": 10
+        },
+        {
+          "from": "cashPanel",
+          "to": "riskPanel",
+          "px": 10
+        },
+        {
+          "from": "riskPanel",
+          "to": "pairRow",
+          "px": 10.1
+        },
+        {
+          "from": "pairRow",
+          "to": "deliveryPanel",
+          "px": 9.9
+        },
+        {
+          "from": "deliveryPanel",
+          "to": "alertPanel",
+          "px": 10
+        },
+        {
+          "from": "alertPanel",
+          "to": "footer",
+          "px": 10.1
+        }
+      ],
+      "blanks": []
+    },
+    {
+      "width": 920,
+      "cols": {
+        "kpi": "2",
+        "cash": "3",
+        "risk": "2",
+        "pair": "2"
+      },
+      "rows": [
+        {
+          "zone": "kpi",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            109.9,
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% ",
+            "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1"
+          ]
+        },
+        {
+          "zone": "kpi",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            109.9,
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%",
+            "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1"
+          ]
+        },
+        {
+          "zone": "cash",
+          "row": 1,
+          "n": 3,
+          "heights": [
+            83.5,
+            83.5,
+            83.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.9,
+          "maxInkSlack": 2.9,
+          "labels": [
+            "现金流入 200,501.05 较上期 +3.2% ↑",
+            "现金流出 184,498.69 较上期 -2.1% ↓",
+            "净现金流 16,002.36 较上期 +4.6% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "应收账款 996.10 较上期 -2.1% ↓",
+            "WIP 2,574.55 较上期 +6.3% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "存货 2,189.48 较上期 -1.8% ↓",
+            "营业收入 3,280.60 较上期 +4.5% ↑"
+          ]
+        },
+        {
+          "zone": "pair",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            426.9,
+            426.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 54.6,
+          "labels": [
+            "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+            "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+          ]
+        }
+      ],
+      "note": {
+        "text": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+        "whiteSpace": "normal",
+        "overflow": "visible",
+        "textOverflow": "clip",
+        "lineRects": 1,
+        "scrollWidth": 408,
+        "clientWidth": 408,
+        "clippedX": false
+      },
+      "targetButtonRows": 1,
+      "delivery": {
+        "h": 268.3,
+        "widthShare": 0.9,
+        "widthRatio": [
+          1,
+          2,
+          1
+        ],
+        "heightSpread": 0,
+        "flexGrow": "0",
+        "inkSlack": 3.8
+      },
+      "gaps": [
+        {
+          "from": "kpiGrid",
+          "to": "cashPanel",
+          "px": 10
+        },
+        {
+          "from": "cashPanel",
+          "to": "riskPanel",
+          "px": 10
+        },
+        {
+          "from": "riskPanel",
+          "to": "pairRow",
+          "px": 10.1
+        },
+        {
+          "from": "pairRow",
+          "to": "deliveryPanel",
+          "px": 9.9
+        },
+        {
+          "from": "deliveryPanel",
+          "to": "alertPanel",
+          "px": 10
+        },
+        {
+          "from": "alertPanel",
+          "to": "footer",
+          "px": 10.1
+        }
+      ],
+      "blanks": []
+    },
+    {
+      "width": 800,
+      "cols": {
+        "kpi": "2",
+        "cash": "3",
+        "risk": "2",
+        "pair": "2"
+      },
+      "rows": [
+        {
+          "zone": "kpi",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            109.9,
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% ",
+            "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1"
+          ]
+        },
+        {
+          "zone": "kpi",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            109.9,
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%",
+            "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1"
+          ]
+        },
+        {
+          "zone": "cash",
+          "row": 1,
+          "n": 3,
+          "heights": [
+            83.5,
+            83.5,
+            83.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.9,
+          "maxInkSlack": 2.9,
+          "labels": [
+            "现金流入 200,501.05 较上期 +3.2% ↑",
+            "现金流出 184,498.69 较上期 -2.1% ↓",
+            "净现金流 16,002.36 较上期 +4.6% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "应收账款 996.10 较上期 -2.1% ↓",
+            "WIP 2,574.55 较上期 +6.3% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "存货 2,189.48 较上期 -1.8% ↓",
+            "营业收入 3,280.60 较上期 +4.5% ↑"
+          ]
+        },
+        {
+          "zone": "pair",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            426.9,
+            426.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 54.6,
+          "labels": [
+            "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+            "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+          ]
+        }
+      ],
+      "note": {
+        "text": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+        "whiteSpace": "normal",
+        "overflow": "visible",
+        "textOverflow": "clip",
+        "lineRects": 1,
+        "scrollWidth": 348,
+        "clientWidth": 348,
+        "clippedX": false
+      },
+      "targetButtonRows": 1,
+      "delivery": {
+        "h": 268.3,
+        "widthShare": 0.9,
+        "widthRatio": [
+          1,
+          2,
+          1
+        ],
+        "heightSpread": 0,
+        "flexGrow": "0",
+        "inkSlack": 3.8
+      },
+      "gaps": [
+        {
+          "from": "kpiGrid",
+          "to": "cashPanel",
+          "px": 10
+        },
+        {
+          "from": "cashPanel",
+          "to": "riskPanel",
+          "px": 10
+        },
+        {
+          "from": "riskPanel",
+          "to": "pairRow",
+          "px": 10.1
+        },
+        {
+          "from": "pairRow",
+          "to": "deliveryPanel",
+          "px": 9.9
+        },
+        {
+          "from": "deliveryPanel",
+          "to": "alertPanel",
+          "px": 10
+        },
+        {
+          "from": "alertPanel",
+          "to": "footer",
+          "px": 10.1
+        }
+      ],
+      "blanks": []
+    },
+    {
+      "width": 680,
+      "cols": {
+        "kpi": "2",
+        "cash": "3",
+        "risk": "2",
+        "pair": "2"
+      },
+      "rows": [
+        {
+          "zone": "kpi",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            109.9,
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% ",
+            "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1"
+          ]
+        },
+        {
+          "zone": "kpi",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            109.9,
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%",
+            "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1"
+          ]
+        },
+        {
+          "zone": "cash",
+          "row": 1,
+          "n": 3,
+          "heights": [
+            83.5,
+            83.5,
+            83.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.9,
+          "maxInkSlack": 2.9,
+          "labels": [
+            "现金流入 200,501.05 较上期 +3.2% ↑",
+            "现金流出 184,498.69 较上期 -2.1% ↓",
+            "净现金流 16,002.36 较上期 +4.6% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "应收账款 996.10 较上期 -2.1% ↓",
+            "WIP 2,574.55 较上期 +6.3% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "存货 2,189.48 较上期 -1.8% ↓",
+            "营业收入 3,280.60 较上期 +4.5% ↑"
+          ]
+        },
+        {
+          "zone": "pair",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            467.5,
+            467.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 95.2,
+          "labels": [
+            "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+            "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+          ]
+        }
+      ],
+      "note": {
+        "text": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+        "whiteSpace": "normal",
+        "overflow": "visible",
+        "textOverflow": "clip",
+        "lineRects": 2,
+        "scrollWidth": 288,
+        "clientWidth": 288,
+        "clippedX": false
+      },
+      "targetButtonRows": 2,
+      "delivery": {
+        "h": 268.3,
+        "widthShare": 0.9,
+        "widthRatio": [
+          1,
+          2,
+          1
+        ],
+        "heightSpread": 0,
+        "flexGrow": "0",
+        "inkSlack": 3.8
+      },
+      "gaps": [
+        {
+          "from": "kpiGrid",
+          "to": "cashPanel",
+          "px": 10
+        },
+        {
+          "from": "cashPanel",
+          "to": "riskPanel",
+          "px": 10
+        },
+        {
+          "from": "riskPanel",
+          "to": "pairRow",
+          "px": 10.1
+        },
+        {
+          "from": "pairRow",
+          "to": "deliveryPanel",
+          "px": 9.9
+        },
+        {
+          "from": "deliveryPanel",
+          "to": "alertPanel",
+          "px": 10
+        },
+        {
+          "from": "alertPanel",
+          "to": "footer",
+          "px": 10
+        }
+      ],
+      "blanks": []
+    },
+    {
+      "width": 560,
+      "cols": {
+        "kpi": "1",
+        "cash": "2",
+        "risk": "2",
+        "pair": "2"
+      },
+      "rows": [
+        {
+          "zone": "kpi",
+          "row": 1,
+          "n": 1,
+          "heights": [
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% "
+          ]
+        },
+        {
+          "zone": "kpi",
+          "row": 2,
+          "n": 1,
+          "heights": [
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1"
+          ]
+        },
+        {
+          "zone": "kpi",
+          "row": 3,
+          "n": 1,
+          "heights": [
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%"
+          ]
+        },
+        {
+          "zone": "kpi",
+          "row": 4,
+          "n": 1,
+          "heights": [
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1"
+          ]
+        },
+        {
+          "zone": "cash",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            83.5,
+            83.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.9,
+          "maxInkSlack": 2.9,
+          "labels": [
+            "现金流入 200,501.05 较上期 +3.2% ↑",
+            "现金流出 184,498.69 较上期 -2.1% ↓"
+          ]
+        },
+        {
+          "zone": "cash",
+          "row": 2,
+          "n": 1,
+          "heights": [
+            83.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.9,
+          "maxInkSlack": 2.9,
+          "labels": [
+            "净现金流 16,002.36 较上期 +4.6% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "应收账款 996.10 较上期 -2.1% ↓",
+            "WIP 2,574.55 较上期 +6.3% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "存货 2,189.48 较上期 -1.8% ↓",
+            "营业收入 3,280.60 较上期 +4.5% ↑"
+          ]
+        },
+        {
+          "zone": "pair",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            467.5,
+            467.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 95.2,
+          "labels": [
+            "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+            "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+          ]
+        }
+      ],
+      "note": {
+        "text": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+        "whiteSpace": "normal",
+        "overflow": "visible",
+        "textOverflow": "clip",
+        "lineRects": 2,
+        "scrollWidth": 228,
+        "clientWidth": 228,
+        "clippedX": false
+      },
+      "targetButtonRows": 2,
+      "delivery": {
+        "h": 268.3,
+        "widthShare": 0.9,
+        "widthRatio": [
+          1,
+          2,
+          1
+        ],
+        "heightSpread": 0,
+        "flexGrow": "0",
+        "inkSlack": 3.8
+      },
+      "gaps": [
+        {
+          "from": "kpiGrid",
+          "to": "cashPanel",
+          "px": 10
+        },
+        {
+          "from": "cashPanel",
+          "to": "riskPanel",
+          "px": 10
+        },
+        {
+          "from": "riskPanel",
+          "to": "pairRow",
+          "px": 10.1
+        },
+        {
+          "from": "pairRow",
+          "to": "deliveryPanel",
+          "px": 9.9
+        },
+        {
+          "from": "deliveryPanel",
+          "to": "alertPanel",
+          "px": 10
+        },
+        {
+          "from": "alertPanel",
+          "to": "footer",
+          "px": 10.1
+        }
+      ],
+      "blanks": []
+    },
+    {
+      "width": 440,
+      "cols": {
+        "kpi": "1",
+        "cash": "1",
+        "risk": "2",
+        "pair": "2"
+      },
+      "rows": [
+        {
+          "zone": "kpi",
+          "row": 1,
+          "n": 1,
+          "heights": [
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% "
+          ]
+        },
+        {
+          "zone": "kpi",
+          "row": 2,
+          "n": 1,
+          "heights": [
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1"
+          ]
+        },
+        {
+          "zone": "kpi",
+          "row": 3,
+          "n": 1,
+          "heights": [
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%"
+          ]
+        },
+        {
+          "zone": "kpi",
+          "row": 4,
+          "n": 1,
+          "heights": [
+            109.9
+          ],
+          "spread": 0,
+          "minInkSlack": 14.9,
+          "maxInkSlack": 14.9,
+          "labels": [
+            "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1"
+          ]
+        },
+        {
+          "zone": "cash",
+          "row": 1,
+          "n": 1,
+          "heights": [
+            83.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.9,
+          "maxInkSlack": 2.9,
+          "labels": [
+            "现金流入 200,501.05 较上期 +3.2% ↑"
+          ]
+        },
+        {
+          "zone": "cash",
+          "row": 2,
+          "n": 1,
+          "heights": [
+            83.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.9,
+          "maxInkSlack": 2.9,
+          "labels": [
+            "现金流出 184,498.69 较上期 -2.1% ↓"
+          ]
+        },
+        {
+          "zone": "cash",
+          "row": 3,
+          "n": 1,
+          "heights": [
+            83.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.9,
+          "maxInkSlack": 2.9,
+          "labels": [
+            "净现金流 16,002.36 较上期 +4.6% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "应收账款 996.10 较上期 -2.1% ↓",
+            "WIP 2,574.55 较上期 +6.3% ↑"
+          ]
+        },
+        {
+          "zone": "risk",
+          "row": 2,
+          "n": 2,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 2.4,
+          "labels": [
+            "存货 2,189.48 较上期 -1.8% ↓",
+            "营业收入 3,280.60 较上期 +4.5% ↑"
+          ]
+        },
+        {
+          "zone": "pair",
+          "row": 1,
+          "n": 2,
+          "heights": [
+            467.5,
+            467.5
+          ],
+          "spread": 0,
+          "minInkSlack": 2.4,
+          "maxInkSlack": 95.2,
+          "labels": [
+            "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+            "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+          ]
+        }
+      ],
+      "note": {
+        "text": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+        "whiteSpace": "normal",
+        "overflow": "visible",
+        "textOverflow": "clip",
+        "lineRects": 2,
+        "scrollWidth": 168,
+        "clientWidth": 168,
+        "clippedX": false
+      },
+      "targetButtonRows": 2,
+      "delivery": {
+        "h": 268.3,
+        "widthShare": 0.9,
+        "widthRatio": [
+          1,
+          2,
+          1
+        ],
+        "heightSpread": 0,
+        "flexGrow": "0",
+        "inkSlack": 3.8
+      },
+      "gaps": [
+        {
+          "from": "kpiGrid",
+          "to": "cashPanel",
+          "px": 10
+        },
+        {
+          "from": "cashPanel",
+          "to": "riskPanel",
+          "px": 10
+        },
+        {
+          "from": "riskPanel",
+          "to": "pairRow",
+          "px": 10
+        },
+        {
+          "from": "pairRow",
+          "to": "deliveryPanel",
+          "px": 10
+        },
+        {
+          "from": "deliveryPanel",
+          "to": "alertPanel",
+          "px": 10
+        },
+        {
+          "from": "alertPanel",
+          "to": "footer",
+          "px": 10
+        }
+      ],
+      "blanks": []
+    }
+  ],
+  "noteWrap": {
+    "width": 680,
+    "note": {
+      "text": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+      "whiteSpace": "normal",
+      "overflow": "visible",
+      "textOverflow": "clip",
+      "lineRects": 2,
+      "scrollWidth": 288,
+      "clientWidth": 288,
+      "clippedX": false
+    },
+    "targetButtonRows": 2,
+    "pair": [
+      {
+        "zone": "pair",
+        "row": 1,
+        "n": 2,
+        "heights": [
+          467.5,
+          467.5
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 95.2,
+        "minHeightBound": false,
+        "labels": [
+          "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+          "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+            "top": 944.8,
+            "left": 16,
+            "h": 467.5,
+            "w": 311.5,
+            "inkSlack": 95.2,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "stretch",
+            "overflowY": "hidden"
+          },
+          {
+            "label": "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% ",
+            "top": 944.8,
+            "left": 337.5,
+            "h": 467.5,
+            "w": 311.5,
+            "inkSlack": 2.4,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "stretch",
+            "overflowY": "hidden"
+          }
+        ]
+      }
+    ],
+    "buttons": [
+      {
+        "text": "新签合同额",
+        "top": 985,
+        "w": 80,
+        "h": 24.2,
+        "scrollWidth": 80,
+        "clientWidth": 80
+      },
+      {
+        "text": "完成合同额",
+        "top": 985,
+        "w": 80,
+        "h": 24.2,
+        "scrollWidth": 80,
+        "clientWidth": 80
+      },
+      {
+        "text": "完成开票额",
+        "top": 985,
+        "w": 80,
+        "h": 24.2,
+        "scrollWidth": 80,
+        "clientWidth": 80
+      },
+      {
+        "text": "完成回款额",
+        "top": 1010.2,
+        "w": 80,
+        "h": 24.2,
+        "scrollWidth": 80,
+        "clientWidth": 80
+      }
+    ]
+  },
+  "grownWide": [
+    {
+      "zone": "kpi",
+      "row": 1,
+      "n": 2,
+      "heights": [
+        133.7,
+        133.7
+      ],
+      "spread": 0,
+      "minInkSlack": 2.4,
+      "maxInkSlack": 23.6,
+      "minHeightBound": false,
+      "labels": [
+        "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% ",
+        "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1"
+      ],
+      "clips": [],
+      "items": [
+        {
+          "label": "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% ",
+          "top": -986,
+          "left": 16,
+          "h": 133.7,
+          "w": 611.5,
+          "inkSlack": 2.4,
+          "minHeight": 0,
+          "padBottom": 11,
+          "alignSelf": "auto",
+          "overflowY": "hidden"
+        },
+        {
+          "label": "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1",
+          "top": -986,
+          "left": 637.5,
+          "h": 133.7,
+          "w": 611.5,
+          "inkSlack": 23.6,
+          "minHeight": 0,
+          "padBottom": 11,
+          "alignSelf": "auto",
+          "overflowY": "hidden"
+        }
+      ]
+    },
+    {
+      "zone": "kpi",
+      "row": 2,
+      "n": 2,
+      "heights": [
+        116.3,
+        116.3
+      ],
+      "spread": 0,
+      "minInkSlack": 14.9,
+      "maxInkSlack": 14.9,
+      "minHeightBound": false,
+      "labels": [
+        "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%",
+        "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1"
+      ],
+      "clips": [],
+      "items": [
+        {
+          "label": "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%",
+          "top": -842.3,
+          "left": 16,
+          "h": 116.3,
+          "w": 611.5,
+          "inkSlack": 14.9,
+          "minHeight": 0,
+          "padBottom": 11,
+          "alignSelf": "auto",
+          "overflowY": "hidden"
+        },
+        {
+          "label": "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1",
+          "top": -842.3,
+          "left": 637.5,
+          "h": 116.3,
+          "w": 611.5,
+          "inkSlack": 14.9,
+          "minHeight": 0,
+          "padBottom": 11,
+          "alignSelf": "auto",
+          "overflowY": "hidden"
+        }
+      ]
+    },
+    {
+      "zone": "cash",
+      "row": 1,
+      "n": 3,
+      "heights": [
+        124.6,
+        124.6,
+        124.6
+      ],
+      "spread": 0,
+      "minInkSlack": 2.4,
+      "maxInkSlack": 37.7,
+      "minHeightBound": false,
+      "labels": [
+        "现金流入 200,501.05 较上期 +3.2% ↑ 补充经营说明需要完整换行，用",
+        "现金流出 184,498.69 较上期 -2.1% ↓",
+        "净现金流 16,002.36 较上期 +4.6% ↑"
+      ],
+      "clips": [],
+      "items": [
+        {
+          "label": "现金流入 200,501.05 较上期 +3.2% ↑ 补充经营说明需要完整换行，用",
+          "top": -675.8,
+          "left": 28,
+          "h": 124.6,
+          "w": 397,
+          "inkSlack": 2.4,
+          "minHeight": 0,
+          "padBottom": 8,
+          "alignSelf": "auto",
+          "overflowY": "visible"
+        },
+        {
+          "label": "现金流出 184,498.69 较上期 -2.1% ↓",
+          "top": -675.8,
+          "left": 434,
+          "h": 124.6,
+          "w": 397,
+          "inkSlack": 37.7,
+          "minHeight": 0,
+          "padBottom": 8,
+          "alignSelf": "auto",
+          "overflowY": "visible"
+        },
+        {
+          "label": "净现金流 16,002.36 较上期 +4.6% ↑",
+          "top": -675.8,
+          "left": 840,
+          "h": 124.6,
+          "w": 397,
+          "inkSlack": 37.7,
+          "minHeight": 0,
+          "padBottom": 8,
+          "alignSelf": "auto",
+          "overflowY": "visible"
+        }
+      ]
+    },
+    {
+      "zone": "risk",
+      "row": 1,
+      "n": 2,
+      "heights": [
+        120.7,
+        120.7
+      ],
+      "spread": 0,
+      "minInkSlack": 2.4,
+      "maxInkSlack": 23.8,
+      "minHeightBound": false,
+      "labels": [
+        "应收账款 996.10 较上期 -2.1% ↓ 应收卡片补充长文案，确认同一行另一张",
+        "WIP 2,574.55 较上期 +6.3% ↑"
+      ],
+      "clips": [],
+      "items": [
+        {
+          "label": "应收账款 996.10 较上期 -2.1% ↓ 应收卡片补充长文案，确认同一行另一张",
+          "top": -204.9,
+          "left": 28,
+          "h": 120.7,
+          "w": 601,
+          "inkSlack": 2.4,
+          "minHeight": 76,
+          "padBottom": 9,
+          "alignSelf": "auto",
+          "overflowY": "visible"
+        },
+        {
+          "label": "WIP 2,574.55 较上期 +6.3% ↑",
+          "top": -204.9,
+          "left": 636,
+          "h": 120.7,
+          "w": 601,
+          "inkSlack": 23.8,
+          "minHeight": 76,
+          "padBottom": 9,
+          "alignSelf": "auto",
+          "overflowY": "visible"
+        }
+      ]
+    },
+    {
+      "zone": "risk",
+      "row": 2,
+      "n": 2,
+      "heights": [
+        99.3,
+        99.3
+      ],
+      "spread": 0,
+      "minInkSlack": 2.4,
+      "maxInkSlack": 2.4,
+      "minHeightBound": false,
+      "labels": [
+        "存货 2,189.48 较上期 -1.8% ↓",
+        "营业收入 3,280.60 较上期 +4.5% ↑"
+      ],
+      "clips": [],
+      "items": [
+        {
+          "label": "存货 2,189.48 较上期 -1.8% ↓",
+          "top": -77.2,
+          "left": 28,
+          "h": 99.3,
+          "w": 601,
+          "inkSlack": 2.4,
+          "minHeight": 76,
+          "padBottom": 9,
+          "alignSelf": "auto",
+          "overflowY": "visible"
+        },
+        {
+          "label": "营业收入 3,280.60 较上期 +4.5% ↑",
+          "top": -77.2,
+          "left": 636,
+          "h": 99.3,
+          "w": 601,
+          "inkSlack": 2.4,
+          "minHeight": 76,
+          "padBottom": 9,
+          "alignSelf": "auto",
+          "overflowY": "visible"
+        }
+      ]
+    },
+    {
+      "zone": "pair",
+      "row": 1,
+      "n": 2,
+      "heights": [
+        401.6,
+        401.6
+      ],
+      "spread": 0,
+      "minInkSlack": 2.4,
+      "maxInkSlack": 29.3,
+      "minHeightBound": false,
+      "labels": [
+        "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+        "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+      ],
+      "clips": [],
+      "items": [
+        {
+          "label": "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+          "top": 52,
+          "left": 16,
+          "h": 401.6,
+          "w": 611.5,
+          "inkSlack": 29.3,
+          "minHeight": 0,
+          "padBottom": 11,
+          "alignSelf": "stretch",
+          "overflowY": "hidden"
+        },
+        {
+          "label": "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% ",
+          "top": 52,
+          "left": 637.5,
+          "h": 401.6,
+          "w": 611.5,
+          "inkSlack": 2.4,
+          "minHeight": 0,
+          "padBottom": 11,
+          "alignSelf": "stretch",
+          "overflowY": "hidden"
+        }
+      ]
+    }
+  ],
+  "grownMid": {
+    "width": 560,
+    "rows": [
+      {
+        "zone": "kpi",
+        "row": 1,
+        "n": 1,
+        "heights": [
+          144.7
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 2.4,
+        "minHeightBound": false,
+        "labels": [
+          "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% "
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% ",
+            "top": 12,
+            "left": 16,
+            "h": 144.7,
+            "w": 513,
+            "inkSlack": 2.4,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "auto",
+            "overflowY": "hidden"
+          }
+        ]
+      },
+      {
+        "zone": "kpi",
+        "row": 2,
+        "n": 1,
+        "heights": [
+          109.9
+        ],
+        "spread": 0,
+        "minInkSlack": 14.9,
+        "maxInkSlack": 14.9,
+        "minHeightBound": false,
+        "labels": [
+          "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1",
+            "top": 166.7,
+            "left": 16,
+            "h": 109.9,
+            "w": 513,
+            "inkSlack": 14.9,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "auto",
+            "overflowY": "hidden"
+          }
+        ]
+      },
+      {
+        "zone": "kpi",
+        "row": 3,
+        "n": 1,
+        "heights": [
+          109.9
+        ],
+        "spread": 0,
+        "minInkSlack": 14.9,
+        "maxInkSlack": 14.9,
+        "minHeightBound": false,
+        "labels": [
+          "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%",
+            "top": 286.6,
+            "left": 16,
+            "h": 109.9,
+            "w": 513,
+            "inkSlack": 14.9,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "auto",
+            "overflowY": "hidden"
+          }
+        ]
+      },
+      {
+        "zone": "kpi",
+        "row": 4,
+        "n": 1,
+        "heights": [
+          109.9
+        ],
+        "spread": 0,
+        "minInkSlack": 14.9,
+        "maxInkSlack": 14.9,
+        "minHeightBound": false,
+        "labels": [
+          "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1",
+            "top": 406.5,
+            "left": 16,
+            "h": 109.9,
+            "w": 513,
+            "inkSlack": 14.9,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "auto",
+            "overflowY": "hidden"
+          }
+        ]
+      },
+      {
+        "zone": "cash",
+        "row": 1,
+        "n": 2,
+        "heights": [
+          153,
+          153
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 72.5,
+        "minHeightBound": false,
+        "labels": [
+          "现金流入 200,501.05 较上期 +3.2% ↑ 补充经营说明需要完整换行，用",
+          "现金流出 184,498.69 较上期 -2.1% ↓"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "现金流入 200,501.05 较上期 +3.2% ↑ 补充经营说明需要完整换行，用",
+            "top": 566.8,
+            "left": 28,
+            "h": 153,
+            "w": 240,
+            "inkSlack": 2.4,
+            "minHeight": 0,
+            "padBottom": 8,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          },
+          {
+            "label": "现金流出 184,498.69 较上期 -2.1% ↓",
+            "top": 566.8,
+            "left": 277,
+            "h": 153,
+            "w": 240,
+            "inkSlack": 72.5,
+            "minHeight": 0,
+            "padBottom": 8,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          }
+        ]
+      },
+      {
+        "zone": "cash",
+        "row": 2,
+        "n": 1,
+        "heights": [
+          83.5
+        ],
+        "spread": 0,
+        "minInkSlack": 2.9,
+        "maxInkSlack": 2.9,
+        "minHeightBound": false,
+        "labels": [
+          "净现金流 16,002.36 较上期 +4.6% ↑"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "净现金流 16,002.36 较上期 +4.6% ↑",
+            "top": 728.8,
+            "left": 28,
+            "h": 83.5,
+            "w": 240,
+            "inkSlack": 2.9,
+            "minHeight": 0,
+            "padBottom": 8,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          }
+        ]
+      },
+      {
+        "zone": "risk",
+        "row": 1,
+        "n": 2,
+        "heights": [
+          149.1,
+          149.1
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 58.6,
+        "minHeightBound": false,
+        "labels": [
+          "应收账款 996.10 较上期 -2.1% ↓ 应收卡片补充长文案，确认同一行另一张",
+          "WIP 2,574.55 较上期 +6.3% ↑"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "应收账款 996.10 较上期 -2.1% ↓ 应收卡片补充长文案，确认同一行另一张",
+            "top": 1158.6,
+            "left": 28,
+            "h": 149.1,
+            "w": 241,
+            "inkSlack": 2.4,
+            "minHeight": 76,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          },
+          {
+            "label": "WIP 2,574.55 较上期 +6.3% ↑",
+            "top": 1158.6,
+            "left": 276,
+            "h": 149.1,
+            "w": 241,
+            "inkSlack": 58.6,
+            "minHeight": 76,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          }
+        ]
+      },
+      {
+        "zone": "risk",
+        "row": 2,
+        "n": 2,
+        "heights": [
+          92.9,
+          92.9
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 2.4,
+        "minHeightBound": false,
+        "labels": [
+          "存货 2,189.48 较上期 -1.8% ↓",
+          "营业收入 3,280.60 较上期 +4.5% ↑"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "存货 2,189.48 较上期 -1.8% ↓",
+            "top": 1314.7,
+            "left": 28,
+            "h": 92.9,
+            "w": 241,
+            "inkSlack": 2.4,
+            "minHeight": 76,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          },
+          {
+            "label": "营业收入 3,280.60 较上期 +4.5% ↑",
+            "top": 1314.7,
+            "left": 276,
+            "h": 92.9,
+            "w": 241,
+            "inkSlack": 2.4,
+            "minHeight": 76,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          }
+        ]
+      },
+      {
+        "zone": "pair",
+        "row": 1,
+        "n": 2,
+        "heights": [
+          467.5,
+          467.5
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 95.2,
+        "minHeightBound": false,
+        "labels": [
+          "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+          "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+            "top": 1437.6,
+            "left": 16,
+            "h": 467.5,
+            "w": 251.5,
+            "inkSlack": 95.2,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "stretch",
+            "overflowY": "hidden"
+          },
+          {
+            "label": "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% ",
+            "top": 1437.6,
+            "left": 277.5,
+            "h": 467.5,
+            "w": 251.5,
+            "inkSlack": 2.4,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "stretch",
+            "overflowY": "hidden"
+          }
+        ]
+      }
+    ],
+    "cols": {
+      "kpi": {
+        "display": "grid",
+        "alignItems": "normal",
+        "gridTemplateColumns": "513px",
+        "gridTemplateRows": "144.703px 109.922px 109.922px 109.922px",
+        "flexGrow": "0",
+        "height": 504.5,
+        "width": 513,
+        "peerCols": "1",
+        "hidden": false
+      },
+      "cash": {
+        "display": "grid",
+        "alignItems": "normal",
+        "gridTemplateColumns": "240px 240px",
+        "gridTemplateRows": "153.031px 83.4688px",
+        "flexGrow": "0",
+        "height": 245.5,
+        "width": 489,
+        "peerCols": "2",
+        "hidden": false
+      },
+      "risk": {
+        "display": "grid",
+        "alignItems": "normal",
+        "gridTemplateColumns": "241px 241px",
+        "gridTemplateRows": "149.094px 92.9219px",
+        "flexGrow": "0",
+        "height": 249,
+        "width": 489,
+        "peerCols": "2",
+        "hidden": false
+      },
+      "pair": {
+        "display": "grid",
+        "alignItems": "stretch",
+        "gridTemplateColumns": "251.5px 251.5px",
+        "gridTemplateRows": "467.453px",
+        "flexGrow": "0",
+        "height": 467.5,
+        "width": 513,
+        "peerCols": "2",
+        "hidden": false
+      }
+    }
+  },
+  "grownNarrow": {
+    "width": 440,
+    "rows": [
+      {
+        "zone": "kpi",
+        "row": 1,
+        "n": 1,
+        "heights": [
+          144.7
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 2.4,
+        "minHeightBound": false,
+        "labels": [
+          "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% "
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% ",
+            "top": 12,
+            "left": 16,
+            "h": 144.7,
+            "w": 393,
+            "inkSlack": 2.4,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "auto",
+            "overflowY": "hidden"
+          }
+        ]
+      },
+      {
+        "zone": "kpi",
+        "row": 2,
+        "n": 1,
+        "heights": [
+          109.9
+        ],
+        "spread": 0,
+        "minInkSlack": 14.9,
+        "maxInkSlack": 14.9,
+        "minHeightBound": false,
+        "labels": [
+          "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1",
+            "top": 166.7,
+            "left": 16,
+            "h": 109.9,
+            "w": 393,
+            "inkSlack": 14.9,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "auto",
+            "overflowY": "hidden"
+          }
+        ]
+      },
+      {
+        "zone": "kpi",
+        "row": 3,
+        "n": 1,
+        "heights": [
+          109.9
+        ],
+        "spread": 0,
+        "minInkSlack": 14.9,
+        "maxInkSlack": 14.9,
+        "minHeightBound": false,
+        "labels": [
+          "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4%",
+            "top": 286.6,
+            "left": 16,
+            "h": 109.9,
+            "w": 393,
+            "inkSlack": 14.9,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "auto",
+            "overflowY": "hidden"
+          }
+        ]
+      },
+      {
+        "zone": "kpi",
+        "row": 4,
+        "n": 1,
+        "heights": [
+          109.9
+        ],
+        "spread": 0,
+        "minInkSlack": 14.9,
+        "maxInkSlack": 14.9,
+        "minHeightBound": false,
+        "labels": [
+          "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1",
+            "top": 406.5,
+            "left": 16,
+            "h": 109.9,
+            "w": 393,
+            "inkSlack": 14.9,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "auto",
+            "overflowY": "hidden"
+          }
+        ]
+      },
+      {
+        "zone": "cash",
+        "row": 1,
+        "n": 1,
+        "heights": [
+          118.3
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 2.4,
+        "minHeightBound": false,
+        "labels": [
+          "现金流入 200,501.05 较上期 +3.2% ↑ 补充经营说明需要完整换行，用"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "现金流入 200,501.05 较上期 +3.2% ↑ 补充经营说明需要完整换行，用",
+            "top": 566.8,
+            "left": 28,
+            "h": 118.3,
+            "w": 369,
+            "inkSlack": 2.4,
+            "minHeight": 0,
+            "padBottom": 8,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          }
+        ]
+      },
+      {
+        "zone": "cash",
+        "row": 2,
+        "n": 1,
+        "heights": [
+          83.5
+        ],
+        "spread": 0,
+        "minInkSlack": 2.9,
+        "maxInkSlack": 2.9,
+        "minHeightBound": false,
+        "labels": [
+          "现金流出 184,498.69 较上期 -2.1% ↓"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "现金流出 184,498.69 较上期 -2.1% ↓",
+            "top": 694,
+            "left": 28,
+            "h": 83.5,
+            "w": 369,
+            "inkSlack": 2.9,
+            "minHeight": 0,
+            "padBottom": 8,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          }
+        ]
+      },
+      {
+        "zone": "cash",
+        "row": 3,
+        "n": 1,
+        "heights": [
+          83.5
+        ],
+        "spread": 0,
+        "minInkSlack": 2.9,
+        "maxInkSlack": 2.9,
+        "minHeightBound": false,
+        "labels": [
+          "净现金流 16,002.36 较上期 +4.6% ↑"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "净现金流 16,002.36 较上期 +4.6% ↑",
+            "top": 786.5,
+            "left": 28,
+            "h": 83.5,
+            "w": 369,
+            "inkSlack": 2.9,
+            "minHeight": 0,
+            "padBottom": 8,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          }
+        ]
+      },
+      {
+        "zone": "risk",
+        "row": 1,
+        "n": 2,
+        "heights": [
+          166.5,
+          166.5
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 76,
+        "minHeightBound": false,
+        "labels": [
+          "应收账款 996.10 较上期 -2.1% ↓ 应收卡片补充长文案，确认同一行另一张",
+          "WIP 2,574.55 较上期 +6.3% ↑"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "应收账款 996.10 较上期 -2.1% ↓ 应收卡片补充长文案，确认同一行另一张",
+            "top": 1216.3,
+            "left": 28,
+            "h": 166.5,
+            "w": 181,
+            "inkSlack": 2.4,
+            "minHeight": 76,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          },
+          {
+            "label": "WIP 2,574.55 较上期 +6.3% ↑",
+            "top": 1216.3,
+            "left": 216,
+            "h": 166.5,
+            "w": 181,
+            "inkSlack": 76,
+            "minHeight": 76,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          }
+        ]
+      },
+      {
+        "zone": "risk",
+        "row": 2,
+        "n": 2,
+        "heights": [
+          92.9,
+          92.9
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 2.4,
+        "minHeightBound": false,
+        "labels": [
+          "存货 2,189.48 较上期 -1.8% ↓",
+          "营业收入 3,280.60 较上期 +4.5% ↑"
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "存货 2,189.48 较上期 -1.8% ↓",
+            "top": 1389.7,
+            "left": 28,
+            "h": 92.9,
+            "w": 181,
+            "inkSlack": 2.4,
+            "minHeight": 76,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          },
+          {
+            "label": "营业收入 3,280.60 较上期 +4.5% ↑",
+            "top": 1389.7,
+            "left": 216,
+            "h": 92.9,
+            "w": 181,
+            "inkSlack": 2.4,
+            "minHeight": 76,
+            "padBottom": 9,
+            "alignSelf": "auto",
+            "overflowY": "visible"
+          }
+        ]
+      },
+      {
+        "zone": "pair",
+        "row": 1,
+        "n": 2,
+        "heights": [
+          467.5,
+          467.5
+        ],
+        "spread": 0,
+        "minInkSlack": 2.4,
+        "maxInkSlack": 95.2,
+        "minHeightBound": false,
+        "labels": [
+          "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+          "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% "
+        ],
+        "clips": [],
+        "items": [
+          {
+            "label": "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,6",
+            "top": 1512.7,
+            "left": 16,
+            "h": 467.5,
+            "w": 191.5,
+            "inkSlack": 95.2,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "stretch",
+            "overflowY": "hidden"
+          },
+          {
+            "label": "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% ",
+            "top": 1512.7,
+            "left": 217.5,
+            "h": 467.5,
+            "w": 191.5,
+            "inkSlack": 2.4,
+            "minHeight": 0,
+            "padBottom": 11,
+            "alignSelf": "stretch",
+            "overflowY": "hidden"
+          }
+        ]
+      }
+    ],
+    "cols": {
+      "kpi": {
+        "display": "grid",
+        "alignItems": "normal",
+        "gridTemplateColumns": "393px",
+        "gridTemplateRows": "144.703px 109.922px 109.922px 109.922px",
+        "flexGrow": "0",
+        "height": 504.5,
+        "width": 393,
+        "peerCols": "1",
+        "hidden": false
+      },
+      "cash": {
+        "display": "grid",
+        "alignItems": "normal",
+        "gridTemplateColumns": "369px",
+        "gridTemplateRows": "118.25px 83.4688px 83.4688px",
+        "flexGrow": "0",
+        "height": 303.2,
+        "width": 369,
+        "peerCols": "1",
+        "hidden": false
+      },
+      "risk": {
+        "display": "grid",
+        "alignItems": "normal",
+        "gridTemplateColumns": "181px 181px",
+        "gridTemplateRows": "166.484px 92.9219px",
+        "flexGrow": "0",
+        "height": 266.4,
+        "width": 369,
+        "peerCols": "2",
+        "hidden": false
+      },
+      "pair": {
+        "display": "grid",
+        "alignItems": "stretch",
+        "gridTemplateColumns": "191.5px 191.5px",
+        "gridTemplateRows": "467.453px",
+        "flexGrow": "0",
+        "height": 467.5,
+        "width": 393,
+        "peerCols": "2",
+        "hidden": false
+      }
+    }
+  },
+  "restored": {
+    "rows": [
+      {
+        "zone": "kpi",
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          128.9,
+          128.9
+        ]
+      },
+      {
+        "zone": "kpi",
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          128.9,
+          128.9
+        ]
+      },
+      {
+        "zone": "cash",
+        "n": 3,
+        "spread": 0,
+        "heights": [
+          95.1,
+          95.1,
+          95.1
+        ]
+      },
+      {
+        "zone": "risk",
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          102.5,
+          102.5
+        ]
+      },
+      {
+        "zone": "risk",
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          102.5,
+          102.5
+        ]
+      },
+      {
+        "zone": "pair",
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          403.6,
+          403.6
+        ]
+      }
+    ]
+  },
+  "units": [
+    {
+      "unit": "全部板块",
+      "stateUnit": "全部板块",
+      "pair": {
+        "display": "grid",
+        "dataVisible": "true",
+        "hidden": false,
+        "height": 403.6
+      },
+      "betweenRiskAndDelivery": 427.6,
+      "mainGap": 12,
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "pair",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            403.6,
+            403.6
+          ]
+        }
+      ],
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "unit": "SAS170 PMC板块",
+      "stateUnit": "SAS170 PMC板块",
+      "pair": {
+        "display": "none",
+        "dataVisible": "false",
+        "hidden": true,
+        "height": 0
+      },
+      "betweenRiskAndDelivery": 12,
+      "mainGap": 12,
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        }
+      ],
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "unit": "SAS610 咨询板块",
+      "stateUnit": "SAS610 咨询板块",
+      "pair": {
+        "display": "none",
+        "dataVisible": "false",
+        "hidden": true,
+        "height": 0
+      },
+      "betweenRiskAndDelivery": 12,
+      "mainGap": 12,
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        }
+      ],
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "unit": "SAS680 数字技术板块",
+      "stateUnit": "SAS680 数字技术板块",
+      "pair": {
+        "display": "none",
+        "dataVisible": "false",
+        "hidden": true,
+        "height": 0
+      },
+      "betweenRiskAndDelivery": 12,
+      "mainGap": 12,
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        }
+      ],
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "unit": "SAS650 新材料板块",
+      "stateUnit": "SAS650 新材料板块",
+      "pair": {
+        "display": "none",
+        "dataVisible": "false",
+        "hidden": true,
+        "height": 0
+      },
+      "betweenRiskAndDelivery": 12,
+      "mainGap": 12,
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        }
+      ],
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "unit": "SAS710 生命科学板块",
+      "stateUnit": "SAS710 生命科学板块",
+      "pair": {
+        "display": "none",
+        "dataVisible": "false",
+        "hidden": true,
+        "height": 0
+      },
+      "betweenRiskAndDelivery": 12,
+      "mainGap": 12,
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        }
+      ],
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "unit": "SAS690 COII板块",
+      "stateUnit": "SAS690 COII板块",
+      "pair": {
+        "display": "none",
+        "dataVisible": "false",
+        "hidden": true,
+        "height": 0
+      },
+      "betweenRiskAndDelivery": 12,
+      "mainGap": 12,
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        }
+      ],
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "unit": "SAS720 模块化板块",
+      "stateUnit": "SAS720 模块化板块",
+      "pair": {
+        "display": "none",
+        "dataVisible": "false",
+        "hidden": true,
+        "height": 0
+      },
+      "betweenRiskAndDelivery": 12,
+      "mainGap": 12,
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        }
+      ],
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "unit": "SAS670 供应链板块",
+      "stateUnit": "SAS670 供应链板块",
+      "pair": {
+        "display": "none",
+        "dataVisible": "false",
+        "hidden": true,
+        "height": 0
+      },
+      "betweenRiskAndDelivery": 12,
+      "mainGap": 12,
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        }
+      ],
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "unit": "SAS520 金山中心",
+      "stateUnit": "SAS520 金山中心",
+      "pair": {
+        "display": "none",
+        "dataVisible": "false",
+        "hidden": true,
+        "height": 0
+      },
+      "betweenRiskAndDelivery": 12,
+      "mainGap": 12,
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        }
+      ],
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "unit": "SAS560 沈阳中心",
+      "stateUnit": "SAS560 沈阳中心",
+      "pair": {
+        "display": "none",
+        "dataVisible": "false",
+        "hidden": true,
+        "height": 0
+      },
+      "betweenRiskAndDelivery": 12,
+      "mainGap": 12,
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        }
+      ],
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "unit": "SAS550 惠湛中心",
+      "stateUnit": "SAS550 惠湛中心",
+      "pair": {
+        "display": "none",
+        "dataVisible": "false",
+        "hidden": true,
+        "height": 0
+      },
+      "betweenRiskAndDelivery": 12,
+      "mainGap": 12,
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        }
+      ],
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "unit": "SAS530 银川中心",
+      "stateUnit": "SAS530 银川中心",
+      "pair": {
+        "display": "none",
+        "dataVisible": "false",
+        "hidden": true,
+        "height": 0
+      },
+      "betweenRiskAndDelivery": 12,
+      "mainGap": 12,
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            128.9,
+            128.9
+          ]
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            95.1,
+            95.1,
+            95.1
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            102.5,
+            102.5
+          ]
+        }
+      ],
+      "delivery": {
+        "h": 276.3,
+        "widthShare": 1,
+        "flexGrow": "0"
+      }
+    }
+  ],
+  "tabs": [
+    {
+      "metric": "contract",
+      "note": {
+        "text": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+        "whiteSpace": "normal",
+        "overflow": "visible",
+        "textOverflow": "clip",
+        "lineRects": 1,
+        "scrollWidth": 661,
+        "clientWidth": 661,
+        "clippedX": false
+      },
+      "pair": {
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          403.6,
+          403.6
+        ],
+        "minInkSlack": 2.4,
+        "maxInkSlack": 25.3
+      }
+    },
+    {
+      "metric": "completed",
+      "note": {
+        "text": "完成合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+        "whiteSpace": "normal",
+        "overflow": "visible",
+        "textOverflow": "clip",
+        "lineRects": 1,
+        "scrollWidth": 661,
+        "clientWidth": 661,
+        "clippedX": false
+      },
+      "pair": {
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          403.6,
+          403.6
+        ],
+        "minInkSlack": 2.4,
+        "maxInkSlack": 25.3
+      }
+    },
+    {
+      "metric": "invoice",
+      "note": {
+        "text": "完成开票额年度目标达成率 · 全部板块（12）· 按完成率降序",
+        "whiteSpace": "normal",
+        "overflow": "visible",
+        "textOverflow": "clip",
+        "lineRects": 1,
+        "scrollWidth": 661,
+        "clientWidth": 661,
+        "clippedX": false
+      },
+      "pair": {
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          403.6,
+          403.6
+        ],
+        "minInkSlack": 2.4,
+        "maxInkSlack": 25.3
+      }
+    },
+    {
+      "metric": "receipt",
+      "note": {
+        "text": "完成回款额年度目标达成率 · 全部板块（12）· 按完成率降序",
+        "whiteSpace": "normal",
+        "overflow": "visible",
+        "textOverflow": "clip",
+        "lineRects": 1,
+        "scrollWidth": 661,
+        "clientWidth": 661,
+        "clippedX": false
+      },
+      "pair": {
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          403.6,
+          403.6
+        ],
+        "minInkSlack": 2.4,
+        "maxInkSlack": 25.3
+      }
+    }
+  ]
+}
