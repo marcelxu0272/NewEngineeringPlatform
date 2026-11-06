@@ -1,0 +1,160 @@
+{
+  "iframeWidth": 312,
+  "pairCols": "2",
+  "pairWidths": [
+    127.5,
+    127.5
+  ],
+  "title": {
+    "text": "板块现金流贡献（万元）?",
+    "scrollWidth": 176,
+    "clientWidth": 104
+  },
+  "chartClipCount": 24,
+  "chartClips": [
+    {
+      "chart": "contributionChart",
+      "text": "2,133.7",
+      "dx": 23.3,
+      "dy": -12
+    },
+    {
+      "chart": "contributionChart",
+      "text": "1,955.8",
+      "dx": 23.3,
+      "dy": -35
+    },
+    {
+      "chart": "contributionChart",
+      "text": "1,778.0",
+      "dx": 23.3,
+      "dy": -59
+    },
+    {
+      "chart": "contributionChart",
+      "text": "1,600.2",
+      "dx": 23.3,
+      "dy": -83
+    },
+    {
+      "chart": "contributionChart",
+      "text": "1,511.3",
+      "dx": 22.8,
+      "dy": -107
+    },
+    {
+      "chart": "contributionChart",
+      "text": "1,333.5",
+      "dx": 23.3,
+      "dy": -131
+    },
+    {
+      "chart": "contributionChart",
+      "text": "1,333.5",
+      "dx": 23.3,
+      "dy": -154
+    },
+    {
+      "chart": "contributionChart",
+      "text": "1,244.6",
+      "dx": 23.3,
+      "dy": -131
+    },
+    {
+      "chart": "contributionChart",
+      "text": "1,066.8",
+      "dx": 23.3,
+      "dy": -107
+    },
+    {
+      "chart": "contributionChart",
+      "text": "-444.5",
+      "dx": 18.3,
+      "dy": -83
+    },
+    {
+      "chart": "contributionChart",
+      "text": "-622.3",
+      "dx": 18.3,
+      "dy": -59
+    },
+    {
+      "chart": "contributionChart",
+      "text": "-977.9",
+      "dx": 18.3,
+      "dy": -35
+    },
+    {
+      "chart": "targetChart",
+      "text": "98.6%",
+      "dx": 15,
+      "dy": -13
+    },
+    {
+      "chart": "targetChart",
+      "text": "96.5%",
+      "dx": 15,
+      "dy": -36
+    },
+    {
+      "chart": "targetChart",
+      "text": "95.4%",
+      "dx": 15,
+      "dy": -60
+    },
+    {
+      "chart": "targetChart",
+      "text": "94.4%",
+      "dx": 15,
+      "dy": -84
+    },
+    {
+      "chart": "targetChart",
+      "text": "93.3%",
+      "dx": 15,
+      "dy": -108
+    },
+    {
+      "chart": "targetChart",
+      "text": "92.3%",
+      "dx": 15,
+      "dy": -132
+    },
+    {
+      "chart": "targetChart",
+      "text": "91.2%",
+      "dx": 15,
+      "dy": -154
+    },
+    {
+      "chart": "targetChart",
+      "text": "90.2%",
+      "dx": 15,
+      "dy": -131
+    },
+    {
+      "chart": "targetChart",
+      "text": "89.1%",
+      "dx": 15,
+      "dy": -107
+    },
+    {
+      "chart": "targetChart",
+      "text": "88.1%",
+      "dx": 15,
+      "dy": -83
+    },
+    {
+      "chart": "targetChart",
+      "text": "87.0%",
+      "dx": 15,
+      "dy": -59
+    },
+    {
+      "chart": "targetChart",
+      "text": "86.0%",
+      "dx": 15,
+      "dy": -35
+    }
+  ]
+}
