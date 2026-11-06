@@ -1,0 +1,228 @@
+{
+  "verdict": "PASS",
+  "fails": [],
+  "unitLog": [
+    {
+      "unit": "全部板块",
+      "head": "全局看板 > 运营看板 > Board",
+      "pair": "grid",
+      "cols": {
+        "kpi": "2",
+        "cash": "3",
+        "pair": "2"
+      }
+    },
+    {
+      "unit": "SAS170 PMC板块",
+      "head": "全局看板 > 运营看板 > SAS170 PMC板块",
+      "pair": "none",
+      "cols": {
+        "kpi": "2",
+        "cash": "3"
+      }
+    },
+    {
+      "unit": "SAS610 咨询板块",
+      "head": "全局看板 > 运营看板 > SAS610 咨询板块",
+      "pair": "none",
+      "cols": {
+        "kpi": "2",
+        "cash": "3"
+      }
+    },
+    {
+      "unit": "SAS680 数字技术板块",
+      "head": "全局看板 > 运营看板 > SAS680 数字技术板块",
+      "pair": "none",
+      "cols": {
+        "kpi": "2",
+        "cash": "3"
+      }
+    },
+    {
+      "unit": "SAS650 新材料板块",
+      "head": "全局看板 > 运营看板 > SAS650 新材料板块",
+      "pair": "none",
+      "cols": {
+        "kpi": "2",
+        "cash": "3"
+      }
+    },
+    {
+      "unit": "SAS710 生命科学板块",
+      "head": "全局看板 > 运营看板 > SAS710 生命科学板块",
+      "pair": "none",
+      "cols": {
+        "kpi": "2",
+        "cash": "3"
+      }
+    },
+    {
+      "unit": "SAS690 COII板块",
+      "head": "全局看板 > 运营看板 > SAS690 COII板块",
+      "pair": "none",
+      "cols": {
+        "kpi": "2",
+        "cash": "3"
+      }
+    },
+    {
+      "unit": "SAS720 模块化板块",
+      "head": "全局看板 > 运营看板 > SAS720 模块化板块",
+      "pair": "none",
+      "cols": {
+        "kpi": "2",
+        "cash": "3"
+      }
+    },
+    {
+      "unit": "SAS670 供应链板块",
+      "head": "全局看板 > 运营看板 > SAS670 供应链板块",
+      "pair": "none",
+      "cols": {
+        "kpi": "2",
+        "cash": "3"
+      }
+    },
+    {
+      "unit": "SAS520 金山中心",
+      "head": "全局看板 > 运营看板 > SAS520 金山中心",
+      "pair": "none",
+      "cols": {
+        "kpi": "2",
+        "cash": "3"
+      }
+    },
+    {
+      "unit": "SAS560 沈阳中心",
+      "head": "全局看板 > 运营看板 > SAS560 沈阳中心",
+      "pair": "none",
+      "cols": {
+        "kpi": "2",
+        "cash": "3"
+      }
+    },
+    {
+      "unit": "SAS550 惠湛中心",
+      "head": "全局看板 > 运营看板 > SAS550 惠湛中心",
+      "pair": "none",
+      "cols": {
+        "kpi": "2",
+        "cash": "3"
+      }
+    },
+    {
+      "unit": "SAS530 银川中心",
+      "head": "全局看板 > 运营看板 > SAS530 银川中心",
+      "pair": "none",
+      "cols": {
+        "kpi": "2",
+        "cash": "3"
+      }
+    }
+  ],
+  "narrow": {
+    "ready": "true",
+    "unit": "全部板块",
+    "pairDisplay": "grid",
+    "kpi": [
+      {
+        "n": 1,
+        "delta": 0,
+        "h": [
+          104.9
+        ]
+      },
+      {
+        "n": 1,
+        "delta": 0,
+        "h": [
+          104.9
+        ]
+      },
+      {
+        "n": 1,
+        "delta": 0,
+        "h": [
+          104.9
+        ]
+      },
+      {
+        "n": 1,
+        "delta": 0,
+        "h": [
+          104.9
+        ]
+      }
+    ],
+    "cash": [
+      {
+        "n": 1,
+        "delta": 0,
+        "h": [
+          83.5
+        ]
+      },
+      {
+        "n": 1,
+        "delta": 0,
+        "h": [
+          83.5
+        ]
+      },
+      {
+        "n": 1,
+        "delta": 0,
+        "h": [
+          83.5
+        ]
+      }
+    ],
+    "risk": [
+      {
+        "n": 1,
+        "delta": 0,
+        "h": [
+          88.9
+        ]
+      },
+      {
+        "n": 1,
+        "delta": 0,
+        "h": [
+          88.9
+        ]
+      },
+      {
+        "n": 1,
+        "delta": 0,
+        "h": [
+          88.9
+        ]
+      },
+      {
+        "n": 1,
+        "delta": 0,
+        "h": [
+          88.9
+        ]
+      }
+    ],
+    "pair": [
+      {
+        "n": 2,
+        "delta": 0,
+        "h": [
+          532.2,
+          532.2
+        ]
+      }
+    ],
+    "noteClip": false,
+    "cols": {
+      "kpi": "1",
+      "cash": "1",
+      "pair": "2"
+    }
+  }
+}
