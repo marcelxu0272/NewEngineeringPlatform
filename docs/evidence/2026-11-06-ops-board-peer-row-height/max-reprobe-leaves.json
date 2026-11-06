@@ -1,0 +1,182 @@
+[
+  {
+    "unit": "SAS170 PMC板块",
+    "stateUnit": "SAS170 PMC板块",
+    "pairDisplay": "none",
+    "pairHiddenAttr": true,
+    "pairDataVisible": "false",
+    "pairRectH": 0,
+    "gaps": {
+      "cashToRisk": 10,
+      "riskToDelivery": 10
+    },
+    "hidden": true,
+    "noHole": true,
+    "pass": true
+  },
+  {
+    "unit": "SAS610 咨询板块",
+    "stateUnit": "SAS610 咨询板块",
+    "pairDisplay": "none",
+    "pairHiddenAttr": true,
+    "pairDataVisible": "false",
+    "pairRectH": 0,
+    "gaps": {
+      "cashToRisk": 10,
+      "riskToDelivery": 10
+    },
+    "hidden": true,
+    "noHole": true,
+    "pass": true
+  },
+  {
+    "unit": "SAS680 数字技术板块",
+    "stateUnit": "SAS680 数字技术板块",
+    "pairDisplay": "none",
+    "pairHiddenAttr": true,
+    "pairDataVisible": "false",
+    "pairRectH": 0,
+    "gaps": {
+      "cashToRisk": 10,
+      "riskToDelivery": 10
+    },
+    "hidden": true,
+    "noHole": true,
+    "pass": true
+  },
+  {
+    "unit": "SAS650 新材料板块",
+    "stateUnit": "SAS650 新材料板块",
+    "pairDisplay": "none",
+    "pairHiddenAttr": true,
+    "pairDataVisible": "false",
+    "pairRectH": 0,
+    "gaps": {
+      "cashToRisk": 10,
+      "riskToDelivery": 10
+    },
+    "hidden": true,
+    "noHole": true,
+    "pass": true
+  },
+  {
+    "unit": "SAS710 生命科学板块",
+    "stateUnit": "SAS710 生命科学板块",
+    "pairDisplay": "none",
+    "pairHiddenAttr": true,
+    "pairDataVisible": "false",
+    "pairRectH": 0,
+    "gaps": {
+      "cashToRisk": 10,
+      "riskToDelivery": 10
+    },
+    "hidden": true,
+    "noHole": true,
+    "pass": true
+  },
+  {
+    "unit": "SAS690 COII板块",
+    "stateUnit": "SAS690 COII板块",
+    "pairDisplay": "none",
+    "pairHiddenAttr": true,
+    "pairDataVisible": "false",
+    "pairRectH": 0,
+    "gaps": {
+      "cashToRisk": 10,
+      "riskToDelivery": 10
+    },
+    "hidden": true,
+    "noHole": true,
+    "pass": true
+  },
+  {
+    "unit": "SAS720 模块化板块",
+    "stateUnit": "SAS720 模块化板块",
+    "pairDisplay": "none",
+    "pairHiddenAttr": true,
+    "pairDataVisible": "false",
+    "pairRectH": 0,
+    "gaps": {
+      "cashToRisk": 10,
+      "riskToDelivery": 10
+    },
+    "hidden": true,
+    "noHole": true,
+    "pass": true
+  },
+  {
+    "unit": "SAS670 供应链板块",
+    "stateUnit": "SAS670 供应链板块",
+    "pairDisplay": "none",
+    "pairHiddenAttr": true,
+    "pairDataVisible": "false",
+    "pairRectH": 0,
+    "gaps": {
+      "cashToRisk": 10,
+      "riskToDelivery": 10
+    },
+    "hidden": true,
+    "noHole": true,
+    "pass": true
+  },
+  {
+    "unit": "SAS520 金山中心",
+    "stateUnit": "SAS520 金山中心",
+    "pairDisplay": "none",
+    "pairHiddenAttr": true,
+    "pairDataVisible": "false",
+    "pairRectH": 0,
+    "gaps": {
+      "cashToRisk": 10,
+      "riskToDelivery": 10
+    },
+    "hidden": true,
+    "noHole": true,
+    "pass": true
+  },
+  {
+    "unit": "SAS560 沈阳中心",
+    "stateUnit": "SAS560 沈阳中心",
+    "pairDisplay": "none",
+    "pairHiddenAttr": true,
+    "pairDataVisible": "false",
+    "pairRectH": 0,
+    "gaps": {
+      "cashToRisk": 10,
+      "riskToDelivery": 10
+    },
+    "hidden": true,
+    "noHole": true,
+    "pass": true
+  },
+  {
+    "unit": "SAS550 惠湛中心",
+    "stateUnit": "SAS550 惠湛中心",
+    "pairDisplay": "none",
+    "pairHiddenAttr": true,
+    "pairDataVisible": "false",
+    "pairRectH": 0,
+    "gaps": {
+      "cashToRisk": 10,
+      "riskToDelivery": 10
+    },
+    "hidden": true,
+    "noHole": true,
+    "pass": true
+  },
+  {
+    "unit": "SAS530 银川中心",
+    "stateUnit": "SAS530 银川中心",
+    "pairDisplay": "none",
+    "pairHiddenAttr": true,
+    "pairDataVisible": "false",
+    "pairRectH": 0,
+    "gaps": {
+      "cashToRisk": 10,
+      "riskToDelivery": 10
+    },
+    "hidden": true,
+    "noHole": true,
+    "pass": true
+  }
+]

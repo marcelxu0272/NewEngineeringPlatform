@@ -1,0 +1,2407 @@
+{
+  "probe": "max-independent-reprobe",
+  "sha": "f9e22ef95f20c78f7e7512a3d87e76f814600b94",
+  "url": "http://localhost:3000/operations-dashboard-202610/board",
+  "capturedAt": "2026-11-06T09:34:54.111Z",
+  "pageErrors": [],
+  "shots": [
+    "max-reprobe-01-shell-760.png",
+    "max-reprobe-02-pair-760.png",
+    "max-reprobe-03-shell-1440.png",
+    "max-reprobe-04-pair-1440.png",
+    "max-reprobe-05-kpi-1440.png",
+    "max-reprobe-06-cash-1440.png",
+    "max-reprobe-07-risk-1440.png",
+    "max-reprobe-08-delivery-1440.png",
+    "max-reprobe-09-shell-760-from-desktop.png",
+    "max-reprobe-10-pair-760-from-desktop.png",
+    "max-reprobe-11-pair-1440-restored.png",
+    "max-reprobe-12-leaf-yinchuan.png"
+  ],
+  "precondition": {
+    "cold760": {
+      "shell": {
+        "viewport": {
+          "w": 760,
+          "h": 1000,
+          "dpr": 1
+        },
+        "sidebar": {
+          "w": 224,
+          "h": 1000,
+          "x": 0,
+          "y": 0
+        },
+        "sidebarCollapsed": "false",
+        "tree": {
+          "w": 224,
+          "h": 872,
+          "x": 224,
+          "y": 128
+        },
+        "iframe": {
+          "w": 312,
+          "h": 872,
+          "x": 448,
+          "y": 128
+        }
+      },
+      "contentWidth": 312,
+      "near312": true,
+      "docClientWidth": 312,
+      "pairClientWidth": 265
+    },
+    "resize760": {
+      "shell": {
+        "viewport": {
+          "w": 760,
+          "h": 1000,
+          "dpr": 1
+        },
+        "sidebar": {
+          "w": 224,
+          "h": 1000,
+          "x": 0,
+          "y": 0
+        },
+        "sidebarCollapsed": "false",
+        "tree": {
+          "w": 224,
+          "h": 872,
+          "x": 224,
+          "y": 128
+        },
+        "iframe": {
+          "w": 312,
+          "h": 872,
+          "x": 448,
+          "y": 128
+        }
+      },
+      "contentWidth": 312,
+      "near312": true,
+      "docClientWidth": 312,
+      "pairClientWidth": 265
+    },
+    "desktop1440": {
+      "shell": {
+        "viewport": {
+          "w": 1440,
+          "h": 1000,
+          "dpr": 1
+        },
+        "sidebar": {
+          "w": 224,
+          "h": 1000,
+          "x": 0,
+          "y": 0
+        },
+        "sidebarCollapsed": "false",
+        "tree": {
+          "w": 224,
+          "h": 872,
+          "x": 224,
+          "y": 128
+        },
+        "iframe": {
+          "w": 992,
+          "h": 872,
+          "x": 448,
+          "y": 128
+        }
+      },
+      "contentWidth": 992
+    },
+    "restored1440": {
+      "shell": {
+        "viewport": {
+          "w": 1440,
+          "h": 1000,
+          "dpr": 1
+        },
+        "sidebar": {
+          "w": 224,
+          "h": 1000,
+          "x": 0,
+          "y": 0
+        },
+        "sidebarCollapsed": "false",
+        "tree": {
+          "w": 224,
+          "h": 872,
+          "x": 224,
+          "y": 128
+        },
+        "iframe": {
+          "w": 992,
+          "h": 872,
+          "x": 448,
+          "y": 128
+        }
+      },
+      "contentWidth": 992
+    }
+  },
+  "narrowCold": {
+    "judge": {
+      "pass": true,
+      "issues": [],
+      "cols": 1,
+      "templateCols": 1,
+      "peerCols": "1"
+    },
+    "titles": [
+      {
+        "panel": "contributionPanel",
+        "titleText": "板块现金流贡献（万元）?",
+        "whiteSpace": "nowrap",
+        "font": "700 14px / 20.3px \"Microsoft YaHei\", 微软雅黑, \"PingFang SC\", sans-serif",
+        "box": {
+          "scrollWidth": 189,
+          "clientWidth": 189,
+          "scrollHeight": 20,
+          "clientHeight": 20,
+          "dx": 0,
+          "dy": 0,
+          "clip": {
+            "left": 0,
+            "right": 0,
+            "overflow": 0,
+            "empty": false
+          }
+        },
+        "parts": [
+          {
+            "tag": "svg",
+            "cls": "[object SVGAnimatedString]",
+            "clip": {
+              "left": 0,
+              "right": 0,
+              "overflow": 0,
+              "empty": false
+            }
+          },
+          {
+            "tag": "SPAN",
+            "cls": "unit",
+            "clip": {
+              "left": 0,
+              "right": 0,
+              "overflow": 0,
+              "empty": false
+            }
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "info-button",
+            "clip": {
+              "left": 0,
+              "right": 0,
+              "overflow": 0,
+              "empty": false
+            }
+          }
+        ]
+      },
+      {
+        "panel": "targetPanel",
+        "titleText": "板块目标达成?",
+        "whiteSpace": "nowrap",
+        "font": "700 14px / 20.3px \"Microsoft YaHei\", 微软雅黑, \"PingFang SC\", sans-serif",
+        "box": {
+          "scrollWidth": 121,
+          "clientWidth": 121,
+          "scrollHeight": 20,
+          "clientHeight": 20,
+          "dx": 0,
+          "dy": 0,
+          "clip": {
+            "left": 0,
+            "right": 0,
+            "overflow": 0,
+            "empty": false
+          }
+        },
+        "parts": [
+          {
+            "tag": "svg",
+            "cls": "[object SVGAnimatedString]",
+            "clip": {
+              "left": 0,
+              "right": 0,
+              "overflow": 0,
+              "empty": false
+            }
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "info-button",
+            "clip": {
+              "left": 0,
+              "right": 0,
+              "overflow": 0,
+              "empty": false
+            }
+          }
+        ]
+      }
+    ],
+    "labels": [
+      {
+        "chart": "contributionChart",
+        "text": "2,133.7",
+        "width": 33.8,
+        "rawBeyondChartRight": -20.2,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "contributionChart",
+        "text": "1,955.8",
+        "width": 33.8,
+        "rawBeyondChartRight": -24.2,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "contributionChart",
+        "text": "1,778.0",
+        "width": 33.8,
+        "rawBeyondChartRight": -28.2,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "contributionChart",
+        "text": "1,600.2",
+        "width": 33.8,
+        "rawBeyondChartRight": -31.2,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "contributionChart",
+        "text": "1,511.3",
+        "width": 33.3,
+        "rawBeyondChartRight": -33.7,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "contributionChart",
+        "text": "1,333.5",
+        "width": 33.8,
+        "rawBeyondChartRight": -37.2,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "contributionChart",
+        "text": "1,333.5",
+        "width": 33.8,
+        "rawBeyondChartRight": -37.2,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "contributionChart",
+        "text": "1,244.6",
+        "width": 33.8,
+        "rawBeyondChartRight": -38.2,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "contributionChart",
+        "text": "1,066.8",
+        "width": 33.8,
+        "rawBeyondChartRight": -42.2,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "contributionChart",
+        "text": "-444.5",
+        "width": 28.8,
+        "rawBeyondChartRight": -115.8,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "contributionChart",
+        "text": "-622.3",
+        "width": 28.8,
+        "rawBeyondChartRight": -119.8,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "contributionChart",
+        "text": "-977.9",
+        "width": 28.8,
+        "rawBeyondChartRight": -126.8,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "targetChart",
+        "text": "98.6%",
+        "width": 25.5,
+        "rawBeyondChartRight": -22.5,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "targetChart",
+        "text": "96.5%",
+        "width": 25.5,
+        "rawBeyondChartRight": -25.5,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "targetChart",
+        "text": "95.4%",
+        "width": 25.5,
+        "rawBeyondChartRight": -26.5,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "targetChart",
+        "text": "94.4%",
+        "width": 25.5,
+        "rawBeyondChartRight": -27.5,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "targetChart",
+        "text": "93.3%",
+        "width": 25.5,
+        "rawBeyondChartRight": -28.5,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "targetChart",
+        "text": "92.3%",
+        "width": 25.5,
+        "rawBeyondChartRight": -29.5,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "targetChart",
+        "text": "91.2%",
+        "width": 25.5,
+        "rawBeyondChartRight": -30.5,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "targetChart",
+        "text": "90.2%",
+        "width": 25.5,
+        "rawBeyondChartRight": -31.5,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "targetChart",
+        "text": "89.1%",
+        "width": 25.5,
+        "rawBeyondChartRight": -32.5,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "targetChart",
+        "text": "88.1%",
+        "width": 25.5,
+        "rawBeyondChartRight": -33.5,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "targetChart",
+        "text": "87.0%",
+        "width": 25.5,
+        "rawBeyondChartRight": -34.5,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "chart": "targetChart",
+        "text": "86.0%",
+        "width": 25.5,
+        "rawBeyondChartRight": -35.5,
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      }
+    ],
+    "groups": {
+      "kpi": {
+        "missing": false,
+        "hidden": false,
+        "display": "grid",
+        "peerCols": "1",
+        "template": "265px",
+        "templateCols": 1,
+        "clientWidth": 265,
+        "clientHeight": 470,
+        "firstRowCols": 1,
+        "rowCount": 4,
+        "rows": [
+          {
+            "n": 1,
+            "top": 12,
+            "heights": [
+              109.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% 当月新增 8"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "kpi-card",
+                "text": "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% 当月新增 8",
+                "top": 12,
+                "left": 16,
+                "width": 265,
+                "height": 109.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": 131.9,
+            "heights": [
+              109.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1% 上月新增"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "kpi-card",
+                "text": "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1% 上月新增",
+                "top": 131.9,
+                "left": 16,
+                "width": 265,
+                "height": 109.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": 251.8,
+            "heights": [
+              109.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4% 当月新增 "
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "kpi-card",
+                "text": "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4% 当月新增 ",
+                "top": 251.8,
+                "left": 16,
+                "width": 265,
+                "height": 109.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": 371.8,
+            "heights": [
+              109.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1% 当月新增"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "kpi-card",
+                "text": "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1% 当月新增",
+                "top": 371.8,
+                "left": 16,
+                "width": 265,
+                "height": 109.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "cash": {
+        "missing": false,
+        "hidden": false,
+        "display": "grid",
+        "peerCols": "1",
+        "template": "241px",
+        "templateCols": 1,
+        "clientWidth": 241,
+        "clientHeight": 268,
+        "firstRowCols": 1,
+        "rowCount": 3,
+        "rows": [
+          {
+            "n": 1,
+            "top": 532,
+            "heights": [
+              83.5
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "现金流入 200,501.05 较上期 +3.2% ↑"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "cash-metric tone-primary",
+                "text": "现金流入 200,501.05 较上期 +3.2% ↑",
+                "top": 532,
+                "left": 28,
+                "width": 241,
+                "height": 83.5,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": 624.5,
+            "heights": [
+              83.5
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "现金流出 184,498.69 较上期 -2.1% ↓"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "cash-metric tone-primary",
+                "text": "现金流出 184,498.69 较上期 -2.1% ↓",
+                "top": 624.5,
+                "left": 28,
+                "width": 241,
+                "height": 83.5,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": 716.9,
+            "heights": [
+              83.5
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "净现金流 16,002.36 较上期 +4.6% ↑"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "cash-metric tone-primary",
+                "text": "净现金流 16,002.36 较上期 +4.6% ↑",
+                "top": 716.9,
+                "left": 28,
+                "width": 241,
+                "height": 83.5,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "risk": {
+        "missing": false,
+        "hidden": false,
+        "display": "grid",
+        "peerCols": "1",
+        "template": "241px",
+        "templateCols": 1,
+        "clientWidth": 241,
+        "clientHeight": 393,
+        "firstRowCols": 1,
+        "rowCount": 4,
+        "rows": [
+          {
+            "n": 1,
+            "top": 1146.7,
+            "heights": [
+              92.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "应收账款 996.10 较上期 -2.1% ↓"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "risk-metric",
+                "text": "应收账款 996.10 较上期 -2.1% ↓",
+                "top": 1146.7,
+                "left": 28,
+                "width": 241,
+                "height": 92.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": 1246.6,
+            "heights": [
+              92.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "WIP 2,574.55 较上期 +6.3% ↑"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "risk-metric",
+                "text": "WIP 2,574.55 较上期 +6.3% ↑",
+                "top": 1246.6,
+                "left": 28,
+                "width": 241,
+                "height": 92.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": 1346.5,
+            "heights": [
+              92.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "存货 2,189.48 较上期 -1.8% ↓"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "risk-metric",
+                "text": "存货 2,189.48 较上期 -1.8% ↓",
+                "top": 1346.5,
+                "left": 28,
+                "width": 241,
+                "height": 92.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": 1446.5,
+            "heights": [
+              92.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "营业收入 3,280.60 较上期 +4.5% ↑"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "risk-metric",
+                "text": "营业收入 3,280.60 较上期 +4.5% ↑",
+                "top": 1446.5,
+                "left": 28,
+                "width": 241,
+                "height": 92.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "pair": {
+        "missing": false,
+        "hidden": false,
+        "display": "grid",
+        "peerCols": "1",
+        "template": "265px",
+        "templateCols": 1,
+        "clientWidth": 265,
+        "clientHeight": 850,
+        "firstRowCols": 1,
+        "rowCount": 2,
+        "rows": [
+          {
+            "n": 1,
+            "top": 1569.4,
+            "heights": [
+              372.3
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "contributionPanel"
+            ],
+            "items": [
+              {
+                "id": "contributionPanel",
+                "cls": "panel",
+                "text": "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,600.2 1",
+                "top": 1569.4,
+                "left": 16,
+                "width": 265,
+                "height": 372.3,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": 1951.7,
+            "heights": [
+              467.5
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "targetPanel"
+            ],
+            "items": [
+              {
+                "id": "targetPanel",
+                "cls": "panel",
+                "text": "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% 96.5% ",
+                "top": 1951.7,
+                "left": 16,
+                "width": 265,
+                "height": 467.5,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "maxLabelOverflow": 0,
+    "bodyClips": [
+      {
+        "sel": "#deliveryPanel .delivery-kpi-card strong",
+        "text": "92.51%",
+        "dx": 57,
+        "dy": 0,
+        "clip": 0
+      },
+      {
+        "sel": "#deliveryPanel .delivery-kpi-card strong",
+        "text": "96.33%",
+        "dx": 57,
+        "dy": 0,
+        "clip": 0
+      }
+    ],
+    "deliveryNumbers": [
+      {
+        "text": "92.51%",
+        "dx": 57,
+        "beyondCard": 47.7,
+        "beyondPanel": 0
+      },
+      {
+        "text": "96.33%",
+        "dx": 57,
+        "beyondCard": 47.7,
+        "beyondPanel": 0
+      }
+    ]
+  },
+  "narrowFromDesktop": {
+    "judge": {
+      "pass": true,
+      "issues": [],
+      "cols": 1,
+      "templateCols": 1,
+      "peerCols": "1"
+    },
+    "rowJudgements": {
+      "kpi": {
+        "pass": true,
+        "issues": [],
+        "firstRowCols": 1,
+        "rowCount": 4
+      },
+      "cash": {
+        "pass": true,
+        "issues": [],
+        "firstRowCols": 1,
+        "rowCount": 3
+      },
+      "risk": {
+        "pass": true,
+        "issues": [],
+        "firstRowCols": 1,
+        "rowCount": 4
+      }
+    },
+    "titles": [
+      {
+        "panel": "contributionPanel",
+        "titleText": "板块现金流贡献（万元）?",
+        "whiteSpace": "nowrap",
+        "font": "700 14px / 20.3px \"Microsoft YaHei\", 微软雅黑, \"PingFang SC\", sans-serif",
+        "box": {
+          "scrollWidth": 189,
+          "clientWidth": 189,
+          "scrollHeight": 20,
+          "clientHeight": 20,
+          "dx": 0,
+          "dy": 0,
+          "clip": {
+            "left": 0,
+            "right": 0,
+            "overflow": 0,
+            "empty": false
+          }
+        },
+        "parts": [
+          {
+            "tag": "svg",
+            "cls": "[object SVGAnimatedString]",
+            "clip": {
+              "left": 0,
+              "right": 0,
+              "overflow": 0,
+              "empty": false
+            }
+          },
+          {
+            "tag": "SPAN",
+            "cls": "unit",
+            "clip": {
+              "left": 0,
+              "right": 0,
+              "overflow": 0,
+              "empty": false
+            }
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "info-button",
+            "clip": {
+              "left": 0,
+              "right": 0,
+              "overflow": 0,
+              "empty": false
+            }
+          }
+        ]
+      },
+      {
+        "panel": "targetPanel",
+        "titleText": "板块目标达成?",
+        "whiteSpace": "nowrap",
+        "font": "700 14px / 20.3px \"Microsoft YaHei\", 微软雅黑, \"PingFang SC\", sans-serif",
+        "box": {
+          "scrollWidth": 121,
+          "clientWidth": 121,
+          "scrollHeight": 20,
+          "clientHeight": 20,
+          "dx": 0,
+          "dy": 0,
+          "clip": {
+            "left": 0,
+            "right": 0,
+            "overflow": 0,
+            "empty": false
+          }
+        },
+        "parts": [
+          {
+            "tag": "svg",
+            "cls": "[object SVGAnimatedString]",
+            "clip": {
+              "left": 0,
+              "right": 0,
+              "overflow": 0,
+              "empty": false
+            }
+          },
+          {
+            "tag": "BUTTON",
+            "cls": "info-button",
+            "clip": {
+              "left": 0,
+              "right": 0,
+              "overflow": 0,
+              "empty": false
+            }
+          }
+        ]
+      }
+    ],
+    "labelSummary": {
+      "count": 24,
+      "maxOverflow": 0,
+      "offenders": []
+    },
+    "groups": {
+      "kpi": {
+        "missing": false,
+        "hidden": false,
+        "display": "grid",
+        "peerCols": "1",
+        "template": "265px",
+        "templateCols": 1,
+        "clientWidth": 265,
+        "clientHeight": 470,
+        "firstRowCols": 1,
+        "rowCount": 4,
+        "rows": [
+          {
+            "n": 1,
+            "top": -1659,
+            "heights": [
+              109.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% 当月新增 8"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "kpi-card",
+                "text": "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% 当月新增 8",
+                "top": -1659,
+                "left": 16,
+                "width": 265,
+                "height": 109.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": -1539.1,
+            "heights": [
+              109.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1% 上月新增"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "kpi-card",
+                "text": "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1% 上月新增",
+                "top": -1539.1,
+                "left": 16,
+                "width": 265,
+                "height": 109.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": -1419.2,
+            "heights": [
+              109.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4% 当月新增 "
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "kpi-card",
+                "text": "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4% 当月新增 ",
+                "top": -1419.2,
+                "left": 16,
+                "width": 265,
+                "height": 109.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": -1299.2,
+            "heights": [
+              109.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1% 当月新增"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "kpi-card",
+                "text": "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1% 当月新增",
+                "top": -1299.2,
+                "left": 16,
+                "width": 265,
+                "height": 109.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "cash": {
+        "missing": false,
+        "hidden": false,
+        "display": "grid",
+        "peerCols": "1",
+        "template": "241px",
+        "templateCols": 1,
+        "clientWidth": 241,
+        "clientHeight": 268,
+        "firstRowCols": 1,
+        "rowCount": 3,
+        "rows": [
+          {
+            "n": 1,
+            "top": -1139,
+            "heights": [
+              83.5
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "现金流入 200,501.05 较上期 +3.2% ↑"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "cash-metric tone-primary",
+                "text": "现金流入 200,501.05 较上期 +3.2% ↑",
+                "top": -1139,
+                "left": 28,
+                "width": 241,
+                "height": 83.5,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": -1046.5,
+            "heights": [
+              83.5
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "现金流出 184,498.69 较上期 -2.1% ↓"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "cash-metric tone-primary",
+                "text": "现金流出 184,498.69 较上期 -2.1% ↓",
+                "top": -1046.5,
+                "left": 28,
+                "width": 241,
+                "height": 83.5,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": -954.1,
+            "heights": [
+              83.5
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "净现金流 16,002.36 较上期 +4.6% ↑"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "cash-metric tone-primary",
+                "text": "净现金流 16,002.36 较上期 +4.6% ↑",
+                "top": -954.1,
+                "left": 28,
+                "width": 241,
+                "height": 83.5,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "risk": {
+        "missing": false,
+        "hidden": false,
+        "display": "grid",
+        "peerCols": "1",
+        "template": "241px",
+        "templateCols": 1,
+        "clientWidth": 241,
+        "clientHeight": 393,
+        "firstRowCols": 1,
+        "rowCount": 4,
+        "rows": [
+          {
+            "n": 1,
+            "top": -524.3,
+            "heights": [
+              92.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "应收账款 996.10 较上期 -2.1% ↓"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "risk-metric",
+                "text": "应收账款 996.10 较上期 -2.1% ↓",
+                "top": -524.3,
+                "left": 28,
+                "width": 241,
+                "height": 92.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": -424.4,
+            "heights": [
+              92.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "WIP 2,574.55 较上期 +6.3% ↑"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "risk-metric",
+                "text": "WIP 2,574.55 较上期 +6.3% ↑",
+                "top": -424.4,
+                "left": 28,
+                "width": 241,
+                "height": 92.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": -324.5,
+            "heights": [
+              92.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "存货 2,189.48 较上期 -1.8% ↓"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "risk-metric",
+                "text": "存货 2,189.48 较上期 -1.8% ↓",
+                "top": -324.5,
+                "left": 28,
+                "width": 241,
+                "height": 92.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": -224.5,
+            "heights": [
+              92.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "营业收入 3,280.60 较上期 +4.5% ↑"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "risk-metric",
+                "text": "营业收入 3,280.60 较上期 +4.5% ↑",
+                "top": -224.5,
+                "left": 28,
+                "width": 241,
+                "height": 92.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "pair": {
+        "missing": false,
+        "hidden": false,
+        "display": "grid",
+        "peerCols": "1",
+        "template": "265px",
+        "templateCols": 1,
+        "clientWidth": 265,
+        "clientHeight": 850,
+        "firstRowCols": 1,
+        "rowCount": 2,
+        "rows": [
+          {
+            "n": 1,
+            "top": -101.6,
+            "heights": [
+              372.3
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "contributionPanel"
+            ],
+            "items": [
+              {
+                "id": "contributionPanel",
+                "cls": "panel",
+                "text": "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,600.2 1",
+                "top": -101.6,
+                "left": 16,
+                "width": 265,
+                "height": 372.3,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 1,
+            "top": 280.7,
+            "heights": [
+              467.5
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "targetPanel"
+            ],
+            "items": [
+              {
+                "id": "targetPanel",
+                "cls": "panel",
+                "text": "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% 96.5% ",
+                "top": 280.7,
+                "left": 16,
+                "width": 265,
+                "height": 467.5,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "desktop": {
+    "kpi": {
+      "pass": true,
+      "issues": [],
+      "firstRowCols": 2,
+      "rowCount": 2
+    },
+    "cash": {
+      "pass": true,
+      "issues": [],
+      "firstRowCols": 3,
+      "rowCount": 1
+    },
+    "risk": {
+      "pass": true,
+      "issues": [],
+      "firstRowCols": 2,
+      "rowCount": 2
+    },
+    "pair": {
+      "pass": true,
+      "issues": [],
+      "firstRowCols": 2,
+      "rowCount": 1
+    },
+    "injection": {
+      "pass": true,
+      "issues": [],
+      "grew": 66,
+      "injectedTextCut": -12,
+      "beforeKpi": [
+        {
+          "h": 109.9,
+          "top": -1034,
+          "left": 16
+        },
+        {
+          "h": 109.9,
+          "top": -1034,
+          "left": 493.5
+        },
+        {
+          "h": 109.9,
+          "top": -914.1,
+          "left": 16
+        },
+        {
+          "h": 109.9,
+          "top": -914.1,
+          "left": 493.5
+        }
+      ],
+      "afterKpi": [
+        {
+          "h": 175.9,
+          "top": -1100,
+          "left": 16
+        },
+        {
+          "h": 175.9,
+          "top": -1100,
+          "left": 493.5
+        },
+        {
+          "h": 109.9,
+          "top": -914.1,
+          "left": 16
+        },
+        {
+          "h": 109.9,
+          "top": -914.1,
+          "left": 493.5
+        }
+      ],
+      "beforePair": [
+        {
+          "h": 426.9,
+          "top": -101.2,
+          "left": 16
+        },
+        {
+          "h": 426.9,
+          "top": -101.2,
+          "left": 493.5
+        }
+      ],
+      "afterPair": [
+        {
+          "h": 426.9,
+          "top": -101.2,
+          "left": 16
+        },
+        {
+          "h": 426.9,
+          "top": -101.2,
+          "left": 493.5
+        }
+      ]
+    },
+    "bodyClips": [],
+    "delivery": {
+      "height": 268.3,
+      "slack": 0,
+      "clientWidth": 943
+    },
+    "deliveryNumbers": [
+      {
+        "text": "92.51%",
+        "dx": 0,
+        "beyondCard": 0,
+        "beyondPanel": 0
+      },
+      {
+        "text": "96.33%",
+        "dx": 0,
+        "beyondCard": 0,
+        "beyondPanel": 0
+      }
+    ],
+    "pairHeights": [
+      {
+        "n": 2,
+        "top": -101.2,
+        "heights": [
+          426.9,
+          426.9
+        ],
+        "delta": 0,
+        "tallestSlack": 54.6,
+        "ids": [
+          "contributionPanel",
+          "targetPanel"
+        ],
+        "items": [
+          {
+            "id": "contributionPanel",
+            "cls": "panel",
+            "text": "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,600.2 1",
+            "top": -101.2,
+            "left": 16,
+            "width": 467.5,
+            "height": 426.9,
+            "slack": 54.6,
+            "scrollVsClient": {
+              "dx": 0,
+              "dy": 0
+            }
+          },
+          {
+            "id": "targetPanel",
+            "cls": "panel",
+            "text": "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% 96.5% ",
+            "top": -101.2,
+            "left": 493.5,
+            "width": 467.5,
+            "height": 426.9,
+            "slack": 0,
+            "scrollVsClient": {
+              "dx": 0,
+              "dy": 0
+            }
+          }
+        ]
+      }
+    ],
+    "groups": {
+      "kpi": {
+        "missing": false,
+        "hidden": false,
+        "display": "grid",
+        "peerCols": "2",
+        "template": "467.5px 467.5px",
+        "templateCols": 2,
+        "clientWidth": 945,
+        "clientHeight": 230,
+        "firstRowCols": 2,
+        "rowCount": 2,
+        "rows": [
+          {
+            "n": 2,
+            "top": -1034,
+            "heights": [
+              109.9,
+              109.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% 当月新增 8",
+              "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1% 上月新增"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "kpi-card",
+                "text": "新签合同额（万元） 9,188.14 目标 9,950.00 占总目标 92.3% 当月新增 8",
+                "top": -1034,
+                "left": 16,
+                "width": 467.5,
+                "height": 109.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              },
+              {
+                "id": "",
+                "cls": "kpi-card",
+                "text": "完成合同额（万元） 12,269.36 目标 13,930.00 占总目标 88.1% 上月新增",
+                "top": -1034,
+                "left": 493.5,
+                "width": 467.5,
+                "height": 109.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 2,
+            "top": -914.1,
+            "heights": [
+              109.9,
+              109.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4% 当月新增 ",
+              "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1% 当月新增"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "kpi-card",
+                "text": "完成开票额（万元） 9,126.36 目标 10,945.00 占总目标 83.4% 当月新增 ",
+                "top": -914.1,
+                "left": 16,
+                "width": 467.5,
+                "height": 109.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              },
+              {
+                "id": "",
+                "cls": "kpi-card",
+                "text": "完成回款额（万元） 13,391.89 目标 15,920.00 占总目标 84.1% 当月新增",
+                "top": -914.1,
+                "left": 493.5,
+                "width": 467.5,
+                "height": 109.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "cash": {
+        "missing": false,
+        "hidden": false,
+        "display": "grid",
+        "peerCols": "3",
+        "template": "301px 301px 301px",
+        "templateCols": 3,
+        "clientWidth": 921,
+        "clientHeight": 83,
+        "firstRowCols": 3,
+        "rowCount": 1,
+        "rows": [
+          {
+            "n": 3,
+            "top": -753.9,
+            "heights": [
+              83.5,
+              83.5,
+              83.5
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "现金流入 200,501.05 较上期 +3.2% ↑",
+              "现金流出 184,498.69 较上期 -2.1% ↓",
+              "净现金流 16,002.36 较上期 +4.6% ↑"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "cash-metric tone-primary",
+                "text": "现金流入 200,501.05 较上期 +3.2% ↑",
+                "top": -753.9,
+                "left": 28,
+                "width": 301,
+                "height": 83.5,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              },
+              {
+                "id": "",
+                "cls": "cash-metric tone-primary",
+                "text": "现金流出 184,498.69 较上期 -2.1% ↓",
+                "top": -753.9,
+                "left": 338,
+                "width": 301,
+                "height": 83.5,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              },
+              {
+                "id": "",
+                "cls": "cash-metric tone-primary",
+                "text": "净现金流 16,002.36 较上期 +4.6% ↑",
+                "top": -753.9,
+                "left": 648,
+                "width": 301,
+                "height": 83.5,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "risk": {
+        "missing": false,
+        "hidden": false,
+        "display": "grid",
+        "peerCols": "2",
+        "template": "457px 457px",
+        "templateCols": 2,
+        "clientWidth": 921,
+        "clientHeight": 193,
+        "firstRowCols": 2,
+        "rowCount": 2,
+        "rows": [
+          {
+            "n": 2,
+            "top": -324.1,
+            "heights": [
+              92.9,
+              92.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "应收账款 996.10 较上期 -2.1% ↓",
+              "WIP 2,574.55 较上期 +6.3% ↑"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "risk-metric",
+                "text": "应收账款 996.10 较上期 -2.1% ↓",
+                "top": -324.1,
+                "left": 28,
+                "width": 457,
+                "height": 92.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              },
+              {
+                "id": "",
+                "cls": "risk-metric",
+                "text": "WIP 2,574.55 较上期 +6.3% ↑",
+                "top": -324.1,
+                "left": 492,
+                "width": 457,
+                "height": 92.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          },
+          {
+            "n": 2,
+            "top": -224.2,
+            "heights": [
+              92.9,
+              92.9
+            ],
+            "delta": 0,
+            "tallestSlack": 0,
+            "ids": [
+              "存货 2,189.48 较上期 -1.8% ↓",
+              "营业收入 3,280.60 较上期 +4.5% ↑"
+            ],
+            "items": [
+              {
+                "id": "",
+                "cls": "risk-metric",
+                "text": "存货 2,189.48 较上期 -1.8% ↓",
+                "top": -224.2,
+                "left": 28,
+                "width": 457,
+                "height": 92.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              },
+              {
+                "id": "",
+                "cls": "risk-metric",
+                "text": "营业收入 3,280.60 较上期 +4.5% ↑",
+                "top": -224.2,
+                "left": 492,
+                "width": 457,
+                "height": 92.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "pair": {
+        "missing": false,
+        "hidden": false,
+        "display": "grid",
+        "peerCols": "2",
+        "template": "467.5px 467.5px",
+        "templateCols": 2,
+        "clientWidth": 945,
+        "clientHeight": 427,
+        "firstRowCols": 2,
+        "rowCount": 1,
+        "rows": [
+          {
+            "n": 2,
+            "top": -101.2,
+            "heights": [
+              426.9,
+              426.9
+            ],
+            "delta": 0,
+            "tallestSlack": 54.6,
+            "ids": [
+              "contributionPanel",
+              "targetPanel"
+            ],
+            "items": [
+              {
+                "id": "contributionPanel",
+                "cls": "panel",
+                "text": "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,600.2 1",
+                "top": -101.2,
+                "left": 16,
+                "width": 467.5,
+                "height": 426.9,
+                "slack": 54.6,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              },
+              {
+                "id": "targetPanel",
+                "cls": "panel",
+                "text": "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% 96.5% ",
+                "top": -101.2,
+                "left": 493.5,
+                "width": 467.5,
+                "height": 426.9,
+                "slack": 0,
+                "scrollVsClient": {
+                  "dx": 0,
+                  "dy": 0
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "axisSample": [
+      {
+        "text": "0",
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "text": "-2k",
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "text": "-1k",
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "text": "1k",
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "text": "2k",
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      },
+      {
+        "text": "3k",
+        "clip": {
+          "left": 0,
+          "right": 0,
+          "overflow": 0,
+          "empty": false
+        }
+      }
+    ],
+    "deliveryRightClip": {
+      "left": 0,
+      "right": 0,
+      "overflow": 0,
+      "empty": false
+    }
+  },
+  "restored": {
+    "judge": {
+      "pass": true,
+      "issues": [],
+      "cols": 2,
+      "heights": [
+        [
+          426.9,
+          426.9
+        ]
+      ]
+    },
+    "groupsPair": {
+      "missing": false,
+      "hidden": false,
+      "display": "grid",
+      "peerCols": "2",
+      "template": "467.5px 467.5px",
+      "templateCols": 2,
+      "clientWidth": 945,
+      "clientHeight": 427,
+      "firstRowCols": 2,
+      "rowCount": 1,
+      "rows": [
+        {
+          "n": 2,
+          "top": -0.2,
+          "heights": [
+            426.9,
+            426.9
+          ],
+          "delta": 0,
+          "tallestSlack": 54.6,
+          "ids": [
+            "contributionPanel",
+            "targetPanel"
+          ],
+          "items": [
+            {
+              "id": "contributionPanel",
+              "cls": "panel",
+              "text": "板块现金流贡献 （万元） ? 2,133.7 1,955.8 1,778.0 1,600.2 1",
+              "top": -0.2,
+              "left": 16,
+              "width": 467.5,
+              "height": 426.9,
+              "slack": 54.6,
+              "scrollVsClient": {
+                "dx": 0,
+                "dy": 0
+              }
+            },
+            {
+              "id": "targetPanel",
+              "cls": "panel",
+              "text": "板块目标达成 ? 新签合同额 完成合同额 完成开票额 完成回款额 目标 98.6% 96.5% ",
+              "top": -0.2,
+              "left": 493.5,
+              "width": 467.5,
+              "height": 426.9,
+              "slack": 0,
+              "scrollVsClient": {
+                "dx": 0,
+                "dy": 0
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "kpi": {
+      "pass": true,
+      "issues": [],
+      "firstRowCols": 2,
+      "rowCount": 2
+    },
+    "cash": {
+      "pass": true,
+      "issues": [],
+      "firstRowCols": 3,
+      "rowCount": 1
+    },
+    "risk": {
+      "pass": true,
+      "issues": [],
+      "firstRowCols": 2,
+      "rowCount": 2
+    },
+    "bodyClips": [],
+    "delivery": {
+      "height": 268.3,
+      "slack": 0,
+      "clientWidth": 943
+    },
+    "deliveryNumbers": [
+      {
+        "text": "92.51%",
+        "dx": 0,
+        "beyondCard": 0,
+        "beyondPanel": 0
+      },
+      {
+        "text": "96.33%",
+        "dx": 0,
+        "beyondCard": 0,
+        "beyondPanel": 0
+      }
+    ]
+  },
+  "leaves": [
+    {
+      "unit": "SAS170 PMC板块",
+      "stateUnit": "SAS170 PMC板块",
+      "pairDisplay": "none",
+      "pairHiddenAttr": true,
+      "pairDataVisible": "false",
+      "pairRectH": 0,
+      "gaps": {
+        "cashToRisk": 10,
+        "riskToDelivery": 10
+      },
+      "hidden": true,
+      "noHole": true,
+      "pass": true
+    },
+    {
+      "unit": "SAS610 咨询板块",
+      "stateUnit": "SAS610 咨询板块",
+      "pairDisplay": "none",
+      "pairHiddenAttr": true,
+      "pairDataVisible": "false",
+      "pairRectH": 0,
+      "gaps": {
+        "cashToRisk": 10,
+        "riskToDelivery": 10
+      },
+      "hidden": true,
+      "noHole": true,
+      "pass": true
+    },
+    {
+      "unit": "SAS680 数字技术板块",
+      "stateUnit": "SAS680 数字技术板块",
+      "pairDisplay": "none",
+      "pairHiddenAttr": true,
+      "pairDataVisible": "false",
+      "pairRectH": 0,
+      "gaps": {
+        "cashToRisk": 10,
+        "riskToDelivery": 10
+      },
+      "hidden": true,
+      "noHole": true,
+      "pass": true
+    },
+    {
+      "unit": "SAS650 新材料板块",
+      "stateUnit": "SAS650 新材料板块",
+      "pairDisplay": "none",
+      "pairHiddenAttr": true,
+      "pairDataVisible": "false",
+      "pairRectH": 0,
+      "gaps": {
+        "cashToRisk": 10,
+        "riskToDelivery": 10
+      },
+      "hidden": true,
+      "noHole": true,
+      "pass": true
+    },
+    {
+      "unit": "SAS710 生命科学板块",
+      "stateUnit": "SAS710 生命科学板块",
+      "pairDisplay": "none",
+      "pairHiddenAttr": true,
+      "pairDataVisible": "false",
+      "pairRectH": 0,
+      "gaps": {
+        "cashToRisk": 10,
+        "riskToDelivery": 10
+      },
+      "hidden": true,
+      "noHole": true,
+      "pass": true
+    },
+    {
+      "unit": "SAS690 COII板块",
+      "stateUnit": "SAS690 COII板块",
+      "pairDisplay": "none",
+      "pairHiddenAttr": true,
+      "pairDataVisible": "false",
+      "pairRectH": 0,
+      "gaps": {
+        "cashToRisk": 10,
+        "riskToDelivery": 10
+      },
+      "hidden": true,
+      "noHole": true,
+      "pass": true
+    },
+    {
+      "unit": "SAS720 模块化板块",
+      "stateUnit": "SAS720 模块化板块",
+      "pairDisplay": "none",
+      "pairHiddenAttr": true,
+      "pairDataVisible": "false",
+      "pairRectH": 0,
+      "gaps": {
+        "cashToRisk": 10,
+        "riskToDelivery": 10
+      },
+      "hidden": true,
+      "noHole": true,
+      "pass": true
+    },
+    {
+      "unit": "SAS670 供应链板块",
+      "stateUnit": "SAS670 供应链板块",
+      "pairDisplay": "none",
+      "pairHiddenAttr": true,
+      "pairDataVisible": "false",
+      "pairRectH": 0,
+      "gaps": {
+        "cashToRisk": 10,
+        "riskToDelivery": 10
+      },
+      "hidden": true,
+      "noHole": true,
+      "pass": true
+    },
+    {
+      "unit": "SAS520 金山中心",
+      "stateUnit": "SAS520 金山中心",
+      "pairDisplay": "none",
+      "pairHiddenAttr": true,
+      "pairDataVisible": "false",
+      "pairRectH": 0,
+      "gaps": {
+        "cashToRisk": 10,
+        "riskToDelivery": 10
+      },
+      "hidden": true,
+      "noHole": true,
+      "pass": true
+    },
+    {
+      "unit": "SAS560 沈阳中心",
+      "stateUnit": "SAS560 沈阳中心",
+      "pairDisplay": "none",
+      "pairHiddenAttr": true,
+      "pairDataVisible": "false",
+      "pairRectH": 0,
+      "gaps": {
+        "cashToRisk": 10,
+        "riskToDelivery": 10
+      },
+      "hidden": true,
+      "noHole": true,
+      "pass": true
+    },
+    {
+      "unit": "SAS550 惠湛中心",
+      "stateUnit": "SAS550 惠湛中心",
+      "pairDisplay": "none",
+      "pairHiddenAttr": true,
+      "pairDataVisible": "false",
+      "pairRectH": 0,
+      "gaps": {
+        "cashToRisk": 10,
+        "riskToDelivery": 10
+      },
+      "hidden": true,
+      "noHole": true,
+      "pass": true
+    },
+    {
+      "unit": "SAS530 银川中心",
+      "stateUnit": "SAS530 银川中心",
+      "pairDisplay": "none",
+      "pairHiddenAttr": true,
+      "pairDataVisible": "false",
+      "pairRectH": 0,
+      "gaps": {
+        "cashToRisk": 10,
+        "riskToDelivery": 10
+      },
+      "hidden": true,
+      "noHole": true,
+      "pass": true
+    }
+  ],
+  "backAllError": "壳级组织板块下拉键盘未能选中：全部板块",
+  "backToAllPairCols": null,
+  "verdict": "PASS",
+  "blockingPass": true,
+  "regressionPass": true
+}
