@@ -195,6 +195,55 @@ function assertRows(label, rows, { requireMulti }) {
   }
   await page.screenshot({ path: path.join(OUT, '03-narrow-520.png'), fullPage: true });
 
+  // 壳视口 760 时 iframe 内容宽 312（760 - 侧栏 224 - 目录 224）。这里直接把看板文档设成该内容宽。
+  await page.setViewportSize({ width: 312, height: 1000 });
+  await page.waitForTimeout(300);
+  const content312 = await page.evaluate(() => {
+    const pair = document.getElementById('pairRow');
+    const tol = 1;
+    const hOutside = (node, host) => {
+      if (!node || !host) return 0;
+      const b = node.getBoundingClientRect();
+      const h = host.getBoundingClientRect();
+      if (b.width < 0.5) return 0;
+      return Math.max(0, h.left - b.left, b.right - h.right);
+    };
+    const panels = [...pair.querySelectorAll(':scope > .panel')].map((panel) => {
+      const title = panel.querySelector('.panel-title');
+      const labels = [...panel.querySelectorAll('.highcharts-data-label')];
+      const labelOver = Math.max(0, ...labels.map((lab) => hOutside(lab, lab.closest('.chart') || panel)), 0);
+      const bits = title ? [...title.querySelectorAll('.unit, .info-button, svg')] : [];
+      return {
+        id: panel.id,
+        w: Math.round(panel.getBoundingClientRect().width * 10) / 10,
+        titleScroll: title ? title.scrollWidth : 0,
+        titleClient: title ? title.clientWidth : 0,
+        titleClip: title ? title.scrollWidth > title.clientWidth + tol : false,
+        bitOver: Math.round(Math.max(0, ...bits.map((n) => hOutside(n, panel)), 0) * 10) / 10,
+        labelCount: labels.length,
+        labelOver: Math.round(labelOver * 10) / 10,
+        overflow: panel.scrollWidth > panel.clientWidth + tol,
+      };
+    });
+    const tops = [...pair.querySelectorAll(':scope > .panel')].map((el) => Math.round(el.getBoundingClientRect().top));
+    return {
+      pairW: pair.clientWidth,
+      cols: pair.dataset.peerCols || '',
+      stacked: tops.length === 2 && Math.abs(tops[0] - tops[1]) > 8,
+      panels,
+    };
+  });
+  const pairFits = content312.panels.every((p) => !p.titleClip && p.bitOver <= 1 && p.labelOver <= 1 && !p.overflow && p.labelCount > 0);
+  check(content312.cols === '1' && content312.stacked, '内容宽 312 成对行收成 1 列', content312);
+  check(pairFits, '内容宽 312 标题与柱端数字未裁切', content312);
+  const peers312 = await readPeers(page);
+  assertRows('内容宽 312 KPI', peers312.kpi, { requireMulti: false });
+  assertRows('内容宽 312 现金流', peers312.cash, { requireMulti: false });
+  assertRows('内容宽 312 应收', peers312.risk, { requireMulti: false });
+  assertRows('内容宽 312 成对模块', peers312.pair, { requireMulti: false });
+  await page.locator('#pairRow').scrollIntoViewIfNeeded();
+  await page.locator('#pairRow').screenshot({ path: path.join(OUT, '11-content-312-pair.png') });
+
   await page.setViewportSize({ width: 1280, height: 1000 });
   await page.waitForTimeout(250);
   await page.evaluate(() => {
@@ -301,6 +350,7 @@ function assertRows(label, rows, { requireMulti }) {
     fails,
     desktop,
     narrow,
+    content312,
     grown: grown.risk,
     units,
     tabSnaps,

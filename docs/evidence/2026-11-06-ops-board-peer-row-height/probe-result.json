@@ -231,6 +231,35 @@
       "pair": "2"
     }
   },
+  "content312": {
+    "pairW": 265,
+    "cols": "1",
+    "stacked": true,
+    "panels": [
+      {
+        "id": "contributionPanel",
+        "w": 265,
+        "titleScroll": 189,
+        "titleClient": 189,
+        "titleClip": false,
+        "bitOver": 0,
+        "labelCount": 12,
+        "labelOver": 0,
+        "overflow": false
+      },
+      {
+        "id": "targetPanel",
+        "w": 265,
+        "titleScroll": 121,
+        "titleClient": 121,
+        "titleClip": false,
+        "bitOver": 0,
+        "labelCount": 12,
+        "labelOver": 0,
+        "overflow": false
+      }
+    ]
+  },
   "grown": [
     {
       "n": 2,
