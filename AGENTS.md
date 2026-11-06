@@ -7,6 +7,7 @@
 | 用途 | 路径 |
 |------|------|
 | **变更账本（唯一口径变更入口）** | [`docs/变更账本.md`](docs/变更账本.md) |
+| **运营看板202610 Board 目标态正式规格** | [`docs/需求文档/202611_运营看板202610_Board目标态视觉与口径公共规格.md`](docs/需求文档/202611_运营看板202610_Board目标态视觉与口径公共规格.md)（与变更账本同为该规格的正式口径与验收依据；[Issue #3](https://github.com/marcelxu0272/NewEngineeringPlatform/issues/3) 只是 tracker/分发副本） |
 | 验收证据 | [`docs/evidence/`](docs/evidence/)（说明见同目录 `README.md`） |
 | 运营看板等业务用语 | [`GLOSSARY.md`](GLOSSARY.md) |
 | 已拍板架构决策 | [`docs/adr/`](docs/adr/) |
