@@ -1,3 +1,7 @@
+// Unmounted snippet. It used to live at src/pages/Detail/index.jsx, which Next
+// treated as the /Detail route and crashed `next build` (Button is not defined).
+// The live detail screen is app/dashboard/detail/page.tsx. Kept here so the
+// fragment is not deleted.
 <div className="operation-area">
   {/* 其他按钮 */}
   <Button onClick={handleExport}>

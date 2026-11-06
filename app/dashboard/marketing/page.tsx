@@ -500,8 +500,8 @@ export default function MarketingDashboard() {
 
       waterfallChartInstance.current.setOption(waterfallOption);
     }
-    });
-    }).catch((err) => console.error('加载中国地图数据失败:', err));
+    })
+    .catch((err) => console.error('加载中国地图数据失败:', err));
 
     // 监听容器尺寸变化
     const observer = new ResizeObserver(debounce(resizeHandler, 100));
