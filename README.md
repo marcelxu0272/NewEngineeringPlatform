@@ -31,6 +31,16 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 首次克隆若需 SQLite：`npm install` 后执行 `npm run db:init`、`npm run db:seed`，再 `npm run dev`。
 
+## Cursor Live App
+
+把本仓作为现有 GitHub 仓库部署（不要另起脚手架）。建议发布时的 App URL 填 `engineering-platform`。对话框里的域名后缀以 Cursor 为准（公开说明里的示例形如 `https://engineering-platform.apps.grok.bot`）。
+
+不需要环境变量或密钥。演示数据是本地 SQLite：`npm start` 在 `data/platform.db` 不存在时自动 `db:init` + `db:seed`。数据库文件在 `.gitignore` 的 `/data/` 下，不会进仓库。
+
+生产进程监听 `0.0.0.0` 和 `PORT`（默认 3000）。目录首页 `/`、组织图入口 `/operations-dashboard-202610`、Board `/operations-dashboard-202610/board` 以及 catalog 里的其他路由都在同一个应用地址下。`next build` 不因历史 ESLint / `tsc` 报错失败（演示页里已有约 70 个类型错误）；需要时仍可单独跑 `npm run lint` 和 `npx tsc --noEmit`。原先 `src/pages/Detail/index.jsx` 不是合法页面，会被 Next 编成 `/Detail` 并在收集 page data 时崩溃；片段已挪到 `docs/snippets/src-pages-Detail-index.jsx`，正式明细页仍是 `/dashboard/detail`。
+
+Preview 通过后，由 Ethan 在 Cursor 的 Preview / Publish 托盘里发布。本仓库不代点 Publish。
+
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
