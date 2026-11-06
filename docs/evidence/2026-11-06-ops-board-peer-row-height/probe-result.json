@@ -1,0 +1,1232 @@
+{
+  "verdict": "PASS",
+  "fails": [],
+  "desktop": {
+    "kpi": [
+      {
+        "n": 2,
+        "h": [
+          128.9,
+          128.9
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      },
+      {
+        "n": 2,
+        "h": [
+          128.9,
+          128.9
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      }
+    ],
+    "cash": [
+      {
+        "n": 3,
+        "h": [
+          95.1,
+          95.1,
+          95.1
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      }
+    ],
+    "risk": [
+      {
+        "n": 2,
+        "h": [
+          102.5,
+          102.5
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      },
+      {
+        "n": 2,
+        "h": [
+          102.5,
+          102.5
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      }
+    ],
+    "pair": [
+      {
+        "n": 2,
+        "h": [
+          403.6,
+          403.6
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      }
+    ],
+    "pairDisplay": "grid",
+    "pairVisible": true,
+    "buttons": [
+      {
+        "text": "新签合同额",
+        "inside": true
+      },
+      {
+        "text": "完成合同额",
+        "inside": true
+      },
+      {
+        "text": "完成开票额",
+        "inside": true
+      },
+      {
+        "text": "完成回款额",
+        "inside": true
+      }
+    ],
+    "noteText": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+    "noteInside": true,
+    "noteClip": false,
+    "betweenRiskDelivery": 428,
+    "mainGap": 12,
+    "spacers": [],
+    "peerCols": {
+      "kpi": "2",
+      "cash": "3",
+      "risk": "2",
+      "pair": "2"
+    }
+  },
+  "narrow": {
+    "kpi": [
+      {
+        "n": 1,
+        "h": [
+          109.9
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      },
+      {
+        "n": 1,
+        "h": [
+          109.9
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      },
+      {
+        "n": 1,
+        "h": [
+          109.9
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      },
+      {
+        "n": 1,
+        "h": [
+          109.9
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      }
+    ],
+    "cash": [
+      {
+        "n": 2,
+        "h": [
+          83.5,
+          83.5
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      },
+      {
+        "n": 1,
+        "h": [
+          83.5
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      }
+    ],
+    "risk": [
+      {
+        "n": 2,
+        "h": [
+          92.9,
+          92.9
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      },
+      {
+        "n": 2,
+        "h": [
+          92.9,
+          92.9
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      }
+    ],
+    "pair": [
+      {
+        "n": 2,
+        "h": [
+          467.5,
+          467.5
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      }
+    ],
+    "pairDisplay": "grid",
+    "pairVisible": true,
+    "buttons": [
+      {
+        "text": "新签合同额",
+        "inside": true
+      },
+      {
+        "text": "完成合同额",
+        "inside": true
+      },
+      {
+        "text": "完成开票额",
+        "inside": true
+      },
+      {
+        "text": "完成回款额",
+        "inside": true
+      }
+    ],
+    "noteText": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+    "noteInside": true,
+    "noteClip": false,
+    "betweenRiskDelivery": 487,
+    "mainGap": 10,
+    "spacers": [],
+    "peerCols": {
+      "kpi": "1",
+      "cash": "2",
+      "risk": "2",
+      "pair": "2"
+    }
+  },
+  "content312": {
+    "pairW": 265,
+    "cols": "1",
+    "stacked": true,
+    "panels": [
+      {
+        "id": "contributionPanel",
+        "w": 265,
+        "titleScroll": 189,
+        "titleClient": 189,
+        "titleClip": false,
+        "bitOver": 0,
+        "labelCount": 12,
+        "labelOver": 0,
+        "overflow": false
+      },
+      {
+        "id": "targetPanel",
+        "w": 265,
+        "titleScroll": 121,
+        "titleClient": 121,
+        "titleClip": false,
+        "bitOver": 0,
+        "labelCount": 12,
+        "labelOver": 0,
+        "overflow": false
+      }
+    ]
+  },
+  "grown": [
+    {
+      "n": 2,
+      "h": [
+        134,
+        134
+      ],
+      "delta": 0,
+      "tallestSlack": 0,
+      "numInside": true
+    },
+    {
+      "n": 2,
+      "h": [
+        99.3,
+        99.3
+      ],
+      "delta": 0,
+      "tallestSlack": 0,
+      "numInside": true
+    }
+  ],
+  "units": [
+    {
+      "unit": "全部板块",
+      "pairDisplay": "grid",
+      "kpi": [
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "cash": [
+        {
+          "n": 3,
+          "h": [
+            89.8,
+            89.8,
+            89.8
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "risk": [
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "pair": [
+        {
+          "n": 2,
+          "h": [
+            401.6,
+            401.6
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "between": 422
+    },
+    {
+      "unit": "SAS170 PMC板块",
+      "pairDisplay": "none",
+      "kpi": [
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "cash": [
+        {
+          "n": 3,
+          "h": [
+            89.8,
+            89.8,
+            89.8
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "risk": [
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "pair": [],
+      "between": 10
+    },
+    {
+      "unit": "SAS610 咨询板块",
+      "pairDisplay": "none",
+      "kpi": [
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "cash": [
+        {
+          "n": 3,
+          "h": [
+            89.8,
+            89.8,
+            89.8
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "risk": [
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "pair": [],
+      "between": 10
+    },
+    {
+      "unit": "SAS680 数字技术板块",
+      "pairDisplay": "none",
+      "kpi": [
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "cash": [
+        {
+          "n": 3,
+          "h": [
+            89.8,
+            89.8,
+            89.8
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "risk": [
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "pair": [],
+      "between": 10
+    },
+    {
+      "unit": "SAS650 新材料板块",
+      "pairDisplay": "none",
+      "kpi": [
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "cash": [
+        {
+          "n": 3,
+          "h": [
+            89.8,
+            89.8,
+            89.8
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "risk": [
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "pair": [],
+      "between": 10
+    },
+    {
+      "unit": "SAS710 生命科学板块",
+      "pairDisplay": "none",
+      "kpi": [
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "cash": [
+        {
+          "n": 3,
+          "h": [
+            89.8,
+            89.8,
+            89.8
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "risk": [
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "pair": [],
+      "between": 10
+    },
+    {
+      "unit": "SAS690 COII板块",
+      "pairDisplay": "none",
+      "kpi": [
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "cash": [
+        {
+          "n": 3,
+          "h": [
+            89.8,
+            89.8,
+            89.8
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "risk": [
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "pair": [],
+      "between": 10
+    },
+    {
+      "unit": "SAS720 模块化板块",
+      "pairDisplay": "none",
+      "kpi": [
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "cash": [
+        {
+          "n": 3,
+          "h": [
+            89.8,
+            89.8,
+            89.8
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "risk": [
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "pair": [],
+      "between": 10
+    },
+    {
+      "unit": "SAS670 供应链板块",
+      "pairDisplay": "none",
+      "kpi": [
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "cash": [
+        {
+          "n": 3,
+          "h": [
+            89.8,
+            89.8,
+            89.8
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "risk": [
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "pair": [],
+      "between": 10
+    },
+    {
+      "unit": "SAS520 金山中心",
+      "pairDisplay": "none",
+      "kpi": [
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "cash": [
+        {
+          "n": 3,
+          "h": [
+            89.8,
+            89.8,
+            89.8
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "risk": [
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "pair": [],
+      "between": 10
+    },
+    {
+      "unit": "SAS560 沈阳中心",
+      "pairDisplay": "none",
+      "kpi": [
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "cash": [
+        {
+          "n": 3,
+          "h": [
+            89.8,
+            89.8,
+            89.8
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "risk": [
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "pair": [],
+      "between": 10
+    },
+    {
+      "unit": "SAS550 惠湛中心",
+      "pairDisplay": "none",
+      "kpi": [
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "cash": [
+        {
+          "n": 3,
+          "h": [
+            89.8,
+            89.8,
+            89.8
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "risk": [
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "pair": [],
+      "between": 10
+    },
+    {
+      "unit": "SAS530 银川中心",
+      "pairDisplay": "none",
+      "kpi": [
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            116.3,
+            116.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "cash": [
+        {
+          "n": 3,
+          "h": [
+            89.8,
+            89.8,
+            89.8
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "risk": [
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        },
+        {
+          "n": 2,
+          "h": [
+            99.3,
+            99.3
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ],
+      "pair": [],
+      "between": 10
+    }
+  ],
+  "tabSnaps": [
+    {
+      "metric": "contract",
+      "note": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+      "pair": [
+        {
+          "n": 2,
+          "h": [
+            401.6,
+            401.6
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ]
+    },
+    {
+      "metric": "completed",
+      "note": "完成合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+      "pair": [
+        {
+          "n": 2,
+          "h": [
+            401.6,
+            401.6
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ]
+    },
+    {
+      "metric": "invoice",
+      "note": "完成开票额年度目标达成率 · 全部板块（12）· 按完成率降序",
+      "pair": [
+        {
+          "n": 2,
+          "h": [
+            401.6,
+            401.6
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ]
+    },
+    {
+      "metric": "receipt",
+      "note": "完成回款额年度目标达成率 · 全部板块（12）· 按完成率降序",
+      "pair": [
+        {
+          "n": 2,
+          "h": [
+            401.6,
+            401.6
+          ],
+          "delta": 0,
+          "tallestSlack": 0,
+          "numInside": true
+        }
+      ]
+    }
+  ],
+  "back": {
+    "kpi": [
+      {
+        "n": 2,
+        "h": [
+          128.9,
+          128.9
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      },
+      {
+        "n": 2,
+        "h": [
+          128.9,
+          128.9
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      }
+    ],
+    "cash": [
+      {
+        "n": 3,
+        "h": [
+          95.1,
+          95.1,
+          95.1
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      }
+    ],
+    "pair": [
+      {
+        "n": 2,
+        "h": [
+          403.6,
+          403.6
+        ],
+        "delta": 0,
+        "tallestSlack": 0,
+        "numInside": true
+      }
+    ]
+  }
+}
