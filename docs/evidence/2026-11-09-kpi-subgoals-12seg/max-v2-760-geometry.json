@@ -1,0 +1,552 @@
+{
+  "grouping": "同一行 = getBoundingClientRect().top 相差不超过 3px。同行等高只看该组 heightDelta，不跨列数比较两次测量的卡高。",
+  "summary": {
+    "offCols": "2",
+    "backCols": "2",
+    "sameCols": true,
+    "offHeights": [
+      169.297,
+      169.297,
+      169.297,
+      169.297
+    ],
+    "backHeights": [
+      169.297,
+      169.297,
+      169.297,
+      169.297
+    ],
+    "withinRowMaxHeightDelta": [
+      {
+        "tag": "760-off-before-scroll",
+        "peerCols": "2",
+        "maxDelta": 0,
+        "rows": [
+          {
+            "row": 1,
+            "n": 2,
+            "heightDelta": 0,
+            "widths": [
+              351.5,
+              351.5
+            ]
+          },
+          {
+            "row": 2,
+            "n": 2,
+            "heightDelta": 0,
+            "widths": [
+              351.5,
+              351.5
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "760-off-after-scroll-this-is-offH",
+        "peerCols": "2",
+        "maxDelta": 0,
+        "rows": [
+          {
+            "row": 1,
+            "n": 2,
+            "heightDelta": 0,
+            "widths": [
+              351.5,
+              351.5
+            ]
+          },
+          {
+            "row": 2,
+            "n": 2,
+            "heightDelta": 0,
+            "widths": [
+              351.5,
+              351.5
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "760-on-after-scroll",
+        "peerCols": "1",
+        "maxDelta": 0,
+        "rows": [
+          {
+            "row": 1,
+            "n": 1,
+            "heightDelta": 0,
+            "widths": [
+              713
+            ]
+          },
+          {
+            "row": 2,
+            "n": 1,
+            "heightDelta": 0,
+            "widths": [
+              713
+            ]
+          },
+          {
+            "row": 3,
+            "n": 1,
+            "heightDelta": 0,
+            "widths": [
+              713
+            ]
+          },
+          {
+            "row": 4,
+            "n": 1,
+            "heightDelta": 0,
+            "widths": [
+              713
+            ]
+          }
+        ]
+      },
+      {
+        "tag": "760-back-after-scroll-this-is-backH",
+        "peerCols": "2",
+        "maxDelta": 0,
+        "rows": [
+          {
+            "row": 1,
+            "n": 2,
+            "heightDelta": 0,
+            "widths": [
+              351.5,
+              351.5
+            ]
+          },
+          {
+            "row": 2,
+            "n": 2,
+            "heightDelta": 0,
+            "widths": [
+              351.5,
+              351.5
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "shots": [
+    {
+      "tag": "760-off-before-scroll",
+      "peerCols": "2",
+      "gridTemplateColumns": "351.5px 351.5px",
+      "switchChecked": "false",
+      "viewport": {
+        "w": 760,
+        "h": 1000
+      },
+      "cards": [
+        {
+          "kpi": "contract",
+          "top": 43.391,
+          "left": 16,
+          "width": 351.5,
+          "height": 169.297,
+          "sub": false,
+          "deltaPosition": "static"
+        },
+        {
+          "kpi": "completed",
+          "top": 43.391,
+          "left": 377.5,
+          "width": 351.5,
+          "height": 169.297,
+          "sub": false,
+          "deltaPosition": "static"
+        },
+        {
+          "kpi": "invoice",
+          "top": 222.688,
+          "left": 16,
+          "width": 351.5,
+          "height": 169.297,
+          "sub": false,
+          "deltaPosition": "static"
+        },
+        {
+          "kpi": "receipt",
+          "top": 222.688,
+          "left": 377.5,
+          "width": 351.5,
+          "height": 169.297,
+          "sub": false,
+          "deltaPosition": "static"
+        }
+      ],
+      "rows": [
+        {
+          "row": 1,
+          "n": 2,
+          "top": 43.391,
+          "heightDelta": 0,
+          "widthDelta": 0,
+          "kpis": [
+            "contract",
+            "completed"
+          ],
+          "heights": [
+            169.297,
+            169.297
+          ],
+          "widths": [
+            351.5,
+            351.5
+          ],
+          "lefts": [
+            16,
+            377.5
+          ]
+        },
+        {
+          "row": 2,
+          "n": 2,
+          "top": 222.688,
+          "heightDelta": 0,
+          "widthDelta": 0,
+          "kpis": [
+            "invoice",
+            "receipt"
+          ],
+          "heights": [
+            169.297,
+            169.297
+          ],
+          "widths": [
+            351.5,
+            351.5
+          ],
+          "lefts": [
+            16,
+            377.5
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "760-off-after-scroll-this-is-offH",
+      "peerCols": "2",
+      "gridTemplateColumns": "351.5px 351.5px",
+      "switchChecked": "false",
+      "viewport": {
+        "w": 760,
+        "h": 1000
+      },
+      "cards": [
+        {
+          "kpi": "contract",
+          "top": 43.391,
+          "left": 16,
+          "width": 351.5,
+          "height": 169.297,
+          "sub": false,
+          "deltaPosition": "static"
+        },
+        {
+          "kpi": "completed",
+          "top": 43.391,
+          "left": 377.5,
+          "width": 351.5,
+          "height": 169.297,
+          "sub": false,
+          "deltaPosition": "static"
+        },
+        {
+          "kpi": "invoice",
+          "top": 222.688,
+          "left": 16,
+          "width": 351.5,
+          "height": 169.297,
+          "sub": false,
+          "deltaPosition": "static"
+        },
+        {
+          "kpi": "receipt",
+          "top": 222.688,
+          "left": 377.5,
+          "width": 351.5,
+          "height": 169.297,
+          "sub": false,
+          "deltaPosition": "static"
+        }
+      ],
+      "rows": [
+        {
+          "row": 1,
+          "n": 2,
+          "top": 43.391,
+          "heightDelta": 0,
+          "widthDelta": 0,
+          "kpis": [
+            "contract",
+            "completed"
+          ],
+          "heights": [
+            169.297,
+            169.297
+          ],
+          "widths": [
+            351.5,
+            351.5
+          ],
+          "lefts": [
+            16,
+            377.5
+          ]
+        },
+        {
+          "row": 2,
+          "n": 2,
+          "top": 222.688,
+          "heightDelta": 0,
+          "widthDelta": 0,
+          "kpis": [
+            "invoice",
+            "receipt"
+          ],
+          "heights": [
+            169.297,
+            169.297
+          ],
+          "widths": [
+            351.5,
+            351.5
+          ],
+          "lefts": [
+            16,
+            377.5
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "760-on-after-scroll",
+      "peerCols": "1",
+      "gridTemplateColumns": "713px",
+      "switchChecked": "true",
+      "viewport": {
+        "w": 760,
+        "h": 1000
+      },
+      "cards": [
+        {
+          "kpi": "contract",
+          "top": 43.391,
+          "left": 16,
+          "width": 713,
+          "height": 245.547,
+          "sub": true,
+          "deltaPosition": "absolute"
+        },
+        {
+          "kpi": "completed",
+          "top": 298.938,
+          "left": 16,
+          "width": 713,
+          "height": 245.547,
+          "sub": true,
+          "deltaPosition": "absolute"
+        },
+        {
+          "kpi": "invoice",
+          "top": 554.484,
+          "left": 16,
+          "width": 713,
+          "height": 245.547,
+          "sub": true,
+          "deltaPosition": "absolute"
+        },
+        {
+          "kpi": "receipt",
+          "top": 810.031,
+          "left": 16,
+          "width": 713,
+          "height": 245.547,
+          "sub": true,
+          "deltaPosition": "absolute"
+        }
+      ],
+      "rows": [
+        {
+          "row": 1,
+          "n": 1,
+          "top": 43.391,
+          "heightDelta": 0,
+          "widthDelta": 0,
+          "kpis": [
+            "contract"
+          ],
+          "heights": [
+            245.547
+          ],
+          "widths": [
+            713
+          ],
+          "lefts": [
+            16
+          ]
+        },
+        {
+          "row": 2,
+          "n": 1,
+          "top": 298.938,
+          "heightDelta": 0,
+          "widthDelta": 0,
+          "kpis": [
+            "completed"
+          ],
+          "heights": [
+            245.547
+          ],
+          "widths": [
+            713
+          ],
+          "lefts": [
+            16
+          ]
+        },
+        {
+          "row": 3,
+          "n": 1,
+          "top": 554.484,
+          "heightDelta": 0,
+          "widthDelta": 0,
+          "kpis": [
+            "invoice"
+          ],
+          "heights": [
+            245.547
+          ],
+          "widths": [
+            713
+          ],
+          "lefts": [
+            16
+          ]
+        },
+        {
+          "row": 4,
+          "n": 1,
+          "top": 810.031,
+          "heightDelta": 0,
+          "widthDelta": 0,
+          "kpis": [
+            "receipt"
+          ],
+          "heights": [
+            245.547
+          ],
+          "widths": [
+            713
+          ],
+          "lefts": [
+            16
+          ]
+        }
+      ]
+    },
+    {
+      "tag": "760-back-after-scroll-this-is-backH",
+      "peerCols": "2",
+      "gridTemplateColumns": "351.5px 351.5px",
+      "switchChecked": "false",
+      "viewport": {
+        "w": 760,
+        "h": 1000
+      },
+      "cards": [
+        {
+          "kpi": "contract",
+          "top": 43.391,
+          "left": 16,
+          "width": 351.5,
+          "height": 169.297,
+          "sub": false,
+          "deltaPosition": "static"
+        },
+        {
+          "kpi": "completed",
+          "top": 43.391,
+          "left": 377.5,
+          "width": 351.5,
+          "height": 169.297,
+          "sub": false,
+          "deltaPosition": "static"
+        },
+        {
+          "kpi": "invoice",
+          "top": 222.688,
+          "left": 16,
+          "width": 351.5,
+          "height": 169.297,
+          "sub": false,
+          "deltaPosition": "static"
+        },
+        {
+          "kpi": "receipt",
+          "top": 222.688,
+          "left": 377.5,
+          "width": 351.5,
+          "height": 169.297,
+          "sub": false,
+          "deltaPosition": "static"
+        }
+      ],
+      "rows": [
+        {
+          "row": 1,
+          "n": 2,
+          "top": 43.391,
+          "heightDelta": 0,
+          "widthDelta": 0,
+          "kpis": [
+            "contract",
+            "completed"
+          ],
+          "heights": [
+            169.297,
+            169.297
+          ],
+          "widths": [
+            351.5,
+            351.5
+          ],
+          "lefts": [
+            16,
+            377.5
+          ]
+        },
+        {
+          "row": 2,
+          "n": 2,
+          "top": 222.688,
+          "heightDelta": 0,
+          "widthDelta": 0,
+          "kpis": [
+            "invoice",
+            "receipt"
+          ],
+          "heights": [
+            169.297,
+            169.297
+          ],
+          "widths": [
+            351.5,
+            351.5
+          ],
+          "lefts": [
+            16,
+            377.5
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+
+> engineering-platform@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.28
+
+   Creating an optimized production build ...
+Browserslist: caniuse-lite is outdated. Please run:
+  npx update-browserslist-db@latest
+  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+ ✓ Compiled successfully
+   Skipping validation of types
+   Skipping linting
+   Collecting page data ...
+   Generating static pages (0/27) ...
+   Generating static pages (6/27) 
+   Generating static pages (13/27) 
+   Generating static pages (20/27) 
+Filtered people count: 0
+ ✓ Generating static pages (27/27)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                  Size     First Load JS
+┌ ○ /                                        154 B           124 kB
+├ ○ /_not-found                              880 B          88.5 kB
+├ ƒ /api/catalog                             0 B                0 B
+├ ƒ /api/catalog/thumbnail                   0 B                0 B
+├ ƒ /api/dashboard                           0 B                0 B
+├ ƒ /api/esk/people                          0 B                0 B
+├ ƒ /api/esk/tree                            0 B                0 B
+├ ƒ /api/org/[slug]/core-project-activity    0 B                0 B
+├ ƒ /api/sme/personnel                       0 B                0 B
+├ ○ /cash-flow-dashboard                     163 B          87.7 kB
+├ ○ /cash-flow-dashboard-mobile              162 B          87.7 kB
+├ ○ /catalog-config                          155 B           124 kB
+├ ○ /dashboard                               6.17 kB         439 kB
+├ ○ /dashboard/DataList                      8.43 kB         259 kB
+├ ○ /dashboard/detail                        9.97 kB         261 kB
+├ ○ /dashboard/eletable                      161 kB          523 kB
+├ ○ /dashboard/marketing                     347 kB          590 kB
+├ ƒ /dashboard/org/[slug]                    10 kB           347 kB
+├ ○ /delivery-assurance-action-items-config  163 B          87.7 kB
+├ ○ /design                                  12.3 kB         226 kB
+├ ○ /dispatch-attendance                     163 B          87.7 kB
+├ ○ /engineering-skills                      39 kB           407 kB
+├ ○ /expert-resources                        5.5 kB          140 kB
+├ ○ /notice-board                            47.9 kB         403 kB
+├ ○ /operations-dashboard-202610             2.63 kB         137 kB
+├ ○ /operations-dashboard-202610/board       5.22 kB         211 kB
+├ ○ /org-chart                               2.63 kB         137 kB
+├ ○ /platform                                22.7 kB         157 kB
+├ ○ /project-management                      10.4 kB         459 kB
+├ ○ /project-requirements                    3.29 kB         108 kB
+├ ○ /third-party-personnel                   163 B          87.7 kB
+└ ○ /yinchuan-performance-payout             161 B          87.7 kB
++ First Load JS shared by all                87.6 kB
+  ├ chunks/2117-6fce73ffb1a16a4c.js          31.8 kB
+  ├ chunks/fd9d1056-c950d8fb32a91e75.js      53.6 kB
+  └ other shared chunks (total)              2.18 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+BUILD_EXIT:0

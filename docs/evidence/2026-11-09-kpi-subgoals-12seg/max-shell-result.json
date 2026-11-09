@@ -1,0 +1,42 @@
+{
+  "url": "http://127.0.0.1:3000/operations-dashboard-202610/board",
+  "verdict": "PASS",
+  "byAc": {
+    "AC3": {
+      "pass": 29,
+      "fail": 0
+    },
+    "规格": {
+      "pass": 1,
+      "fail": 0
+    },
+    "AC5": {
+      "pass": 258,
+      "fail": 0
+    },
+    "AC6": {
+      "pass": 115,
+      "fail": 0
+    },
+    "AC7": {
+      "pass": 196,
+      "fail": 0
+    },
+    "AC1": {
+      "pass": 68,
+      "fail": 0
+    },
+    "AC2": {
+      "pass": 256,
+      "fail": 0
+    },
+    "11-06补测": {
+      "pass": 3,
+      "fail": 0
+    }
+  },
+  "failCount": 0,
+  "passCount": 926,
+  "fails": [],
+  "note": "组织与主题都用键盘选择，活动项必须 isConnected 且在 document 中。未点击可能被虚拟列表卸掉的 option。"
+}

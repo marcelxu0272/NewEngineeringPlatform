@@ -1,0 +1,26 @@
+TSC_EXIT:2
+TSC_ERRORS:73
+     24 app/dashboard/DataList/page.tsx
+     39 app/dashboard/detail/page.tsx
+      1 app/dashboard/eletable/page.tsx
+      2 app/dashboard/marketing/page.tsx
+      4 app/engineering-skills/page.tsx
+      2 app/project-management/page.tsx
+      1 lib/catalog-filter.ts
+
+LINT_EXIT:1
+LINT_ERRORS:93
+./app/dashboard/DataList/page.tsx
+./app/dashboard/detail/page.tsx
+./app/dashboard/eletable/page.tsx
+./app/dashboard/marketing/page.tsx
+./app/dashboard/org/[slug]/page.tsx
+./app/dashboard/page.tsx
+./app/engineering-skills/page.tsx
+./app/expert-resources/PersonnelCards.tsx
+./app/notice-board/page.tsx
+./app/platform/page.tsx
+./app/project-management/page.tsx
+./components/ui/input.tsx
+./lib/db/seed.ts
+./lib/third-party-personnel.ts

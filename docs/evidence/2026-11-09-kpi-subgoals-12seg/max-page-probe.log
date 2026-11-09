@@ -1,0 +1,2379 @@
+PASS  [文档] 页面演示权重与证据里抄录的正整数一致
+PASS  [AC3] 进入页面开关为关
+PASS  [AC3] 关闭时没有子行节点
+PASS  [规格] 开关旁标明仅演示、非业务默认
+PASS  [AC7] 关态1440 四张主卡
+PASS  [AC7] 关态1440 contract 名称与万元
+PASS  [AC7] 关态1440 contract 保留目标与占总目标
+PASS  [AC7] 关态1440 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] 关态1440 contract 主条 12 等分
+PASS  [AC5] 关态1440 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] 关态1440 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] 关态1440 completed 名称与万元
+PASS  [AC7] 关态1440 completed 保留目标与占总目标
+PASS  [AC7] 关态1440 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] 关态1440 completed 主条 12 等分
+PASS  [AC5] 关态1440 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] 关态1440 completed 主条 填充不吸附到 1/12
+PASS  [AC7] 关态1440 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] 关态1440 invoice 名称与万元
+PASS  [AC7] 关态1440 invoice 保留目标与占总目标
+PASS  [AC7] 关态1440 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] 关态1440 invoice 主条 12 等分
+PASS  [AC5] 关态1440 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] 关态1440 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] 关态1440 receipt 名称与万元
+PASS  [AC7] 关态1440 receipt 保留目标与占总目标
+PASS  [AC7] 关态1440 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] 关态1440 receipt 主条 12 等分
+PASS  [AC5] 关态1440 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] 关态1440 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC6] 关态1440 第1行外框等高
+PASS  [AC6] 关态1440 第2行外框等高
+PASS  [AC6] 关态1440 contract 卡内无滚动裁切
+PASS  [AC6] 关态1440 contract 无省略号
+PASS  [AC6] 关态1440 contract 字形不互相遮挡
+PASS  [AC6] 关态1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] 关态1440 completed 卡内无滚动裁切
+PASS  [AC6] 关态1440 completed 无省略号
+PASS  [AC6] 关态1440 completed 字形不互相遮挡
+PASS  [AC6] 关态1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] 关态1440 invoice 卡内无滚动裁切
+PASS  [AC6] 关态1440 invoice 无省略号
+PASS  [AC6] 关态1440 invoice 字形不互相遮挡
+PASS  [AC6] 关态1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 关态1440 receipt 卡内无滚动裁切
+PASS  [AC6] 关态1440 receipt 无省略号
+PASS  [AC6] 关态1440 receipt 字形不互相遮挡
+PASS  [AC6] 关态1440 receipt 文字未被 overflow 裁掉
+PASS  [AC3] 打开开关后为开
+PASS  [AC5] 开关不改变 Highcharts 系列类型、名称、颜色和点数
+PASS  [AC5] 图表容器仍是 Highcharts
+PASS  [AC3] 开关不写本地存储、cookie 或 URL
+PASS  [AC3] 全部板块 切换后开关保持
+PASS  [AC7] 全部板块 四张主卡
+PASS  [AC7] 全部板块 contract 名称与万元
+PASS  [AC7] 全部板块 contract 保留目标与占总目标
+PASS  [AC7] 全部板块 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] 全部板块 contract 主条 12 等分
+PASS  [AC5] 全部板块 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] 全部板块 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] 全部板块 completed 名称与万元
+PASS  [AC7] 全部板块 completed 保留目标与占总目标
+PASS  [AC7] 全部板块 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] 全部板块 completed 主条 12 等分
+PASS  [AC5] 全部板块 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] 全部板块 completed 主条 填充不吸附到 1/12
+PASS  [AC7] 全部板块 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] 全部板块 invoice 名称与万元
+PASS  [AC7] 全部板块 invoice 保留目标与占总目标
+PASS  [AC7] 全部板块 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] 全部板块 invoice 主条 12 等分
+PASS  [AC5] 全部板块 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] 全部板块 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] 全部板块 receipt 名称与万元
+PASS  [AC7] 全部板块 receipt 保留目标与占总目标
+PASS  [AC7] 全部板块 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] 全部板块 receipt 主条 12 等分
+PASS  [AC5] 全部板块 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] 全部板块 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC1] 全部板块 contract 三行顺序
+PASS  [AC2] 全部板块 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] 全部板块 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] 全部板块 contract EPC 百分比
+PASS  [AC5] 全部板块 contract EPC 子条 12 等分
+PASS  [AC5] 全部板块 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 全部板块 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] 全部板块 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] 全部板块 contract PMC 百分比
+PASS  [AC5] 全部板块 contract PMC 子条 12 等分
+PASS  [AC5] 全部板块 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 全部板块 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 全部板块 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 全部板块 contract 设计及咨询 百分比
+PASS  [AC5] 全部板块 contract 设计及咨询 子条 12 等分
+PASS  [AC5] 全部板块 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 全部板块 contract 三行展示合计等于主卡
+PASS  [AC7] 全部板块 contract 子行没有新增文案
+PASS  [AC1] 全部板块 completed 三行顺序
+PASS  [AC2] 全部板块 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] 全部板块 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] 全部板块 completed EPC 百分比
+PASS  [AC5] 全部板块 completed EPC 子条 12 等分
+PASS  [AC5] 全部板块 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] 全部板块 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] 全部板块 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] 全部板块 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] 全部板块 completed PMC 百分比
+PASS  [AC5] 全部板块 completed PMC 子条 12 等分
+PASS  [AC5] 全部板块 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 全部板块 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 全部板块 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 全部板块 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 全部板块 completed 设计及咨询 百分比
+PASS  [AC5] 全部板块 completed 设计及咨询 子条 12 等分
+PASS  [AC5] 全部板块 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] 全部板块 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] 全部板块 completed 三行展示合计等于主卡
+PASS  [AC7] 全部板块 completed 子行没有新增文案
+PASS  [AC1] 全部板块 invoice 三行顺序
+PASS  [AC2] 全部板块 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] 全部板块 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] 全部板块 invoice EPC 百分比
+PASS  [AC5] 全部板块 invoice EPC 子条 12 等分
+PASS  [AC5] 全部板块 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 全部板块 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] 全部板块 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] 全部板块 invoice PMC 百分比
+PASS  [AC5] 全部板块 invoice PMC 子条 12 等分
+PASS  [AC5] 全部板块 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 全部板块 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 全部板块 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 全部板块 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 全部板块 invoice 设计及咨询 百分比
+PASS  [AC5] 全部板块 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] 全部板块 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 全部板块 invoice 三行展示合计等于主卡
+PASS  [AC7] 全部板块 invoice 子行没有新增文案
+PASS  [AC1] 全部板块 receipt 三行顺序
+PASS  [AC2] 全部板块 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] 全部板块 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] 全部板块 receipt EPC 百分比
+PASS  [AC5] 全部板块 receipt EPC 子条 12 等分
+PASS  [AC5] 全部板块 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 全部板块 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] 全部板块 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] 全部板块 receipt PMC 百分比
+PASS  [AC5] 全部板块 receipt PMC 子条 12 等分
+PASS  [AC5] 全部板块 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 全部板块 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 全部板块 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 全部板块 receipt 设计及咨询 百分比
+PASS  [AC5] 全部板块 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] 全部板块 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 全部板块 receipt 三行展示合计等于主卡
+PASS  [AC7] 全部板块 receipt 子行没有新增文案
+PASS  [AC6] 全部板块 1440 第1行外框等高
+PASS  [AC6] 全部板块 1440 第2行外框等高
+PASS  [AC6] 全部板块 1440 contract 卡内无滚动裁切
+PASS  [AC6] 全部板块 1440 contract 无省略号
+PASS  [AC6] 全部板块 1440 contract 字形不互相遮挡
+PASS  [AC6] 全部板块 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] 全部板块 1440 completed 卡内无滚动裁切
+PASS  [AC6] 全部板块 1440 completed 无省略号
+PASS  [AC6] 全部板块 1440 completed 字形不互相遮挡
+PASS  [AC6] 全部板块 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] 全部板块 1440 invoice 卡内无滚动裁切
+PASS  [AC6] 全部板块 1440 invoice 无省略号
+PASS  [AC6] 全部板块 1440 invoice 字形不互相遮挡
+PASS  [AC6] 全部板块 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 全部板块 1440 receipt 卡内无滚动裁切
+PASS  [AC6] 全部板块 1440 receipt 无省略号
+PASS  [AC6] 全部板块 1440 receipt 字形不互相遮挡
+PASS  [AC6] 全部板块 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC3] SAS170 PMC板块 切换后开关保持
+PASS  [AC7] SAS170 PMC板块 四张主卡
+PASS  [AC7] SAS170 PMC板块 contract 名称与万元
+PASS  [AC7] SAS170 PMC板块 contract 保留目标与占总目标
+PASS  [AC7] SAS170 PMC板块 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS170 PMC板块 contract 主条 12 等分
+PASS  [AC5] SAS170 PMC板块 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS170 PMC板块 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS170 PMC板块 completed 名称与万元
+PASS  [AC7] SAS170 PMC板块 completed 保留目标与占总目标
+PASS  [AC7] SAS170 PMC板块 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS170 PMC板块 completed 主条 12 等分
+PASS  [AC5] SAS170 PMC板块 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] SAS170 PMC板块 completed 主条 填充不吸附到 1/12
+PASS  [AC7] SAS170 PMC板块 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS170 PMC板块 invoice 名称与万元
+PASS  [AC7] SAS170 PMC板块 invoice 保留目标与占总目标
+PASS  [AC7] SAS170 PMC板块 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS170 PMC板块 invoice 主条 12 等分
+PASS  [AC5] SAS170 PMC板块 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS170 PMC板块 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS170 PMC板块 receipt 名称与万元
+PASS  [AC7] SAS170 PMC板块 receipt 保留目标与占总目标
+PASS  [AC7] SAS170 PMC板块 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS170 PMC板块 receipt 主条 12 等分
+PASS  [AC5] SAS170 PMC板块 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS170 PMC板块 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC1] SAS170 PMC板块 contract 三行顺序
+PASS  [AC2] SAS170 PMC板块 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS170 PMC板块 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS170 PMC板块 contract EPC 百分比
+PASS  [AC5] SAS170 PMC板块 contract EPC 子条 12 等分
+PASS  [AC5] SAS170 PMC板块 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS170 PMC板块 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS170 PMC板块 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS170 PMC板块 contract PMC 百分比
+PASS  [AC5] SAS170 PMC板块 contract PMC 子条 12 等分
+PASS  [AC5] SAS170 PMC板块 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS170 PMC板块 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS170 PMC板块 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS170 PMC板块 contract 设计及咨询 百分比
+PASS  [AC5] SAS170 PMC板块 contract 设计及咨询 子条 12 等分
+PASS  [AC5] SAS170 PMC板块 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS170 PMC板块 contract 三行展示合计等于主卡
+PASS  [AC7] SAS170 PMC板块 contract 子行没有新增文案
+PASS  [AC1] SAS170 PMC板块 SAS170 组织名与业务 PMC 同时在
+PASS  [AC1] SAS170 PMC板块 completed 三行顺序
+PASS  [AC2] SAS170 PMC板块 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS170 PMC板块 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS170 PMC板块 completed EPC 百分比
+PASS  [AC5] SAS170 PMC板块 completed EPC 子条 12 等分
+PASS  [AC5] SAS170 PMC板块 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS170 PMC板块 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS170 PMC板块 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS170 PMC板块 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS170 PMC板块 completed PMC 百分比
+PASS  [AC5] SAS170 PMC板块 completed PMC 子条 12 等分
+PASS  [AC5] SAS170 PMC板块 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS170 PMC板块 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS170 PMC板块 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS170 PMC板块 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS170 PMC板块 completed 设计及咨询 百分比
+PASS  [AC5] SAS170 PMC板块 completed 设计及咨询 子条 12 等分
+PASS  [AC5] SAS170 PMC板块 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS170 PMC板块 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] SAS170 PMC板块 completed 三行展示合计等于主卡
+PASS  [AC7] SAS170 PMC板块 completed 子行没有新增文案
+PASS  [AC1] SAS170 PMC板块 SAS170 组织名与业务 PMC 同时在
+PASS  [AC1] SAS170 PMC板块 invoice 三行顺序
+PASS  [AC2] SAS170 PMC板块 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS170 PMC板块 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS170 PMC板块 invoice EPC 百分比
+PASS  [AC5] SAS170 PMC板块 invoice EPC 子条 12 等分
+PASS  [AC5] SAS170 PMC板块 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS170 PMC板块 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS170 PMC板块 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS170 PMC板块 invoice PMC 百分比
+PASS  [AC5] SAS170 PMC板块 invoice PMC 子条 12 等分
+PASS  [AC5] SAS170 PMC板块 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS170 PMC板块 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS170 PMC板块 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS170 PMC板块 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS170 PMC板块 invoice 设计及咨询 百分比
+PASS  [AC5] SAS170 PMC板块 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] SAS170 PMC板块 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS170 PMC板块 invoice 三行展示合计等于主卡
+PASS  [AC7] SAS170 PMC板块 invoice 子行没有新增文案
+PASS  [AC1] SAS170 PMC板块 SAS170 组织名与业务 PMC 同时在
+PASS  [AC1] SAS170 PMC板块 receipt 三行顺序
+PASS  [AC2] SAS170 PMC板块 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS170 PMC板块 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS170 PMC板块 receipt EPC 百分比
+PASS  [AC5] SAS170 PMC板块 receipt EPC 子条 12 等分
+PASS  [AC5] SAS170 PMC板块 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS170 PMC板块 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS170 PMC板块 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS170 PMC板块 receipt PMC 百分比
+PASS  [AC5] SAS170 PMC板块 receipt PMC 子条 12 等分
+PASS  [AC5] SAS170 PMC板块 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS170 PMC板块 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS170 PMC板块 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS170 PMC板块 receipt 设计及咨询 百分比
+PASS  [AC5] SAS170 PMC板块 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] SAS170 PMC板块 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS170 PMC板块 receipt 三行展示合计等于主卡
+PASS  [AC7] SAS170 PMC板块 receipt 子行没有新增文案
+PASS  [AC1] SAS170 PMC板块 SAS170 组织名与业务 PMC 同时在
+PASS  [AC6] SAS170 PMC板块 1440 第1行外框等高
+PASS  [AC6] SAS170 PMC板块 1440 第2行外框等高
+PASS  [AC6] SAS170 PMC板块 1440 contract 卡内无滚动裁切
+PASS  [AC6] SAS170 PMC板块 1440 contract 无省略号
+PASS  [AC6] SAS170 PMC板块 1440 contract 字形不互相遮挡
+PASS  [AC6] SAS170 PMC板块 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] SAS170 PMC板块 1440 completed 卡内无滚动裁切
+PASS  [AC6] SAS170 PMC板块 1440 completed 无省略号
+PASS  [AC6] SAS170 PMC板块 1440 completed 字形不互相遮挡
+PASS  [AC6] SAS170 PMC板块 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] SAS170 PMC板块 1440 invoice 卡内无滚动裁切
+PASS  [AC6] SAS170 PMC板块 1440 invoice 无省略号
+PASS  [AC6] SAS170 PMC板块 1440 invoice 字形不互相遮挡
+PASS  [AC6] SAS170 PMC板块 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] SAS170 PMC板块 1440 receipt 卡内无滚动裁切
+PASS  [AC6] SAS170 PMC板块 1440 receipt 无省略号
+PASS  [AC6] SAS170 PMC板块 1440 receipt 字形不互相遮挡
+PASS  [AC6] SAS170 PMC板块 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC6] SAS170 PMC板块 叶子两块整块隐藏
+PASS  [AC6] SAS170 PMC板块 叶子两块隐藏后不留大洞
+PASS  [AC3] SAS610 咨询板块 切换后开关保持
+PASS  [AC7] SAS610 咨询板块 四张主卡
+PASS  [AC7] SAS610 咨询板块 contract 名称与万元
+PASS  [AC7] SAS610 咨询板块 contract 保留目标与占总目标
+PASS  [AC7] SAS610 咨询板块 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS610 咨询板块 contract 主条 12 等分
+PASS  [AC5] SAS610 咨询板块 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS610 咨询板块 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS610 咨询板块 completed 名称与万元
+PASS  [AC7] SAS610 咨询板块 completed 保留目标与占总目标
+PASS  [AC7] SAS610 咨询板块 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS610 咨询板块 completed 主条 12 等分
+PASS  [AC5] SAS610 咨询板块 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] SAS610 咨询板块 completed 主条 填充不吸附到 1/12
+PASS  [AC7] SAS610 咨询板块 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS610 咨询板块 invoice 名称与万元
+PASS  [AC7] SAS610 咨询板块 invoice 保留目标与占总目标
+PASS  [AC7] SAS610 咨询板块 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS610 咨询板块 invoice 主条 12 等分
+PASS  [AC5] SAS610 咨询板块 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS610 咨询板块 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS610 咨询板块 receipt 名称与万元
+PASS  [AC7] SAS610 咨询板块 receipt 保留目标与占总目标
+PASS  [AC7] SAS610 咨询板块 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS610 咨询板块 receipt 主条 12 等分
+PASS  [AC5] SAS610 咨询板块 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS610 咨询板块 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC1] SAS610 咨询板块 contract 三行顺序
+PASS  [AC2] SAS610 咨询板块 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS610 咨询板块 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS610 咨询板块 contract EPC 百分比
+PASS  [AC5] SAS610 咨询板块 contract EPC 子条 12 等分
+PASS  [AC5] SAS610 咨询板块 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS610 咨询板块 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS610 咨询板块 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS610 咨询板块 contract PMC 百分比
+PASS  [AC5] SAS610 咨询板块 contract PMC 子条 12 等分
+PASS  [AC5] SAS610 咨询板块 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS610 咨询板块 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS610 咨询板块 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS610 咨询板块 contract 设计及咨询 百分比
+PASS  [AC5] SAS610 咨询板块 contract 设计及咨询 子条 12 等分
+PASS  [AC5] SAS610 咨询板块 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS610 咨询板块 contract 三行展示合计等于主卡
+PASS  [AC7] SAS610 咨询板块 contract 子行没有新增文案
+PASS  [AC1] SAS610 咨询板块 completed 三行顺序
+PASS  [AC2] SAS610 咨询板块 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS610 咨询板块 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS610 咨询板块 completed EPC 百分比
+PASS  [AC5] SAS610 咨询板块 completed EPC 子条 12 等分
+PASS  [AC5] SAS610 咨询板块 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS610 咨询板块 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS610 咨询板块 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS610 咨询板块 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS610 咨询板块 completed PMC 百分比
+PASS  [AC5] SAS610 咨询板块 completed PMC 子条 12 等分
+PASS  [AC5] SAS610 咨询板块 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS610 咨询板块 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS610 咨询板块 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS610 咨询板块 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS610 咨询板块 completed 设计及咨询 百分比
+PASS  [AC5] SAS610 咨询板块 completed 设计及咨询 子条 12 等分
+PASS  [AC5] SAS610 咨询板块 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS610 咨询板块 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] SAS610 咨询板块 completed 三行展示合计等于主卡
+PASS  [AC7] SAS610 咨询板块 completed 子行没有新增文案
+PASS  [AC1] SAS610 咨询板块 invoice 三行顺序
+PASS  [AC2] SAS610 咨询板块 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS610 咨询板块 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS610 咨询板块 invoice EPC 百分比
+PASS  [AC5] SAS610 咨询板块 invoice EPC 子条 12 等分
+PASS  [AC5] SAS610 咨询板块 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS610 咨询板块 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS610 咨询板块 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS610 咨询板块 invoice PMC 百分比
+PASS  [AC5] SAS610 咨询板块 invoice PMC 子条 12 等分
+PASS  [AC5] SAS610 咨询板块 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS610 咨询板块 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS610 咨询板块 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS610 咨询板块 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS610 咨询板块 invoice 设计及咨询 百分比
+PASS  [AC5] SAS610 咨询板块 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] SAS610 咨询板块 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS610 咨询板块 invoice 三行展示合计等于主卡
+PASS  [AC7] SAS610 咨询板块 invoice 子行没有新增文案
+PASS  [AC1] SAS610 咨询板块 receipt 三行顺序
+PASS  [AC2] SAS610 咨询板块 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS610 咨询板块 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS610 咨询板块 receipt EPC 百分比
+PASS  [AC5] SAS610 咨询板块 receipt EPC 子条 12 等分
+PASS  [AC5] SAS610 咨询板块 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS610 咨询板块 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS610 咨询板块 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS610 咨询板块 receipt PMC 百分比
+PASS  [AC5] SAS610 咨询板块 receipt PMC 子条 12 等分
+PASS  [AC5] SAS610 咨询板块 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS610 咨询板块 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS610 咨询板块 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS610 咨询板块 receipt 设计及咨询 百分比
+PASS  [AC5] SAS610 咨询板块 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] SAS610 咨询板块 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS610 咨询板块 receipt 三行展示合计等于主卡
+PASS  [AC7] SAS610 咨询板块 receipt 子行没有新增文案
+PASS  [AC6] SAS610 咨询板块 1440 第1行外框等高
+PASS  [AC6] SAS610 咨询板块 1440 第2行外框等高
+PASS  [AC6] SAS610 咨询板块 1440 contract 卡内无滚动裁切
+PASS  [AC6] SAS610 咨询板块 1440 contract 无省略号
+PASS  [AC6] SAS610 咨询板块 1440 contract 字形不互相遮挡
+PASS  [AC6] SAS610 咨询板块 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] SAS610 咨询板块 1440 completed 卡内无滚动裁切
+PASS  [AC6] SAS610 咨询板块 1440 completed 无省略号
+PASS  [AC6] SAS610 咨询板块 1440 completed 字形不互相遮挡
+PASS  [AC6] SAS610 咨询板块 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] SAS610 咨询板块 1440 invoice 卡内无滚动裁切
+PASS  [AC6] SAS610 咨询板块 1440 invoice 无省略号
+PASS  [AC6] SAS610 咨询板块 1440 invoice 字形不互相遮挡
+PASS  [AC6] SAS610 咨询板块 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] SAS610 咨询板块 1440 receipt 卡内无滚动裁切
+PASS  [AC6] SAS610 咨询板块 1440 receipt 无省略号
+PASS  [AC6] SAS610 咨询板块 1440 receipt 字形不互相遮挡
+PASS  [AC6] SAS610 咨询板块 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC6] SAS610 咨询板块 叶子两块整块隐藏
+PASS  [AC6] SAS610 咨询板块 叶子两块隐藏后不留大洞
+PASS  [AC3] SAS680 数字技术板块 切换后开关保持
+PASS  [AC7] SAS680 数字技术板块 四张主卡
+PASS  [AC7] SAS680 数字技术板块 contract 名称与万元
+PASS  [AC7] SAS680 数字技术板块 contract 保留目标与占总目标
+PASS  [AC7] SAS680 数字技术板块 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS680 数字技术板块 contract 主条 12 等分
+PASS  [AC5] SAS680 数字技术板块 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS680 数字技术板块 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS680 数字技术板块 completed 名称与万元
+PASS  [AC7] SAS680 数字技术板块 completed 保留目标与占总目标
+PASS  [AC7] SAS680 数字技术板块 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS680 数字技术板块 completed 主条 12 等分
+PASS  [AC5] SAS680 数字技术板块 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] SAS680 数字技术板块 completed 主条 填充不吸附到 1/12
+PASS  [AC7] SAS680 数字技术板块 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS680 数字技术板块 invoice 名称与万元
+PASS  [AC7] SAS680 数字技术板块 invoice 保留目标与占总目标
+PASS  [AC7] SAS680 数字技术板块 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS680 数字技术板块 invoice 主条 12 等分
+PASS  [AC5] SAS680 数字技术板块 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS680 数字技术板块 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS680 数字技术板块 receipt 名称与万元
+PASS  [AC7] SAS680 数字技术板块 receipt 保留目标与占总目标
+PASS  [AC7] SAS680 数字技术板块 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS680 数字技术板块 receipt 主条 12 等分
+PASS  [AC5] SAS680 数字技术板块 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS680 数字技术板块 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC1] SAS680 数字技术板块 contract 三行顺序
+PASS  [AC2] SAS680 数字技术板块 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS680 数字技术板块 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS680 数字技术板块 contract EPC 百分比
+PASS  [AC5] SAS680 数字技术板块 contract EPC 子条 12 等分
+PASS  [AC5] SAS680 数字技术板块 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS680 数字技术板块 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS680 数字技术板块 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS680 数字技术板块 contract PMC 百分比
+PASS  [AC5] SAS680 数字技术板块 contract PMC 子条 12 等分
+PASS  [AC5] SAS680 数字技术板块 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS680 数字技术板块 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS680 数字技术板块 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS680 数字技术板块 contract 设计及咨询 百分比
+PASS  [AC5] SAS680 数字技术板块 contract 设计及咨询 子条 12 等分
+PASS  [AC5] SAS680 数字技术板块 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS680 数字技术板块 contract 三行展示合计等于主卡
+PASS  [AC7] SAS680 数字技术板块 contract 子行没有新增文案
+PASS  [AC1] SAS680 数字技术板块 completed 三行顺序
+PASS  [AC2] SAS680 数字技术板块 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS680 数字技术板块 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS680 数字技术板块 completed EPC 百分比
+PASS  [AC5] SAS680 数字技术板块 completed EPC 子条 12 等分
+PASS  [AC5] SAS680 数字技术板块 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS680 数字技术板块 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS680 数字技术板块 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS680 数字技术板块 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS680 数字技术板块 completed PMC 百分比
+PASS  [AC5] SAS680 数字技术板块 completed PMC 子条 12 等分
+PASS  [AC5] SAS680 数字技术板块 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS680 数字技术板块 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS680 数字技术板块 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS680 数字技术板块 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS680 数字技术板块 completed 设计及咨询 百分比
+PASS  [AC5] SAS680 数字技术板块 completed 设计及咨询 子条 12 等分
+PASS  [AC5] SAS680 数字技术板块 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS680 数字技术板块 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] SAS680 数字技术板块 completed 三行展示合计等于主卡
+PASS  [AC7] SAS680 数字技术板块 completed 子行没有新增文案
+PASS  [AC1] SAS680 数字技术板块 invoice 三行顺序
+PASS  [AC2] SAS680 数字技术板块 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS680 数字技术板块 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS680 数字技术板块 invoice EPC 百分比
+PASS  [AC5] SAS680 数字技术板块 invoice EPC 子条 12 等分
+PASS  [AC5] SAS680 数字技术板块 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS680 数字技术板块 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS680 数字技术板块 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS680 数字技术板块 invoice PMC 百分比
+PASS  [AC5] SAS680 数字技术板块 invoice PMC 子条 12 等分
+PASS  [AC5] SAS680 数字技术板块 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS680 数字技术板块 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS680 数字技术板块 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS680 数字技术板块 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS680 数字技术板块 invoice 设计及咨询 百分比
+PASS  [AC5] SAS680 数字技术板块 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] SAS680 数字技术板块 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS680 数字技术板块 invoice 三行展示合计等于主卡
+PASS  [AC7] SAS680 数字技术板块 invoice 子行没有新增文案
+PASS  [AC1] SAS680 数字技术板块 receipt 三行顺序
+PASS  [AC2] SAS680 数字技术板块 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS680 数字技术板块 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS680 数字技术板块 receipt EPC 百分比
+PASS  [AC5] SAS680 数字技术板块 receipt EPC 子条 12 等分
+PASS  [AC5] SAS680 数字技术板块 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS680 数字技术板块 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS680 数字技术板块 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS680 数字技术板块 receipt PMC 百分比
+PASS  [AC5] SAS680 数字技术板块 receipt PMC 子条 12 等分
+PASS  [AC5] SAS680 数字技术板块 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS680 数字技术板块 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS680 数字技术板块 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS680 数字技术板块 receipt 设计及咨询 百分比
+PASS  [AC5] SAS680 数字技术板块 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] SAS680 数字技术板块 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS680 数字技术板块 receipt 三行展示合计等于主卡
+PASS  [AC7] SAS680 数字技术板块 receipt 子行没有新增文案
+PASS  [AC6] SAS680 数字技术板块 1440 第1行外框等高
+PASS  [AC6] SAS680 数字技术板块 1440 第2行外框等高
+PASS  [AC6] SAS680 数字技术板块 1440 contract 卡内无滚动裁切
+PASS  [AC6] SAS680 数字技术板块 1440 contract 无省略号
+PASS  [AC6] SAS680 数字技术板块 1440 contract 字形不互相遮挡
+PASS  [AC6] SAS680 数字技术板块 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] SAS680 数字技术板块 1440 completed 卡内无滚动裁切
+PASS  [AC6] SAS680 数字技术板块 1440 completed 无省略号
+PASS  [AC6] SAS680 数字技术板块 1440 completed 字形不互相遮挡
+PASS  [AC6] SAS680 数字技术板块 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] SAS680 数字技术板块 1440 invoice 卡内无滚动裁切
+PASS  [AC6] SAS680 数字技术板块 1440 invoice 无省略号
+PASS  [AC6] SAS680 数字技术板块 1440 invoice 字形不互相遮挡
+PASS  [AC6] SAS680 数字技术板块 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] SAS680 数字技术板块 1440 receipt 卡内无滚动裁切
+PASS  [AC6] SAS680 数字技术板块 1440 receipt 无省略号
+PASS  [AC6] SAS680 数字技术板块 1440 receipt 字形不互相遮挡
+PASS  [AC6] SAS680 数字技术板块 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC6] SAS680 数字技术板块 叶子两块整块隐藏
+PASS  [AC6] SAS680 数字技术板块 叶子两块隐藏后不留大洞
+PASS  [AC3] SAS650 新材料板块 切换后开关保持
+PASS  [AC7] SAS650 新材料板块 四张主卡
+PASS  [AC7] SAS650 新材料板块 contract 名称与万元
+PASS  [AC7] SAS650 新材料板块 contract 保留目标与占总目标
+PASS  [AC7] SAS650 新材料板块 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS650 新材料板块 contract 主条 12 等分
+PASS  [AC5] SAS650 新材料板块 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS650 新材料板块 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS650 新材料板块 completed 名称与万元
+PASS  [AC7] SAS650 新材料板块 completed 保留目标与占总目标
+PASS  [AC7] SAS650 新材料板块 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS650 新材料板块 completed 主条 12 等分
+PASS  [AC5] SAS650 新材料板块 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] SAS650 新材料板块 completed 主条 填充不吸附到 1/12
+PASS  [AC7] SAS650 新材料板块 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS650 新材料板块 invoice 名称与万元
+PASS  [AC7] SAS650 新材料板块 invoice 保留目标与占总目标
+PASS  [AC7] SAS650 新材料板块 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS650 新材料板块 invoice 主条 12 等分
+PASS  [AC5] SAS650 新材料板块 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS650 新材料板块 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS650 新材料板块 receipt 名称与万元
+PASS  [AC7] SAS650 新材料板块 receipt 保留目标与占总目标
+PASS  [AC7] SAS650 新材料板块 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS650 新材料板块 receipt 主条 12 等分
+PASS  [AC5] SAS650 新材料板块 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS650 新材料板块 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC1] SAS650 新材料板块 contract 三行顺序
+PASS  [AC2] SAS650 新材料板块 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS650 新材料板块 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS650 新材料板块 contract EPC 百分比
+PASS  [AC5] SAS650 新材料板块 contract EPC 子条 12 等分
+PASS  [AC5] SAS650 新材料板块 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS650 新材料板块 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS650 新材料板块 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS650 新材料板块 contract PMC 百分比
+PASS  [AC5] SAS650 新材料板块 contract PMC 子条 12 等分
+PASS  [AC5] SAS650 新材料板块 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS650 新材料板块 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS650 新材料板块 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS650 新材料板块 contract 设计及咨询 百分比
+PASS  [AC5] SAS650 新材料板块 contract 设计及咨询 子条 12 等分
+PASS  [AC5] SAS650 新材料板块 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS650 新材料板块 contract 三行展示合计等于主卡
+PASS  [AC7] SAS650 新材料板块 contract 子行没有新增文案
+PASS  [AC1] SAS650 新材料板块 completed 三行顺序
+PASS  [AC2] SAS650 新材料板块 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS650 新材料板块 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS650 新材料板块 completed EPC 百分比
+PASS  [AC5] SAS650 新材料板块 completed EPC 子条 12 等分
+PASS  [AC5] SAS650 新材料板块 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS650 新材料板块 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS650 新材料板块 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS650 新材料板块 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS650 新材料板块 completed PMC 百分比
+PASS  [AC5] SAS650 新材料板块 completed PMC 子条 12 等分
+PASS  [AC5] SAS650 新材料板块 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS650 新材料板块 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS650 新材料板块 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS650 新材料板块 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS650 新材料板块 completed 设计及咨询 百分比
+PASS  [AC5] SAS650 新材料板块 completed 设计及咨询 子条 12 等分
+PASS  [AC5] SAS650 新材料板块 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS650 新材料板块 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] SAS650 新材料板块 completed 三行展示合计等于主卡
+PASS  [AC7] SAS650 新材料板块 completed 子行没有新增文案
+PASS  [AC1] SAS650 新材料板块 invoice 三行顺序
+PASS  [AC2] SAS650 新材料板块 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS650 新材料板块 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS650 新材料板块 invoice EPC 百分比
+PASS  [AC5] SAS650 新材料板块 invoice EPC 子条 12 等分
+PASS  [AC5] SAS650 新材料板块 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS650 新材料板块 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS650 新材料板块 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS650 新材料板块 invoice PMC 百分比
+PASS  [AC5] SAS650 新材料板块 invoice PMC 子条 12 等分
+PASS  [AC5] SAS650 新材料板块 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS650 新材料板块 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS650 新材料板块 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS650 新材料板块 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS650 新材料板块 invoice 设计及咨询 百分比
+PASS  [AC5] SAS650 新材料板块 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] SAS650 新材料板块 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS650 新材料板块 invoice 三行展示合计等于主卡
+PASS  [AC7] SAS650 新材料板块 invoice 子行没有新增文案
+PASS  [AC1] SAS650 新材料板块 receipt 三行顺序
+PASS  [AC2] SAS650 新材料板块 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS650 新材料板块 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS650 新材料板块 receipt EPC 百分比
+PASS  [AC5] SAS650 新材料板块 receipt EPC 子条 12 等分
+PASS  [AC5] SAS650 新材料板块 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS650 新材料板块 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS650 新材料板块 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS650 新材料板块 receipt PMC 百分比
+PASS  [AC5] SAS650 新材料板块 receipt PMC 子条 12 等分
+PASS  [AC5] SAS650 新材料板块 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS650 新材料板块 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS650 新材料板块 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS650 新材料板块 receipt 设计及咨询 百分比
+PASS  [AC5] SAS650 新材料板块 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] SAS650 新材料板块 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS650 新材料板块 receipt 三行展示合计等于主卡
+PASS  [AC7] SAS650 新材料板块 receipt 子行没有新增文案
+PASS  [AC6] SAS650 新材料板块 1440 第1行外框等高
+PASS  [AC6] SAS650 新材料板块 1440 第2行外框等高
+PASS  [AC6] SAS650 新材料板块 1440 contract 卡内无滚动裁切
+PASS  [AC6] SAS650 新材料板块 1440 contract 无省略号
+PASS  [AC6] SAS650 新材料板块 1440 contract 字形不互相遮挡
+PASS  [AC6] SAS650 新材料板块 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] SAS650 新材料板块 1440 completed 卡内无滚动裁切
+PASS  [AC6] SAS650 新材料板块 1440 completed 无省略号
+PASS  [AC6] SAS650 新材料板块 1440 completed 字形不互相遮挡
+PASS  [AC6] SAS650 新材料板块 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] SAS650 新材料板块 1440 invoice 卡内无滚动裁切
+PASS  [AC6] SAS650 新材料板块 1440 invoice 无省略号
+PASS  [AC6] SAS650 新材料板块 1440 invoice 字形不互相遮挡
+PASS  [AC6] SAS650 新材料板块 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] SAS650 新材料板块 1440 receipt 卡内无滚动裁切
+PASS  [AC6] SAS650 新材料板块 1440 receipt 无省略号
+PASS  [AC6] SAS650 新材料板块 1440 receipt 字形不互相遮挡
+PASS  [AC6] SAS650 新材料板块 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC6] SAS650 新材料板块 叶子两块整块隐藏
+PASS  [AC6] SAS650 新材料板块 叶子两块隐藏后不留大洞
+PASS  [AC3] SAS710 生命科学板块 切换后开关保持
+PASS  [AC7] SAS710 生命科学板块 四张主卡
+PASS  [AC7] SAS710 生命科学板块 contract 名称与万元
+PASS  [AC7] SAS710 生命科学板块 contract 保留目标与占总目标
+PASS  [AC7] SAS710 生命科学板块 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS710 生命科学板块 contract 主条 12 等分
+PASS  [AC5] SAS710 生命科学板块 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS710 生命科学板块 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS710 生命科学板块 completed 名称与万元
+PASS  [AC7] SAS710 生命科学板块 completed 保留目标与占总目标
+PASS  [AC7] SAS710 生命科学板块 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS710 生命科学板块 completed 主条 12 等分
+PASS  [AC5] SAS710 生命科学板块 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] SAS710 生命科学板块 completed 主条 填充不吸附到 1/12
+PASS  [AC7] SAS710 生命科学板块 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS710 生命科学板块 invoice 名称与万元
+PASS  [AC7] SAS710 生命科学板块 invoice 保留目标与占总目标
+PASS  [AC7] SAS710 生命科学板块 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS710 生命科学板块 invoice 主条 12 等分
+PASS  [AC5] SAS710 生命科学板块 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS710 生命科学板块 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS710 生命科学板块 receipt 名称与万元
+PASS  [AC7] SAS710 生命科学板块 receipt 保留目标与占总目标
+PASS  [AC7] SAS710 生命科学板块 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS710 生命科学板块 receipt 主条 12 等分
+PASS  [AC5] SAS710 生命科学板块 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS710 生命科学板块 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC1] SAS710 生命科学板块 contract 三行顺序
+PASS  [AC2] SAS710 生命科学板块 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS710 生命科学板块 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS710 生命科学板块 contract EPC 百分比
+PASS  [AC5] SAS710 生命科学板块 contract EPC 子条 12 等分
+PASS  [AC5] SAS710 生命科学板块 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS710 生命科学板块 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS710 生命科学板块 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS710 生命科学板块 contract PMC 百分比
+PASS  [AC5] SAS710 生命科学板块 contract PMC 子条 12 等分
+PASS  [AC5] SAS710 生命科学板块 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS710 生命科学板块 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS710 生命科学板块 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS710 生命科学板块 contract 设计及咨询 百分比
+PASS  [AC5] SAS710 生命科学板块 contract 设计及咨询 子条 12 等分
+PASS  [AC5] SAS710 生命科学板块 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS710 生命科学板块 contract 三行展示合计等于主卡
+PASS  [AC7] SAS710 生命科学板块 contract 子行没有新增文案
+PASS  [AC1] SAS710 生命科学板块 completed 三行顺序
+PASS  [AC2] SAS710 生命科学板块 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS710 生命科学板块 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS710 生命科学板块 completed EPC 百分比
+PASS  [AC5] SAS710 生命科学板块 completed EPC 子条 12 等分
+PASS  [AC5] SAS710 生命科学板块 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS710 生命科学板块 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS710 生命科学板块 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS710 生命科学板块 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS710 生命科学板块 completed PMC 百分比
+PASS  [AC5] SAS710 生命科学板块 completed PMC 子条 12 等分
+PASS  [AC5] SAS710 生命科学板块 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS710 生命科学板块 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS710 生命科学板块 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS710 生命科学板块 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS710 生命科学板块 completed 设计及咨询 百分比
+PASS  [AC5] SAS710 生命科学板块 completed 设计及咨询 子条 12 等分
+PASS  [AC5] SAS710 生命科学板块 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS710 生命科学板块 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] SAS710 生命科学板块 completed 三行展示合计等于主卡
+PASS  [AC7] SAS710 生命科学板块 completed 子行没有新增文案
+PASS  [AC1] SAS710 生命科学板块 invoice 三行顺序
+PASS  [AC2] SAS710 生命科学板块 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS710 生命科学板块 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS710 生命科学板块 invoice EPC 百分比
+PASS  [AC5] SAS710 生命科学板块 invoice EPC 子条 12 等分
+PASS  [AC5] SAS710 生命科学板块 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS710 生命科学板块 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS710 生命科学板块 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS710 生命科学板块 invoice PMC 百分比
+PASS  [AC5] SAS710 生命科学板块 invoice PMC 子条 12 等分
+PASS  [AC5] SAS710 生命科学板块 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS710 生命科学板块 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS710 生命科学板块 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS710 生命科学板块 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS710 生命科学板块 invoice 设计及咨询 百分比
+PASS  [AC5] SAS710 生命科学板块 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] SAS710 生命科学板块 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS710 生命科学板块 invoice 三行展示合计等于主卡
+PASS  [AC7] SAS710 生命科学板块 invoice 子行没有新增文案
+PASS  [AC1] SAS710 生命科学板块 receipt 三行顺序
+PASS  [AC2] SAS710 生命科学板块 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS710 生命科学板块 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS710 生命科学板块 receipt EPC 百分比
+PASS  [AC5] SAS710 生命科学板块 receipt EPC 子条 12 等分
+PASS  [AC5] SAS710 生命科学板块 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS710 生命科学板块 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS710 生命科学板块 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS710 生命科学板块 receipt PMC 百分比
+PASS  [AC5] SAS710 生命科学板块 receipt PMC 子条 12 等分
+PASS  [AC5] SAS710 生命科学板块 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS710 生命科学板块 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS710 生命科学板块 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS710 生命科学板块 receipt 设计及咨询 百分比
+PASS  [AC5] SAS710 生命科学板块 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] SAS710 生命科学板块 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS710 生命科学板块 receipt 三行展示合计等于主卡
+PASS  [AC7] SAS710 生命科学板块 receipt 子行没有新增文案
+PASS  [AC6] SAS710 生命科学板块 1440 第1行外框等高
+PASS  [AC6] SAS710 生命科学板块 1440 第2行外框等高
+PASS  [AC6] SAS710 生命科学板块 1440 contract 卡内无滚动裁切
+PASS  [AC6] SAS710 生命科学板块 1440 contract 无省略号
+PASS  [AC6] SAS710 生命科学板块 1440 contract 字形不互相遮挡
+PASS  [AC6] SAS710 生命科学板块 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] SAS710 生命科学板块 1440 completed 卡内无滚动裁切
+PASS  [AC6] SAS710 生命科学板块 1440 completed 无省略号
+PASS  [AC6] SAS710 生命科学板块 1440 completed 字形不互相遮挡
+PASS  [AC6] SAS710 生命科学板块 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] SAS710 生命科学板块 1440 invoice 卡内无滚动裁切
+PASS  [AC6] SAS710 生命科学板块 1440 invoice 无省略号
+PASS  [AC6] SAS710 生命科学板块 1440 invoice 字形不互相遮挡
+PASS  [AC6] SAS710 生命科学板块 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] SAS710 生命科学板块 1440 receipt 卡内无滚动裁切
+PASS  [AC6] SAS710 生命科学板块 1440 receipt 无省略号
+PASS  [AC6] SAS710 生命科学板块 1440 receipt 字形不互相遮挡
+PASS  [AC6] SAS710 生命科学板块 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC6] SAS710 生命科学板块 叶子两块整块隐藏
+PASS  [AC6] SAS710 生命科学板块 叶子两块隐藏后不留大洞
+PASS  [AC3] SAS690 COII板块 切换后开关保持
+PASS  [AC7] SAS690 COII板块 四张主卡
+PASS  [AC7] SAS690 COII板块 contract 名称与万元
+PASS  [AC7] SAS690 COII板块 contract 保留目标与占总目标
+PASS  [AC7] SAS690 COII板块 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS690 COII板块 contract 主条 12 等分
+PASS  [AC5] SAS690 COII板块 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS690 COII板块 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS690 COII板块 completed 名称与万元
+PASS  [AC7] SAS690 COII板块 completed 保留目标与占总目标
+PASS  [AC7] SAS690 COII板块 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS690 COII板块 completed 主条 12 等分
+PASS  [AC5] SAS690 COII板块 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] SAS690 COII板块 completed 主条 填充不吸附到 1/12
+PASS  [AC7] SAS690 COII板块 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS690 COII板块 invoice 名称与万元
+PASS  [AC7] SAS690 COII板块 invoice 保留目标与占总目标
+PASS  [AC7] SAS690 COII板块 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS690 COII板块 invoice 主条 12 等分
+PASS  [AC5] SAS690 COII板块 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS690 COII板块 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS690 COII板块 receipt 名称与万元
+PASS  [AC7] SAS690 COII板块 receipt 保留目标与占总目标
+PASS  [AC7] SAS690 COII板块 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS690 COII板块 receipt 主条 12 等分
+PASS  [AC5] SAS690 COII板块 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS690 COII板块 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC1] SAS690 COII板块 contract 三行顺序
+PASS  [AC2] SAS690 COII板块 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS690 COII板块 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS690 COII板块 contract EPC 百分比
+PASS  [AC5] SAS690 COII板块 contract EPC 子条 12 等分
+PASS  [AC5] SAS690 COII板块 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS690 COII板块 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS690 COII板块 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS690 COII板块 contract PMC 百分比
+PASS  [AC5] SAS690 COII板块 contract PMC 子条 12 等分
+PASS  [AC5] SAS690 COII板块 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS690 COII板块 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS690 COII板块 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS690 COII板块 contract 设计及咨询 百分比
+PASS  [AC5] SAS690 COII板块 contract 设计及咨询 子条 12 等分
+PASS  [AC5] SAS690 COII板块 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS690 COII板块 contract 三行展示合计等于主卡
+PASS  [AC7] SAS690 COII板块 contract 子行没有新增文案
+PASS  [AC1] SAS690 COII板块 completed 三行顺序
+PASS  [AC2] SAS690 COII板块 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS690 COII板块 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS690 COII板块 completed EPC 百分比
+PASS  [AC5] SAS690 COII板块 completed EPC 子条 12 等分
+PASS  [AC5] SAS690 COII板块 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS690 COII板块 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS690 COII板块 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS690 COII板块 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS690 COII板块 completed PMC 百分比
+PASS  [AC5] SAS690 COII板块 completed PMC 子条 12 等分
+PASS  [AC5] SAS690 COII板块 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS690 COII板块 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS690 COII板块 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS690 COII板块 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS690 COII板块 completed 设计及咨询 百分比
+PASS  [AC5] SAS690 COII板块 completed 设计及咨询 子条 12 等分
+PASS  [AC5] SAS690 COII板块 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS690 COII板块 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] SAS690 COII板块 completed 三行展示合计等于主卡
+PASS  [AC7] SAS690 COII板块 completed 子行没有新增文案
+PASS  [AC1] SAS690 COII板块 invoice 三行顺序
+PASS  [AC2] SAS690 COII板块 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS690 COII板块 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS690 COII板块 invoice EPC 百分比
+PASS  [AC5] SAS690 COII板块 invoice EPC 子条 12 等分
+PASS  [AC5] SAS690 COII板块 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS690 COII板块 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS690 COII板块 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS690 COII板块 invoice PMC 百分比
+PASS  [AC5] SAS690 COII板块 invoice PMC 子条 12 等分
+PASS  [AC5] SAS690 COII板块 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS690 COII板块 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS690 COII板块 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS690 COII板块 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS690 COII板块 invoice 设计及咨询 百分比
+PASS  [AC5] SAS690 COII板块 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] SAS690 COII板块 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS690 COII板块 invoice 三行展示合计等于主卡
+PASS  [AC7] SAS690 COII板块 invoice 子行没有新增文案
+PASS  [AC1] SAS690 COII板块 receipt 三行顺序
+PASS  [AC2] SAS690 COII板块 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS690 COII板块 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS690 COII板块 receipt EPC 百分比
+PASS  [AC5] SAS690 COII板块 receipt EPC 子条 12 等分
+PASS  [AC5] SAS690 COII板块 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS690 COII板块 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS690 COII板块 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS690 COII板块 receipt PMC 百分比
+PASS  [AC5] SAS690 COII板块 receipt PMC 子条 12 等分
+PASS  [AC5] SAS690 COII板块 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS690 COII板块 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS690 COII板块 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS690 COII板块 receipt 设计及咨询 百分比
+PASS  [AC5] SAS690 COII板块 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] SAS690 COII板块 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS690 COII板块 receipt 三行展示合计等于主卡
+PASS  [AC7] SAS690 COII板块 receipt 子行没有新增文案
+PASS  [AC6] SAS690 COII板块 1440 第1行外框等高
+PASS  [AC6] SAS690 COII板块 1440 第2行外框等高
+PASS  [AC6] SAS690 COII板块 1440 contract 卡内无滚动裁切
+PASS  [AC6] SAS690 COII板块 1440 contract 无省略号
+PASS  [AC6] SAS690 COII板块 1440 contract 字形不互相遮挡
+PASS  [AC6] SAS690 COII板块 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] SAS690 COII板块 1440 completed 卡内无滚动裁切
+PASS  [AC6] SAS690 COII板块 1440 completed 无省略号
+PASS  [AC6] SAS690 COII板块 1440 completed 字形不互相遮挡
+PASS  [AC6] SAS690 COII板块 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] SAS690 COII板块 1440 invoice 卡内无滚动裁切
+PASS  [AC6] SAS690 COII板块 1440 invoice 无省略号
+PASS  [AC6] SAS690 COII板块 1440 invoice 字形不互相遮挡
+PASS  [AC6] SAS690 COII板块 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] SAS690 COII板块 1440 receipt 卡内无滚动裁切
+PASS  [AC6] SAS690 COII板块 1440 receipt 无省略号
+PASS  [AC6] SAS690 COII板块 1440 receipt 字形不互相遮挡
+PASS  [AC6] SAS690 COII板块 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC6] SAS690 COII板块 叶子两块整块隐藏
+PASS  [AC6] SAS690 COII板块 叶子两块隐藏后不留大洞
+PASS  [AC3] SAS720 模块化板块 切换后开关保持
+PASS  [AC7] SAS720 模块化板块 四张主卡
+PASS  [AC7] SAS720 模块化板块 contract 名称与万元
+PASS  [AC7] SAS720 模块化板块 contract 保留目标与占总目标
+PASS  [AC7] SAS720 模块化板块 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS720 模块化板块 contract 主条 12 等分
+PASS  [AC5] SAS720 模块化板块 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS720 模块化板块 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS720 模块化板块 completed 名称与万元
+PASS  [AC7] SAS720 模块化板块 completed 保留目标与占总目标
+PASS  [AC7] SAS720 模块化板块 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS720 模块化板块 completed 主条 12 等分
+PASS  [AC5] SAS720 模块化板块 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] SAS720 模块化板块 completed 主条 填充不吸附到 1/12
+PASS  [AC7] SAS720 模块化板块 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS720 模块化板块 invoice 名称与万元
+PASS  [AC7] SAS720 模块化板块 invoice 保留目标与占总目标
+PASS  [AC7] SAS720 模块化板块 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS720 模块化板块 invoice 主条 12 等分
+PASS  [AC5] SAS720 模块化板块 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS720 模块化板块 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS720 模块化板块 receipt 名称与万元
+PASS  [AC7] SAS720 模块化板块 receipt 保留目标与占总目标
+PASS  [AC7] SAS720 模块化板块 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS720 模块化板块 receipt 主条 12 等分
+PASS  [AC5] SAS720 模块化板块 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS720 模块化板块 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC1] SAS720 模块化板块 contract 三行顺序
+PASS  [AC2] SAS720 模块化板块 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS720 模块化板块 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS720 模块化板块 contract EPC 百分比
+PASS  [AC5] SAS720 模块化板块 contract EPC 子条 12 等分
+PASS  [AC5] SAS720 模块化板块 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS720 模块化板块 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS720 模块化板块 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS720 模块化板块 contract PMC 百分比
+PASS  [AC5] SAS720 模块化板块 contract PMC 子条 12 等分
+PASS  [AC5] SAS720 模块化板块 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS720 模块化板块 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS720 模块化板块 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS720 模块化板块 contract 设计及咨询 百分比
+PASS  [AC5] SAS720 模块化板块 contract 设计及咨询 子条 12 等分
+PASS  [AC5] SAS720 模块化板块 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS720 模块化板块 contract 三行展示合计等于主卡
+PASS  [AC7] SAS720 模块化板块 contract 子行没有新增文案
+PASS  [AC1] SAS720 模块化板块 completed 三行顺序
+PASS  [AC2] SAS720 模块化板块 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS720 模块化板块 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS720 模块化板块 completed EPC 百分比
+PASS  [AC5] SAS720 模块化板块 completed EPC 子条 12 等分
+PASS  [AC5] SAS720 模块化板块 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS720 模块化板块 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS720 模块化板块 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS720 模块化板块 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS720 模块化板块 completed PMC 百分比
+PASS  [AC5] SAS720 模块化板块 completed PMC 子条 12 等分
+PASS  [AC5] SAS720 模块化板块 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS720 模块化板块 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS720 模块化板块 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS720 模块化板块 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS720 模块化板块 completed 设计及咨询 百分比
+PASS  [AC5] SAS720 模块化板块 completed 设计及咨询 子条 12 等分
+PASS  [AC5] SAS720 模块化板块 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS720 模块化板块 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] SAS720 模块化板块 completed 三行展示合计等于主卡
+PASS  [AC7] SAS720 模块化板块 completed 子行没有新增文案
+PASS  [AC1] SAS720 模块化板块 invoice 三行顺序
+PASS  [AC2] SAS720 模块化板块 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS720 模块化板块 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS720 模块化板块 invoice EPC 百分比
+PASS  [AC5] SAS720 模块化板块 invoice EPC 子条 12 等分
+PASS  [AC5] SAS720 模块化板块 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS720 模块化板块 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS720 模块化板块 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS720 模块化板块 invoice PMC 百分比
+PASS  [AC5] SAS720 模块化板块 invoice PMC 子条 12 等分
+PASS  [AC5] SAS720 模块化板块 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS720 模块化板块 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS720 模块化板块 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS720 模块化板块 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS720 模块化板块 invoice 设计及咨询 百分比
+PASS  [AC5] SAS720 模块化板块 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] SAS720 模块化板块 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS720 模块化板块 invoice 三行展示合计等于主卡
+PASS  [AC7] SAS720 模块化板块 invoice 子行没有新增文案
+PASS  [AC1] SAS720 模块化板块 receipt 三行顺序
+PASS  [AC2] SAS720 模块化板块 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS720 模块化板块 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS720 模块化板块 receipt EPC 百分比
+PASS  [AC5] SAS720 模块化板块 receipt EPC 子条 12 等分
+PASS  [AC5] SAS720 模块化板块 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS720 模块化板块 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS720 模块化板块 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS720 模块化板块 receipt PMC 百分比
+PASS  [AC5] SAS720 模块化板块 receipt PMC 子条 12 等分
+PASS  [AC5] SAS720 模块化板块 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS720 模块化板块 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS720 模块化板块 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS720 模块化板块 receipt 设计及咨询 百分比
+PASS  [AC5] SAS720 模块化板块 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] SAS720 模块化板块 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS720 模块化板块 receipt 三行展示合计等于主卡
+PASS  [AC7] SAS720 模块化板块 receipt 子行没有新增文案
+PASS  [AC6] SAS720 模块化板块 1440 第1行外框等高
+PASS  [AC6] SAS720 模块化板块 1440 第2行外框等高
+PASS  [AC6] SAS720 模块化板块 1440 contract 卡内无滚动裁切
+PASS  [AC6] SAS720 模块化板块 1440 contract 无省略号
+PASS  [AC6] SAS720 模块化板块 1440 contract 字形不互相遮挡
+PASS  [AC6] SAS720 模块化板块 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] SAS720 模块化板块 1440 completed 卡内无滚动裁切
+PASS  [AC6] SAS720 模块化板块 1440 completed 无省略号
+PASS  [AC6] SAS720 模块化板块 1440 completed 字形不互相遮挡
+PASS  [AC6] SAS720 模块化板块 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] SAS720 模块化板块 1440 invoice 卡内无滚动裁切
+PASS  [AC6] SAS720 模块化板块 1440 invoice 无省略号
+PASS  [AC6] SAS720 模块化板块 1440 invoice 字形不互相遮挡
+PASS  [AC6] SAS720 模块化板块 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] SAS720 模块化板块 1440 receipt 卡内无滚动裁切
+PASS  [AC6] SAS720 模块化板块 1440 receipt 无省略号
+PASS  [AC6] SAS720 模块化板块 1440 receipt 字形不互相遮挡
+PASS  [AC6] SAS720 模块化板块 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC6] SAS720 模块化板块 叶子两块整块隐藏
+PASS  [AC6] SAS720 模块化板块 叶子两块隐藏后不留大洞
+PASS  [AC3] SAS670 供应链板块 切换后开关保持
+PASS  [AC7] SAS670 供应链板块 四张主卡
+PASS  [AC7] SAS670 供应链板块 contract 名称与万元
+PASS  [AC7] SAS670 供应链板块 contract 保留目标与占总目标
+PASS  [AC7] SAS670 供应链板块 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS670 供应链板块 contract 主条 12 等分
+PASS  [AC5] SAS670 供应链板块 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS670 供应链板块 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS670 供应链板块 completed 名称与万元
+PASS  [AC7] SAS670 供应链板块 completed 保留目标与占总目标
+PASS  [AC7] SAS670 供应链板块 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS670 供应链板块 completed 主条 12 等分
+PASS  [AC5] SAS670 供应链板块 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] SAS670 供应链板块 completed 主条 填充不吸附到 1/12
+PASS  [AC7] SAS670 供应链板块 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS670 供应链板块 invoice 名称与万元
+PASS  [AC7] SAS670 供应链板块 invoice 保留目标与占总目标
+PASS  [AC7] SAS670 供应链板块 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS670 供应链板块 invoice 主条 12 等分
+PASS  [AC5] SAS670 供应链板块 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS670 供应链板块 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS670 供应链板块 receipt 名称与万元
+PASS  [AC7] SAS670 供应链板块 receipt 保留目标与占总目标
+PASS  [AC7] SAS670 供应链板块 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS670 供应链板块 receipt 主条 12 等分
+PASS  [AC5] SAS670 供应链板块 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS670 供应链板块 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC1] SAS670 供应链板块 contract 三行顺序
+PASS  [AC2] SAS670 供应链板块 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS670 供应链板块 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS670 供应链板块 contract EPC 百分比
+PASS  [AC5] SAS670 供应链板块 contract EPC 子条 12 等分
+PASS  [AC5] SAS670 供应链板块 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS670 供应链板块 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS670 供应链板块 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS670 供应链板块 contract PMC 百分比
+PASS  [AC5] SAS670 供应链板块 contract PMC 子条 12 等分
+PASS  [AC5] SAS670 供应链板块 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS670 供应链板块 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS670 供应链板块 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS670 供应链板块 contract 设计及咨询 百分比
+PASS  [AC5] SAS670 供应链板块 contract 设计及咨询 子条 12 等分
+PASS  [AC5] SAS670 供应链板块 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS670 供应链板块 contract 三行展示合计等于主卡
+PASS  [AC7] SAS670 供应链板块 contract 子行没有新增文案
+PASS  [AC1] SAS670 供应链板块 completed 三行顺序
+PASS  [AC2] SAS670 供应链板块 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS670 供应链板块 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS670 供应链板块 completed EPC 百分比
+PASS  [AC5] SAS670 供应链板块 completed EPC 子条 12 等分
+PASS  [AC5] SAS670 供应链板块 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS670 供应链板块 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS670 供应链板块 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS670 供应链板块 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS670 供应链板块 completed PMC 百分比
+PASS  [AC5] SAS670 供应链板块 completed PMC 子条 12 等分
+PASS  [AC5] SAS670 供应链板块 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS670 供应链板块 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS670 供应链板块 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS670 供应链板块 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS670 供应链板块 completed 设计及咨询 百分比
+PASS  [AC5] SAS670 供应链板块 completed 设计及咨询 子条 12 等分
+PASS  [AC5] SAS670 供应链板块 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS670 供应链板块 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] SAS670 供应链板块 completed 三行展示合计等于主卡
+PASS  [AC7] SAS670 供应链板块 completed 子行没有新增文案
+PASS  [AC1] SAS670 供应链板块 invoice 三行顺序
+PASS  [AC2] SAS670 供应链板块 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS670 供应链板块 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS670 供应链板块 invoice EPC 百分比
+PASS  [AC5] SAS670 供应链板块 invoice EPC 子条 12 等分
+PASS  [AC5] SAS670 供应链板块 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS670 供应链板块 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS670 供应链板块 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS670 供应链板块 invoice PMC 百分比
+PASS  [AC5] SAS670 供应链板块 invoice PMC 子条 12 等分
+PASS  [AC5] SAS670 供应链板块 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS670 供应链板块 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS670 供应链板块 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS670 供应链板块 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS670 供应链板块 invoice 设计及咨询 百分比
+PASS  [AC5] SAS670 供应链板块 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] SAS670 供应链板块 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS670 供应链板块 invoice 三行展示合计等于主卡
+PASS  [AC7] SAS670 供应链板块 invoice 子行没有新增文案
+PASS  [AC1] SAS670 供应链板块 receipt 三行顺序
+PASS  [AC2] SAS670 供应链板块 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS670 供应链板块 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS670 供应链板块 receipt EPC 百分比
+PASS  [AC5] SAS670 供应链板块 receipt EPC 子条 12 等分
+PASS  [AC5] SAS670 供应链板块 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS670 供应链板块 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS670 供应链板块 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS670 供应链板块 receipt PMC 百分比
+PASS  [AC5] SAS670 供应链板块 receipt PMC 子条 12 等分
+PASS  [AC5] SAS670 供应链板块 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS670 供应链板块 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS670 供应链板块 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS670 供应链板块 receipt 设计及咨询 百分比
+PASS  [AC5] SAS670 供应链板块 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] SAS670 供应链板块 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS670 供应链板块 receipt 三行展示合计等于主卡
+PASS  [AC7] SAS670 供应链板块 receipt 子行没有新增文案
+PASS  [AC6] SAS670 供应链板块 1440 第1行外框等高
+PASS  [AC6] SAS670 供应链板块 1440 第2行外框等高
+PASS  [AC6] SAS670 供应链板块 1440 contract 卡内无滚动裁切
+PASS  [AC6] SAS670 供应链板块 1440 contract 无省略号
+PASS  [AC6] SAS670 供应链板块 1440 contract 字形不互相遮挡
+PASS  [AC6] SAS670 供应链板块 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] SAS670 供应链板块 1440 completed 卡内无滚动裁切
+PASS  [AC6] SAS670 供应链板块 1440 completed 无省略号
+PASS  [AC6] SAS670 供应链板块 1440 completed 字形不互相遮挡
+PASS  [AC6] SAS670 供应链板块 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] SAS670 供应链板块 1440 invoice 卡内无滚动裁切
+PASS  [AC6] SAS670 供应链板块 1440 invoice 无省略号
+PASS  [AC6] SAS670 供应链板块 1440 invoice 字形不互相遮挡
+PASS  [AC6] SAS670 供应链板块 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] SAS670 供应链板块 1440 receipt 卡内无滚动裁切
+PASS  [AC6] SAS670 供应链板块 1440 receipt 无省略号
+PASS  [AC6] SAS670 供应链板块 1440 receipt 字形不互相遮挡
+PASS  [AC6] SAS670 供应链板块 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC6] SAS670 供应链板块 叶子两块整块隐藏
+PASS  [AC6] SAS670 供应链板块 叶子两块隐藏后不留大洞
+PASS  [AC3] SAS520 金山中心 切换后开关保持
+PASS  [AC7] SAS520 金山中心 四张主卡
+PASS  [AC7] SAS520 金山中心 contract 名称与万元
+PASS  [AC7] SAS520 金山中心 contract 保留目标与占总目标
+PASS  [AC7] SAS520 金山中心 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS520 金山中心 contract 主条 12 等分
+PASS  [AC5] SAS520 金山中心 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS520 金山中心 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS520 金山中心 completed 名称与万元
+PASS  [AC7] SAS520 金山中心 completed 保留目标与占总目标
+PASS  [AC7] SAS520 金山中心 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS520 金山中心 completed 主条 12 等分
+PASS  [AC5] SAS520 金山中心 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] SAS520 金山中心 completed 主条 填充不吸附到 1/12
+PASS  [AC7] SAS520 金山中心 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS520 金山中心 invoice 名称与万元
+PASS  [AC7] SAS520 金山中心 invoice 保留目标与占总目标
+PASS  [AC7] SAS520 金山中心 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS520 金山中心 invoice 主条 12 等分
+PASS  [AC5] SAS520 金山中心 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS520 金山中心 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS520 金山中心 receipt 名称与万元
+PASS  [AC7] SAS520 金山中心 receipt 保留目标与占总目标
+PASS  [AC7] SAS520 金山中心 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS520 金山中心 receipt 主条 12 等分
+PASS  [AC5] SAS520 金山中心 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS520 金山中心 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC1] SAS520 金山中心 contract 三行顺序
+PASS  [AC2] SAS520 金山中心 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS520 金山中心 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS520 金山中心 contract EPC 百分比
+PASS  [AC5] SAS520 金山中心 contract EPC 子条 12 等分
+PASS  [AC5] SAS520 金山中心 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS520 金山中心 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS520 金山中心 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS520 金山中心 contract PMC 百分比
+PASS  [AC5] SAS520 金山中心 contract PMC 子条 12 等分
+PASS  [AC5] SAS520 金山中心 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS520 金山中心 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS520 金山中心 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS520 金山中心 contract 设计及咨询 百分比
+PASS  [AC5] SAS520 金山中心 contract 设计及咨询 子条 12 等分
+PASS  [AC5] SAS520 金山中心 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS520 金山中心 contract 三行展示合计等于主卡
+PASS  [AC7] SAS520 金山中心 contract 子行没有新增文案
+PASS  [AC1] SAS520 金山中心 completed 三行顺序
+PASS  [AC2] SAS520 金山中心 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS520 金山中心 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS520 金山中心 completed EPC 百分比
+PASS  [AC5] SAS520 金山中心 completed EPC 子条 12 等分
+PASS  [AC5] SAS520 金山中心 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS520 金山中心 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS520 金山中心 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS520 金山中心 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS520 金山中心 completed PMC 百分比
+PASS  [AC5] SAS520 金山中心 completed PMC 子条 12 等分
+PASS  [AC5] SAS520 金山中心 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS520 金山中心 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS520 金山中心 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS520 金山中心 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS520 金山中心 completed 设计及咨询 百分比
+PASS  [AC5] SAS520 金山中心 completed 设计及咨询 子条 12 等分
+PASS  [AC5] SAS520 金山中心 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS520 金山中心 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] SAS520 金山中心 completed 三行展示合计等于主卡
+PASS  [AC7] SAS520 金山中心 completed 子行没有新增文案
+PASS  [AC1] SAS520 金山中心 invoice 三行顺序
+PASS  [AC2] SAS520 金山中心 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS520 金山中心 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS520 金山中心 invoice EPC 百分比
+PASS  [AC5] SAS520 金山中心 invoice EPC 子条 12 等分
+PASS  [AC5] SAS520 金山中心 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS520 金山中心 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS520 金山中心 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS520 金山中心 invoice PMC 百分比
+PASS  [AC5] SAS520 金山中心 invoice PMC 子条 12 等分
+PASS  [AC5] SAS520 金山中心 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS520 金山中心 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS520 金山中心 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS520 金山中心 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS520 金山中心 invoice 设计及咨询 百分比
+PASS  [AC5] SAS520 金山中心 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] SAS520 金山中心 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS520 金山中心 invoice 三行展示合计等于主卡
+PASS  [AC7] SAS520 金山中心 invoice 子行没有新增文案
+PASS  [AC1] SAS520 金山中心 receipt 三行顺序
+PASS  [AC2] SAS520 金山中心 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS520 金山中心 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS520 金山中心 receipt EPC 百分比
+PASS  [AC5] SAS520 金山中心 receipt EPC 子条 12 等分
+PASS  [AC5] SAS520 金山中心 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS520 金山中心 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS520 金山中心 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS520 金山中心 receipt PMC 百分比
+PASS  [AC5] SAS520 金山中心 receipt PMC 子条 12 等分
+PASS  [AC5] SAS520 金山中心 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS520 金山中心 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS520 金山中心 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS520 金山中心 receipt 设计及咨询 百分比
+PASS  [AC5] SAS520 金山中心 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] SAS520 金山中心 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS520 金山中心 receipt 三行展示合计等于主卡
+PASS  [AC7] SAS520 金山中心 receipt 子行没有新增文案
+PASS  [AC6] SAS520 金山中心 1440 第1行外框等高
+PASS  [AC6] SAS520 金山中心 1440 第2行外框等高
+PASS  [AC6] SAS520 金山中心 1440 contract 卡内无滚动裁切
+PASS  [AC6] SAS520 金山中心 1440 contract 无省略号
+PASS  [AC6] SAS520 金山中心 1440 contract 字形不互相遮挡
+PASS  [AC6] SAS520 金山中心 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] SAS520 金山中心 1440 completed 卡内无滚动裁切
+PASS  [AC6] SAS520 金山中心 1440 completed 无省略号
+PASS  [AC6] SAS520 金山中心 1440 completed 字形不互相遮挡
+PASS  [AC6] SAS520 金山中心 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] SAS520 金山中心 1440 invoice 卡内无滚动裁切
+PASS  [AC6] SAS520 金山中心 1440 invoice 无省略号
+PASS  [AC6] SAS520 金山中心 1440 invoice 字形不互相遮挡
+PASS  [AC6] SAS520 金山中心 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] SAS520 金山中心 1440 receipt 卡内无滚动裁切
+PASS  [AC6] SAS520 金山中心 1440 receipt 无省略号
+PASS  [AC6] SAS520 金山中心 1440 receipt 字形不互相遮挡
+PASS  [AC6] SAS520 金山中心 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC6] SAS520 金山中心 叶子两块整块隐藏
+PASS  [AC6] SAS520 金山中心 叶子两块隐藏后不留大洞
+PASS  [AC3] SAS560 沈阳中心 切换后开关保持
+PASS  [AC7] SAS560 沈阳中心 四张主卡
+PASS  [AC7] SAS560 沈阳中心 contract 名称与万元
+PASS  [AC7] SAS560 沈阳中心 contract 保留目标与占总目标
+PASS  [AC7] SAS560 沈阳中心 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS560 沈阳中心 contract 主条 12 等分
+PASS  [AC5] SAS560 沈阳中心 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS560 沈阳中心 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS560 沈阳中心 completed 名称与万元
+PASS  [AC7] SAS560 沈阳中心 completed 保留目标与占总目标
+PASS  [AC7] SAS560 沈阳中心 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS560 沈阳中心 completed 主条 12 等分
+PASS  [AC5] SAS560 沈阳中心 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] SAS560 沈阳中心 completed 主条 填充不吸附到 1/12
+PASS  [AC7] SAS560 沈阳中心 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS560 沈阳中心 invoice 名称与万元
+PASS  [AC7] SAS560 沈阳中心 invoice 保留目标与占总目标
+PASS  [AC7] SAS560 沈阳中心 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS560 沈阳中心 invoice 主条 12 等分
+PASS  [AC5] SAS560 沈阳中心 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS560 沈阳中心 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS560 沈阳中心 receipt 名称与万元
+PASS  [AC7] SAS560 沈阳中心 receipt 保留目标与占总目标
+PASS  [AC7] SAS560 沈阳中心 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS560 沈阳中心 receipt 主条 12 等分
+PASS  [AC5] SAS560 沈阳中心 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS560 沈阳中心 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC1] SAS560 沈阳中心 contract 三行顺序
+PASS  [AC2] SAS560 沈阳中心 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS560 沈阳中心 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS560 沈阳中心 contract EPC 百分比
+PASS  [AC5] SAS560 沈阳中心 contract EPC 子条 12 等分
+PASS  [AC5] SAS560 沈阳中心 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS560 沈阳中心 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS560 沈阳中心 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS560 沈阳中心 contract PMC 百分比
+PASS  [AC5] SAS560 沈阳中心 contract PMC 子条 12 等分
+PASS  [AC5] SAS560 沈阳中心 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS560 沈阳中心 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS560 沈阳中心 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS560 沈阳中心 contract 设计及咨询 百分比
+PASS  [AC5] SAS560 沈阳中心 contract 设计及咨询 子条 12 等分
+PASS  [AC5] SAS560 沈阳中心 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS560 沈阳中心 contract 三行展示合计等于主卡
+PASS  [AC7] SAS560 沈阳中心 contract 子行没有新增文案
+PASS  [AC1] SAS560 沈阳中心 completed 三行顺序
+PASS  [AC2] SAS560 沈阳中心 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS560 沈阳中心 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS560 沈阳中心 completed EPC 百分比
+PASS  [AC5] SAS560 沈阳中心 completed EPC 子条 12 等分
+PASS  [AC5] SAS560 沈阳中心 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS560 沈阳中心 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS560 沈阳中心 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS560 沈阳中心 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS560 沈阳中心 completed PMC 百分比
+PASS  [AC5] SAS560 沈阳中心 completed PMC 子条 12 等分
+PASS  [AC5] SAS560 沈阳中心 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS560 沈阳中心 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS560 沈阳中心 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS560 沈阳中心 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS560 沈阳中心 completed 设计及咨询 百分比
+PASS  [AC5] SAS560 沈阳中心 completed 设计及咨询 子条 12 等分
+PASS  [AC5] SAS560 沈阳中心 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS560 沈阳中心 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] SAS560 沈阳中心 completed 三行展示合计等于主卡
+PASS  [AC7] SAS560 沈阳中心 completed 子行没有新增文案
+PASS  [AC1] SAS560 沈阳中心 invoice 三行顺序
+PASS  [AC2] SAS560 沈阳中心 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS560 沈阳中心 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS560 沈阳中心 invoice EPC 百分比
+PASS  [AC5] SAS560 沈阳中心 invoice EPC 子条 12 等分
+PASS  [AC5] SAS560 沈阳中心 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS560 沈阳中心 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS560 沈阳中心 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS560 沈阳中心 invoice PMC 百分比
+PASS  [AC5] SAS560 沈阳中心 invoice PMC 子条 12 等分
+PASS  [AC5] SAS560 沈阳中心 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS560 沈阳中心 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS560 沈阳中心 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS560 沈阳中心 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS560 沈阳中心 invoice 设计及咨询 百分比
+PASS  [AC5] SAS560 沈阳中心 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] SAS560 沈阳中心 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS560 沈阳中心 invoice 三行展示合计等于主卡
+PASS  [AC7] SAS560 沈阳中心 invoice 子行没有新增文案
+PASS  [AC1] SAS560 沈阳中心 receipt 三行顺序
+PASS  [AC2] SAS560 沈阳中心 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS560 沈阳中心 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS560 沈阳中心 receipt EPC 百分比
+PASS  [AC5] SAS560 沈阳中心 receipt EPC 子条 12 等分
+PASS  [AC5] SAS560 沈阳中心 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS560 沈阳中心 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS560 沈阳中心 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS560 沈阳中心 receipt PMC 百分比
+PASS  [AC5] SAS560 沈阳中心 receipt PMC 子条 12 等分
+PASS  [AC5] SAS560 沈阳中心 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS560 沈阳中心 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS560 沈阳中心 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS560 沈阳中心 receipt 设计及咨询 百分比
+PASS  [AC5] SAS560 沈阳中心 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] SAS560 沈阳中心 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS560 沈阳中心 receipt 三行展示合计等于主卡
+PASS  [AC7] SAS560 沈阳中心 receipt 子行没有新增文案
+PASS  [AC6] SAS560 沈阳中心 1440 第1行外框等高
+PASS  [AC6] SAS560 沈阳中心 1440 第2行外框等高
+PASS  [AC6] SAS560 沈阳中心 1440 contract 卡内无滚动裁切
+PASS  [AC6] SAS560 沈阳中心 1440 contract 无省略号
+PASS  [AC6] SAS560 沈阳中心 1440 contract 字形不互相遮挡
+PASS  [AC6] SAS560 沈阳中心 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] SAS560 沈阳中心 1440 completed 卡内无滚动裁切
+PASS  [AC6] SAS560 沈阳中心 1440 completed 无省略号
+PASS  [AC6] SAS560 沈阳中心 1440 completed 字形不互相遮挡
+PASS  [AC6] SAS560 沈阳中心 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] SAS560 沈阳中心 1440 invoice 卡内无滚动裁切
+PASS  [AC6] SAS560 沈阳中心 1440 invoice 无省略号
+PASS  [AC6] SAS560 沈阳中心 1440 invoice 字形不互相遮挡
+PASS  [AC6] SAS560 沈阳中心 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] SAS560 沈阳中心 1440 receipt 卡内无滚动裁切
+PASS  [AC6] SAS560 沈阳中心 1440 receipt 无省略号
+PASS  [AC6] SAS560 沈阳中心 1440 receipt 字形不互相遮挡
+PASS  [AC6] SAS560 沈阳中心 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC6] SAS560 沈阳中心 叶子两块整块隐藏
+PASS  [AC6] SAS560 沈阳中心 叶子两块隐藏后不留大洞
+PASS  [AC3] SAS550 惠湛中心 切换后开关保持
+PASS  [AC7] SAS550 惠湛中心 四张主卡
+PASS  [AC7] SAS550 惠湛中心 contract 名称与万元
+PASS  [AC7] SAS550 惠湛中心 contract 保留目标与占总目标
+PASS  [AC7] SAS550 惠湛中心 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS550 惠湛中心 contract 主条 12 等分
+PASS  [AC5] SAS550 惠湛中心 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS550 惠湛中心 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS550 惠湛中心 completed 名称与万元
+PASS  [AC7] SAS550 惠湛中心 completed 保留目标与占总目标
+PASS  [AC7] SAS550 惠湛中心 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS550 惠湛中心 completed 主条 12 等分
+PASS  [AC5] SAS550 惠湛中心 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] SAS550 惠湛中心 completed 主条 填充不吸附到 1/12
+PASS  [AC7] SAS550 惠湛中心 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS550 惠湛中心 invoice 名称与万元
+PASS  [AC7] SAS550 惠湛中心 invoice 保留目标与占总目标
+PASS  [AC7] SAS550 惠湛中心 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS550 惠湛中心 invoice 主条 12 等分
+PASS  [AC5] SAS550 惠湛中心 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS550 惠湛中心 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS550 惠湛中心 receipt 名称与万元
+PASS  [AC7] SAS550 惠湛中心 receipt 保留目标与占总目标
+PASS  [AC7] SAS550 惠湛中心 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS550 惠湛中心 receipt 主条 12 等分
+PASS  [AC5] SAS550 惠湛中心 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS550 惠湛中心 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC1] SAS550 惠湛中心 contract 三行顺序
+PASS  [AC2] SAS550 惠湛中心 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS550 惠湛中心 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS550 惠湛中心 contract EPC 百分比
+PASS  [AC5] SAS550 惠湛中心 contract EPC 子条 12 等分
+PASS  [AC5] SAS550 惠湛中心 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS550 惠湛中心 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS550 惠湛中心 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS550 惠湛中心 contract PMC 百分比
+PASS  [AC5] SAS550 惠湛中心 contract PMC 子条 12 等分
+PASS  [AC5] SAS550 惠湛中心 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS550 惠湛中心 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS550 惠湛中心 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS550 惠湛中心 contract 设计及咨询 百分比
+PASS  [AC5] SAS550 惠湛中心 contract 设计及咨询 子条 12 等分
+PASS  [AC5] SAS550 惠湛中心 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS550 惠湛中心 contract 三行展示合计等于主卡
+PASS  [AC7] SAS550 惠湛中心 contract 子行没有新增文案
+PASS  [AC1] SAS550 惠湛中心 completed 三行顺序
+PASS  [AC2] SAS550 惠湛中心 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS550 惠湛中心 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS550 惠湛中心 completed EPC 百分比
+PASS  [AC5] SAS550 惠湛中心 completed EPC 子条 12 等分
+PASS  [AC5] SAS550 惠湛中心 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS550 惠湛中心 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS550 惠湛中心 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS550 惠湛中心 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS550 惠湛中心 completed PMC 百分比
+PASS  [AC5] SAS550 惠湛中心 completed PMC 子条 12 等分
+PASS  [AC5] SAS550 惠湛中心 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS550 惠湛中心 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS550 惠湛中心 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS550 惠湛中心 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS550 惠湛中心 completed 设计及咨询 百分比
+PASS  [AC5] SAS550 惠湛中心 completed 设计及咨询 子条 12 等分
+PASS  [AC5] SAS550 惠湛中心 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS550 惠湛中心 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] SAS550 惠湛中心 completed 三行展示合计等于主卡
+PASS  [AC7] SAS550 惠湛中心 completed 子行没有新增文案
+PASS  [AC1] SAS550 惠湛中心 invoice 三行顺序
+PASS  [AC2] SAS550 惠湛中心 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS550 惠湛中心 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS550 惠湛中心 invoice EPC 百分比
+PASS  [AC5] SAS550 惠湛中心 invoice EPC 子条 12 等分
+PASS  [AC5] SAS550 惠湛中心 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS550 惠湛中心 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS550 惠湛中心 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS550 惠湛中心 invoice PMC 百分比
+PASS  [AC5] SAS550 惠湛中心 invoice PMC 子条 12 等分
+PASS  [AC5] SAS550 惠湛中心 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS550 惠湛中心 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS550 惠湛中心 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS550 惠湛中心 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS550 惠湛中心 invoice 设计及咨询 百分比
+PASS  [AC5] SAS550 惠湛中心 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] SAS550 惠湛中心 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS550 惠湛中心 invoice 三行展示合计等于主卡
+PASS  [AC7] SAS550 惠湛中心 invoice 子行没有新增文案
+PASS  [AC1] SAS550 惠湛中心 receipt 三行顺序
+PASS  [AC2] SAS550 惠湛中心 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS550 惠湛中心 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS550 惠湛中心 receipt EPC 百分比
+PASS  [AC5] SAS550 惠湛中心 receipt EPC 子条 12 等分
+PASS  [AC5] SAS550 惠湛中心 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS550 惠湛中心 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS550 惠湛中心 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS550 惠湛中心 receipt PMC 百分比
+PASS  [AC5] SAS550 惠湛中心 receipt PMC 子条 12 等分
+PASS  [AC5] SAS550 惠湛中心 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS550 惠湛中心 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS550 惠湛中心 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS550 惠湛中心 receipt 设计及咨询 百分比
+PASS  [AC5] SAS550 惠湛中心 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] SAS550 惠湛中心 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS550 惠湛中心 receipt 三行展示合计等于主卡
+PASS  [AC7] SAS550 惠湛中心 receipt 子行没有新增文案
+PASS  [AC6] SAS550 惠湛中心 1440 第1行外框等高
+PASS  [AC6] SAS550 惠湛中心 1440 第2行外框等高
+PASS  [AC6] SAS550 惠湛中心 1440 contract 卡内无滚动裁切
+PASS  [AC6] SAS550 惠湛中心 1440 contract 无省略号
+PASS  [AC6] SAS550 惠湛中心 1440 contract 字形不互相遮挡
+PASS  [AC6] SAS550 惠湛中心 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] SAS550 惠湛中心 1440 completed 卡内无滚动裁切
+PASS  [AC6] SAS550 惠湛中心 1440 completed 无省略号
+PASS  [AC6] SAS550 惠湛中心 1440 completed 字形不互相遮挡
+PASS  [AC6] SAS550 惠湛中心 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] SAS550 惠湛中心 1440 invoice 卡内无滚动裁切
+PASS  [AC6] SAS550 惠湛中心 1440 invoice 无省略号
+PASS  [AC6] SAS550 惠湛中心 1440 invoice 字形不互相遮挡
+PASS  [AC6] SAS550 惠湛中心 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] SAS550 惠湛中心 1440 receipt 卡内无滚动裁切
+PASS  [AC6] SAS550 惠湛中心 1440 receipt 无省略号
+PASS  [AC6] SAS550 惠湛中心 1440 receipt 字形不互相遮挡
+PASS  [AC6] SAS550 惠湛中心 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC6] SAS550 惠湛中心 叶子两块整块隐藏
+PASS  [AC6] SAS550 惠湛中心 叶子两块隐藏后不留大洞
+PASS  [AC3] SAS530 银川中心 切换后开关保持
+PASS  [AC7] SAS530 银川中心 四张主卡
+PASS  [AC7] SAS530 银川中心 contract 名称与万元
+PASS  [AC7] SAS530 银川中心 contract 保留目标与占总目标
+PASS  [AC7] SAS530 银川中心 contract 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS530 银川中心 contract 主条 12 等分
+PASS  [AC5] SAS530 银川中心 contract 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS530 银川中心 contract 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS530 银川中心 completed 名称与万元
+PASS  [AC7] SAS530 银川中心 completed 保留目标与占总目标
+PASS  [AC7] SAS530 银川中心 completed 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS530 银川中心 completed 主条 12 等分
+PASS  [AC5] SAS530 银川中心 completed 主条 填充宽度按未舍入比例
+PASS  [AC5] SAS530 银川中心 completed 主条 填充不吸附到 1/12
+PASS  [AC7] SAS530 银川中心 completed 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS530 银川中心 invoice 名称与万元
+PASS  [AC7] SAS530 银川中心 invoice 保留目标与占总目标
+PASS  [AC7] SAS530 银川中心 invoice 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS530 银川中心 invoice 主条 12 等分
+PASS  [AC5] SAS530 银川中心 invoice 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS530 银川中心 invoice 新增文案与占目标 1 位或无目标
+PASS  [AC7] SAS530 银川中心 receipt 名称与万元
+PASS  [AC7] SAS530 银川中心 receipt 保留目标与占总目标
+PASS  [AC7] SAS530 银川中心 receipt 占总目标等于独立 2 位百分比
+PASS  [AC5] SAS530 银川中心 receipt 主条 12 等分
+PASS  [AC5] SAS530 银川中心 receipt 主条 填充宽度按未舍入比例
+PASS  [AC7] SAS530 银川中心 receipt 新增文案与占目标 1 位或无目标
+PASS  [AC1] SAS530 银川中心 contract 三行顺序
+PASS  [AC2] SAS530 银川中心 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS530 银川中心 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS530 银川中心 contract EPC 百分比
+PASS  [AC5] SAS530 银川中心 contract EPC 子条 12 等分
+PASS  [AC5] SAS530 银川中心 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS530 银川中心 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS530 银川中心 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS530 银川中心 contract PMC 百分比
+PASS  [AC5] SAS530 银川中心 contract PMC 子条 12 等分
+PASS  [AC5] SAS530 银川中心 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS530 银川中心 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS530 银川中心 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS530 银川中心 contract 设计及咨询 百分比
+PASS  [AC5] SAS530 银川中心 contract 设计及咨询 子条 12 等分
+PASS  [AC5] SAS530 银川中心 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS530 银川中心 contract 三行展示合计等于主卡
+PASS  [AC7] SAS530 银川中心 contract 子行没有新增文案
+PASS  [AC1] SAS530 银川中心 completed 三行顺序
+PASS  [AC2] SAS530 银川中心 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS530 银川中心 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS530 银川中心 completed EPC 百分比
+PASS  [AC5] SAS530 银川中心 completed EPC 子条 12 等分
+PASS  [AC5] SAS530 银川中心 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS530 银川中心 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS530 银川中心 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS530 银川中心 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS530 银川中心 completed PMC 百分比
+PASS  [AC5] SAS530 银川中心 completed PMC 子条 12 等分
+PASS  [AC5] SAS530 银川中心 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS530 银川中心 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS530 银川中心 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS530 银川中心 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS530 银川中心 completed 设计及咨询 百分比
+PASS  [AC5] SAS530 银川中心 completed 设计及咨询 子条 12 等分
+PASS  [AC5] SAS530 银川中心 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS530 银川中心 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] SAS530 银川中心 completed 三行展示合计等于主卡
+PASS  [AC7] SAS530 银川中心 completed 子行没有新增文案
+PASS  [AC1] SAS530 银川中心 invoice 三行顺序
+PASS  [AC2] SAS530 银川中心 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS530 银川中心 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS530 银川中心 invoice EPC 百分比
+PASS  [AC5] SAS530 银川中心 invoice EPC 子条 12 等分
+PASS  [AC5] SAS530 银川中心 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS530 银川中心 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS530 银川中心 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS530 银川中心 invoice PMC 百分比
+PASS  [AC5] SAS530 银川中心 invoice PMC 子条 12 等分
+PASS  [AC5] SAS530 银川中心 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] SAS530 银川中心 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] SAS530 银川中心 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS530 银川中心 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS530 银川中心 invoice 设计及咨询 百分比
+PASS  [AC5] SAS530 银川中心 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] SAS530 银川中心 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS530 银川中心 invoice 三行展示合计等于主卡
+PASS  [AC7] SAS530 银川中心 invoice 子行没有新增文案
+PASS  [AC1] SAS530 银川中心 receipt 三行顺序
+PASS  [AC2] SAS530 银川中心 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] SAS530 银川中心 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] SAS530 银川中心 receipt EPC 百分比
+PASS  [AC5] SAS530 银川中心 receipt EPC 子条 12 等分
+PASS  [AC5] SAS530 银川中心 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS530 银川中心 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] SAS530 银川中心 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] SAS530 银川中心 receipt PMC 百分比
+PASS  [AC5] SAS530 银川中心 receipt PMC 子条 12 等分
+PASS  [AC5] SAS530 银川中心 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS530 银川中心 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] SAS530 银川中心 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] SAS530 银川中心 receipt 设计及咨询 百分比
+PASS  [AC5] SAS530 银川中心 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] SAS530 银川中心 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] SAS530 银川中心 receipt 三行展示合计等于主卡
+PASS  [AC7] SAS530 银川中心 receipt 子行没有新增文案
+PASS  [AC6] SAS530 银川中心 1440 第1行外框等高
+PASS  [AC6] SAS530 银川中心 1440 第2行外框等高
+PASS  [AC6] SAS530 银川中心 1440 contract 卡内无滚动裁切
+PASS  [AC6] SAS530 银川中心 1440 contract 无省略号
+PASS  [AC6] SAS530 银川中心 1440 contract 字形不互相遮挡
+PASS  [AC6] SAS530 银川中心 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] SAS530 银川中心 1440 completed 卡内无滚动裁切
+PASS  [AC6] SAS530 银川中心 1440 completed 无省略号
+PASS  [AC6] SAS530 银川中心 1440 completed 字形不互相遮挡
+PASS  [AC6] SAS530 银川中心 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] SAS530 银川中心 1440 invoice 卡内无滚动裁切
+PASS  [AC6] SAS530 银川中心 1440 invoice 无省略号
+PASS  [AC6] SAS530 银川中心 1440 invoice 字形不互相遮挡
+PASS  [AC6] SAS530 银川中心 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] SAS530 银川中心 1440 receipt 卡内无滚动裁切
+PASS  [AC6] SAS530 银川中心 1440 receipt 无省略号
+PASS  [AC6] SAS530 银川中心 1440 receipt 字形不互相遮挡
+PASS  [AC6] SAS530 银川中心 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC6] SAS530 银川中心 叶子两块整块隐藏
+PASS  [AC6] SAS530 银川中心 叶子两块隐藏后不留大洞
+PASS  [AC6] 关 1440 第1行外框等高
+PASS  [AC6] 关 1440 第2行外框等高
+PASS  [AC6] 关 1440 contract 卡内无滚动裁切
+PASS  [AC6] 关 1440 contract 无省略号
+PASS  [AC6] 关 1440 contract 字形不互相遮挡
+PASS  [AC6] 关 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] 关 1440 completed 卡内无滚动裁切
+PASS  [AC6] 关 1440 completed 无省略号
+PASS  [AC6] 关 1440 completed 字形不互相遮挡
+PASS  [AC6] 关 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] 关 1440 invoice 卡内无滚动裁切
+PASS  [AC6] 关 1440 invoice 无省略号
+PASS  [AC6] 关 1440 invoice 字形不互相遮挡
+PASS  [AC6] 关 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 关 1440 receipt 卡内无滚动裁切
+PASS  [AC6] 关 1440 receipt 无省略号
+PASS  [AC6] 关 1440 receipt 字形不互相遮挡
+PASS  [AC6] 关 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC3] 关 1440 不留子行空位
+PASS  [AC6] 开 1440 第1行外框等高
+PASS  [AC6] 开 1440 第2行外框等高
+PASS  [AC6] 开 1440 contract 卡内无滚动裁切
+PASS  [AC6] 开 1440 contract 无省略号
+PASS  [AC6] 开 1440 contract 字形不互相遮挡
+PASS  [AC6] 开 1440 contract 文字未被 overflow 裁掉
+PASS  [AC6] 开 1440 completed 卡内无滚动裁切
+PASS  [AC6] 开 1440 completed 无省略号
+PASS  [AC6] 开 1440 completed 字形不互相遮挡
+PASS  [AC6] 开 1440 completed 文字未被 overflow 裁掉
+PASS  [AC6] 开 1440 invoice 卡内无滚动裁切
+PASS  [AC6] 开 1440 invoice 无省略号
+PASS  [AC6] 开 1440 invoice 字形不互相遮挡
+PASS  [AC6] 开 1440 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 开 1440 receipt 卡内无滚动裁切
+PASS  [AC6] 开 1440 receipt 无省略号
+PASS  [AC6] 开 1440 receipt 字形不互相遮挡
+PASS  [AC6] 开 1440 receipt 文字未被 overflow 裁掉
+PASS  [AC1] 开 1440 contract 三行顺序
+PASS  [AC2] 开 1440 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 1440 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 1440 contract EPC 百分比
+PASS  [AC5] 开 1440 contract EPC 子条 12 等分
+PASS  [AC5] 开 1440 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1440 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 1440 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 1440 contract PMC 百分比
+PASS  [AC5] 开 1440 contract PMC 子条 12 等分
+PASS  [AC5] 开 1440 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1440 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 1440 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 1440 contract 设计及咨询 百分比
+PASS  [AC5] 开 1440 contract 设计及咨询 子条 12 等分
+PASS  [AC5] 开 1440 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1440 contract 三行展示合计等于主卡
+PASS  [AC7] 开 1440 contract 子行没有新增文案
+PASS  [AC1] 开 1440 completed 三行顺序
+PASS  [AC2] 开 1440 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 1440 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 1440 completed EPC 百分比
+PASS  [AC5] 开 1440 completed EPC 子条 12 等分
+PASS  [AC5] 开 1440 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 1440 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 1440 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 1440 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 1440 completed PMC 百分比
+PASS  [AC5] 开 1440 completed PMC 子条 12 等分
+PASS  [AC5] 开 1440 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 1440 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 1440 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 1440 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 1440 completed 设计及咨询 百分比
+PASS  [AC5] 开 1440 completed 设计及咨询 子条 12 等分
+PASS  [AC5] 开 1440 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 1440 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] 开 1440 completed 三行展示合计等于主卡
+PASS  [AC7] 开 1440 completed 子行没有新增文案
+PASS  [AC1] 开 1440 invoice 三行顺序
+PASS  [AC2] 开 1440 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 1440 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 1440 invoice EPC 百分比
+PASS  [AC5] 开 1440 invoice EPC 子条 12 等分
+PASS  [AC5] 开 1440 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1440 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 1440 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 1440 invoice PMC 百分比
+PASS  [AC5] 开 1440 invoice PMC 子条 12 等分
+PASS  [AC5] 开 1440 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 1440 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 1440 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 1440 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 1440 invoice 设计及咨询 百分比
+PASS  [AC5] 开 1440 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] 开 1440 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1440 invoice 三行展示合计等于主卡
+PASS  [AC7] 开 1440 invoice 子行没有新增文案
+PASS  [AC1] 开 1440 receipt 三行顺序
+PASS  [AC2] 开 1440 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 1440 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 1440 receipt EPC 百分比
+PASS  [AC5] 开 1440 receipt EPC 子条 12 等分
+PASS  [AC5] 开 1440 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1440 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 1440 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 1440 receipt PMC 百分比
+PASS  [AC5] 开 1440 receipt PMC 子条 12 等分
+PASS  [AC5] 开 1440 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1440 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 1440 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 1440 receipt 设计及咨询 百分比
+PASS  [AC5] 开 1440 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] 开 1440 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1440 receipt 三行展示合计等于主卡
+PASS  [AC7] 开 1440 receipt 子行没有新增文案
+PASS  [AC6] 开 1440 展开后不低于收起高度
+PASS  [AC6] 收起后无子行空位 1440
+PASS  [AC6] 关 1280 第1行外框等高
+PASS  [AC6] 关 1280 第2行外框等高
+PASS  [AC6] 关 1280 contract 卡内无滚动裁切
+PASS  [AC6] 关 1280 contract 无省略号
+PASS  [AC6] 关 1280 contract 字形不互相遮挡
+PASS  [AC6] 关 1280 contract 文字未被 overflow 裁掉
+PASS  [AC6] 关 1280 completed 卡内无滚动裁切
+PASS  [AC6] 关 1280 completed 无省略号
+PASS  [AC6] 关 1280 completed 字形不互相遮挡
+PASS  [AC6] 关 1280 completed 文字未被 overflow 裁掉
+PASS  [AC6] 关 1280 invoice 卡内无滚动裁切
+PASS  [AC6] 关 1280 invoice 无省略号
+PASS  [AC6] 关 1280 invoice 字形不互相遮挡
+PASS  [AC6] 关 1280 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 关 1280 receipt 卡内无滚动裁切
+PASS  [AC6] 关 1280 receipt 无省略号
+PASS  [AC6] 关 1280 receipt 字形不互相遮挡
+PASS  [AC6] 关 1280 receipt 文字未被 overflow 裁掉
+PASS  [AC3] 关 1280 不留子行空位
+PASS  [AC6] 开 1280 第1行外框等高
+PASS  [AC6] 开 1280 第2行外框等高
+PASS  [AC6] 开 1280 contract 卡内无滚动裁切
+PASS  [AC6] 开 1280 contract 无省略号
+PASS  [AC6] 开 1280 contract 字形不互相遮挡
+PASS  [AC6] 开 1280 contract 文字未被 overflow 裁掉
+PASS  [AC6] 开 1280 completed 卡内无滚动裁切
+PASS  [AC6] 开 1280 completed 无省略号
+PASS  [AC6] 开 1280 completed 字形不互相遮挡
+PASS  [AC6] 开 1280 completed 文字未被 overflow 裁掉
+PASS  [AC6] 开 1280 invoice 卡内无滚动裁切
+PASS  [AC6] 开 1280 invoice 无省略号
+PASS  [AC6] 开 1280 invoice 字形不互相遮挡
+PASS  [AC6] 开 1280 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 开 1280 receipt 卡内无滚动裁切
+PASS  [AC6] 开 1280 receipt 无省略号
+PASS  [AC6] 开 1280 receipt 字形不互相遮挡
+PASS  [AC6] 开 1280 receipt 文字未被 overflow 裁掉
+PASS  [AC1] 开 1280 contract 三行顺序
+PASS  [AC2] 开 1280 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 1280 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 1280 contract EPC 百分比
+PASS  [AC5] 开 1280 contract EPC 子条 12 等分
+PASS  [AC5] 开 1280 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1280 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 1280 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 1280 contract PMC 百分比
+PASS  [AC5] 开 1280 contract PMC 子条 12 等分
+PASS  [AC5] 开 1280 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1280 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 1280 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 1280 contract 设计及咨询 百分比
+PASS  [AC5] 开 1280 contract 设计及咨询 子条 12 等分
+PASS  [AC5] 开 1280 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1280 contract 三行展示合计等于主卡
+PASS  [AC7] 开 1280 contract 子行没有新增文案
+PASS  [AC1] 开 1280 completed 三行顺序
+PASS  [AC2] 开 1280 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 1280 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 1280 completed EPC 百分比
+PASS  [AC5] 开 1280 completed EPC 子条 12 等分
+PASS  [AC5] 开 1280 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 1280 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 1280 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 1280 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 1280 completed PMC 百分比
+PASS  [AC5] 开 1280 completed PMC 子条 12 等分
+PASS  [AC5] 开 1280 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 1280 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 1280 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 1280 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 1280 completed 设计及咨询 百分比
+PASS  [AC5] 开 1280 completed 设计及咨询 子条 12 等分
+PASS  [AC5] 开 1280 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 1280 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] 开 1280 completed 三行展示合计等于主卡
+PASS  [AC7] 开 1280 completed 子行没有新增文案
+PASS  [AC1] 开 1280 invoice 三行顺序
+PASS  [AC2] 开 1280 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 1280 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 1280 invoice EPC 百分比
+PASS  [AC5] 开 1280 invoice EPC 子条 12 等分
+PASS  [AC5] 开 1280 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1280 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 1280 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 1280 invoice PMC 百分比
+PASS  [AC5] 开 1280 invoice PMC 子条 12 等分
+PASS  [AC5] 开 1280 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 1280 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 1280 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 1280 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 1280 invoice 设计及咨询 百分比
+PASS  [AC5] 开 1280 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] 开 1280 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1280 invoice 三行展示合计等于主卡
+PASS  [AC7] 开 1280 invoice 子行没有新增文案
+PASS  [AC1] 开 1280 receipt 三行顺序
+PASS  [AC2] 开 1280 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 1280 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 1280 receipt EPC 百分比
+PASS  [AC5] 开 1280 receipt EPC 子条 12 等分
+PASS  [AC5] 开 1280 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1280 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 1280 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 1280 receipt PMC 百分比
+PASS  [AC5] 开 1280 receipt PMC 子条 12 等分
+PASS  [AC5] 开 1280 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1280 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 1280 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 1280 receipt 设计及咨询 百分比
+PASS  [AC5] 开 1280 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] 开 1280 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1280 receipt 三行展示合计等于主卡
+PASS  [AC7] 开 1280 receipt 子行没有新增文案
+PASS  [AC6] 开 1280 展开后不低于收起高度
+PASS  [AC6] 收起后无子行空位 1280
+PASS  [AC6] 关 1024 第1行外框等高
+PASS  [AC6] 关 1024 第2行外框等高
+PASS  [AC6] 关 1024 contract 卡内无滚动裁切
+PASS  [AC6] 关 1024 contract 无省略号
+PASS  [AC6] 关 1024 contract 字形不互相遮挡
+PASS  [AC6] 关 1024 contract 文字未被 overflow 裁掉
+PASS  [AC6] 关 1024 completed 卡内无滚动裁切
+PASS  [AC6] 关 1024 completed 无省略号
+PASS  [AC6] 关 1024 completed 字形不互相遮挡
+PASS  [AC6] 关 1024 completed 文字未被 overflow 裁掉
+PASS  [AC6] 关 1024 invoice 卡内无滚动裁切
+PASS  [AC6] 关 1024 invoice 无省略号
+PASS  [AC6] 关 1024 invoice 字形不互相遮挡
+PASS  [AC6] 关 1024 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 关 1024 receipt 卡内无滚动裁切
+PASS  [AC6] 关 1024 receipt 无省略号
+PASS  [AC6] 关 1024 receipt 字形不互相遮挡
+PASS  [AC6] 关 1024 receipt 文字未被 overflow 裁掉
+PASS  [AC3] 关 1024 不留子行空位
+PASS  [AC6] 开 1024 第1行外框等高
+PASS  [AC6] 开 1024 第2行外框等高
+PASS  [AC6] 开 1024 contract 卡内无滚动裁切
+PASS  [AC6] 开 1024 contract 无省略号
+PASS  [AC6] 开 1024 contract 字形不互相遮挡
+PASS  [AC6] 开 1024 contract 文字未被 overflow 裁掉
+PASS  [AC6] 开 1024 completed 卡内无滚动裁切
+PASS  [AC6] 开 1024 completed 无省略号
+PASS  [AC6] 开 1024 completed 字形不互相遮挡
+PASS  [AC6] 开 1024 completed 文字未被 overflow 裁掉
+PASS  [AC6] 开 1024 invoice 卡内无滚动裁切
+PASS  [AC6] 开 1024 invoice 无省略号
+PASS  [AC6] 开 1024 invoice 字形不互相遮挡
+PASS  [AC6] 开 1024 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 开 1024 receipt 卡内无滚动裁切
+PASS  [AC6] 开 1024 receipt 无省略号
+PASS  [AC6] 开 1024 receipt 字形不互相遮挡
+PASS  [AC6] 开 1024 receipt 文字未被 overflow 裁掉
+PASS  [AC1] 开 1024 contract 三行顺序
+PASS  [AC2] 开 1024 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 1024 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 1024 contract EPC 百分比
+PASS  [AC5] 开 1024 contract EPC 子条 12 等分
+PASS  [AC5] 开 1024 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1024 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 1024 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 1024 contract PMC 百分比
+PASS  [AC5] 开 1024 contract PMC 子条 12 等分
+PASS  [AC5] 开 1024 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1024 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 1024 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 1024 contract 设计及咨询 百分比
+PASS  [AC5] 开 1024 contract 设计及咨询 子条 12 等分
+PASS  [AC5] 开 1024 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1024 contract 三行展示合计等于主卡
+PASS  [AC7] 开 1024 contract 子行没有新增文案
+PASS  [AC1] 开 1024 completed 三行顺序
+PASS  [AC2] 开 1024 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 1024 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 1024 completed EPC 百分比
+PASS  [AC5] 开 1024 completed EPC 子条 12 等分
+PASS  [AC5] 开 1024 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 1024 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 1024 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 1024 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 1024 completed PMC 百分比
+PASS  [AC5] 开 1024 completed PMC 子条 12 等分
+PASS  [AC5] 开 1024 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 1024 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 1024 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 1024 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 1024 completed 设计及咨询 百分比
+PASS  [AC5] 开 1024 completed 设计及咨询 子条 12 等分
+PASS  [AC5] 开 1024 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 1024 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] 开 1024 completed 三行展示合计等于主卡
+PASS  [AC7] 开 1024 completed 子行没有新增文案
+PASS  [AC1] 开 1024 invoice 三行顺序
+PASS  [AC2] 开 1024 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 1024 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 1024 invoice EPC 百分比
+PASS  [AC5] 开 1024 invoice EPC 子条 12 等分
+PASS  [AC5] 开 1024 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1024 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 1024 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 1024 invoice PMC 百分比
+PASS  [AC5] 开 1024 invoice PMC 子条 12 等分
+PASS  [AC5] 开 1024 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 1024 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 1024 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 1024 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 1024 invoice 设计及咨询 百分比
+PASS  [AC5] 开 1024 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] 开 1024 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1024 invoice 三行展示合计等于主卡
+PASS  [AC7] 开 1024 invoice 子行没有新增文案
+PASS  [AC1] 开 1024 receipt 三行顺序
+PASS  [AC2] 开 1024 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 1024 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 1024 receipt EPC 百分比
+PASS  [AC5] 开 1024 receipt EPC 子条 12 等分
+PASS  [AC5] 开 1024 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1024 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 1024 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 1024 receipt PMC 百分比
+PASS  [AC5] 开 1024 receipt PMC 子条 12 等分
+PASS  [AC5] 开 1024 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1024 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 1024 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 1024 receipt 设计及咨询 百分比
+PASS  [AC5] 开 1024 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] 开 1024 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 1024 receipt 三行展示合计等于主卡
+PASS  [AC7] 开 1024 receipt 子行没有新增文案
+PASS  [AC6] 开 1024 展开后不低于收起高度
+PASS  [AC6] 收起后无子行空位 1024
+PASS  [AC6] 关 760 第1行外框等高
+PASS  [AC6] 关 760 第2行外框等高
+PASS  [AC6] 关 760 contract 卡内无滚动裁切
+PASS  [AC6] 关 760 contract 无省略号
+PASS  [AC6] 关 760 contract 字形不互相遮挡
+PASS  [AC6] 关 760 contract 文字未被 overflow 裁掉
+PASS  [AC6] 关 760 completed 卡内无滚动裁切
+PASS  [AC6] 关 760 completed 无省略号
+PASS  [AC6] 关 760 completed 字形不互相遮挡
+PASS  [AC6] 关 760 completed 文字未被 overflow 裁掉
+PASS  [AC6] 关 760 invoice 卡内无滚动裁切
+PASS  [AC6] 关 760 invoice 无省略号
+PASS  [AC6] 关 760 invoice 字形不互相遮挡
+PASS  [AC6] 关 760 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 关 760 receipt 卡内无滚动裁切
+PASS  [AC6] 关 760 receipt 无省略号
+PASS  [AC6] 关 760 receipt 字形不互相遮挡
+PASS  [AC6] 关 760 receipt 文字未被 overflow 裁掉
+PASS  [AC3] 关 760 不留子行空位
+PASS  [AC6] 开 760 第1行外框等高
+PASS  [AC6] 开 760 第2行外框等高
+PASS  [AC6] 开 760 第3行外框等高
+PASS  [AC6] 开 760 第4行外框等高
+PASS  [AC6] 开 760 contract 卡内无滚动裁切
+PASS  [AC6] 开 760 contract 无省略号
+PASS  [AC6] 开 760 contract 字形不互相遮挡
+PASS  [AC6] 开 760 contract 文字未被 overflow 裁掉
+PASS  [AC6] 开 760 completed 卡内无滚动裁切
+PASS  [AC6] 开 760 completed 无省略号
+PASS  [AC6] 开 760 completed 字形不互相遮挡
+PASS  [AC6] 开 760 completed 文字未被 overflow 裁掉
+PASS  [AC6] 开 760 invoice 卡内无滚动裁切
+PASS  [AC6] 开 760 invoice 无省略号
+PASS  [AC6] 开 760 invoice 字形不互相遮挡
+PASS  [AC6] 开 760 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 开 760 receipt 卡内无滚动裁切
+PASS  [AC6] 开 760 receipt 无省略号
+PASS  [AC6] 开 760 receipt 字形不互相遮挡
+PASS  [AC6] 开 760 receipt 文字未被 overflow 裁掉
+PASS  [AC1] 开 760 contract 三行顺序
+PASS  [AC2] 开 760 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 760 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 760 contract EPC 百分比
+PASS  [AC5] 开 760 contract EPC 子条 12 等分
+PASS  [AC5] 开 760 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 760 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 760 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 760 contract PMC 百分比
+PASS  [AC5] 开 760 contract PMC 子条 12 等分
+PASS  [AC5] 开 760 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 760 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 760 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 760 contract 设计及咨询 百分比
+PASS  [AC5] 开 760 contract 设计及咨询 子条 12 等分
+PASS  [AC5] 开 760 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 760 contract 三行展示合计等于主卡
+PASS  [AC7] 开 760 contract 子行没有新增文案
+PASS  [AC1] 开 760 completed 三行顺序
+PASS  [AC2] 开 760 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 760 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 760 completed EPC 百分比
+PASS  [AC5] 开 760 completed EPC 子条 12 等分
+PASS  [AC5] 开 760 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 760 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 760 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 760 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 760 completed PMC 百分比
+PASS  [AC5] 开 760 completed PMC 子条 12 等分
+PASS  [AC5] 开 760 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 760 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 760 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 760 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 760 completed 设计及咨询 百分比
+PASS  [AC5] 开 760 completed 设计及咨询 子条 12 等分
+PASS  [AC5] 开 760 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 760 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] 开 760 completed 三行展示合计等于主卡
+PASS  [AC7] 开 760 completed 子行没有新增文案
+PASS  [AC1] 开 760 invoice 三行顺序
+PASS  [AC2] 开 760 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 760 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 760 invoice EPC 百分比
+PASS  [AC5] 开 760 invoice EPC 子条 12 等分
+PASS  [AC5] 开 760 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 760 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 760 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 760 invoice PMC 百分比
+PASS  [AC5] 开 760 invoice PMC 子条 12 等分
+PASS  [AC5] 开 760 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 760 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 760 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 760 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 760 invoice 设计及咨询 百分比
+PASS  [AC5] 开 760 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] 开 760 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 760 invoice 三行展示合计等于主卡
+PASS  [AC7] 开 760 invoice 子行没有新增文案
+PASS  [AC1] 开 760 receipt 三行顺序
+PASS  [AC2] 开 760 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 760 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 760 receipt EPC 百分比
+PASS  [AC5] 开 760 receipt EPC 子条 12 等分
+PASS  [AC5] 开 760 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 760 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 760 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 760 receipt PMC 百分比
+PASS  [AC5] 开 760 receipt PMC 子条 12 等分
+PASS  [AC5] 开 760 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 760 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 760 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 760 receipt 设计及咨询 百分比
+PASS  [AC5] 开 760 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] 开 760 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 760 receipt 三行展示合计等于主卡
+PASS  [AC7] 开 760 receipt 子行没有新增文案
+PASS  [AC6] 开 760 展开后不低于收起高度
+PASS  [AC6] 收起后无子行空位 760
+PASS  [AC6] 关 520 第1行外框等高
+PASS  [AC6] 关 520 第2行外框等高
+PASS  [AC6] 关 520 第3行外框等高
+PASS  [AC6] 关 520 第4行外框等高
+PASS  [AC6] 关 520 contract 卡内无滚动裁切
+PASS  [AC6] 关 520 contract 无省略号
+PASS  [AC6] 关 520 contract 字形不互相遮挡
+PASS  [AC6] 关 520 contract 文字未被 overflow 裁掉
+PASS  [AC6] 关 520 completed 卡内无滚动裁切
+PASS  [AC6] 关 520 completed 无省略号
+PASS  [AC6] 关 520 completed 字形不互相遮挡
+PASS  [AC6] 关 520 completed 文字未被 overflow 裁掉
+PASS  [AC6] 关 520 invoice 卡内无滚动裁切
+PASS  [AC6] 关 520 invoice 无省略号
+PASS  [AC6] 关 520 invoice 字形不互相遮挡
+PASS  [AC6] 关 520 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 关 520 receipt 卡内无滚动裁切
+PASS  [AC6] 关 520 receipt 无省略号
+PASS  [AC6] 关 520 receipt 字形不互相遮挡
+PASS  [AC6] 关 520 receipt 文字未被 overflow 裁掉
+PASS  [AC3] 关 520 不留子行空位
+PASS  [AC6] 开 520 第1行外框等高
+PASS  [AC6] 开 520 第2行外框等高
+PASS  [AC6] 开 520 第3行外框等高
+PASS  [AC6] 开 520 第4行外框等高
+PASS  [AC6] 开 520 contract 卡内无滚动裁切
+PASS  [AC6] 开 520 contract 无省略号
+PASS  [AC6] 开 520 contract 字形不互相遮挡
+PASS  [AC6] 开 520 contract 文字未被 overflow 裁掉
+PASS  [AC6] 开 520 completed 卡内无滚动裁切
+PASS  [AC6] 开 520 completed 无省略号
+PASS  [AC6] 开 520 completed 字形不互相遮挡
+PASS  [AC6] 开 520 completed 文字未被 overflow 裁掉
+PASS  [AC6] 开 520 invoice 卡内无滚动裁切
+PASS  [AC6] 开 520 invoice 无省略号
+PASS  [AC6] 开 520 invoice 字形不互相遮挡
+PASS  [AC6] 开 520 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 开 520 receipt 卡内无滚动裁切
+PASS  [AC6] 开 520 receipt 无省略号
+PASS  [AC6] 开 520 receipt 字形不互相遮挡
+PASS  [AC6] 开 520 receipt 文字未被 overflow 裁掉
+PASS  [AC1] 开 520 contract 三行顺序
+PASS  [AC2] 开 520 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 520 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 520 contract EPC 百分比
+PASS  [AC5] 开 520 contract EPC 子条 12 等分
+PASS  [AC5] 开 520 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 520 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 520 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 520 contract PMC 百分比
+PASS  [AC5] 开 520 contract PMC 子条 12 等分
+PASS  [AC5] 开 520 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 520 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 520 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 520 contract 设计及咨询 百分比
+PASS  [AC5] 开 520 contract 设计及咨询 子条 12 等分
+PASS  [AC5] 开 520 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 520 contract 三行展示合计等于主卡
+PASS  [AC7] 开 520 contract 子行没有新增文案
+PASS  [AC1] 开 520 completed 三行顺序
+PASS  [AC2] 开 520 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 520 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 520 completed EPC 百分比
+PASS  [AC5] 开 520 completed EPC 子条 12 等分
+PASS  [AC5] 开 520 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 520 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 520 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 520 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 520 completed PMC 百分比
+PASS  [AC5] 开 520 completed PMC 子条 12 等分
+PASS  [AC5] 开 520 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 520 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 520 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 520 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 520 completed 设计及咨询 百分比
+PASS  [AC5] 开 520 completed 设计及咨询 子条 12 等分
+PASS  [AC5] 开 520 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 520 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] 开 520 completed 三行展示合计等于主卡
+PASS  [AC7] 开 520 completed 子行没有新增文案
+PASS  [AC1] 开 520 invoice 三行顺序
+PASS  [AC2] 开 520 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 520 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 520 invoice EPC 百分比
+PASS  [AC5] 开 520 invoice EPC 子条 12 等分
+PASS  [AC5] 开 520 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 520 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 520 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 520 invoice PMC 百分比
+PASS  [AC5] 开 520 invoice PMC 子条 12 等分
+PASS  [AC5] 开 520 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 520 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 520 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 520 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 520 invoice 设计及咨询 百分比
+PASS  [AC5] 开 520 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] 开 520 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 520 invoice 三行展示合计等于主卡
+PASS  [AC7] 开 520 invoice 子行没有新增文案
+PASS  [AC1] 开 520 receipt 三行顺序
+PASS  [AC2] 开 520 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 520 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 520 receipt EPC 百分比
+PASS  [AC5] 开 520 receipt EPC 子条 12 等分
+PASS  [AC5] 开 520 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 520 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 520 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 520 receipt PMC 百分比
+PASS  [AC5] 开 520 receipt PMC 子条 12 等分
+PASS  [AC5] 开 520 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 520 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 520 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 520 receipt 设计及咨询 百分比
+PASS  [AC5] 开 520 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] 开 520 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 520 receipt 三行展示合计等于主卡
+PASS  [AC7] 开 520 receipt 子行没有新增文案
+PASS  [AC6] 开 520 展开后不低于收起高度
+PASS  [AC6] 收起后无子行空位 520
+PASS  [AC6] 关 312 第1行外框等高
+PASS  [AC6] 关 312 第2行外框等高
+PASS  [AC6] 关 312 第3行外框等高
+PASS  [AC6] 关 312 第4行外框等高
+PASS  [AC6] 关 312 contract 卡内无滚动裁切
+PASS  [AC6] 关 312 contract 无省略号
+PASS  [AC6] 关 312 contract 字形不互相遮挡
+PASS  [AC6] 关 312 contract 文字未被 overflow 裁掉
+PASS  [AC6] 关 312 completed 卡内无滚动裁切
+PASS  [AC6] 关 312 completed 无省略号
+PASS  [AC6] 关 312 completed 字形不互相遮挡
+PASS  [AC6] 关 312 completed 文字未被 overflow 裁掉
+PASS  [AC6] 关 312 invoice 卡内无滚动裁切
+PASS  [AC6] 关 312 invoice 无省略号
+PASS  [AC6] 关 312 invoice 字形不互相遮挡
+PASS  [AC6] 关 312 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 关 312 receipt 卡内无滚动裁切
+PASS  [AC6] 关 312 receipt 无省略号
+PASS  [AC6] 关 312 receipt 字形不互相遮挡
+PASS  [AC6] 关 312 receipt 文字未被 overflow 裁掉
+PASS  [AC3] 关 312 不留子行空位
+PASS  [AC6] 开 312 第1行外框等高
+PASS  [AC6] 开 312 第2行外框等高
+PASS  [AC6] 开 312 第3行外框等高
+PASS  [AC6] 开 312 第4行外框等高
+PASS  [AC6] 开 312 contract 卡内无滚动裁切
+PASS  [AC6] 开 312 contract 无省略号
+PASS  [AC6] 开 312 contract 字形不互相遮挡
+PASS  [AC6] 开 312 contract 文字未被 overflow 裁掉
+PASS  [AC6] 开 312 completed 卡内无滚动裁切
+PASS  [AC6] 开 312 completed 无省略号
+PASS  [AC6] 开 312 completed 字形不互相遮挡
+PASS  [AC6] 开 312 completed 文字未被 overflow 裁掉
+PASS  [AC6] 开 312 invoice 卡内无滚动裁切
+PASS  [AC6] 开 312 invoice 无省略号
+PASS  [AC6] 开 312 invoice 字形不互相遮挡
+PASS  [AC6] 开 312 invoice 文字未被 overflow 裁掉
+PASS  [AC6] 开 312 receipt 卡内无滚动裁切
+PASS  [AC6] 开 312 receipt 无省略号
+PASS  [AC6] 开 312 receipt 字形不互相遮挡
+PASS  [AC6] 开 312 receipt 文字未被 overflow 裁掉
+PASS  [AC1] 开 312 contract 三行顺序
+PASS  [AC2] 开 312 contract EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 312 contract EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 312 contract EPC 百分比
+PASS  [AC5] 开 312 contract EPC 子条 12 等分
+PASS  [AC5] 开 312 contract EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 312 contract PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 312 contract PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 312 contract PMC 百分比
+PASS  [AC5] 开 312 contract PMC 子条 12 等分
+PASS  [AC5] 开 312 contract PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 312 contract 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 312 contract 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 312 contract 设计及咨询 百分比
+PASS  [AC5] 开 312 contract 设计及咨询 子条 12 等分
+PASS  [AC5] 开 312 contract 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 312 contract 三行展示合计等于主卡
+PASS  [AC7] 开 312 contract 子行没有新增文案
+PASS  [AC1] 开 312 completed 三行顺序
+PASS  [AC2] 开 312 completed EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 312 completed EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 312 completed EPC 百分比
+PASS  [AC5] 开 312 completed EPC 子条 12 等分
+PASS  [AC5] 开 312 completed EPC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 312 completed EPC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 312 completed PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 312 completed PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 312 completed PMC 百分比
+PASS  [AC5] 开 312 completed PMC 子条 12 等分
+PASS  [AC5] 开 312 completed PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 312 completed PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 312 completed 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 312 completed 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 312 completed 设计及咨询 百分比
+PASS  [AC5] 开 312 completed 设计及咨询 子条 12 等分
+PASS  [AC5] 开 312 completed 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 312 completed 设计及咨询 子条 填充不吸附到 1/12
+PASS  [AC2] 开 312 completed 三行展示合计等于主卡
+PASS  [AC7] 开 312 completed 子行没有新增文案
+PASS  [AC1] 开 312 invoice 三行顺序
+PASS  [AC2] 开 312 invoice EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 312 invoice EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 312 invoice EPC 百分比
+PASS  [AC5] 开 312 invoice EPC 子条 12 等分
+PASS  [AC5] 开 312 invoice EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 312 invoice PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 312 invoice PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 312 invoice PMC 百分比
+PASS  [AC5] 开 312 invoice PMC 子条 12 等分
+PASS  [AC5] 开 312 invoice PMC 子条 填充宽度按未舍入比例
+PASS  [AC5] 开 312 invoice PMC 子条 填充不吸附到 1/12
+PASS  [AC2] 开 312 invoice 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 312 invoice 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 312 invoice 设计及咨询 百分比
+PASS  [AC5] 开 312 invoice 设计及咨询 子条 12 等分
+PASS  [AC5] 开 312 invoice 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 312 invoice 三行展示合计等于主卡
+PASS  [AC7] 开 312 invoice 子行没有新增文案
+PASS  [AC1] 开 312 receipt 三行顺序
+PASS  [AC2] 开 312 receipt EPC 完成额逐行等于独立余数
+PASS  [AC2] 开 312 receipt EPC 目标额逐行等于独立余数
+PASS  [AC5] 开 312 receipt EPC 百分比
+PASS  [AC5] 开 312 receipt EPC 子条 12 等分
+PASS  [AC5] 开 312 receipt EPC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 312 receipt PMC 完成额逐行等于独立余数
+PASS  [AC2] 开 312 receipt PMC 目标额逐行等于独立余数
+PASS  [AC5] 开 312 receipt PMC 百分比
+PASS  [AC5] 开 312 receipt PMC 子条 12 等分
+PASS  [AC5] 开 312 receipt PMC 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 312 receipt 设计及咨询 完成额逐行等于独立余数
+PASS  [AC2] 开 312 receipt 设计及咨询 目标额逐行等于独立余数
+PASS  [AC5] 开 312 receipt 设计及咨询 百分比
+PASS  [AC5] 开 312 receipt 设计及咨询 子条 12 等分
+PASS  [AC5] 开 312 receipt 设计及咨询 子条 填充宽度按未舍入比例
+PASS  [AC2] 开 312 receipt 三行展示合计等于主卡
+PASS  [AC7] 开 312 receipt 子行没有新增文案
+PASS  [AC6] 开 312 展开后不低于收起高度
+PASS  [AC6] 收起后无子行空位 312
+PASS  [AC5] 主题 teal CSS 变量
+PASS  [AC7] 主题 teal 主条和子条填充跟随主题
+PASS  [AC5] 主题 blue CSS 变量
+PASS  [AC7] 主题 blue 主条和子条填充跟随主题
+PASS  [AC5] 主题 wood CSS 变量
+PASS  [AC7] 主题 wood 主条和子条填充跟随主题
+PASS  [AC5] 主题切换不改 Highcharts 系列结构
+PASS  [AC5] 仅测试主条文字 13.23%
+PASS  [AC5] 仅测试 13.23% 主条落在第 2 段内部
+PASS  [AC4] 仅测试 115.68% 主条满宽且文字照实
+PASS  [AC4] 有效完成额 0.00 主卡
+PASS  [AC4] 有效完成额 0 的三行不是缺失也不是无目标
+PASS  [AC4] 主目标 0.00
+PASS  [AC4] 主目标 0 时占目标不做除法
+PASS  [AC4] SAS170 主目标 0 时三行仍是 EPC/PMC/设计及咨询且都无目标
+PASS  [AC5] 仅测试子条 13.23% 在第 2 段内部
+PASS  [AC4] 仅测试子条 115.68% 满宽
+PASS  [AC4] 仅测试有效完成额 0
+PASS  [AC4] 仅测试目标 0
+PASS  [AC4] 缺失行是破折号，不能当成 0.00 做合计
+PASS  [AC4] 缺失且目标已知为 0
+PASS  [AC4] 把缺失当成 0 去加总会被独立解析拒绝
+PASS  [AC3] 刷新后开关回到关且无子行
+PASS  [AC3] 刷新后组织回到默认全部板块
+verdict=PASS pass=2377 fail=0
+PAGE_EXIT:0

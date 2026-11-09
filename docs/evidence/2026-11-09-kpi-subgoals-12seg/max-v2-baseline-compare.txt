@@ -1,0 +1,19 @@
+v2 基线对照。worktree /tmp/max-baseline-232cadf
+HEAD=232cadfe0dfff742561491b71cdd977047bbc9c7
+node_modules 为指向补丁树 node_modules 的符号链接。package.json 与 package-lock.json 与补丁树 cmp 相同（本次补丁不改依赖）。
+补丁树与基线使用同一套命令、同一次会话。
+
+命令与退出码
+- 基线 npx tsc --noEmit          退出码 2    error TS 73
+- 补丁树 npx tsc --noEmit        退出码 2    error TS 73
+- 基线 npm run lint              退出码 1    Error: 93
+- 补丁树 npm run lint            退出码 1    Error: 93
+- 基线 node scripts/test-yinchuan-ui.cjs   退出码 1
+- 补丁树 node scripts/test-yinchuan-ui.cjs 退出码 1
+
+签名
+- tsc 的 error TS 行排序后完全相同（73=73）
+- lint 的「文件:行:列 Error: 消息」排序后完全相同（93=93）
+- 银川两边都是 TypeError: Vue.component is not a function，栈顶都是 evalmachine.<anonymous>:896 的 Vue.component('yc-formula-page'。脚本路径不同只因为 worktree 路径不同。
+
+结论：这三项在精确基线上已经以相同签名失败。不是仅凭路径不相交作出的推断。不影响本次 AC1–7。
