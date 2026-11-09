@@ -1,0 +1,920 @@
+{
+  "probe": "max-shell-peer-row-height",
+  "commit": "69bbce5db6b5cf8029e68ff5f6c5d01a8b8ef272",
+  "url": "http://127.0.0.1:3456/operations-dashboard-202610/board",
+  "measuredAt": "2026-11-06T09:06:43.576Z",
+  "verdict": "FAIL",
+  "issueCount": 1,
+  "issues": [
+    {
+      "ac": "正文未被裁切",
+      "ctx": "shell-width-760",
+      "detail": {
+        "zone": "pair",
+        "row": 1,
+        "clips": [
+          {
+            "text": "（万元）",
+            "dx": 43.5,
+            "dy": -14.5,
+            "clipper": "contributionPanel"
+          },
+          {
+            "text": "?",
+            "dx": 56.3,
+            "dy": -17.1,
+            "clipper": "contributionPanel"
+          }
+        ]
+      }
+    }
+  ],
+  "header": "全局看板 > 运营看板 > Board",
+  "desktop": {
+    "rows": [
+      {
+        "zone": "kpi",
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          109.9,
+          109.9
+        ],
+        "minInkSlack": 14.9,
+        "maxInkSlack": 14.9,
+        "clips": 0
+      },
+      {
+        "zone": "kpi",
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          109.9,
+          109.9
+        ],
+        "minInkSlack": 14.9,
+        "maxInkSlack": 14.9,
+        "clips": 0
+      },
+      {
+        "zone": "cash",
+        "n": 3,
+        "spread": 0,
+        "heights": [
+          83.5,
+          83.5,
+          83.5
+        ],
+        "minInkSlack": 2.9,
+        "maxInkSlack": 2.9,
+        "clips": 0
+      },
+      {
+        "zone": "risk",
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          92.9,
+          92.9
+        ],
+        "minInkSlack": 2.4,
+        "maxInkSlack": 2.4,
+        "clips": 0
+      },
+      {
+        "zone": "risk",
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          92.9,
+          92.9
+        ],
+        "minInkSlack": 2.4,
+        "maxInkSlack": 2.4,
+        "clips": 0
+      },
+      {
+        "zone": "pair",
+        "n": 2,
+        "spread": 0,
+        "heights": [
+          426.9,
+          426.9
+        ],
+        "minInkSlack": 2.4,
+        "maxInkSlack": 54.6,
+        "clips": 0
+      }
+    ],
+    "delivery": {
+      "h": 268.3,
+      "w": 945,
+      "widthShare": 1,
+      "flexGrow": "0",
+      "columns": [
+        {
+          "cls": "delivery-left",
+          "h": 210,
+          "w": 226.3,
+          "top": 1421.9
+        },
+        {
+          "cls": "delivery-mid",
+          "h": 210,
+          "w": 452.5,
+          "top": 1421.9
+        },
+        {
+          "cls": "delivery-right",
+          "h": 210,
+          "w": 226.3,
+          "top": 1421.9
+        }
+      ],
+      "widthRatio": [
+        1,
+        2,
+        1
+      ],
+      "heightSpread": 0,
+      "inkSlack": 3.8
+    },
+    "pair": {
+      "display": "grid",
+      "dataVisible": "true",
+      "hidden": false,
+      "height": 426.9
+    },
+    "note": {
+      "text": "新签合同额年度目标达成率 · 全部板块（12）· 按完成率降序",
+      "whiteSpace": "normal",
+      "overflow": "visible",
+      "textOverflow": "clip",
+      "lineRects": 1,
+      "scrollWidth": 444,
+      "clientWidth": 444,
+      "clippedX": false
+    },
+    "gaps": [
+      {
+        "from": "kpiGrid",
+        "to": "cashPanel",
+        "px": 10
+      },
+      {
+        "from": "cashPanel",
+        "to": "riskPanel",
+        "px": 10
+      },
+      {
+        "from": "riskPanel",
+        "to": "pairRow",
+        "px": 10.1
+      },
+      {
+        "from": "pairRow",
+        "to": "deliveryPanel",
+        "px": 9.9
+      },
+      {
+        "from": "deliveryPanel",
+        "to": "alertPanel",
+        "px": 10
+      },
+      {
+        "from": "alertPanel",
+        "to": "footer",
+        "px": 10.1
+      }
+    ]
+  },
+  "leaf": {
+    "header": "全局看板 > 运营看板 > SAS530 银川中心",
+    "pair": {
+      "display": "none",
+      "dataVisible": "false",
+      "hidden": true,
+      "height": 0
+    },
+    "between": 10,
+    "gap": 10
+  },
+  "sweep": [
+    {
+      "width": 1200,
+      "iframe": 752,
+      "cols": {
+        "kpi": "2",
+        "cash": "3",
+        "risk": "2",
+        "pair": "2"
+      },
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            109.9,
+            109.9
+          ],
+          "minInkSlack": 14.9
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            109.9,
+            109.9
+          ],
+          "minInkSlack": 14.9
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0,
+          "heights": [
+            83.5,
+            83.5,
+            83.5
+          ],
+          "minInkSlack": 2.9
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "minInkSlack": 2.4
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "minInkSlack": 2.4
+        },
+        {
+          "zone": "pair",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            452.1,
+            452.1
+          ],
+          "minInkSlack": 2.4
+        }
+      ],
+      "delivery": {
+        "h": 268.3,
+        "widthShare": 0.9,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "width": 960,
+      "iframe": 512,
+      "cols": {
+        "kpi": "1",
+        "cash": "2",
+        "risk": "2",
+        "pair": "2"
+      },
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            109.9
+          ],
+          "minInkSlack": 14.9
+        },
+        {
+          "zone": "kpi",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            109.9
+          ],
+          "minInkSlack": 14.9
+        },
+        {
+          "zone": "kpi",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            109.9
+          ],
+          "minInkSlack": 14.9
+        },
+        {
+          "zone": "kpi",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            109.9
+          ],
+          "minInkSlack": 14.9
+        },
+        {
+          "zone": "cash",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            83.5,
+            83.5
+          ],
+          "minInkSlack": 2.9
+        },
+        {
+          "zone": "cash",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            83.5
+          ],
+          "minInkSlack": 2.9
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "minInkSlack": 2.4
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            92.9,
+            92.9
+          ],
+          "minInkSlack": 2.4
+        },
+        {
+          "zone": "pair",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            467.5,
+            467.5
+          ],
+          "minInkSlack": 2.4
+        }
+      ],
+      "delivery": {
+        "h": 268.3,
+        "widthShare": 0.9,
+        "flexGrow": "0"
+      }
+    },
+    {
+      "width": 760,
+      "iframe": 312,
+      "cols": {
+        "kpi": "1",
+        "cash": "1",
+        "risk": "1",
+        "pair": "2"
+      },
+      "rows": [
+        {
+          "zone": "kpi",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            109.9
+          ],
+          "minInkSlack": 14.9
+        },
+        {
+          "zone": "kpi",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            109.9
+          ],
+          "minInkSlack": 14.9
+        },
+        {
+          "zone": "kpi",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            109.9
+          ],
+          "minInkSlack": 14.9
+        },
+        {
+          "zone": "kpi",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            109.9
+          ],
+          "minInkSlack": 14.9
+        },
+        {
+          "zone": "cash",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            83.5
+          ],
+          "minInkSlack": 2.9
+        },
+        {
+          "zone": "cash",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            83.5
+          ],
+          "minInkSlack": 2.9
+        },
+        {
+          "zone": "cash",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            83.5
+          ],
+          "minInkSlack": 2.9
+        },
+        {
+          "zone": "risk",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            92.9
+          ],
+          "minInkSlack": 2.4
+        },
+        {
+          "zone": "risk",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            92.9
+          ],
+          "minInkSlack": 2.4
+        },
+        {
+          "zone": "risk",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            92.9
+          ],
+          "minInkSlack": 2.4
+        },
+        {
+          "zone": "risk",
+          "n": 1,
+          "spread": 0,
+          "heights": [
+            92.9
+          ],
+          "minInkSlack": 2.4
+        },
+        {
+          "zone": "pair",
+          "n": 2,
+          "spread": 0,
+          "heights": [
+            548.6,
+            548.6
+          ],
+          "minInkSlack": 2.4
+        }
+      ],
+      "delivery": {
+        "h": 283.6,
+        "widthShare": 0.8,
+        "flexGrow": "0"
+      }
+    }
+  ],
+  "unitChecks": [
+    {
+      "unit": "SAS170 PMC板块",
+      "header": "全局看板 > 运营看板 > SAS170 PMC板块",
+      "pairDisplay": "none",
+      "between": 10,
+      "gap": 10,
+      "spreads": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        }
+      ]
+    },
+    {
+      "unit": "SAS610 咨询板块",
+      "header": "全局看板 > 运营看板 > SAS610 咨询板块",
+      "pairDisplay": "none",
+      "between": 10,
+      "gap": 10,
+      "spreads": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        }
+      ]
+    },
+    {
+      "unit": "SAS680 数字技术板块",
+      "header": "全局看板 > 运营看板 > SAS680 数字技术板块",
+      "pairDisplay": "none",
+      "between": 10,
+      "gap": 10,
+      "spreads": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        }
+      ]
+    },
+    {
+      "unit": "SAS650 新材料板块",
+      "header": "全局看板 > 运营看板 > SAS650 新材料板块",
+      "pairDisplay": "none",
+      "between": 10,
+      "gap": 10,
+      "spreads": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        }
+      ]
+    },
+    {
+      "unit": "SAS710 生命科学板块",
+      "header": "全局看板 > 运营看板 > SAS710 生命科学板块",
+      "pairDisplay": "none",
+      "between": 10,
+      "gap": 10,
+      "spreads": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        }
+      ]
+    },
+    {
+      "unit": "SAS690 COII板块",
+      "header": "全局看板 > 运营看板 > SAS690 COII板块",
+      "pairDisplay": "none",
+      "between": 10,
+      "gap": 10,
+      "spreads": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        }
+      ]
+    },
+    {
+      "unit": "SAS720 模块化板块",
+      "header": "全局看板 > 运营看板 > SAS720 模块化板块",
+      "pairDisplay": "none",
+      "between": 10,
+      "gap": 10,
+      "spreads": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        }
+      ]
+    },
+    {
+      "unit": "SAS670 供应链板块",
+      "header": "全局看板 > 运营看板 > SAS670 供应链板块",
+      "pairDisplay": "none",
+      "between": 10,
+      "gap": 10,
+      "spreads": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        }
+      ]
+    },
+    {
+      "unit": "SAS520 金山中心",
+      "header": "全局看板 > 运营看板 > SAS520 金山中心",
+      "pairDisplay": "none",
+      "between": 10,
+      "gap": 10,
+      "spreads": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        }
+      ]
+    },
+    {
+      "unit": "SAS560 沈阳中心",
+      "header": "全局看板 > 运营看板 > SAS560 沈阳中心",
+      "pairDisplay": "none",
+      "between": 10,
+      "gap": 10,
+      "spreads": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        }
+      ]
+    },
+    {
+      "unit": "SAS550 惠湛中心",
+      "header": "全局看板 > 运营看板 > SAS550 惠湛中心",
+      "pairDisplay": "none",
+      "between": 10,
+      "gap": 10,
+      "spreads": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        }
+      ]
+    },
+    {
+      "unit": "SAS530 银川中心",
+      "header": "全局看板 > 运营看板 > SAS530 银川中心",
+      "pairDisplay": "none",
+      "between": 10,
+      "gap": 10,
+      "spreads": [
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "kpi",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "cash",
+          "n": 3,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        },
+        {
+          "zone": "risk",
+          "n": 2,
+          "spread": 0
+        }
+      ]
+    }
+  ]
+}
