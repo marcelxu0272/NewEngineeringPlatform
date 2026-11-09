@@ -271,8 +271,8 @@ main{
   min-width:0!important;
   width:auto!important; /* 列宽由等分网格决定，避免内容撑破 */
   max-width:100%!important;
-  height:100%!important;
-  min-height:0!important;
+  height:auto!important; /* 外框随该行内容最高者，不用固定高去裁正文 */
+  min-height:min-content!important;
   max-height:none!important;
   align-self:stretch!important;
   overflow:hidden!important;
@@ -281,6 +281,17 @@ main{
 .pair-row .panel-head{
   min-width:0!important;
   max-width:100%!important;
+}
+.pair-row .segment{
+  flex-shrink:1!important;
+  flex-wrap:wrap!important;
+  max-width:100%!important;
+}
+#targetNote{
+  white-space:normal!important;
+  overflow:visible!important;
+  text-overflow:clip!important;
+  height:auto!important;
 }
 .pair-row .table-wrap{
   flex:1 1 auto!important;
@@ -904,13 +915,119 @@ main{grid-row:1!important;grid-column:1!important}
     }
     row.setAttribute('data-visible', show?'true':'false');
   }
+  /* 经营全景同行：列数跟着放不下的正文收，外框仍由网格按该行最高内容拉齐。
+     成对行另外要求标题（含单位、说明按钮）和柱端数字都落在卡片内；放不下就收成 1 列，再按新行拉齐。 */
+  function syncPeerRows(){
+    const specs=[
+      {root:$('kpiGrid'),prefer:2,sel:':scope > .kpi-card'},
+      {root:$('cashMetrics'),prefer:3,sel:':scope > .cash-metric'},
+      {root:$('riskMetrics'),prefer:2,sel:':scope > .risk-metric'},
+      {root:$('pairRow'),prefer:2,sel:':scope > .panel'}
+    ];
+    const textWidth=node=>{
+      const range=document.createRange();
+      range.selectNodeContents(node);
+      return range.getBoundingClientRect().width;
+    };
+    const titleIntrinsic=title=>{
+      const probe=title.cloneNode(true);
+      probe.setAttribute('aria-hidden','true');
+      probe.style.position='absolute';
+      probe.style.visibility='hidden';
+      probe.style.pointerEvents='none';
+      probe.style.width='max-content';
+      probe.style.minWidth='max-content';
+      probe.style.maxWidth='none';
+      probe.style.whiteSpace='nowrap';
+      (title.parentElement||document.body).appendChild(probe);
+      const w=Math.ceil(probe.getBoundingClientRect().width);
+      probe.remove();
+      return w;
+    };
+    const minContentWidth=el=>{
+      const cs=getComputedStyle(el);
+      const pad=(parseFloat(cs.paddingLeft)||0)+(parseFloat(cs.paddingRight)||0);
+      const border=(parseFloat(cs.borderLeftWidth)||0)+(parseFloat(cs.borderRightWidth)||0);
+      let text=0;
+      el.querySelectorAll('.segment button').forEach(n=>{text=Math.max(text,n.getBoundingClientRect().width);});
+      el.querySelectorAll('.kpi-value, strong').forEach(n=>{
+        if(n.closest('.segment')||n.closest('svg'))return;
+        text=Math.max(text,textWidth(n));
+      });
+      el.querySelectorAll('.panel-title').forEach(n=>{text=Math.max(text,titleIntrinsic(n));});
+      const icon=el.querySelector(':scope > .mini-icon, :scope > .kpi-icon');
+      const iconW=icon?icon.getBoundingClientRect().width:0;
+      const gap=icon?(parseFloat(cs.columnGap||cs.gap)||8):0;
+      const delta=el.querySelector(':scope > .kpi-delta');
+      const deltaW=delta?delta.getBoundingClientRect().width+8:0;
+      return Math.ceil(text+iconW+gap+deltaW+pad+border+2);
+    };
+    specs.forEach(spec=>{
+      const root=spec.root;
+      if(!root)return;
+      const hidden=root.hidden||getComputedStyle(root).display==='none';
+      if(hidden){
+        root.style.removeProperty('grid-template-columns');
+        delete root.dataset.peerCols;
+        return;
+      }
+      const items=[...root.querySelectorAll(spec.sel)];
+      if(!items.length)return;
+      const avail=root.clientWidth;
+      if(avail<8)return;
+      const gap=parseFloat(getComputedStyle(root).columnGap)||0;
+      const minW=Math.max(1,...items.map(minContentWidth));
+      let cols=Math.min(spec.prefer,items.length);
+      while(cols>1&&(cols*minW+(cols-1)*gap)>avail+1)cols-=1;
+      root.style.setProperty('grid-template-columns','repeat('+cols+',minmax(0,1fr))','important');
+      root.dataset.peerCols=String(cols);
+    });
+  }
+  function hOutside(node,host,tol){
+    if(!node||!host)return false;
+    const b=node.getBoundingClientRect();
+    const h=host.getBoundingClientRect();
+    if(b.width<0.5)return false;
+    return b.left<h.left-tol||b.right>h.right+tol;
+  }
+  /* 两列时标题或柱端数字仍被裁，就收成一列。列数变化后由网格按新行重算外框高度。 */
+  function relaxPairRow(){
+    const root=$('pairRow');
+    if(!root||root.hidden||getComputedStyle(root).display==='none')return false;
+    const cols=Number(root.dataset.peerCols||0);
+    if(cols<=1)return false;
+    const tol=1;
+    const clips=[...root.querySelectorAll(':scope > .panel')].some(panel=>{
+      if(panel.scrollWidth>panel.clientWidth+tol)return true;
+      const title=panel.querySelector('.panel-title');
+      if(title&&title.scrollWidth>title.clientWidth+tol)return true;
+      if(title&&[...title.querySelectorAll('.unit, .info-button, svg')].some(n=>hOutside(n,panel,tol)))return true;
+      return [...panel.querySelectorAll('.highcharts-data-label')].some(lab=>hOutside(lab,lab.closest('.chart')||panel,tol));
+    });
+    if(!clips)return false;
+    root.style.setProperty('grid-template-columns','minmax(0,1fr)','important');
+    root.dataset.peerCols='1';
+    return true;
+  }
+  /* reflow() 用 setTimeout 延后 setSize，紧接着量柱端数字会读到旧坐标。这里同步缩放到容器。 */
+  function reflowCharts(){
+    Object.values(charts).forEach(c=>{
+      if(!c||!c.container||!c.container.offsetWidth)return;
+      c.setSize(undefined,undefined,false);
+    });
+  }
+  function applyPeerLayout(){
+    syncPeerRows();
+    reflowCharts();
+    if(relaxPairRow())reflowCharts();
+  }
   function render(){
     hideTooltip();model=buildModel();const asofEl=$('asofDate');if(asofEl)asofEl.textContent=`${state.year}-08-31`;
     syncPairRowVisibility();renderKpis();renderCash();renderRisk();if(state.unit==='全部板块'){renderContribution();renderTargets();}renderDelivery();renderAlerts();
     
     document.querySelectorAll('[data-contribution-dim]').forEach(b=>b.classList.toggle('active',b.dataset.contributionDim===state.dimension));
     document.querySelectorAll('[data-target-metric]').forEach(b=>b.classList.toggle('active',b.dataset.targetMetric===state.target));
-    document.body.dataset.ready='true';window.dashboard={state,model,charts,THEMES,DEMO_DATA,METRICS};
+    applyPeerLayout();document.body.dataset.ready='true';window.dashboard={state,model,charts,THEMES,DEMO_DATA,METRICS};
   }
   function toast(message){$('toast').textContent=message;$('toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('toast').classList.remove('show'),2600);}
   function showDialog(title,content,footer='数据为交互演示样例，金额单位：万元。'){
@@ -936,7 +1053,7 @@ main{grid-row:1!important;grid-column:1!important}
     if(b.dataset.kpi)openKpi(b.dataset.kpi);
     
     else if(b.dataset.contributionDim){state.dimension=b.dataset.contributionDim;render();}
-    else if(b.dataset.targetMetric){state.target=b.dataset.targetMetric;document.querySelectorAll('[data-target-metric]').forEach(x=>x.classList.toggle('active',x.dataset.targetMetric===state.target));renderTargets();return;}
+    else if(b.dataset.targetMetric){state.target=b.dataset.targetMetric;document.querySelectorAll('[data-target-metric]').forEach(x=>x.classList.toggle('active',x.dataset.targetMetric===state.target));renderTargets();applyPeerLayout();return;}
     else if(b.dataset.cashDetail!==undefined)openCash();
     else if(b.dataset.risk!==undefined){const i=+b.dataset.risk;const amts=[model.receivables,model.wip,model.inventory,null];const labels=['应收账款','WIP','存货','营业收入'];const body=`<p class="dialog-description">${b.dataset.tip}</p>`+(i<3?`<div class="dialog-stats"><div><span>当前金额</span><strong>${money(amts[i])}</strong></div></div>`:'');showDialog(labels[i]+' · 指标说明',body);}
     else if(b.dataset.row)openDepartment(b.dataset.row);
@@ -978,7 +1095,7 @@ main{grid-row:1!important;grid-column:1!important}
     if(d.type==='ops-dashboard-filter')applyHostFilter(d);
   });
   $('detailDialog').addEventListener('click',e=>{if(e.target===$('detailDialog')){const r=e.target.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)e.target.close();}});
-  window.addEventListener('resize',()=>{hideTooltip();clearTimeout(window.resizeTimer);window.resizeTimer=setTimeout(()=>Object.values(charts).forEach(c=>c.reflow()),80);});
+  window.addEventListener('resize',()=>{hideTooltip();clearTimeout(window.resizeTimer);window.resizeTimer=setTimeout(()=>{applyPeerLayout();},80);});
   const themeFromQuery=new URLSearchParams(location.search).get('theme');
   setTheme(themeFromQuery&&THEMES[themeFromQuery]?themeFromQuery:'blue');
   render();
