@@ -1,0 +1,70 @@
+TAP version 13
+# Subtest: 展示金额换 0.01 万元整数并写回千分位
+ok 1 - 展示金额换 0.01 万元整数并写回千分位
+  ---
+  duration_ms: 1.422823
+  type: 'test'
+  ...
+# Subtest: 验算例：主额 1.00、仅测试权重 1:1:1 → 0.34 / 0.33 / 0.33
+ok 2 - 验算例：主额 1.00、仅测试权重 1:1:1 → 0.34 / 0.33 / 0.33
+  ---
+  duration_ms: 0.734537
+  type: 'test'
+  ...
+# Subtest: 余数按精确小数部分从大到小，平手按 EPC、PMC、设计及咨询
+ok 3 - 余数按精确小数部分从大到小，平手按 EPC、PMC、设计及咨询
+  ---
+  duration_ms: 0.216082
+  type: 'test'
+  ...
+# Subtest: 权重必须是 3 个正整数
+ok 4 - 权重必须是 3 个正整数
+  ---
+  duration_ms: 0.160926
+  type: 'test'
+  ...
+# Subtest: 仅测试正权重 × 不能整除金额：合计严格相等，余数规则成立
+ok 5 - 仅测试正权重 × 不能整除金额：合计严格相等，余数规则成立
+  ---
+  duration_ms: 29.158826
+  type: 'test'
+  ...
+# Subtest: 完成额与目标额分开拆，余数不互相挪；类别顺序固定
+ok 6 - 完成额与目标额分开拆，余数不互相挪；类别顺序固定
+  ---
+  duration_ms: 0.38009
+  type: 'test'
+  ...
+# Subtest: 百分比文字四舍五入 2 位；目标为 0 不除
+ok 7 - 百分比文字四舍五入 2 位；目标为 0 不除
+  ---
+  duration_ms: 0.163757
+  type: 'test'
+  ...
+# Subtest: 轨道填充用未舍入比例、上限 100%，不吸附到 1/12
+ok 8 - 轨道填充用未舍入比例、上限 100%，不吸附到 1/12
+  ---
+  duration_ms: 0.109525
+  type: 'test'
+  ...
+# Subtest: 行视图：有效 0、无目标、缺失彼此区分
+ok 9 - 行视图：有效 0、无目标、缺失彼此区分
+  ---
+  duration_ms: 0.334128
+  type: 'test'
+  ...
+# Subtest: HTML：12 刻度轨道、三行顺序、无新增文案、无目标标记
+ok 10 - HTML：12 刻度轨道、三行顺序、无新增文案、无目标标记
+  ---
+  duration_ms: 0.616805
+  type: 'test'
+  ...
+1..10
+# tests 10
+# suites 0
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 85.484721

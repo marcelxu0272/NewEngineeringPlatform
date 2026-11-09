@@ -1,0 +1,1642 @@
+{
+  "url": "http://127.0.0.1:3000/operations-dashboard-202610/board",
+  "verdict": "PASS",
+  "selfTest": true,
+  "notMaxAcceptance": true,
+  "fails": [],
+  "results": [
+    {
+      "name": "壳 进入页面开关为关且无子行空内容",
+      "ok": true,
+      "detail": {
+        "unit": "全部板块",
+        "theme": "blue",
+        "checked": "false",
+        "subRows": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "cats": [
+          "",
+          "",
+          "",
+          ""
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [
+          {
+            "n": 2,
+            "delta": 0,
+            "h": [
+              426.9,
+              426.9
+            ]
+          }
+        ],
+        "noteClip": false,
+        "pair": "grid",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 可见演示标记",
+      "ok": true,
+      "detail": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+    },
+    {
+      "name": "壳 全部板块 开关保持且三行齐全",
+      "ok": true,
+      "detail": {
+        "unit": "全部板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [
+          {
+            "n": 2,
+            "delta": 0,
+            "h": [
+              426.9,
+              426.9
+            ]
+          }
+        ],
+        "noteClip": false,
+        "pair": "grid",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 全部板块 同行等高且金额类别百分比在卡内、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "全部板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [
+          {
+            "n": 2,
+            "delta": 0,
+            "h": [
+              426.9,
+              426.9
+            ]
+          }
+        ],
+        "noteClip": false,
+        "pair": "grid",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS170 PMC板块 开关保持且三行齐全",
+      "ok": true,
+      "detail": {
+        "unit": "SAS170 PMC板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS170 PMC板块 同行等高且金额类别百分比在卡内、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "SAS170 PMC板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS170 PMC板块 成对模块整块隐藏",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "壳 SAS610 咨询板块 开关保持且三行齐全",
+      "ok": true,
+      "detail": {
+        "unit": "SAS610 咨询板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS610 咨询板块 同行等高且金额类别百分比在卡内、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "SAS610 咨询板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS610 咨询板块 成对模块整块隐藏",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "壳 SAS680 数字技术板块 开关保持且三行齐全",
+      "ok": true,
+      "detail": {
+        "unit": "SAS680 数字技术板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS680 数字技术板块 同行等高且金额类别百分比在卡内、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "SAS680 数字技术板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS680 数字技术板块 成对模块整块隐藏",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "壳 SAS650 新材料板块 开关保持且三行齐全",
+      "ok": true,
+      "detail": {
+        "unit": "SAS650 新材料板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS650 新材料板块 同行等高且金额类别百分比在卡内、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "SAS650 新材料板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS650 新材料板块 成对模块整块隐藏",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "壳 SAS710 生命科学板块 开关保持且三行齐全",
+      "ok": true,
+      "detail": {
+        "unit": "SAS710 生命科学板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS710 生命科学板块 同行等高且金额类别百分比在卡内、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "SAS710 生命科学板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS710 生命科学板块 成对模块整块隐藏",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "壳 SAS690 COII板块 开关保持且三行齐全",
+      "ok": true,
+      "detail": {
+        "unit": "SAS690 COII板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS690 COII板块 同行等高且金额类别百分比在卡内、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "SAS690 COII板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS690 COII板块 成对模块整块隐藏",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "壳 SAS720 模块化板块 开关保持且三行齐全",
+      "ok": true,
+      "detail": {
+        "unit": "SAS720 模块化板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS720 模块化板块 同行等高且金额类别百分比在卡内、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "SAS720 模块化板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS720 模块化板块 成对模块整块隐藏",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "壳 SAS670 供应链板块 开关保持且三行齐全",
+      "ok": true,
+      "detail": {
+        "unit": "SAS670 供应链板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS670 供应链板块 同行等高且金额类别百分比在卡内、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "SAS670 供应链板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS670 供应链板块 成对模块整块隐藏",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "壳 SAS520 金山中心 开关保持且三行齐全",
+      "ok": true,
+      "detail": {
+        "unit": "SAS520 金山中心",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS520 金山中心 同行等高且金额类别百分比在卡内、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "SAS520 金山中心",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS520 金山中心 成对模块整块隐藏",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "壳 SAS560 沈阳中心 开关保持且三行齐全",
+      "ok": true,
+      "detail": {
+        "unit": "SAS560 沈阳中心",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS560 沈阳中心 同行等高且金额类别百分比在卡内、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "SAS560 沈阳中心",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS560 沈阳中心 成对模块整块隐藏",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "壳 SAS550 惠湛中心 开关保持且三行齐全",
+      "ok": true,
+      "detail": {
+        "unit": "SAS550 惠湛中心",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS550 惠湛中心 同行等高且金额类别百分比在卡内、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "SAS550 惠湛中心",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS550 惠湛中心 成对模块整块隐藏",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "壳 SAS530 银川中心 开关保持且三行齐全",
+      "ok": true,
+      "detail": {
+        "unit": "SAS530 银川中心",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS530 银川中心 同行等高且金额类别百分比在卡内、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "SAS530 银川中心",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [],
+        "noteClip": false,
+        "pair": "none",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 SAS530 银川中心 成对模块整块隐藏",
+      "ok": true,
+      "detail": "none"
+    },
+    {
+      "name": "壳 视口 1440 展开同行等高无裁切、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "全部板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [
+          {
+            "n": 2,
+            "delta": 0,
+            "h": [
+              426.9,
+              426.9
+            ]
+          }
+        ],
+        "noteClip": false,
+        "pair": "grid",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 视口 1024 展开同行等高无裁切、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "全部板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 2,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5
+            ]
+          },
+          {
+            "n": 1,
+            "delta": 0,
+            "h": [
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [
+          {
+            "n": 2,
+            "delta": 0,
+            "h": [
+              467.5,
+              467.5
+            ]
+          }
+        ],
+        "noteClip": false,
+        "pair": "grid",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 视口 760 展开同行等高无裁切、文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "unit": "全部板块",
+        "theme": "blue",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 1,
+            "delta": 0,
+            "h": [
+              83.5
+            ]
+          },
+          {
+            "n": 1,
+            "delta": 0,
+            "h": [
+              83.5
+            ]
+          },
+          {
+            "n": 1,
+            "delta": 0,
+            "h": [
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [
+          {
+            "n": 1,
+            "delta": 0,
+            "h": [
+              372.3
+            ]
+          },
+          {
+            "n": 1,
+            "delta": 0,
+            "h": [
+              467.5
+            ]
+          }
+        ],
+        "noteClip": false,
+        "pair": "grid",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳窄屏已用真实下拉回到全部板块",
+      "ok": true,
+      "detail": "全部板块"
+    },
+    {
+      "name": "壳窄屏现金流同行仍对齐",
+      "ok": true,
+      "detail": [
+        {
+          "n": 1,
+          "delta": 0,
+          "h": [
+            83.5
+          ]
+        },
+        {
+          "n": 1,
+          "delta": 0,
+          "h": [
+            83.5
+          ]
+        },
+        {
+          "n": 1,
+          "delta": 0,
+          "h": [
+            83.5
+          ]
+        }
+      ]
+    },
+    {
+      "name": "壳窄屏成对模块对齐或已重排",
+      "ok": true,
+      "detail": [
+        {
+          "n": 1,
+          "delta": 0,
+          "h": [
+            370.3
+          ]
+        },
+        {
+          "n": 1,
+          "delta": 0,
+          "h": [
+            466.5
+          ]
+        }
+      ]
+    },
+    {
+      "name": "壳窄屏目标说明不截断",
+      "ok": true,
+      "detail": false
+    },
+    {
+      "name": "壳窄屏 KPI 同行等高且文字互不遮挡",
+      "ok": true,
+      "detail": {
+        "peer": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": []
+      }
+    },
+    {
+      "name": "壳 主题切到暖棕后开关仍保持",
+      "ok": true,
+      "detail": {
+        "unit": "全部板块",
+        "theme": "wood",
+        "checked": "true",
+        "subRows": [
+          3,
+          3,
+          3,
+          3
+        ],
+        "cats": [
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询",
+          "EPC,PMC,设计及咨询"
+        ],
+        "peer": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 1,
+            "delta": 0,
+            "h": [
+              83.5
+            ]
+          },
+          {
+            "n": 1,
+            "delta": 0,
+            "h": [
+              83.5
+            ]
+          },
+          {
+            "n": 1,
+            "delta": 0,
+            "h": [
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [
+          {
+            "n": 1,
+            "delta": 0,
+            "h": [
+              372.3
+            ]
+          },
+          {
+            "n": 1,
+            "delta": 0,
+            "h": [
+              467.5
+            ]
+          }
+        ],
+        "noteClip": false,
+        "pair": "grid",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    },
+    {
+      "name": "壳 刷新后开关关、主题回默认蓝",
+      "ok": true,
+      "detail": {
+        "unit": "全部板块",
+        "theme": "blue",
+        "checked": "false",
+        "subRows": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "cats": [
+          "",
+          "",
+          "",
+          ""
+        ],
+        "peer": [
+          0,
+          0
+        ],
+        "overflow": [],
+        "clipped": [],
+        "glyphHits": [],
+        "cash": [
+          {
+            "n": 3,
+            "delta": 0,
+            "h": [
+              83.5,
+              83.5,
+              83.5
+            ]
+          }
+        ],
+        "pairRows": [
+          {
+            "n": 2,
+            "delta": 0,
+            "h": [
+              426.9,
+              426.9
+            ]
+          }
+        ],
+        "noteClip": false,
+        "pair": "grid",
+        "note": "显示子目标\n子目标拆分权重仅演示、非业务默认"
+      }
+    }
+  ]
+}

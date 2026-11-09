@@ -1,0 +1,25 @@
+PASS  壳 header 全部板块为 Board
+PASS  壳内 KPI 同行等高
+PASS  壳内现金流三卡同行
+PASS  壳内成对模块等高
+PASS  壳内切换目标页签只改本区说明
+PASS  切页签后成对模块仍等高
+PASS  壳内点击 KPI 打开明细
+PASS  壳筛选 全部板块
+PASS  壳筛选 SAS170 PMC板块
+PASS  壳筛选 SAS610 咨询板块
+PASS  壳筛选 SAS680 数字技术板块
+PASS  壳筛选 SAS650 新材料板块
+PASS  壳筛选 SAS710 生命科学板块
+PASS  壳筛选 SAS690 COII板块
+PASS  壳筛选 SAS720 模块化板块
+PASS  壳筛选 SAS670 供应链板块
+PASS  壳筛选 SAS520 金山中心
+PASS  壳筛选 SAS560 沈阳中心
+PASS  壳筛选 SAS550 惠湛中心
+PASS  壳筛选 SAS530 银川中心
+PASS  壳窄屏现金流同行仍对齐
+PASS  壳窄屏成对模块对齐或已重排
+PASS  壳窄屏目标说明不截断
+VERDICT PASS fails=0
+REPRO_EXIT:0

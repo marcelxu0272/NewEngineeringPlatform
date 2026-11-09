@@ -1,0 +1,97 @@
+{
+  "file": "file:///agent/repos/NewEngineeringPlatform/public/operations-dashboard-202610/index.html",
+  "input": "baseline 232cadfe0dfff742561491b71cdd977047bbc9c7 + patch sha256 688a5bfceefc5a43c6d42d1614681e1c78b64ac7e45bfcbe99e0d9bfe2573684",
+  "declaredImplShaNotPresent": "5a1191ac9f0c8b93e60756d0be434cd45ca005fe",
+  "weights": {
+    "contract": {
+      "done": [
+        5,
+        3,
+        2
+      ],
+      "target": [
+        9,
+        6,
+        5
+      ]
+    },
+    "completed": {
+      "done": [
+        6,
+        2,
+        2
+      ],
+      "target": [
+        11,
+        5,
+        4
+      ]
+    },
+    "invoice": {
+      "done": [
+        4,
+        3,
+        3
+      ],
+      "target": [
+        8,
+        7,
+        5
+      ]
+    },
+    "receipt": {
+      "done": [
+        5,
+        2,
+        3
+      ],
+      "target": [
+        10,
+        4,
+        6
+      ]
+    }
+  },
+  "verdict": "PASS",
+  "byAc": {
+    "文档": {
+      "pass": 1,
+      "fail": 0
+    },
+    "AC3": {
+      "pass": 25,
+      "fail": 0
+    },
+    "规格": {
+      "pass": 1,
+      "fail": 0
+    },
+    "AC7": {
+      "pass": 317,
+      "fail": 0
+    },
+    "AC5": {
+      "pass": 895,
+      "fail": 0
+    },
+    "AC6": {
+      "pass": 514,
+      "fail": 0
+    },
+    "AC1": {
+      "pass": 80,
+      "fail": 0
+    },
+    "AC2": {
+      "pass": 532,
+      "fail": 0
+    },
+    "AC4": {
+      "pass": 12,
+      "fail": 0
+    }
+  },
+  "failCount": 0,
+  "passCount": 2377,
+  "fails": []
+}

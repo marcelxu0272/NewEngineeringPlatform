@@ -1,0 +1,928 @@
+PASS  [AC3] 壳进入时开关关且无子行
+PASS  [规格] 壳上可见仅演示标记
+PASS  [AC5] 进入时 Highcharts 容器仍在
+PASS  [AC5] 壳内打开开关不改 Highcharts 系列
+PASS  [AC3] 真实键盘选中且选项仍在 DOM 全部板块
+PASS  [AC3] 全部板块 开关在组织切换后保持
+PASS  [AC6] 壳 全部板块 KPI 第1行等高
+PASS  [AC6] 壳 全部板块 KPI 第2行等高
+PASS  [AC7] 壳 全部板块 contract 名称
+PASS  [AC7] 壳 全部板块 contract 占总目标
+PASS  [AC7] 壳 全部板块 contract 新增文案
+PASS  [AC1] 壳 全部板块 contract 三行
+PASS  [AC2] 壳 全部板块 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳 全部板块 contract EPC 百分比
+PASS  [AC2] 壳 全部板块 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳 全部板块 contract PMC 百分比
+PASS  [AC2] 壳 全部板块 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 全部板块 contract 设计及咨询 百分比
+PASS  [AC2] 壳 全部板块 contract 合计
+PASS  [AC5] 壳 全部板块 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳 全部板块 contract 无裁切无字形遮挡
+PASS  [AC7] 壳 全部板块 completed 名称
+PASS  [AC7] 壳 全部板块 completed 占总目标
+PASS  [AC7] 壳 全部板块 completed 新增文案
+PASS  [AC1] 壳 全部板块 completed 三行
+PASS  [AC2] 壳 全部板块 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳 全部板块 completed EPC 百分比
+PASS  [AC2] 壳 全部板块 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳 全部板块 completed PMC 百分比
+PASS  [AC2] 壳 全部板块 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 全部板块 completed 设计及咨询 百分比
+PASS  [AC2] 壳 全部板块 completed 合计
+PASS  [AC5] 壳 全部板块 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳 全部板块 completed 无裁切无字形遮挡
+PASS  [AC7] 壳 全部板块 invoice 名称
+PASS  [AC7] 壳 全部板块 invoice 占总目标
+PASS  [AC7] 壳 全部板块 invoice 新增文案
+PASS  [AC1] 壳 全部板块 invoice 三行
+PASS  [AC2] 壳 全部板块 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳 全部板块 invoice EPC 百分比
+PASS  [AC2] 壳 全部板块 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳 全部板块 invoice PMC 百分比
+PASS  [AC2] 壳 全部板块 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 全部板块 invoice 设计及咨询 百分比
+PASS  [AC2] 壳 全部板块 invoice 合计
+PASS  [AC5] 壳 全部板块 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳 全部板块 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳 全部板块 receipt 名称
+PASS  [AC7] 壳 全部板块 receipt 占总目标
+PASS  [AC7] 壳 全部板块 receipt 新增文案
+PASS  [AC1] 壳 全部板块 receipt 三行
+PASS  [AC2] 壳 全部板块 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳 全部板块 receipt EPC 百分比
+PASS  [AC2] 壳 全部板块 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳 全部板块 receipt PMC 百分比
+PASS  [AC2] 壳 全部板块 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 全部板块 receipt 设计及咨询 百分比
+PASS  [AC2] 壳 全部板块 receipt 合计
+PASS  [AC5] 壳 全部板块 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳 全部板块 receipt 无裁切无字形遮挡
+PASS  [AC3] 真实键盘选中且选项仍在 DOM SAS170 PMC板块
+PASS  [AC3] SAS170 PMC板块 开关在组织切换后保持
+PASS  [AC6] 壳 SAS170 PMC板块 KPI 第1行等高
+PASS  [AC6] 壳 SAS170 PMC板块 KPI 第2行等高
+PASS  [AC7] 壳 SAS170 PMC板块 contract 名称
+PASS  [AC7] 壳 SAS170 PMC板块 contract 占总目标
+PASS  [AC7] 壳 SAS170 PMC板块 contract 新增文案
+PASS  [AC1] 壳 SAS170 PMC板块 contract 三行
+PASS  [AC2] 壳 SAS170 PMC板块 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS170 PMC板块 contract EPC 百分比
+PASS  [AC2] 壳 SAS170 PMC板块 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS170 PMC板块 contract PMC 百分比
+PASS  [AC2] 壳 SAS170 PMC板块 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS170 PMC板块 contract 设计及咨询 百分比
+PASS  [AC2] 壳 SAS170 PMC板块 contract 合计
+PASS  [AC5] 壳 SAS170 PMC板块 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS170 PMC板块 contract 无裁切无字形遮挡
+PASS  [AC1] 壳 SAS170 PMC板块 组织 PMC 与业务 PMC 并存
+PASS  [AC7] 壳 SAS170 PMC板块 completed 名称
+PASS  [AC7] 壳 SAS170 PMC板块 completed 占总目标
+PASS  [AC7] 壳 SAS170 PMC板块 completed 新增文案
+PASS  [AC1] 壳 SAS170 PMC板块 completed 三行
+PASS  [AC2] 壳 SAS170 PMC板块 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS170 PMC板块 completed EPC 百分比
+PASS  [AC2] 壳 SAS170 PMC板块 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS170 PMC板块 completed PMC 百分比
+PASS  [AC2] 壳 SAS170 PMC板块 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS170 PMC板块 completed 设计及咨询 百分比
+PASS  [AC2] 壳 SAS170 PMC板块 completed 合计
+PASS  [AC5] 壳 SAS170 PMC板块 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS170 PMC板块 completed 无裁切无字形遮挡
+PASS  [AC1] 壳 SAS170 PMC板块 组织 PMC 与业务 PMC 并存
+PASS  [AC7] 壳 SAS170 PMC板块 invoice 名称
+PASS  [AC7] 壳 SAS170 PMC板块 invoice 占总目标
+PASS  [AC7] 壳 SAS170 PMC板块 invoice 新增文案
+PASS  [AC1] 壳 SAS170 PMC板块 invoice 三行
+PASS  [AC2] 壳 SAS170 PMC板块 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS170 PMC板块 invoice EPC 百分比
+PASS  [AC2] 壳 SAS170 PMC板块 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS170 PMC板块 invoice PMC 百分比
+PASS  [AC2] 壳 SAS170 PMC板块 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS170 PMC板块 invoice 设计及咨询 百分比
+PASS  [AC2] 壳 SAS170 PMC板块 invoice 合计
+PASS  [AC5] 壳 SAS170 PMC板块 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS170 PMC板块 invoice 无裁切无字形遮挡
+PASS  [AC1] 壳 SAS170 PMC板块 组织 PMC 与业务 PMC 并存
+PASS  [AC7] 壳 SAS170 PMC板块 receipt 名称
+PASS  [AC7] 壳 SAS170 PMC板块 receipt 占总目标
+PASS  [AC7] 壳 SAS170 PMC板块 receipt 新增文案
+PASS  [AC1] 壳 SAS170 PMC板块 receipt 三行
+PASS  [AC2] 壳 SAS170 PMC板块 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS170 PMC板块 receipt EPC 百分比
+PASS  [AC2] 壳 SAS170 PMC板块 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS170 PMC板块 receipt PMC 百分比
+PASS  [AC2] 壳 SAS170 PMC板块 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS170 PMC板块 receipt 设计及咨询 百分比
+PASS  [AC2] 壳 SAS170 PMC板块 receipt 合计
+PASS  [AC5] 壳 SAS170 PMC板块 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS170 PMC板块 receipt 无裁切无字形遮挡
+PASS  [AC1] 壳 SAS170 PMC板块 组织 PMC 与业务 PMC 并存
+PASS  [AC6] 壳 SAS170 PMC板块 叶子两块隐藏且不留洞
+PASS  [AC3] 真实键盘选中且选项仍在 DOM SAS610 咨询板块
+PASS  [AC3] SAS610 咨询板块 开关在组织切换后保持
+PASS  [AC6] 壳 SAS610 咨询板块 KPI 第1行等高
+PASS  [AC6] 壳 SAS610 咨询板块 KPI 第2行等高
+PASS  [AC7] 壳 SAS610 咨询板块 contract 名称
+PASS  [AC7] 壳 SAS610 咨询板块 contract 占总目标
+PASS  [AC7] 壳 SAS610 咨询板块 contract 新增文案
+PASS  [AC1] 壳 SAS610 咨询板块 contract 三行
+PASS  [AC2] 壳 SAS610 咨询板块 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS610 咨询板块 contract EPC 百分比
+PASS  [AC2] 壳 SAS610 咨询板块 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS610 咨询板块 contract PMC 百分比
+PASS  [AC2] 壳 SAS610 咨询板块 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS610 咨询板块 contract 设计及咨询 百分比
+PASS  [AC2] 壳 SAS610 咨询板块 contract 合计
+PASS  [AC5] 壳 SAS610 咨询板块 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS610 咨询板块 contract 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS610 咨询板块 completed 名称
+PASS  [AC7] 壳 SAS610 咨询板块 completed 占总目标
+PASS  [AC7] 壳 SAS610 咨询板块 completed 新增文案
+PASS  [AC1] 壳 SAS610 咨询板块 completed 三行
+PASS  [AC2] 壳 SAS610 咨询板块 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS610 咨询板块 completed EPC 百分比
+PASS  [AC2] 壳 SAS610 咨询板块 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS610 咨询板块 completed PMC 百分比
+PASS  [AC2] 壳 SAS610 咨询板块 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS610 咨询板块 completed 设计及咨询 百分比
+PASS  [AC2] 壳 SAS610 咨询板块 completed 合计
+PASS  [AC5] 壳 SAS610 咨询板块 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS610 咨询板块 completed 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS610 咨询板块 invoice 名称
+PASS  [AC7] 壳 SAS610 咨询板块 invoice 占总目标
+PASS  [AC7] 壳 SAS610 咨询板块 invoice 新增文案
+PASS  [AC1] 壳 SAS610 咨询板块 invoice 三行
+PASS  [AC2] 壳 SAS610 咨询板块 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS610 咨询板块 invoice EPC 百分比
+PASS  [AC2] 壳 SAS610 咨询板块 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS610 咨询板块 invoice PMC 百分比
+PASS  [AC2] 壳 SAS610 咨询板块 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS610 咨询板块 invoice 设计及咨询 百分比
+PASS  [AC2] 壳 SAS610 咨询板块 invoice 合计
+PASS  [AC5] 壳 SAS610 咨询板块 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS610 咨询板块 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS610 咨询板块 receipt 名称
+PASS  [AC7] 壳 SAS610 咨询板块 receipt 占总目标
+PASS  [AC7] 壳 SAS610 咨询板块 receipt 新增文案
+PASS  [AC1] 壳 SAS610 咨询板块 receipt 三行
+PASS  [AC2] 壳 SAS610 咨询板块 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS610 咨询板块 receipt EPC 百分比
+PASS  [AC2] 壳 SAS610 咨询板块 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS610 咨询板块 receipt PMC 百分比
+PASS  [AC2] 壳 SAS610 咨询板块 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS610 咨询板块 receipt 设计及咨询 百分比
+PASS  [AC2] 壳 SAS610 咨询板块 receipt 合计
+PASS  [AC5] 壳 SAS610 咨询板块 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS610 咨询板块 receipt 无裁切无字形遮挡
+PASS  [AC6] 壳 SAS610 咨询板块 叶子两块隐藏且不留洞
+PASS  [AC3] 真实键盘选中且选项仍在 DOM SAS680 数字技术板块
+PASS  [AC3] SAS680 数字技术板块 开关在组织切换后保持
+PASS  [AC6] 壳 SAS680 数字技术板块 KPI 第1行等高
+PASS  [AC6] 壳 SAS680 数字技术板块 KPI 第2行等高
+PASS  [AC7] 壳 SAS680 数字技术板块 contract 名称
+PASS  [AC7] 壳 SAS680 数字技术板块 contract 占总目标
+PASS  [AC7] 壳 SAS680 数字技术板块 contract 新增文案
+PASS  [AC1] 壳 SAS680 数字技术板块 contract 三行
+PASS  [AC2] 壳 SAS680 数字技术板块 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS680 数字技术板块 contract EPC 百分比
+PASS  [AC2] 壳 SAS680 数字技术板块 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS680 数字技术板块 contract PMC 百分比
+PASS  [AC2] 壳 SAS680 数字技术板块 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS680 数字技术板块 contract 设计及咨询 百分比
+PASS  [AC2] 壳 SAS680 数字技术板块 contract 合计
+PASS  [AC5] 壳 SAS680 数字技术板块 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS680 数字技术板块 contract 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS680 数字技术板块 completed 名称
+PASS  [AC7] 壳 SAS680 数字技术板块 completed 占总目标
+PASS  [AC7] 壳 SAS680 数字技术板块 completed 新增文案
+PASS  [AC1] 壳 SAS680 数字技术板块 completed 三行
+PASS  [AC2] 壳 SAS680 数字技术板块 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS680 数字技术板块 completed EPC 百分比
+PASS  [AC2] 壳 SAS680 数字技术板块 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS680 数字技术板块 completed PMC 百分比
+PASS  [AC2] 壳 SAS680 数字技术板块 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS680 数字技术板块 completed 设计及咨询 百分比
+PASS  [AC2] 壳 SAS680 数字技术板块 completed 合计
+PASS  [AC5] 壳 SAS680 数字技术板块 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS680 数字技术板块 completed 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS680 数字技术板块 invoice 名称
+PASS  [AC7] 壳 SAS680 数字技术板块 invoice 占总目标
+PASS  [AC7] 壳 SAS680 数字技术板块 invoice 新增文案
+PASS  [AC1] 壳 SAS680 数字技术板块 invoice 三行
+PASS  [AC2] 壳 SAS680 数字技术板块 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS680 数字技术板块 invoice EPC 百分比
+PASS  [AC2] 壳 SAS680 数字技术板块 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS680 数字技术板块 invoice PMC 百分比
+PASS  [AC2] 壳 SAS680 数字技术板块 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS680 数字技术板块 invoice 设计及咨询 百分比
+PASS  [AC2] 壳 SAS680 数字技术板块 invoice 合计
+PASS  [AC5] 壳 SAS680 数字技术板块 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS680 数字技术板块 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS680 数字技术板块 receipt 名称
+PASS  [AC7] 壳 SAS680 数字技术板块 receipt 占总目标
+PASS  [AC7] 壳 SAS680 数字技术板块 receipt 新增文案
+PASS  [AC1] 壳 SAS680 数字技术板块 receipt 三行
+PASS  [AC2] 壳 SAS680 数字技术板块 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS680 数字技术板块 receipt EPC 百分比
+PASS  [AC2] 壳 SAS680 数字技术板块 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS680 数字技术板块 receipt PMC 百分比
+PASS  [AC2] 壳 SAS680 数字技术板块 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS680 数字技术板块 receipt 设计及咨询 百分比
+PASS  [AC2] 壳 SAS680 数字技术板块 receipt 合计
+PASS  [AC5] 壳 SAS680 数字技术板块 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS680 数字技术板块 receipt 无裁切无字形遮挡
+PASS  [AC6] 壳 SAS680 数字技术板块 叶子两块隐藏且不留洞
+PASS  [AC3] 真实键盘选中且选项仍在 DOM SAS650 新材料板块
+PASS  [AC3] SAS650 新材料板块 开关在组织切换后保持
+PASS  [AC6] 壳 SAS650 新材料板块 KPI 第1行等高
+PASS  [AC6] 壳 SAS650 新材料板块 KPI 第2行等高
+PASS  [AC7] 壳 SAS650 新材料板块 contract 名称
+PASS  [AC7] 壳 SAS650 新材料板块 contract 占总目标
+PASS  [AC7] 壳 SAS650 新材料板块 contract 新增文案
+PASS  [AC1] 壳 SAS650 新材料板块 contract 三行
+PASS  [AC2] 壳 SAS650 新材料板块 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS650 新材料板块 contract EPC 百分比
+PASS  [AC2] 壳 SAS650 新材料板块 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS650 新材料板块 contract PMC 百分比
+PASS  [AC2] 壳 SAS650 新材料板块 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS650 新材料板块 contract 设计及咨询 百分比
+PASS  [AC2] 壳 SAS650 新材料板块 contract 合计
+PASS  [AC5] 壳 SAS650 新材料板块 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS650 新材料板块 contract 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS650 新材料板块 completed 名称
+PASS  [AC7] 壳 SAS650 新材料板块 completed 占总目标
+PASS  [AC7] 壳 SAS650 新材料板块 completed 新增文案
+PASS  [AC1] 壳 SAS650 新材料板块 completed 三行
+PASS  [AC2] 壳 SAS650 新材料板块 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS650 新材料板块 completed EPC 百分比
+PASS  [AC2] 壳 SAS650 新材料板块 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS650 新材料板块 completed PMC 百分比
+PASS  [AC2] 壳 SAS650 新材料板块 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS650 新材料板块 completed 设计及咨询 百分比
+PASS  [AC2] 壳 SAS650 新材料板块 completed 合计
+PASS  [AC5] 壳 SAS650 新材料板块 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS650 新材料板块 completed 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS650 新材料板块 invoice 名称
+PASS  [AC7] 壳 SAS650 新材料板块 invoice 占总目标
+PASS  [AC7] 壳 SAS650 新材料板块 invoice 新增文案
+PASS  [AC1] 壳 SAS650 新材料板块 invoice 三行
+PASS  [AC2] 壳 SAS650 新材料板块 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS650 新材料板块 invoice EPC 百分比
+PASS  [AC2] 壳 SAS650 新材料板块 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS650 新材料板块 invoice PMC 百分比
+PASS  [AC2] 壳 SAS650 新材料板块 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS650 新材料板块 invoice 设计及咨询 百分比
+PASS  [AC2] 壳 SAS650 新材料板块 invoice 合计
+PASS  [AC5] 壳 SAS650 新材料板块 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS650 新材料板块 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS650 新材料板块 receipt 名称
+PASS  [AC7] 壳 SAS650 新材料板块 receipt 占总目标
+PASS  [AC7] 壳 SAS650 新材料板块 receipt 新增文案
+PASS  [AC1] 壳 SAS650 新材料板块 receipt 三行
+PASS  [AC2] 壳 SAS650 新材料板块 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS650 新材料板块 receipt EPC 百分比
+PASS  [AC2] 壳 SAS650 新材料板块 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS650 新材料板块 receipt PMC 百分比
+PASS  [AC2] 壳 SAS650 新材料板块 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS650 新材料板块 receipt 设计及咨询 百分比
+PASS  [AC2] 壳 SAS650 新材料板块 receipt 合计
+PASS  [AC5] 壳 SAS650 新材料板块 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS650 新材料板块 receipt 无裁切无字形遮挡
+PASS  [AC6] 壳 SAS650 新材料板块 叶子两块隐藏且不留洞
+PASS  [AC3] 真实键盘选中且选项仍在 DOM SAS710 生命科学板块
+PASS  [AC3] SAS710 生命科学板块 开关在组织切换后保持
+PASS  [AC6] 壳 SAS710 生命科学板块 KPI 第1行等高
+PASS  [AC6] 壳 SAS710 生命科学板块 KPI 第2行等高
+PASS  [AC7] 壳 SAS710 生命科学板块 contract 名称
+PASS  [AC7] 壳 SAS710 生命科学板块 contract 占总目标
+PASS  [AC7] 壳 SAS710 生命科学板块 contract 新增文案
+PASS  [AC1] 壳 SAS710 生命科学板块 contract 三行
+PASS  [AC2] 壳 SAS710 生命科学板块 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS710 生命科学板块 contract EPC 百分比
+PASS  [AC2] 壳 SAS710 生命科学板块 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS710 生命科学板块 contract PMC 百分比
+PASS  [AC2] 壳 SAS710 生命科学板块 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS710 生命科学板块 contract 设计及咨询 百分比
+PASS  [AC2] 壳 SAS710 生命科学板块 contract 合计
+PASS  [AC5] 壳 SAS710 生命科学板块 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS710 生命科学板块 contract 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS710 生命科学板块 completed 名称
+PASS  [AC7] 壳 SAS710 生命科学板块 completed 占总目标
+PASS  [AC7] 壳 SAS710 生命科学板块 completed 新增文案
+PASS  [AC1] 壳 SAS710 生命科学板块 completed 三行
+PASS  [AC2] 壳 SAS710 生命科学板块 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS710 生命科学板块 completed EPC 百分比
+PASS  [AC2] 壳 SAS710 生命科学板块 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS710 生命科学板块 completed PMC 百分比
+PASS  [AC2] 壳 SAS710 生命科学板块 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS710 生命科学板块 completed 设计及咨询 百分比
+PASS  [AC2] 壳 SAS710 生命科学板块 completed 合计
+PASS  [AC5] 壳 SAS710 生命科学板块 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS710 生命科学板块 completed 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS710 生命科学板块 invoice 名称
+PASS  [AC7] 壳 SAS710 生命科学板块 invoice 占总目标
+PASS  [AC7] 壳 SAS710 生命科学板块 invoice 新增文案
+PASS  [AC1] 壳 SAS710 生命科学板块 invoice 三行
+PASS  [AC2] 壳 SAS710 生命科学板块 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS710 生命科学板块 invoice EPC 百分比
+PASS  [AC2] 壳 SAS710 生命科学板块 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS710 生命科学板块 invoice PMC 百分比
+PASS  [AC2] 壳 SAS710 生命科学板块 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS710 生命科学板块 invoice 设计及咨询 百分比
+PASS  [AC2] 壳 SAS710 生命科学板块 invoice 合计
+PASS  [AC5] 壳 SAS710 生命科学板块 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS710 生命科学板块 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS710 生命科学板块 receipt 名称
+PASS  [AC7] 壳 SAS710 生命科学板块 receipt 占总目标
+PASS  [AC7] 壳 SAS710 生命科学板块 receipt 新增文案
+PASS  [AC1] 壳 SAS710 生命科学板块 receipt 三行
+PASS  [AC2] 壳 SAS710 生命科学板块 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS710 生命科学板块 receipt EPC 百分比
+PASS  [AC2] 壳 SAS710 生命科学板块 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS710 生命科学板块 receipt PMC 百分比
+PASS  [AC2] 壳 SAS710 生命科学板块 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS710 生命科学板块 receipt 设计及咨询 百分比
+PASS  [AC2] 壳 SAS710 生命科学板块 receipt 合计
+PASS  [AC5] 壳 SAS710 生命科学板块 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS710 生命科学板块 receipt 无裁切无字形遮挡
+PASS  [AC6] 壳 SAS710 生命科学板块 叶子两块隐藏且不留洞
+PASS  [AC3] 真实键盘选中且选项仍在 DOM SAS690 COII板块
+PASS  [AC3] SAS690 COII板块 开关在组织切换后保持
+PASS  [AC6] 壳 SAS690 COII板块 KPI 第1行等高
+PASS  [AC6] 壳 SAS690 COII板块 KPI 第2行等高
+PASS  [AC7] 壳 SAS690 COII板块 contract 名称
+PASS  [AC7] 壳 SAS690 COII板块 contract 占总目标
+PASS  [AC7] 壳 SAS690 COII板块 contract 新增文案
+PASS  [AC1] 壳 SAS690 COII板块 contract 三行
+PASS  [AC2] 壳 SAS690 COII板块 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS690 COII板块 contract EPC 百分比
+PASS  [AC2] 壳 SAS690 COII板块 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS690 COII板块 contract PMC 百分比
+PASS  [AC2] 壳 SAS690 COII板块 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS690 COII板块 contract 设计及咨询 百分比
+PASS  [AC2] 壳 SAS690 COII板块 contract 合计
+PASS  [AC5] 壳 SAS690 COII板块 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS690 COII板块 contract 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS690 COII板块 completed 名称
+PASS  [AC7] 壳 SAS690 COII板块 completed 占总目标
+PASS  [AC7] 壳 SAS690 COII板块 completed 新增文案
+PASS  [AC1] 壳 SAS690 COII板块 completed 三行
+PASS  [AC2] 壳 SAS690 COII板块 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS690 COII板块 completed EPC 百分比
+PASS  [AC2] 壳 SAS690 COII板块 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS690 COII板块 completed PMC 百分比
+PASS  [AC2] 壳 SAS690 COII板块 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS690 COII板块 completed 设计及咨询 百分比
+PASS  [AC2] 壳 SAS690 COII板块 completed 合计
+PASS  [AC5] 壳 SAS690 COII板块 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS690 COII板块 completed 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS690 COII板块 invoice 名称
+PASS  [AC7] 壳 SAS690 COII板块 invoice 占总目标
+PASS  [AC7] 壳 SAS690 COII板块 invoice 新增文案
+PASS  [AC1] 壳 SAS690 COII板块 invoice 三行
+PASS  [AC2] 壳 SAS690 COII板块 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS690 COII板块 invoice EPC 百分比
+PASS  [AC2] 壳 SAS690 COII板块 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS690 COII板块 invoice PMC 百分比
+PASS  [AC2] 壳 SAS690 COII板块 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS690 COII板块 invoice 设计及咨询 百分比
+PASS  [AC2] 壳 SAS690 COII板块 invoice 合计
+PASS  [AC5] 壳 SAS690 COII板块 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS690 COII板块 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS690 COII板块 receipt 名称
+PASS  [AC7] 壳 SAS690 COII板块 receipt 占总目标
+PASS  [AC7] 壳 SAS690 COII板块 receipt 新增文案
+PASS  [AC1] 壳 SAS690 COII板块 receipt 三行
+PASS  [AC2] 壳 SAS690 COII板块 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS690 COII板块 receipt EPC 百分比
+PASS  [AC2] 壳 SAS690 COII板块 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS690 COII板块 receipt PMC 百分比
+PASS  [AC2] 壳 SAS690 COII板块 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS690 COII板块 receipt 设计及咨询 百分比
+PASS  [AC2] 壳 SAS690 COII板块 receipt 合计
+PASS  [AC5] 壳 SAS690 COII板块 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS690 COII板块 receipt 无裁切无字形遮挡
+PASS  [AC6] 壳 SAS690 COII板块 叶子两块隐藏且不留洞
+PASS  [AC3] 真实键盘选中且选项仍在 DOM SAS720 模块化板块
+PASS  [AC3] SAS720 模块化板块 开关在组织切换后保持
+PASS  [AC6] 壳 SAS720 模块化板块 KPI 第1行等高
+PASS  [AC6] 壳 SAS720 模块化板块 KPI 第2行等高
+PASS  [AC7] 壳 SAS720 模块化板块 contract 名称
+PASS  [AC7] 壳 SAS720 模块化板块 contract 占总目标
+PASS  [AC7] 壳 SAS720 模块化板块 contract 新增文案
+PASS  [AC1] 壳 SAS720 模块化板块 contract 三行
+PASS  [AC2] 壳 SAS720 模块化板块 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS720 模块化板块 contract EPC 百分比
+PASS  [AC2] 壳 SAS720 模块化板块 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS720 模块化板块 contract PMC 百分比
+PASS  [AC2] 壳 SAS720 模块化板块 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS720 模块化板块 contract 设计及咨询 百分比
+PASS  [AC2] 壳 SAS720 模块化板块 contract 合计
+PASS  [AC5] 壳 SAS720 模块化板块 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS720 模块化板块 contract 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS720 模块化板块 completed 名称
+PASS  [AC7] 壳 SAS720 模块化板块 completed 占总目标
+PASS  [AC7] 壳 SAS720 模块化板块 completed 新增文案
+PASS  [AC1] 壳 SAS720 模块化板块 completed 三行
+PASS  [AC2] 壳 SAS720 模块化板块 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS720 模块化板块 completed EPC 百分比
+PASS  [AC2] 壳 SAS720 模块化板块 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS720 模块化板块 completed PMC 百分比
+PASS  [AC2] 壳 SAS720 模块化板块 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS720 模块化板块 completed 设计及咨询 百分比
+PASS  [AC2] 壳 SAS720 模块化板块 completed 合计
+PASS  [AC5] 壳 SAS720 模块化板块 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS720 模块化板块 completed 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS720 模块化板块 invoice 名称
+PASS  [AC7] 壳 SAS720 模块化板块 invoice 占总目标
+PASS  [AC7] 壳 SAS720 模块化板块 invoice 新增文案
+PASS  [AC1] 壳 SAS720 模块化板块 invoice 三行
+PASS  [AC2] 壳 SAS720 模块化板块 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS720 模块化板块 invoice EPC 百分比
+PASS  [AC2] 壳 SAS720 模块化板块 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS720 模块化板块 invoice PMC 百分比
+PASS  [AC2] 壳 SAS720 模块化板块 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS720 模块化板块 invoice 设计及咨询 百分比
+PASS  [AC2] 壳 SAS720 模块化板块 invoice 合计
+PASS  [AC5] 壳 SAS720 模块化板块 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS720 模块化板块 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS720 模块化板块 receipt 名称
+PASS  [AC7] 壳 SAS720 模块化板块 receipt 占总目标
+PASS  [AC7] 壳 SAS720 模块化板块 receipt 新增文案
+PASS  [AC1] 壳 SAS720 模块化板块 receipt 三行
+PASS  [AC2] 壳 SAS720 模块化板块 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS720 模块化板块 receipt EPC 百分比
+PASS  [AC2] 壳 SAS720 模块化板块 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS720 模块化板块 receipt PMC 百分比
+PASS  [AC2] 壳 SAS720 模块化板块 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS720 模块化板块 receipt 设计及咨询 百分比
+PASS  [AC2] 壳 SAS720 模块化板块 receipt 合计
+PASS  [AC5] 壳 SAS720 模块化板块 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS720 模块化板块 receipt 无裁切无字形遮挡
+PASS  [AC6] 壳 SAS720 模块化板块 叶子两块隐藏且不留洞
+PASS  [AC3] 真实键盘选中且选项仍在 DOM SAS670 供应链板块
+PASS  [AC3] SAS670 供应链板块 开关在组织切换后保持
+PASS  [AC6] 壳 SAS670 供应链板块 KPI 第1行等高
+PASS  [AC6] 壳 SAS670 供应链板块 KPI 第2行等高
+PASS  [AC7] 壳 SAS670 供应链板块 contract 名称
+PASS  [AC7] 壳 SAS670 供应链板块 contract 占总目标
+PASS  [AC7] 壳 SAS670 供应链板块 contract 新增文案
+PASS  [AC1] 壳 SAS670 供应链板块 contract 三行
+PASS  [AC2] 壳 SAS670 供应链板块 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS670 供应链板块 contract EPC 百分比
+PASS  [AC2] 壳 SAS670 供应链板块 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS670 供应链板块 contract PMC 百分比
+PASS  [AC2] 壳 SAS670 供应链板块 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS670 供应链板块 contract 设计及咨询 百分比
+PASS  [AC2] 壳 SAS670 供应链板块 contract 合计
+PASS  [AC5] 壳 SAS670 供应链板块 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS670 供应链板块 contract 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS670 供应链板块 completed 名称
+PASS  [AC7] 壳 SAS670 供应链板块 completed 占总目标
+PASS  [AC7] 壳 SAS670 供应链板块 completed 新增文案
+PASS  [AC1] 壳 SAS670 供应链板块 completed 三行
+PASS  [AC2] 壳 SAS670 供应链板块 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS670 供应链板块 completed EPC 百分比
+PASS  [AC2] 壳 SAS670 供应链板块 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS670 供应链板块 completed PMC 百分比
+PASS  [AC2] 壳 SAS670 供应链板块 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS670 供应链板块 completed 设计及咨询 百分比
+PASS  [AC2] 壳 SAS670 供应链板块 completed 合计
+PASS  [AC5] 壳 SAS670 供应链板块 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS670 供应链板块 completed 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS670 供应链板块 invoice 名称
+PASS  [AC7] 壳 SAS670 供应链板块 invoice 占总目标
+PASS  [AC7] 壳 SAS670 供应链板块 invoice 新增文案
+PASS  [AC1] 壳 SAS670 供应链板块 invoice 三行
+PASS  [AC2] 壳 SAS670 供应链板块 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS670 供应链板块 invoice EPC 百分比
+PASS  [AC2] 壳 SAS670 供应链板块 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS670 供应链板块 invoice PMC 百分比
+PASS  [AC2] 壳 SAS670 供应链板块 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS670 供应链板块 invoice 设计及咨询 百分比
+PASS  [AC2] 壳 SAS670 供应链板块 invoice 合计
+PASS  [AC5] 壳 SAS670 供应链板块 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS670 供应链板块 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS670 供应链板块 receipt 名称
+PASS  [AC7] 壳 SAS670 供应链板块 receipt 占总目标
+PASS  [AC7] 壳 SAS670 供应链板块 receipt 新增文案
+PASS  [AC1] 壳 SAS670 供应链板块 receipt 三行
+PASS  [AC2] 壳 SAS670 供应链板块 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS670 供应链板块 receipt EPC 百分比
+PASS  [AC2] 壳 SAS670 供应链板块 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS670 供应链板块 receipt PMC 百分比
+PASS  [AC2] 壳 SAS670 供应链板块 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS670 供应链板块 receipt 设计及咨询 百分比
+PASS  [AC2] 壳 SAS670 供应链板块 receipt 合计
+PASS  [AC5] 壳 SAS670 供应链板块 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS670 供应链板块 receipt 无裁切无字形遮挡
+PASS  [AC6] 壳 SAS670 供应链板块 叶子两块隐藏且不留洞
+PASS  [AC3] 真实键盘选中且选项仍在 DOM SAS520 金山中心
+PASS  [AC3] SAS520 金山中心 开关在组织切换后保持
+PASS  [AC6] 壳 SAS520 金山中心 KPI 第1行等高
+PASS  [AC6] 壳 SAS520 金山中心 KPI 第2行等高
+PASS  [AC7] 壳 SAS520 金山中心 contract 名称
+PASS  [AC7] 壳 SAS520 金山中心 contract 占总目标
+PASS  [AC7] 壳 SAS520 金山中心 contract 新增文案
+PASS  [AC1] 壳 SAS520 金山中心 contract 三行
+PASS  [AC2] 壳 SAS520 金山中心 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS520 金山中心 contract EPC 百分比
+PASS  [AC2] 壳 SAS520 金山中心 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS520 金山中心 contract PMC 百分比
+PASS  [AC2] 壳 SAS520 金山中心 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS520 金山中心 contract 设计及咨询 百分比
+PASS  [AC2] 壳 SAS520 金山中心 contract 合计
+PASS  [AC5] 壳 SAS520 金山中心 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS520 金山中心 contract 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS520 金山中心 completed 名称
+PASS  [AC7] 壳 SAS520 金山中心 completed 占总目标
+PASS  [AC7] 壳 SAS520 金山中心 completed 新增文案
+PASS  [AC1] 壳 SAS520 金山中心 completed 三行
+PASS  [AC2] 壳 SAS520 金山中心 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS520 金山中心 completed EPC 百分比
+PASS  [AC2] 壳 SAS520 金山中心 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS520 金山中心 completed PMC 百分比
+PASS  [AC2] 壳 SAS520 金山中心 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS520 金山中心 completed 设计及咨询 百分比
+PASS  [AC2] 壳 SAS520 金山中心 completed 合计
+PASS  [AC5] 壳 SAS520 金山中心 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS520 金山中心 completed 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS520 金山中心 invoice 名称
+PASS  [AC7] 壳 SAS520 金山中心 invoice 占总目标
+PASS  [AC7] 壳 SAS520 金山中心 invoice 新增文案
+PASS  [AC1] 壳 SAS520 金山中心 invoice 三行
+PASS  [AC2] 壳 SAS520 金山中心 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS520 金山中心 invoice EPC 百分比
+PASS  [AC2] 壳 SAS520 金山中心 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS520 金山中心 invoice PMC 百分比
+PASS  [AC2] 壳 SAS520 金山中心 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS520 金山中心 invoice 设计及咨询 百分比
+PASS  [AC2] 壳 SAS520 金山中心 invoice 合计
+PASS  [AC5] 壳 SAS520 金山中心 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS520 金山中心 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS520 金山中心 receipt 名称
+PASS  [AC7] 壳 SAS520 金山中心 receipt 占总目标
+PASS  [AC7] 壳 SAS520 金山中心 receipt 新增文案
+PASS  [AC1] 壳 SAS520 金山中心 receipt 三行
+PASS  [AC2] 壳 SAS520 金山中心 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS520 金山中心 receipt EPC 百分比
+PASS  [AC2] 壳 SAS520 金山中心 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS520 金山中心 receipt PMC 百分比
+PASS  [AC2] 壳 SAS520 金山中心 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS520 金山中心 receipt 设计及咨询 百分比
+PASS  [AC2] 壳 SAS520 金山中心 receipt 合计
+PASS  [AC5] 壳 SAS520 金山中心 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS520 金山中心 receipt 无裁切无字形遮挡
+PASS  [AC6] 壳 SAS520 金山中心 叶子两块隐藏且不留洞
+PASS  [AC3] 真实键盘选中且选项仍在 DOM SAS560 沈阳中心
+PASS  [AC3] SAS560 沈阳中心 开关在组织切换后保持
+PASS  [AC6] 壳 SAS560 沈阳中心 KPI 第1行等高
+PASS  [AC6] 壳 SAS560 沈阳中心 KPI 第2行等高
+PASS  [AC7] 壳 SAS560 沈阳中心 contract 名称
+PASS  [AC7] 壳 SAS560 沈阳中心 contract 占总目标
+PASS  [AC7] 壳 SAS560 沈阳中心 contract 新增文案
+PASS  [AC1] 壳 SAS560 沈阳中心 contract 三行
+PASS  [AC2] 壳 SAS560 沈阳中心 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS560 沈阳中心 contract EPC 百分比
+PASS  [AC2] 壳 SAS560 沈阳中心 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS560 沈阳中心 contract PMC 百分比
+PASS  [AC2] 壳 SAS560 沈阳中心 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS560 沈阳中心 contract 设计及咨询 百分比
+PASS  [AC2] 壳 SAS560 沈阳中心 contract 合计
+PASS  [AC5] 壳 SAS560 沈阳中心 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS560 沈阳中心 contract 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS560 沈阳中心 completed 名称
+PASS  [AC7] 壳 SAS560 沈阳中心 completed 占总目标
+PASS  [AC7] 壳 SAS560 沈阳中心 completed 新增文案
+PASS  [AC1] 壳 SAS560 沈阳中心 completed 三行
+PASS  [AC2] 壳 SAS560 沈阳中心 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS560 沈阳中心 completed EPC 百分比
+PASS  [AC2] 壳 SAS560 沈阳中心 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS560 沈阳中心 completed PMC 百分比
+PASS  [AC2] 壳 SAS560 沈阳中心 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS560 沈阳中心 completed 设计及咨询 百分比
+PASS  [AC2] 壳 SAS560 沈阳中心 completed 合计
+PASS  [AC5] 壳 SAS560 沈阳中心 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS560 沈阳中心 completed 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS560 沈阳中心 invoice 名称
+PASS  [AC7] 壳 SAS560 沈阳中心 invoice 占总目标
+PASS  [AC7] 壳 SAS560 沈阳中心 invoice 新增文案
+PASS  [AC1] 壳 SAS560 沈阳中心 invoice 三行
+PASS  [AC2] 壳 SAS560 沈阳中心 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS560 沈阳中心 invoice EPC 百分比
+PASS  [AC2] 壳 SAS560 沈阳中心 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS560 沈阳中心 invoice PMC 百分比
+PASS  [AC2] 壳 SAS560 沈阳中心 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS560 沈阳中心 invoice 设计及咨询 百分比
+PASS  [AC2] 壳 SAS560 沈阳中心 invoice 合计
+PASS  [AC5] 壳 SAS560 沈阳中心 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS560 沈阳中心 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS560 沈阳中心 receipt 名称
+PASS  [AC7] 壳 SAS560 沈阳中心 receipt 占总目标
+PASS  [AC7] 壳 SAS560 沈阳中心 receipt 新增文案
+PASS  [AC1] 壳 SAS560 沈阳中心 receipt 三行
+PASS  [AC2] 壳 SAS560 沈阳中心 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS560 沈阳中心 receipt EPC 百分比
+PASS  [AC2] 壳 SAS560 沈阳中心 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS560 沈阳中心 receipt PMC 百分比
+PASS  [AC2] 壳 SAS560 沈阳中心 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS560 沈阳中心 receipt 设计及咨询 百分比
+PASS  [AC2] 壳 SAS560 沈阳中心 receipt 合计
+PASS  [AC5] 壳 SAS560 沈阳中心 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS560 沈阳中心 receipt 无裁切无字形遮挡
+PASS  [AC6] 壳 SAS560 沈阳中心 叶子两块隐藏且不留洞
+PASS  [AC3] 真实键盘选中且选项仍在 DOM SAS550 惠湛中心
+PASS  [AC3] SAS550 惠湛中心 开关在组织切换后保持
+PASS  [AC6] 壳 SAS550 惠湛中心 KPI 第1行等高
+PASS  [AC6] 壳 SAS550 惠湛中心 KPI 第2行等高
+PASS  [AC7] 壳 SAS550 惠湛中心 contract 名称
+PASS  [AC7] 壳 SAS550 惠湛中心 contract 占总目标
+PASS  [AC7] 壳 SAS550 惠湛中心 contract 新增文案
+PASS  [AC1] 壳 SAS550 惠湛中心 contract 三行
+PASS  [AC2] 壳 SAS550 惠湛中心 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS550 惠湛中心 contract EPC 百分比
+PASS  [AC2] 壳 SAS550 惠湛中心 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS550 惠湛中心 contract PMC 百分比
+PASS  [AC2] 壳 SAS550 惠湛中心 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS550 惠湛中心 contract 设计及咨询 百分比
+PASS  [AC2] 壳 SAS550 惠湛中心 contract 合计
+PASS  [AC5] 壳 SAS550 惠湛中心 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS550 惠湛中心 contract 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS550 惠湛中心 completed 名称
+PASS  [AC7] 壳 SAS550 惠湛中心 completed 占总目标
+PASS  [AC7] 壳 SAS550 惠湛中心 completed 新增文案
+PASS  [AC1] 壳 SAS550 惠湛中心 completed 三行
+PASS  [AC2] 壳 SAS550 惠湛中心 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS550 惠湛中心 completed EPC 百分比
+PASS  [AC2] 壳 SAS550 惠湛中心 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS550 惠湛中心 completed PMC 百分比
+PASS  [AC2] 壳 SAS550 惠湛中心 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS550 惠湛中心 completed 设计及咨询 百分比
+PASS  [AC2] 壳 SAS550 惠湛中心 completed 合计
+PASS  [AC5] 壳 SAS550 惠湛中心 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS550 惠湛中心 completed 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS550 惠湛中心 invoice 名称
+PASS  [AC7] 壳 SAS550 惠湛中心 invoice 占总目标
+PASS  [AC7] 壳 SAS550 惠湛中心 invoice 新增文案
+PASS  [AC1] 壳 SAS550 惠湛中心 invoice 三行
+PASS  [AC2] 壳 SAS550 惠湛中心 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS550 惠湛中心 invoice EPC 百分比
+PASS  [AC2] 壳 SAS550 惠湛中心 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS550 惠湛中心 invoice PMC 百分比
+PASS  [AC2] 壳 SAS550 惠湛中心 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS550 惠湛中心 invoice 设计及咨询 百分比
+PASS  [AC2] 壳 SAS550 惠湛中心 invoice 合计
+PASS  [AC5] 壳 SAS550 惠湛中心 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS550 惠湛中心 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS550 惠湛中心 receipt 名称
+PASS  [AC7] 壳 SAS550 惠湛中心 receipt 占总目标
+PASS  [AC7] 壳 SAS550 惠湛中心 receipt 新增文案
+PASS  [AC1] 壳 SAS550 惠湛中心 receipt 三行
+PASS  [AC2] 壳 SAS550 惠湛中心 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS550 惠湛中心 receipt EPC 百分比
+PASS  [AC2] 壳 SAS550 惠湛中心 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS550 惠湛中心 receipt PMC 百分比
+PASS  [AC2] 壳 SAS550 惠湛中心 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS550 惠湛中心 receipt 设计及咨询 百分比
+PASS  [AC2] 壳 SAS550 惠湛中心 receipt 合计
+PASS  [AC5] 壳 SAS550 惠湛中心 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS550 惠湛中心 receipt 无裁切无字形遮挡
+PASS  [AC6] 壳 SAS550 惠湛中心 叶子两块隐藏且不留洞
+PASS  [AC3] 真实键盘选中且选项仍在 DOM SAS530 银川中心
+PASS  [AC3] SAS530 银川中心 开关在组织切换后保持
+PASS  [AC6] 壳 SAS530 银川中心 KPI 第1行等高
+PASS  [AC6] 壳 SAS530 银川中心 KPI 第2行等高
+PASS  [AC7] 壳 SAS530 银川中心 contract 名称
+PASS  [AC7] 壳 SAS530 银川中心 contract 占总目标
+PASS  [AC7] 壳 SAS530 银川中心 contract 新增文案
+PASS  [AC1] 壳 SAS530 银川中心 contract 三行
+PASS  [AC2] 壳 SAS530 银川中心 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS530 银川中心 contract EPC 百分比
+PASS  [AC2] 壳 SAS530 银川中心 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS530 银川中心 contract PMC 百分比
+PASS  [AC2] 壳 SAS530 银川中心 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS530 银川中心 contract 设计及咨询 百分比
+PASS  [AC2] 壳 SAS530 银川中心 contract 合计
+PASS  [AC5] 壳 SAS530 银川中心 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS530 银川中心 contract 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS530 银川中心 completed 名称
+PASS  [AC7] 壳 SAS530 银川中心 completed 占总目标
+PASS  [AC7] 壳 SAS530 银川中心 completed 新增文案
+PASS  [AC1] 壳 SAS530 银川中心 completed 三行
+PASS  [AC2] 壳 SAS530 银川中心 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS530 银川中心 completed EPC 百分比
+PASS  [AC2] 壳 SAS530 银川中心 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS530 银川中心 completed PMC 百分比
+PASS  [AC2] 壳 SAS530 银川中心 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS530 银川中心 completed 设计及咨询 百分比
+PASS  [AC2] 壳 SAS530 银川中心 completed 合计
+PASS  [AC5] 壳 SAS530 银川中心 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS530 银川中心 completed 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS530 银川中心 invoice 名称
+PASS  [AC7] 壳 SAS530 银川中心 invoice 占总目标
+PASS  [AC7] 壳 SAS530 银川中心 invoice 新增文案
+PASS  [AC1] 壳 SAS530 银川中心 invoice 三行
+PASS  [AC2] 壳 SAS530 银川中心 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS530 银川中心 invoice EPC 百分比
+PASS  [AC2] 壳 SAS530 银川中心 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS530 银川中心 invoice PMC 百分比
+PASS  [AC2] 壳 SAS530 银川中心 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS530 银川中心 invoice 设计及咨询 百分比
+PASS  [AC2] 壳 SAS530 银川中心 invoice 合计
+PASS  [AC5] 壳 SAS530 银川中心 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS530 银川中心 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳 SAS530 银川中心 receipt 名称
+PASS  [AC7] 壳 SAS530 银川中心 receipt 占总目标
+PASS  [AC7] 壳 SAS530 银川中心 receipt 新增文案
+PASS  [AC1] 壳 SAS530 银川中心 receipt 三行
+PASS  [AC2] 壳 SAS530 银川中心 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS530 银川中心 receipt EPC 百分比
+PASS  [AC2] 壳 SAS530 银川中心 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳 SAS530 银川中心 receipt PMC 百分比
+PASS  [AC2] 壳 SAS530 银川中心 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳 SAS530 银川中心 receipt 设计及咨询 百分比
+PASS  [AC2] 壳 SAS530 银川中心 receipt 合计
+PASS  [AC5] 壳 SAS530 银川中心 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳 SAS530 银川中心 receipt 无裁切无字形遮挡
+PASS  [AC6] 壳 SAS530 银川中心 叶子两块隐藏且不留洞
+PASS  [AC6] 壳 760 时 iframe 内容宽在 312px 附近
+PASS  [AC6] 壳760 KPI 第1行等高
+PASS  [AC6] 壳760 KPI 第2行等高
+PASS  [AC6] 壳760 KPI 第3行等高
+PASS  [AC6] 壳760 KPI 第4行等高
+PASS  [AC7] 壳760 contract 名称
+PASS  [AC7] 壳760 contract 占总目标
+PASS  [AC7] 壳760 contract 新增文案
+PASS  [AC1] 壳760 contract 三行
+PASS  [AC2] 壳760 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳760 contract EPC 百分比
+PASS  [AC2] 壳760 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳760 contract PMC 百分比
+PASS  [AC2] 壳760 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳760 contract 设计及咨询 百分比
+PASS  [AC2] 壳760 contract 合计
+PASS  [AC5] 壳760 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳760 contract 无裁切无字形遮挡
+PASS  [AC7] 壳760 completed 名称
+PASS  [AC7] 壳760 completed 占总目标
+PASS  [AC7] 壳760 completed 新增文案
+PASS  [AC1] 壳760 completed 三行
+PASS  [AC2] 壳760 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳760 completed EPC 百分比
+PASS  [AC2] 壳760 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳760 completed PMC 百分比
+PASS  [AC2] 壳760 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳760 completed 设计及咨询 百分比
+PASS  [AC2] 壳760 completed 合计
+PASS  [AC5] 壳760 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳760 completed 无裁切无字形遮挡
+PASS  [AC7] 壳760 invoice 名称
+PASS  [AC7] 壳760 invoice 占总目标
+PASS  [AC7] 壳760 invoice 新增文案
+PASS  [AC1] 壳760 invoice 三行
+PASS  [AC2] 壳760 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳760 invoice EPC 百分比
+PASS  [AC2] 壳760 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳760 invoice PMC 百分比
+PASS  [AC2] 壳760 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳760 invoice 设计及咨询 百分比
+PASS  [AC2] 壳760 invoice 合计
+PASS  [AC5] 壳760 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳760 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳760 receipt 名称
+PASS  [AC7] 壳760 receipt 占总目标
+PASS  [AC7] 壳760 receipt 新增文案
+PASS  [AC1] 壳760 receipt 三行
+PASS  [AC2] 壳760 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳760 receipt EPC 百分比
+PASS  [AC2] 壳760 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳760 receipt PMC 百分比
+PASS  [AC2] 壳760 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳760 receipt 设计及咨询 百分比
+PASS  [AC2] 壳760 receipt 合计
+PASS  [AC5] 壳760 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳760 receipt 无裁切无字形遮挡
+PASS  [AC3] 780 前已用真实键盘回到全部板块
+PASS  [AC6] 壳 780 时 iframe 内容宽在 312px 附近
+PASS  [11-06补测] 780 现金流同行仍对齐
+PASS  [11-06补测] 780 成对模块对齐或已重排
+PASS  [11-06补测] 780 目标说明不截断
+PASS  [AC6] 壳780 KPI 第1行等高
+PASS  [AC6] 壳780 KPI 第2行等高
+PASS  [AC6] 壳780 KPI 第3行等高
+PASS  [AC6] 壳780 KPI 第4行等高
+PASS  [AC7] 壳780 contract 名称
+PASS  [AC7] 壳780 contract 占总目标
+PASS  [AC7] 壳780 contract 新增文案
+PASS  [AC1] 壳780 contract 三行
+PASS  [AC2] 壳780 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳780 contract EPC 百分比
+PASS  [AC2] 壳780 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳780 contract PMC 百分比
+PASS  [AC2] 壳780 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳780 contract 设计及咨询 百分比
+PASS  [AC2] 壳780 contract 合计
+PASS  [AC5] 壳780 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳780 contract 无裁切无字形遮挡
+PASS  [AC7] 壳780 completed 名称
+PASS  [AC7] 壳780 completed 占总目标
+PASS  [AC7] 壳780 completed 新增文案
+PASS  [AC1] 壳780 completed 三行
+PASS  [AC2] 壳780 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳780 completed EPC 百分比
+PASS  [AC2] 壳780 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳780 completed PMC 百分比
+PASS  [AC2] 壳780 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳780 completed 设计及咨询 百分比
+PASS  [AC2] 壳780 completed 合计
+PASS  [AC5] 壳780 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳780 completed 无裁切无字形遮挡
+PASS  [AC7] 壳780 invoice 名称
+PASS  [AC7] 壳780 invoice 占总目标
+PASS  [AC7] 壳780 invoice 新增文案
+PASS  [AC1] 壳780 invoice 三行
+PASS  [AC2] 壳780 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳780 invoice EPC 百分比
+PASS  [AC2] 壳780 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳780 invoice PMC 百分比
+PASS  [AC2] 壳780 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳780 invoice 设计及咨询 百分比
+PASS  [AC2] 壳780 invoice 合计
+PASS  [AC5] 壳780 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳780 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳780 receipt 名称
+PASS  [AC7] 壳780 receipt 占总目标
+PASS  [AC7] 壳780 receipt 新增文案
+PASS  [AC1] 壳780 receipt 三行
+PASS  [AC2] 壳780 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳780 receipt EPC 百分比
+PASS  [AC2] 壳780 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳780 receipt PMC 百分比
+PASS  [AC2] 壳780 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳780 receipt 设计及咨询 百分比
+PASS  [AC2] 壳780 receipt 合计
+PASS  [AC5] 壳780 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳780 receipt 无裁切无字形遮挡
+PASS  [AC6] 拉回桌面后开关仍开
+PASS  [AC6] 壳拉回1440 KPI 第1行等高
+PASS  [AC6] 壳拉回1440 KPI 第2行等高
+PASS  [AC7] 壳拉回1440 contract 名称
+PASS  [AC7] 壳拉回1440 contract 占总目标
+PASS  [AC7] 壳拉回1440 contract 新增文案
+PASS  [AC1] 壳拉回1440 contract 三行
+PASS  [AC2] 壳拉回1440 contract EPC 逐行 0.01 万元
+PASS  [AC5] 壳拉回1440 contract EPC 百分比
+PASS  [AC2] 壳拉回1440 contract PMC 逐行 0.01 万元
+PASS  [AC5] 壳拉回1440 contract PMC 百分比
+PASS  [AC2] 壳拉回1440 contract 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳拉回1440 contract 设计及咨询 百分比
+PASS  [AC2] 壳拉回1440 contract 合计
+PASS  [AC5] 壳拉回1440 contract 主条加三子条都是 12 段
+PASS  [AC6] 壳拉回1440 contract 无裁切无字形遮挡
+PASS  [AC7] 壳拉回1440 completed 名称
+PASS  [AC7] 壳拉回1440 completed 占总目标
+PASS  [AC7] 壳拉回1440 completed 新增文案
+PASS  [AC1] 壳拉回1440 completed 三行
+PASS  [AC2] 壳拉回1440 completed EPC 逐行 0.01 万元
+PASS  [AC5] 壳拉回1440 completed EPC 百分比
+PASS  [AC2] 壳拉回1440 completed PMC 逐行 0.01 万元
+PASS  [AC5] 壳拉回1440 completed PMC 百分比
+PASS  [AC2] 壳拉回1440 completed 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳拉回1440 completed 设计及咨询 百分比
+PASS  [AC2] 壳拉回1440 completed 合计
+PASS  [AC5] 壳拉回1440 completed 主条加三子条都是 12 段
+PASS  [AC6] 壳拉回1440 completed 无裁切无字形遮挡
+PASS  [AC7] 壳拉回1440 invoice 名称
+PASS  [AC7] 壳拉回1440 invoice 占总目标
+PASS  [AC7] 壳拉回1440 invoice 新增文案
+PASS  [AC1] 壳拉回1440 invoice 三行
+PASS  [AC2] 壳拉回1440 invoice EPC 逐行 0.01 万元
+PASS  [AC5] 壳拉回1440 invoice EPC 百分比
+PASS  [AC2] 壳拉回1440 invoice PMC 逐行 0.01 万元
+PASS  [AC5] 壳拉回1440 invoice PMC 百分比
+PASS  [AC2] 壳拉回1440 invoice 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳拉回1440 invoice 设计及咨询 百分比
+PASS  [AC2] 壳拉回1440 invoice 合计
+PASS  [AC5] 壳拉回1440 invoice 主条加三子条都是 12 段
+PASS  [AC6] 壳拉回1440 invoice 无裁切无字形遮挡
+PASS  [AC7] 壳拉回1440 receipt 名称
+PASS  [AC7] 壳拉回1440 receipt 占总目标
+PASS  [AC7] 壳拉回1440 receipt 新增文案
+PASS  [AC1] 壳拉回1440 receipt 三行
+PASS  [AC2] 壳拉回1440 receipt EPC 逐行 0.01 万元
+PASS  [AC5] 壳拉回1440 receipt EPC 百分比
+PASS  [AC2] 壳拉回1440 receipt PMC 逐行 0.01 万元
+PASS  [AC5] 壳拉回1440 receipt PMC 百分比
+PASS  [AC2] 壳拉回1440 receipt 设计及咨询 逐行 0.01 万元
+PASS  [AC5] 壳拉回1440 receipt 设计及咨询 百分比
+PASS  [AC2] 壳拉回1440 receipt 合计
+PASS  [AC5] 壳拉回1440 receipt 主条加三子条都是 12 段
+PASS  [AC6] 壳拉回1440 receipt 无裁切无字形遮挡
+PASS  [AC7] 壳主题 暖棕主题 后开关仍保持
+PASS  [AC7] 壳主题 青绿主题 后开关仍保持
+PASS  [AC7] 壳主题 深蓝主题 后开关仍保持
+PASS  [AC3] 壳刷新后开关回到关
+PASS  [AC7] 壳刷新后主题回到默认蓝
+verdict=PASS pass=926 fail=0
+SHELL_EXIT:0

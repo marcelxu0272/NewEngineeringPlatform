@@ -1,0 +1,31 @@
+FAIL  AC3 进入页面开关为关  {"c":null,"l":null}
+FAIL  演示权重标明「仅演示、非业务默认」
+PASS  AC3 关闭时无子行
+PASS  AC5/AC7 关态 1440 四张主卡
+PASS  AC5/AC7 关态 1440 contract 名称与万元
+PASS  AC5/AC7 关态 1440 contract 保留目标/占总目标
+FAIL  AC5/AC7 关态 1440 contract 占总目标 2 位且与主条同口径  {"rate":"92.3%","value":"9,188.14","target":"9,950.00"}
+FAIL  AC5/AC7 关态 1440 contract 主条宽按未舍入比例  {"fillW":null,"fillExp":562.8312894472361}
+FAIL  AC5/AC7 关态 1440 contract 主条 12 等分  []
+PASS  AC5/AC7 关态 1440 contract 新增文案与占目标 1 位
+PASS  AC5/AC7 关态 1440 completed 名称与万元
+PASS  AC5/AC7 关态 1440 completed 保留目标/占总目标
+FAIL  AC5/AC7 关态 1440 completed 占总目标 2 位且与主条同口径  {"rate":"88.1%","value":"12,269.36","target":"13,930.00"}
+FAIL  AC5/AC7 关态 1440 completed 主条宽按未舍入比例  {"fillW":null,"fillExp":536.8395491744436}
+FAIL  AC5/AC7 关态 1440 completed 主条 12 等分  []
+PASS  AC5/AC7 关态 1440 completed 新增文案与占目标 1 位
+PASS  AC5/AC7 关态 1440 invoice 名称与万元
+PASS  AC5/AC7 关态 1440 invoice 保留目标/占总目标
+FAIL  AC5/AC7 关态 1440 invoice 占总目标 2 位且与主条同口径  {"rate":"83.4%","value":"9,126.36","target":"10,945.00"}
+FAIL  AC5/AC7 关态 1440 invoice 主条宽按未舍入比例  {"fillW":null,"fillExp":508.2244330744632}
+FAIL  AC5/AC7 关态 1440 invoice 主条 12 等分  []
+PASS  AC5/AC7 关态 1440 invoice 新增文案与占目标 1 位
+PASS  AC5/AC7 关态 1440 receipt 名称与万元
+PASS  AC5/AC7 关态 1440 receipt 保留目标/占总目标
+FAIL  AC5/AC7 关态 1440 receipt 占总目标 2 位且与主条同口径  {"rate":"84.1%","value":"13,391.89","target":"15,920.00"}
+FAIL  AC5/AC7 关态 1440 receipt 主条宽按未舍入比例  {"fillW":null,"fillExp":512.7108640075377}
+FAIL  AC5/AC7 关态 1440 receipt 主条 12 等分  []
+PASS  AC5/AC7 关态 1440 receipt 新增文案与占目标 1 位
+Error: 缺少 #kpiSubgoalSwitch
+    at setSwitch (/agent/repos/NewEngineeringPlatform/docs/evidence/2026-11-09-ops-kpi-subgoals/probe.cjs:46:37)
+    at async /agent/repos/NewEngineeringPlatform/docs/evidence/2026-11-09-ops-kpi-subgoals/probe.cjs:167:3

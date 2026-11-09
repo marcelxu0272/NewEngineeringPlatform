@@ -1,0 +1,325 @@
+{
+  "a": {
+    "tag": "fresh-760-off",
+    "peerCols": "1",
+    "gridTemplateColumns": "713px",
+    "cards": [
+      {
+        "kpi": "contract",
+        "top": 43.390625,
+        "left": 16,
+        "width": 713,
+        "height": 109.921875,
+        "sub": false,
+        "deltaPosition": "absolute"
+      },
+      {
+        "kpi": "completed",
+        "top": 163.3125,
+        "left": 16,
+        "width": 713,
+        "height": 109.921875,
+        "sub": false,
+        "deltaPosition": "absolute"
+      },
+      {
+        "kpi": "invoice",
+        "top": 283.234375,
+        "left": 16,
+        "width": 713,
+        "height": 109.921875,
+        "sub": false,
+        "deltaPosition": "absolute"
+      },
+      {
+        "kpi": "receipt",
+        "top": 403.15625,
+        "left": 16,
+        "width": 713,
+        "height": 109.921875,
+        "sub": false,
+        "deltaPosition": "absolute"
+      }
+    ],
+    "rows": [
+      {
+        "row": 1,
+        "n": 1,
+        "top": 43.390625,
+        "heightDelta": 0,
+        "kpis": [
+          "contract"
+        ],
+        "widths": [
+          713
+        ],
+        "heights": [
+          109.921875
+        ],
+        "lefts": [
+          16
+        ]
+      },
+      {
+        "row": 2,
+        "n": 1,
+        "top": 163.3125,
+        "heightDelta": 0,
+        "kpis": [
+          "completed"
+        ],
+        "widths": [
+          713
+        ],
+        "heights": [
+          109.921875
+        ],
+        "lefts": [
+          16
+        ]
+      },
+      {
+        "row": 3,
+        "n": 1,
+        "top": 283.234375,
+        "heightDelta": 0,
+        "kpis": [
+          "invoice"
+        ],
+        "widths": [
+          713
+        ],
+        "heights": [
+          109.921875
+        ],
+        "lefts": [
+          16
+        ]
+      },
+      {
+        "row": 4,
+        "n": 1,
+        "top": 403.15625,
+        "heightDelta": 0,
+        "kpis": [
+          "receipt"
+        ],
+        "widths": [
+          713
+        ],
+        "heights": [
+          109.921875
+        ],
+        "lefts": [
+          16
+        ]
+      }
+    ]
+  },
+  "on": {
+    "tag": "fresh-760-on",
+    "peerCols": "2",
+    "gridTemplateColumns": "351.5px 351.5px",
+    "cards": [
+      {
+        "kpi": "contract",
+        "top": 43.390625,
+        "left": 16,
+        "width": 351.5,
+        "height": 304.921875,
+        "sub": true,
+        "deltaPosition": "static"
+      },
+      {
+        "kpi": "completed",
+        "top": 43.390625,
+        "left": 377.5,
+        "width": 351.5,
+        "height": 304.921875,
+        "sub": true,
+        "deltaPosition": "static"
+      },
+      {
+        "kpi": "invoice",
+        "top": 358.3125,
+        "left": 16,
+        "width": 351.5,
+        "height": 304.921875,
+        "sub": true,
+        "deltaPosition": "static"
+      },
+      {
+        "kpi": "receipt",
+        "top": 358.3125,
+        "left": 377.5,
+        "width": 351.5,
+        "height": 304.921875,
+        "sub": true,
+        "deltaPosition": "static"
+      }
+    ],
+    "rows": [
+      {
+        "row": 1,
+        "n": 2,
+        "top": 43.390625,
+        "heightDelta": 0,
+        "kpis": [
+          "contract",
+          "completed"
+        ],
+        "widths": [
+          351.5,
+          351.5
+        ],
+        "heights": [
+          304.921875,
+          304.921875
+        ],
+        "lefts": [
+          16,
+          377.5
+        ]
+      },
+      {
+        "row": 2,
+        "n": 2,
+        "top": 358.3125,
+        "heightDelta": 0,
+        "kpis": [
+          "invoice",
+          "receipt"
+        ],
+        "widths": [
+          351.5,
+          351.5
+        ],
+        "heights": [
+          304.921875,
+          304.921875
+        ],
+        "lefts": [
+          16,
+          377.5
+        ]
+      }
+    ]
+  },
+  "b": {
+    "tag": "fresh-760-off-again",
+    "peerCols": "1",
+    "gridTemplateColumns": "713px",
+    "cards": [
+      {
+        "kpi": "contract",
+        "top": 43.390625,
+        "left": 16,
+        "width": 713,
+        "height": 109.921875,
+        "sub": false,
+        "deltaPosition": "absolute"
+      },
+      {
+        "kpi": "completed",
+        "top": 163.3125,
+        "left": 16,
+        "width": 713,
+        "height": 109.921875,
+        "sub": false,
+        "deltaPosition": "absolute"
+      },
+      {
+        "kpi": "invoice",
+        "top": 283.234375,
+        "left": 16,
+        "width": 713,
+        "height": 109.921875,
+        "sub": false,
+        "deltaPosition": "absolute"
+      },
+      {
+        "kpi": "receipt",
+        "top": 403.15625,
+        "left": 16,
+        "width": 713,
+        "height": 109.921875,
+        "sub": false,
+        "deltaPosition": "absolute"
+      }
+    ],
+    "rows": [
+      {
+        "row": 1,
+        "n": 1,
+        "top": 43.390625,
+        "heightDelta": 0,
+        "kpis": [
+          "contract"
+        ],
+        "widths": [
+          713
+        ],
+        "heights": [
+          109.921875
+        ],
+        "lefts": [
+          16
+        ]
+      },
+      {
+        "row": 2,
+        "n": 1,
+        "top": 163.3125,
+        "heightDelta": 0,
+        "kpis": [
+          "completed"
+        ],
+        "widths": [
+          713
+        ],
+        "heights": [
+          109.921875
+        ],
+        "lefts": [
+          16
+        ]
+      },
+      {
+        "row": 3,
+        "n": 1,
+        "top": 283.234375,
+        "heightDelta": 0,
+        "kpis": [
+          "invoice"
+        ],
+        "widths": [
+          713
+        ],
+        "heights": [
+          109.921875
+        ],
+        "lefts": [
+          16
+        ]
+      },
+      {
+        "row": 4,
+        "n": 1,
+        "top": 403.15625,
+        "heightDelta": 0,
+        "kpis": [
+          "receipt"
+        ],
+        "widths": [
+          713
+        ],
+        "heights": [
+          109.921875
+        ],
+        "lefts": [
+          16
+        ]
+      }
+    ]
+  }
+}
