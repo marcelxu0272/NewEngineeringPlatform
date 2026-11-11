@@ -35,7 +35,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 把本仓作为现有 GitHub 仓库部署（不要另起脚手架）。建议发布时的 App URL 填 `engineering-platform`。对话框里的域名后缀以 Cursor 为准（公开说明里的示例形如 `https://engineering-platform.apps.grok.bot`）。
 
-不需要环境变量或密钥。演示数据是本地 SQLite：`npm start` 在 `data/platform.db` 不存在时自动 `db:init` + `db:seed`。数据库文件在 `.gitignore` 的 `/data/` 下，不会进仓库。
+不需要环境变量或密钥。演示数据是本地 SQLite：`npm start` 在 `data/platform.db` 不存在时自动 `db:init` + `db:seed`。数据库文件在 `.gitignore` 的 `/data/` 下，不会进仓库。公开发布时目录只读；人员名录不含姓名、邮箱和电话；银川绩效使用样例身份，不提供角色切换，也不展示合同额。
 
 生产进程监听 `0.0.0.0` 和 `PORT`（默认 3000）。目录首页 `/`、组织图入口 `/operations-dashboard-202610`、Board `/operations-dashboard-202610/board` 以及 catalog 里的其他路由都在同一个应用地址下。`next build` 不因历史 ESLint / `tsc` 报错失败（演示页里已有约 70 个类型错误）；需要时仍可单独跑 `npm run lint` 和 `npx tsc --noEmit`。原先 `src/pages/Detail/index.jsx` 不是合法页面，会被 Next 编成 `/Detail` 并在收集 page data 时崩溃；片段已挪到 `docs/snippets/src-pages-Detail-index.jsx`，正式明细页仍是 `/dashboard/detail`。
 

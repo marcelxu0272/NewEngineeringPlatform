@@ -15,33 +15,33 @@
 (function () {
   'use strict';
 
-  var STORAGE_KEY = 'engineering-platform-yinchuan-performance-payout-v7';
+  var STORAGE_KEY = 'engineering-platform-yinchuan-performance-payout-v8';
 
   /* ==========================================================================
    * 一、主数据（只读 mock）
    * ========================================================================== */
 
   var USERS = [
-    { id: 'u_wanglei', name: '王磊', namePinyin: 'wanglei', empNo: '170001', status: 'active' },
-    { id: 'u_liqiang', name: '李强', namePinyin: 'liqiang', empNo: '170002', status: 'active' },
-    { id: 'u_zhangxin', name: '张鑫', namePinyin: 'zhangxin', empNo: '170003', status: 'active' },
-    { id: 'u_anxiaohua', name: '安小华', namePinyin: 'anxiaohua', empNo: '170004', status: 'active' },
-    { id: 'u_sunqiang', name: '孙强', namePinyin: 'sunqiang', empNo: '170011', status: 'active' },
-    { id: 'u_zhaomin', name: '赵敏', namePinyin: 'zhaomin', empNo: '170012', status: 'active' },
-    { id: 'u_zhoufang', name: '周芳', namePinyin: 'zhoufang', empNo: '170013', status: 'active' },
-    { id: 'u_qianjin', name: '钱进', namePinyin: 'qianjin', empNo: '170014', status: 'active' },
-    { id: 'u_huangbin', name: '黄斌', namePinyin: 'huangbin', empNo: '170021', status: 'active' },
-    { id: 'u_litao', name: '李涛', namePinyin: 'litao', empNo: '170022', status: 'active' },
-    { id: 'u_hanxue', name: '韩雪', namePinyin: 'hanxue', empNo: '170023', status: 'active' },
-    { id: 'u_machao', name: '马超', namePinyin: 'machao', empNo: '178901', status: 'active' },
-    { id: 'u_liuyang', name: '刘洋', namePinyin: 'liuyang', empNo: '178902', status: 'active' },
-    { id: 'u_chenli', name: '陈立', namePinyin: 'chenli', empNo: '178903', status: 'active' },
-    { id: 'u_wuqian', name: '吴倩', namePinyin: 'wuqian', empNo: '178904', status: 'active' },
-    { id: 'u_guojing', name: '郭静', namePinyin: 'guojing', empNo: '178905', status: 'active' },
-    { id: 'u_fenghao', name: '冯浩', namePinyin: 'fenghao', empNo: '178906', status: 'active' },
+    { id: 'u_wanglei', name: '样例-01', namePinyin: 'yangli01', status: 'active' },
+    { id: 'u_liqiang', name: '样例-02', namePinyin: 'yangli02', status: 'active' },
+    { id: 'u_zhangxin', name: '样例-03', namePinyin: 'yangli03', status: 'active' },
+    { id: 'u_anxiaohua', name: '样例-04', namePinyin: 'yangli04', status: 'active' },
+    { id: 'u_sunqiang', name: '样例-05', namePinyin: 'yangli05', status: 'active' },
+    { id: 'u_zhaomin', name: '样例-06', namePinyin: 'yangli06', status: 'active' },
+    { id: 'u_zhoufang', name: '样例-07', namePinyin: 'yangli07', status: 'active' },
+    { id: 'u_qianjin', name: '样例-08', namePinyin: 'yangli08', status: 'active' },
+    { id: 'u_huangbin', name: '样例-09', namePinyin: 'yangli09', status: 'active' },
+    { id: 'u_litao', name: '样例-10', namePinyin: 'yangli10', status: 'active' },
+    { id: 'u_hanxue', name: '样例-11', namePinyin: 'yangli11', status: 'active' },
+    { id: 'u_machao', name: '样例-12', namePinyin: 'yangli12', status: 'active' },
+    { id: 'u_liuyang', name: '样例-13', namePinyin: 'yangli13', status: 'active' },
+    { id: 'u_chenli', name: '样例-14', namePinyin: 'yangli14', status: 'active' },
+    { id: 'u_wuqian', name: '样例-15', namePinyin: 'yangli15', status: 'active' },
+    { id: 'u_guojing', name: '样例-16', namePinyin: 'yangli16', status: 'active' },
+    { id: 'u_fenghao', name: '样例-17', namePinyin: 'yangli17', status: 'active' },
     // 历史派过工时但已离职：不应出现在专业内可选名单
-    { id: 'u_zhouli', name: '周离', namePinyin: 'zhouli', empNo: '178999', status: 'resigned' },
-    { id: 'u_admin', name: '管理员', namePinyin: 'guanliyuan', empNo: '100000', status: 'active' }
+    { id: 'u_zhouli', name: '样例-18', namePinyin: 'yangli18', status: 'resigned' },
+    { id: 'u_admin', name: '样例-19', namePinyin: 'yangli19', status: 'active' }
   ];
 
   var USER_MAP = USERS.reduce(function (m, u) { m[u.id] = u; return m; }, {});
@@ -63,13 +63,13 @@
   var PIE_COLOR_FALLBACK = ['#95c3c1', '#cae1e0', '#5a9e9a'];
 
   var PROJECTS = [
-    { id: 'p018', code: 'B26666', name: '银川新材料装置设计', center: 'SAS530', contractAmountExclTax: 10000000, managerUserId: 'u_wanglei' },
-    { id: 'p019', code: 'B26777', name: '银川中试装置改造', center: 'SAS530', contractAmountExclTax: 6000000, managerUserId: 'u_wanglei' },
-    { id: 'p020', code: 'B26888', name: '银川热电联产配套', center: 'SAS530', contractAmountExclTax: 8000000, managerUserId: 'u_liqiang' },
-    { id: 'p021', code: 'B26999', name: '银川空分装置改造', center: 'SAS530', contractAmountExclTax: 12000000, managerUserId: 'u_wanglei' },
-    { id: 'p022', code: 'B27000-0001', name: '银川污水处理配套', center: 'SAS530', contractAmountExclTax: 10000000, managerUserId: 'u_wanglei' },
-    { id: 'p023', code: 'B27111-0001', name: '银川储运系统升级', center: 'SAS530', contractAmountExclTax: 7500000, managerUserId: 'u_wanglei' },
-    { id: 'p024', code: 'B27222-0001', name: '银川循环水系统改造', center: 'SAS530', contractAmountExclTax: 9000000, managerUserId: 'u_wanglei' }
+    { id: 'p018', code: 'B26666', name: '银川新材料装置设计', center: 'SAS530', contractAmountExclTax: 0, managerUserId: 'u_wanglei' },
+    { id: 'p019', code: 'B26777', name: '银川中试装置改造', center: 'SAS530', contractAmountExclTax: 0, managerUserId: 'u_wanglei' },
+    { id: 'p020', code: 'B26888', name: '银川热电联产配套', center: 'SAS530', contractAmountExclTax: 0, managerUserId: 'u_liqiang' },
+    { id: 'p021', code: 'B26999', name: '银川空分装置改造', center: 'SAS530', contractAmountExclTax: 0, managerUserId: 'u_wanglei' },
+    { id: 'p022', code: 'B27000-0001', name: '银川污水处理配套', center: 'SAS530', contractAmountExclTax: 0, managerUserId: 'u_wanglei' },
+    { id: 'p023', code: 'B27111-0001', name: '银川储运系统升级', center: 'SAS530', contractAmountExclTax: 0, managerUserId: 'u_wanglei' },
+    { id: 'p024', code: 'B27222-0001', name: '银川循环水系统改造', center: 'SAS530', contractAmountExclTax: 0, managerUserId: 'u_wanglei' }
   ];
 
   var PROJECT_MAP = PROJECTS.reduce(function (m, p) { m[p.id] = p; return m; }, {});
@@ -110,7 +110,7 @@
       ]
     },
     {
-      // 同专业多单元、不同负责人：管道 WP1 孙强 / WP5 钱进
+      // 同专业多单元、不同负责人：管道 WP1 样例-05 / WP5 样例-08
       id: 'tb024', projectId: 'p024', workPackages: [
         { id: 'WP1', name: '循环水管道', disciplineId: 'd_pipe', leadUserId: 'u_sunqiang' },
         { id: 'WP2', name: '循环水工艺', disciplineId: 'd_process', leadUserId: 'u_zhaomin' },
@@ -483,7 +483,7 @@
   function personLabel(userId) {
     var u = USER_MAP[userId];
     if (!u) return '—';
-    return u.name + '(' + (u.empNo || '—') + ')';
+    return u.name;
   }
 
   function addHourNull(a, b) {
@@ -783,7 +783,7 @@
       unitLineFromBook('p024', 'WP5', 2000),
       unitLineFromBook('p024', 'WP2', 5000)
     ], 'INTER_APPROVED', {
-      remark: '循环水按单元：循环水管道孙强 30%、冷却塔管道钱进 20%、工艺 50%。',
+      remark: '循环水按单元：循环水管道样例-05 30%、冷却塔管道样例-08 20%、工艺 50%。',
       k2Status: 'confirmed', k3Status: 'confirmed',
       k2ConfirmedBy: cfg.k2ReviewerId, k2ConfirmedAt: nowStamp(),
       k3ConfirmedBy: cfg.k3ReviewerId, k3ConfirmedAt: nowStamp()
@@ -845,8 +845,8 @@
     {
       label: '发起与评估',
       options: [
-        { key: 'PM:u_wanglei', name: '项目经理 · 王磊' },
-        { key: 'PM:u_liqiang', name: '项目经理 · 李强' }
+        { key: 'PM:u_wanglei', name: '项目经理 · 样例-01' },
+        { key: 'PM:u_liqiang', name: '项目经理 · 样例-02' }
       ]
     },
     {
@@ -856,28 +856,28 @@
     {
       label: '专业负责人',
       options: [
-        { key: 'LEAD:u_sunqiang', name: '专业负责人 · 设计-设计-管道 孙强' },
-        { key: 'LEAD:u_zhaomin', name: '专业负责人 · 设计-设计-工艺 赵敏' },
-        { key: 'LEAD:u_zhoufang', name: '专业负责人 · 设计-设计-电气 周芳' },
-        { key: 'LEAD:u_qianjin', name: '专业负责人 · 设计-设计-管道 钱进' }
+        { key: 'LEAD:u_sunqiang', name: '专业负责人 · 设计-设计-管道 样例-05' },
+        { key: 'LEAD:u_zhaomin', name: '专业负责人 · 设计-设计-工艺 样例-06' },
+        { key: 'LEAD:u_zhoufang', name: '专业负责人 · 设计-设计-电气 样例-07' },
+        { key: 'LEAD:u_qianjin', name: '专业负责人 · 设计-设计-管道 样例-08' }
       ]
     },
     {
       label: '专业室主任',
       options: [
-        { key: 'DIRECTOR:u_huangbin', name: '专业室主任 · 设计-设计-管道 黄斌' },
-        { key: 'DIRECTOR:u_litao', name: '专业室主任 · 设计-设计-工艺 李涛' },
-        { key: 'DIRECTOR:u_hanxue', name: '专业室主任 · 设计-设计-电气 韩雪' }
+        { key: 'DIRECTOR:u_huangbin', name: '专业室主任 · 设计-设计-管道 样例-09' },
+        { key: 'DIRECTOR:u_litao', name: '专业室主任 · 设计-设计-工艺 样例-10' },
+        { key: 'DIRECTOR:u_hanxue', name: '专业室主任 · 设计-设计-电气 样例-11' }
       ]
     },
     {
       label: '工程师',
       options: [
-        { key: 'ENGINEER:u_machao', name: '工程师 · 马超' },
-        { key: 'ENGINEER:u_liuyang', name: '工程师 · 刘洋' },
-        { key: 'ENGINEER:u_fenghao', name: '工程师 · 冯浩' },
-        { key: 'ENGINEER:u_chenli', name: '工程师 · 陈立' },
-        { key: 'ENGINEER:u_wuqian', name: '工程师 · 吴倩' }
+        { key: 'ENGINEER:u_machao', name: '工程师 · 样例-12' },
+        { key: 'ENGINEER:u_liuyang', name: '工程师 · 样例-13' },
+        { key: 'ENGINEER:u_fenghao', name: '工程师 · 样例-17' },
+        { key: 'ENGINEER:u_chenli', name: '工程师 · 样例-14' },
+        { key: 'ENGINEER:u_wuqian', name: '工程师 · 样例-15' }
       ]
     },
     {

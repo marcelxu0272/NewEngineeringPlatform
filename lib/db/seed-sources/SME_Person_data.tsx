@@ -1,8 +1,6 @@
 export const personnelData = [
   {
-    name: "何红阳",
-    email: "hongyang.he@woodplc.com", 
-    phone: "13000000000",
+    name: "人员-001",
     department: "金山中心",
     major: "工艺",
     projects: ["空分", "生物乙醇", "PMMA"],
@@ -13,9 +11,7 @@ export const personnelData = [
     location: "徐汇"
   },
   {
-    name: "朱雪梅",
-    email: "xuemei.zhu@woodplc.com",
-    phone: "13000000000",
+    name: "人员-002",
     department: "金山中心", 
     major: "工艺",
     projects: ["特种沥青", "硫磺回收", "MMA"],
@@ -26,9 +22,7 @@ export const personnelData = [
     location: "惠州"
   },
   {
-    name: "王平",
-    email: "ping.wang@woodplc.com",
-    phone: "13000000000",
+    name: "人员-003",
     department: "金山中心",
     major: "结构",
     projects: ["立体仓库", "密闭除焦"],
@@ -39,9 +33,7 @@ export const personnelData = [
     location: "银川"
   },
   {
-    name: "王爱民",
-    email: "aimin.wang@woodplc.com",
-    phone: "13000000000",
+    name: "人员-004",
     department: "施工部",
     major: "施工管理",
     projects: ["常减压", "加氢", "制氢", "全厂管廊"],
@@ -52,9 +44,7 @@ export const personnelData = [
     location: "沈阳"
   },
   {
-    name: "徐严勇",
-    email: "yanyong.xv@woodplc.com",
-    phone: "13000000000",
+    name: "人员-005",
     department: "施工部",
     major: "安全",
     projects: ["过氧化物", "空分", "合成橡胶"],
@@ -65,9 +55,7 @@ export const personnelData = [
     location: "金山"
   },
   {
-    name: "颉晓永",
-    email: "xiaoyong.xie@woodplc.com",
-    phone: "13000000000",
+    name: "人员-006",
     department: "施工部",
     major: "质量",
     projects: ["PMMA", "聚烯烃", "LNG", "磷酸盐", "环氧乙烷"],
@@ -78,9 +66,7 @@ export const personnelData = [
     location: "湛江"
   },
   {
-    name: "戴作滔",
-    email: "zuotao.dai@woodplc.com",
-    phone: "13000000000",
+    name: "人员-007",
     department: "仪电室",
     major: "仪表",
     projects: ["锂电池", "PE", "氯碱", "烧碱"],
@@ -91,9 +77,7 @@ export const personnelData = [
     location: "金山"
   },
   {
-    name: "郭超华",
-    email: "chaohua.guo@woodplc.com",
-    phone: "13000000000",
+    name: "人员-008",
     department: "仪电室",
     major: "电气",
     projects: ["炼化一体化", "芳烃", "聚酯", "研发中心"],
@@ -104,9 +88,7 @@ export const personnelData = [
     location: "金山"
   },
   {
-    name: "刘贺南",
-    email: "henan.liu@woodplc.com",
-    phone: "13000000000",
+    name: "人员-009",
     department: "仪电室",
     major: "电信",
     projects: ["数字化顶层设计", "全厂电信系统"],
@@ -117,9 +99,7 @@ export const personnelData = [
     location: "未知"
   },
   {
-    name: "张三",
-    email: "zhangsan@woodplc.com",
-    phone: "13000000000",
+    name: "人员-010",
     department: "仪电室",
     major: "电信",
     projects: ["数字化顶层设计", "全厂电信系统", "智能工厂建设", "工业互联网平台", "工业安全体系", "工业数据中心", "工业云平台", "5G专网建设", "工业大数据", "边缘计算"],

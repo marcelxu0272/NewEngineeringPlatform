@@ -168,8 +168,8 @@ function runSeed() {
   for (const p of personnelData) {
     insSme.run(
       p.name,
-      p.email,
-      p.phone ?? null,
+      '',
+      null,
       p.department ?? null,
       p.major ?? null,
       JSON.stringify(p.projects ?? []),
@@ -189,11 +189,11 @@ function runSeed() {
   for (const p of peopleData) {
     insEsk.run(
       p.name,
-      p.email,
+      '',
       p.specialty ?? null,
       p.region ?? null,
       p.department ?? null,
-      p.phone ?? null,
+      null,
       p.score ?? null,
       JSON.stringify(p.skills ?? [])
     );

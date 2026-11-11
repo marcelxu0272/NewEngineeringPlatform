@@ -7,8 +7,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { 
-  MailOutlined, 
-  PhoneOutlined, 
   EnvironmentOutlined,
   ProjectOutlined,    // 项目图标
   BankOutlined,       // 行业图标
@@ -20,8 +18,6 @@ import Image from 'next/image';
 
 type Personnel = {
   name: string;
-  email: string;
-  phone?: string;
   department?: string;
   major?: string;
   projects?: string[];
@@ -107,12 +103,6 @@ export default function PersonnelCards() {
   )
 }
 
-// 添加这个辅助函数来格式化手机号
-function formatPhoneNumber(phoneNumber: string): string {
-  if (phoneNumber.length !== 11) return phoneNumber; // 如果不是11位则返回原始号码
-  return `${phoneNumber.slice(0, 3)} ${phoneNumber.slice(3, 7)} ${phoneNumber.slice(7)}`;
-}
-
 // 添加这个函数来获取基于location的渐变色
 function getLocationGradient(location: string): string {
   const gradientMap: { [key: string]: string } = {
@@ -152,19 +142,6 @@ function PersonCard({ person }: { person: any }) {
           </div>
           
           <div className="space-y-3">
-            <div className="flex items-center text-gray-600">
-              <MailOutlined className="mr-3 text-gray-400" /> 
-              <a 
-                href={`mailto:${person.email}`} 
-                className="text-sm text-blue-600 hover:text-blue-800 transition-colors cursor-pointer"
-              >
-                {person.email}
-              </a>
-            </div>
-            <div className="flex items-center text-gray-600">
-              <PhoneOutlined className="mr-3 text-gray-400" /> 
-              <span className="text-sm">{formatPhoneNumber(person.phone)}</span>
-            </div>
             <div className="flex items-center text-gray-600">
               <EnvironmentOutlined className="mr-3 text-gray-400" /> 
               <span className="text-sm">{person.location}</span>

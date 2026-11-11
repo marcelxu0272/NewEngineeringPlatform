@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { Tree, Input, Select, Button, Radio, Modal, Form, List, Space, Divider, Table, Drawer, Tag, Typography, Popconfirm, InputNumber, message, Pagination } from 'antd';
-import { ClearOutlined, SettingOutlined, PlusOutlined, MinusCircleOutlined, UploadOutlined, ExpandAltOutlined, ShrinkOutlined, SearchOutlined, ArrowLeftOutlined, MailOutlined, PhoneOutlined, TeamOutlined, EnvironmentOutlined, WechatOutlined } from '@ant-design/icons';
+import { ClearOutlined, SettingOutlined, PlusOutlined, MinusCircleOutlined, UploadOutlined, ExpandAltOutlined, ShrinkOutlined, SearchOutlined, ArrowLeftOutlined, TeamOutlined, EnvironmentOutlined, WechatOutlined } from '@ant-design/icons';
 import type { DataNode } from 'antd/es/tree';
 import { cn } from '@/lib/utils'
 import styled from 'styled-components';
@@ -197,8 +197,7 @@ const EngineeringSystemSkills = () => {
           person.skills.some(personSkill => personSkill.name.startsWith(skill)))
       )) &&
       (searchTerm === '' || 
-        person.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-        person.email.toLowerCase().includes(searchTerm.toLowerCase())
+        person.name.toLowerCase().includes(searchTerm.toLowerCase())
       ) &&
       (selectedDepartment === '全部' || person.department === selectedDepartment) &&
       (selectedRegion === '全部' || person.region === selectedRegion) &&
@@ -525,7 +524,7 @@ const EngineeringSystemSkills = () => {
         <div ref={cardListRef} className="flex-grow overflow-auto">
           {paginatedPeople.map((person) => (
             <PersonCard
-              key={person.email}
+              key={person.name}
               person={person}
               checkedSkills={checkedSkills}
               onClick={() => showDrawer(person)}
@@ -568,9 +567,7 @@ const EngineeringSystemSkills = () => {
         {selectedPerson && (
           <div className="space-y-6">
             <div className="grid grid-cols-2 gap-4">
-              <InfoItem label="姓名" value={selectedPerson.name} />
-              <InfoItem label="邮箱" value={selectedPerson.email} />
-              <InfoItem label="手机号" value={selectedPerson.phone} />
+              <InfoItem label="编号" value={selectedPerson.name} />
               <InfoItem label="部门" value={selectedPerson.department} />
               <InfoItem label="区域" value={selectedPerson.region} />
               <InfoItem label="专业" value={selectedPerson.specialty} />
@@ -701,8 +698,7 @@ const ManagementModal: React.FC<ManagementModalProps> = ({
 
   const filteredPeopleData = useMemo(() => {
     return peopleData.filter(person =>
-      person.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      person.email.toLowerCase().includes(searchTerm.toLowerCase())
+      person.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
   }, [peopleData, searchTerm]);
 
@@ -725,7 +721,7 @@ const ManagementModal: React.FC<ManagementModalProps> = ({
           <div className="w-1/3 pr-4 border-r flex flex-col">
             <div className="sticky top-0 bg-white z-10 pb-2">
               <Input
-                placeholder="搜索姓名或邮箱"
+                placeholder="搜索编号、部门或专业"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="mb-2"
@@ -741,11 +737,11 @@ const ManagementModal: React.FC<ManagementModalProps> = ({
                       setSelectedPerson(item);
                       setIsAddingNew(false);
                     }}
-                    className={`cursor-pointer ${selectedPerson?.email === item.email ? 'bg-blue-100' : ''}`}
+                    className={`cursor-pointer ${selectedPerson?.name === item.name ? 'bg-blue-100' : ''}`}
                   >
                     <div className="flex flex-col w-full">
                       <span>{item.name}</span>
-                      <span className="text-xs text-gray-400 truncate" style={{ maxWidth: '100%' }}>{item.email}</span>
+                      <span className="text-xs text-gray-400 truncate" style={{ maxWidth: '100%' }}>{item.department}</span>
                     </div>
                   </List.Item>
                 )}
@@ -754,13 +750,7 @@ const ManagementModal: React.FC<ManagementModalProps> = ({
           </div>
           <div className="w-2/3 pl-4 overflow-y-auto">
             <Form form={form} layout="vertical">
-              <Form.Item name="name" label="姓名" rules={[{ required: true }]}>
-                <Input disabled={!isAddingNew} />
-              </Form.Item>
-              <Form.Item name="email" label="邮箱" rules={[{ required: true, type: 'email' }]}>
-                <Input disabled={!isAddingNew} />
-              </Form.Item>
-              <Form.Item name="phone" label="手机号" rules={[{ required: true, pattern: /^1[3-9]\d{9}$/, message: '请输有效的手机号' }]}>
+              <Form.Item name="name" label="编号" rules={[{ required: true }]}>
                 <Input disabled={!isAddingNew} />
               </Form.Item>
               <Form.Item name="region" label="区域" rules={[{ required: true }]}>
@@ -1240,14 +1230,6 @@ const PersonCard: React.FC<{ person: PersonCard; checkedSkills: string[]; onClic
         <div className="space-y-2">
           <h3 className="text-xl font-bold">{person.name}</h3>
           <div className="flex items-center space-x-6 text-gray-600">
-            <div className="flex items-center space-x-1">
-              <MailOutlined className="text-gray-400" />
-              <span>{person.email}</span>
-            </div>
-            <div className="flex items-center space-x-1">
-              <PhoneOutlined className="text-gray-400" />
-              <span>{person.phone}</span>
-            </div>
             <div className="flex items-center space-x-1 text-[#3975c6]">
               <Image 
                 src="/images/wechat.png" 

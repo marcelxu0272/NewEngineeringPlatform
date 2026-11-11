@@ -139,8 +139,6 @@ export function getSmePersonnel() {
   }>;
   return rows.map((r) => ({
     name: r.name,
-    email: r.email,
-    phone: r.phone ?? undefined,
     department: r.department ?? undefined,
     major: r.major ?? undefined,
     projects: JSON.parse(r.projects || '[]'),
@@ -166,11 +164,9 @@ export function getEskPeople() {
   }>;
   return rows.map((r) => ({
     name: r.name,
-    email: r.email,
     specialty: r.specialty ?? undefined,
     region: r.region ?? undefined,
     department: r.department ?? undefined,
-    phone: r.phone ?? undefined,
     score: r.score ?? undefined,
     skills: JSON.parse(r.skills || '[]'),
   }));

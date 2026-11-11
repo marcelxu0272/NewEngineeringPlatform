@@ -62,15 +62,8 @@
                 <div class="yc-demo-tools">
                     <span class="yc-demo-label">演示工具</span>
                     <span class="text-sm text-gray-500">当前身份</span>
-                    <el-select v-model="currentRole" size="small" style="width: 260px">
-                        <el-option-group v-for="g in roleGroups" :key="g.label" :label="g.label">
-                            <el-option
-                                v-for="o in g.options"
-                                :key="o.key"
-                                :label="o.key === 'K2' ? ('K2 审核人 · ' + userName(state.config.k2ReviewerId)) : (o.key === 'K3' ? ('K3 审核人 · ' + userName(state.config.k3ReviewerId)) : o.name)"
-                                :value="o.key"></el-option>
-                        </el-option-group>
-                    </el-select>
+                    <span class="text-sm text-gray-800">样例项目经理</span>
+                    <span class="text-sm text-gray-500">合同额不在本演示中展示</span>
                     <el-button v-if="showDemoReset" size="small" icon="el-icon-refresh-left" @click="resetDemoData">重置演示数据</el-button>
                 </div>
             </div>
@@ -220,7 +213,7 @@
                     <div>
                         <label class="yc-field-label">
                             可分配金额
-                            <el-tooltip content="不含税合同额 - 已分配金额" placement="top">
+                            <el-tooltip content="样例基数 - 已分配金额" placement="top">
                                 <i class="fas fa-info-circle yc-field-tip"></i>
                             </el-tooltip>
                         </label>
