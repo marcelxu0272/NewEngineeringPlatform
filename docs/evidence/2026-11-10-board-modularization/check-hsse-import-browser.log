@@ -1,0 +1,1 @@
+{"verdict":"PASS","checks":14,"errors":[],"preview":"real HTTP Excel parser","commit":"mocked; actual transaction tested separately using isolated SQLite"}

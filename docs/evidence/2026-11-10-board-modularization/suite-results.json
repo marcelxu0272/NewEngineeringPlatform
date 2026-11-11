@@ -1,0 +1,77 @@
+{
+  "verdict": "PASS",
+  "results": [
+    {
+      "name": "kpi-math",
+      "status": 0
+    },
+    {
+      "name": "sector-comparison",
+      "status": 0
+    },
+    {
+      "name": "monthly-details",
+      "status": 0
+    },
+    {
+      "name": "project-math",
+      "status": 0
+    },
+    {
+      "name": "market-math",
+      "status": 0
+    },
+    {
+      "name": "storage-isolated",
+      "status": 0
+    },
+    {
+      "name": "hsse-api-isolated",
+      "status": 0
+    },
+    {
+      "name": "hsse-import-isolated",
+      "status": 0
+    },
+    {
+      "name": "static-lifecycle",
+      "status": 0
+    },
+    {
+      "name": "project-browser",
+      "status": 0
+    },
+    {
+      "name": "timesheet-browser",
+      "status": 0
+    },
+    {
+      "name": "timesheet-lifecycle",
+      "status": 0
+    },
+    {
+      "name": "market-browser",
+      "status": 0
+    },
+    {
+      "name": "hsse-browser",
+      "status": 0
+    },
+    {
+      "name": "hsse-import-browser",
+      "status": 0
+    },
+    {
+      "name": "pdf-browser",
+      "status": 0
+    },
+    {
+      "name": "baseline",
+      "status": 0
+    },
+    {
+      "name": "baseline-and-vendor-integrity",
+      "status": 0
+    }
+  ]
+}

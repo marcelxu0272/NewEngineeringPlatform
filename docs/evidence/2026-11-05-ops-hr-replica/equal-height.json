@@ -1,0 +1,61 @@
+{
+  "viewport": 1920,
+  "panels": [
+    {
+      "height": 546.59375,
+      "id": "dispatchMapPanel",
+      "width": 1421,
+      "x": 18,
+      "y": 450.953125
+    },
+    {
+      "height": 611.1875,
+      "id": "dispatchPanel",
+      "width": 1421,
+      "x": 18,
+      "y": 1011.546875
+    },
+    {
+      "height": 371.578125,
+      "id": "specialtyPanel",
+      "width": 703.5,
+      "x": 18,
+      "y": 1636.734375
+    },
+    {
+      "height": 371.578125,
+      "id": "sectorDemandPanel",
+      "width": 703.5,
+      "x": 735.5,
+      "y": 1636.734375
+    },
+    {
+      "height": 485.796875,
+      "id": "loadAnalysisPanel",
+      "width": 703.5,
+      "x": 18,
+      "y": 2022.3125
+    },
+    {
+      "height": 485.796875,
+      "id": "lowLoadPanel",
+      "width": 703.5,
+      "x": 735.5,
+      "y": 2022.3125
+    },
+    {
+      "height": 284.796875,
+      "id": "officePanel",
+      "width": 1421,
+      "x": 18,
+      "y": 2522.109375
+    },
+    {
+      "height": 1046.390625,
+      "id": "potentialPanel",
+      "width": 1421,
+      "x": 18,
+      "y": 2820.90625
+    }
+  ]
+}

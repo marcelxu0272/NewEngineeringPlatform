@@ -1,0 +1,40 @@
+{
+  "pass": true,
+  "dom": {
+    "agingTitle": false,
+    "agingChart": false,
+    "agingLegend": false,
+    "riskMetrics": 4,
+    "contrib": true,
+    "contribTitle": "板块现金流贡献 （万元） ?",
+    "openAging": "undefined"
+  },
+  "layout": {
+    "cw": 769.5,
+    "tw": 769.5,
+    "equal": true
+  },
+  "sorts": {
+    "contract": {
+      "n": 10,
+      "desc": true,
+      "note": "新签合同额年度目标达成率 · 全部板块（10）· 按完成率降序"
+    },
+    "completed": {
+      "n": 10,
+      "desc": true,
+      "note": "完成合同额年度目标达成率 · 全部板块（10）· 按完成率降序"
+    },
+    "invoice": {
+      "n": 10,
+      "desc": true,
+      "note": "完成开票额年度目标达成率 · 全部板块（10）· 按完成率降序"
+    },
+    "receipt": {
+      "n": 10,
+      "desc": true,
+      "note": "完成回款额年度目标达成率 · 全部板块（10）· 按完成率降序"
+    }
+  },
+  "errors": []
+}

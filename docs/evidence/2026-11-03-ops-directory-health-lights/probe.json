@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "rows": [
+    "合同签约正常",
+    "资金回收关注",
+    "交付保障预警"
+  ],
+  "belowTree": true,
+  "visibleAt1280": true,
+  "themeSwitch": true,
+  "treeSwitch": true
+}

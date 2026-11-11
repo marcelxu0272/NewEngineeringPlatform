@@ -1,0 +1,27 @@
+{
+  "verdict": "PASS",
+  "checks": 50,
+  "errors": [],
+  "results": [
+    {
+      "id": "overview",
+      "mountCycles": 2,
+      "charts": 5
+    },
+    {
+      "id": "completed-contract",
+      "mountCycles": 2,
+      "charts": 3
+    },
+    {
+      "id": "timesheet",
+      "mountCycles": 2,
+      "charts": 4
+    },
+    {
+      "id": "hr",
+      "mountCycles": 2,
+      "charts": 1
+    }
+  ]
+}

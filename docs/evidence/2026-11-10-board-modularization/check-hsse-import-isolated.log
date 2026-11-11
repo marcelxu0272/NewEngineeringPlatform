@@ -1,0 +1,1 @@
+{"verdict":"PASS","checks":26,"template":"13 columns, 12 blank months","storage":"isolated temporary SQLite","rollback":"verified with forced failure on second month"}

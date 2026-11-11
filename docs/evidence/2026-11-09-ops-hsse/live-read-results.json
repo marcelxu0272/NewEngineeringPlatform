@@ -1,0 +1,6 @@
+{
+  "verdict": "PASS",
+  "realHttpApi": true,
+  "databaseRows": 0,
+  "noFixtures": true
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>工时看板</title>
+<script src="./vendor/echarts.min.js"></script>
+
+<link rel="stylesheet" href="./timesheet/styles.css">
+</head>
+<body>
+<main class="page" id="timesheetPage">
+  <header class="page-head">
+    <div><h1>工时看板<span class="demo-tag">演示数据</span></h1><div class="department">当前部门：<span id="effectiveDepartment">SAS610 咨询板块</span></div><div class="head-note" id="scopeNote">顶部为全部板块，当前展示咨询板块。</div></div>
+    <div class="period">报告期<br/><strong>2026-11-01 至 2026-11-03</strong><br/>数据截至 2026-11-03</div>
+  </header>
+  <section class="kpi-grid" aria-label="工时核心指标">
+    <article class="kpi-card"><h2 class="kpi-title">报告期批准工时数<span class="info" tabindex="0" title="演示计算：批准工时为报告期项目工时与 OverHead 工时合计，单位：小时。">i</span></h2><div class="metric"><span id="approvedHours">—</span><span class="metric-unit">小时</span></div><div class="kpi-sub"><span>OverHead 工时 <strong id="overheadHours">—</strong> 小时</span></div></article>
+    <article class="kpi-card"><h2 class="kpi-title">报告期标准工时数<span class="info" tabindex="0" title="当前部门基准人员在报告期内的标准可用工时合计。固定样例，仅用于演示。">i</span></h2><div class="metric"><span id="standardHours">—</span><span class="metric-unit">小时</span></div><div class="kpi-sub"><button class="detail-link" data-detail-kind="baseline">基准人数 <strong id="baselineCount">—</strong> 人<span class="arrow">›</span></button><button class="detail-link" data-detail-kind="reported">上报人数 <strong id="reportedCount">—</strong> 人<span class="arrow">›</span></button></div></article>
+    <article class="kpi-card"><h2 class="kpi-title">报告期负荷率<span class="info" tabindex="0" title="演示计算：报告期项目工时 ÷ 标准可用工时。分母为零或暂无数据时显示 —；OverHead 不计入分子。">i</span></h2><div class="metric" id="reportLoad">—</div><div class="kpi-sub"><button class="detail-link" data-detail-kind="projects">项目工时统计<span class="arrow">›</span></button><button class="detail-link" data-detail-kind="people">人员工时统计<span class="arrow">›</span></button></div></article>
+    <article class="kpi-card forecast-kpi"><h2 class="kpi-title">未来三月负荷率预测<span class="info" tabindex="0" title="演示计算：部门已排总工时 ÷ 部门可用总工时，按容量加权，不平均人员百分比。">i</span></h2><div class="mini-chart" id="miniForecastChart" role="img" aria-label="未来三个月部门负荷率预测"></div><div class="mini-empty" id="miniEmpty" hidden>暂无预测数据</div></article>
+  </section>
+  <section class="panel" id="departmentTrendPanel"><div class="panel-head"><h2 class="panel-title">部门负荷</h2><div class="segmented" aria-label="趋势时间范围"><button data-trend-mode="report" aria-pressed="false">报告期数据</button><button class="active" data-trend-mode="history" aria-pressed="true">历史＋未来</button></div></div><div class="panel-note" id="trendNote"></div><div class="trend-chart" id="departmentTrendChart" role="img" aria-label="当前部门负荷率趋势"></div><div class="empty" id="trendEmpty" hidden>当前部门暂无负荷数据</div><div class="legend-note"><span><i></i>实际负荷</span><span id="forecastLegend"><i class="dashed"></i>预测负荷</span><span><i class="guide"></i>100% 参考线</span></div></section>
+  <div class="bottom-grid">
+    <section class="panel" id="departmentForecastPanel"><div class="panel-head"><h2 class="panel-title">本部门未来三个月对比</h2></div><div class="panel-note">负荷率 · 已排总工时（EWH）</div><div class="forecast-chart" id="departmentForecastChart" role="img" aria-label="本部门未来三个月负荷率与已排总工时"></div><div class="empty" id="departmentEmpty" hidden>当前部门暂无预测数据</div><div class="panel-note">按总工时比例计算，包含本部门全部基准人员。</div></section>
+    <section class="panel" id="personnelForecastPanel"><div class="panel-head"><h2 class="panel-title">人员负荷率预测</h2></div><div class="segmented" id="forecastMonthTabs" aria-label="人员预测月份"><button data-forecast-month="2026-12" class="active" aria-pressed="true">2026年12月</button><button data-forecast-month="2027-01" aria-pressed="false">2027年1月</button><button data-forecast-month="2027-02" aria-pressed="false">2027年2月</button></div><div class="controls"><label for="personnelSort">负荷率排序</label><select id="personnelSort"><option value="desc">从高到低</option><option value="asc">从低到高</option></select></div><form class="search-form" id="personnelSearchForm"><input id="personnelSearch" type="search" placeholder="输入人员姓名" aria-label="人员姓名" autocomplete="off"/><button class="btn primary" id="searchPersonnel" type="submit">查询</button></form><div class="export-row"><button class="btn" id="exportSummary">↓ 导出</button><button class="btn" id="exportDetails">↓ 导出明细</button></div><div class="people-meta" id="personnelCount"></div><div class="personnel-chart" id="personnelForecastChart" role="img" aria-label="当前月份本部门人员负荷率与已排工时"></div><div class="empty" id="personnelEmpty" hidden>未找到匹配人员</div><div class="tbd">TBD 工时<strong id="tbdHours">0.00 EWH</strong><br/>待分配工时独立展示。</div><div class="status" id="exportStatus" role="status" aria-live="polite"></div></section>
+  </div>
+  <p class="footer-note">演示计算：报告期负荷率＝项目工时／标准可用工时；批准工时＝项目工时＋OverHead。预测负荷率＝已排工时／可用工时。<br/>固定样例仅用于展示交互，工时与比例保留两位小数；“—”表示无数据或标准可用工时为零。</p>
+</main>
+<dialog id="detailDialog" aria-labelledby="detailTitle"><div class="dialog-layout"><header class="dialog-head"><h2 id="detailTitle"></h2><button class="close-btn" id="closeDetail" type="button" aria-label="关闭明细">×</button></header><div class="dialog-body"><p class="dialog-context" id="detailContext"></p><div class="table-wrap"><table id="detailTable"></table></div></div><footer class="dialog-foot">演示数据 · 报告期：2026-11-01 至 2026-11-03 · 单位：小时<br/>所有明细均限定当前部门，可按 Esc 关闭。</footer></div></dialog>
+
+<script type="module" src="./timesheet/app.js"></script>
+</body>
+</html>

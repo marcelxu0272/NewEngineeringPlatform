@@ -1,0 +1,63 @@
+{
+  "pass": true,
+  "geom": {
+    "chartH": {
+      "c": 320,
+      "t": 320,
+      "diff": 0
+    },
+    "chartW": {
+      "c": 735.5,
+      "t": 735.5
+    },
+    "clientH": {
+      "c": 320,
+      "t": 320
+    },
+    "css": {
+      "c": {
+        "h": "320px",
+        "min": "320px",
+        "max": "320px",
+        "flex": "0 0 320px",
+        "grow": "0"
+      },
+      "t": {
+        "h": "320px",
+        "min": "320px",
+        "max": "320px",
+        "flex": "0 0 320px",
+        "grow": "0"
+      }
+    },
+    "panelW": {
+      "c": 769.5,
+      "t": 769.5
+    },
+    "agingGone": true
+  },
+  "geomAfterTabs": {
+    "c": 320,
+    "t": 320,
+    "diff": 0
+  },
+  "sorts": {
+    "contract": {
+      "n": 10,
+      "desc": true
+    },
+    "completed": {
+      "n": 10,
+      "desc": true
+    },
+    "invoice": {
+      "n": 10,
+      "desc": true
+    },
+    "receipt": {
+      "n": 10,
+      "desc": true
+    }
+  },
+  "errors": []
+}

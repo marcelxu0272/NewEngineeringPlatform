@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "topLevelOrder": [
+    "运营看板",
+    "部门成本看板",
+    "市场看板",
+    "人力资源看板",
+    "交付保障看板",
+    "完成合同额看板",
+    "PDF报告"
+  ],
+  "placeholderSwitch": true
+}

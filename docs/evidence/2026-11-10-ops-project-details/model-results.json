@@ -1,0 +1,5 @@
+{
+  "verdict": "PASS",
+  "checks": 108,
+  "coverage": "six metrics; positive, zero, negative and one-unit totals; project fields, search, CSV and stable IDs"
+}

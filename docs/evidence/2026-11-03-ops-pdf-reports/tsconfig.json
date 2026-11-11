@@ -1,0 +1,1 @@
+{"extends":"../../../tsconfig.json","compilerOptions":{"incremental":false},"include":["../../../app/operations-dashboard-202610/board/*.tsx","../../../app/api/pdf-reports/**/*.ts","../../../app/api/pdf-assets/**/*.ts","../../../lib/pdf-reports/*.ts"],"exclude":["../../../node_modules"]}

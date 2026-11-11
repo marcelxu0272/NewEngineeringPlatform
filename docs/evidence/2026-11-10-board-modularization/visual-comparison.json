@@ -1,0 +1,62 @@
+{
+  "current": {
+    "changedPixels": 2227,
+    "totalPixels": 1296000,
+    "bbox": [
+      412,
+      23,
+      1417,
+      121
+    ]
+  },
+  "completed-contract": {
+    "changedPixels": 12921,
+    "totalPixels": 1296000,
+    "bbox": [
+      232,
+      24,
+      1416,
+      492
+    ]
+  },
+  "timesheet": {
+    "changedPixels": 46,
+    "totalPixels": 1296000,
+    "bbox": [
+      413,
+      24,
+      1416,
+      120
+    ]
+  },
+  "hr": {
+    "changedPixels": 12934,
+    "totalPixels": 1296000,
+    "bbox": [
+      232,
+      24,
+      1416,
+      429
+    ]
+  },
+  "market": {
+    "changedPixels": 13254,
+    "totalPixels": 1296000,
+    "bbox": [
+      232,
+      24,
+      1416,
+      398
+    ]
+  },
+  "hsse": {
+    "changedPixels": 13515,
+    "totalPixels": 1296000,
+    "bbox": [
+      232,
+      24,
+      1416,
+      524
+    ]
+  }
+}

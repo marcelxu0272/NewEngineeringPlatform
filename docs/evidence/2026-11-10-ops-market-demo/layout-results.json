@@ -1,0 +1,254 @@
+[
+  {
+    "clientWidth": 992,
+    "scrollWidth": 992,
+    "grids": [
+      {
+        "name": "kpi",
+        "columns": 2,
+        "cards": [
+          {
+            "top": 417,
+            "height": 140.9375
+          },
+          {
+            "top": 417,
+            "height": 140.9375
+          },
+          {
+            "top": 573,
+            "height": 140.9375
+          },
+          {
+            "top": 573,
+            "height": 140.9375
+          }
+        ]
+      },
+      {
+        "name": "contracts",
+        "columns": 2,
+        "cards": [
+          {
+            "top": 730,
+            "height": 395
+          },
+          {
+            "top": 730,
+            "height": 395
+          },
+          {
+            "top": 1141,
+            "height": 382
+          },
+          {
+            "top": 1141,
+            "height": 382
+          },
+          {
+            "top": 1539,
+            "height": 433
+          },
+          {
+            "top": 1539,
+            "height": 433
+          },
+          {
+            "top": 1988,
+            "height": 358
+          }
+        ]
+      },
+      {
+        "name": "bands",
+        "columns": 2,
+        "cards": [
+          {
+            "top": 1197,
+            "height": 118
+          },
+          {
+            "top": 1197,
+            "height": 118
+          },
+          {
+            "top": 1327,
+            "height": 118
+          },
+          {
+            "top": 1327,
+            "height": 118
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "clientWidth": 832,
+    "scrollWidth": 832,
+    "grids": [
+      {
+        "name": "kpi",
+        "columns": 2,
+        "cards": [
+          {
+            "top": 417,
+            "height": 140.9375
+          },
+          {
+            "top": 417,
+            "height": 140.9375
+          },
+          {
+            "top": 573,
+            "height": 140.9375
+          },
+          {
+            "top": 573,
+            "height": 140.9375
+          }
+        ]
+      },
+      {
+        "name": "contracts",
+        "columns": 2,
+        "cards": [
+          {
+            "top": 730,
+            "height": 395
+          },
+          {
+            "top": 730,
+            "height": 395
+          },
+          {
+            "top": 1141,
+            "height": 382
+          },
+          {
+            "top": 1141,
+            "height": 382
+          },
+          {
+            "top": 1539,
+            "height": 433
+          },
+          {
+            "top": 1539,
+            "height": 433
+          },
+          {
+            "top": 1988,
+            "height": 358
+          }
+        ]
+      },
+      {
+        "name": "bands",
+        "columns": 2,
+        "cards": [
+          {
+            "top": 1197,
+            "height": 118
+          },
+          {
+            "top": 1197,
+            "height": 118
+          },
+          {
+            "top": 1327,
+            "height": 118
+          },
+          {
+            "top": 1327,
+            "height": 118
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "clientWidth": 652,
+    "scrollWidth": 652,
+    "grids": [
+      {
+        "name": "kpi",
+        "columns": 1,
+        "cards": [
+          {
+            "top": 482,
+            "height": 140.9375
+          },
+          {
+            "top": 639,
+            "height": 140.9375
+          },
+          {
+            "top": 796,
+            "height": 140.9375
+          },
+          {
+            "top": 953,
+            "height": 140.9375
+          }
+        ]
+      },
+      {
+        "name": "contracts",
+        "columns": 1,
+        "cards": [
+          {
+            "top": 1110,
+            "height": 395
+          },
+          {
+            "top": 1521,
+            "height": 395
+          },
+          {
+            "top": 1932,
+            "height": 382
+          },
+          {
+            "top": 2330,
+            "height": 583
+          },
+          {
+            "top": 2929,
+            "height": 411
+          },
+          {
+            "top": 3356,
+            "height": 433
+          },
+          {
+            "top": 3805,
+            "height": 358
+          }
+        ]
+      },
+      {
+        "name": "bands",
+        "columns": 1,
+        "cards": [
+          {
+            "top": 2386,
+            "height": 118
+          },
+          {
+            "top": 2516,
+            "height": 118
+          },
+          {
+            "top": 2646,
+            "height": 118
+          },
+          {
+            "top": 2776,
+            "height": 118
+          }
+        ]
+      }
+    ]
+  }
+]

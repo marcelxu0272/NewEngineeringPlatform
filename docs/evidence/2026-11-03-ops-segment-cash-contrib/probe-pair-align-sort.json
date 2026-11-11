@@ -1,0 +1,152 @@
+{
+  "pass": true,
+  "results": {
+    "1280": {
+      "layout": {
+        "cols": "611.5px 611.5px",
+        "contrib": {
+          "w": 611.5,
+          "h": 401.58
+        },
+        "target": {
+          "w": 611.5,
+          "h": 401.58
+        },
+        "chartC": {
+          "w": 587.5,
+          "h": 320
+        },
+        "chartT": {
+          "w": 587.5,
+          "h": 320
+        }
+      },
+      "widthEqual": true,
+      "chartWEqual": true,
+      "chartHEqual": true,
+      "allSorted": true,
+      "sortSample": {
+        "contract": [
+          "设计一院",
+          "设计二院",
+          "设计三院"
+        ],
+        "completed": [
+          "设计一院",
+          "设计二院",
+          "设计三院"
+        ],
+        "invoice": [
+          "设计一院",
+          "设计二院",
+          "设计三院"
+        ],
+        "receipt": [
+          "设计一院",
+          "设计二院",
+          "设计三院"
+        ]
+      },
+      "errors": [],
+      "pass": true
+    },
+    "1360": {
+      "layout": {
+        "cols": "651.5px 651.5px",
+        "contrib": {
+          "w": 651.5,
+          "h": 401.58
+        },
+        "target": {
+          "w": 651.5,
+          "h": 401.58
+        },
+        "chartC": {
+          "w": 627.5,
+          "h": 320
+        },
+        "chartT": {
+          "w": 627.5,
+          "h": 320
+        }
+      },
+      "widthEqual": true,
+      "chartWEqual": true,
+      "chartHEqual": true,
+      "allSorted": true,
+      "sortSample": {
+        "contract": [
+          "设计一院",
+          "设计二院",
+          "设计三院"
+        ],
+        "completed": [
+          "设计一院",
+          "设计二院",
+          "设计三院"
+        ],
+        "invoice": [
+          "设计一院",
+          "设计二院",
+          "设计三院"
+        ],
+        "receipt": [
+          "设计一院",
+          "设计二院",
+          "设计三院"
+        ]
+      },
+      "errors": [],
+      "pass": true
+    },
+    "1600": {
+      "layout": {
+        "cols": "769.5px 769.5px",
+        "contrib": {
+          "w": 769.5,
+          "h": 407.58
+        },
+        "target": {
+          "w": 769.5,
+          "h": 407.58
+        },
+        "chartC": {
+          "w": 735.5,
+          "h": 320
+        },
+        "chartT": {
+          "w": 735.5,
+          "h": 320
+        }
+      },
+      "widthEqual": true,
+      "chartWEqual": true,
+      "chartHEqual": true,
+      "allSorted": true,
+      "sortSample": {
+        "contract": [
+          "设计一院",
+          "设计二院",
+          "设计三院"
+        ],
+        "completed": [
+          "设计一院",
+          "设计二院",
+          "设计三院"
+        ],
+        "invoice": [
+          "设计一院",
+          "设计二院",
+          "设计三院"
+        ],
+        "receipt": [
+          "设计一院",
+          "设计二院",
+          "设计三院"
+        ]
+      },
+      "errors": [],
+      "pass": true
+    }
+  }
+}

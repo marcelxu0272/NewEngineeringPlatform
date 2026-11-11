@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "checks": 75,
+  "snapshots": [
+    {
+      "width": 1440,
+      "height": 1000,
+      "iframe": {
+        "width": 992,
+        "scrollWidth": 992,
+        "clientWidth": 992,
+        "height": 872,
+        "scrollHeight": 1602
+      }
+    },
+    {
+      "width": 1280,
+      "height": 720,
+      "iframe": {
+        "width": 832,
+        "scrollWidth": 832,
+        "clientWidth": 832,
+        "height": 592,
+        "scrollHeight": 1567
+      }
+    }
+  ],
+  "pageErrors": []
+}

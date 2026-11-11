@@ -1,0 +1,31 @@
+{
+  "entries": [
+    {
+      "path": "public/operations-dashboard-202610/index.html",
+      "beforeBytes": 398967,
+      "afterBytes": 11482
+    },
+    {
+      "path": "public/operations-dashboard-202610/completed-contract.html",
+      "beforeBytes": 44740,
+      "afterBytes": 6223
+    },
+    {
+      "path": "public/operations-dashboard-202610/timesheet.html",
+      "beforeBytes": 37868,
+      "afterBytes": 6811
+    },
+    {
+      "path": "public/operations-dashboard-202610/hr.html",
+      "beforeBytes": 7211,
+      "afterBytes": 7230
+    },
+    {
+      "path": "app/operations-dashboard-202610/board/page.tsx",
+      "beforeBytes": 30113,
+      "afterBytes": 1263
+    }
+  ],
+  "echartsSha256": "bf4a223524e40b77c304bec67e1222cf551f14880cf42c69dc046558e11c07b1",
+  "echartsUnchanged": true
+}

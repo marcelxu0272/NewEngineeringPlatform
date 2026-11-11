@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "checks": [
+    "two category lists",
+    "period and query filters",
+    "empty state",
+    "PDF page 1 and page 2 actually rendered",
+    "zoom and narrow dialog",
+    "download byte equality",
+    "load failure and retry",
+    "UI uploads in both categories",
+    "persistence after refresh",
+    "organization scope filter",
+    "invalid file rejected",
+    "unknown category rejected",
+    "missing file 404"
+  ],
+  "pageErrors": []
+}

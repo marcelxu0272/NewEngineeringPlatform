@@ -1,0 +1,31 @@
+2026-11-03 · 全仓生产构建检查
+命令：npm run build
+结果：FAIL（既有市场看板语法错误，本次不扩展修复）
+
+> engineering-platform@0.1.0 build
+> next build
+
+Next.js 14.2.28
+Creating an optimized production build ...
+Failed to compile.
+
+./app/dashboard/marketing/page.tsx
+Error: Expression expected
+523 |       scatterChartInstance.current?.dispose();
+524 |       waterfallChartInstance.current?.dispose();
+525 |     };
+526 |   }, []);
+    |   ^
+527 |
+528 |   // 添加模拟数据
+529 |   const metricInfo: MetricInfo = {
+
+Caused by: Syntax Error
+Import trace for requested module: ./app/dashboard/marketing/page.tsx
+Build failed because of webpack errors
+
+本次工时功能专项检查：
+- Board 及其实际导入依赖的 TypeScript 检查：0 diagnostics。
+- npx eslint app/operations-dashboard-202610/board/page.tsx：退出码 0。
+- 工时 HTML 内联脚本 vm.Script 语法检查：通过。
+- 完整浏览器验收结果见 verification.json。

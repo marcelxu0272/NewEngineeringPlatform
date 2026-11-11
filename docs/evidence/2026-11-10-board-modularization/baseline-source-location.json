@@ -1,0 +1,8 @@
+{
+  "sourceSnapshot": "C:\\Users\\xuys\\AppData\\Local\\Temp\\board-modularization-uzm9nuvr",
+  "includes": [
+    "public/operations-dashboard-202610",
+    "app/operations-dashboard-202610/board"
+  ],
+  "excludes": "database and runtime data"
+}

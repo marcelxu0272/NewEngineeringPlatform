@@ -1,0 +1,136 @@
+{
+  "item": "板块现金流贡献",
+  "pass": true,
+  "checks": [
+    {
+      "ac": 1,
+      "name": "模块标题为「板块现金流贡献」、无「经营贡献分析」主标题",
+      "ok": true,
+      "detail": "板块现金流贡献 （万元） ?"
+    },
+    {
+      "ac": 2,
+      "name": "横向柱图且按值降序可核对",
+      "ok": true,
+      "detail": "{\"type\":\"bar\",\"sortedDesc\":true,\"n\":10,\"sample\":[{\"name\":\"设计一院\",\"y\":3021.81,\"color\":\"#238b77\"},{\"name\":\"设计二院\",\"y\":2618.91,\"color\":\"#238b77\"},{\"name\":\"设计三院\",\"y\":2232.79,\"color\":\"#238b77\"}]}"
+    },
+    {
+      "ac": 3,
+      "name": "正值绿、负值红",
+      "ok": true,
+      "detail": "{\"hasPos\":true,\"hasNeg\":true,\"colorOk\":true,\"pts\":[{\"name\":\"设计一院\",\"y\":3021.81,\"color\":\"#238b77\"},{\"name\":\"结构专业室\",\"y\":-419.7,\"color\":\"#df5c70\"},{\"name\":\"电气专业室\",\"y\":-587.58,\"color\":\"#df5c70\"},{\"name\":\"智能咨询部\",\"y\":-923.33,\"color\":\"#df5c70\"}]}"
+    },
+    {
+      "ac": 4,
+      "name": "角标保留（模块内 ? 说明按钮可见）",
+      "ok": true,
+      "detail": "{\"infoCount\":1,\"infoVisible\":true,\"infoText\":\"?\",\"bodyHasFinanceImport\":false,\"bodyHasMonthCum\":false,\"note\":\"全文检索无「财务导入」「累计到月」字面；改前贡献模块亦无此二字面，仅有 ? 角标\"}"
+    },
+    {
+      "ac": 5,
+      "name": "仅现金流指标：无表格/结构占比/维度页签残留、系列仅为净现金流",
+      "ok": true,
+      "detail": "{\"hasChart\":true,\"hasTable\":false,\"hasMix\":false,\"dimBtnCount\":0,\"seriesNames\":[\"净现金流贡献\"]}"
+    },
+    {
+      "ac": 6,
+      "name": "demo 可渲染且无 pageerror",
+      "ok": true,
+      "detail": "{\"errors\":[]}"
+    },
+    {
+      "ac": 7,
+      "name": "证据落盘、未改实现/账本（过程项）",
+      "ok": true,
+      "detail": "max-* 证据写入；实现与账本未改"
+    }
+  ],
+  "aDom": {
+    "titleText": "板块现金流贡献 （万元） ?",
+    "hasTitle": true,
+    "hasOldTitle": false,
+    "infoCount": 1,
+    "infoVisible": true,
+    "infoText": "?",
+    "hasChart": true,
+    "hasTable": false,
+    "hasMix": false,
+    "dimBtnCount": 0,
+    "dimBtnLabels": [],
+    "panelHasFinanceImport": false,
+    "panelHasMonthCum": false,
+    "bodyHasFinanceImport": false,
+    "bodyHasMonthCum": false,
+    "panelSnippet": "板块现金流贡献\n（万元）\n?\n3,021.8\n2,618.9\n2,232.8\n1,913.8\n1,678.8\n1,645.2\n1,040.9\n-419.7\n-587.6\n-923.3\n-1500\n-1000\n-500\n0\n500\n1000\n1500\n2000\n2500\n3000\n3500\n设计一院\n设计二院\n设计三院\n设计四院\n设计五院\n智能工程部\n工艺专业室\n结构专业室\n电气专业室\n智能咨询部"
+  },
+  "aChart": {
+    "ok": true,
+    "type": "bar",
+    "seriesNames": [
+      "净现金流贡献"
+    ],
+    "onlyCash": true,
+    "n": 10,
+    "sortedDesc": true,
+    "hasPos": true,
+    "hasNeg": true,
+    "colorOk": true,
+    "pts": [
+      {
+        "name": "设计一院",
+        "y": 3021.81,
+        "color": "#238b77"
+      },
+      {
+        "name": "设计二院",
+        "y": 2618.91,
+        "color": "#238b77"
+      },
+      {
+        "name": "设计三院",
+        "y": 2232.79,
+        "color": "#238b77"
+      },
+      {
+        "name": "设计四院",
+        "y": 1913.82,
+        "color": "#238b77"
+      },
+      {
+        "name": "设计五院",
+        "y": 1678.79,
+        "color": "#238b77"
+      },
+      {
+        "name": "智能工程部",
+        "y": 1645.21,
+        "color": "#238b77"
+      },
+      {
+        "name": "工艺专业室",
+        "y": 1040.85,
+        "color": "#238b77"
+      },
+      {
+        "name": "结构专业室",
+        "y": -419.7,
+        "color": "#df5c70"
+      },
+      {
+        "name": "电气专业室",
+        "y": -587.58,
+        "color": "#df5c70"
+      },
+      {
+        "name": "智能咨询部",
+        "y": -923.33,
+        "color": "#df5c70"
+      }
+    ],
+    "success": "#06997d",
+    "danger": "#e94f68",
+    "inverted": true
+  },
+  "errors": [],
+  "generatedAt": "2026-11-03T02:13:15.317Z"
+}

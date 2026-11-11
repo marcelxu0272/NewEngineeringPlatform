@@ -1,0 +1,150 @@
+{
+  "item": "板块目标达成四tab",
+  "pass": true,
+  "checks": [
+    {
+      "ac": 1,
+      "name": "本区四 tab 命名对齐顶部四 KPI",
+      "ok": true,
+      "detail": "{\"tabs\":[{\"k\":\"contract\",\"t\":\"新签合同额\",\"active\":true},{\"k\":\"completed\",\"t\":\"完成合同额\",\"active\":false},{\"k\":\"invoice\",\"t\":\"完成开票额\",\"active\":false},{\"k\":\"receipt\",\"t\":\"完成回款额\",\"active\":false}],\"metricNames\":{\"contract\":\"新签合同额\",\"completed\":\"完成合同额\",\"invoice\":\"完成开票额\",\"receipt\":\"完成回款额\"},\"kpiCards\":[{\"key\":\"contract\",\"title\":\"新签合同额（万元）\"},{\"key\":\"completed\",\"title\":\"完成合同额（万元）\"},{\"key\":\"invoice\",\"title\":\"完成开票额（万元）\"},{\"key\":\"receipt\",\"title\":\"完成回款额（万元）\"}]}"
+    },
+    {
+      "ac": 2,
+      "name": "切换 tab 只改本区；顶部 KPI/现金流/贡献/应收/负荷不因 tab 被替换",
+      "ok": true,
+      "detail": "{\"perTab\":[{\"key\":\"contract\",\"activeOk\":true,\"othersUnchanged\":true,\"note\":\"新签合同额年度目标达成率 · 显示合同额排名前5的板块\",\"ratesHead\":\"99.1833566514133,94.33760014141701,91.45076647588732\",\"targetChangedFromDefault\":false},{\"key\":\"completed\",\"activeOk\":true,\"othersUnchanged\":true,\"note\":\"完成合同额年度目标达成率 · 显示合同额排名前5的板块\",\"ratesHead\":\"94.60269678388961,89.98129738940754,87.22804877880584\",\"targetChangedFromDefault\":true},{\"key\":\"invoice\",\"activeOk\":true,\"othersUnchanged\":true,\"note\":\"完成开票额年度目标达成率 · 显示合同额排名前5的板块\",\"ratesHead\":\"89.56021710343336,85.18516722738433,82.57859838487116\",\"targetChangedFromDefault\":true},{\"key\":\"receipt\",\"activeOk\":true,\"othersUnchanged\":true,\"note\":\"完成回款额年度目标达成率 · 显示合同额排名前5的板块\",\"ratesHead\":\"90.35068366224868,85.93681900355915,83.30717981853523\",\"targetChangedFromDefault\":true}],\"beforeNote\":\"新签合同额年度目标达成率 · 显示合同额排名前5的板块\"}"
+    },
+    {
+      "ac": 3,
+      "name": "默认选中明确；四 tab 可点且内容可区分",
+      "ok": true,
+      "detail": "{\"defaultActive\":\"contract\",\"distinctNotes\":4,\"notes\":[\"新签合同额年度目标达成率 · 显示合同额排名前5的板块\",\"完成合同额年度目标达成率 · 显示合同额排名前5的板块\",\"完成开票额年度目标达成率 · 显示合同额排名前5的板块\",\"完成回款额年度目标达成率 · 显示合同额排名前5的板块\"]}"
+    },
+    {
+      "ac": 4,
+      "name": "不与现金流贡献条混绑（本验分条；贡献区在切 tab 后数据不变）",
+      "ok": true,
+      "detail": "{\"contribStable\":true,\"aAllCorePass\":true}"
+    },
+    {
+      "ac": 5,
+      "name": "证据落盘、未改实现/账本（过程项）",
+      "ok": true,
+      "detail": "max-* 写入 target-tabs 目录；实现与账本未改"
+    }
+  ],
+  "bDom": {
+    "tabs": [
+      {
+        "k": "contract",
+        "t": "新签合同额",
+        "active": true
+      },
+      {
+        "k": "completed",
+        "t": "完成合同额",
+        "active": false
+      },
+      {
+        "k": "invoice",
+        "t": "完成开票额",
+        "active": false
+      },
+      {
+        "k": "receipt",
+        "t": "完成回款额",
+        "active": false
+      }
+    ],
+    "kpiCards": [
+      {
+        "key": "contract",
+        "title": "新签合同额（万元）"
+      },
+      {
+        "key": "completed",
+        "title": "完成合同额（万元）"
+      },
+      {
+        "key": "invoice",
+        "title": "完成开票额（万元）"
+      },
+      {
+        "key": "receipt",
+        "title": "完成回款额（万元）"
+      }
+    ],
+    "metricNames": {
+      "contract": "新签合同额",
+      "completed": "完成合同额",
+      "invoice": "完成开票额",
+      "receipt": "完成回款额"
+    },
+    "panelTitle": "板块目标达成 ?",
+    "defaultActive": "contract"
+  },
+  "perTab": [
+    {
+      "key": "contract",
+      "activeOk": true,
+      "othersUnchanged": true,
+      "note": "新签合同额年度目标达成率 · 显示合同额排名前5的板块",
+      "ratesHead": "99.1833566514133,94.33760014141701,91.45076647588732",
+      "targetChangedFromDefault": false
+    },
+    {
+      "key": "completed",
+      "activeOk": true,
+      "othersUnchanged": true,
+      "note": "完成合同额年度目标达成率 · 显示合同额排名前5的板块",
+      "ratesHead": "94.60269678388961,89.98129738940754,87.22804877880584",
+      "targetChangedFromDefault": true
+    },
+    {
+      "key": "invoice",
+      "activeOk": true,
+      "othersUnchanged": true,
+      "note": "完成开票额年度目标达成率 · 显示合同额排名前5的板块",
+      "ratesHead": "89.56021710343336,85.18516722738433,82.57859838487116",
+      "targetChangedFromDefault": true
+    },
+    {
+      "key": "receipt",
+      "activeOk": true,
+      "othersUnchanged": true,
+      "note": "完成回款额年度目标达成率 · 显示合同额排名前5的板块",
+      "ratesHead": "90.35068366224868,85.93681900355915,83.30717981853523",
+      "targetChangedFromDefault": true
+    }
+  ],
+  "before": {
+    "contrib": "3021.81,2618.91,2232.79,1913.82,1678.79,1645.21,1040.85,-419.7,-587.58,-923.33",
+    "cash": "当月流入:20350|21310|25970|24300|26700|29300|25908.41|27670.18;当月流出:-17700|-18610|-19400|-20300|-23500|-26200|-28681.95|-31033.87;当年累计净现金流:2650|5350|11920|15920|19120|22220|19446.46|16082.769999999999",
+    "kpiText": "新签合同额（万元） 9,234.31 目标 10,000.00 占总目标 92.3% 当月新增 862.40 占目标 8.6% 完成合同额（万元） 12,331.02 目标 14,000.00 占总目标 88.1% 上月新增 968.35 占目标 6.9% 完成开票额（万元） 9,172.22 目标 11,000.00 占总目标 83.4% 当月新增 738.25 占目标 6.7% 完成回款额（万元） 13,459.19 目标 16,000.00 占总目标 84.1% 当月新增 1,126.80 占目标 7.0%",
+    "riskText": "应收与资金风险 （万元） ? 应收账款 1,001.11 较上期 -2.1% ↓ WIP 2,587.49 较上期 +6.3% ↑ 存货 2,200.48 较上期 -1.8% ↓ 营业收入 3,280.60 较上期 +4.5% ↑ 应收账款账龄结构 （万元） ? 1年以内 68% 1–2年 22% 2–3年 7% 3年以上 3%",
+    "loadText": "92.51%|96.33%",
+    "note": "新签合同额年度目标达成率 · 显示合同额排名前5的板块",
+    "cats": "设计一院,设计二院,设计三院,设计四院,设计五院",
+    "rates": "99.1833566514133,94.33760014141701,91.45076647588732,87.94532559631553,85.16159313312617",
+    "active": [
+      {
+        "k": "contract",
+        "active": true
+      },
+      {
+        "k": "completed",
+        "active": false
+      },
+      {
+        "k": "invoice",
+        "active": false
+      },
+      {
+        "k": "receipt",
+        "active": false
+      }
+    ]
+  },
+  "errors": [],
+  "generatedAt": "2026-11-03T02:13:15.318Z"
+}

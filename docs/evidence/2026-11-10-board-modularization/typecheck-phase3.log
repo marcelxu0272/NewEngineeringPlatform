@@ -1,0 +1,82 @@
+app/dashboard/DataList/page.tsx(280,19): error TS18046: 'totalCost.差旅及报销' is of type 'unknown'.
+app/dashboard/DataList/page.tsx(280,37): error TS18046: 'totalCost.人力成本' is of type 'unknown'.
+app/dashboard/DataList/page.tsx(283,75): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(284,75): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(285,75): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(286,75): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(287,75): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(288,75): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(289,75): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(290,75): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(291,75): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(294,21): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+app/dashboard/DataList/page.tsx(295,88): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+app/dashboard/DataList/page.tsx(297,21): error TS18046: 'item.差旅及报销' is of type 'unknown'.
+app/dashboard/DataList/page.tsx(297,34): error TS18046: 'item.人力成本' is of type 'unknown'.
+app/dashboard/DataList/page.tsx(300,77): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(301,77): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(302,77): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(303,77): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(304,77): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(305,77): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(306,77): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(307,77): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/DataList/page.tsx(308,77): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number | null | undefined'.
+app/dashboard/detail/page.tsx(609,15): error TS18046: 'item.设计服务分包' is of type 'unknown'.
+app/dashboard/detail/page.tsx(609,29): error TS18046: 'item.采购' is of type 'unknown'.
+app/dashboard/detail/page.tsx(610,15): error TS18046: 'item.差旅及报销' is of type 'unknown'.
+app/dashboard/detail/page.tsx(610,28): error TS18046: 'item.人力成本' is of type 'unknown'.
+app/dashboard/detail/page.tsx(656,27): error TS18046: 'item.差旅及报销' is of type 'unknown'.
+app/dashboard/detail/page.tsx(656,40): error TS18046: 'item.人力成本' is of type 'unknown'.
+app/dashboard/detail/page.tsx(658,27): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(659,27): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(660,27): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(661,27): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(662,27): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(663,27): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(664,27): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(665,27): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(666,27): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(774,19): error TS18046: 'totalCost.差旅及报销' is of type 'unknown'.
+app/dashboard/detail/page.tsx(774,37): error TS18046: 'totalCost.人力成本' is of type 'unknown'.
+app/dashboard/detail/page.tsx(777,78): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(778,78): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(779,78): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(780,78): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(781,78): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(782,78): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(783,78): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(784,78): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(785,78): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(789,21): error TS2322: Type 'unknown' is not assignable to type 'Key | null | undefined'.
+app/dashboard/detail/page.tsx(790,88): error TS2322: Type 'unknown' is not assignable to type 'ReactNode'.
+app/dashboard/detail/page.tsx(792,21): error TS18046: 'item.差旅及报销' is of type 'unknown'.
+app/dashboard/detail/page.tsx(792,34): error TS18046: 'item.人力成本' is of type 'unknown'.
+app/dashboard/detail/page.tsx(795,80): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(796,80): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(797,80): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(798,80): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(799,80): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(800,80): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(801,80): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(802,80): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/detail/page.tsx(803,80): error TS2345: Argument of type 'unknown' is not assignable to parameter of type 'number'.
+app/dashboard/eletable/page.tsx(1242,19): error TS2322: Type '({ title: string; dataIndex: string; width: number; onHeaderCell: () => { style: { backgroundColor: string; color: string; }; }; align?: undefined; onCell?: undefined; } | { title: string; dataIndex: string; align: string; width: number; onHeaderCell: () => { ...; }; onCell: () => { ...; }; })[]' is not assignable to type '(ColumnGroupType<{ key: string; code: string; unit: string; newContract: string; remainingContract: string; wip: string; receivable: string; currentCompleted: string; yearlyCompleted: string; yearlyInvoice: string; yearlyPayment: string; }> | ColumnType<...>)[]'.
+  Type '{ title: string; dataIndex: string; width: number; onHeaderCell: () => { style: { backgroundColor: string; color: string; }; }; align?: undefined; onCell?: undefined; } | { title: string; dataIndex: string; align: string; width: number; onHeaderCell: () => { ...; }; onCell: () => { ...; }; }' is not assignable to type 'ColumnGroupType<{ key: string; code: string; unit: string; newContract: string; remainingContract: string; wip: string; receivable: string; currentCompleted: string; yearlyCompleted: string; yearlyInvoice: string; yearlyPayment: string; }> | ColumnType<...>'.
+    Type '{ title: string; dataIndex: string; align: string; width: number; onHeaderCell: () => { style: { backgroundColor: string; color: string; }; }; onCell: () => { style: { fontFamily: string; }; }; }' is not assignable to type 'ColumnGroupType<{ key: string; code: string; unit: string; newContract: string; remainingContract: string; wip: string; receivable: string; currentCompleted: string; yearlyCompleted: string; yearlyInvoice: string; yearlyPayment: string; }> | ColumnType<...>'.
+      Type '{ title: string; dataIndex: string; align: string; width: number; onHeaderCell: () => { style: { backgroundColor: string; color: string; }; }; onCell: () => { style: { fontFamily: string; }; }; }' is not assignable to type 'ColumnType<{ key: string; code: string; unit: string; newContract: string; remainingContract: string; wip: string; receivable: string; currentCompleted: string; yearlyCompleted: string; yearlyInvoice: string; yearlyPayment: string; }>'.
+        Types of property 'align' are incompatible.
+          Type 'string' is not assignable to type 'AlignType | undefined'.
+app/dashboard/marketing/page.tsx(199,39): error TS7006: Parameter 'idx' implicitly has an 'any' type.
+app/dashboard/marketing/page.tsx(259,39): error TS7006: Parameter 'idx' implicitly has an 'any' type.
+app/engineering-skills/page.tsx(182,11): error TS18048: 'person.specialty' is possibly 'undefined'.
+app/engineering-skills/page.tsx(182,50): error TS18048: 'person.specialty' is possibly 'undefined'.
+app/engineering-skills/page.tsx(185,21): error TS18048: 'person.specialty' is possibly 'undefined'.
+app/engineering-skills/page.tsx(205,54): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+app/operations-dashboard-202610/board/features/hsse/HssePyramid.tsx(7,28): error TS2304: Cannot find name 'HsseValues'.
+app/operations-dashboard-202610/board/features/pdf/PdfReports.tsx(83,897): error TS2304: Cannot find name 'size'.
+app/operations-dashboard-202610/board/features/pdf/PdfReports.tsx(83,1162): error TS2552: Cannot find name 'date'. Did you mean 'Date'?
+app/project-management/page.tsx(971,24): error TS7006: Parameter 'text' implicitly has an 'any' type.
+app/project-management/page.tsx(971,30): error TS7006: Parameter 'record' implicitly has an 'any' type.
+lib/catalog-filter.ts(53,14): error TS2802: Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.

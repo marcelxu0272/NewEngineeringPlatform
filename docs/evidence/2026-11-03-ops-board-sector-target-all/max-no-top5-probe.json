@@ -1,0 +1,251 @@
+{
+  "item": "板块目标达成取消前5限制（全部板块）",
+  "pass": true,
+  "checks": [
+    {
+      "ac": 1,
+      "name": "任一 tab 展示全部板块，不再截断为前5",
+      "ok": true,
+      "detail": {
+        "depCount": 10,
+        "seriesNs": [
+          {
+            "k": "contract",
+            "n": 10,
+            "note": "新签合同额年度目标达成率 · 全部板块（10）"
+          },
+          {
+            "k": "completed",
+            "n": 10,
+            "note": "完成合同额年度目标达成率 · 全部板块（10）"
+          },
+          {
+            "k": "invoice",
+            "n": 10,
+            "note": "完成开票额年度目标达成率 · 全部板块（10）"
+          },
+          {
+            "k": "receipt",
+            "n": 10,
+            "note": "完成回款额年度目标达成率 · 全部板块（10）"
+          }
+        ],
+        "staticHasTop5Slice": false,
+        "staticNoteAll": true,
+        "staticNoteTop5": false,
+        "catsMatchSource": true
+      }
+    },
+    {
+      "ac": 2,
+      "name": "四 tab 切换后仍为全部板块",
+      "ok": true,
+      "detail": [
+        {
+          "k": "contract",
+          "n": 10,
+          "cats": 10,
+          "note": "新签合同额年度目标达成率 · 全部板块（10）"
+        },
+        {
+          "k": "completed",
+          "n": 10,
+          "cats": 10,
+          "note": "完成合同额年度目标达成率 · 全部板块（10）"
+        },
+        {
+          "k": "invoice",
+          "n": 10,
+          "cats": 10,
+          "note": "完成开票额年度目标达成率 · 全部板块（10）"
+        },
+        {
+          "k": "receipt",
+          "n": 10,
+          "cats": 10,
+          "note": "完成回款额年度目标达成率 · 全部板块（10）"
+        }
+      ]
+    },
+    {
+      "ac": 3,
+      "name": "不回退四 tab 对齐顶部 KPI、切换只改本区",
+      "ok": true,
+      "detail": {
+        "tabs": [
+          {
+            "k": "contract",
+            "t": "新签合同额",
+            "active": true
+          },
+          {
+            "k": "completed",
+            "t": "完成合同额",
+            "active": false
+          },
+          {
+            "k": "invoice",
+            "t": "完成开票额",
+            "active": false
+          },
+          {
+            "k": "receipt",
+            "t": "完成回款额",
+            "active": false
+          }
+        ],
+        "switchOnlyLocal": true,
+        "contentDistinct": true,
+        "contribStable": true,
+        "loadStable": true
+      }
+    },
+    {
+      "ac": 4,
+      "name": "Max 终验过程项：证据落盘、未改实现/账本、未 commit",
+      "ok": true,
+      "detail": "max-* 写入 ops-board-sector-target-all；实现与账本未改；入库仍缓"
+    }
+  ],
+  "baseline": {
+    "depCount": 10,
+    "depNames": [
+      "设计一院",
+      "设计二院",
+      "设计三院",
+      "设计四院",
+      "设计五院",
+      "智能工程部",
+      "智能咨询部",
+      "工艺专业室",
+      "结构专业室",
+      "电气专业室"
+    ],
+    "note": "新签合同额年度目标达成率 · 全部板块（10）",
+    "seriesN": 10,
+    "tabs": [
+      {
+        "k": "contract",
+        "t": "新签合同额",
+        "active": true
+      },
+      {
+        "k": "completed",
+        "t": "完成合同额",
+        "active": false
+      },
+      {
+        "k": "invoice",
+        "t": "完成开票额",
+        "active": false
+      },
+      {
+        "k": "receipt",
+        "t": "完成回款额",
+        "active": false
+      }
+    ]
+  },
+  "perTab": [
+    {
+      "key": "contract",
+      "seriesN": 10,
+      "cats": [
+        "设计一院",
+        "设计二院",
+        "设计三院",
+        "设计四院",
+        "设计五院",
+        "智能工程部",
+        "智能咨询部",
+        "工艺专业室",
+        "结构专业室",
+        "电气专业室"
+      ],
+      "note": "新签合同额年度目标达成率 · 全部板块（10）",
+      "ratesHead": [
+        99.1833566514133,
+        94.33760014141701,
+        91.45076647588732
+      ],
+      "activeOk": true
+    },
+    {
+      "key": "completed",
+      "seriesN": 10,
+      "cats": [
+        "设计一院",
+        "设计二院",
+        "设计三院",
+        "设计四院",
+        "设计五院",
+        "智能工程部",
+        "智能咨询部",
+        "工艺专业室",
+        "结构专业室",
+        "电气专业室"
+      ],
+      "note": "完成合同额年度目标达成率 · 全部板块（10）",
+      "ratesHead": [
+        94.60269678388961,
+        89.98129738940754,
+        87.22804877880584
+      ],
+      "activeOk": true
+    },
+    {
+      "key": "invoice",
+      "seriesN": 10,
+      "cats": [
+        "设计一院",
+        "设计二院",
+        "设计三院",
+        "设计四院",
+        "设计五院",
+        "智能工程部",
+        "智能咨询部",
+        "工艺专业室",
+        "结构专业室",
+        "电气专业室"
+      ],
+      "note": "完成开票额年度目标达成率 · 全部板块（10）",
+      "ratesHead": [
+        89.56021710343336,
+        85.18516722738433,
+        82.57859838487116
+      ],
+      "activeOk": true
+    },
+    {
+      "key": "receipt",
+      "seriesN": 10,
+      "cats": [
+        "设计一院",
+        "设计二院",
+        "设计三院",
+        "设计四院",
+        "设计五院",
+        "智能工程部",
+        "智能咨询部",
+        "工艺专业室",
+        "结构专业室",
+        "电气专业室"
+      ],
+      "note": "完成回款额年度目标达成率 · 全部板块（10）",
+      "ratesHead": [
+        90.35068366224868,
+        85.93681900355915,
+        83.30717981853523
+      ],
+      "activeOk": true
+    }
+  ],
+  "static": {
+    "staticHasTop5Slice": false,
+    "staticNoteAll": true,
+    "staticNoteTop5": false,
+    "renderTargetsLen": 1665
+  },
+  "errors": [],
+  "generatedAt": "2026-11-03T02:17:28.427Z"
+}

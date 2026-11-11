@@ -1,0 +1,113 @@
+{
+  "item": "去掉「应收账款账龄结构」整块",
+  "verdict": "PASS",
+  "checkedAt": "2026-11-03T02:28:45.940Z",
+  "dom": {
+    "bodyHasAgingTitle": false,
+    "htmlHasAgingTitle": false,
+    "htmlHasAgingPhrase": false,
+    "titleHits": [],
+    "agingIds": [
+      {
+        "id": "agingChart",
+        "exists": false
+      },
+      {
+        "id": "agingLegend",
+        "exists": false
+      },
+      {
+        "id": "agingBar",
+        "exists": false
+      },
+      {
+        "id": "arAging",
+        "exists": false
+      },
+      {
+        "id": "ageStructure",
+        "exists": false
+      },
+      {
+        "id": "agingPanel",
+        "exists": false
+      },
+      {
+        "id": "agingSection",
+        "exists": false
+      }
+    ],
+    "riskCount": 4,
+    "riskMetricLabels": [
+      "应收账款",
+      "WIP",
+      "存货",
+      "营业收入"
+    ],
+    "modules": {
+      "kpi": true,
+      "cash": true,
+      "risk": true,
+      "contrib": true,
+      "target": true,
+      "delivery": true,
+      "alerts": true
+    },
+    "afterRisk": {
+      "tag": "DIV",
+      "id": null,
+      "className": "pair-row",
+      "text": "板块现金流贡献 （万元） ?"
+    },
+    "emptyBelow": 30,
+    "openAgingType": "undefined",
+    "riskPanelH": 312.33
+  },
+  "pairAndSort": {
+    "equal": true,
+    "match": true,
+    "catsTop": [
+      "设计一院",
+      "工艺专业室",
+      "设计二院"
+    ],
+    "byRateTop": [
+      "设计一院",
+      "工艺专业室",
+      "设计二院"
+    ]
+  },
+  "checks": [
+    {
+      "ac": 1,
+      "name": "页面不再出现「应收账款账龄结构」标题/图区/图例/空态",
+      "ok": true,
+      "detail": "{\"bodyHasAgingTitle\":false,\"htmlHasAgingTitle\":false,\"titleHits\":[],\"agingIds\":[{\"id\":\"agingChart\",\"exists\":false},{\"id\":\"agingLegend\",\"exists\":false},{\"id\":\"agingBar\",\"exists\":false},{\"id\":\"arAging\",\"exists\":false},{\"id\":\"ageStructure\",\"exists\":false},{\"id\":\"agingPanel\",\"exists\":false},{\"id\":\"agingSection\",\"exists\":false}]}"
+    },
+    {
+      "ac": 2,
+      "name": "专用 DOM/入口移除或不可达；风险区无巨大空白占位洞",
+      "ok": true,
+      "detail": "{\"openAgingType\":\"undefined\",\"emptyBelow\":30,\"afterRisk\":{\"tag\":\"DIV\",\"id\":null,\"className\":\"pair-row\",\"text\":\"板块现金流贡献 （万元） ?\"},\"riskPanelH\":312.33}"
+    },
+    {
+      "ac": 3,
+      "name": "不误删其它模块；风险四指标卡仍在",
+      "ok": true,
+      "detail": "{\"riskCount\":4,\"riskMetricLabels\":[\"应收账款\",\"WIP\",\"存货\",\"营业收入\"],\"modules\":{\"kpi\":true,\"cash\":true,\"risk\":true,\"contrib\":true,\"target\":true,\"delivery\":true,\"alerts\":true}}"
+    },
+    {
+      "ac": 4,
+      "name": "不回退未结宽度对齐 + 按完成率降序",
+      "ok": true,
+      "detail": "{\"equal\":true,\"match\":true,\"catsTop\":[\"设计一院\",\"工艺专业室\",\"设计二院\"],\"byRateTop\":[\"设计一院\",\"工艺专业室\",\"设计二院\"]}"
+    },
+    {
+      "ac": 5,
+      "name": "无 pageerror；证据落盘；未改实现/账本",
+      "ok": true,
+      "detail": "{\"errors\":[]}"
+    }
+  ],
+  "errors": []
+}

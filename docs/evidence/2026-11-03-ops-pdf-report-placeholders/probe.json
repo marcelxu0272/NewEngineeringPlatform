@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "defaultExpanded": true,
+  "children": [
+    "WIP 账龄分析",
+    "完成合同额核减"
+  ],
+  "placeholderPanels": true,
+  "parentTogglePreservesContent": true,
+  "healthLightsPreserved": true,
+  "returnToOperations": true
+}

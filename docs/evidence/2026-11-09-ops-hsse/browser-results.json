@@ -1,0 +1,6 @@
+{
+  "verdict": "PASS",
+  "checks": 24,
+  "errors": [],
+  "note": "Browser uses shared in-memory API fixture; real API persistence is separately tested against isolated SQLite."
+}

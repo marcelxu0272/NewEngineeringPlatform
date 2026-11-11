@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="blue">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>人力资源看板</title>
+  <link rel="stylesheet" href="./hr/styles.css" />
+  <script src="./vendor/echarts.min.js" defer></script>
+  <script src="./hr-data.js" defer></script>
+  <script type="module" src="./hr/app.js"></script>
+</head>
+<body>
+<main id="hrPage" class="page">
+  <header class="page-head">
+    <div><h1>人力资源看板 <span class="snapshot-tag">来源快照</span></h1><p id="hrScope" class="scope">全公司</p></div>
+    <div class="source-meta">数据中台 · 人力资源看板<br/><strong>2026-11-05 快照</strong></div>
+  </header>
+  <p class="source-note" id="hrSourceNote">保留源看板指标、派遣、需求、办公地与人员梯队内容。快照为固定记录。</p>
+  <section class="kpi-grid" aria-label="人力资源核心指标">
+    <article class="kpi-card"><h2>交付资源协调</h2><button class="detail-icon" type="button" data-hr-detail-kind="coordination" aria-label="交付资源协调详情">›</button><div class="metric"><span id="kpiCoordination">—</span><small id="kpiCoordinationPeople"></small></div><p class="kpi-caption">需求协调 · 全公司快照</p></article>
+    <article class="kpi-card"><h2>进行中的高潜力人员提名</h2><button class="detail-icon" type="button" data-hr-detail-kind="potential" aria-label="高潜力人员提名详情">›</button><div class="metric" id="kpiPotential">—</div><p class="kpi-caption">人员梯队 · 全公司快照</p></article>
+    <article class="kpi-card"><h2>公司整体负荷率</h2><button class="detail-icon" type="button" data-hr-detail-kind="company-load" aria-label="公司整体负荷率详情">›</button><div class="metric success" id="kpiCompanyLoad">—</div><p class="kpi-caption"><span id="kpiLoadDelta" class="success"></span><span>全公司快照</span></p></article>
+    <article class="kpi-card"><h2>三周持续低负荷人员数量</h2><button class="detail-icon" type="button" data-hr-detail-kind="low-load" aria-label="持续低负荷人员详情">›</button><div class="metric danger" id="kpiLowLoad">—</div><p class="kpi-caption"><span id="kpiLowLoadDelta" class="danger"></span><span>全公司快照</span></p></article>
+  </section>
+  <div class="dashboard-grid">
+    <section class="panel map-panel" id="dispatchMapPanel">
+      <div class="panel-head"><h2>项目派遣分布</h2><button type="button" class="text-button" id="openMapFullscreen">⛶ 全屏查看</button></div>
+      <div class="map-toolbar"><span class="panel-note">全公司派遣分布 · 城市中心示意</span><div class="zoom-controls"><button type="button" data-map-zoom="out" aria-label="缩小地图">−</button><span id="mapZoom">100%</span><button type="button" data-map-zoom="in" aria-label="放大地图">＋</button><button type="button" id="resetMap" aria-label="重置地图">复位</button></div></div>
+      <div id="dispatchMap" class="map-chart" role="img" aria-label="项目派遣地图"></div><p id="mapStatus" class="panel-note" role="status"></p>
+      <h3 class="subheading">热门派遣区域</h3><ul id="popularRegions" class="region-list"></ul>
+    </section>
+    <section class="panel dispatch-panel" id="dispatchPanel">
+      <div class="panel-head"><h2>人员派遣情况</h2><button type="button" class="button primary" id="openPersonnelSearch">⌕ 搜索人员</button></div>
+      <div id="dispatchTypeTabs" class="tabs" role="tablist" aria-label="派遣项目类型"><button type="button" role="tab" data-type="PMC">PMC</button><button type="button" role="tab" data-type="EPC/m">EPC/m</button><button type="button" role="tab" data-type="设计及其他">设计及其他</button></div>
+      <p class="panel-note" id="dispatchScope"></p><div class="table-scroll project-table-scroll"><table id="dispatchTable"><thead><tr><th>项目名称</th><th>项目编码</th><th>项目类型</th><th>负责人</th><th>团队规模</th><th>内外人员占比</th><th>操作</th></tr></thead><tbody></tbody></table></div>
+      <p class="table-caption" id="dispatchCount"></p>
+    </section>
+    <section class="panel" id="specialtyPanel"><div class="panel-head"><h2>专业需求人数</h2></div><p class="panel-note" id="specialtyScope"></p><div id="specialtyList" class="specialty-grid"></div></section>
+    <section class="panel" id="sectorDemandPanel"><div class="panel-head"><h2>板块需求</h2><button class="text-button" id="openDemandPivot" type="button">查看详情 ›</button></div><div id="sectorDemandList" class="sector-list"></div></section>
+    <section class="panel" id="loadAnalysisPanel"><div class="panel-head"><h2>负荷率分析</h2></div><p class="panel-note" id="loadScope"></p><div class="load-chart" id="loadRateChart" role="img" aria-label="负荷率分析图"></div><div class="empty" id="loadEmpty" hidden>来源快照尚未提供负荷图明细数据。</div></section>
+    <section class="panel" id="lowLoadPanel"><div class="panel-head"><h2>持续低负荷人员</h2><span id="lowLoadCount" class="count-badge"></span></div><p class="panel-note" id="lowLoadScope"></p><div class="people-scroll" id="lowLoadList"></div></section>
+    <section class="panel span-all" id="officePanel"><div class="panel-head"><h2>办公地情况</h2><div class="actions"><a class="text-button" id="seatSystemLink" target="_blank" rel="noopener noreferrer" hidden>⌖ 跳转座位系统 ↗</a><button class="text-button" id="openOfficePivot" type="button">人员统计 ›</button></div></div><p class="panel-note">全公司快照 · 各办公地总人数与在岗人数</p><div class="office-grid" id="officeList"></div></section>
+    <section class="panel span-all" id="potentialPanel"><div class="panel-head"><h2>人员梯队分析</h2><button class="text-button" type="button" data-hr-detail-kind="potential">查看详情 ›</button></div><h3 class="subheading">高潜力人员 <span id="potentialCount" class="count-badge"></span></h3><p id="potentialScope" class="panel-note"></p><div class="potential-grid" id="potentialList"></div></section>
+  </div>
+  <footer class="page-footer">来源：<a href="https://projectszone.woodchina.com/Project/HumanResources/HumanResourcesDashboardIndex" target="_blank" rel="noopener noreferrer">数据中台人力资源看板 ↗</a> · 2026-11-05 只读快照。<br/>组织名称与 SAS 编码按 wood-groupname 对照；源部门、岗位与源数据原样保留。未提供的明细显示“—”。</footer>
+</main>
+<dialog id="hrDialog" aria-labelledby="hrDialogTitle"><div class="dialog-layout"><header class="dialog-head"><div class="dialog-heading"><button type="button" id="hrDialogBack" class="text-button" aria-label="返回上一层" hidden>‹ 返回</button><h2 id="hrDialogTitle"></h2></div><button type="button" id="closeHrDialog" class="close-button" aria-label="关闭弹窗">×</button></header><div id="hrDialogBody" class="dialog-body"></div><footer class="dialog-footer"><span>来源快照 · 2026-11-05 · 只读</span><button type="button" class="button" id="closeHrDialogFooter">关闭</button></footer></div></dialog>
+</body>
+</html>
